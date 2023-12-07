@@ -37,6 +37,7 @@ public class User {
 	};
 
 	//ログアウトする
+	//TODO セッション破棄のメソッドを記述する
 	public void logout() {
 	};
 
