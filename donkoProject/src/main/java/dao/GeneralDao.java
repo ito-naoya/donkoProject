@@ -13,7 +13,6 @@ public class GeneralDao {
 
 		PreparedStatement statement = conn.prepareStatement(sql);
 		setParameter(statement, paramList);
-
 		return statement.executeUpdate();
 
 	}
@@ -23,7 +22,6 @@ public class GeneralDao {
 
 		PreparedStatement statement = conn.prepareStatement(sql);
 		setParameter(statement, paramList);
-
 		return statement.executeQuery();
 
 	}
@@ -31,11 +29,7 @@ public class GeneralDao {
 	public static void setParameter(PreparedStatement statement, List<Object> paramList) throws SQLException {
 
 		for (int i = 0; i < paramList.size(); i++) {
-
 			statement.setObject(i + 1, paramList.get(i));
-
 		}
-
 	}
-
 }
