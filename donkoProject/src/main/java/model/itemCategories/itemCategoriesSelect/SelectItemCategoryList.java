@@ -17,27 +17,42 @@ public class SelectItemCategoryList {
 	public static ArrayList<ItemCategoryBean> selectItemCategoryList(){
 		
 		//カテゴリーテーブルでitem_category_nameの重複を許さないSELECT文を回して、全ての商品カテゴリを取得
-		String getItemCategorySQL = "SELECT DISTINCT item_category_name FROM item_categories;";
-		List<Object> params = Arrays.asList();
-		try (Connection conn = DatabaseConnection.getConnection();
-		     ResultSet rs = GeneralDao.executeQuery(conn, getItemCategorySQL, params)) {
-				//arrayListに格納する順番を　衣類,靴,携帯,本,食料品に変更
-		   		List<ItemCategoryBean> itemCategory = new ArrayList<>();
-			        while (rs.next()) {
-			        	String file = rs.getString("file_name");
-			        	itemCategory.add(file);
-			        }
-			        return itemCategory;
-		   	} catch (ClassNotFoundException | SQLException e) {
-					e.printStackTrace();
-			}
-		
-		
-		//close文を忘れない
-		
-		//取得した結果をItemCategoryBeanに格納
-		
-		
-		return null;};
+		StringBuilder sb = new StringBuilder();
 
+		sb.append("SELECT DISTINCT "		 	);
+		sb.append(	"item_category_name "		);
+		sb.append("FROM "	  					);
+		sb.append(	"item_categories;"		  	);
+		
+		String sql = sb.toString();
+		
+		List<Object> params = Arrays.asList();
+		
+
+		try (Connection conn = DatabaseConnection.getConnection()){
+
+		    try(ResultSet rs = GeneralDao.executeQuery(conn, sql, params)) {
+
+		   		ArrayList<ItemCategoryBean> itemCategories = new ArrayList<>();
+		        //取得された順番にItemCategoryBeanに格納
+		   		while (rs.next()) {
+		        	ItemCategoryBean itemCategory = new ItemCategoryBean();
+		        	String item = rs.getString("item_category_name");
+		        	itemCategory.setItemCategoryName(item);
+		        	itemCategories.add(itemCategory);
+		        }
+			       //カテゴリーリストを返す
+			        return itemCategories;
+			        
+		    } catch (SQLException e) {
+		    	if(!conn.isClosed()) {
+			        conn.rollback();
+			        e.printStackTrace();
+		    	}
+		    }
+		    
+		} catch (SQLException | ClassNotFoundException e) {
+		  e.printStackTrace();
+		}
+		return null;};
 }
