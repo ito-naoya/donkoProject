@@ -1,10 +1,7 @@
 package controller.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import bean.ItemBean;
-import classes.Item;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,13 +18,7 @@ public class RegistItemServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		ArrayList<ItemBean> itemCategories = Item.getItemListWithoutDuplicate();
-
-		for (ItemBean itemCategory : itemCategories) {
-            	System.out.println(itemCategory.getImageFileName());
-            }
-		
+	
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
