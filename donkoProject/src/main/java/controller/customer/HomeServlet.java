@@ -28,7 +28,7 @@ public class HomeServlet extends HttpServlet {
 		ArrayList<ItemBean> resultList = new ArrayList<>();
 		Random random = new Random();
 
-		for (int i = 0; i < 9 ; i++) {
+		for (int i = 0; i < 8 ; i++) {
 		    if (!itemList.isEmpty()) {
 		        int index = random.nextInt(itemList.size()); // ランダムなインデックスを生成
 		        ItemBean randomItem = itemList.get(index);
@@ -36,6 +36,8 @@ public class HomeServlet extends HttpServlet {
 		    }
 		}
 		request.setAttribute("resultList", resultList);
+		String view = "/WEB-INF/views/customer/home.jsp";
+        request.getRequestDispatcher(view).forward(request, response);
 	}
 
 
