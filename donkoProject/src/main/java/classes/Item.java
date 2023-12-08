@@ -9,6 +9,7 @@ import model.items.itemsSelect.SelectItemDetailFromItems;
 import model.items.itemsSelect.SelectItemListFromItems;
 import model.items.itemsSelect.SelectItemListFromItemsByCategory;
 import model.items.itemsSelect.SelectItemListFromItemsByOption;
+import model.items.itemsSelect.SelectItemListWithoutDuplicate;
 import model.items.itemsUpdate.UpdateItemInfoInItems;
 
 public class Item {
@@ -16,6 +17,11 @@ public class Item {
 	//商品をカテゴリとオプション指定して取得する
 	public static ArrayList<ItemBean> getItemListByOption(ItemBean itemBean){
 		return SelectItemListFromItemsByOption.selectItemListFromItemsByOption(itemBean);
+	};
+	
+	//登録されている商品名を重複なしで取得する
+	public static ArrayList<ItemBean> getItemListWithoutDuplicate(){
+		return SelectItemListWithoutDuplicate.selectItemListWithoutDuplicate();
 	};
 	
 	//商品をカテゴリ指定で取得する
