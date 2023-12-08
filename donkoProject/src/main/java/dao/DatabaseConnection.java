@@ -13,9 +13,13 @@ public class DatabaseConnection {
 	
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 
+		//JDBCドライバーの読み込み
 		Class.forName(DB_JDBC_DRIVER);
-		return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-
+		//データベース接続を確立
+		Connection conn =  DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+		//SQLのオートコミット機能をオフにする(トランザクション処理)
+		conn.setAutoCommit(false);
+		
+		return conn;
 	}
-
 }
