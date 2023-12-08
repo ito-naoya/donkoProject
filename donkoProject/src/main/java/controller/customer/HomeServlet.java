@@ -26,8 +26,8 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<ItemBean> itemList = Item.getItemList();
 		ArrayList<ItemBean> resultList = new ArrayList<>();
+		
 		Random random = new Random();
-
 		for (int i = 0; i < 8 ; i++) {
 		    if (!itemList.isEmpty()) {
 		        int index = random.nextInt(itemList.size()); // ランダムなインデックスを生成
