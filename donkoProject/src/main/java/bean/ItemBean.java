@@ -11,7 +11,7 @@ public class ItemBean {
 	private boolean isDeleted;
 	private String imageFileName;
 	private String itemFirstOptionName;
-	private String itemDecondOptionName;
+	private String itemSecondOptionName;
 	private String itemFirstOptionValue;
 	private String itemSecondOptionValue;
 	
@@ -89,12 +89,12 @@ public class ItemBean {
 		this.itemFirstOptionName = itemFirstOptionName;
 	}
 	
-	public String getItemDecondOptionName() {
-		return itemDecondOptionName;
+	public String getItemSecondOptionName() {
+		return itemSecondOptionName;
 	}
 	
-	public void setItemDecondOptionName(String itemDecondOptionName) {
-		this.itemDecondOptionName = itemDecondOptionName;
+	public void setItemSecondOptionName(String itemDecondOptionName) {
+		this.itemSecondOptionName = itemDecondOptionName;
 	}
 	
 	public String getItemFirstOptionValue() {
