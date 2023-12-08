@@ -8,6 +8,7 @@ import java.util.List;
 
 public class GeneralDao {
 	
+	//Insert、Update、Deleteに使うUpdateメソッドの実装
 	public static int executeUpdate(Connection conn, String sql, List<Object> paramList) throws SQLException {
 
 		PreparedStatement statement = conn.prepareStatement(sql);
@@ -17,7 +18,7 @@ public class GeneralDao {
 
 	}
 	
-
+	//Selectに使うQueryメソッドの実装
 	public static ResultSet executeQuery(Connection conn, String sql, List<Object> paramList) throws SQLException {
 
 		PreparedStatement statement = conn.prepareStatement(sql);
