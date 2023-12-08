@@ -3,7 +3,7 @@ package model.purchases.purchasesSelect;
 import java.util.ArrayList;
 
 import bean.PurchaseBean;
-import classes.CustomerUser;
+import classes.user.CustomerUser;
 
 public class SelectMyPurchaseHistory {
 	

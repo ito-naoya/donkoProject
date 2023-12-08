@@ -3,6 +3,7 @@ package classes;
 import java.util.ArrayList;
 
 import bean.PurchaseBean;
+import classes.user.CustomerUser;
 import model.purchases.purchasesInsert.InsertPurchaseToPurchases;
 import model.purchases.purchasesSelect.SelectMyPurchaseHistory;
 import model.purchases.purchasesSelect.SelectOrderItemList;

@@ -1,6 +1,6 @@
 package model.users.usersUpdate;
 
-import classes.CustomerUser;
+import classes.user.CustomerUser;
 
 public class UpdateUserInfoInUsers {
 	

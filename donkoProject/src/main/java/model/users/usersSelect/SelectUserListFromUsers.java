@@ -2,7 +2,7 @@ package model.users.usersSelect;
 
 import java.util.ArrayList;
 
-import classes.CustomerUser;
+import classes.user.CustomerUser;
 
 public class SelectUserListFromUsers {
 	

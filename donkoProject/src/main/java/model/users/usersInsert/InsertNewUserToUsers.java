@@ -1,6 +1,6 @@
 package model.users.usersInsert;
 
-import classes.CustomerUser;
+import classes.user.CustomerUser;
 
 public class InsertNewUserToUsers {
 	

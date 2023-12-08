@@ -3,7 +3,7 @@ package model.carts.cartsSelect;
 import java.util.ArrayList;
 
 import bean.ItemBean;
-import classes.CustomerUser;
+import classes.user.CustomerUser;
 
 public class SelectItemListFromCarts {
 	

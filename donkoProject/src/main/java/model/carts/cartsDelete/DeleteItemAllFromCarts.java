@@ -1,6 +1,6 @@
 package model.carts.cartsDelete;
 
-import classes.CustomerUser;
+import classes.user.CustomerUser;
 
 public class DeleteItemAllFromCarts {
 	

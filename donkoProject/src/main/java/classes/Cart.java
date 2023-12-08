@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import bean.CartBean;
 import bean.ItemBean;
+import classes.user.CustomerUser;
 import model.carts.cartsDelete.DeleteItemAllFromCarts;
 import model.carts.cartsDelete.DeleteItemFromCarts;
 import model.carts.cartsInsert.InsertItemToCarts;

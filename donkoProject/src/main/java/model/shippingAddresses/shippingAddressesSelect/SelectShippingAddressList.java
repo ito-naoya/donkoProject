@@ -3,7 +3,7 @@ package model.shippingAddresses.shippingAddressesSelect;
 import java.util.ArrayList;
 
 import bean.ShippingAddressBean;
-import classes.CustomerUser;
+import classes.user.CustomerUser;
 
 public class SelectShippingAddressList {
 	

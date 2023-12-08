@@ -3,6 +3,7 @@ package classes;
 import java.util.ArrayList;
 
 import bean.ShippingAddressBean;
+import classes.user.CustomerUser;
 import model.shippingAddresses.shippingAddressesInsert.InsertNewShippingAddress;
 import model.shippingAddresses.shippingAddressesSelect.SelectDefaultShippingAddress;
 import model.shippingAddresses.shippingAddressesSelect.SelectShippingAddressDetail;

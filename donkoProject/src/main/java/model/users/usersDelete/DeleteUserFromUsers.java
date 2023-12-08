@@ -1,6 +1,6 @@
 package model.users.usersDelete;
 
-import classes.CustomerUser;
+import classes.user.CustomerUser;
 
 public class DeleteUserFromUsers {
 	
