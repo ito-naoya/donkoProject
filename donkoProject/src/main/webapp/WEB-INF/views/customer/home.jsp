@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, bean.ItemBean"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,16 +11,13 @@
 	<%@include file= "../component/header.jsp" %>
 	<%@include file= "../component/headerTopSpace.jsp" %>
 	<main>
-	<div class="d-flex flex-wrap">
-		<% ArrayList<ItemBean> IList = (ArrayList<ItemBean>)request.getAttribute("resultList"); %>
-		<% for (ItemBean item : IList) { %>
+	<% ArrayList<ItemBean> IList = (ArrayList<ItemBean>)request.getAttribute("IList"); %>
+	<% for(ItemBean item : IList) { %>
 		<div class="card" style="width: 200px; height: 200px;">
 			<img src="..." class="card-img-top" alt="...">
-			<p><%= item.getImageFileName() %></p>
-			<p><%= item.getItemCategoryName() %></p>
+			<%= item.getItemId() %>
 		</div>
 		<% } %>
-	</div>
 	</main>
 	<%@include file= "../component/footer.jsp" %>
 </body>
