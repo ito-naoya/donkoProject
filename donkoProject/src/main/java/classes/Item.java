@@ -60,5 +60,5 @@ public class Item {
 	public static void deleteItem(ItemBean itemBean){
 		DeleteItemFromItems.deleteItemFromItems(itemBean);
 	};
-
+	
 }
