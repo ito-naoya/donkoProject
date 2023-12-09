@@ -9,10 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/registItem")
-public class RegistItemServlet extends HttpServlet {
+public class RegistItemServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public RegistItemServlet() {
+	public RegistItemServlet2() {
 		super();
 	}
 
