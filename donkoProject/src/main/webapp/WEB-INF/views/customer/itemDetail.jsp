@@ -18,7 +18,7 @@
 		<div class="container text-center">
 			<div class="row">
 				<div class="col">
-				<img src="./images/
+				<img src="./images/トマト1.jpg">
 				</div>
 				<div class="col">
 				column
