@@ -2,6 +2,8 @@ package controller.customer;
 
 import java.io.IOException;
 
+import bean.ItemBean;
+import classes.Item;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,7 +21,10 @@ public class CategoryServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 以下作業途中
 		String categoryName = request.getParameter("category_name");
+		ItemBean it = new ItemBean;
+		Item.getItemListByCategory(null);
 		String view = "/WEB-INF/views/customer/categoryIndex.jsp";
         request.getRequestDispatcher(view).forward(request, response);
 	}
