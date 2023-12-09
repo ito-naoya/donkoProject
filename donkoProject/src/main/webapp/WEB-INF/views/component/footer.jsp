@@ -5,8 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>donko</title>
+<style type="text/css">
+.wrapper{
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 250px;/*footerの高さ*/
+    box-sizing: border-box;
+}
+</style>
 </head>
-<body>
+<body class="wrapper">
 	<footer style="position: absolute; bottom: 0; width:100%;">
 		<span id="back">
 		    <a href="#top"  style="text-decoration:none;">

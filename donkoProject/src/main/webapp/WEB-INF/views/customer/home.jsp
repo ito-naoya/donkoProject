@@ -20,6 +20,6 @@
 	<% } %>
 	</div>
 	</main>
-	<%-- <%@include file= "../component/footer.jsp" %> --%>
+	<%@include file= "../component/footer.jsp" %>
 </body>
 </html>
