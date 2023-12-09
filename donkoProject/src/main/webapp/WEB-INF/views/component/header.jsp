@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div id="top"></div>
-	<header class="fixed-top">
+	<header class="fixed-top" style="background-color:white;">
     	<div style="height:60px; background-color:#385A37; position:relative; top: 0; left: 0; z-index:2; display:flex; align-items:center;">
     		<ul class="d-flex mb-0 p-0 w-100">
     			<li class="mx-3" style="list-style:none; display: flex; align-items: center;">
