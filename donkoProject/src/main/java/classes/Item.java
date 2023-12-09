@@ -10,6 +10,7 @@ import model.items.itemsSelect.SelectItemListFromItems;
 import model.items.itemsSelect.SelectItemListFromItemsByCategory;
 import model.items.itemsSelect.SelectItemListFromItemsByOption;
 import model.items.itemsSelect.SelectItemListWithoutDuplicate;
+import model.items.itemsSelect.SelectItemNameListFromItemsByCategory;
 import model.items.itemsUpdate.UpdateItemInfoInItems;
 
 public class Item {
@@ -18,6 +19,7 @@ public class Item {
 	public static ArrayList<ItemBean> getItemListByOption(ItemBean itemBean){
 		return SelectItemListFromItemsByOption.selectItemListFromItemsByOption(itemBean);
 	};
+	
 	
 	//登録されている商品名を重複なしで取得する
 	public static ArrayList<ItemBean> getItemListWithoutDuplicate(){
@@ -28,6 +30,11 @@ public class Item {
 	public static ArrayList<ItemBean> getItemListByCategory(ItemBean itemBean){
 		return SelectItemListFromItemsByCategory.selectItemListFromItemsByCategory(itemBean);
 	};
+	
+	//商品名をカテゴリ指定で取得する
+	public static ArrayList<ItemBean>getItemNameListByCategory(ItemBean itemBean){
+		return SelectItemNameListFromItemsByCategory.selectItemNameListFromItemsByCategory(itemBean);
+	}
 	
 	//商品の一覧を取得する
 	public static ArrayList<ItemBean> getItemList(){
