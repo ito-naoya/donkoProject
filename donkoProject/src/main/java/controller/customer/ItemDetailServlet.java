@@ -1,7 +1,11 @@
 package controller.customer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import bean.ItemBean;
+import classes.Item;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,11 +21,23 @@ public class ItemDetailServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+		ItemBean itemBean = new ItemBean();
+		itemBean.setItemId( Integer.parseInt(request.getParameter("itemId")));
+
+		ItemBean item = Item.getItemDetail(itemBean);
+		ArrayList<ItemBean> itemImageList = Item.getItemImageList(itemBean);
+
+		
+		request.setAttribute("itemImageList", itemImageList);
+		request.setAttribute("item", item);
+		
+		String view = "/WEB-INF/views/customer/itemDetail.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+		dispatcher.forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
