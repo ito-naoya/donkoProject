@@ -21,7 +21,7 @@
 					style="object-fit: cover; height: 100%;">
 			</div>
 			<div class="mb-3 mx-2">
-				<p><%= item.getItemName() %></p>
+				<a href="/itemDetail?id=<%= item.getItemId() %>"><%= item.getItemName() %></a>
 			</div>
 			</div>
 			<% } %>

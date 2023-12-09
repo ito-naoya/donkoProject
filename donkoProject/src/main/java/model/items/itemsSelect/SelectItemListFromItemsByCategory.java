@@ -26,7 +26,7 @@ public class SelectItemListFromItemsByCategory {
 					String imageFileName = result.getString("file_name");
 
 					IBeans.setItemId(itemId);
-					IBeans.setImageFileName(itemName);
+					IBeans.setItemName(itemName);
 					IBeans.setImageFileName(imageFileName);
 
 					Itemlist.add(IBeans);
