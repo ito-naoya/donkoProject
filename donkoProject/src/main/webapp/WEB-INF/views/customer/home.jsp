@@ -14,10 +14,15 @@
 	<div class="d-flex flex-wrap justify-content-center mx-5 my-4">
 		<% ArrayList<ItemBean> IList = (ArrayList<ItemBean>)request.getAttribute("resultList"); %>
 		<% for (ItemBean item : IList) { %>
+<<<<<<< Updated upstream
 		<div class="card mb-3 mx-2" style="width: 300px; height: 300px;">
 			<img src="./images/<%= item.getImageFileName() %>.jpg" class="card-img-top" alt="...">
 			<p><%= item.getImageFileName() %></p>
 			<p><%= item.getItemCategoryName() %></p>
+=======
+		<div class="card mb-3" style="width: 300px; height: 300px;">
+			<img src="./images/<%= item.getImageFileName() %>.jpg" class="card-img-top" alt="..." style="object-fit: cover;">
+>>>>>>> Stashed changes
 		</div>
 		<% } %>
 	</div>

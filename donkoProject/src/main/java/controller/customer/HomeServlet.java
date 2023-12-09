@@ -24,10 +24,15 @@ public class HomeServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Random random = new Random();
 		ArrayList<ItemBean> itemList = Item.getItemList();
 		ArrayList<ItemBean> resultList = new ArrayList<>();
+<<<<<<< Updated upstream
 		
 		Random random = new Random();
+=======
+
+>>>>>>> Stashed changes
 		for (int i = 0; i < 8 ; i++) {
 		    if (!itemList.isEmpty()) {
 		        int index = random.nextInt(itemList.size()); // ランダムなインデックスを生成
@@ -35,6 +40,7 @@ public class HomeServlet extends HttpServlet {
 		        resultList.add(randomItem);
 		    }
 		}
+		
 		request.setAttribute("resultList", resultList);
 		String view = "/WEB-INF/views/customer/home.jsp";
         request.getRequestDispatcher(view).forward(request, response);

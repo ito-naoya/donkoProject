@@ -13,7 +13,7 @@ public class SelectItemListFromItems {
 	
 	//商品の一覧を取得する
 	public static ArrayList<ItemBean> selectItemListFromItems(){
-		final String SELECT_ITEMLIST_SQL = "SELECT item_id, file_name, item_category_name, item_name FROM items";
+		final String SELECT_ITEMLIST_SQL = "SELECT item_id, item_category_name, item_name, file_name FROM items";
 		ArrayList<ItemBean> Itemlist = new ArrayList<>();
 		ArrayList<Object> paramLists = new ArrayList<>() {{ }};
 		try (Connection conn = DatabaseConnection.getConnection()) {
@@ -22,13 +22,12 @@ public class SelectItemListFromItems {
 				ResultSet result = GeneralDao.executeQuery(conn, SELECT_ITEMLIST_SQL, paramLists);
 				while (result.next()) {
 					ItemBean IBeans = new ItemBean();
-
+					
 					int itemId = result.getInt("item_id");
-					String imageFileName = result.getString("file_name");
 					String itemCategoryName = result.getString("item_category_name");
 					String itemName = result.getString("item_name");
+					String imageFileName = result.getString("file_name");
 
-					IBeans.setItemId(itemId);
 					IBeans.setItemName(itemName);
 					IBeans.setItemCategoryName(itemCategoryName);
 					IBeans.setImageFileName(imageFileName);
