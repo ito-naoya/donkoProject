@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="bean.ItemBean" %>
+	<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>donko</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-	crossorigin="anonymous">
 </head>
 <body>
 	<%@include file="../component/header.jsp"%>
@@ -18,10 +15,41 @@
 		<div class="container text-center">
 			<div class="row">
 				<div class="col">
-				<img src="./images/
+					<%
+						ItemBean item = (ItemBean)request.getAttribute("item");
+					%>
+					<div class="m-auto h-75 w-75" style="height: 200px; width: 200px;">
+						<img class="object-fit-cover w-100 h-100" src="./images/<%= item.getImageFileName() %>.jpg">
+					</div>
 				</div>
+				
 				<div class="col">
-				column
+					<h2> <%= item.getItemName() %> </h2>
+					<h3> <%= item.getItemPrice() %> </h3>
+					<hr>
+					<%
+						ArrayList<ItemBean> itemImageList = (ArrayList<ItemBean>)request.getAttribute("itemImageList"); 
+					%>
+					<div class="d-flex justify-content-around">
+					<%
+					for(ItemBean itemBean : itemImageList){ 
+					%>
+						<a style="text-decoration: none;"href="itemDetail?itemId=<%= itemBean.getItemId() %>">
+							<div style="height: 150px; width: 150px;">							
+								<img class="object-fit-cover w-100 h-100" src="./images/<%= itemBean.getImageFileName() %>.jpg">
+							</div>
+						</a>
+					<%
+					} 
+					%>
+					</div>
+					
+					<h4>
+						この商品について
+					</h4>
+					<p>
+						<%= item.getItemDescription() %>
+					</p>
 				</div>
 			</div>
 		</div>
