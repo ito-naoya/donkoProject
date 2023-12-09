@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/registItem")
+@WebServlet("/registItem2")
 public class RegistItemServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
