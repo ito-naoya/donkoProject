@@ -13,7 +13,7 @@ public class SelectItemListFromItems {
 	
 	//商品の一覧を取得する
 	public static ArrayList<ItemBean> selectItemListFromItems(){
-		final String SELECT_ITEMLIST_SQL = "SELECT item_id, item_category_name, item_name, file_name FROM items";
+		final String SELECT_ITEMLIST_SQL = "SELECT file_name FROM items GROUP BY file_name ORDER BY RAND() LIMIT 8;";
 		ArrayList<ItemBean> Itemlist = new ArrayList<>();
 		ArrayList<Object> paramLists = new ArrayList<>() {{ }};
 		try (Connection conn = DatabaseConnection.getConnection()) {
@@ -23,13 +23,8 @@ public class SelectItemListFromItems {
 				while (result.next()) {
 					ItemBean IBeans = new ItemBean();
 					
-					int itemId = result.getInt("item_id");
-					String itemCategoryName = result.getString("item_category_name");
-					String itemName = result.getString("item_name");
 					String imageFileName = result.getString("file_name");
-
-					IBeans.setItemName(itemName);
-					IBeans.setItemCategoryName(itemCategoryName);
+					
 					IBeans.setImageFileName(imageFileName);
 
 					Itemlist.add(IBeans);
