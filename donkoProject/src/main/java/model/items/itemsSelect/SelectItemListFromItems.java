@@ -17,9 +17,7 @@ public class SelectItemListFromItems {
 		ArrayList<ItemBean> Itemlist = new ArrayList<>();
 		ArrayList<Object> paramLists = new ArrayList<>() {{ }};
 		try (Connection conn = DatabaseConnection.getConnection()) {
-			try {
-				// resultsetはcloseの必要がない？ので無闇にtryの(）内に記述してcloseする必要はないかも
-				ResultSet result = GeneralDao.executeQuery(conn, SELECT_ITEMLIST_SQL, paramLists);
+			try (ResultSet result = GeneralDao.executeQuery(conn, SELECT_ITEMLIST_SQL, paramLists)) {
 				while (result.next()) {
 					ItemBean IBeans = new ItemBean();
 					
