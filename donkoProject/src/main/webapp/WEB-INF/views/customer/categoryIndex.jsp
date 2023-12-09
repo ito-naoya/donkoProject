@@ -21,7 +21,11 @@
 					style="object-fit: cover; height: 100%;">
 			</div>
 			<div class="mb-3 mx-2">
-				<a href="/itemDetail?id=<%= item.getItemId() %>"><%= item.getItemName() %></a>
+<<<<<<< Updated upstream
+				<a href="itemDetail?itemId=<%= item.getItemId() %>"><%= item.getItemName() %></a>
+=======
+				<a href="/itemDetail?itemId=<%= item.getItemId() %>"><%= item.getItemName() %></a>
+>>>>>>> Stashed changes
 			</div>
 			</div>
 			<% } %>
