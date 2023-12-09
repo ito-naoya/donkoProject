@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <title>donko</title>
 </head>
 <body>
 	<div id="top"></div>
-	<header class="fixed-top">
+	<header class="fixed-top" style="background-color:white;">
     	<div style="height:60px; background-color:#385A37; position:relative; top: 0; left: 0; z-index:2; display:flex; align-items:center;">
     		<ul class="d-flex mb-0 p-0 w-100">
     			<li class="mx-3" style="list-style:none; display: flex; align-items: center;">
