@@ -29,8 +29,8 @@ public class ItemDetailServlet extends HttpServlet {
 		ArrayList<ItemBean> itemImageList = Item.getItemImageList(itemBean);
 
 		
-		request.setAttribute("itemImageList", itemImageList);
 		request.setAttribute("item", item);
+		request.setAttribute("itemImageList", itemImageList);
 		
 		String view = "/WEB-INF/views/customer/itemDetail.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
