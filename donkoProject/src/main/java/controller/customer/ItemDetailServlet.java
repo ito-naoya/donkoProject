@@ -23,15 +23,7 @@ public class ItemDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		ItemBean itemBean = new ItemBean();
-//		itemBean.setItemId( Integer.parseInt(request.getParameter("itemId")));
-		
-		String test = request.getParameter("itemId");
-		
-		if(test != null) {	
-			itemBean.setItemId(Integer.parseInt(test));
-		}else {
-			itemBean.setItemId(10);
-		}
+		itemBean.setItemId( Integer.parseInt(request.getParameter("itemId")));
 
 		ItemBean item = Item.getItemDetail(itemBean);
 		ArrayList<ItemBean> itemImageList = Item.getItemImageList(itemBean);
