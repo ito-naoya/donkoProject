@@ -69,7 +69,7 @@
 											</option>
 										</select>
 									</p>
-									<button type="submit" class="btn p-2 ms-2" style="background-color: #e5ccff;">
+									<button type="submit" class="btn p-2 ms-3" style="background-color: #e5ccff;">
 										更新
 									</button>
 								</div>
