@@ -7,6 +7,9 @@
 <title>donko</title>
 </head>
 <body>
-
+	<%@include file= "../component/header.jsp" %>
+	<%@include file= "../component/headerTopSpace.jsp" %>
+	
+	<%@include file= "../component/footer.jsp" %>
 </body>
 </html>

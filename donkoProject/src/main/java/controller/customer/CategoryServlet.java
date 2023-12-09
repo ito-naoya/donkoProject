@@ -19,7 +19,9 @@ public class CategoryServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String categoryName = request.getParameter("category_name");
+		String view = "/WEB-INF/views/customer/categoryIndex.jsp";
+        request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	
