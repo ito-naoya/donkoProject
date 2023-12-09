@@ -6,6 +6,7 @@ import bean.ItemBean;
 import model.items.itemsDelete.DeleteItemFromItems;
 import model.items.itemsInsert.InsertNewItemToItems;
 import model.items.itemsSelect.SelectItemDetailFromItems;
+import model.items.itemsSelect.SelectItemImageListFromItems;
 import model.items.itemsSelect.SelectItemListFromItems;
 import model.items.itemsSelect.SelectItemListFromItemsByCategory;
 import model.items.itemsSelect.SelectItemListFromItemsByOption;
@@ -45,6 +46,11 @@ public class Item {
 	public static ItemBean getItemDetail(ItemBean itemBean){
 		return SelectItemDetailFromItems.selectItemDetailFromItems(itemBean);
 	};
+	
+	//商品の画像一覧を取得する
+	public static ArrayList<ItemBean> getItemImageList(ItemBean itemBean) {
+		return SelectItemImageListFromItems.selectItemImageListFromItems(itemBean);
+	}
 	
 	//商品を新規登録する
 	public static void registerNewItem(ItemBean itemBean){
