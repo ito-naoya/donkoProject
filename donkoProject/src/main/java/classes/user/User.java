@@ -14,11 +14,11 @@ public class User {
 	public User() {
 	};
 
-	protected int getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	protected void setUserId(int userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
