@@ -71,11 +71,23 @@
 						<%=item.getItemDescription()%>
 					</p>
 					<div class="d-flex justify-content-between align-items-center">
-						<p class="border p-3 mt-4 text-center" style=" width: 100px;">
-							残り<%=item.getItemStock()%>点
-						</p>
-						<form action="">
-							<input type="hidden" value="<%= item.getItemId() %>" name="itemId">
+						<% 
+						if (item.getItemStock() <= 3) {
+						%>
+							<p class="border p-3 mt-4 text-center" style=" width: 100px; color: red">
+								残り<%=item.getItemStock()%>点
+							</p>
+						<%		
+						} else {
+						%>
+							<p class="border p-3 mt-4 text-center" style=" width: 100px;">
+								残り<%=item.getItemStock()%>点
+							</p>
+						<%
+						} 
+						%>
+						
+						<form action="cart?itemId=<%= item.getItemId() %>" method="post">
 							<button type=submit class="btn px-5 py-3" style="background-color: #9933ff; color: white;">カートに入れる</button>
 						</form>
 					</div>

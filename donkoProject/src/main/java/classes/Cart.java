@@ -3,7 +3,6 @@ package classes;
 import java.util.ArrayList;
 
 import bean.CartBean;
-import bean.ItemBean;
 import classes.user.CustomerUser;
 import model.carts.cartsDelete.DeleteItemAllFromCarts;
 import model.carts.cartsDelete.DeleteItemFromCarts;
@@ -24,7 +23,7 @@ public class Cart {
 	};
 	
 	//カート内の商品一覧を取得する
-	public static ArrayList<ItemBean> getItemListFromCart(CustomerUser customerUser){
+	public static ArrayList<CartBean> getItemListFromCart(CustomerUser customerUser){
 		return SelectItemListFromCarts.selectItemListFromCarts(customerUser);
 	};
 	
