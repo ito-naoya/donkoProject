@@ -23,32 +23,32 @@ public class User {
 	}
 
 	//ユーザー新規登録する
-	protected static void registerNewUser(CustomerUser customerUser) {
+	public static void registerNewUser(CustomerUser customerUser) {
 		InsertNewUserToUsers.insertNewUserToUsers(customerUser);
 	};
 	
 	//ユーザー情報の重複をチェックする
-	protected void checkUserDuplicate(CustomerUser customerUser){
+	public void checkUserDuplicate(CustomerUser customerUser){
 		SelectUserDuplicate.selectUserDuplicate(customerUser);
 	};
 
 	//ユーザー情報を更新する
-	protected void updateUserInfo(CustomerUser customerUser) {
+	public void updateUserInfo(CustomerUser customerUser) {
 		UpdateUserInfoInUsers.updateUserInfoInUsers(customerUser);
 	};
 
 	//ユーザーの詳細を取得する
-	protected CustomerUser getUserDetail(CustomerUser customerUser) {
+	public CustomerUser getUserDetail(CustomerUser customerUser) {
 		return SelectUserDetailFromUsers.selectUserDetailFromUsers(customerUser);
 	};
 
 	//ログアウトする
 	//TODO セッション破棄のメソッドを記述する
-	protected void logout() {
+	public void logout() {
 	};
 
 	//ログインする
-	protected static void login(CustomerUser customerUser) {
+	public static void login(CustomerUser customerUser) {
 		SelectUserFromUsers.selectUserFromUsers(customerUser);
 	};
 
