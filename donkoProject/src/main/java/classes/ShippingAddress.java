@@ -24,8 +24,8 @@ public class ShippingAddress {
 	};
 	
 	//デフォルトのお届け先を取得する
-	public static ShippingAddressBean getDefaultShippingAddress(){
-		return SelectDefaultShippingAddress.selectDefaultShippingAddress();
+	public static ShippingAddressBean getDefaultShippingAddress(CustomerUser customerUser){
+		return SelectDefaultShippingAddress.selectDefaultShippingAddress(customerUser);
 	};
 	
 	//配送住所の詳細情報を取得する
