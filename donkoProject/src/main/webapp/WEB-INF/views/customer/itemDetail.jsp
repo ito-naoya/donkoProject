@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>donko</title>
+<link rel="stylesheet" href="./css/itemDetailStyle.css">
 </head>
 <body>
 	<%@include file="../component/header.jsp"%>
@@ -26,7 +27,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="m-auto" style="height: 400px; width: 400px;">
-						<img class="object-fit-cover w-100 h-100" src="./images/<%=item.getImageFileName()%>.jpg">
+						<img class="object-fit-cover w-100 h-100" id="mainImage" src="./images/<%=item.getImageFileName()%>.jpg">
 					</div>
 				</div>
 				<div class="col">
@@ -52,7 +53,7 @@
 							%>
 							<a href="itemDetail?itemId=<%=itemBean.getItemId()%>" class="me-3" style="text-decoration: none;">
 								<div style="height: 150px; width: 150px;">
-									<img class="object-fit-cover w-100 h-100" src="./images/<%=itemBean.getImageFileName()%>.jpg">
+									<img class="object-fit-cover w-100 h-100 subImage" src="./images/<%=itemBean.getImageFileName()%>.jpg">
 								</div>
 							</a>
 							<%
@@ -84,5 +85,6 @@
 		</div>
 	</main>
 	<%@include file="../component/footer.jsp"%>
+	<script src="./js/itemDetailScript.js"></script>
 </body>
 </html>

@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+.subImageOpacity{
+	opacity: 0.5;
+	transition-duration: 0.3s;
+}
