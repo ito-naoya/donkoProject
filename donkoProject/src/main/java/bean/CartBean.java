@@ -41,31 +41,25 @@ public class CartBean {
 		return itemName;
 	}
 
-
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-
 
 	public String getImageFileName() {
 		return imageFileName;
 	}
 
-
 	public void setImageFileName(String imageFileName) {
 		this.imageFileName = imageFileName;
 	}
-
 
 	public int getItemPrice() {
 		return itemPrice;
 	}
 
-
 	public void setItemPrice(int itemPrice) {
 		this.itemPrice = itemPrice;
 	}
-
 
 	public int getQuantity() {
 		return quantity;

@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>donko</title>
+<link rel="stylesheet" href="./css/itemDetailStyle.css">
 </head>
 <body>
 	<%@include file="../component/header.jsp"%>
@@ -26,7 +27,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="m-auto" style="height: 400px; width: 400px;">
-						<img class="object-fit-cover w-100 h-100" src="./images/<%=item.getImageFileName()%>.jpg">
+						<img class="object-fit-cover w-100 h-100" id="mainImage" src="./images/<%=item.getImageFileName()%>.jpg">
 					</div>
 				</div>
 				<div class="col">
@@ -52,7 +53,7 @@
 							%>
 							<a href="itemDetail?itemId=<%=itemBean.getItemId()%>" class="me-3" style="text-decoration: none;">
 								<div style="height: 150px; width: 150px;">
-									<img class="object-fit-cover w-100 h-100" src="./images/<%=itemBean.getImageFileName()%>.jpg">
+									<img class="object-fit-cover w-100 h-100 subImage" src="./images/<%=itemBean.getImageFileName()%>.jpg">
 								</div>
 							</a>
 							<%
@@ -71,11 +72,23 @@
 						<%=item.getItemDescription()%>
 					</p>
 					<div class="d-flex justify-content-between align-items-center">
-						<p class="border p-3 mt-4 text-center" style=" width: 100px;">
-							残り<%=item.getItemStock()%>点
-						</p>
-						<form action="">
-							<input type="hidden" value="<%= item.getItemId() %>" name="itemId">
+						<% 
+						if (item.getItemStock() <= 3) {
+						%>
+							<p class="border p-3 mt-4 text-center" style=" width: 100px; color: red">
+								残り<%=item.getItemStock()%>点
+							</p>
+						<%		
+						} else {
+						%>
+							<p class="border p-3 mt-4 text-center" style=" width: 100px;">
+								残り<%=item.getItemStock()%>点
+							</p>
+						<%
+						} 
+						%>
+						
+						<form action="cart?itemId=<%= item.getItemId() %>" method="post">
 							<button type=submit class="btn px-5 py-3" style="background-color: #9933ff; color: white;">カートに入れる</button>
 						</form>
 					</div>
@@ -84,5 +97,6 @@
 		</div>
 	</main>
 	<%@include file="../component/footer.jsp"%>
+	<script src="./js/itemDetailScript.js"></script>
 </body>
 </html>
