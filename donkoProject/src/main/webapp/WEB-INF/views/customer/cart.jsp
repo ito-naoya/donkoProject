@@ -72,6 +72,9 @@
 									<button type="submit" class="btn p-2 ms-3" style="background-color: #e5ccff;">
 										更新
 									</button>
+									<button type="submit" class="btn p-2 ms-3" style="background-color: red; color: white;">
+										削除
+									</button>
 								</div>
 							</div>
 						</li>
