@@ -1,6 +1,3 @@
-/**
- * 
- */
 
  const mainImage = document.querySelector("#mainImage");
  const mainSrc = mainImage.getAttribute("src");
