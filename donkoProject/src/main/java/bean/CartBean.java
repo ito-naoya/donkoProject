@@ -5,6 +5,9 @@ public class CartBean {
 	private int cartId;
 	private int userId;
 	private int itemId;
+	private String itemName;
+	private String imageFileName;
+	private int itemPrice;
 	private int quantity;
 	
 	public CartBean(){};
@@ -34,6 +37,30 @@ public class CartBean {
 		this.itemId = itemId;
 	}
 	
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public String getImageFileName() {
+		return imageFileName;
+	}
+
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
+
+	public int getItemPrice() {
+		return itemPrice;
+	}
+
+	public void setItemPrice(int itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+
 	public int getQuantity() {
 		return quantity;
 	}
