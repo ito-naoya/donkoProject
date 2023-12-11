@@ -23,8 +23,6 @@ public class MyPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		CustomerUser customerUser = new CustomerUser();
-		// TODO:実装が問題なければこのコードは削除予定
-		customerUser.setUserLoginId(Integer.parseInt("2"));
 		
 		ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
 		request.setAttribute("purchaseList", purchaseList);

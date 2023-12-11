@@ -5,10 +5,10 @@
 <head>
   <meta charset="UTF-8">
   <link href="../css/style.css" rel="stylesheet">
-  <title>donko MyPage</title>
+  <title>donko</title>
 </head>
 <body>
-  <%@include file= "../component/headerMyPage.jsp" %>
+  <%@include file= "../component/header.jsp" %>
   <%@include file= "../component/headerTopSpace.jsp" %>
   <main>
     <div class="myPageMenu">
