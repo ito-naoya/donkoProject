@@ -13,10 +13,18 @@
 </head>
 <body>
 	<main>
-		<a href="#" class="m-5" style="text-decoration: none; display: inline-block">
+		<a href="#" class="m-5 mb-4" style="text-decoration: none; display: inline-block">
 			<h6 class="py-2 px-5"style="color: #385a37; border: 1px solid #385a37; text-align: center; width: 200px;">
 				DONKO
 			</h6>
+		</a>
+		<br>
+		<a href="cart" class="mb-4" style="display: inline-block; margin-left: 52.5px;">
+			<div class="border text-center" style="width: 50px;">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  					<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+				</svg>
+			</div>
 		</a>
 		<div class="container">
 			<div class="row">
@@ -36,7 +44,7 @@
 						○○○○○
 						</p>
 						<div class="d-flex justify-content-end">
-							<a href="#">
+							<a href="shippingAddressIndex" style="color: #385a37">
 								デフォルトの配送先を変更
 							</a>
 						</div>
@@ -45,13 +53,33 @@
 						1. 商品情報
 					</p>
 					<hr>
+					<table class="table table-borderless">
+						<tr>
+							<td style="width: 200px">
+								<a href="#" class="me-3"
+								style="text-decoration: none; display: inline-block;">
+									<div style="height: 150px; width: 150px;">
+										<img class="object-fit-cover w-100 h-100"
+											src="./images/Galaxy1.jpg">
+									</div>
+								</a>
+							</td>
+							<td style="vertical-align: middle;"><strong>商品タイトル</strong></td>
+							<td style="vertical-align: middle;">¥ 30,009</td>
+							<td style="vertical-align: middle;">
+							<p style="margin: 0">
+								6個 
+							</p>
+							</td>
+						<tr>
+					</table>
 				</div>
 				<div class="col-4">
 					<div class="d-flex flex-column border p-5 align-items-center justify-content-center" style="width: 280px; height: 200px;">
 						<p>
 						合計金額 ¥ 60,000
 						</p>
-						<form action="" method="post">
+						<form action="purchaseConfirm" method="post">
 							<button type=submit class="btn px-5 py-2" style="background-color: #9933ff; color: white;">
 								注文確定
 							</button>

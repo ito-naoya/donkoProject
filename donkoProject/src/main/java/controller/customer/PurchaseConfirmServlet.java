@@ -37,7 +37,9 @@ public class PurchaseConfirmServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
+		String view = "/WEB-INF/views/customer/purchaseComplete.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 }
