@@ -95,6 +95,8 @@ public class Item {
 				return null;
 			}
 
+			//ItemBeanに値をセット
+
 			ItemBean newItem = new ItemBean();
 			newItem.setItemCategoryName(itemCategoryName);
 			newItem.setItemName(itemName);
@@ -103,5 +105,7 @@ public class Item {
 			newItem.setItemStock(Integer.valueOf(stock));
 
 			return newItem;
-		}
+
+		};
+
 }
