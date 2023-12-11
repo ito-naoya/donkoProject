@@ -11,7 +11,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 
 @WebServlet("/deleteCart")
@@ -24,17 +23,17 @@ public class DeleteCartServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		CustomerUser user = (CustomerUser)session.getAttribute("user");
+//		HttpSession session = request.getSession();
+//		CustomerUser user = (CustomerUser)session.getAttribute("user");
 		
+		CustomerUser user = new CustomerUser();
 		user.setUserId(2);
 		
 		int itemId = Integer.parseInt(request.getParameter("itemId"));
 //		int userId = user.getUserId();
-		int userId = user.getUserId();
 		
 		CartBean cartBean = new CartBean();
-		cartBean.setUserId(userId);
+		cartBean.setUserId(user.getUserId());
 		cartBean.setItemId(itemId);
 		
 		Cart.deleteItemFromCart(cartBean);
@@ -47,10 +46,11 @@ public class DeleteCartServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		CustomerUser user = (CustomerUser)session.getAttribute("user");
+//		HttpSession session = request.getSession();
+//		CustomerUser user = (CustomerUser)session.getAttribute("user");
 		
 //		int userId = user.getUserId();
+		CustomerUser user = new CustomerUser();
 		user.setUserId(2);
 		
 		Cart.deleteAllItemFromCart(user);

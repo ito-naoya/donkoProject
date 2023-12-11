@@ -45,7 +45,7 @@
 								</strong>
 							</td>
 							<td style="vertical-align: middle;">
-								¥ <%= String.format("%,d", cb.getItemPrice()) %>
+								¥ <%= String.format("%,d", cb.getItemPrice() * cb.getQuantity()) %>
 							</td>
 							<td style="vertical-align: middle;">
 								<p class="border p-2" style="margin: 0">
@@ -75,20 +75,21 @@
 									</select>
 								</p>
 							</td>
-							<form action="#">
-								<td style="vertical-align: middle;">
+							<td style="vertical-align: middle;">
+								<form action="#">
 									<button type="submit" class="btn p-2 ms-3" style="background-color: #e5ccff;">
 										更新
 									</button>
-								</td>
-							</form>
-							<form action="deleteCart?itemId=<%= cb.getItemId()%>" method="GET">
-								<td style="vertical-align: middle;">
+								</form>
+							</td>
+							<td style="vertical-align: middle;">
+								<form action="deleteCart" method="GET">
+									<input type="hidden" value="<%= cb.getItemId() %>" name="itemId">
 									<button type="submit" class="btn p-2 ms-3" style="background-color: red; color: white;">
 										削除
 									</button>
-								</td>
-							</form>
+								</form>
+							</td>
 						<tr>
 					<%
 					} 
@@ -96,11 +97,10 @@
 					</table>
 				</div>
 				<div class="d-flex justify-content-center">
-					<form action="deleteCart?itemId=<%= cb.getItemId() %>" method="POST" class="d-flex justify-content-end mt-3">
-						<button type=submit
-							class="btn px-5 py-3 rounded-pill border border-danger"
-							style="background-color: white; color: red;">
-							カートの中身を全て削除する</button>
+					<form action="deleteCart" method="POST" class="d-flex justify-content-end mt-3">
+						<button type=submit class="btn px-5 py-3 rounded-pill border border-danger" style="background-color: white; color: red;">
+							カートの中身を全て削除する
+						</button>
 					</form>
 				</div>
 			</div>
