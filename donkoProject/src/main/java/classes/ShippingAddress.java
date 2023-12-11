@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import bean.ShippingAddressBean;
 import classes.user.CustomerUser;
 import model.shippingAddresses.shippingAddressesInsert.InsertNewShippingAddress;
-import model.shippingAddresses.shippingAddressesSelect.SelectDefaultShippingAddress;
+import model.shippingAddresses.shippingAddressesSelect.SelectMainShippingAddress;
 import model.shippingAddresses.shippingAddressesSelect.SelectShippingAddressDetail;
 import model.shippingAddresses.shippingAddressesSelect.SelectShippingAddressList;
-import model.shippingAddresses.shippingAddressesUpdate.UpdateDefaultShippingAddress;
+import model.shippingAddresses.shippingAddressesUpdate.UpdateMainShippingAddress;
 import model.shippingAddresses.shippingAddressesUpdate.UpdateShippingAddress;
 
 public class ShippingAddress {
@@ -18,14 +18,14 @@ public class ShippingAddress {
 		InsertNewShippingAddress.insertNewShippingAddress(shippingAddressBean);
 	};
 	
-	//デフォルトの配送先を更新する
-	public static void updateDefaultShippingAddress(ShippingAddressBean shippingAddressBean){
-		UpdateDefaultShippingAddress.updateDefaultShippingAddress(shippingAddressBean);
+	//メインの配送先を更新する
+	public static void updateMainShippingAddress(ShippingAddressBean shippingAddressBean){
+		UpdateMainShippingAddress.updateMainShippingAddress(shippingAddressBean);
 	};
 	
-	//デフォルトのお届け先を取得する
-	public static ShippingAddressBean getDefaultShippingAddress(CustomerUser customerUser){
-		return SelectDefaultShippingAddress.selectDefaultShippingAddress(customerUser);
+	//メインのお届け先を取得する
+	public static ShippingAddressBean getMainShippingAddress(CustomerUser customerUser){
+		return SelectMainShippingAddress.selectMainShippingAddress(customerUser);
 	};
 	
 	//配送住所の詳細情報を取得する
