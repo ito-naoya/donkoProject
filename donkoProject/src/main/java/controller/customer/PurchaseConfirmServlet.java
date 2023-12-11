@@ -1,7 +1,13 @@
 package controller.customer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import bean.CartBean;
+import bean.ShippingAddressBean;
+import classes.Cart;
+import classes.ShippingAddress;
+import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,12 +31,15 @@ public class PurchaseConfirmServlet extends HttpServlet {
 //			response.sendRedirect("login");
 //			return;
 //		}
-//		
-//		ShippingAddressBean shippingAddress = ShippingAddress.getDefaultShippingAddress(loginedUser);
-//		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(loginedUser);
-//		
-//		request.setAttribute("shippingAddress", shippingAddress);
-//		request.setAttribute("cartBeanList", cartBeanList);
+
+		CustomerUser loginedUser = new CustomerUser();
+		loginedUser.setUserId(2);
+		
+		ShippingAddressBean shippingAddress = ShippingAddress.getMainShippingAddress(loginedUser);
+		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(loginedUser);
+		
+		request.setAttribute("shippingAddress", shippingAddress);
+		request.setAttribute("cartBeanList", cartBeanList);
 		
 		String view = "/WEB-INF/views/customer/purchaseConfirm.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
