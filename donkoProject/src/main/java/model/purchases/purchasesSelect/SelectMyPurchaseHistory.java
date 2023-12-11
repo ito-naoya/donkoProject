@@ -65,10 +65,12 @@ public class SelectMyPurchaseHistory {
 						if(!connection.isClosed()) {
 							connection.rollback();
 							e.printStackTrace();
+							return null;
 					}
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
+				return null;
 			}
 			return purchaseList;
 		}
