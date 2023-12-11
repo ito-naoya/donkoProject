@@ -94,7 +94,9 @@ public class Item {
 			if(stock.isEmpty() || stock.length() > 11) {
 				return null;
 			}
+
 			//ItemBeanに値をセット
+
 			ItemBean newItem = new ItemBean();
 			newItem.setItemCategoryName(itemCategoryName);
 			newItem.setItemName(itemName);
@@ -103,5 +105,7 @@ public class Item {
 			newItem.setItemStock(Integer.valueOf(stock));
 
 			return newItem;
+
 		};
+
 }
