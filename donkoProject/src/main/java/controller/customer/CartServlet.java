@@ -30,11 +30,11 @@ public class CartServlet extends HttpServlet {
 //		}
 		
 		//テストコード
-//		CustomerUser loginedUser = new CustomerUser();
-//		loginedUser.setUserId(1);
-//		
-//		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
-//		request.setAttribute("cartList", cartList);
+		CustomerUser loginedUser = new CustomerUser();
+		loginedUser.setUserId(2);
+	
+		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
+		request.setAttribute("cartList", cartList);
 		
 		String view = "/WEB-INF/views/customer/cart.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
@@ -42,7 +42,6 @@ public class CartServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 	}
 
 }
