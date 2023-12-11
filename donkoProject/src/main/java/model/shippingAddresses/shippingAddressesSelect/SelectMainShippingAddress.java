@@ -7,10 +7,7 @@ public class SelectMainShippingAddress {
 	
 	//メインの配送先を取得する
 	public static ShippingAddressBean selectMainShippingAddress(CustomerUser customerUser){
-		
-		
-		
-		
+		return null;
 	};
 
 }
