@@ -27,10 +27,11 @@ public class ItemDetailServlet extends HttpServlet {
 
 		ItemBean item = Item.getItemDetail(itemBean);
 		ArrayList<ItemBean> itemImageList = Item.getItemImageList(itemBean);
-
+		ArrayList<ItemBean> itemOptionList = Item.getItemOptionList(itemBean);
 		
 		request.setAttribute("item", item);
 		request.setAttribute("itemImageList", itemImageList);
+		request.setAttribute("itemOptionList", itemOptionList);
 		
 		String view = "/WEB-INF/views/customer/itemDetail.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);

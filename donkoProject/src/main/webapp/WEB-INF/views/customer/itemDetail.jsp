@@ -63,6 +63,30 @@
 						}
 						%>
 					</div>
+					<%
+					ArrayList<ItemBean> itemOptionList = (ArrayList<ItemBean>)request.getAttribute("itemOptionList");
+					%>
+					
+					<% 
+					if(itemOptionList.size() > 1){
+					%>
+						<div class="d-flex">
+							<%
+							for(ItemBean ib : itemOptionList) {
+							%>
+								<a href="itemDetail?itemId=<%= ib.getItemId() %>" class="d-inline-block" style="margin-right: 9px; text-decoration: none; margin-bottom: 16px; color: black;">
+									<div class="border text-center" style=" width: 50px; hegiht: 50px">
+										<%= ib.getItemFirstOptionValue() %>
+									</div>
+								</a>
+							<%
+							}
+							%>
+						</div>
+					<%
+					} 
+					%>
+					
 					<h5>
 						<strong>
 							この商品について

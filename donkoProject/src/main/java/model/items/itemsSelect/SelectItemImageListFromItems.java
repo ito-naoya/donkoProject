@@ -14,53 +14,44 @@ public class SelectItemImageListFromItems {
 	//商品の画像一覧を取得する
 	public static ArrayList<ItemBean> selectItemImageListFromItems(ItemBean itemBean) {
 		
-		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT "			 																									  );
-		sql.append(		"items.item_id, "																									  );
-		sql.append(		"items.file_name "																									  );
-		sql.append("FROM "																													  );
-		sql.append(		"items "																											  );
-		sql.append("INNER JOIN	"																											  );
-		sql.append(		"item_categories "																									  );
-		sql.append("ON "																													  );
-		sql.append(		"items.item_category_name = item_categories.item_category_name "													  );
-		sql.append("INNER JOIN "																											  );
-		sql.append(		"`options` "																										  );
-		sql.append("ON "																													  );
-		sql.append(		"items.item_id = options.item_id "																					  );
-		sql.append("AND "																													  );
-		sql.append(		"item_categories.option_category_name = options.option_category_name "												  );
-		sql.append("INNER JOIN "																											  );
-		sql.append(		"option_categories "																								  );
-		sql.append("ON "																													  );
-		sql.append(		"`options`.option_category_name = option_categories.option_category_name "											  );
-		sql.append("AND	"																													  );
-		sql.append(		"`options`.option_category_increment_id  = option_categories.option_category_increment_id "							  );
-		sql.append("WHERE "																													  );
-		sql.append(		"item_name = (SELECT "																								  );
-		sql.append(					 	"item_name	"																						  );
-		sql.append(					 "FROM "																								  );
-		sql.append(						"items "																							  );
-		sql.append(					 "WHERE "																								  );
-		//渡された商品のIDをここで使用する(1/2回目)
-		sql.append(						"item_id = ?) "																						  ); 
-		sql.append("AND "																													  );
-		sql.append(		"option_category_value = (SELECT "																					  );
-		sql.append(									"option_categories.option_category_value "												  );
-		sql.append(								 "FROM "																					  );
-		sql.append(								  	"`options` "																			  );
-		sql.append(								 "INNER JOIN "																				  );
-		sql.append(									"option_categories "																	  );
-		sql.append(								 "ON "																						  );
-		sql.append(								 	"`options`.option_category_name = option_categories.option_category_name "				  );
-		sql.append(								 "AND "																						  );
-		sql.append(									"`options`.option_category_increment_id = option_categories.option_category_increment_id ");
-		sql.append(								 "AND "																						  );
-		sql.append(									"`options`.option_category_name != '色' "												  );
-		sql.append(								 "WHERE "																					  );
-		//渡された商品のIDをここで使用する(2/2回目)
-		sql.append(									"`options`.item_id = ?)"																  );
-
+		StringBuilder sql = new StringBuilder();	
+		sql.append("SELECT "																			   );
+		sql.append(		"items.item_id, "																   );
+		sql.append(		"items.file_name "																   );
+		sql.append("FROM "																				   );
+		sql.append(		"items "																		   );
+		sql.append("INNER JOIN "																		   );
+		sql.append(		"item_categories "																   );
+		sql.append("ON "																				   );
+		sql.append(		"items.item_category_name = item_categories.item_category_name "				   );
+		sql.append("INNER JOIN "																		   );
+		sql.append(		"`options` "																	   );
+		sql.append("ON "																				   );
+		sql.append(		"items.item_id = options.item_id "												   );
+		sql.append("AND "																				   );
+		sql.append(		"item_categories.option_category_name = options.option_category_name "			   );
+		sql.append("AND "																				   );
+		sql.append(		"options.option_category_name != '色' "											   );
+		sql.append("WHERE "																				   );
+		sql.append(		"item_name = (SELECT "															   );
+		sql.append(						"item_name "													   );		  	                                                       
+		sql.append(					"FROM "																   );		  	                                                             
+		sql.append(						"items "														   );		 	                                                            
+		sql.append(					"WHERE "															   );		 	                                                            
+		//渡された商品IDをここで使う（1/2回目)
+		sql.append(						"item_id = ? ) "												   );		  	                                                     
+		sql.append("AND "																				   );
+		sql.append(		"option_category_increment_id = (SELECT "						  				   );                                                                   
+		sql.append(											"option_category_increment_id "				   );                                                      
+		sql.append(										"FROM "							   				   );
+		sql.append(											"options "					   				   );
+		sql.append(										"WHERE "						   				   );
+		//渡された商品IDをここで使う（2/2回目)
+		sql.append(											"item_id = ? "				   				   );
+		sql.append(										"AND "							   			 	   );
+		sql.append(											"option_category_name != '色') "				   );
+		sql.append("AND "							   				  									   );
+		sql.append(		"items.item_delete_flg != 1 "  				  									   );                                                                  
 		//SQL文を文字列に変換
 		final String SELECT_ITEMIMAGELIST_SQL = sql.toString();
 		
