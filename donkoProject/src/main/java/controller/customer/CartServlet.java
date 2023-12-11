@@ -1,11 +1,7 @@
 package controller.customer;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import bean.CartBean;
-import classes.Cart;
-import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -46,32 +42,6 @@ public class CartServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-//		HttpSession session = request.getSession();
-//		CustomerUser loginedUser = (CustomerUser)session.getAttribute("user");
-		
-//		if(loginedUser == null) {
-//			response.sendRedirect("login");
-//			return;
-//		}
-		
-		//テストコード
-		CustomerUser loginedUser = new CustomerUser();
-		loginedUser.setUserId(1);
-		
-		int itemId = Integer.parseInt(request.getParameter("itemId"));
-		int userId = loginedUser.getUserId();
-		CartBean cartBean = new CartBean();
-		
-		cartBean.setItemId(itemId);
-		cartBean.setUserId(userId);
-		
-		Cart.addItemToCart(cartBean);
-		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
-		request.setAttribute("cartList", cartList);
-		
-		String view = "/WEB-INF/views/customer/cart.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
 		
 	}
 
