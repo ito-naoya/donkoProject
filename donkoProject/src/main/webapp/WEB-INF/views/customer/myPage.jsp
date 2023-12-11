@@ -35,7 +35,7 @@
     <% for (PurchaseBean purchaseBean : purchaseList) { %>
       <tr align="center" style="display: flex; justify-content: space-between; height: auto; padding-left:90px;">
           <!-- 購入履歴ID -->
-          <td><a href='orderDetail?id=<%= purchaseBean.getPurchaseId() %>'><%= purchaseBean.getPurchaseId() %></a></button></td>
+          <td><a href='orderDetail?purchase_id=<%= purchaseBean.getPurchaseId() %>'><%= purchaseBean.getPurchaseId() %></a></button></td>
           <!-- 合計金額 -->
           <td>¥<%= purchaseBean.getTotalAmount() %></td>
           <!-- 購入日 -->
