@@ -18,11 +18,13 @@
 			<%
 			for (ItemBean item : IList) {
 			%>
-			<div class="card mb-3 mx-2" style="width: 300px; height: 300px;">
-				<img src="./images/<%=item.getImageFileName()%>.jpg"
-					class="card-img-top" alt="<%=item.getImageFileName()%>"
-					style="object-fit: cover; height: 100%;">
-			</div>
+			<a href="itemDetail?itemId=<%= item.getItemId() %>" style="color: #385a37; display: block; text-decoration:none;">
+				<span class="card mb-3 mx-2" style="width: 300px; height: 300px;">
+					<img src="./images/<%= item.getImageFileName() %>.jpg"
+						class="card-img-top" alt="<%= item.getImageFileName() %>"
+						style="object-fit: cover; height: 100%;">
+				</span>
+			</a>
 			<%
 			}
 			%>
