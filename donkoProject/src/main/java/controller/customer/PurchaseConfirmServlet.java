@@ -31,15 +31,23 @@ public class PurchaseConfirmServlet extends HttpServlet {
 //			response.sendRedirect("login");
 //			return;
 //		}
-
-		CustomerUser loginedUser = new CustomerUser();
+		
+		//テストコード
+		CustomerUser loginedUser = new CustomerUser(); 
 		loginedUser.setUserId(2);
 		
 		ShippingAddressBean shippingAddress = ShippingAddress.getMainShippingAddress(loginedUser);
-		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(loginedUser);
+		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
+		
+		ArrayList<Integer> priceList = new ArrayList<Integer>();
+		cartList.forEach(cb -> {
+			priceList.add(cb.getQuantity() * cb.getItemPrice());		
+		});
+		Integer totalPrice = priceList.stream().mapToInt( i -> i ).sum();
 		
 		request.setAttribute("shippingAddress", shippingAddress);
-		request.setAttribute("cartBeanList", cartBeanList);
+		request.setAttribute("cartList", cartList);
+		request.setAttribute("totalPrice", totalPrice);
 		
 		String view = "/WEB-INF/views/customer/purchaseConfirm.jsp";
 		request.getRequestDispatcher(view).forward(request, response);

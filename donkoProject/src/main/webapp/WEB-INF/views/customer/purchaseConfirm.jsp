@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="java.util.*" %>
+	<%@ page import="bean.ShippingAddressBean" %>
+	<%@ page import="bean.CartBean" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,19 +32,22 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-8">
+				<%
+				ShippingAddressBean sa = (ShippingAddressBean)request.getAttribute("shippingAddress");
+				%>
 					<p>
 						1. 配送先
 					</p>
 					<hr>
 					<div class="p-3">
 						<p class="mb-0">
-						〒000-000
+						〒 <%= sa.getPostalCode() %>
 						</p>
 						<p>
-						○○○○○○○○○○x-x-x
+						<%= sa.getAddress() %>
 						</p>
 						<p>
-						○○○○○
+						<%= sa.getAddressee() %>
 						</p>
 						<div class="d-flex justify-content-end">
 							<a href="shippingAddressIndex" style="color: #385a37">
@@ -54,30 +60,40 @@
 					</p>
 					<hr>
 					<table class="table table-borderless">
-						<tr>
-							<td style="width: 200px">
-								<a href="#" class="me-3"
-								style="text-decoration: none; display: inline-block;">
-									<div style="height: 150px; width: 150px;">
-										<img class="object-fit-cover w-100 h-100"
-											src="./images/Galaxy1.jpg">
-									</div>
-								</a>
-							</td>
-							<td style="vertical-align: middle;"><strong>商品タイトル</strong></td>
-							<td style="vertical-align: middle;">¥ 30,009</td>
-							<td style="vertical-align: middle;">
-							<p style="margin: 0">
-								6個 
-							</p>
-							</td>
-						<tr>
+						<%
+						ArrayList<CartBean> cartList = (ArrayList<CartBean>) request.getAttribute("cartList");
+						%>
+						<%
+						for(CartBean cb : cartList) {
+						%>
+							<tr>
+								<td style="width: 200px">
+									<a href="#" class="me-3"
+									style="text-decoration: none; display: inline-block;">
+										<div style="height: 150px; width: 150px;">
+											<img class="object-fit-cover w-100 h-100"
+												src="./images/<%= cb.getImageFileName() %>.jpg">
+										</div>
+									</a>
+								</td>
+								<td style="vertical-align: middle;"><strong><%= cb.getItemName() %></strong></td>
+								<td style="vertical-align: middle;">¥ <%= String.format("%,d", cb.getItemPrice()) %></td>
+								<td style="vertical-align: middle;">
+								<p style="margin: 0">
+									<%= cb.getQuantity() %>個 
+								</p>
+								</td>
+							<tr>
+						<%
+						} 
+						%>
 					</table>
 				</div>
 				<div class="col-4">
 					<div class="d-flex flex-column border p-5 align-items-center justify-content-center" style="width: 280px; height: 200px;">
+					<% Integer totalPrice = (Integer)request.getAttribute("totalPrice");%>
 						<p>
-						合計金額 ¥ 60,000
+						合計金額 ¥ <%= String.format("%,d", totalPrice) %>
 						</p>
 						<form action="purchaseConfirm" method="post">
 							<button type=submit class="btn px-5 py-2" style="background-color: #9933ff; color: white;">

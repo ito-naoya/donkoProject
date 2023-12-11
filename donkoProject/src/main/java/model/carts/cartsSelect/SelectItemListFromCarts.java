@@ -17,7 +17,6 @@ public class SelectItemListFromCarts {
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT "					);
-		sql.append(		"c.cart_id, "			);
 		sql.append(		"i.item_id, "			);
 		sql.append(		"i.item_name, "			);
 		sql.append(		"i.file_name, "			);
@@ -43,7 +42,6 @@ public class SelectItemListFromCarts {
 				
 				while(rs.next()) {
 					CartBean cb = new CartBean();
-					cb.setCartId(rs.getInt("cart_id"));
 					cb.setItemId(rs.getInt("item_id"));
 					cb.setItemName(rs.getString("item_name"));
 					cb.setImageFileName(rs.getString("file_name"));

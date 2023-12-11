@@ -111,10 +111,18 @@
 						<%
 						} 
 						%>
-						
-						<form action="itemDetail?itemId=<%= item.getItemId() %>" method="post">
-							<button type=submit class="btn px-5 py-3" style="background-color: #9933ff; color: white;">カートに入れる</button>
-						</form>
+						<%
+						if (item.getItemStock() != 0) { 
+						%>
+							<form action="itemDetail?itemId=<%= item.getItemId() %>" method="post">
+								<button type=submit class="btn px-5 py-3" style="background-color: #9933ff; color: white;">
+									カートに入れる
+								</button>
+							</form>
+						<%
+						} 
+						%>
+
 					</div>
 				</div>
 			</div>
