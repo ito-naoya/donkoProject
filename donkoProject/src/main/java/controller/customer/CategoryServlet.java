@@ -31,4 +31,8 @@ public class CategoryServlet extends HttpServlet {
 		String view = "/WEB-INF/views/customer/categoryIndex.jsp";
         request.getRequestDispatcher(view).forward(request, response);
 	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
 }
