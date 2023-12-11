@@ -22,7 +22,7 @@ public class CategoryServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String categoryName = "衣類";
+		String categoryName = request.getParameter("categoryName");
 		ItemBean itemBean = new ItemBean();
 		itemBean.setItemCategoryName(categoryName);
 		ArrayList<ItemBean> itemList =Item.getItemListByCategory(itemBean);

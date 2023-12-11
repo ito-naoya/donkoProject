@@ -11,7 +11,18 @@ import dao.GeneralDao;
 
 public class SelectItemListFromItemsByCategory {
 	public static ArrayList<ItemBean> selectItemListFromItemsByCategory(ItemBean itemBean){
-		final String SELECT_ITEMLIST_SQL = "SELECT item_id, item_name, file_name FROM items WHERE items.item_category_name = ?";
+		String categoryName = itemBean.getItemCategoryName();
+		String SELECT_ITEMLIST_SQL = null;
+		if (categoryName.equals("衣類") || categoryName.equals("靴")) {
+			SELECT_ITEMLIST_SQL = "SELECT * FROM items "
+					+ "INNER JOIN options ON items.item_id  = options.item_id "
+					+ "AND options.option_category_name != '色' "
+					+ "AND items.item_category_name = ? "
+					+ "AND option_category_increment_id = 2 "
+					+ "WHERE items.item_delete_flg = 0";
+		} else {
+			SELECT_ITEMLIST_SQL = "SELECT * FROM items WHERE item_category_name  = ?";
+		}
 		ArrayList<ItemBean> Itemlist = new ArrayList<>();
 		ArrayList<Object> paramLists = new ArrayList<>() {{
 			add(itemBean.getItemCategoryName());
