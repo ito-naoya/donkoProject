@@ -72,4 +72,36 @@ public class Item {
 		DeleteItemFromItems.deleteItemFromItems(itemBean);
 	};
 	
+	//商品登録画面から取得した値のnull値及び文字数をチェックして、ItemBeanにセット		
+		public static ItemBean checkRegistItemDetail(String itemCategoryName, String itemName, String itemDescription, String price, String stock) {	
+			//カテゴリー名
+			if(itemCategoryName.isEmpty() || itemCategoryName.length() > 20) {
+				return null;
+			}
+			//商品名
+			if(itemName.isEmpty() || itemName.length() > 30) {
+				return null;
+			}
+			//商品説明
+			if(itemDescription.isEmpty() || itemDescription.length() > 100) {
+				return null;
+			}
+			//金額
+			if(price.isEmpty() || price.length() > 11) {
+				return null;
+			}
+			//在庫
+			if(stock.isEmpty() || stock.length() > 11) {
+				return null;
+			}
+			//ItemBeanに値をセット
+			ItemBean newItem = new ItemBean();
+			newItem.setItemCategoryName(itemCategoryName);
+			newItem.setItemName(itemName);
+			newItem.setItemDescription(itemDescription);
+			newItem.setItemPrice(Integer.valueOf(price.replaceAll(",", "")));
+			newItem.setItemStock(Integer.valueOf(stock));
+			
+			return newItem;
+		};	
 }

@@ -14,6 +14,8 @@ public class ItemBean {
 	private String itemSecondOptionName;
 	private String itemFirstOptionValue;
 	private String itemSecondOptionValue;
+	private int itemFirstOptionIncrementId;
+    private int itemSecondOptionIncrementId;
 	
 	public ItemBean(){};
 	
@@ -113,4 +115,19 @@ public class ItemBean {
 		this.itemSecondOptionValue = itemSecondOptionValue;
 	}
 	
+	public int getItemFirstOptionIncrementId() {
+        return itemFirstOptionIncrementId;
+	}
+	
+	public void setItemFirstOptionIncrementId(int itemFirstOptionIncrementId) {
+	        this.itemFirstOptionIncrementId = itemFirstOptionIncrementId;
+	}
+	
+	public int getItemSecondOptionIncrementId() {
+	        return itemSecondOptionIncrementId;
+	}
+	
+	public void setItemSecondOptionIncrementId(int itemSecondOptionIncrementId) {
+	        this.itemSecondOptionIncrementId = itemSecondOptionIncrementId;
+	}
 }
