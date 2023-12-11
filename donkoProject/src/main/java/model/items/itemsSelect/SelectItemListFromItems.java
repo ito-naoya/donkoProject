@@ -18,26 +18,27 @@ public class SelectItemListFromItems {
 		ArrayList<Object> paramLists = new ArrayList<>() {{ }};
 		try (Connection conn = DatabaseConnection.getConnection()) {
 			try (ResultSet result = GeneralDao.executeQuery(conn, SELECT_ALL_ITEMLIST_SQL, paramLists)) {
-				ItemBean IBeans = new ItemBean();
+				
 				if(result.next()){ 
+					ItemBean IBeans = new ItemBean();
 					int itemId = result.getInt("item_id");
 					String imageFileName = result.getString("file_name");
 					IBeans.setItemId(itemId);
 					IBeans.setImageFileName(imageFileName);
 					Itemlist.add(IBeans);
 				}
-				String previousFN = IBeans.getImageFileName();
+				
 				while (result.next()) {
 				    int itemId = result.getInt("item_id");
 				    String imageFileName = result.getString("file_name");
-
-				    if (!imageFileName.equals(previousFN)) {
-				        ItemBean IB = new ItemBean();
-				        IB.setItemId(itemId);
-				        IB.setImageFileName(imageFileName);
-				        Itemlist.add(IB);
-				        
-				        previousFN = imageFileName;
+				    
+				    boolean check = isChecked(Itemlist, imageFileName);
+				    
+				    if(check == true) {
+				    	ItemBean IBeans = new ItemBean();
+						IBeans.setItemId(itemId);
+						IBeans.setImageFileName(imageFileName);
+						Itemlist.add(IBeans);
 				    }
 				    
 				    if (Itemlist.size() == 8) {
@@ -52,11 +53,25 @@ public class SelectItemListFromItems {
 				}
 				return null;
 			}
-			// getConnection時のExceptionをcatch
+		// getConnection時のExceptionをcatch
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 		return Itemlist;
 	};
-
+	
+	protected static boolean isChecked(ArrayList<ItemBean> Itemlist, String imageFileName) {
+		 boolean isChecked = false;
+		    for (int i = 0; i < Itemlist.size(); i++) {
+             String imn = Itemlist.get(i).getImageFileName();
+             if (imn.equals(imageFileName)) {
+            	 isChecked = false;
+                 break;
+             } else {
+            	isChecked = true;
+             	i++;
+             }
+         }
+		return isChecked;
+	}
 }
