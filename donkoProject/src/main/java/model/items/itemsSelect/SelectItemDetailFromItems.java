@@ -46,9 +46,8 @@ public class SelectItemDetailFromItems {
 		try (Connection conn = DatabaseConnection.getConnection();) {
 			try (ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEMDETAIL_SQL, params);) {
 
-				ib = new ItemBean();
-
 				while (rs.next()) {
+					ib = new ItemBean();
 					ib.setItemId(rs.getInt("item_id"));
 					ib.setItemCategoryName(rs.getString("item_category_name"));
 					ib.setItemName(rs.getString("item_name"));

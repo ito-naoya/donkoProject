@@ -36,14 +36,13 @@ public class SelectItemListFromCarts {
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(customerUser.getUserId());
 		
-		CartBean cb = null;
 		ArrayList<CartBean> cartBeanList = new ArrayList<CartBean>();
 		
 		try(Connection conn = DatabaseConnection.getConnection();){
 			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_CARTLIST_SQL, params);){
 				
 				while(rs.next()) {
-					cb = new CartBean();
+					CartBean cb = new CartBean();
 					cb.setCartId(rs.getInt("cart_id"));
 					cb.setItemId(rs.getInt("item_id"));
 					cb.setItemName(rs.getString("item_name"));
@@ -58,6 +57,7 @@ public class SelectItemListFromCarts {
 					conn.rollback();
 				}
 			e.printStackTrace();
+			return null;
 			}
 			
 		} catch (ClassNotFoundException | SQLException e1) {

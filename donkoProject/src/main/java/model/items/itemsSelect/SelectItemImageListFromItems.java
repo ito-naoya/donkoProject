@@ -68,14 +68,13 @@ public class SelectItemImageListFromItems {
 		params.add(itemBean.getItemId());
 		params.add(itemBean.getItemId());
 
-		ItemBean ib = null;
 		ArrayList<ItemBean> itemBeanList = new ArrayList<ItemBean>();
 
 		try (Connection conn = DatabaseConnection.getConnection();) {
 			try (ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEMIMAGELIST_SQL, params);) {
 				
 				while (rs.next()) {
-					ib = new ItemBean();
+					ItemBean ib = new ItemBean();
 					ib.setItemId(rs.getInt("item_id"));
 					ib.setImageFileName(rs.getString("file_name"));
 					itemBeanList.add(ib);

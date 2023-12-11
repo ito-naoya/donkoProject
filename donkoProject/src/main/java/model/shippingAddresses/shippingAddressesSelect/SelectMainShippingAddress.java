@@ -9,5 +9,4 @@ public class SelectMainShippingAddress {
 	public static ShippingAddressBean selectMainShippingAddress(CustomerUser customerUser){
 		return null;
 	};
-
 }
