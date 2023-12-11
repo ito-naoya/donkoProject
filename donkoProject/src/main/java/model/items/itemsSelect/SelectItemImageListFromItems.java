@@ -85,10 +85,12 @@ public class SelectItemImageListFromItems {
 					//SQL文が一つでも失敗したらロールバックする
 					conn.rollback();
 					e.printStackTrace();
+					return null;
 				}
 			}
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
+			return null;
 		}
 		return itemBeanList;
 	}

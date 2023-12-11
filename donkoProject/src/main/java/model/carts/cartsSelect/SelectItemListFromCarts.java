@@ -56,12 +56,13 @@ public class SelectItemListFromCarts {
 				if(!conn.isClosed()) {
 					conn.rollback();
 				}
-			e.printStackTrace();
-			return null;
+				e.printStackTrace();
+				return null;
 			}
 			
-		} catch (ClassNotFoundException | SQLException e1) {
-			e1.printStackTrace();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 		return cartBeanList;
 	};	
