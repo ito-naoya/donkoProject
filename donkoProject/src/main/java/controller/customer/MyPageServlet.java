@@ -1,7 +1,11 @@
 package controller.customer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import bean.PurchaseBean;
+import classes.Purchase;
+import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,17 +15,20 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/myPage")
 public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public MyPageServlet() {
-        super();
-    }
-
+	
+	public MyPageServlet() {
+		super();
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		CustomerUser customerUser = new CustomerUser();
+		
+		ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
+		request.setAttribute("purchaseList", purchaseList);
+		System.out.println(purchaseList);
+		
+		String view = "/WEB-INF/views/customer/myPage.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
 }
