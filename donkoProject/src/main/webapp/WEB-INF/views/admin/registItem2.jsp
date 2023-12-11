@@ -21,7 +21,7 @@
 
 	    reader.onloadend = function() {
 	        preview.src = reader.result;
-	        imgCard.style.display = 'block'; // 画像を表示
+	        imgCard.style.display = 'block'; // カード画像を表示
 	    }
 
 	    if (file) {

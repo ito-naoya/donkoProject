@@ -101,7 +101,7 @@
 	//数字をカンマ区切りにする
 	document.getElementById('price').addEventListener('input', function (event) {
        let value = event.target.value;
-       value = value.replace(/[^\d]/g, ''); //数字以外の文字を除去
+       value = value.replace(/[^\d]/g, ''); //正規表現で数字以外の文字を除去
        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ','); //3桁ごとにカンマを挿入
        event.target.value = value;
    });

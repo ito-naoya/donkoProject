@@ -45,7 +45,6 @@ public class RegistItemServlet1 extends HttpServlet {
 			throws ServletException, IOException {
 
 		//TODO:セッション管理
-
 		//カテゴリー、商品名、商品説明、金額、在庫数を取得
 		String itemCategoryName = request.getParameter("itemCategoryName");
 		String itemName = request.getParameter("itemName");
