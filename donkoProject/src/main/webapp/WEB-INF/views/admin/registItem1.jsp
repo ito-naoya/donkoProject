@@ -36,7 +36,7 @@
 						%>
 						<div id="error-message-container" class="alert alert-danger d-none"></div>
 
-
+						<!-- ここから入力フォーム  -->
 						<form action="registItem1" id="registItem1" method="post">
 							<div class="mb-3">
 								<select class="form-select category-select" name="itemCategoryName">
