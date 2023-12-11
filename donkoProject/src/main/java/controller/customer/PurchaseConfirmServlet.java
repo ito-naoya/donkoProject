@@ -17,11 +17,29 @@ public class PurchaseConfirmServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+//		HttpSession session = request.getSession();
+//		CustomerUser loginedUser = (CustomerUser)session.getAttribute("customerUser");
+//		
+//		if(loginedUser == null) {
+//			response.sendRedirect("login");
+//			return;
+//		}
+//		
+//		ShippingAddressBean shippingAddress = ShippingAddress.getDefaultShippingAddress(loginedUser);
+//		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(loginedUser);
+//		
+//		request.setAttribute("shippingAddress", shippingAddress);
+//		request.setAttribute("cartBeanList", cartBeanList);
+		
+		String view = "/WEB-INF/views/customer/purchaseConfirm.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
+		String view = "/WEB-INF/views/customer/purchaseComplete.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 }

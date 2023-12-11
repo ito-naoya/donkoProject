@@ -11,9 +11,11 @@
 	<%@include file="../component/headerTopSpace.jsp"%>
 	<main class="m-5">
 		<div>
-			<form action="#" class="d-flex justify-content-end mb-3">
+			<form action="purchaseConfirm" method="get" class="d-flex justify-content-end mb-3">
 				<%-- <input type="hidden" value="<%= item.getItemId() %>" name="itemId"> --%>
-				<button type=submit class="btn px-5 py-3" style="background-color: #9933ff; color: white; width: 210px;">レジに進む</button>
+				<button type=submit class="btn px-5 py-3" style="background-color: #9933ff; color: white; width: 210px;">
+					レジに進む
+				</button>
 			</form>
 		</div>
 		<div class="container">
@@ -60,7 +62,7 @@
 					</table>
 				</div>
 				<div class="d-flex justify-content-center">
-					<form action="#" class="d-flex justify-content-end mt-3">
+					<form action="" class="d-flex justify-content-end mt-3">
 						<button type=submit
 							class="btn px-5 py-3 rounded-pill border border-danger"
 							style="background-color: white; color: red;">
