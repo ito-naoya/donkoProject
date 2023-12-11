@@ -50,19 +50,25 @@
 									</select>
 								</p>
 							</td>
-							<td style="vertical-align: middle;">
-								<button type="submit" class="btn p-2 ms-3"
-									style="background-color: #e5ccff;">更新</button>
-							</td>
-							<td style="vertical-align: middle;">
-								<button type="submit" class="btn p-2 ms-3"
-									style="background-color: red; color: white;">削除</button>
-							</td>
+							<form action="#">
+								<td style="vertical-align: middle;">
+									<button type="submit" class="btn p-2 ms-3" style="background-color: #e5ccff;">
+										更新
+									</button>
+								</td>
+							</form>
+							<form action="deleteCart?itemId=<%= cb.getItemId()%>" method="GET">
+								<td style="vertical-align: middle;">
+									<button type="submit" class="btn p-2 ms-3" style="background-color: red; color: white;">
+										削除
+									</button>
+								</td>
+							</form>
 						<tr>
 					</table>
 				</div>
 				<div class="d-flex justify-content-center">
-					<form action="" class="d-flex justify-content-end mt-3">
+					<form action="deleteCart?itemId=<%= cb.getItemId() %>" method="POST" class="d-flex justify-content-end mt-3">
 						<button type=submit
 							class="btn px-5 py-3 rounded-pill border border-danger"
 							style="background-color: white; color: red;">
