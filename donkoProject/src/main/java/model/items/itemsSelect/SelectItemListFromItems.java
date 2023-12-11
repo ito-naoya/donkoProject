@@ -13,7 +13,7 @@ public class SelectItemListFromItems {
 	
 	//商品の一覧を取得する
 	public static ArrayList<ItemBean> selectItemListFromItems(){
-		final String SELECT_ITEMLIST_SQL = "SELECT file_name FROM items GROUP BY file_name ORDER BY RAND() LIMIT 8;";
+		final String SELECT_ITEMLIST_SQL = "SELECT item_id, file_name FROM items";
 		ArrayList<ItemBean> Itemlist = new ArrayList<>();
 		ArrayList<Object> paramLists = new ArrayList<>() {{ }};
 		try (Connection conn = DatabaseConnection.getConnection()) {
