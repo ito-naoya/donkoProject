@@ -40,7 +40,7 @@ public class SelectShippingAddressList {
 				
 				while (results.next()) {
 					shippingAddressBean = new ShippingAddressBean();
-					shippingAddressBean.setShippingAddressId(0);
+					shippingAddressBean.setShippingAddressId(results.getInt("shipping_address_id"));
 					shippingAddressBean.setPostalCode(results.getString("postal_code"));
 					shippingAddressBean.setAddress(results.getString("address"));
 					shippingAddressBean.setMainShippingAddress(results.getInt("main_shipping_address"));
