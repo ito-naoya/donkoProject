@@ -11,36 +11,36 @@ import dao.DatabaseConnection;
 import dao.GeneralDao;
 
 public class SelectItemListFromCarts {
-	
+
 	//カート内の商品一覧を取得する
-	public static ArrayList<CartBean> selectItemListFromCarts(CustomerUser customerUser){
-		
+	public static ArrayList<CartBean> selectItemListFromCarts(CustomerUser customerUser) {
+
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT "					);
-		sql.append(		"i.item_id, "			);
-		sql.append(		"i.item_name, "			);
-		sql.append(		"i.file_name, "			);
-		sql.append(		"i.price, "				);
-		sql.append(		"c.quantity "			);
-		sql.append("FROM "						);
-		sql.append(		"carts as c "			);
-		sql.append("INNER JOIN "				);
-		sql.append(		"items as i "			);
-		sql.append("ON "						);
+		sql.append("SELECT ");
+		sql.append(		"i.item_id, ");
+		sql.append(		"i.item_name, ");
+		sql.append(		"i.file_name, ");
+		sql.append(		"i.price, ");
+		sql.append(		"c.quantity ");
+		sql.append("FROM ");
+		sql.append(		"carts as c ");
+		sql.append("INNER JOIN ");
+		sql.append(		"items as i ");
+		sql.append("ON ");
 		sql.append(		"i.item_id = c.item_id ");
-		sql.append("WHERE "						);
-		sql.append(		"c.user_id = ? "		);
+		sql.append("WHERE ");
+		sql.append(		"c.user_id = ? ");
 		final String SELECT_CARTLIST_SQL = sql.toString();
-		
+
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(customerUser.getUserId());
-		
+
 		ArrayList<CartBean> cartBeanList = new ArrayList<CartBean>();
-		
-		try(Connection conn = DatabaseConnection.getConnection();){
-			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_CARTLIST_SQL, params);){
-				
-				while(rs.next()) {
+
+		try (Connection conn = DatabaseConnection.getConnection();) {
+			try (ResultSet rs = GeneralDao.executeQuery(conn, SELECT_CARTLIST_SQL, params);) {
+
+				while (rs.next()) {
 					CartBean cb = new CartBean();
 					cb.setItemId(rs.getInt("item_id"));
 					cb.setItemName(rs.getString("item_name"));
@@ -49,19 +49,19 @@ public class SelectItemListFromCarts {
 					cb.setQuantity(rs.getInt("quantity"));
 					cartBeanList.add(cb);
 				}
-				
+
 			} catch (SQLException e) {
-				if(!conn.isClosed()) {
+				if (!conn.isClosed()) {
 					conn.rollback();
 				}
 				e.printStackTrace();
 				return null;
 			}
-			
+
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 		return cartBeanList;
-	};	
+	};
 }

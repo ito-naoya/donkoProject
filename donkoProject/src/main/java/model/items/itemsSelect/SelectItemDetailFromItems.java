@@ -17,24 +17,24 @@ public class SelectItemDetailFromItems {
 		//商品の詳細情報を取得するSQL
 		StringBuilder sql = new StringBuilder();
 
-		sql.append("SELECT "															);
-		sql.append(		"items.item_id, "												);
-		sql.append(		"items.item_category_name, "									);
-		sql.append(		"items.item_name, "												);
-		sql.append(		"items.item_description, "										);
-		sql.append(		"items.price, "													);
-		sql.append(		"items.stock, "													);
-		sql.append(		"items.file_name "												);
-		sql.append("FROM "																);
-		sql.append(		"items "														);
-		sql.append("INNER JOIN "														);
-		sql.append(		"item_categories "												);
-		sql.append("ON "																);
+		sql.append("SELECT ");
+		sql.append(		"items.item_id, ");
+		sql.append(		"items.item_category_name, ");
+		sql.append(		"items.item_name, ");
+		sql.append(		"items.item_description, ");
+		sql.append(		"items.price, ");
+		sql.append(		"items.stock, ");
+		sql.append(		"items.file_name ");
+		sql.append("FROM ");
+		sql.append(		"items ");
+		sql.append("INNER JOIN ");
+		sql.append(		"item_categories ");
+		sql.append("ON ");
 		sql.append(		"items.item_category_name = item_categories.item_category_name ");
-		sql.append("WHERE "																);
-		sql.append(		"items.item_id = ? "											);
-		sql.append("AND "																);
-		sql.append(		"item_categories.option_category_name != '色' "					);
+		sql.append("WHERE ");
+		sql.append(		"items.item_id = ? ");
+		sql.append("AND ");
+		sql.append(		"item_categories.option_category_name != '色' ");
 
 		final String SELECT_ITEMDETAIL_SQL = sql.toString();
 

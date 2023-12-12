@@ -14,16 +14,20 @@ public class InsertItemToCarts {
 	public static void insertItemToCarts(CartBean cartBean) {
 
 		StringBuilder sql = new StringBuilder();
-		sql.append("INSERT INTO "				  );
-		sql.append(		"carts "				  );
-		sql.append(			"(user_id, "		  );
-		sql.append(			"item_id, "			  );
-		sql.append(			"quantity) "		  );
-		sql.append("VALUES "					  );
-		sql.append(		"(?, "					  );
-		sql.append(		"?, "					  );
-		sql.append(		"1) "					  );
-		sql.append("ON DUPLICATE KEY UPDATE "	  );
+		sql.append("INSERT INTO ");
+		sql.append(		"carts ");
+		sql.append(		"(");
+		sql.append(		"user_id, ");
+		sql.append(		"item_id, ");
+		sql.append(		"quantity");
+		sql.append(		") ");
+		sql.append("VALUES ");
+		sql.append(		"(");
+		sql.append(		"?, ");
+		sql.append(		"?, ");
+		sql.append(		"1");
+		sql.append(		") ");
+		sql.append("ON DUPLICATE KEY UPDATE ");
 		sql.append(		"quantity = quantity + 1 ");
 		final String INSERT_CART_SQL = sql.toString();
 
