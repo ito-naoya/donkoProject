@@ -1,7 +1,7 @@
 <%@page import="bean.ItemCategoryBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, bean.ItemCategoryBean"%>
+<%@ page import="java.util.ArrayList, bean.ItemBean, bean.ItemCategoryBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +27,7 @@
 
 						<%
 						//渡されたidに基づく商品詳細を取得
-						String item = request.getAttribute("item", item);
+						ItemBean item = (ItemBean) request.getAttribute("item");
 						//カテゴリのデフォルト情報を取得
 						String defaultItemCategoryName = item.getItemCategoryName();
 
@@ -50,7 +50,10 @@
 							            ArrayList<ItemCategoryBean> categoryList = (ArrayList<ItemCategoryBean>) request.getAttribute("categoryList");
 							            for (ItemCategoryBean category : categoryList){
 							            %>
-							            <option value="${category.getItemCategoryName()}" <%if(defaultItemCategoryName == category.getItemCategoryName(){"selected"}) %>><%=category.getItemCategoryName()%></option>
+								            <option value="<%= category.getItemCategoryName() %>"
+											  <% if(defaultItemCategoryName.equals(category.getItemCategoryName())) { %> selected <% } %>>
+											  <%= category.getItemCategoryName() %>
+											</option>
 							            <%
 							            }
 							            %>
@@ -58,21 +61,24 @@
 							</div>
 							<div class="mb-3">
 							    <label for="itemName" class="form-label">商品名</label>
-							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" value="${item.getItemName}" required>
+							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" value="<%= item.getItemName() %>" required>
 						 	</div>
 						 	<div class="mb-3">
 							    <label for="itemDescription" class="form-label">商品説明</label>
-							    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" required maxlength="100"  value="${item.getItemDescription}" ></textarea>
+							    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" required maxlength="100">
+								    <%= item.getItemDescription() %>
+								</textarea>
 						 	</div>
 						 	<div class="col-4 mb-3">
 							    <label for="price" class="form-label">金額</label>
-							    <input type="text" class="form-control" id="price" name="price" maxlength="11"  value="${item.getItemPrice}" required style="text-align: right">
+							    <input type="text" class="form-control" id="price" name="price" maxlength="11"  value="<%= item.getItemPrice() %>" required style="text-align: right">
 						 	</div>
 						 	<div class="col-2 mb-3">
 							    <label for="stock" class="form-label">在庫</label>
-							    <input type="number" class="form-control" id="stock" name="stock" min="1" max="100" value="${item.getItemStock}" required style="text-align: center">
+							    <input type="number" class="form-control" id="stock" name="stock" min="1" max="100" value="<%= item.getItemStock() %>" required style="text-align: center">
 						 	</div>
 						 	<br>
+						 	<input type="hidden" name="fileName" value="<%= item.getFileName() %>">
 							<button type=submit class="btn px-5 py-3" style="background-color: #E5CCFF; color: black; border-radius: 0.5rem;">オプションの追加をする</button>
 						</form>
 				</div>
