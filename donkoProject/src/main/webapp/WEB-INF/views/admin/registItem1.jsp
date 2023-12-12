@@ -73,5 +73,6 @@
 			</div>
 		</div>
 </main>
+<script src="./js/registItemScript.js"></script>
 </body>
 </html>
