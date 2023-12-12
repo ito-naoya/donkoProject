@@ -3,6 +3,7 @@ package controller.customer;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import bean.ItemBean;
 import bean.PurchaseDetailBean;
 import classes.PurchaseDetail;
 import jakarta.servlet.ServletException;
@@ -25,11 +26,16 @@ public class OrderDetailServlet extends HttpServlet {
 		int purchase_id = Integer.parseInt(request.getParameter("purchase_id"));
 		request.setAttribute("purchase_id", purchase_id);
 		
+		// 購入情報詳細
 		PurchaseDetailBean purchaseDetailBean = new PurchaseDetailBean();
 		purchaseDetailBean.setPurchaseId(purchase_id);
-		ArrayList<PurchaseDetailBean> purchaseDetailList = PurchaseDetail.getPurchaseDetail(purchaseDetailBean);
 		
+		ArrayList<PurchaseDetailBean> purchaseDetailList = PurchaseDetail.getPurchaseDetail(purchaseDetailBean);
 		request.setAttribute("purchaseDetailList", purchaseDetailList);
+		
+		// 画像表示
+		ItemBean itemBean = new ItemBean();
+		int item_id = itemBean.getItemId();
 		
 		String view = "/WEB-INF/views/customer/orderDetail.jsp";
 		request.getRequestDispatcher(view).forward(request, response);

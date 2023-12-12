@@ -18,6 +18,7 @@ public class SelectPurchaseDetail {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT " );
 		sb.append(	"purchase_details.purchase_id, ");
+		sb.append(	"items.item_id, ");
 		sb.append(	"items.item_name, ");
 		sb.append(	"purchase_details.purchase_amount, ");
 		sb.append(	"purchase_details.quantity ");
@@ -46,6 +47,7 @@ public class SelectPurchaseDetail {
 				while (results.next()) {
 					purchaseDetailBeans = new PurchaseDetailBean();
 					purchaseDetailBeans.setPurchaseId(results.getInt("purchase_id"));
+					purchaseDetailBeans.setItemId(results.getInt("item_id"));
 					purchaseDetailBeans.setItemName(results.getString("item_name"));
 					purchaseDetailBeans.setPurchaseAmount(results.getInt("purchase_amount"));
 					purchaseDetailBeans.setQuantity(results.getInt("quantity"));
