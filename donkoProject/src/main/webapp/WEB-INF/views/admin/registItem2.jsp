@@ -1,7 +1,7 @@
-<%@page import="bean.ItemCategoryBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>
 <%@ page import="java.text.NumberFormat" %>
+<%@ page import="bean.ItemCategoryBean"%>
 <%@ page import="java.util.ArrayList, bean.ItemBean, bean.ItemCategoryBean, bean.OptionCategoryBean"%>
 <!DOCTYPE html>
 <html>
@@ -11,56 +11,6 @@
 <title>donko</title>
 </head>
 <body>
-<script>
-	//画像プレビュー機能を追加
-	function previewImage(event) {
-	    let preview = document.getElementById('image-preview');
-	    let imgCard = document.querySelector('.card');;
-	    let file = event.target.files[0];
-	    let reader = new FileReader();
-
-	    reader.onloadend = function() {
-	        preview.src = reader.result;
-	        imgCard.style.display = 'block'; // カード画像を表示
-	    }
-
-	    if (file) {
-	        reader.readAsDataURL(file);
-	    } else {
-	        preview.src = "";
-	        imgCard.style.display = 'none'; // 画像がない場合は非表示
-	    }
-	}
-	//各種入力チェック
-	function validateFile(file) {
-	    const allowedExtensions = 'jpg';
-	    const fileSizeLimit = 2 * 1024 * 1024; // 2MB in bytes
-	    const dimensionLimit = 3000;
-
-	    // 拡張子のチェック
-	    let extension = file.name.split('.').pop().toLowerCase();
-	    if (!allowedExtensions.includes(extension)) {
-	        return "ファイル形式はjpgのみ許可されています。";
-	    }
-	     // ファイルサイズのチェック
-	    if (file.size > fileSizeLimit) {
-	        return "ファイルサイズは2MB以下にしてください。";
-	    }
-	    // 画像サイズのチェック (非同期)
-	    return new Promise((resolve, reject) => {
-	        let img = new Image();
-	        img.src = URL.createObjectURL(file);
-	        img.onload = () => {
-	            if (img.width > dimensionLimit || img.height > dimensionLimit) {
-	                resolve("画像サイズは3000px * 3000px以下にしてください。");
-	            } else {
-	                resolve(null);
-	            }
-	        };
-	        img.onerror = reject;
-	    });
-	}
-</script>
 <main class="m-5">
 		<div class="container　ml-5 mr-5">
 			<div class="row  justify-content-center">
@@ -109,12 +59,17 @@
 						<%
 						}
 						%>
-
-						<div id="error-message-container" class="alert alert-danger d-none"></div>
-
 						<br>
-					<form action="registItem2"  method="post" enctype="multipart/form-data">
-					    <input type="hidden" name="getparam" value="">
+						<div id="error-message-container2" class="alert alert-danger d-none"></div>
+						<br>
+					<!-- 　フォーム入力 -->
+					<form action="registItem2"  id="registItem2"  method="post" enctype="multipart/form-data">
+						<input type="hidden" name="getparam" value="取れてる?">
+					    <input type="hidden" name="itemCategoryName" value="<%= newItem.getItemCategoryName() %>">
+					    <input type="hidden" name="itemName" value="<%= newItem.getItemName() %>">
+					    <input type="hidden" name="itemDescription" value="<%= newItem.getItemDescription() %>">
+					    <input type="hidden" name="itemPrice" value="<%= newItem.getItemPrice() %>">
+					    <input type="hidden" name="itemStock" value="<%= newItem.getItemStock() %>">
 					    <br>
 					    <div class="mb-3">
 						    <label for="formFile" class="form-label">商品写真を登録</label>
@@ -125,7 +80,6 @@
 						    <img id="image-preview" style="height: 100%;"/>
 						</div>
 					    <br>
-
 					    <div class="mb-3">
 					    	<label for="options" class="form-label">オプションを登録</label>
 						    <!-- categoryListをSeleectで選択。（TODOチャレンジ:色に関して、既存の商品名で登録済みのものは表示しない -->
@@ -138,7 +92,7 @@
 				            %>
 				            <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= itemCategory.getOptionCategoryName() %>">
 				            <!-- itemCategoryを元に得られたoptionCategoryの中身を選択画面に表示 -->
-			            	<select class="form-select category-select mb-3" id="options" name="optionValue_<%= counter %>">
+			            	<select class="form-select option-select mb-3" id="options" name="optionValue_<%= counter %>">
 							  <option selected>オプション選択： <%=itemCategory.getOptionCategoryName() %></option>
 						        <%
 						        for (OptionCategoryBean option : options) {
@@ -154,21 +108,78 @@
 					        %>
 					        <input type="hidden" name="selectBoxCount" value="<%= counter - 1 %>">
 				        </div>
-
 					    <br>
 					    <br>
-
-					    <input type="hidden" name="itemCategoryName" value="<%= newItem.getItemCategoryName() %>">
-					    <input type="hidden" name="itemName" value="<%= newItem.getItemName() %>">
-					    <input type="hidden" name="itemDescription" value="<%= newItem.getItemDescription() %>">
-					    <input type="hidden" name="itemPrice" value="<%= newItem.getItemPrice() %>">
-					    <input type="hidden" name="itemStock" value="<%= newItem.getItemStock() %>">
-
 					    <button type=submit class="btn px-5 py-3" style="background-color: #9933FF; color: white; border-radius: 0.5rem;">登録</button>
 					</form>
 				</div>
 			</div>
 		</div>
 </main>
+<script>
+	//画像プレビュー機能を追加
+	function previewImage(event) {
+	    let preview = document.getElementById('image-preview');
+	    let imgCard = document.querySelector('.card');;
+	    let file = event.target.files[0];
+	    let reader = new FileReader();
+	    reader.onloadend = function() {
+	        preview.src = reader.result;
+	        imgCard.style.display = 'block'; // カード画像を表示
+	    }
+	    if (file) {
+	        reader.readAsDataURL(file);
+	    } else {
+	        preview.src = "";
+	        imgCard.style.display = 'none'; // 画像がない場合は非表示
+	    }
+	}
+	//各種入力チェック
+	// submit押下時にnull値及び文字数をチェック
+	document.getElementById('registItem2').addEventListener('submit', function(event) {
+	    let selectCategoryElement = document.querySelector('.option-select');
+	    let selectedCategoryValue = selectCategoryElement.value;
+	    let errorMessageContainer = document.getElementById('error-message-container2');
+	    // カテゴリー選択のチェック
+	    if(selectedCategoryValue.includes("オプション選択")) {
+		    event.preventDefault(); // フォームの送信を阻止
+		    errorMessageContainer.textContent = 'オプションを選択してください';
+		    errorMessageContainer.classList.remove('d-none'); // エラーメッセージを表示
+		}
+	    // 商品名、価格、在庫の空白チェック
+	    else if(document.getElementById('formFile').files.length === 0) {
+		    event.preventDefault(); // フォームの送信を阻止
+		    errorMessageContainer.textContent = '写真をアップロードしてください';
+		    errorMessageContainer.classList.remove('d-none'); // エラーメッセージを表示
+		}
+	});
+	function validateFile(file) {
+	    const allowedExtensions = 'jpg';
+	    const fileSizeLimit = 2 * 1024 * 1024; // 2MB in bytes
+	    const dimensionLimit = 3000;
+	    // 拡張子のチェック
+	    let extension = file.name.split('.').pop().toLowerCase();
+	    if (!allowedExtensions.includes(extension)) {
+	        return "ファイル形式はjpgのみ許可されています。";
+	    }
+	     // ファイルサイズのチェック
+	    if (file.size > fileSizeLimit) {
+	        return "ファイルサイズは2MB以下にしてください。";
+	    }
+	    // 画像サイズのチェック (非同期)
+	    return new Promise((resolve, reject) => {
+	        let img = new Image();
+	        img.src = URL.createObjectURL(file);
+	        img.onload = () => {
+	            if (img.width > dimensionLimit || img.height > dimensionLimit) {
+	                resolve("画像サイズは3000px * 3000px以下にしてください。");
+	            } else {
+	                resolve(null);
+	            }
+	        };
+	        img.onerror = reject;
+	    });
+	}
+</script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <%@page import="bean.ItemCategoryBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, bean.ItemCategoryBean"%>
 <!DOCTYPE html>
 <html>
@@ -35,7 +35,6 @@
 						}
 						%>
 						<div id="error-message-container" class="alert alert-danger d-none"></div>
-
 						<!-- ここから入力フォーム  -->
 						<form action="registItem1" id="registItem1" method="post">
 							<div class="mb-3">
@@ -80,7 +79,6 @@
 	    let selectCategoryElement = document.querySelector('.category-select');
 	    let selectedCategoryValue = selectCategoryElement.value;
 	    let errorMessageContainer = document.getElementById('error-message-container');
-
 	    // カテゴリー選択のチェック
 	    if(selectedCategoryValue === "カテゴリーを選択") {
 	        event.preventDefault(); // フォームの送信を阻止
@@ -97,14 +95,13 @@
 	        errorMessageContainer.classList.remove('d-none'); // エラーメッセージを表示
 	    }
 	});
-
 	//数字をカンマ区切りにする
 	document.getElementById('price').addEventListener('input', function (event) {
-       let value = event.target.value;
-       value = value.replace(/[^\d]/g, ''); //正規表現で数字以外の文字を除去
-       value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ','); //3桁ごとにカンマを挿入
-       event.target.value = value;
-   });
+      let value = event.target.value;
+      value = value.replace(/[^\d]/g, ''); //正規表現で数字以外の文字を除去
+      value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ','); //3桁ごとにカンマを挿入
+      event.target.value = value;
+  });
 </script>
 </body>
 </html>
