@@ -73,12 +73,14 @@
 					    <br>
 					    <div class="mb-3">
 						    <label for="formFile" class="form-label">商品写真を登録</label>
-						    <input type="file" class="form-control" id="formFile" name="img" accept="" onchange="previewImage(event);" />
+						    <input type="file" class="form-control" id="formFile" name="img" accept=".jpg" onchange="previewImage(event);" />
 						</div>
 					    <br>
-					    <div class="upload card mb-3 mx-2" style="object-fit: cover; width: 300px; height: 300px; display: none;">
-						    <img id="image-preview" style="height: 100%;"/>
+					    <div class="upload card mb-3 mx-2" style="width: 300px; height: 300px; display: inline-block;">
+							<span id="default-text" style="position: absolute; width: 100%; height: 100%;">ここに画像が表示されます</span>
+						    <img id="image-preview" style="width: 100%; height: 100%; object-fit: cover; display: none;"/>
 						</div>
+
 					    <br>
 					    <div class="mb-3">
 					    	<label for="options" class="form-label">オプションを登録</label>
@@ -117,23 +119,33 @@
 		</div>
 </main>
 <script>
-	//画像プレビュー機能を追加
 	function previewImage(event) {
 	    let preview = document.getElementById('image-preview');
-	    let imgCard = document.querySelector('.card');;
+	    let defaultText = document.getElementById('default-text');
 	    let file = event.target.files[0];
 	    let reader = new FileReader();
+
 	    reader.onloadend = function() {
-	        preview.src = reader.result;
-	        imgCard.style.display = 'block'; // カード画像を表示
+	        if (file) {
+	            preview.src = reader.result;
+	            preview.style.display = 'block'; // 画像を表示
+	            defaultText.style.display = 'none'; // デフォルトテキストを非表示にする
+	        } else {
+	            preview.src = "";
+	            preview.style.display = 'none'; // 画像がない場合は画像を非表示
+	            defaultText.style.display = 'block'; // デフォルトテキストを表示する
+	        }
 	    }
+
 	    if (file) {
 	        reader.readAsDataURL(file);
 	    } else {
 	        preview.src = "";
-	        imgCard.style.display = 'none'; // 画像がない場合は非表示
+	        preview.style.display = 'none';
+	        defaultText.style.display = 'block';
 	    }
 	}
+
 	//各種入力チェック
 	// submit押下時にnull値及び文字数をチェック
 	document.getElementById('registItem2').addEventListener('submit', function(event) {
