@@ -5,6 +5,7 @@ import java.io.IOException;
 import bean.ItemBean;
 import classes.Item;
 import classes.Option;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -31,14 +32,13 @@ public class RegistItemServlet2 extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//regist1で既に取得済みの情報を再度獲得（作成中）
-		String getparam = request.getParameter("getparam");
+		//regist1で既に取得済みの情報を再度獲得
         String itemCategoryName = request.getParameter("itemCategoryName");
         String itemName = request.getParameter("itemName");
         String itemDescription = request.getParameter("itemDescription");
         String itemPrice = request.getParameter("itemPrice");
         String itemStock = request.getParameter("itemStock");
-        Part filePart = request.getPart("img");
+        Part imgPart = request.getPart("img");
 		//取得情報について、null値及び文字数制限の超過が無いかどうか確認し、itemBeanに登録
 		ItemBean newItem = Item.checkRegistItemDetail(itemCategoryName, itemName, itemDescription, itemPrice, itemStock);
 		if(newItem == null) {
@@ -71,10 +71,14 @@ public class RegistItemServlet2 extends HttpServlet {
 			newItemaddOption.setImageFileName(fileName);
 			//itemsテーブルと、item_optionsテーブルを同じトランザクションで更新
 			Item.registerNewItem(newItemaddOption, selectBoxCount);
+
+			//画像をドキュメント内に保管
+			Item.registerNewImage(imgPart,fileName);
 		}
 
-		//画像をドキュメント内に保管
-
+		String view = "deleteItemIndex";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+		dispatcher.forward(request, response);
 	}
 
 }

@@ -1,8 +1,10 @@
 package classes;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.ItemBean;
+import jakarta.servlet.http.Part;
 import model.items.itemsDelete.DeleteItemFromItems;
 import model.items.itemsInsert.InsertNewItemToItems;
 import model.items.itemsSelect.SelectItemDetailFromItems;
@@ -70,6 +72,21 @@ public class Item {
 	//商品を削除する（論理削除）
 	public static void deleteItem(ItemBean itemBean){
 		DeleteItemFromItems.deleteItemFromItems(itemBean);
+	};
+
+	//商品画像をドキュメント内に登録する
+	public static void registerNewImage(Part part,String fileName){
+		// 取得した値を格納するArrayList
+		if(part != null && !fileName.isEmpty()) {
+			try {
+			    // フルパスじゃないと上手く読み込まれないみたいなので、自分のファイルパスに適宜変更してください。
+			    String filePath = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/" + fileName + ".jpg";
+			    // ファイルを保存
+				part.write(filePath);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	};
 
 	//商品登録画面から取得した値のnull値及び文字数をチェックして、ItemBeanにセット
