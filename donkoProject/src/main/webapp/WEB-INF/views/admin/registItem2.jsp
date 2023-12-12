@@ -89,6 +89,7 @@
 				            int counter = 1;
 				            //カテゴリーから取得したオプションの数分、セレクトボックスを作成（衣類なら、「色」と「衣類サイズ」）
 				            for (ArrayList<OptionCategoryBean> optionCategoryList : itemCategoryListAll){
+				            	//オプションカテゴリ名を表示[色,サイズ]
 				            	String optionCategoryName = optionCategoryList.get(0).getOptionCategoryName();
 				            %>
 					            <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryName %>">

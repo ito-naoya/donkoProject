@@ -75,13 +75,13 @@ public class RegistItemServlet1 extends HttpServlet {
 				for (int i = 0; i < itemCategoryList.size(); i++) {
 				    ItemCategoryBean itemCategory = itemCategoryList.get(i);
 
-				    //オプションの詳細を取得する<1:緑,2:白,3:黒>
+				    //オプションの詳細を取得する[色,1,緑],[色,2,白],[色,3,黒]
 				    ArrayList<OptionCategoryBean> options = OptionCategory.getOptionCategoryListByCategory(itemCategory);
 				    if(options == null) {
 						//取得情報の不備があれば、再度入力画面に戻る
 						response.sendRedirect("regisatItem1");
 					} else {
-						//ユニークな属性名を生成してリクエストにセット
+						//詳細の配列を
 						itemCategoryListAll.add(options);
 					}
 				}
