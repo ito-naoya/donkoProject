@@ -19,9 +19,9 @@ public class SelectPurchaseDetail {
 		sb.append("SELECT " );
 		sb.append(	"purchase_details.purchase_id, "			);
 		sb.append(	"purchase_details.purchase_amount, "		);
-		sb.append(	"purchase_details.quantity "				);
+		sb.append(	"purchase_details.quantity, "				);
 		sb.append(	"items.item_name, "							);
-		sb.append(	"items.file_name, "							);
+		sb.append(	"items.file_name "							);
 		sb.append("FROM "										);
 		sb.append(	"( "										);
 		sb.append(	"purchase_details "							);
@@ -49,8 +49,8 @@ public class SelectPurchaseDetail {
 					purchaseDetailBeans.setPurchaseId(results.getInt("purchase_id"));
 					purchaseDetailBeans.setPurchaseAmount(results.getInt("purchase_amount"));
 					purchaseDetailBeans.setQuantity(results.getInt("quantity"));
-					purchaseDetailBeans.setItemId(results.getInt("item_name"));
-					purchaseDetailBeans.setItemName(results.getString("file_name"));
+					purchaseDetailBeans.setItemName(results.getString("item_name"));
+					purchaseDetailBeans.setImageFileName(results.getString("file_name"));
 					purchaseDetailList.add(purchaseDetailBeans);
 				}
 			} catch (Exception e) {
