@@ -29,15 +29,11 @@
   <tbody>
 <% ArrayList<PurchaseDetailBean> purchaseDetailList  =
     (ArrayList<PurchaseDetailBean>)request.getAttribute("purchaseDetailList");%>
-<% ArrayList<ItemBean> itemImageList  =
-    (ArrayList<ItemBean>)request.getAttribute("itemImageList");
-    %>
      <tr>
       <!-- 商品画像 -->
    <% for (PurchaseDetailBean purchaseDetailBean : purchaseDetailList) { %>
-    <% for (ItemBean itemBean :itemImageList) { %>
       <td>
-        <img style="object-fit: cover;" src="./images/<%= itemBean.getImageFileName() %>.jpg">
+        <img style="object-fit: cover;" src="./images/<%= purchaseDetailBean.getImageFileName() %>.jpg">
       </td>
       <!-- 商品タイトル -->
       <td><%= purchaseDetailBean.getItemName() %></td>
@@ -46,7 +42,6 @@
       <!-- 個数 -->
       <td><%= purchaseDetailBean.getQuantity() %></td>
     </tr>
-        <% } %>
     <% } %>
   </tbody>
   </table>
