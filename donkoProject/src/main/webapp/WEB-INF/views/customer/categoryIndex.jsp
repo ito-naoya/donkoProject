@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, bean.ItemBean"%>
+<%@ page import="java.util.ArrayList, bean.ItemBean, bean.OptionCategoryBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +14,20 @@
 		<form action="" method="post">
 			<div class="d-flex justify-content-end">
 				<div class="col-lg-6 d-flex border mx-3 p-3" style="height: 70px; box-shadow:5px 5px 5px lightgray;">
-					<div class="border px-3" style="width:100%; height: 35px;">
-						<small>オプション選択1を表示</small>
+					<% 
+					ArrayList<ArrayList<OptionCategoryBean>> ONVListAll = (ArrayList<ArrayList<OptionCategoryBean>>)request.getAttribute("ONValueListALL");
+					%>
+					<% 
+					for (ArrayList<OptionCategoryBean> ONVList : ONVListAll) {
+					%>
+					<div class="d-flex border px-3" style="width:100%; height: 35px;">
+						<% for (OptionCategoryBean ONValue : ONVList) { %>
+						<small><%= ONValue.getOptionCateegoryName() %></small>
+						<% } %>
 					</div>
-					<div class="border mx-3 px-3" style="width:100%; height: 35px;">
-						<small>オプション選択2を表示</small>
-					</div>
+					<%
+					} 
+					%>
 					<buttun class="btn text-nowrap ms-auto" style="background-color: #E5CCFF";">こだわり検索</buttun>
 				</div>
 			</div>
