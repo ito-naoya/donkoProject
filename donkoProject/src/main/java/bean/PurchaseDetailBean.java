@@ -67,5 +67,12 @@ public class PurchaseDetailBean {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
+	
+	public String getImageFileName() {
+		return imageFileName;
+	}
+	
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
 }
