@@ -1,3 +1,4 @@
+<%@page import="bean.ItemBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, bean.PurchaseDetailBean" %>
 <!DOCTYPE html>
@@ -27,13 +28,17 @@
     </thead>
   <tbody>
 <% ArrayList<PurchaseDetailBean> purchaseDetailList  =
-    (ArrayList<PurchaseDetailBean>)request.getAttribute("purchaseDetailList");
+    (ArrayList<PurchaseDetailBean>)request.getAttribute("purchaseDetailList");%>
+<% ArrayList<ItemBean> itemImageList  =
+    (ArrayList<ItemBean>)request.getAttribute("itemImageList");
     %>
- <% for (PurchaseDetailBean purchaseDetailBean : purchaseDetailList) { %>
-    <tr>
+     <tr>
       <!-- 商品画像 -->
-      <td><img src=".jpg"></td>
-      <%-- <td><%= image %></td> --%>
+   <% for (PurchaseDetailBean purchaseDetailBean : purchaseDetailList) { %>
+    <% for (ItemBean itemBean :itemImageList) { %>
+      <td>
+        <img style="object-fit: cover;" src="./images/<%= itemBean.getImageFileName() %>.jpg">
+      </td>
       <!-- 商品タイトル -->
       <td><%= purchaseDetailBean.getItemName() %></td>
       <!-- 合計金額 -->
@@ -41,6 +46,7 @@
       <!-- 個数 -->
       <td><%= purchaseDetailBean.getQuantity() %></td>
     </tr>
+        <% } %>
     <% } %>
   </tbody>
   </table>
