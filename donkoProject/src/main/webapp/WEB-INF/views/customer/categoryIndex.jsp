@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, bean.ItemBean"%>
+<%@ page import="java.util.ArrayList, bean.ItemBean, bean.OptionCategoryBean"%>
 <!DOCTYPE html>
 <html>
 <head>
