@@ -7,7 +7,7 @@ public class ShippingAddressBean {
 	private String postalCode;
 	private String addressee;
 	private String address;
-	private int main_shipping_address;
+	private int mainShippingAddress;
 	
 	public ShippingAddressBean() {};
 	
