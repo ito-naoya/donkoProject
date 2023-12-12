@@ -73,7 +73,7 @@ public class PurchaseDetailBean {
 		return imageFileName;
 	}
 	
-	public void setIimageFileName(String imageFileName) {
+	public void setImageFileName(String imageFileName) {
 		this.imageFileName = imageFileName;
 	}
 }
