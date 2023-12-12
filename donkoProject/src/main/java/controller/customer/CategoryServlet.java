@@ -27,6 +27,10 @@ public class CategoryServlet extends HttpServlet {
 		itemBean.setItemCategoryName(categoryName);
 		ArrayList<ItemBean> itemList =Item.getItemListByCategory(itemBean);
 		request.setAttribute("itemList", itemList);
+
+		// 商品のカテゴリーをもとにオプションのカテゴリー名を取得
+		
+		// オプションのカテゴリー名をもとに オプションのvalueを取得
 		
 		String view = "/WEB-INF/views/customer/categoryIndex.jsp";
         request.getRequestDispatcher(view).forward(request, response);
