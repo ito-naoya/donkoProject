@@ -61,7 +61,7 @@ public class SelectItemListFromItems {
 	};
 	
 	protected static boolean isChecked(ArrayList<ItemBean> Itemlist, String imageFileName) {
-		 boolean isChecked = false;
+		boolean isChecked = false;
 		    for (int i = 0; i < Itemlist.size(); i++) {
              String imn = Itemlist.get(i).getImageFileName();
              if (imn.equals(imageFileName)) {
