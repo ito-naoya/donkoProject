@@ -34,7 +34,6 @@ public class InsertNewShippingAddress {
 		sb.append(	"?, "										);
 		// 宛名
 		sb.append(	"?, "										);
-		sb.append(	"purchase_details.item_id = items.item_id "	);
 		sb.append(	") "										);
 		String sql = sb.toString();
 		
