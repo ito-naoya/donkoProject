@@ -30,7 +30,7 @@
 					for(CartBean cb : cartList) {
 					%>
 						<tr>
-							<td>
+							<td style="width: 200px;">
 								<a href="itemDetail?itemId=<%= cb.getItemId() %>" class="me-3"
 								style="text-decoration: none; display: inline-block;">
 									<div style="height: 150px; width: 150px;">
@@ -45,43 +45,50 @@
 								</strong>
 							</td>
 							<td style="vertical-align: middle;">
-								¥ <%= String.format("%,d", cb.getItemPrice()) %>
+								¥ <%= String.format("%,d", cb.getItemPrice() * cb.getQuantity()) %>
 							</td>
-							<td style="vertical-align: middle;">
-								<p class="border p-2" style="margin: 0">
-									数量: 
-									<select name="quantity" style="border: none;">
-									<%
-									for(int i = 1; i <= 9; i ++) {
-									%>
+							<form action="cart" method="POST" style="width: 120px;">
+								<td style="vertical-align: middle; width: 150px;">
+									<input type="hidden" value="<%= cb.getItemId() %>" name="itemId">
+									<p class="border p-2" style="margin: 0; width: 120px;">
+										数量: 
+										<select name="quantity" style="border: none;">
 										<%
-										if (i == cb.getQuantity()) {
+										for(int i = 1; i <= 9; i ++) {
 										%>
-											<option value="<%= i %>" selected>
-												<%= i %>
-											</option>
+											<%
+											if (i == cb.getQuantity()) {
+											%>
+												<option value="<%= i %>" selected>
+													<%= i %>
+												</option>
+											<%
+											}else {
+											%>
+												<option value="<%= i %>">
+													<%= i %>
+												</option>
+											<%
+											} 
+											%>
 										<%
-										}else {
+										}
 										%>
-											<option value="<%= i %>">
-												<%= i %>
-											</option>
-										<%
-										} 
-										%>
-									<%
-									}
-									%>
-									</select>
-								</p>
-							</td>
+										</select>
+									</p>
+								</td>
+								<td style="vertical-align: middle;">
+									<button type="submit" class="btn p-2 ms-3"
+										style="background-color: #e5ccff;">更新</button>
+								</td>
+              </form>
 							<td style="vertical-align: middle;">
-								<button type="submit" class="btn p-2 ms-3"
-									style="background-color: #e5ccff;">更新</button>
-							</td>
-							<td style="vertical-align: middle;">
-								<button type="submit" class="btn p-2 ms-3"
-									style="background-color: red; color: white;">削除</button>
+								<form action="deleteCart" method="GET">
+									<input type="hidden" value="<%= cb.getItemId() %>" name="itemId">
+									<button type="submit" class="btn p-2 ms-3" style="background-color: red; color: white;">
+										削除
+									</button>
+								</form>
 							</td>
 						<tr>
 					<%
@@ -90,11 +97,10 @@
 					</table>
 				</div>
 				<div class="d-flex justify-content-center">
-					<form action="" class="d-flex justify-content-end mt-3">
-						<button type=submit
-							class="btn px-5 py-3 rounded-pill border border-danger"
-							style="background-color: white; color: red;">
-							カートの中身を全て削除する</button>
+					<form action="deleteCart" method="POST" class="d-flex justify-content-end mt-3">
+						<button type=submit class="btn px-5 py-3 rounded-pill border border-danger" style="background-color: white; color: red;">
+							カートの中身を全て削除する
+						</button>
 					</form>
 				</div>
 			</div>
