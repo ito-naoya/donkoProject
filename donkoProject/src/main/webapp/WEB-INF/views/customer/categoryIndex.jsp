@@ -6,12 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>donko</title>
+<style type="text/css">
+	a,label{cursor:pointer;}
+	label:hover { color : #E5CCFF; }
+	}
+</style>
 </head>
 <body>
 	<%@include file= "../component/header.jsp" %>
 	<%@include file= "../component/headerTopSpace.jsp" %>
 	<main>
-		<form action="" method="post">
+		<form action="" method="post" name="form">
 			<div class="d-flex justify-content-end">
 				<div class="col-lg-6 d-flex border mx-3 p-3" style="width:auto; height: 70px; box-shadow:5px 5px 5px lightgray;">
 					<% 
@@ -23,12 +28,14 @@
 					<div class="d-flex justify-content-center border mx-2 px-3" style="width:auto; height: 35px; background-color: #D5E8D4";">
 						<% for (OptionCategoryBean ONValue : ONVList) { %>
 						<small class="mx-3" style="display: flex; align-items: center;">
-							<%-- <% if ([option].isSelected()) { %> --%>
-								<input type="checkbox" name="option" id="<%= ONValue.getOptionCategoryValue() %>" style="display: none;">
-								<label for="<%= ONValue.getOptionCategoryValue() %>" style="color:red;"><%= ONValue.getOptionCategoryValue() %></label>
-							<%-- <% } else { %>
-								<span><%= ONValue.getOptionCategoryValue() %></span>
-							<% } %> --%>
+							<input type="checkbox" name="option"
+							id="<%=ONValue.getOptionCategoryValue()%>"
+							onclick="chebg('<%=ONValue.getOptionCategoryValue()%>')" 
+							style="display: none;" 
+							value="<%=ONValue.getOptionCategoryValue()%>"> 
+							<label for="<%=ONValue.getOptionCategoryValue()%>">
+								<%= ONValue.getOptionCategoryValue() %>
+							</label>
 						</small>
 						<% } %>
 					</div>
@@ -39,12 +46,13 @@
 				</div>
 			</div>
 		</form>
+
 		<div class="d-flex flex-wrap justify-content-center mx-5 my-4">
 			<% ArrayList<ItemBean> IList = (ArrayList<ItemBean>)request.getAttribute("itemList"); %>
 			<% for (ItemBean item : IList) { %>
-			<div class="mx-2">
+			<div>
 				<a href="itemDetail?itemId=<%= item.getItemId() %>" style="color: #385a37; display: block; text-decoration:none;">
-					<span class="card" style="width: 200px; height: 200px;">
+					<span class="card mx-2" style="width: 200px; height: 200px;">
 					<img src="./images/<%= item.getImageFileName() %>.jpg"
 						class="card-img-top" alt="<%= item.getImageFileName() %>"
 						style="object-fit: cover; height: 100%; display: block;">
@@ -60,5 +68,6 @@
 		</div>
 	</main>
 	<%@include file= "../component/footer.jsp" %>
+	<script src="./js/categoryIndexScript.js"></script>
 </body>
 </html>
