@@ -9,7 +9,6 @@ public class PurchaseDetailBean {
 	private String itemName;
 	private int purchaseAmount;
 	private int quantity;
-	private String imageFileName;
 	
 	public PurchaseDetailBean() {};
 	
@@ -68,12 +67,5 @@ public class PurchaseDetailBean {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	public String getImageFileName() {
-		return imageFileName;
-	}
-	
-	public void setIimageFileName(String imageFileName) {
-		this.imageFileName = imageFileName;
-	}
+
 }
