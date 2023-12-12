@@ -52,7 +52,7 @@ public class ItemDetailServlet extends HttpServlet {
 		
 		//テストコード
 		CustomerUser loginedUser = new CustomerUser();
-		loginedUser.setUserId(1);
+		loginedUser.setUserId(2);
 		
 		int itemId = Integer.parseInt(request.getParameter("itemId"));
 		int userId = loginedUser.getUserId();
