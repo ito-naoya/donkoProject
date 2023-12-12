@@ -64,14 +64,12 @@ public class RegistItemServlet1 extends HttpServlet {
 			request.setAttribute("newItem", newItem);
 
 			//カテゴリー名からオプションを取得<衣類：色、衣類：衣類サイズ>
+			ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = new ArrayList<ArrayList<OptionCategoryBean>>();
 			ArrayList<ItemCategoryBean> itemCategoryList = ItemCategory.getItemOptionCategoryNameListByCategory(newItem);
-
 			if(itemCategoryList == null) {
 				//取得情報の不備があれば、再度入力画面に戻る
 				response.sendRedirect("registItem1");
 			} else {
-				//カテゴリー名とオプション名のリストを格納
-				request.setAttribute("itemCategoryList", itemCategoryList);
 
 				//各オプションが持っているオプションの数分for文を回す
 				for (int i = 0; i < itemCategoryList.size(); i++) {
@@ -84,7 +82,7 @@ public class RegistItemServlet1 extends HttpServlet {
 						response.sendRedirect("registItem1");
 					} else {
 						//ユニークな属性名を生成してリクエストにセット
-						request.setAttribute("optionCategory" + (i + 1), options);
+						itemCategoryListAll.add(options);
 					}
 				}
 
