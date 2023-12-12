@@ -20,6 +20,7 @@ public class SelectOptionCategoryListByCategory {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("SELECT "							);
+		sb.append(	"option_category_name,"	);
 		sb.append(	"option_category_increment_id,"	);
 		sb.append(	"option_category_value " 		);
 		sb.append("FROM "							);
@@ -40,13 +41,16 @@ public class SelectOptionCategoryListByCategory {
 					//OptionCategoryBeanに挿入
 					while(rs.next()) {
 						OptionCategoryBean optionCategory = new OptionCategoryBean();
-				int optionId = rs.getInt("option_category_increment_id");
-				optionCategory.setOptionCategoryId(optionId);
-				String optionName = rs.getString("option_category_value");
-				optionCategory.setOptionCategoryValue(optionName);
 
-				optionCategories.add(optionCategory);
-			}
+						String optionCategoryName = rs.getString("option_category_name");
+						optionCategory.setOptionCateegoryName(optionCategoryName);
+						int optionId = rs.getInt("option_category_increment_id");
+						optionCategory.setOptionCategoryId(optionId);
+						String optionName = rs.getString("option_category_value");
+						optionCategory.setOptionCategoryValue(optionName);
+
+						optionCategories.add(optionCategory);
+					}
 
 			} catch (SQLException e) {
 				if(!conn.isClosed()) {

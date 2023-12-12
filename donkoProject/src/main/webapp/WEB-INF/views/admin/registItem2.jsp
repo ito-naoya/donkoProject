@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ page import="java.text.NumberFormat" %>
-<%@ page import="bean.ItemCategoryBean"%>
 <%@ page import="java.util.ArrayList, bean.ItemBean, bean.ItemCategoryBean, bean.OptionCategoryBean"%>
 <!DOCTYPE html>
 <html>
@@ -86,24 +85,23 @@
 					    	<label for="options" class="form-label">オプションを登録</label>
 						    <!-- categoryListをSeleectで選択。（TODOチャレンジ:色に関して、既存の商品名で登録済みのものは表示しない -->
 						    <%
-						    ArrayList<ItemCategoryBean> itemCategoryList = (ArrayList<ItemCategoryBean>) request.getAttribute("itemCategoryList");
+						    ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = (ArrayList<ArrayList<OptionCategoryBean>>) request.getAttribute("itemCategoryListAll");
 				            int counter = 1;
 				            //カテゴリーから取得したオプションの数分、セレクトボックスを作成（衣類なら、「色」と「衣類サイズ」）
-				            for (ItemCategoryBean itemCategory : itemCategoryList) {
-				            	ArrayList<OptionCategoryBean> options = (ArrayList<OptionCategoryBean>) request.getAttribute("optionCategory" + counter);
+				            for (ArrayList<OptionCategoryBean> optionCategoryList : itemCategoryListAll)
 				            %>
-				            <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= itemCategory.getOptionCategoryName() %>">
-				            <!-- itemCategoryを元に得られたoptionCategoryの中身を選択画面に表示 -->
-			            	<select class="form-select option-select mb-3" id="options" name="optionValue_<%= counter %>">
-							  <option selected>オプション選択： <%=itemCategory.getOptionCategoryName() %></option>
-						        <%
-						        for (OptionCategoryBean option : options) {
-						        %>
-						            <option value="<%=option.getOptionCategoryId()%>"><%=option.getOptionCategoryValue()%></option>
-						        <%
-						        }
-						        %>
-						    </select>
+					            <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryList.getOptionCategoryName() %>">
+					            <!-- itemCategoryを元に得られたoptionCategoryの中身を選択画面に表示 -->
+				            	<select class="form-select option-select mb-3" id="options" name="optionValue_<%= counter %>">
+								  <option selected>オプション選択： <%=optionCategoryList.getOptionCategoryName() %></option>
+							        <%
+							        for (OptionCategoryBean option : optionCategoryList) {
+							        %>
+							            <option value="<%=option.getOptionCategoryId()%>"><%=option.getOptionCategoryValue()%></option>
+							        <%
+							        }
+							        %>
+							    </select>
 						    <%
 						    counter++;
 					        }

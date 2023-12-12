@@ -85,7 +85,7 @@ public class RegistItemServlet1 extends HttpServlet {
 						itemCategoryListAll.add(options);
 					}
 				}
-
+				request.setAttribute("itemCategoryListAll", itemCategoryListAll);
 				String view = "/WEB-INF/views/admin/registItem2.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 				dispatcher.forward(request, response);
