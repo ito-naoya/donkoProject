@@ -16,10 +16,11 @@ public class SelectOptionCategoryListByCategory {
 
 	//カテゴリ名でオプション詳細を取得する
 	public static ArrayList<OptionCategoryBean> selectOptionCategoryListByCategory(ItemCategoryBean itemCategoryBean) {
-		//カテゴリ名でオプション詳細を取得するSQL（?=色：[1,緑][2,白][3,黒])
+		//カテゴリ名でオプション詳細を取得するSQL（?=色：[色,1,緑][色,2,白][色,3,黒])
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("SELECT "							);
+		sb.append(	"option_category_name,"	);
 		sb.append(	"option_category_increment_id,"	);
 		sb.append(	"option_category_value " 		);
 		sb.append("FROM "							);
@@ -40,13 +41,16 @@ public class SelectOptionCategoryListByCategory {
 					//OptionCategoryBeanに挿入
 					while(rs.next()) {
 						OptionCategoryBean optionCategory = new OptionCategoryBean();
-				int optionId = rs.getInt("option_category_increment_id");
-				optionCategory.setOptionCategoryId(optionId);
-				String optionName = rs.getString("option_category_value");
-				optionCategory.setOptionCategoryValue(optionName);
 
-				optionCategories.add(optionCategory);
-			}
+						String optionCategoryName = rs.getString("option_category_name");
+						optionCategory.setOptionCategoryName(optionCategoryName);
+						int optionId = rs.getInt("option_category_increment_id");
+						optionCategory.setOptionCategoryId(optionId);
+						String optionName = rs.getString("option_category_value");
+						optionCategory.setOptionCategoryValue(optionName);
+
+						optionCategories.add(optionCategory);
+					}
 
 			} catch (SQLException e) {
 				if(!conn.isClosed()) {
