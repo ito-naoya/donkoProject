@@ -32,8 +32,20 @@
 				</div>
 				<div class="col">
 					<h2>
+					<%
+					ArrayList<ItemBean> optionValueList = (ArrayList<ItemBean>)request.getAttribute("optionValueList");
+					%>
 						<strong>
 							<%=item.getItemName()%>
+							(
+								<%
+								for(ItemBean ib : optionValueList){
+								%>
+								<span><%= ib.getItemFirstOptionValue() %></span>
+								<%
+								}
+								%>
+							)
 						</strong>
 					</h2>
 					<h3>
