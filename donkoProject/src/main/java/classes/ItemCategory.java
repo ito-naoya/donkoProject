@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import bean.ItemBean;
 import bean.ItemCategoryBean;
 import model.itemCategories.itemCategoriesSelect.SelectItemCategoryList;
-import model.itemCategories.itemCategoriesSelect.SelectItemCategoryListByCategory;
+import model.itemCategories.itemCategoriesSelect.SelectOptionCategoryNameListByCategory;
 
 public class ItemCategory {
 
@@ -15,8 +15,8 @@ public class ItemCategory {
 	};
 
 	//カテゴリ名からオプションカテゴリ名を取得
-	public static ArrayList<ItemCategoryBean> getOptionListByCategory(ItemBean itemBean) {
-		return SelectItemCategoryListByCategory.selectItemCategoryListByCategory(itemBean);
+	public static ArrayList<ItemCategoryBean> getItemOptionCategoryNameListByCategory(ItemBean itemBean) {
+		return SelectOptionCategoryNameListByCategory.selectOptionCategoryNameListByCategory(itemBean);
 	};
 
 }

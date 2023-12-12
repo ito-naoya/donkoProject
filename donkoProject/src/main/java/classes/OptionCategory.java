@@ -10,12 +10,12 @@ import model.optionCategories.optionCategoriesSelect.SelectOptionCategoryListByC
 public class OptionCategory {
 
 	//全てのオプションを取得する
-	public static ArrayList<OptionCategoryBean> getOptionList() {
+	public static ArrayList<OptionCategoryBean> getOptionCategoryList() {
 		return SelectOptionCategoryList.selectOptionCategoryList();
 	};
 
 	//カテゴリ名でオプションを取得する
-	public static ArrayList<OptionCategoryBean> getOptionListByCategory(ItemCategoryBean itemCategoryBean) {
+	public static ArrayList<OptionCategoryBean> getOptionCategoryListByCategory(ItemCategoryBean itemCategoryBean) {
 		return SelectOptionCategoryListByCategory.selectOptionCategoryListByCategory(itemCategoryBean);
 	}
 

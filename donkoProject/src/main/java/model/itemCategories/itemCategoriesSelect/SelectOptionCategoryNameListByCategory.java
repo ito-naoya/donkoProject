@@ -12,10 +12,10 @@ import bean.ItemCategoryBean;
 import dao.DatabaseConnection;
 import dao.GeneralDao;
 
-public class SelectItemCategoryListByCategory {
+public class SelectOptionCategoryNameListByCategory {
 
 	//カテゴリ指定してオプションを取得する
-	public static ArrayList<ItemCategoryBean> selectItemCategoryListByCategory(ItemBean itemBean) {
+	public static ArrayList<ItemCategoryBean> selectOptionCategoryNameListByCategory(ItemBean itemBean) {
 		//カテゴリ指定してカテゴリ名とオプション名を抽出するSQL（衣服：色、衣服；衣類サイズ）
 		StringBuilder sb = new StringBuilder();
 
@@ -37,16 +37,16 @@ public class SelectItemCategoryListByCategory {
 		List<Object> params = Arrays.asList(categoryName);
 		try (Connection conn = DatabaseConnection.getConnection()){
 			try(ResultSet rs = GeneralDao.executeQuery(conn, sql, params)) {
-	
-	
-					//ItemCategoryBeanに挿入
-					while(rs.next()) {
-						ItemCategoryBean itemCategory = new ItemCategoryBean();
+
+
+			//ItemCategoryBeanに挿入
+			while(rs.next()) {
+				ItemCategoryBean itemCategory = new ItemCategoryBean();
 				String category = rs.getString("item_category_name");
 				itemCategory.setItemCategoryName(category);
 				String option = rs.getString("option_category_name");
 				itemCategory.setOptionCategoryName(option);
-	
+
 				itemCategories.add(itemCategory);
 			}
 
