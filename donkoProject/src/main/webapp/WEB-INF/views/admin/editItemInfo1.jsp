@@ -1,6 +1,7 @@
 <%@page import="bean.ItemCategoryBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+<%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.ArrayList, bean.ItemBean, bean.ItemCategoryBean"%>
 <!DOCTYPE html>
 <html>
@@ -65,20 +66,18 @@
 						 	</div>
 						 	<div class="mb-3">
 							    <label for="itemDescription" class="form-label">商品説明</label>
-							    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" required maxlength="100">
-								    <%= item.getItemDescription() %>
-								</textarea>
+							    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" required maxlength="100"><%= item.getItemDescription().trim() %></textarea>
 						 	</div>
 						 	<div class="col-4 mb-3">
 							    <label for="price" class="form-label">金額</label>
-							    <input type="text" class="form-control" id="price" name="price" maxlength="11"  value="<%= item.getItemPrice() %>" required style="text-align: right">
+							    <input type="text" class="form-control" id="price" name="price" maxlength="11"  value="<%= NumberFormat.getNumberInstance().format(item.getItemPrice()) %>" required style="text-align: right">
 						 	</div>
 						 	<div class="col-2 mb-3">
 							    <label for="stock" class="form-label">在庫</label>
 							    <input type="number" class="form-control" id="stock" name="stock" min="1" max="100" value="<%= item.getItemStock() %>" required style="text-align: center">
 						 	</div>
 						 	<br>
-						 	<input type="hidden" name="fileName" value="<%= item.getFileName() %>">
+						 	<input type="hidden" name="fileName" value="<%= item.getImageFileName() %>">
 							<button type=submit class="btn px-5 py-3" style="background-color: #E5CCFF; color: black; border-radius: 0.5rem;">オプションの追加をする</button>
 						</form>
 				</div>
