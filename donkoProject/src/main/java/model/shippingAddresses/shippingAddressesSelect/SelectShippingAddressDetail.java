@@ -32,16 +32,14 @@ public class SelectShippingAddressDetail {
 		param.add(shippingAddressBean.getShippingAddressId());
 		param.add(shippingAddressBean.getUserId());
 		
-		ShippingAddressBean shippingAddressBeans = null;
-		
 		try (Connection connection = DatabaseConnection.getConnection()) {
 			try (ResultSet results = GeneralDao.executeQuery(connection, sql, param)) {
-
+				
 				while (results.next()) {
-					shippingAddressBeans = new ShippingAddressBean();
-					shippingAddressBeans.setPostalCode(results.getString("postal_code"));
-					shippingAddressBeans.setAddress(results.getString("address"));
-					shippingAddressBeans.setAddressee(results.getString("addressee"));
+					shippingAddressBean = new ShippingAddressBean();
+					shippingAddressBean.setPostalCode(results.getString("postal_code"));
+					shippingAddressBean.setAddress(results.getString("address"));
+					shippingAddressBean.setAddressee(results.getString("addressee"));
 				}
 			} catch (Exception e) {
 				if(!connection.isClosed()) {
@@ -55,6 +53,6 @@ public class SelectShippingAddressDetail {
 			e.printStackTrace();
 			return null;
 		}
-		return shippingAddressBeans;
+		return shippingAddressBean;
 		}
 }
