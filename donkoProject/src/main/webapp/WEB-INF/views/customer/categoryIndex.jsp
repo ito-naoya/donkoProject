@@ -13,22 +13,29 @@
 	<main>
 		<form action="" method="post">
 			<div class="d-flex justify-content-end">
-				<div class="col-lg-6 d-flex border mx-3 p-3" style="height: 70px; box-shadow:5px 5px 5px lightgray;">
+				<div class="col-lg-6 d-flex border mx-3 p-3" style="width:auto; height: 70px; box-shadow:5px 5px 5px lightgray;">
 					<% 
 					ArrayList<ArrayList<OptionCategoryBean>> ONVListAll = (ArrayList<ArrayList<OptionCategoryBean>>)request.getAttribute("ONValueListALL");
 					%>
 					<% 
 					for (ArrayList<OptionCategoryBean> ONVList : ONVListAll) {
 					%>
-					<div class="d-flex border px-3" style="width:100%; height: 35px;">
+					<div class="d-flex justify-content-center border mx-2 px-3" style="width:auto; height: 35px; background-color: #D5E8D4";">
 						<% for (OptionCategoryBean ONValue : ONVList) { %>
-						<small><%= ONValue.getOptionCateegoryName() %></small>
+						<small class="mx-3" style="display: flex; align-items: center;">
+							<%-- <% if ([option].isSelected()) { %> --%>
+								<input type="checkbox" name="option" id="<%= ONValue.getOptionCategoryValue() %>" style="display: none;">
+								<label for="<%= ONValue.getOptionCategoryValue() %>" style="color:red;"><%= ONValue.getOptionCategoryValue() %></label>
+							<%-- <% } else { %>
+								<span><%= ONValue.getOptionCategoryValue() %></span>
+							<% } %> --%>
+						</small>
 						<% } %>
 					</div>
 					<%
 					} 
 					%>
-					<buttun class="btn text-nowrap ms-auto" style="background-color: #E5CCFF";">こだわり検索</buttun>
+					<buttun class="btn text-nowrap ms-3" style="background-color: #E5CCFF";">こだわり検索</buttun>
 				</div>
 			</div>
 		</form>
