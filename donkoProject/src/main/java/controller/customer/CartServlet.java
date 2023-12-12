@@ -1,7 +1,11 @@
 package controller.customer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import bean.CartBean;
+import classes.Cart;
+import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
