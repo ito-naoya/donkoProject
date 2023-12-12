@@ -3,6 +3,6 @@ function chebg(chkID){
     if(optionId.checked == true){
         optionId.parentNode.style.color = '#9933FF';
     }else{
-        optionId.parentNode.style.color = '#000';
+        optionId.parentNode.style.color = '#000000';
     }
 }

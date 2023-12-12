@@ -46,7 +46,7 @@
 				</div>
 			</div>
 		</form>
-
+		
 		<div class="d-flex flex-wrap justify-content-center mx-5 my-4">
 			<% ArrayList<ItemBean> IList = (ArrayList<ItemBean>)request.getAttribute("itemList"); %>
 			<% for (ItemBean item : IList) { %>
