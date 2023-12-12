@@ -17,6 +17,21 @@ subImages.forEach(img => {
 	})
 	
 })
+
+const sizes = document.querySelectorAll(".size");
+
+sizes.forEach(size => {
+	
+	size.addEventListener("mouseover", () => {
+		size.classList.toggle("sizeHover");
+	})
+	
+	size.addEventListener("mouseout", () => {
+		size.classList.toggle("sizeHover");
+	})
+	
+})
+
  
  
  

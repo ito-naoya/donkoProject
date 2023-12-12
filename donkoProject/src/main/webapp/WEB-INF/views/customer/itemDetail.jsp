@@ -75,7 +75,7 @@
 							for(ItemBean ib : itemOptionList) {
 							%>
 								<a href="itemDetail?itemId=<%= ib.getItemId() %>" class="d-inline-block" style="margin-right: 9px; text-decoration: none; margin-bottom: 16px; color: black;">
-									<div class="border text-center" style=" width: 50px; hegiht: 50px">
+									<div class="border text-center size" style=" width: 50px; hegiht: 50px">
 										<%= ib.getItemFirstOptionValue() %>
 									</div>
 								</a>
