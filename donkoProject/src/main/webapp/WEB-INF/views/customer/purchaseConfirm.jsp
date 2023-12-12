@@ -77,7 +77,7 @@
 									</a>
 								</td>
 								<td style="vertical-align: middle;"><strong><%= cb.getItemName() %></strong></td>
-								<td style="vertical-align: middle;">¥ <%= String.format("%,d", cb.getItemPrice()) %></td>
+								<td style="vertical-align: middle;">¥ <%= String.format("%,d", cb.getItemPrice() * cb.getQuantity()) %></td>
 								<td style="vertical-align: middle;">
 								<p style="margin: 0">
 									<%= cb.getQuantity() %>個 
