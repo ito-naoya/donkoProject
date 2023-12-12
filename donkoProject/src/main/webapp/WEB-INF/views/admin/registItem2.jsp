@@ -88,12 +88,13 @@
 						    ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = (ArrayList<ArrayList<OptionCategoryBean>>) request.getAttribute("itemCategoryListAll");
 				            int counter = 1;
 				            //カテゴリーから取得したオプションの数分、セレクトボックスを作成（衣類なら、「色」と「衣類サイズ」）
-				            for (ArrayList<OptionCategoryBean> optionCategoryList : itemCategoryListAll)
+				            for (ArrayList<OptionCategoryBean> optionCategoryList : itemCategoryListAll){
+				            	String optionCategoryName = optionCategoryList.get(0).getOptionCategoryName();
 				            %>
-					            <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryList.getOptionCategoryName() %>">
+					            <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryName %>">
 					            <!-- itemCategoryを元に得られたoptionCategoryの中身を選択画面に表示 -->
 				            	<select class="form-select option-select mb-3" id="options" name="optionValue_<%= counter %>">
-								  <option selected>オプション選択： <%=optionCategoryList.getOptionCategoryName() %></option>
+								  <option selected>オプション選択： <%= optionCategoryName %></option>
 							        <%
 							        for (OptionCategoryBean option : optionCategoryList) {
 							        %>

@@ -16,7 +16,7 @@ public class SelectOptionCategoryListByCategory {
 
 	//カテゴリ名でオプション詳細を取得する
 	public static ArrayList<OptionCategoryBean> selectOptionCategoryListByCategory(ItemCategoryBean itemCategoryBean) {
-		//カテゴリ名でオプション詳細を取得するSQL（?=色：[1,緑][2,白][3,黒])
+		//カテゴリ名でオプション詳細を取得するSQL（?=色：[色,1,緑][色,2,白][色,3,黒])
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("SELECT "							);
@@ -43,7 +43,7 @@ public class SelectOptionCategoryListByCategory {
 						OptionCategoryBean optionCategory = new OptionCategoryBean();
 
 						String optionCategoryName = rs.getString("option_category_name");
-						optionCategory.setOptionCateegoryName(optionCategoryName);
+						optionCategory.setOptionCategoryName(optionCategoryName);
 						int optionId = rs.getInt("option_category_increment_id");
 						optionCategory.setOptionCategoryId(optionId);
 						String optionName = rs.getString("option_category_value");

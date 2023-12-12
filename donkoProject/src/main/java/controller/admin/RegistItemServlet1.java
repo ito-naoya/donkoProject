@@ -79,7 +79,7 @@ public class RegistItemServlet1 extends HttpServlet {
 				    ArrayList<OptionCategoryBean> options = OptionCategory.getOptionCategoryListByCategory(itemCategory);
 				    if(options == null) {
 						//取得情報の不備があれば、再度入力画面に戻る
-						response.sendRedirect("registItem1");
+						response.sendRedirect("regisatItem1");
 					} else {
 						//ユニークな属性名を生成してリクエストにセット
 						itemCategoryListAll.add(options);
