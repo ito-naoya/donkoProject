@@ -9,6 +9,7 @@ public class PurchaseDetailBean {
 	private String itemName;
 	private int purchaseAmount;
 	private int quantity;
+	private String imageFileName;
 	
 	public PurchaseDetailBean() {};
 	
