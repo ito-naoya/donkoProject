@@ -4,3 +4,8 @@
 	opacity: 0.5;
 	transition-duration: 0.3s;
 }
+
+.sizeHover{
+	background-color: #e5ccff;
+	color: black;
+}
