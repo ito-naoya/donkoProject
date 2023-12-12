@@ -118,13 +118,12 @@
 					    <br>
 					    <div class="mb-3">
 						    <label for="formFile" class="form-label">商品写真を登録</label>
-						    <input type="file" class="form-control" id="formFile" name="img" accept="jpg" onchange="previewImage(event);" />
+						    <input type="file" class="form-control" id="formFile" name="img" accept="" onchange="previewImage(event);" />
 						</div>
 					    <br>
-					    <div class="upload card mb-3 mx-2" style="display: flex; justify-content: center; align-items: center; width: 300px; height: 300px;">
-    <img id="image-preview" style="max-width: 100%; max-height: 100%;"/>
-</div>
-
+					    <div class="upload card mb-3 mx-2" style="object-fit: cover; width: 300px; height: 300px; display: none;">
+						    <img id="image-preview" style="height: 100%;"/>
+						</div>
 					    <br>
 
 					    <div class="mb-3">
