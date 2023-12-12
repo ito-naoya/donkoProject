@@ -96,6 +96,8 @@
 						合計金額 ¥ <%= String.format("%,d", totalPrice) %>
 						</p>
 						<form action="purchaseConfirm" method="post">
+							<input type="hidden" value="<%= totalPrice %>" name="totalPrice">
+							<input type="hidden" value="<%= sa.getShippingAddressId() %>" name="shippingAddressId">
 							<button type=submit class="btn px-5 py-2" style="background-color: #9933ff; color: white;">
 								注文確定
 							</button>

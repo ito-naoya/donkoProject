@@ -23,10 +23,11 @@ public class MyPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		CustomerUser customerUser = new CustomerUser();
+		// TODO:テストコードです。不要になれば削除します。
+		customerUser.setUserLoginId(4);
 		
 		ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
 		request.setAttribute("purchaseList", purchaseList);
-		System.out.println(purchaseList);
 		
 		String view = "/WEB-INF/views/customer/myPage.jsp";
 		request.getRequestDispatcher(view).forward(request, response);

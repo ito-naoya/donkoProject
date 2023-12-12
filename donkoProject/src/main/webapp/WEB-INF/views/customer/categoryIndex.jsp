@@ -6,11 +6,47 @@
 <head>
 <meta charset="UTF-8">
 <title>donko</title>
+<style type="text/css">
+	a,label{cursor:pointer;}
+	label:hover { color : #E5CCFF; }
+	}
+</style>
 </head>
 <body>
 	<%@include file= "../component/header.jsp" %>
 	<%@include file= "../component/headerTopSpace.jsp" %>
 	<main>
+		<form action="" method="post" name="form">
+			<div class="d-flex justify-content-end">
+				<div class="col-lg-6 d-flex border mx-3 p-3" style="width:auto; height: 70px; box-shadow:5px 5px 5px lightgray;">
+					<% 
+					ArrayList<ArrayList<OptionCategoryBean>> ONVListAll = (ArrayList<ArrayList<OptionCategoryBean>>)request.getAttribute("ONValueListALL");
+					%>
+					<% 
+					for (ArrayList<OptionCategoryBean> ONVList : ONVListAll) {
+					%>
+					<div class="d-flex justify-content-center border mx-2 px-3" style="width:auto; height: 35px; background-color: #D5E8D4";">
+						<% for (OptionCategoryBean ONValue : ONVList) { %>
+						<small class="mx-3" style="display: flex; align-items: center;">
+							<input type="checkbox" name="option"
+							id="<%=ONValue.getOptionCategoryValue()%>"
+							onclick="chebg('<%=ONValue.getOptionCategoryValue()%>')" 
+							style="display: none;" 
+							value="<%=ONValue.getOptionCategoryValue()%>"> 
+							<label for="<%=ONValue.getOptionCategoryValue()%>">
+								<%= ONValue.getOptionCategoryValue() %>
+							</label>
+						</small>
+						<% } %>
+					</div>
+					<%
+					} 
+					%>
+					<buttun class="btn text-nowrap ms-3" style="background-color: #E5CCFF";">こだわり検索</buttun>
+				</div>
+			</div>
+		</form>
+		
 		<div class="d-flex flex-wrap justify-content-center mx-5 my-4">
 			<% ArrayList<ItemBean> IList = (ArrayList<ItemBean>)request.getAttribute("itemList"); %>
 			<% for (ItemBean item : IList) { %>
@@ -32,5 +68,6 @@
 		</div>
 	</main>
 	<%@include file= "../component/footer.jsp" %>
+	<script src="./js/categoryIndexScript.js"></script>
 </body>
 </html>
