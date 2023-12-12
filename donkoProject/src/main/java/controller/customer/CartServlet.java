@@ -36,7 +36,7 @@ public class CartServlet extends HttpServlet {
 		//テストコード
 		CustomerUser loginedUser = new CustomerUser();
 		loginedUser.setUserId(2);
-	
+
 		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
 		request.setAttribute("cartList", cartList);
 		
