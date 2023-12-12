@@ -73,12 +73,14 @@
 					    <br>
 					    <div class="mb-3">
 						    <label for="formFile" class="form-label">商品写真を登録</label>
-						    <input type="file" class="form-control" id="formFile" name="img" onchange="previewImage(event);" />
+						    <input type="file" class="form-control" id="formFile" name="img" accept=".jpg" onchange="previewImage(event);" />
 						</div>
 					    <br>
-					    <div class="upload card mb-3 mx-2" style="width: 300px; height: 300px; display: none;">
-						    <img id="image-preview" style="object-fit: cover; height: 100%;"/>
+					    <div class="upload card mb-3 mx-2" style="width: 300px; height: 300px; display: inline-block;">
+							<span id="default-text" style="position: absolute; width: 100%; height: 100%;">ここに画像が表示されます</span>
+						    <img id="image-preview" style="width: 100%; height: 100%; object-fit: cover; display: none;"/>
 						</div>
+
 					    <br>
 					    <div class="mb-3">
 					    	<label for="options" class="form-label">オプションを登録</label>
@@ -116,70 +118,6 @@
 			</div>
 		</div>
 </main>
-<script>
-	//画像プレビュー機能を追加
-	function previewImage(event) {
-	    let preview = document.getElementById('image-preview');
-	    let imgCard = document.querySelector('.card');;
-	    let file = event.target.files[0];
-	    let reader = new FileReader();
-	    reader.onloadend = function() {
-	        preview.src = reader.result;
-	        imgCard.style.display = 'block'; // カード画像を表示
-	    }
-	    if (file) {
-	        reader.readAsDataURL(file);
-	    } else {
-	        preview.src = "";
-	        imgCard.style.display = 'none'; // 画像がない場合は非表示
-	    }
-	}
-	//各種入力チェック
-	// submit押下時にnull値及び文字数をチェック
-	document.getElementById('registItem2').addEventListener('submit', function(event) {
-	    let selectCategoryElement = document.querySelector('.option-select');
-	    let selectedCategoryValue = selectCategoryElement.value;
-	    let errorMessageContainer = document.getElementById('error-message-container2');
-	    // カテゴリー選択のチェック
-	    if(selectedCategoryValue.includes("オプション選択")) {
-		    event.preventDefault(); // フォームの送信を阻止
-		    errorMessageContainer.textContent = 'オプションを選択してください';
-		    errorMessageContainer.classList.remove('d-none'); // エラーメッセージを表示
-		}
-	    // 商品名、価格、在庫の空白チェック
-	    else if(document.getElementById('formFile').files.length === 0) {
-		    event.preventDefault(); // フォームの送信を阻止
-		    errorMessageContainer.textContent = '写真をアップロードしてください';
-		    errorMessageContainer.classList.remove('d-none'); // エラーメッセージを表示
-		}
-	});
-	function validateFile(file) {
-	    const allowedExtensions = 'jpg';
-	    const fileSizeLimit = 2 * 1024 * 1024; // 2MB in bytes
-	    const dimensionLimit = 3000;
-	    // 拡張子のチェック
-	    let extension = file.name.split('.').pop().toLowerCase();
-	    if (!allowedExtensions.includes(extension)) {
-	        return "ファイル形式はjpgのみ許可されています。";
-	    }
-	     // ファイルサイズのチェック
-	    if (file.size > fileSizeLimit) {
-	        return "ファイルサイズは2MB以下にしてください。";
-	    }
-	    // 画像サイズのチェック (非同期)
-	    return new Promise((resolve, reject) => {
-	        let img = new Image();
-	        img.src = URL.createObjectURL(file);
-	        img.onload = () => {
-	            if (img.width > dimensionLimit || img.height > dimensionLimit) {
-	                resolve("画像サイズは3000px * 3000px以下にしてください。");
-	            } else {
-	                resolve(null);
-	            }
-	        };
-	        img.onerror = reject;
-	    });
-	}
-</script>
+<script src="./js/registItemScript.js"></script>
 </body>
 </html>
