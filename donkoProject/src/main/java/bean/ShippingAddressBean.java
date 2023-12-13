@@ -52,11 +52,11 @@ public class ShippingAddressBean {
 	}
 	
 	public int getMain_Shipping_Address() {
-		return main_Shipping_Address;
+		return mainShippingAddress;
 	}
 	
-	public void setMain_Shipping_Address(int main_Shipping_Address) {
-		this.main_Shipping_Address = main_Shipping_Address;
+	public void setMain_Shipping_Address(int mainShippingAddress) {
+		this.mainShippingAddress = mainShippingAddress;
 	}
 	
 }
