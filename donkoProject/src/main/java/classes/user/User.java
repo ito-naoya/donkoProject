@@ -38,7 +38,7 @@ public class User {
 	};
 
 	//ユーザーの詳細を取得する
-	public CustomerUser getUserDetail(CustomerUser customerUser) {
+	public static CustomerUser getUserDetail(CustomerUser customerUser) {
 		return SelectUserDetailFromUsers.selectUserDetailFromUsers(customerUser);
 	};
 
