@@ -13,6 +13,7 @@ public class SelectItemDetailOptionFromItems {
 	
 	public static ItemBean selectItemDetailOptionFromItems(ItemBean itemBean) {
 		
+		//商品のオプションの詳細を取得するSQL
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT ");
 		sql.append(		"group_concat(option_categories.option_category_value separator ',') ");
@@ -29,19 +30,25 @@ public class SelectItemDetailOptionFromItems {
 		sql.append("AND ");
 		sql.append(		"options.option_category_increment_id  = option_categories.option_category_increment_id ");
 		sql.append("WHERE ");
+		//パラメータをここで使う
 		sql.append(		"items.item_id = ?");
+		//sqlを文字列化
 		final String SELECT_ITEMDETAILOPTION_SQL = sql.toString();
 		
-		
+		//詳細オプション情報を取得したい商品のIDをリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(itemBean.getItemId());
 		
+		//オプション情報を保持するitembeanをnullで初期化
 		ItemBean ib = null;
 		
+		//データベース接続
 		try(Connection conn = DatabaseConnection.getConnection();){
+			//商品詳細オプションを取得する
 			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEMDETAILOPTION_SQL, params)){
 				
 				while(rs.next()) {
+					//商品詳細オプションを保持するitemBeanをnew
 					ib = new ItemBean();
 					ib.setItemFirstOptionValue(rs.getString("group_concat(option_categories.option_category_value separator ',')"));
 				}
@@ -57,6 +64,7 @@ public class SelectItemDetailOptionFromItems {
 			e.printStackTrace();
 			return null;
 		}
+		//商品詳細オプションを保持したitemBeanを返す
 		return ib;
 	}
 }

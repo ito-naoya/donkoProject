@@ -37,8 +37,10 @@ public class CartServlet extends HttpServlet {
 		CustomerUser loginedUser = new CustomerUser();
 		loginedUser.setUserId(2);
 
+		//対象のユーザーのカート内の商品を全て取得
 		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
 		
+		//カート内の商品のオプションを取得する
 		cartList.forEach(cb -> {
 			ItemBean ib = new ItemBean();
 			ib.setItemId(cb.getItemId());
@@ -65,11 +67,14 @@ public class CartServlet extends HttpServlet {
 
 		int itemId = Integer.parseInt(request.getParameter("itemId"));
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		
+		//カートの商品情報を保持するcartBeanをnew
 		CartBean cb = new CartBean();
 		cb.setUserId(loginedUser.getUserId());
 		cb.setItemId(itemId);
 		cb.setQuantity(quantity);
 		
+		 //カート内の商品の数量を更新する
 		Cart.updateItemQuantityInCart(cb);
 		
 		response.sendRedirect("cart");

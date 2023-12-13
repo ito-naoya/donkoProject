@@ -16,6 +16,7 @@ public class InsertPurchaseDetail {
 	//購入詳細を追加する
 	public static void insertPurchaseDetail(PurchaseBean purchaseBean){
 		
+		//購入詳細を追加するSQL
 		StringBuilder insertSql = new StringBuilder();
 		insertSql.append("INSERT INTO ");
 		insertSql.append(		"purchase_details ");
@@ -55,30 +56,37 @@ public class InsertPurchaseDetail {
 		//パラメータをここで使う(5/5)
 		insertSql.append(	"?");
 		insertSql.append(")");
+		//sqlを文字列化
 		final String INSERT_PURCHASEDETAIL_SQL = insertSql.toString();
 		
+		//データベースに接続
 		try(Connection conn = DatabaseConnection.getConnection();){
 				
-				CustomerUser customerUser = new CustomerUser();
-				customerUser.setUserId(purchaseBean.getUserId());
-				ArrayList<CartBean> cartList = Cart.getItemListFromCart(customerUser);
-			
-				cartList.forEach(cb -> {
-					ArrayList<Object> params = new ArrayList<Object>();
-					params.add(purchaseBean.getUserId());
-					params.add(purchaseBean.getUserId());
-					params.add(cb.getItemId());
-					params.add(cb.getItemPrice() * cb.getQuantity());
-					params.add(cb.getQuantity());
-	
-					try {
-						GeneralDao.executeUpdate(conn, INSERT_PURCHASEDETAIL_SQL, params);
-						conn.commit();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					
-				});
+			//購入したユーザーのIDを保持するcustomerUserBeanをnew
+			CustomerUser customerUser = new CustomerUser();
+			//購入したユーザーのIDをcustomerUserにセット
+			customerUser.setUserId(purchaseBean.getUserId());
+			//カート内にある購入した商品の情報を全て取得
+			ArrayList<CartBean> cartList = Cart.getItemListFromCart(customerUser);
+		
+			//カート内の商品情報をパラメータリストに追加
+			cartList.forEach(cb -> {
+				ArrayList<Object> params = new ArrayList<Object>();
+				params.add(purchaseBean.getUserId());
+				params.add(purchaseBean.getUserId());
+				params.add(cb.getItemId());
+				params.add(cb.getItemPrice() * cb.getQuantity());
+				params.add(cb.getQuantity());
+
+				try {
+					//購入した商品を商品数のだけインサート
+					GeneralDao.executeUpdate(conn, INSERT_PURCHASEDETAIL_SQL, params);
+					conn.commit();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+			});
 		}catch(SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
