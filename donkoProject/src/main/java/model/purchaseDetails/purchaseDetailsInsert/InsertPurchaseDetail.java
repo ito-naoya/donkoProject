@@ -86,7 +86,6 @@ public class InsertPurchaseDetail {
 					try {
 						conn.rollback();
 					} catch (SQLException e1) {
-						// TODO 自動生成された catch ブロック
 						e1.printStackTrace();
 					}
 				}
