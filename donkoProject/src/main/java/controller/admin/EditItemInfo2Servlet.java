@@ -32,7 +32,6 @@ public class EditItemInfo2Servlet extends HttpServlet {
 		throws ServletException, IOException {
 
 	//regist1で既に取得済みの情報を再度獲得
-	String id = request.getParameter("itemId");
 	Integer itemId = Integer.parseInt(request.getParameter("itemId"));
 	String itemCategoryName = request.getParameter("itemCategoryName");
 	String itemName = request.getParameter("itemName");
@@ -71,13 +70,15 @@ public class EditItemInfo2Servlet extends HttpServlet {
 		//写真名を設定
 		String fileName = itemName + ItemfirstOptionIncrementId;
 		if(!fileName.equals(oldItemFile)) {
-			updateItemaddOption.setImageFileName(fileName);
+			updateItemaddOption.setImageFileName(fileName);//商品名を変更した場合、新しい写真名になる
+		} else {
+			updateItemaddOption.setImageFileName(itemName);//商品名はそのままの場合
 		}
 		//itemsテーブルと、item_optionsテーブルを同じトランザクションで更新
 		Item.updateItemInfo(updateItemaddOption, selectBoxCount);
 
 		//画像をドキュメント内に保管
-		Item.registerNewImage(imgPart,fileName,oldItemFile);
+		Item.renameNewImage(imgPart,fileName,oldItemFile);
 
 	String view = "deleteItemIndex";
 	RequestDispatcher dispatcher = request.getRequestDispatcher(view);

@@ -93,12 +93,13 @@ public class Item {
 	public static void deleteItem(ItemBean itemBean){
 		DeleteItemFromItems.deleteItemFromItems(itemBean);
 	};
-
-
 	//商品画像をドキュメント内に登録する
+		//写真がある、fileNameがあってoldFileNameがない(新規登録)
+		//写真がある、fileNameとoldFileNameがある(写真の差し替え)
+		//写真がない、fileNameとoldFileNameがある(名前の差し替え)
+		//写真がない、fileNameがない
 	public static void registerNewImage(Part part,String fileName, String oldFileName){
-		// 取得した値を格納するArrayList
-		if(part != null && oldFileName == null) {
+		if(part != null && !fileName.isEmpty()) {
 			try {
 			    // フルパスじゃないと上手く読み込まれないみたいなので、自分のファイルパスに適宜変更してください。
 			    String filePath = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/" + fileName + ".jpg";
@@ -107,12 +108,24 @@ public class Item {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} else if (part == null && !oldFileName.equals(oldFileName)) {
-	        // ファイルをリネーム
-	        File oldFile = new File("/path/to/your/images/directory/" + oldFileName + ".jpg");
-	        File newFile = new File("/path/to/your/images/directory/" + fileName + ".jpg");
+		}
+	};
+	public static void renameNewImage(Part part,String fileName, String oldFileName){
+		if(part != null && !fileName.isEmpty()) {
+			try {
+				// フルパスじゃないと上手く読み込まれないみたいなので、自分のファイルパスに適宜変更してください。
+				String filePath = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/" + fileName + ".jpg";
+				// ファイルを保存
+				part.write(filePath);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else if (part == null && !fileName.isEmpty()) {
+			// ファイルをリネーム
+			File oldFile = new File("/path/to/your/images/directory/" + oldFileName + ".jpg");
+			File newFile = new File("/path/to/your/images/directory/" + fileName + ".jpg");
 
-	        oldFile.renameTo(newFile);
+			oldFile.renameTo(newFile);
 		}
 	};
 
