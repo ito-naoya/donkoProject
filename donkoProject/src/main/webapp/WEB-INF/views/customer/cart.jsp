@@ -42,6 +42,9 @@
 							<td style="vertical-align: middle;">
 								<strong>
 									<%= cb.getItemName() %>
+									(
+									<%= cb.getItemOptionDetail() %>
+									)
 								</strong>
 							</td>
 							<td style="vertical-align: middle;">

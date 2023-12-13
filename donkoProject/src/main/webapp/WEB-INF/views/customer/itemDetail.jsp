@@ -33,18 +33,13 @@
 				<div class="col">
 					<h2>
 					<%
-					ArrayList<ItemBean> optionValueList = (ArrayList<ItemBean>)request.getAttribute("optionValueList");
+					ItemBean itemOptionDetail = (ItemBean)request.getAttribute("itemOptionDetail");
 					%>
 						<strong>
 							<%=item.getItemName()%>
 							(
-								<%
-								for(ItemBean ib : optionValueList){
-								%>
-								<span><%= ib.getItemFirstOptionValue() %></span>
-								<%
-								}
-								%>
+						
+								<span><%= itemOptionDetail.getItemFirstOptionValue() %></span>
 							)
 						</strong>
 					</h2>

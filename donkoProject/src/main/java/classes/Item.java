@@ -51,7 +51,7 @@ public class Item {
 	};
 
 	//商品の詳細情報（オプションだけ）を取得する
-	public static ArrayList<ItemBean> getItemDetailOption(ItemBean itemBean) {
+	public static ItemBean getItemDetailOption(ItemBean itemBean) {
 		return SelectItemDetailOptionFromItems.selectItemDetailOptionFromItems(itemBean);
 	}
 	

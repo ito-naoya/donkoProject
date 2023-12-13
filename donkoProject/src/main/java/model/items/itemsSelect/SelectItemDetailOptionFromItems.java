@@ -11,11 +11,11 @@ import dao.GeneralDao;
 
 public class SelectItemDetailOptionFromItems {
 	
-	public static ArrayList<ItemBean> selectItemDetailOptionFromItems(ItemBean itemBean) {
+	public static ItemBean selectItemDetailOptionFromItems(ItemBean itemBean) {
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT ");
-		sql.append(		"option_categories.option_category_value ");
+		sql.append(		"group_concat(option_categories.option_category_value separator ',') ");
 		sql.append("FROM ");
 		sql.append(		"items ");
 		sql.append("INNER JOIN ");
@@ -36,15 +36,14 @@ public class SelectItemDetailOptionFromItems {
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(itemBean.getItemId());
 		
-		ArrayList<ItemBean> itemBeanList = new ArrayList<ItemBean>();
+		ItemBean ib = null;
 		
 		try(Connection conn = DatabaseConnection.getConnection();){
 			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEMDETAILOPTION_SQL, params)){
 				
 				while(rs.next()) {
-					ItemBean ib = new ItemBean();
-					ib.setItemFirstOptionValue(rs.getString("option_category_value"));
-					itemBeanList.add(ib);
+					ib = new ItemBean();
+					ib.setItemFirstOptionValue(rs.getString("group_concat(option_categories.option_category_value separator ',')"));
 				}
 
 			}catch(SQLException e) {
@@ -58,6 +57,6 @@ public class SelectItemDetailOptionFromItems {
 			e.printStackTrace();
 			return null;
 		}
-		return itemBeanList;
+		return ib;
 	}
 }
