@@ -16,7 +16,6 @@ public class SelectItemDetailFromItems {
 
 		//商品の詳細情報を取得するSQL
 		StringBuilder sql = new StringBuilder();
-
 		sql.append("SELECT ");
 		sql.append(		"items.item_id, ");
 		sql.append(		"items.item_category_name, ");
@@ -35,7 +34,6 @@ public class SelectItemDetailFromItems {
 		sql.append(		"items.item_id = ? ");
 		sql.append("AND ");
 		sql.append(		"item_categories.option_category_name != '色' ");
-
 		final String SELECT_ITEMDETAIL_SQL = sql.toString();
 
 		ArrayList<Object> params = new ArrayList<Object>();

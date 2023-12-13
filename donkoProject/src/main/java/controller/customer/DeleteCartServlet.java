@@ -1,7 +1,6 @@
 package controller.customer;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import bean.CartBean;
 import classes.Cart;
@@ -37,11 +36,8 @@ public class DeleteCartServlet extends HttpServlet {
 		cartBean.setItemId(itemId);
 		
 		Cart.deleteItemFromCart(cartBean);
-		ArrayList<CartBean> cartList = Cart.getItemListFromCart(user);
-		request.setAttribute("cartList", cartList);
 		
-		String view = "/WEB-INF/views/customer/cart.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		response.sendRedirect("cart");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,11 +50,8 @@ public class DeleteCartServlet extends HttpServlet {
 		user.setUserId(2);
 		
 		Cart.deleteAllItemFromCart(user);
-		ArrayList<CartBean> cartList = Cart.getItemListFromCart(user);
-		request.setAttribute("cartList", cartList);
 		
-		String view = "/WEB-INF/views/customer/cart.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		response.sendRedirect("cart");
 		
 	}
 

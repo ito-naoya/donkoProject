@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.CartBean;
+import bean.ItemBean;
 import classes.Cart;
+import classes.Item;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -36,6 +38,14 @@ public class CartServlet extends HttpServlet {
 		loginedUser.setUserId(2);
 
 		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
+		
+		cartList.forEach(cb -> {
+			ItemBean ib = new ItemBean();
+			ib.setItemId(cb.getItemId());
+			ItemBean itemOptionDetail =  Item.getItemDetailOption(ib);
+			cb.setItemOptionDetail(itemOptionDetail.getItemFirstOptionValue());
+		});
+		
 		request.setAttribute("cartList", cartList);
 
 		String view = "/WEB-INF/views/customer/cart.jsp";
@@ -61,11 +71,8 @@ public class CartServlet extends HttpServlet {
 		cb.setQuantity(quantity);
 		
 		Cart.updateItemQuantityInCart(cb);
-		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
-		request.setAttribute("cartList", cartList);
 		
-		String view = "/WEB-INF/views/customer/cart.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		response.sendRedirect("cart");
 	}
 
 }

@@ -31,10 +31,12 @@ public class ItemDetailServlet extends HttpServlet {
 		ItemBean item = Item.getItemDetail(itemBean);
 		ArrayList<ItemBean> itemImageList = Item.getItemImageList(itemBean);
 		ArrayList<ItemBean> itemOptionList = Item.getItemOptionList(itemBean);
+		ItemBean itemOptionDetail =  Item.getItemDetailOption(itemBean);
 		
 		request.setAttribute("item", item);
 		request.setAttribute("itemImageList", itemImageList);
 		request.setAttribute("itemOptionList", itemOptionList);
+		request.setAttribute("itemOptionDetail", itemOptionDetail);
 		
 		String view = "/WEB-INF/views/customer/itemDetail.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
@@ -63,6 +65,14 @@ public class ItemDetailServlet extends HttpServlet {
 		
 		Cart.addItemToCart(cartBean);
 		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
+		
+		cartList.forEach(cb -> {
+			ItemBean ib = new ItemBean();
+			ib.setItemId(cb.getItemId());
+			ItemBean itemOptionDetail =  Item.getItemDetailOption(ib);
+			cb.setItemOptionDetail(itemOptionDetail.getItemFirstOptionValue());
+		});
+		
 		request.setAttribute("cartList", cartList);
 		
 		String view = "/WEB-INF/views/customer/cart.jsp";
