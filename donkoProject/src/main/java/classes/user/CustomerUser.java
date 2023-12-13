@@ -8,7 +8,7 @@ public class CustomerUser extends User {
 	};
 
 	//ログインID
-	private int userLoginId;
+	private String userLoginId;
 	//パスワード
 	private String password;
 	//ユーザー名
@@ -20,11 +20,11 @@ public class CustomerUser extends User {
 	//削除フラグ
 	private boolean isDeleted;
 
-	public int getUserLoginId() {
+	public String getUserLoginId() {
 		return userLoginId;
 	}
 
-	public void setUserLoginId(int userLoginId) {
+	public void setUserLoginId(String userLoginId) {
 		this.userLoginId = userLoginId;
 	}
 

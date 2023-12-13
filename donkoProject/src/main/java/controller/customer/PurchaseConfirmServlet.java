@@ -89,6 +89,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 
 		Purchase.purchaseItem(pb);
 		PurchaseDetail.addPurchaseDetail(pb);
+		Item.updateItemStock(pb);
 		Cart.deleteAllItemFromCart(loginedUser);
 		
 		String view = "/WEB-INF/views/customer/purchaseComplete.jsp";

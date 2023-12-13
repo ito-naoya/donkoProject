@@ -51,11 +51,11 @@ public class ShippingAddressBean {
 		this.address = address;
 	}
 	
-	public int getMain_Shipping_Address() {
+	public int getMainShippingAddress() {
 		return mainShippingAddress;
 	}
 	
-	public void setMain_Shipping_Address(int mainShippingAddress) {
+	public void setMainShippingAddress(int mainShippingAddress) {
 		this.mainShippingAddress = mainShippingAddress;
 	}
 	
