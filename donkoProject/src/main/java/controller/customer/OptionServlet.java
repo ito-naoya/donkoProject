@@ -57,15 +57,10 @@ public class OptionServlet extends HttpServlet {
 	}
 	
 	public static String checkedOption(String[] checkedOption) {
-		String str = null;
-		for (int index = 0; index < checkedOption.length; index++) {
-			if (index == 0) {
-				str = "'" + checkedOption[0] + "'";
-			} else {
-				str += "," + "'" + checkedOption[index] + "'";
-			}
-			index++;
-		}
-		return str;
+		String str = "'" + checkedOption[0] + "'";
+	    for (int index = 1; index < checkedOption.length; index++) {
+	        str += "," + "'" + checkedOption[index] + "'";
+	    }
+	    return str;
 	}
 }
