@@ -24,7 +24,7 @@ public class MyPageServlet extends HttpServlet {
 		
 		CustomerUser customerUser = new CustomerUser();
 		// TODO:テストコードです。不要になれば削除します。
-		customerUser.setUserLoginId(4);
+		customerUser.setUserLoginId("ayasuzu");
 		
 		ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
 		request.setAttribute("purchaseList", purchaseList);

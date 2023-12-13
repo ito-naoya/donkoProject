@@ -37,7 +37,7 @@ public class SelectUserDetailFromUsers {
 				
 				while (results.next()) {
 					customerUser = new CustomerUser();
-					customerUser.setUserLoginId(results.getInt("user_login_id"));
+					customerUser.setUserLoginId(results.getString("user_login_id"));
 					customerUser.setUserName(results.getString("user_name"));
 					customerUser.setPassword(results.getString("password"));
 					customerUser.setBirthday(results.getDate("birthday"));
