@@ -28,13 +28,19 @@ public class ItemDetailServlet extends HttpServlet {
 		ItemBean itemBean = new ItemBean();
 		itemBean.setItemId( Integer.parseInt(request.getParameter("itemId")));
 
+		//商品の詳細情報を取得する
 		ItemBean item = Item.getItemDetail(itemBean);
+		//商品の色違い画像を取得する
 		ArrayList<ItemBean> itemImageList = Item.getItemImageList(itemBean);
+		//商品のオプションを取得する
 		ArrayList<ItemBean> itemOptionList = Item.getItemOptionList(itemBean);
+		//商品のオプション詳細を取得する
+		ItemBean itemOptionDetail =  Item.getItemDetailOption(itemBean);
 		
 		request.setAttribute("item", item);
 		request.setAttribute("itemImageList", itemImageList);
 		request.setAttribute("itemOptionList", itemOptionList);
+		request.setAttribute("itemOptionDetail", itemOptionDetail);
 		
 		String view = "/WEB-INF/views/customer/itemDetail.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
@@ -61,12 +67,10 @@ public class ItemDetailServlet extends HttpServlet {
 		cartBean.setItemId(itemId);
 		cartBean.setUserId(userId);
 		
+		//カートに商品を追加する
 		Cart.addItemToCart(cartBean);
-		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
-		request.setAttribute("cartList", cartList);
 		
-		String view = "/WEB-INF/views/customer/cart.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		response.sendRedirect("cart");
 	}
 
 }

@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.CartBean;
+import bean.ItemBean;
 import bean.PurchaseBean;
 import bean.ShippingAddressBean;
 import classes.Cart;
+import classes.Item;
 import classes.Purchase;
 import classes.PurchaseDetail;
 import classes.ShippingAddress;
@@ -41,6 +43,13 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		
 		ShippingAddressBean shippingAddress = ShippingAddress.getMainShippingAddress(loginedUser);
 		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
+		
+		cartList.forEach(cb -> {
+			ItemBean ib = new ItemBean();
+			ib.setItemId(cb.getItemId());
+			ItemBean itemOptionDetail =  Item.getItemDetailOption(ib);
+			cb.setItemOptionDetail(itemOptionDetail.getItemFirstOptionValue());
+		});
 		
 		ArrayList<Integer> priceList = new ArrayList<Integer>();
 		cartList.forEach(cb -> {

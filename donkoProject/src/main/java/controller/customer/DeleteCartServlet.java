@@ -1,7 +1,6 @@
 package controller.customer;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import bean.CartBean;
 import classes.Cart;
@@ -32,16 +31,15 @@ public class DeleteCartServlet extends HttpServlet {
 		int itemId = Integer.parseInt(request.getParameter("itemId"));
 //		int userId = user.getUserId();
 		
+		//削除したいカート内商品の情報を保持するcartBeanをnew
 		CartBean cartBean = new CartBean();
 		cartBean.setUserId(user.getUserId());
 		cartBean.setItemId(itemId);
 		
+		 //対象の商品をカートから削除
 		Cart.deleteItemFromCart(cartBean);
-		ArrayList<CartBean> cartList = Cart.getItemListFromCart(user);
-		request.setAttribute("cartList", cartList);
 		
-		String view = "/WEB-INF/views/customer/cart.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		response.sendRedirect("cart");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,12 +51,10 @@ public class DeleteCartServlet extends HttpServlet {
 		CustomerUser user = new CustomerUser();
 		user.setUserId(2);
 		
+		//カートから全ての商品を削除
 		Cart.deleteAllItemFromCart(user);
-		ArrayList<CartBean> cartList = Cart.getItemListFromCart(user);
-		request.setAttribute("cartList", cartList);
 		
-		String view = "/WEB-INF/views/customer/cart.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		response.sendRedirect("cart");
 		
 	}
 

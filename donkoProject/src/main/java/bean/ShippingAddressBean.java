@@ -7,6 +7,7 @@ public class ShippingAddressBean {
 	private String postalCode;
 	private String addressee;
 	private String address;
+	private int mainShippingAddress;
 	
 	public ShippingAddressBean() {};
 	
@@ -48,6 +49,14 @@ public class ShippingAddressBean {
 	
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public int getMain_Shipping_Address() {
+		return mainShippingAddress;
+	}
+	
+	public void setMain_Shipping_Address(int mainShippingAddress) {
+		this.mainShippingAddress = mainShippingAddress;
 	}
 	
 }

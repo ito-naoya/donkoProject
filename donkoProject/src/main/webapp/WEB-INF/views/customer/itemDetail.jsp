@@ -32,8 +32,15 @@
 				</div>
 				<div class="col">
 					<h2>
+					<%
+					ItemBean itemOptionDetail = (ItemBean)request.getAttribute("itemOptionDetail");
+					%>
 						<strong>
 							<%=item.getItemName()%>
+							(
+						
+								<span><%= itemOptionDetail.getItemFirstOptionValue() %></span>
+							)
 						</strong>
 					</h2>
 					<h3>
