@@ -55,6 +55,11 @@ public class Item {
 		return SelectItemDetailOptionFromItems.selectItemDetailOptionFromItems(itemBean);
 	}
 	
+	//商品がもつ全ての情報を取得する
+	public static ItemBean getItemAllDetail(ItemBean itemBean) {
+		return SelectItemAllDetail.selectItemAllDetail(itemBean);
+	}
+	
 	//商品の画像一覧を取得する
 	public static ArrayList<ItemBean> getItemImageList(ItemBean itemBean) {
 		return SelectItemImageListFromItems.selectItemImageListFromItems(itemBean);
