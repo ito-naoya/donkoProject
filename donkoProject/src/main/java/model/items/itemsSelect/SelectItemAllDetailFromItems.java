@@ -8,49 +8,54 @@ import java.util.ArrayList;
 import bean.ItemBean;
 import dao.DatabaseConnection;
 import dao.GeneralDao;
-
+//商品がもつ全ての情報を取得する
 public class SelectItemAllDetailFromItems {
 
 	public static ItemBean selectItemAllDetailFromItems(ItemBean itemBean) {
+		//商品がもつ全ての情報を取得するSQL(id=1なら、itemsテーブル上の情報と、optionに紐づいた情報(色；緑色　衣類サイズ；Sサイズ)を全て獲得)
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT "																						);
+		sb.append(		"* "																					);
+		sb.append("FROM "																						);
+		sb.append(		"items "																				);
+		sb.append("INNER JOIN "																					);
+		sb.append(		"`options` "																			);
+		sb.append("ON "																							);
+		sb.append(		"items.item_id = `options`.item_id "													);
+		sb.append("INNER JOIN "																					);
+		sb.append(		"option_categories "																	);
+		sb.append("ON "																							);
+		sb.append(		"options.option_category_name = option_categories.option_category_name "				);
+		sb.append("AND "																						);
+		sb.append(		"options.option_category_increment_id = option_categories.option_category_increment_id ");
+		sb.append("WHERE "																						);
+		sb.append(		"items.item_id = ?;"																	);
 
-		//商品のオプションの詳細を取得するSQL
-		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT ");
-		sql.append(		"group_concat(option_categories.option_category_value separator ',') ");
-		sql.append("FROM ");
-		sql.append(		"items ");
-		sql.append("INNER JOIN ");
-		sql.append(		"`options` ");
-		sql.append("ON ");
-		sql.append(		"items.item_id = `options`.item_id ");
-		sql.append("INNER JOIN ");
-		sql.append(		"option_categories ");
-		sql.append("ON ");
-		sql.append(		"options.option_category_name  = option_categories.option_category_name ");
-		sql.append("AND ");
-		sql.append(		"options.option_category_increment_id  = option_categories.option_category_increment_id ");
-		sql.append("WHERE ");
-		//パラメータをここで使う
-		sql.append(		"items.item_id = ?");
-		//sqlを文字列化
-		final String SELECT_ITEMDETAILOPTION_SQL = sql.toString();
+		String sql = sb.toString();
 
-		//詳細オプション情報を取得したい商品のIDをリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
-		params.add(itemBean.getItemId());
 
-		//オプション情報を保持するitembeanをnullで初期化
-		ItemBean ib = null;
-
-		//データベース接続
+		ItemBean ib = new ItemBean();
 		try(Connection conn = DatabaseConnection.getConnection();){
-			//商品詳細オプションを取得する
-			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEMDETAILOPTION_SQL, params)){
+			try(ResultSet rs = GeneralDao.executeQuery(conn, sql, params)){
 
+				if(rs.next()){
+		            ib.setItemCategoryName(rs.getString("item_category_name"));
+		            ib.setItemName(rs.getString("item_name"));
+		            ib.setItemDescription(rs.getString("item_description"));
+		            ib.setItemPrice(rs.getInt("price"));
+		            ib.setItemStock(rs.getInt("stock"));
+		            ib.setDeleted(rs.getBoolean("item_delete_flg"));
+		            ib.setImageFileName(rs.getString("file_name"));
+		            ib.setItemFirstOptionName(rs.getString("option_category_name"));
+		            ib.setItemFirstOptionValue(rs.getString("option_category_value"));
+		            ib.setItemFirstOptionIncrementId(rs.getInt("option_category_increment_id"));
+				}
+				//2個目のオプション（２列目）があれば、そちらも登録
 				while(rs.next()) {
-					//商品詳細オプションを保持するitemBeanをnew
-					ib = new ItemBean();
-					ib.setItemFirstOptionValue(rs.getString("group_concat(option_categories.option_category_value separator ',')"));
+					ib.setItemSecondOptionName(rs.getString("option_category_name"));
+		            ib.setItemSecondOptionValue(rs.getString("option_category_value"));
+		            ib.setItemSecondOptionIncrementId(rs.getInt("option_category_increment_id"));
 				}
 
 			}catch(SQLException e) {
@@ -64,6 +69,7 @@ public class SelectItemAllDetailFromItems {
 			e.printStackTrace();
 			return null;
 		}
+
 		//商品詳細オプションを保持したitemBeanを返す
 		return ib;
 	}
