@@ -87,7 +87,7 @@ public class Item {
 	public static void updateItemStock(PurchaseBean purchaseBean) {
 		UpdateItemStockInItems.updateItemStockInItems(purchaseBean);
 	}
-	
+
 	//商品を削除する（論理削除）
 	public static void deleteItem(ItemBean itemBean){
 		DeleteItemFromItems.deleteItemFromItems(itemBean);
