@@ -8,6 +8,7 @@ import bean.PurchaseBean;
 import jakarta.servlet.http.Part;
 import model.items.itemsDelete.DeleteItemFromItems;
 import model.items.itemsInsert.InsertNewItemToItems;
+import model.items.itemsSelect.SelectItemAllDetailFromItems;
 import model.items.itemsSelect.SelectItemDetailFromItems;
 import model.items.itemsSelect.SelectItemDetailOptionFromItems;
 import model.items.itemsSelect.SelectItemImageListFromItems;
@@ -56,7 +57,12 @@ public class Item {
 	public static ItemBean getItemDetailOption(ItemBean itemBean) {
 		return SelectItemDetailOptionFromItems.selectItemDetailOptionFromItems(itemBean);
 	}
-	
+
+	//商品がもつ全ての情報を取得する
+	public static ItemBean getItemAllDetail(ItemBean itemBean) {
+		return SelectItemAllDetailFromItems.selectItemAllDetailFromItems(itemBean);
+	}
+
 	//商品の画像一覧を取得する
 	public static ArrayList<ItemBean> getItemImageList(ItemBean itemBean) {
 		return SelectItemImageListFromItems.selectItemImageListFromItems(itemBean);
@@ -87,7 +93,7 @@ public class Item {
 		DeleteItemFromItems.deleteItemFromItems(itemBean);
 	};
 
-	
+
 	//商品画像をドキュメント内に登録する
 	public static void registerNewImage(Part part,String fileName){
 		// 取得した値を格納するArrayList
