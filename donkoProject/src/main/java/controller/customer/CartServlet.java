@@ -71,11 +71,8 @@ public class CartServlet extends HttpServlet {
 		cb.setQuantity(quantity);
 		
 		Cart.updateItemQuantityInCart(cb);
-		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
-		request.setAttribute("cartList", cartList);
 		
-		String view = "/WEB-INF/views/customer/cart.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		response.sendRedirect("cart");
 	}
 
 }
