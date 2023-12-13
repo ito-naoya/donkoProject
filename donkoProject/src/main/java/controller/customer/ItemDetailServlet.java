@@ -65,6 +65,14 @@ public class ItemDetailServlet extends HttpServlet {
 		
 		Cart.addItemToCart(cartBean);
 		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
+		
+		cartList.forEach(cb -> {
+			ItemBean ib = new ItemBean();
+			ib.setItemId(cb.getItemId());
+			ItemBean itemOptionDetail =  Item.getItemDetailOption(ib);
+			cb.setItemOptionDetail(itemOptionDetail.getItemFirstOptionValue());
+		});
+		
 		request.setAttribute("cartList", cartList);
 		
 		String view = "/WEB-INF/views/customer/cart.jsp";
