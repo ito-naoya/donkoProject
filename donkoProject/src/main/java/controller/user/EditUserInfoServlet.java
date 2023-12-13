@@ -2,6 +2,7 @@ package controller.user;
 
 import java.io.IOException;
 
+import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,11 +18,20 @@ public class EditUserInfoServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// TODO:テストコードです。最終的にはセッションから取得してくる予定
+		CustomerUser customerUser = new CustomerUser();
+		customerUser.setUserId(6);
+		
+		// ユーザー情報取得
+		CustomerUser users = CustomerUser.getUserDetail(customerUser);
+		request.setAttribute("users", users);
+		
+		String view = "/WEB-INF/views/user/editUserInfo.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
+		
 	}
-
 }
