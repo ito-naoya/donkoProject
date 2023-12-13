@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.ItemBean;
+import bean.PurchaseBean;
 import jakarta.servlet.http.Part;
 import model.items.itemsDelete.DeleteItemFromItems;
 import model.items.itemsInsert.InsertNewItemToItems;
@@ -17,6 +18,7 @@ import model.items.itemsSelect.SelectItemListWithoutDuplicate;
 import model.items.itemsSelect.SelectItemNameListFromItemsByCategory;
 import model.items.itemsSelect.SelectItemOptionListFromItems;
 import model.items.itemsUpdate.UpdateItemInfoInItems;
+import model.items.itemsUpdate.UpdateItemStockInItems;
 
 public class Item {
 
@@ -75,6 +77,11 @@ public class Item {
 		UpdateItemInfoInItems.updateItemInfoInItems(itemBean);
 	};
 
+	//商品の在庫数を更新する
+	public static void updateItemStock(PurchaseBean purchaseBean) {
+		UpdateItemStockInItems.updateItemStockInItems(purchaseBean);
+	}
+	
 	//商品を削除する（論理削除）
 	public static void deleteItem(ItemBean itemBean){
 		DeleteItemFromItems.deleteItemFromItems(itemBean);
