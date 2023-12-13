@@ -49,12 +49,14 @@ public class UpdateItemInfoInItems {
         ArrayList<Object> params2 = new ArrayList<Object>();
         params2.add(itemBean.getItemFirstOptionName());
         params2.add(itemBean.getItemFirstOptionIncrementId());
+        params2.add(itemBean.getItemId());
 
         //セレクトボックスが2つの時
         ArrayList<Object> params3 = new ArrayList<Object>();
         if(selectBoxCount == 2) {
             params3.add(itemBean.getItemSecondOptionName());
             params3.add(itemBean.getItemSecondOptionIncrementId());
+            params3.add(itemBean.getItemId());
         }
 
         try (Connection conn = DatabaseConnection.getConnection()) {

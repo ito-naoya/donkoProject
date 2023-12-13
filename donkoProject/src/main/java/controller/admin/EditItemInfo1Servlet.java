@@ -40,6 +40,7 @@ public class EditItemInfo1Servlet extends HttpServlet {
 		request.setAttribute("errorMessage", "");
 
 		//商品詳細を取得
+
 		ItemBean editItem = Item.getItemAllDetail(item);
 		request.setAttribute("item", editItem);
 		String view = "/WEB-INF/views/admin/editItemInfo1.jsp";
@@ -53,6 +54,7 @@ public class EditItemInfo1Servlet extends HttpServlet {
 
 		//TODO:セッション管理
 		//カテゴリー、商品名、商品説明、金額、在庫数を取得
+		Integer itemId = Integer.parseInt(request.getParameter("itemId"));
 		String itemCategoryName = request.getParameter("itemCategoryName");
 		String itemName = request.getParameter("itemName");
 		String itemDescription = request.getParameter("itemDescription");
@@ -69,7 +71,8 @@ public class EditItemInfo1Servlet extends HttpServlet {
 			//取得情報の不備があれば、再度入力画面に戻る
 			response.sendRedirect("registItem1");
 		} else {
-			//オプション属性をセット
+			//オプション属性をセット(null値チェックどこでしようか考え中）
+			updateItem.setItemId(itemId);
 			updateItem.setImageFileName(fileName);
 			updateItem.setItemFirstOptionIncrementId(firstOptionId);
 			updateItem.setItemSecondOptionIncrementId(secondOptionId);

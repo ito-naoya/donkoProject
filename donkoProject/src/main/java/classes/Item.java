@@ -1,5 +1,6 @@
 package classes;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -79,8 +80,8 @@ public class Item {
 	};
 
 	//商品の情報を更新する
-	public static void updateItemInfo(ItemBean itemBean){
-		UpdateItemInfoInItems.updateItemInfoInItems(itemBean);
+	public static void updateItemInfo(ItemBean itemBean,  int selectBoxCount){
+		UpdateItemInfoInItems.updateItemInfoInItems(itemBean, selectBoxCount);
 	};
 
 	//商品の在庫数を更新する
@@ -95,9 +96,9 @@ public class Item {
 
 
 	//商品画像をドキュメント内に登録する
-	public static void registerNewImage(Part part,String fileName){
+	public static void registerNewImage(Part part,String fileName, String oldFileName){
 		// 取得した値を格納するArrayList
-		if(part != null && !fileName.isEmpty()) {
+		if(part != null && oldFileName == null) {
 			try {
 			    // フルパスじゃないと上手く読み込まれないみたいなので、自分のファイルパスに適宜変更してください。
 			    String filePath = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/" + fileName + ".jpg";
@@ -106,6 +107,12 @@ public class Item {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		} else if (part == null && !oldFileName.equals(oldFileName)) {
+	        // ファイルをリネーム
+	        File oldFile = new File("/path/to/your/images/directory/" + oldFileName + ".jpg");
+	        File newFile = new File("/path/to/your/images/directory/" + fileName + ".jpg");
+
+	        oldFile.renameTo(newFile);
 		}
 	};
 

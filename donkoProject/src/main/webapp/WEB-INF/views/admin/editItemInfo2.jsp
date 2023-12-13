@@ -65,11 +65,13 @@
 						<br>
 					<!-- 　フォーム入力 -->
 					<form action="editItemInfo2"  id="registItem2"  method="post" enctype="multipart/form-data">
+					    <input type="hidden" name="itemId" value="<%= item.getItemId() %>">
 					    <input type="hidden" name="itemCategoryName" value="<%= item.getItemCategoryName() %>">
 					    <input type="hidden" name="itemName" value="<%= item.getItemName() %>">
 					    <input type="hidden" name="itemDescription" value="<%= item.getItemDescription() %>">
 					    <input type="hidden" name="itemPrice" value="<%= item.getItemPrice() %>">
 					    <input type="hidden" name="itemStock" value="<%= item.getItemStock() %>">
+					    <input type="hidden" name="itemImgFileName" value="<%= item.getImageFileName() %>">
 					    <br>
 
 						<label for="default-text" class="form-label">現在登録済みの写真</label>
