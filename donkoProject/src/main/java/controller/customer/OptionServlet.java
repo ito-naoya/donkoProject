@@ -57,9 +57,9 @@ public class OptionServlet extends HttpServlet {
 	}
 	
 	public static String checkedOption(String[] checkedOption) {
-		String str = "'" + checkedOption[0] + "'";
+		String str = "[ " + checkedOption[0] + " ]";
 	    for (int index = 1; index < checkedOption.length; index++) {
-	        str += "," + "'" + checkedOption[index] + "'";
+	        str += ", " + "[ " + checkedOption[index] + " ]";
 	    }
 	    return str;
 	}

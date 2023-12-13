@@ -12,14 +12,17 @@ import dao.GeneralDao;
 public class SelectItemListFromItemsByOption {
 	//商品をカテゴリとオプション指定して取得する
 	public static ArrayList<ItemBean> selectItemListFromItemsByOption(String[] checkedOption, String categoryName){
-		final String SELECT_OPTION_ITEMLIST_SQL = "SELECT items.item_id, items.item_name, items.file_name, option_categories.option_category_value "
+		final String SELECT_OPTION_ITEMLIST_SQL = "SELECT items.item_id, items.item_name, items.file_name "
 				+ "FROM items "
 				+ "INNER JOIN options ON items.item_id = options.item_id "
-				+ "INNER JOIN option_categories ON options.option_category_name = option_categories.option_category_name "
-				+ "AND items.item_category_name = ? "
+				+ "INNER JOIN option_categories ON "
+				+ "options.option_category_name = option_categories.option_category_name AND "
+				+ "options.option_category_increment_id = option_categories.option_category_increment_id "
 				+ "WHERE option_categories.option_category_value IN (" + checkedOption(checkedOption) + ")";
 		ArrayList<Object> paramLists = new ArrayList<>() {{
-			add(categoryName);
+			// IN句のaddの処理をfor文で書く
+			// ?で書かないといけないので。
+//			add(categoryName);
 		}};
 		ArrayList<ItemBean> OptionList = new ArrayList<>();
 		try (Connection conn = DatabaseConnection.getConnection()) {
