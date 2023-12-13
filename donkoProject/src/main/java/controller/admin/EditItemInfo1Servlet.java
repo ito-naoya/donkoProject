@@ -74,14 +74,14 @@ public class EditItemInfo1Servlet extends HttpServlet {
 			updateItem.setItemFirstOptionIncrementId(firstOptionId);
 			updateItem.setItemSecondOptionIncrementId(secondOptionId);
 			//取得した商品情報をセット
-			request.setAttribute("updateItem", updateItem);
+			request.setAttribute("item", updateItem);
 
 			//カテゴリー名からオプションを取得<衣類：色、衣類：衣類サイズ>
 			ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = new ArrayList<ArrayList<OptionCategoryBean>>();
 			ArrayList<ItemCategoryBean> itemCategoryList = ItemCategory.getItemOptionCategoryNameListByCategory(updateItem);
 			if(itemCategoryList == null) {
 				//取得情報の不備があれば、再度入力画面に戻る
-				response.sendRedirect("registItem1");
+				response.sendRedirect("editItem1");
 			} else {
 
 				//各オプションが持っているオプションの数分for文を回す
@@ -92,14 +92,14 @@ public class EditItemInfo1Servlet extends HttpServlet {
 				    ArrayList<OptionCategoryBean> options = OptionCategory.getOptionCategoryListByCategory(itemCategory);
 				    if(options == null) {
 						//取得情報の不備があれば、再度入力画面に戻る
-						response.sendRedirect("regisatItem1");
+						response.sendRedirect("editItem1");
 					} else {
 						//詳細の配列を追加
 						itemCategoryListAll.add(options);
 					}
 				}
 				request.setAttribute("itemCategoryListAll", itemCategoryListAll);
-				String view = "/WEB-INF/views/admin/registItem2.jsp";
+				String view = "/WEB-INF/views/admin/editItemInfo2.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 				dispatcher.forward(request, response);
 				//TODOチャレンジ；商品名から既存の登録済みオプションと写真情報を取得してjsp上で選択不可にする
