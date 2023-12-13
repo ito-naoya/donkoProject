@@ -28,6 +28,7 @@
 						<%
 						//渡されたidに基づく商品詳細を取得
 						ItemBean item = (ItemBean) request.getAttribute("item");
+
 						//カテゴリのデフォルト情報を取得
 						String defaultItemCategoryName = item.getItemCategoryName();
 						String errorMessage = (String) request.getAttribute("errorMessage");
@@ -62,7 +63,7 @@
 							    <input type="number" class="form-control" id="stock" name="stock" min="1" max="100" value="<%= item.getItemStock() %>" required style="text-align: center">
 						 	</div>
 						 	<br>
-						 	<input type="hidden" name="itemId" value="<%= item.getItemId() %>">
+						 	<input type="text" name="itemId" value="<%= item.getItemId() %>">
 						 	<input type="hidden" name="itemCategoryName" value="<%= item.getItemCategoryName() %>">
 						 	<input type="hidden" name="fileName" value="<%= item.getImageFileName() %>">
 						 	<input type="hidden" name="firstOptionId" value="<%= item.getItemFirstOptionIncrementId() %>">

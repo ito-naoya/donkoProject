@@ -40,6 +40,7 @@ public class SelectItemAllDetailFromItems {
 			try(ResultSet rs = GeneralDao.executeQuery(conn, sql, params)){
 
 				if(rs.next()){
+					ib.setItemId(rs.getInt("item_id"));
 		            ib.setItemCategoryName(rs.getString("item_category_name"));
 		            ib.setItemName(rs.getString("item_name"));
 		            ib.setItemDescription(rs.getString("item_description"));

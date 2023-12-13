@@ -32,6 +32,7 @@ public class EditItemInfo2Servlet extends HttpServlet {
 		throws ServletException, IOException {
 
 	//regist1で既に取得済みの情報を再度獲得
+	String id = request.getParameter("itemId");
 	Integer itemId = Integer.parseInt(request.getParameter("itemId"));
 	String itemCategoryName = request.getParameter("itemCategoryName");
 	String itemName = request.getParameter("itemName");
