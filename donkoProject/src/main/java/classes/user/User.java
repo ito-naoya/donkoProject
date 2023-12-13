@@ -33,7 +33,7 @@ public class User {
 	};
 
 	//ユーザー情報を更新する
-	public void updateUserInfo(CustomerUser customerUser) {
+	public static void updateUserInfo(CustomerUser customerUser) {
 		UpdateUserInfoInUsers.updateUserInfoInUsers(customerUser);
 	};
 
