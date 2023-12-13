@@ -20,8 +20,8 @@ import model.items.itemsUpdate.UpdateItemInfoInItems;
 public class Item {
 
 	//商品をカテゴリとオプション指定して取得する
-	public static ArrayList<ItemBean> getItemListByOption(ItemBean itemBean){
-		return SelectItemListFromItemsByOption.selectItemListFromItemsByOption(itemBean);
+	public static ArrayList<ItemBean> getItemListByOption(String[] checkedOption, String categoryName){
+		return SelectItemListFromItemsByOption.selectItemListFromItemsByOption(checkedOption, categoryName);
 	};
 
 	//登録されている商品名を重複なしで取得する
