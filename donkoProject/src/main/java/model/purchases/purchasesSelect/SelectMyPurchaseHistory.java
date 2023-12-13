@@ -43,7 +43,7 @@ public class SelectMyPurchaseHistory {
 			
 			// ？の値を渡す
 			ArrayList<Object> params = new ArrayList<Object>();
-			params.add(CustomerUser.getUserLoginId());
+			params.add(CustomerUser.getUserId());
 			
 			ArrayList<PurchaseBean> purchaseList = new ArrayList<PurchaseBean>();
 			PurchaseBean purchaseBean;
