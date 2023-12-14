@@ -94,10 +94,6 @@ public class Item {
 		DeleteItemFromItems.deleteItemFromItems(itemBean);
 	};
 	//商品画像をドキュメント内に登録する
-		//写真がある、fileNameがあってoldFileNameがない(新規登録)
-		//写真がある、fileNameとoldFileNameがある(写真の差し替え)
-		//写真がない、fileNameとoldFileNameがある(名前の差し替え)
-		//写真がない、fileNameがない
 	public static void registerNewImage(Part part,String fileName, String oldFileName){
 		if(part != null && !fileName.isEmpty()) {
 			try {
@@ -110,24 +106,38 @@ public class Item {
 			}
 		}
 	};
-	public static void renameNewImage(Part part,String fileName, String oldFileName){
-		if(part != null && !fileName.isEmpty()) {
-			try {
-				// フルパスじゃないと上手く読み込まれないみたいなので、自分のファイルパスに適宜変更してください。
-				String filePath = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/" + fileName + ".jpg";
-				// ファイルを保存
-				part.write(filePath);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else if (part == null && !fileName.isEmpty()) {
-			// ファイルをリネーム
-			File oldFile = new File("/path/to/your/images/directory/" + oldFileName + ".jpg");
-			File newFile = new File("/path/to/your/images/directory/" + fileName + ".jpg");
 
-			oldFile.renameTo(newFile);
-		}
-	};
+	public static void renameNewImage(Part part, String fileName, String oldFileName) {
+	    String imagesDirectory = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/";
+	    // 写真がある場合
+	    if (part != null) {
+	        // 古いファイルを削除（名前が異なる場合）
+	        if (!fileName.equals(oldFileName)) {
+	            File oldFile = new File(imagesDirectory + oldFileName + ".jpg");
+	            if (oldFile.exists()) {
+	                oldFile.delete();
+	            }
+	        }
+	        // 新しいファイルを保存
+	        String newFilePath = imagesDirectory + fileName + ".jpg";
+	        try {
+	            part.write(newFilePath);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    // 写真がないが、名前が異なる場合
+	    else if (!fileName.equals(oldFileName)) {
+	        File oldFile = new File(imagesDirectory + oldFileName + ".jpg");
+	        File newFile = new File(imagesDirectory + fileName + ".jpg");
+	        // ファイル名を変更
+	        if (oldFile.exists()) {
+	            oldFile.renameTo(newFile);
+	        }
+	    }
+	    // その他の場合は何もしない
+	}
+
 
 	//商品登録画面から取得した値のnull値及び文字数をチェックして、ItemBeanにセット
 		public static ItemBean checkRegistItemDetail(String itemCategoryName, String itemName, String itemDescription, String price, String stock) {

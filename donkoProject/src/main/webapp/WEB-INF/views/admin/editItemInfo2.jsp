@@ -71,7 +71,7 @@
 					    <input type="hidden" name="itemDescription" value="<%= item.getItemDescription() %>">
 					    <input type="hidden" name="itemPrice" value="<%= item.getItemPrice() %>">
 					    <input type="hidden" name="itemStock" value="<%= item.getItemStock() %>">
-					    <input type="hidden" name="itemImgFileName" value="<%= item.getImageFileName() %>">
+					    <input type="text" name="itemImgFileName" value="<%= item.getImageFileName() %>">
 					    <br>
 
 						<label for="default-text" class="form-label">現在登録済みの写真</label>
@@ -84,6 +84,7 @@
 						    <label for="formFile" class="form-label">商品写真を変更</label>
 						    <input type="file" class="form-control" id="formFile" name="img" accept=".jpg" onchange="previewImage(event);" />
 						</div>
+						
 					    <br>
 					    <div class="mb-3">
 						    <!-- categoryListをSeleectで選択。（TODOチャレンジ:色に関して、既存の商品名で登録済みのものは表示しない -->
