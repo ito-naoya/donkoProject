@@ -21,26 +21,26 @@ public class SelectItemListFromItemsByOption {
 				+ "WHERE items.item_category_name = ? "
 				+ "AND option_categories.option_category_value IN (" + questionNum(checkedOption) + ")";
 
-		ArrayList<Object> paramLists = new ArrayList<>() {{
+		ArrayList<Object> paramList = new ArrayList<>() {{
 			add(categoryName);
-			for (int index = 0; index < checkedOption.length; index++) {
-		        add(checkedOption[index]);
+			for (int i = 0; i < checkedOption.length; i++) {
+		        add(checkedOption[i]);
 		    }
 		}};
-		ArrayList<ItemBean> OptionList = new ArrayList<>();
+		ArrayList<ItemBean> optionList = new ArrayList<>();
 		try (Connection conn = DatabaseConnection.getConnection()) {
-			try (ResultSet result = GeneralDao.executeQuery(conn, SELECT_OPTION_ITEMLIST_SQL, paramLists)) {
+			try (ResultSet result = GeneralDao.executeQuery(conn, SELECT_OPTION_ITEMLIST_SQL, paramList)) {
 				
 				// 1回目
 				if(result.next()){ 
-					ItemBean IBeans = new ItemBean();
+					ItemBean itemBean = new ItemBean();
 					int itemId = result.getInt("item_id");
 					String itemName = result.getString("item_name");
 					String imageFileName = result.getString("file_name");
-					IBeans.setItemId(itemId);
-					IBeans.setItemName(itemName);
-					IBeans.setImageFileName(imageFileName);
-					OptionList.add(IBeans);
+					itemBean.setItemId(itemId);
+					itemBean.setItemName(itemName);
+					itemBean.setImageFileName(imageFileName);
+					optionList.add(itemBean);
 				}
 				
 				// 2回目以降
@@ -50,12 +50,14 @@ public class SelectItemListFromItemsByOption {
 					String itemName = result.getString("item_name");
 					String imageFileName = result.getString("file_name");
 					
-					boolean isNotExist = isNotExist(OptionList, imageFileName);
+					// 画像名が一致するかを判定
+					boolean isNotExist = isNotExist(optionList, imageFileName);
+					// 一致しない場合は配列に格納
 					if (isNotExist == true) {
 						IBeans.setItemId(itemId);
 						IBeans.setItemName(itemName);
 						IBeans.setImageFileName(imageFileName);
-						OptionList.add(IBeans);
+						optionList.add(IBeans);
 					}
 				}
 				
@@ -68,10 +70,12 @@ public class SelectItemListFromItemsByOption {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return OptionList;
+		return optionList;
 	};
 	
+	// SQL文の?を検索キーワードの数だけ用意する
 	private static String questionNum(String[] checkedOption) {
 		String str = "?";
 	    for (int index = 1; index < checkedOption.length; index++) {
@@ -80,14 +84,16 @@ public class SelectItemListFromItemsByOption {
 	    return str;
 	}
 	
-	private static boolean isNotExist(ArrayList<ItemBean> OptionList, String imageFileName) {
+	// 取得したデータを格納する配列の中に同じ画像名がないかを判定
+	private static boolean isNotExist(ArrayList<ItemBean> optionList, String imageFileName) {
 		boolean isNotExist = false;
-		for (int i = 0; i < OptionList.size(); i++) {
+		for (int i = 0; i < optionList.size(); i++) {
 			// i番目のファイル名の取得
-			ItemBean IB = OptionList.get(i);
-			String FN_num_i = IB.getImageFileName();
+			ItemBean itembean = optionList.get(i);
+			String fileNameInList = itembean.getImageFileName();
 			
-			if (!imageFileName.equals(FN_num_i)) {
+			// ファイル名が一致するかを判定
+			if (!imageFileName.equals(fileNameInList)) {
 				isNotExist = true;
 			} else {
 				isNotExist = false;
