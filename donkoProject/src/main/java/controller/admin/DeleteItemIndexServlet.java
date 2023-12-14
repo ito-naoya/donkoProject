@@ -1,7 +1,10 @@
 package controller.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import bean.ItemBean;
+import classes.Item;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,10 +18,15 @@ public class DeleteItemIndexServlet extends HttpServlet {
 	public DeleteItemIndexServlet() {
 		super();
 	}
-
+//カテゴリーなし
+//カテゴリー
+//以下テストコード
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String itemCategoryName = "衣類";
+		int flg = 1;
+		ArrayList<ItemBean> itemList = Item.getItemAndOptionListByDelFlg(flg,itemCategoryName);
+		request.setAttribute("item", itemList);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
