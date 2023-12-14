@@ -50,11 +50,10 @@ public class PurchaseConfirmServlet extends HttpServlet {
 			cb.setItemOptionDetail(itemOptionDetail.getItemFirstOptionValue());
 		});
 		
-		ArrayList<Integer> priceList = new ArrayList<Integer>();
-		cartList.forEach(cb -> {
-			priceList.add(cb.getQuantity() * cb.getItemPrice());		
-		});
-		Integer totalPrice = priceList.stream().mapToInt( i -> i ).sum();
+		Integer totalPrice= cartList.stream()
+				.map(cb -> cb.getItemPrice() * cb.getQuantity())
+				.mapToInt( i -> i )
+				.sum();
 		
 		request.setAttribute("shippingAddress", shippingAddress);
 		request.setAttribute("cartList", cartList);
