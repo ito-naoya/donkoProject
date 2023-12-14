@@ -20,7 +20,9 @@ public class CreateShippingAddressServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// 配送先登録画面
+		String view = "/WEB-INF/views/customer/shippingAddressCreate.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	
