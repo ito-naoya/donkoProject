@@ -41,20 +41,23 @@ public class SelectItemAndOptionListByDelFlg {
 		sb.append("ORDER BY "																					);
 		sb.append(    "items.item_id;"																			);
 
-		String sql = sb.toString();
+		final String SELECT_ITEM_AND_OPTION_LIST_DELFLG_SQL = sb.toString();
 
+		//削除フラグを挿入（0なら掲載中、1なら削除済み)
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(itemDeleteFlg);
+
+		//カテゴリ名で指定して商品リストを取得したい）の場合
 		if(!itemCategoryName.isEmpty()) {
 			params.add(itemCategoryName);
 		}
 		ArrayList<ItemBean> itemBeanList = new ArrayList<ItemBean>();
 
 		try(Connection conn = DatabaseConnection.getConnection();){
-			try(ResultSet rs = GeneralDao.executeQuery(conn, sql, params)){
+			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEM_AND_OPTION_LIST_DELFLG_SQL, params)){
 
 				ItemBean currentIb = null;
-	            int lastItemId = -1; // item_idがint型であるため、初期値として無効な値を設定
+	            int lastItemId = -1; //item_idがint型であるため、初期値として無効な値を設定
 
 	            while(rs.next()) {
 	                int currentItemId = rs.getInt("item_id");

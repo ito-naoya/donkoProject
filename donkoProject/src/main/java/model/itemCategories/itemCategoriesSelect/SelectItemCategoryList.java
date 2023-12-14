@@ -15,7 +15,7 @@ public class SelectItemCategoryList {
 
 	//全ての商品カテゴリを取得する
 	public static ArrayList<ItemCategoryBean> selectItemCategoryList() {
-			//全ての商品カテゴリの一覧を取得するSQL(衣服、靴、本・・・）
+			//全ての商品カテゴリの一覧を取得するSQL[衣服]、[靴]、[本]・・・）
 			StringBuilder sb = new StringBuilder();
 
 				sb.append("SELECT DISTINCT "			);
@@ -23,10 +23,11 @@ public class SelectItemCategoryList {
 				sb.append("FROM "						);
 				sb.append(	"item_categories "			);
 
-				String SQL = sb.toString();
+				final String SQL = sb.toString();
 
 				ArrayList<ItemCategoryBean> itemCategories = new ArrayList<>();
 				List<Object> params = Arrays.asList();
+				//SQL接続
 				try (Connection conn = DatabaseConnection.getConnection()){
 					try(ResultSet rs = GeneralDao.executeQuery(conn, SQL, params)) {
 
