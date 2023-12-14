@@ -17,7 +17,7 @@ public class AdminTopPageServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String view = "/WEB-INF/views/customer/categoryIndex.jsp";
+		String view = "/WEB-INF/views/admin/adminTopPage.jsp";
         request.getRequestDispatcher(view).forward(request, response);
 	}
 }
