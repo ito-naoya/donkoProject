@@ -24,24 +24,18 @@ public class OptionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] checkedOption = request.getParameterValues("option");
 		String categoryName = request.getParameter("categoryName");
-		request.setAttribute("categoryName", categoryName);
 		
+		// オプション選択した一覧
+		ArrayList<ItemBean> OCList = Item.getItemListByOption(checkedOption, categoryName);
 		// オプション選択の取得
 		ItemBean itemBean = new ItemBean();
 		itemBean.setItemCategoryName(categoryName);
 		ArrayList<ArrayList<OptionCategoryBean>> ONValueListALL = OptionCategory.getOptionCategoryListAllByCategory(itemBean);
-		request.setAttribute("ONValueListALL", ONValueListALL);
 		
-		if (checkedOption != null && checkedOption.length > 0) {
-			// オプション選択した一覧
-			ArrayList<ItemBean> OCList = Item.getItemListByOption(checkedOption, categoryName);
-			request.setAttribute("itemList", OCList);
-			request.setAttribute("message", "検索キーワード : " + checkedOption(checkedOption));
-		} else {
-			// カテゴリー一覧
-			ArrayList<ItemBean> itemList =Item.getItemListByCategory(itemBean);
-			request.setAttribute("itemList", itemList);
-		}
+		request.setAttribute("categoryName", categoryName);
+		request.setAttribute("ONValueListALL", ONValueListALL);
+		request.setAttribute("itemList", OCList);
+		request.setAttribute("message", "検索キーワード : " + checkedOption(checkedOption));
 		
 		String view = "/WEB-INF/views/customer/categoryIndex.jsp";
         request.getRequestDispatcher(view).forward(request, response);
