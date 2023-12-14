@@ -27,7 +27,7 @@ public class EditItemInfo2Servlet extends HttpServlet {
 //
 //response.getWriter().append("Served at: ").append(request.getContextPath());
 //}
-
+	//リファクタリングは改めて・・・
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 

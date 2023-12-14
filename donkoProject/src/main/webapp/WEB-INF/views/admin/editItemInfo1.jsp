@@ -42,6 +42,7 @@
 						%>
 						<div id="error-message-container" class="alert alert-danger d-none"></div>
 						<!-- ここから入力フォーム  -->
+						<!-- リファクタリングは改めて・・・ -->
 						<form action="editItemInfo1" id="registItem1" method="post">
 							<div class="mb-3">
 								<label for="itemCategory" class="form-label">カテゴリ：<%= item.getItemCategoryName() %></label>

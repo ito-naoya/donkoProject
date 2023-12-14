@@ -48,7 +48,7 @@ public class EditItemInfo1Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-
+	//リファクタリングは改めて・・・
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

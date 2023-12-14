@@ -24,6 +24,7 @@
 					<br>
 					<h2>商品情報登録</h2>
 					<br>
+					<!-- リファクタリングは改めて・・・ -->
 					<!-- 　枠の中でnewItemを展開 -->
 						<%
 						ItemBean item = (ItemBean) request.getAttribute("item");
@@ -84,7 +85,7 @@
 						    <label for="formFile" class="form-label">商品写真を変更</label>
 						    <input type="file" class="form-control" id="formFile" name="img" accept=".jpg" onchange="previewImage(event);" />
 						</div>
-						
+
 					    <br>
 					    <div class="mb-3">
 						    <!-- categoryListをSeleectで選択。（TODOチャレンジ:色に関して、既存の商品名で登録済みのものは表示しない -->
