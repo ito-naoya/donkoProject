@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.ItemBean;
-import bean.ItemCategoryBean;
 import bean.OptionCategoryBean;
 import classes.Item;
-import classes.ItemCategory;
 import classes.OptionCategory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,19 +28,8 @@ public class CategoryServlet extends HttpServlet {
 		ItemBean itemBean = new ItemBean();
 		itemBean.setItemCategoryName(categoryName);
 		
-		// 以下共通
-		// 取得した値を格納するArrayList
-		ArrayList<ArrayList<OptionCategoryBean>> ONValueListALL = new ArrayList<ArrayList<OptionCategoryBean>>();
-		// 引数 : 衣類 => 配列の中身 : 衣類サイズ, 色
-		ArrayList<ItemCategoryBean> CNList = ItemCategory.getItemOptionCategoryNameListByCategory(itemBean);
-		for (int i = 0; i < CNList.size(); i++) {
-			ItemCategoryBean OCName = CNList.get(i);
-			// 引数 : 衣類サイズ => 配列の中身 : S, M, L
-			ArrayList<OptionCategoryBean> ONValueList = OptionCategory.getOptionCategoryListByCategory(OCName);
-			ONValueListALL.add(ONValueList);
-		}
-		// ここまで
-		
+		// オプション選択の取得
+		ArrayList<ArrayList<OptionCategoryBean>> ONValueListALL = OptionCategory.getOptionCategoryListAllByCategory(itemBean);
 		// カテゴリー一覧の取得
 		ArrayList<ItemBean> itemList =Item.getItemListByCategory(itemBean);
 		

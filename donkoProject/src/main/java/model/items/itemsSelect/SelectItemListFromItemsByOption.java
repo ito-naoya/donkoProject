@@ -18,11 +18,14 @@ public class SelectItemListFromItemsByOption {
 				+ "INNER JOIN option_categories ON "
 				+ "options.option_category_name = option_categories.option_category_name AND "
 				+ "options.option_category_increment_id = option_categories.option_category_increment_id "
-				+ "WHERE option_categories.option_category_value IN (" + checkedOption(checkedOption) + ")";
+				+ "WHERE option_categories.option_category_value IN (" + checkedOption(checkedOption) + ") "
+				+ "AND items.item_category_name = ?";
+
 		ArrayList<Object> paramLists = new ArrayList<>() {{
-			// IN句のaddの処理をfor文で書く
-			// ?で書かないといけないので。
-//			add(categoryName);
+			for (int index = 0; index < checkedOption.length; index++) {
+		        add(checkedOption[index]);
+		    }
+			add(categoryName);
 		}};
 		ArrayList<ItemBean> OptionList = new ArrayList<>();
 		try (Connection conn = DatabaseConnection.getConnection()) {
@@ -53,9 +56,9 @@ public class SelectItemListFromItemsByOption {
 	};
 	
 	public static String checkedOption(String[] checkedOption) {
-		String str = "'" + checkedOption[0] + "'";
+		String str = "?";
 	    for (int index = 1; index < checkedOption.length; index++) {
-	        str += "," + "'" + checkedOption[index] + "'";
+	        str += ",?";
 	    }
 	    return str;
 	}
