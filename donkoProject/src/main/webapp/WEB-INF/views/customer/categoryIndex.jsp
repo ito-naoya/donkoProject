@@ -24,7 +24,6 @@
 				<% if (message != null) { %>
 				<p class="border ms-4 my-auto py-2 px-3 w-auto" style="display: inline-flex; vertical-align: middle;"><%= message %></p>
 				<% } %>
-				<p class="ms-4 my-auto py-2 px-3 w-auto" style="display: inline-flex; vertical-align: middle;" id="validate_msg" style="color: red;"></p>
 				<div class="col-lg-6 d-flex border ms-auto me-3 p-3" style="width:auto; height: 70px; box-shadow:5px 5px 5px lightgray;">
 					<% 
 					ArrayList<ArrayList<OptionCategoryBean>> ONVListAll = (ArrayList<ArrayList<OptionCategoryBean>>)request.getAttribute("ONValueListALL");
@@ -50,7 +49,7 @@
 					} 
 					%>
 					<input type="hidden" name="categoryName" value="<%= (String)request.getAttribute("categoryName") %>">
-					<button type="submit" class="btn text-nowrap ms-3" style="background-color: #E5CCFF;" onclick="return testCheck()">こだわり検索</button>
+					<button type="submit" class="btn text-nowrap ms-3" style="background-color: #E5CCFF;">こだわり検索</button>
 				</div>
 			</div>
 		</form>
