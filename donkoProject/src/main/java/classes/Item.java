@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.ItemBean;
-import bean.PurchaseBean;
 import jakarta.servlet.http.Part;
 import model.items.itemsDelete.DeleteItemFromItems;
 import model.items.itemsInsert.InsertNewItemToItems;
 import model.items.itemsSelect.SelectItemAllDetailFromItems;
+import model.items.itemsSelect.SelectItemAndOptionListAll;
+import model.items.itemsSelect.SelectItemAndOptionListByDelFlg;
 import model.items.itemsSelect.SelectItemDetailFromItems;
-import model.items.itemsSelect.SelectItemDetailOptionFromItems;
 import model.items.itemsSelect.SelectItemImageListFromItems;
 import model.items.itemsSelect.SelectItemListFromItems;
 import model.items.itemsSelect.SelectItemListFromItemsByCategory;
@@ -20,7 +20,6 @@ import model.items.itemsSelect.SelectItemListWithoutDuplicate;
 import model.items.itemsSelect.SelectItemNameListFromItemsByCategory;
 import model.items.itemsSelect.SelectItemOptionListFromItems;
 import model.items.itemsUpdate.UpdateItemInfoInItems;
-import model.items.itemsUpdate.UpdateItemStockInItems;
 
 public class Item {
 
@@ -45,19 +44,24 @@ public class Item {
 	}
 
 	//商品の一覧を取得する
-	public static ArrayList<ItemBean> getItemList(){
-		return SelectItemListFromItems.selectItemListFromItems();
+		public static ArrayList<ItemBean> getItemList(){
+			return SelectItemListFromItems.selectItemListFromItems();
+		};
+
+	//商品の一覧を取得する(カテゴリ指定も可能)
+	public static ArrayList<ItemBean> getItemAndOptionListAll(String itemCategoryName){
+		return SelectItemAndOptionListAll.selectItemAndOptionListAll(itemCategoryName);
+	};
+
+	//商品の一覧を取り扱い指定込みで取得する(カテゴリ指定も可能)
+	public static ArrayList<ItemBean> getItemAndOptionListByDelFlg(int itemDeleteFlg, String itemCategoryName){
+		return SelectItemAndOptionListByDelFlg.selectItemAndOptionListByDelFlg(itemDeleteFlg, itemCategoryName);
 	};
 
 	//商品の詳細を取得する
 	public static ItemBean getItemDetail(ItemBean itemBean){
 		return SelectItemDetailFromItems.selectItemDetailFromItems(itemBean);
 	};
-
-	//商品の詳細情報（オプションだけ）を取得する
-	public static ItemBean getItemDetailOption(ItemBean itemBean) {
-		return SelectItemDetailOptionFromItems.selectItemDetailOptionFromItems(itemBean);
-	}
 
 	//商品がもつ全ての情報を取得する
 	public static ItemBean getItemAllDetail(ItemBean itemBean) {
@@ -83,11 +87,6 @@ public class Item {
 	public static void updateItemInfo(ItemBean itemBean,  int selectBoxCount){
 		UpdateItemInfoInItems.updateItemInfoInItems(itemBean, selectBoxCount);
 	};
-
-	//商品の在庫数を更新する
-	public static void updateItemStock(PurchaseBean purchaseBean) {
-		UpdateItemStockInItems.updateItemStockInItems(purchaseBean);
-	}
 
 	//商品を削除する（論理削除）
 	public static void deleteItem(ItemBean itemBean){

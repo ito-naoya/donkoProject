@@ -20,6 +20,7 @@ public class DeleteCartServlet extends HttpServlet {
         super();
     }
 
+    //カート内の商品を一つだけ削除する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 //		HttpSession session = request.getSession();
@@ -31,17 +32,21 @@ public class DeleteCartServlet extends HttpServlet {
 		int itemId = Integer.parseInt(request.getParameter("itemId"));
 //		int userId = user.getUserId();
 		
-		//削除したいカート内商品の情報を保持するcartBeanをnew
-		CartBean cartBean = new CartBean();
-		cartBean.setUserId(user.getUserId());
-		cartBean.setItemId(itemId);
+		//削除する商品の情報を保持するcartBeanをnew
+		CartBean cb = new CartBean();
+		//ユーザーIDをcartBeanにセット
+		cb.setUserId(user.getUserId());
+		//商品IDをcartBeanにセット
+		cb.setItemId(itemId);
 		
 		 //対象の商品をカートから削除
-		Cart.deleteItemFromCart(cartBean);
+		Cart.deleteItemFromCart(cb);
 		
+		//カート一覧ページにリダイレクト
 		response.sendRedirect("cart");
 	}
 
+	//カート内の商品をすべて削除する
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 //		HttpSession session = request.getSession();
@@ -54,6 +59,7 @@ public class DeleteCartServlet extends HttpServlet {
 		//カートから全ての商品を削除
 		Cart.deleteAllItemFromCart(user);
 		
+		//カート一覧ページにリダイレクトする
 		response.sendRedirect("cart");
 		
 	}

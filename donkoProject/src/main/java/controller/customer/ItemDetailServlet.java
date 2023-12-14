@@ -8,7 +8,6 @@ import bean.ItemBean;
 import classes.Cart;
 import classes.Item;
 import classes.user.CustomerUser;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,29 +24,31 @@ public class ItemDetailServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		ItemBean itemBean = new ItemBean();
-		itemBean.setItemId( Integer.parseInt(request.getParameter("itemId")));
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
+		
+		//商品IDを保持するitemBeanをnew
+		ItemBean ib = new ItemBean();
+		//商品IDをitemBeanにセットする
+		ib.setItemId(itemId);
 
-		//商品の詳細情報を取得する
-		ItemBean item = Item.getItemDetail(itemBean);
-		//商品の色違い画像を取得する
-		ArrayList<ItemBean> itemImageList = Item.getItemImageList(itemBean);
-		//商品のオプションを取得する
-		ArrayList<ItemBean> itemOptionList = Item.getItemOptionList(itemBean);
-		//商品のオプション詳細を取得する
-		ItemBean itemOptionDetail =  Item.getItemDetailOption(itemBean);
+		//商品IDを元に商品の詳細情報を取得する
+		ItemBean item = Item.getItemDetail(ib);
+		//詳細表示する商品の色違い画像を取得する
+		ArrayList<ItemBean> itemImageList = Item.getItemImageList(ib);
+		//商品の登録されているオプションを全て取得する(衣類：S、M、L)
+		ArrayList<ItemBean> itemOptionList = Item.getItemOptionList(ib);
 		
 		request.setAttribute("item", item);
 		request.setAttribute("itemImageList", itemImageList);
 		request.setAttribute("itemOptionList", itemOptionList);
-		request.setAttribute("itemOptionDetail", itemOptionDetail);
 		
+		//商品詳細ページを返す
 		String view = "/WEB-INF/views/customer/itemDetail.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 //		HttpSession session = request.getSession();
 //		CustomerUser loginedUser = (CustomerUser)session.getAttribute("user");
 		
@@ -60,17 +61,19 @@ public class ItemDetailServlet extends HttpServlet {
 		CustomerUser loginedUser = new CustomerUser();
 		loginedUser.setUserId(2);
 		
-		int itemId = Integer.parseInt(request.getParameter("itemId"));
-		int userId = loginedUser.getUserId();
-		CartBean cartBean = new CartBean();
+		String itemId = request.getParameter("itemId");
 		
-		cartBean.setItemId(itemId);
-		cartBean.setUserId(userId);
+		//商品IDとユーザーIDを保持するcartBeanをnewする
+		CartBean cb = new CartBean();
+		//商品IDをcartBeanにセットする
+		cb.setItemId(Integer.parseInt(itemId));
+		//ログインしているユーザーのIDをcartBeanにセットする
+		cb.setUserId(loginedUser.getUserId());
 		
 		//カートに商品を追加する
-		Cart.addItemToCart(cartBean);
+		Cart.addItemToCart(cb);
 		
+		//カート画面にリダイレクト
 		response.sendRedirect("cart");
 	}
-
 }
