@@ -72,7 +72,7 @@ public class SelectItemListFromItemsByOption {
 		return OptionList;
 	};
 	
-	protected static String questionNum(String[] checkedOption) {
+	private static String questionNum(String[] checkedOption) {
 		String str = "?";
 	    for (int index = 1; index < checkedOption.length; index++) {
 	        str += ",?";
@@ -80,7 +80,7 @@ public class SelectItemListFromItemsByOption {
 	    return str;
 	}
 	
-	protected static boolean isNotExist(ArrayList<ItemBean> OptionList, String imageFileName) {
+	private static boolean isNotExist(ArrayList<ItemBean> OptionList, String imageFileName) {
 		boolean isNotExist = false;
 		for (int i = 0; i < OptionList.size(); i++) {
 			// i番目のファイル名の取得
