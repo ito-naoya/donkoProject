@@ -39,7 +39,7 @@
 				<div class="form-group"
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
 					<input type="text" class="form-control" id="exampleInputUserId"
-						aria-describedby="userId" value="<%=users.getUserLoginId()%>">
+						aria-describedby="userId" name="user_login_id" value="<%=users.getUserLoginId()%>">
 				</div>
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputUserName">ユーザー名</label><br>
@@ -48,7 +48,7 @@
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
 
 					<input type="text" class="form-control" id="exampleInputUserName"
-						aria-describedby="userName" value="<%=users.getUserName()%>">
+						aria-describedby="userName" name="user_name" value="<%=users.getUserName()%>">
 				</div>
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputPassword">パスワード</label><br>
@@ -56,14 +56,14 @@
 				<div class="form-group"
 					style="display: flex; justify-content: center; margin-bottom: 30px;"">
 					<input type="text" class="form-control" id="exampleInputPassword"
-						maxlength="8" value="">
+						maxlength="8" name="password" value="">
 				</div>
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputGender">性別</label><br>
 				</div>
 				<div class="form-group"
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
-					<select class="form-control">
+					<select class="form-control" name="gender">
 						<%
 						String selected = users.getGender();
 						String men = (selected != null && selected.equals("男性") ? "selected" : "");
@@ -79,7 +79,7 @@
 				</div>
 				<div class="form-group"
 					style="display: flex; justify-content: center; margin-bottom: 70px;">
-					<input type="date" class="form-control" id="exampleInputbirthday"
+					<input type="date" class="form-control" id="exampleInputbirthday" name="birthday"
 						value="<%=users.getBirthday()%>">
 				</div>
 				<div class="cancelButton"
