@@ -23,22 +23,22 @@ public class SelectItemCategoryList {
 				sb.append("FROM "						);
 				sb.append(	"item_categories "			);
 
-				String sql = sb.toString();
+				String SQL = sb.toString();
 
 				ArrayList<ItemCategoryBean> itemCategories = new ArrayList<>();
 				List<Object> params = Arrays.asList();
 				try (Connection conn = DatabaseConnection.getConnection()){
-					try(ResultSet rs = GeneralDao.executeQuery(conn, sql, params)) {
-	
+					try(ResultSet rs = GeneralDao.executeQuery(conn, SQL, params)) {
+
 							//ItemCategoryBeanに挿入
 							while(rs.next()) {
 								ItemCategoryBean itemCategory = new ItemCategoryBean();
-						String category = rs.getString("item_category_name");
-						itemCategory.setItemCategoryName(category);
-	
-						itemCategories.add(itemCategory);
-					}
-	
+								String category = rs.getString("item_category_name");
+								itemCategory.setItemCategoryName(category);
+
+								itemCategories.add(itemCategory);
+							}
+
 					} catch (SQLException e) {
 						if(!conn.isClosed()) {
 							conn.rollback();
