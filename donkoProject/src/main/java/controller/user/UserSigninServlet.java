@@ -1,4 +1,4 @@
-package controller.user;
+package donkoProject.src.main.java.controller.user;
 
 import java.io.IOException;
 
@@ -17,7 +17,9 @@ public class UserSigninServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String view = "/WEB-INF/views/userSignin.jsp";
+        req.getRequestDispatcher(view).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
