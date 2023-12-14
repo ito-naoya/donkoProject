@@ -42,25 +42,26 @@
     }
 
     const registItem2Form = document.getElementById('registItem2');
-    if (registItem2Form) {
-        registItem2Form.addEventListener('submit', function(event) {
-            const selectCategoryElement = document.querySelector('.option-select');
-            const selectedCategoryValue = selectCategoryElement.value;
-            const errorMessageContainer = document.getElementById('error-message-container2');
+if (registItem2Form) {
+    registItem2Form.addEventListener('submit', function(event) {
+        const selectCategoryElement = document.querySelector('.option-select');
+        const selectedCategoryValue = selectCategoryElement.value;
+        const errorMessageContainer = document.getElementById('error-message-container2');
 
-            if(selectedCategoryValue.includes("オプション選択")) {
-                event.preventDefault();
-                errorMessageContainer.textContent = 'オプションを選択してください';
-                errorMessageContainer.classList.remove('d-none');
-            }
+        if(selectedCategoryValue.includes("オプション選択")) {
+            event.preventDefault();
+            errorMessageContainer.textContent = 'オプションを選択してください';
+            errorMessageContainer.classList.remove('d-none');
+        }
 
-            if(document.getElementById('formFile').files.length === 0) {
-                event.preventDefault();
-                errorMessageContainer.textContent = '写真をアップロードしてください';
-                errorMessageContainer.classList.remove('d-none');
-            }
-        });
-    }
+        // 新規登録の場合のみファイルのアップロードをチェック
+        if(registItem2Form.getAttribute('action') === 'registItem2' && document.getElementById('formFile').files.length === 0) {
+            event.preventDefault();
+            errorMessageContainer.textContent = '写真をアップロードしてください';
+            errorMessageContainer.classList.remove('d-none');
+        }
+    });
+}
 
     const priceInput = document.getElementById('price');
     if (priceInput) {
