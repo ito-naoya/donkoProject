@@ -89,19 +89,16 @@ public class SelectItemListFromItemsByOption {
 	}
 	
 	// 取得したデータを格納した配列内に同じ画像名が存在するかを判定
-		private static boolean checkExist(ArrayList<ItemBean> optionList, String imageFileName) {
-			boolean isNotExist = true;
-			for (int i = 0; i < optionList.size(); i++) {
-				// i番目のファイル名の取得
-				ItemBean itemBean = optionList.get(i);
-				String fileNameInList = itemBean.getImageFileName();
-				
-				// 配列の中のファイル名が同じかを判定
-				if (imageFileName.equals(fileNameInList)) {
-					isNotExist = false;
-					break;
-				}
+	private static boolean checkExist(ArrayList<ItemBean> itemList, String imageFileName) {
+		boolean isNotExist = true;
+		for (ItemBean item : itemList) {
+			String fileNameInList = item.getImageFileName();
+			
+			if (imageFileName.equals(fileNameInList)) {
+				isNotExist = false;
+				break;
 			}
-			return isNotExist;
 		}
+		return isNotExist;
+	}
 }

@@ -51,6 +51,7 @@ public class SelectRandomItemListFromItems {
 				    	break;
 				    }
 				}
+				
 			// SQL実行時のExceptionをcatch
 			} catch (SQLException e) {
 				if (conn != null && !conn.isClosed()&& !conn.getAutoCommit()) {
@@ -70,12 +71,9 @@ public class SelectRandomItemListFromItems {
 	// 取得したデータを格納した配列内に同じ画像名が存在するかを判定
 	private static boolean checkExist(ArrayList<ItemBean> itemList, String imageFileName) {
 		boolean isNotExist = true;
-		for (int i = 0; i < itemList.size(); i++) {
-			// i番目のファイル名の取得
-			ItemBean itemBean = itemList.get(i);
-			String fileNameInList = itemBean.getImageFileName();
+		for (ItemBean item : itemList) {
+			String fileNameInList = item.getImageFileName();
 			
-			// 配列の中のファイル名が同じかを判定
 			if (imageFileName.equals(fileNameInList)) {
 				isNotExist = false;
 				break;
