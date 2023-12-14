@@ -22,7 +22,7 @@
 				String message = (String) request.getAttribute("message");
 				%>
 				<% if (message != null) { %>
-				<span class="border ms-4 py-2 px-3 w-auto" style="display: inline-flex; vertical-align: middle;"><%= message %></span>
+				<p class="border ms-4 my-auto py-2 px-3 w-auto" style="display: inline-flex; vertical-align: middle;"><%= message %></p>
 				<% } %>
 				<div class="col-lg-6 d-flex border ms-auto me-3 p-3" style="width:auto; height: 70px; box-shadow:5px 5px 5px lightgray;">
 					<% 
