@@ -14,33 +14,38 @@ public class SelectRandomItemListFromItems {
 	//商品の一覧を取得する
 	public static ArrayList<ItemBean> selectItemListFromItems(){
 		final String SELECT_ALL_ITEMLIST_SQL = "SELECT item_id, file_name FROM items WHERE items.item_delete_flg = 0 ORDER BY RAND()";
-		ArrayList<ItemBean> Itemlist = new ArrayList<>();
-		ArrayList<Object> paramLists = new ArrayList<>() {{ }};
+		ArrayList<ItemBean> itemlist = new ArrayList<>();
+		ArrayList<Object> paramList = new ArrayList<>() {{ }};
 		try (Connection conn = DatabaseConnection.getConnection()) {
-			try (ResultSet result = GeneralDao.executeQuery(conn, SELECT_ALL_ITEMLIST_SQL, paramLists)) {
+			try (ResultSet result = GeneralDao.executeQuery(conn, SELECT_ALL_ITEMLIST_SQL, paramList)) {
 				
+				// 1回目
 				if(result.next()){ 
-					ItemBean IBeans = new ItemBean();
+					ItemBean itemBean = new ItemBean();
 					int itemId = result.getInt("item_id");
 					String imageFileName = result.getString("file_name");
-					IBeans.setItemId(itemId);
-					IBeans.setImageFileName(imageFileName);
-					Itemlist.add(IBeans);
+					itemBean.setItemId(itemId);
+					itemBean.setImageFileName(imageFileName);
+					itemlist.add(itemBean);
 				}
 				
+				// 2回目以降
 				while (result.next()) {
-					ItemBean IBeans = new ItemBean();
+					ItemBean itemBean = new ItemBean();
 				    int itemId = result.getInt("item_id");
 				    String imageFileName = result.getString("file_name");
 				    
-				    boolean isNotExist = isNotExist(Itemlist, imageFileName);
+				    // 画像の重複を判定
+				    boolean isNotExist = isNotExist(itemlist, imageFileName);
+				    // 重複しないデータを配列に格納
 					if (isNotExist == true) {
-						IBeans.setItemId(itemId);;
-						IBeans.setImageFileName(imageFileName);
-						Itemlist.add(IBeans);
+						itemBean.setItemId(itemId);;
+						itemBean.setImageFileName(imageFileName);
+						itemlist.add(itemBean);
 					}
 				    
-				    if (Itemlist.size() == 8) {
+					// 配列の中身が8個になったらwhile文を終了
+				    if (itemlist.size() == 8) {
 				    	break;
 				    }
 				}
@@ -55,18 +60,21 @@ public class SelectRandomItemListFromItems {
 		// getConnection時のExceptionをcatch
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return Itemlist;
+		return itemlist;
 	};
 	
-	private static boolean isNotExist(ArrayList<ItemBean> Itemlist, String imageFileName) {
+	// 取得したデータを格納したList内に同じ画像名が存在するかを判定
+	private static boolean isNotExist(ArrayList<ItemBean> itemList, String imageFileName) {
 		boolean isNotExist = false;
-		for (int i = 0; i < Itemlist.size(); i++) {
+		for (int i = 0; i < itemList.size(); i++) {
 			// i番目のファイル名の取得
-			ItemBean IB = Itemlist.get(i);
-			String FN_num_i = IB.getImageFileName();
+			ItemBean itemBean = itemList.get(i);
+			String fileNameInList = itemBean.getImageFileName();
 			
-			if (!imageFileName.equals(FN_num_i)) {
+			// 配列の中のファイル名が同じかを判定
+			if (!imageFileName.equals(fileNameInList)) {
 				isNotExist = true;
 			} else {
 				isNotExist = false;
