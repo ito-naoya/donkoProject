@@ -13,31 +13,39 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
-@WebServlet("/category")
-public class CategoryServlet extends HttpServlet {
+@WebServlet("/option")
+public class OptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
-    public CategoryServlet() {
+      
+    public OptionServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String[] checkedOption = request.getParameterValues("option");
 		String categoryName = request.getParameter("categoryName");
+		
+		// オプション選択した一覧
+		ArrayList<ItemBean> OCList = Item.getItemListByOption(checkedOption, categoryName);
+		// オプション選択の取得
 		ItemBean itemBean = new ItemBean();
 		itemBean.setItemCategoryName(categoryName);
-		
-		// オプション選択の取得
 		ArrayList<ArrayList<OptionCategoryBean>> ONValueListALL = OptionCategory.getOptionCategoryListAllByCategory(itemBean);
-		// カテゴリー一覧の取得
-		ArrayList<ItemBean> itemList =Item.getItemListByCategory(itemBean);
 		
 		request.setAttribute("categoryName", categoryName);
 		request.setAttribute("ONValueListALL", ONValueListALL);
-		request.setAttribute("itemList", itemList);
+		request.setAttribute("itemList", OCList);
+		request.setAttribute("message", "検索キーワード : " + checkedOption(checkedOption));
 		
 		String view = "/WEB-INF/views/customer/categoryIndex.jsp";
         request.getRequestDispatcher(view).forward(request, response);
+	}
+	
+	protected static String checkedOption(String[] checkedOption) {
+		String str = "[ " + checkedOption[0] + " ]";
+	    for (int index = 1; index < checkedOption.length; index++) {
+	        str += ", " + "[ " + checkedOption[index] + " ]";
+	    }
+	    return str;
 	}
 }

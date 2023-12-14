@@ -77,7 +77,7 @@ public class CartServlet extends HttpServlet {
 		 //カート内の商品の数量を更新する
 		Cart.updateItemQuantityInCart(cb);
 		
-		response.sendRedirect("cart");
+		doGet(request, response);
 	}
 
 }

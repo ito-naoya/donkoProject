@@ -82,8 +82,12 @@ public class InsertPurchaseDetail {
 					//購入した商品を商品数のだけインサート
 					GeneralDao.executeUpdate(conn, INSERT_PURCHASEDETAIL_SQL, params);
 					conn.commit();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				}catch(Exception e) {
+					try {
+						conn.rollback();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
 				}
 				
 			});

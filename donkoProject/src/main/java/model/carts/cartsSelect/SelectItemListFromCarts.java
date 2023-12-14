@@ -23,6 +23,7 @@ public class SelectItemListFromCarts {
 		sql.append(		"i.item_name, ");
 		sql.append(		"i.file_name, ");
 		sql.append(		"i.price, ");
+		sql.append(		"i.stock, ");
 		sql.append(		"c.quantity ");
 		sql.append("FROM ");
 		sql.append(		"carts as c ");
@@ -56,6 +57,7 @@ public class SelectItemListFromCarts {
 					cb.setImageFileName(rs.getString("file_name"));
 					cb.setItemPrice(rs.getInt("price"));
 					cb.setQuantity(rs.getInt("quantity"));
+					cb.setItemStock(rs.getInt("stock"));
 					 //カート情報を保持したcartBeanをcartBeanListに追加する
 					cartBeanList.add(cb);
 				}
