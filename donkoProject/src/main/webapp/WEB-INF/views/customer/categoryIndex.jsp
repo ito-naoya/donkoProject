@@ -16,9 +16,15 @@
 	<%@include file= "../component/header.jsp" %>
 	<%@include file= "../component/headerTopSpace.jsp" %>
 	<main>
-		<form action="" method="post" name="form">
-			<div class="d-flex justify-content-end">
-				<div class="col-lg-6 d-flex border mx-3 p-3" style="width:auto; height: 70px; box-shadow:5px 5px 5px lightgray;">
+		<form action="option" method="get">
+			<div class="d-flex">
+				<%
+				String message = (String) request.getAttribute("message");
+				%>
+				<% if (message != null) { %>
+				<span class="border ms-4 py-2 px-3 w-auto" style="display: inline-flex; vertical-align: middle;"><%= message %></span>
+				<% } %>
+				<div class="col-lg-6 d-flex border ms-auto me-3 p-3" style="width:auto; height: 70px; box-shadow:5px 5px 5px lightgray;">
 					<% 
 					ArrayList<ArrayList<OptionCategoryBean>> ONVListAll = (ArrayList<ArrayList<OptionCategoryBean>>)request.getAttribute("ONValueListALL");
 					%>
@@ -29,11 +35,11 @@
 						<% for (OptionCategoryBean ONValue : ONVList) { %>
 						<small class="mx-3" style="display: flex; align-items: center;">
 							<input type="checkbox" name="option"
-							id="<%=ONValue.getOptionCategoryValue()%>"
-							onclick="chebg('<%=ONValue.getOptionCategoryValue()%>')" 
+							id="<%= ONValue.getOptionCategoryValue() %>"
+							onclick="chebg('<%= ONValue.getOptionCategoryValue() %>')" 
 							style="display: none;" 
-							value="<%=ONValue.getOptionCategoryValue()%>"> 
-							<label for="<%=ONValue.getOptionCategoryValue()%>">
+							value="<%= ONValue.getOptionCategoryValue() %>"> 
+							<label for="<%= ONValue.getOptionCategoryValue() %>">
 								<%= ONValue.getOptionCategoryValue() %>
 							</label>
 						</small>
@@ -42,7 +48,8 @@
 					<%
 					} 
 					%>
-					<buttun class="btn text-nowrap ms-3" style="background-color: #E5CCFF";">こだわり検索</buttun>
+					<input type="hidden" name="categoryName" value="<%= (String)request.getAttribute("categoryName") %>">
+					<button type="submit" class="btn text-nowrap ms-3" style="background-color: #E5CCFF";">こだわり検索</button>
 				</div>
 			</div>
 		</form>
