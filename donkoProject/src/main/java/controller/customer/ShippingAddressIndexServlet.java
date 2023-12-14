@@ -17,7 +17,9 @@ public class ShippingAddressIndexServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// 配送先一覧
+		String view = "/WEB-INF/views/customer/shippingAddressIndex.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

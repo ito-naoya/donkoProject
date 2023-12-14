@@ -73,7 +73,7 @@ public class RegistItemServlet2 extends HttpServlet {
 			Item.registerNewItem(newItemaddOption, selectBoxCount);
 
 			//画像をドキュメント内に保管
-			Item.registerNewImage(imgPart,fileName);
+			Item.registerNewImage(imgPart,fileName,null);
 		}
 
 		String view = "deleteItemIndex";

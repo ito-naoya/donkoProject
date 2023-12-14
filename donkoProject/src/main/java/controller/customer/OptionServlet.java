@@ -25,24 +25,24 @@ public class OptionServlet extends HttpServlet {
 		String[] checkedOption = request.getParameterValues("option");
 		String categoryName = request.getParameter("categoryName");
 		
-		// オプション選択した一覧
-		ArrayList<ItemBean> OCList = Item.getItemListByOption(checkedOption, categoryName);
 		// オプション選択の取得
 		ItemBean itemBean = new ItemBean();
 		itemBean.setItemCategoryName(categoryName);
 		ArrayList<ArrayList<OptionCategoryBean>> ONValueListALL = OptionCategory.getOptionCategoryListAllByCategory(itemBean);
+		// オプション選択した一覧
+		ArrayList<ItemBean> OCList = Item.getItemListByOption(checkedOption, categoryName);
 		
 		request.setAttribute("categoryName", categoryName);
 		request.setAttribute("ONValueListALL", ONValueListALL);
 		request.setAttribute("itemList", OCList);
-		request.setAttribute("message", "検索キーワード : " + checkedOption(checkedOption));
+		request.setAttribute("message", "検索キーワード : " + checkedOption(categoryName, checkedOption));
 		
 		String view = "/WEB-INF/views/customer/categoryIndex.jsp";
         request.getRequestDispatcher(view).forward(request, response);
 	}
 	
-	protected static String checkedOption(String[] checkedOption) {
-		String str = "[ " + checkedOption[0] + " ]";
+	private static String checkedOption(String categoryName, String[] checkedOption) {
+		String str = "[ " + categoryName + " ], [ " + checkedOption[0] + " ]";
 	    for (int index = 1; index < checkedOption.length; index++) {
 	        str += ", " + "[ " + checkedOption[index] + " ]";
 	    }
