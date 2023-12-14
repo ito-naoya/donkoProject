@@ -6,3 +6,12 @@ function chebg(chkID){
         optionId.parentNode.style.color = '#000000';
     }
 }
+
+function nullCheck(){
+  var test = document.getElementById("test").value;
+  if(test.length < 6){
+    var validate = "6文字以上入力してください。";
+    document.getElementById("validate_msg").innerHTML = validate; 
+    return false; 
+  }
+}
