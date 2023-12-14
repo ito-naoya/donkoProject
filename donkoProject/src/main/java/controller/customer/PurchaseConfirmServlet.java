@@ -24,6 +24,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
         super();
     }
 
+    //購入確認をする
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 //		HttpSession session = request.getSession();
@@ -41,18 +42,18 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		//ログインしているユーザーのメインの配送先を取得
 		ShippingAddressBean shippingAddress = ShippingAddress.getMainShippingAddress(loginedUser);
 		//ログインしているユーザーがカートに追加した商品を全て取得
-		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
+		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(loginedUser);
 		
-		if(cartList != null && shippingAddress != null) {
+		if(cartBeanList != null && shippingAddress != null) {
 			
 			//カート内の商品の合計金額をtotalPriceに代入
-			Integer totalPrice= cartList.stream()
+			Integer totalPrice= cartBeanList.stream()
 					.map(cb -> cb.getItemPrice() * cb.getQuantity())
 					.mapToInt( i -> i )
 					.sum();
 			
 			request.setAttribute("shippingAddress", shippingAddress);
-			request.setAttribute("cartList", cartList);
+			request.setAttribute("cartBeanList", cartBeanList);
 			request.setAttribute("totalPrice", totalPrice);
 			
 			String view = "/WEB-INF/views/customer/purchaseConfirm.jsp";
@@ -60,6 +61,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		}
 	}
 
+	//購入処理をする
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 //		HttpSession session = request.getSession();
@@ -77,13 +79,19 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
 		int shippingAddressId = Integer.parseInt(request.getParameter("shippingAddressId"));
 
+		//購入情報を保持するpurchaseBeanをnew
 		PurchaseBean pb = new PurchaseBean();
+		//purchaseBeanにユーザーIDをセット
 		pb.setUserId(loginedUser.getUserId());
+		//purchaseBeanに合計金額をセット
 		pb.setTotalAmount(totalPrice);
+		//purchaseBeanに配送先IDをセット
 		pb.setShippingAddressId(shippingAddressId);
 
+		//商品を購入する
 		Purchase.purchaseItem(pb);
 		
+		//購入完了画面を返す
 		String view = "/WEB-INF/views/customer/purchaseComplete.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}

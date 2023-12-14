@@ -22,6 +22,7 @@ public class ItemDetailServlet extends HttpServlet {
         super();
     }
 
+    //商品の詳細情報を表示する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		int itemId = Integer.parseInt(request.getParameter("itemId"));
@@ -47,6 +48,7 @@ public class ItemDetailServlet extends HttpServlet {
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 	
+	//商品をカートに入れる
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 //		HttpSession session = request.getSession();

@@ -13,16 +13,16 @@ public class DeleteItemAllFromCarts {
 	//カートから全ての商品を削除する
 	public static void deleteItemAllFromCarts(CustomerUser customerUser) {
 
-		//カート内の対象のユーザーの商品を全て削除するSQL
-		StringBuilder sql = new StringBuilder();
-		sql.append("DELETE ");
-		sql.append("FROM ");
-		sql.append(		"carts ");
-		sql.append("WHERE ");
+		//カートからログインしているユーザーが追加した商品を全て削除するSQL
+		StringBuilder sb = new StringBuilder();
+		sb.append("DELETE ");
+		sb.append("FROM ");
+		sb.append(		"carts ");
+		sb.append("WHERE ");
 		//パラメータをここで使う
-		sql.append(		"user_id = ? ");
+		sb.append(		"user_id = ? ");
 		//sqlを文字列化
-		final String DELETE_ITEMALL_SQL = sql.toString();
+		final String DELETE_ITEM_ALL_SQL = sb.toString();
 
 		//対象のユーザーのuser_idをリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
@@ -31,10 +31,13 @@ public class DeleteItemAllFromCarts {
 		//データベースに接続
 		try (Connection conn = DatabaseConnection.getConnection();) {
 			try {
-				GeneralDao.executeUpdate(conn, DELETE_ITEMALL_SQL, params);
+				//カートからログインしているユーザーが追加した商品を全て削除する
+				GeneralDao.executeUpdate(conn, DELETE_ITEM_ALL_SQL, params);
+				//sqlをコミット
 				conn.commit();
 			} catch (SQLException e) {
 				if (!conn.isClosed()) {
+					//一つでも処理が失敗したらロールバック
 					conn.rollback();
 				}
 				e.printStackTrace();
