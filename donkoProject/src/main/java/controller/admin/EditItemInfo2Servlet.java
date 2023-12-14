@@ -72,7 +72,7 @@ public class EditItemInfo2Servlet extends HttpServlet {
 		if(!fileName.equals(oldItemFile)) {
 			updateItemaddOption.setImageFileName(fileName);//商品名を変更した場合、新しい写真名になる
 		} else {
-			updateItemaddOption.setImageFileName(itemName);//商品名はそのままの場合
+			updateItemaddOption.setImageFileName(oldItemFile);//商品名はそのままの場合
 		}
 		//itemsテーブルと、item_optionsテーブルを同じトランザクションで更新
 		Item.updateItemInfo(updateItemaddOption, selectBoxCount);

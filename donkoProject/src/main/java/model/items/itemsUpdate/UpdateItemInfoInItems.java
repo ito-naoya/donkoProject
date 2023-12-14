@@ -16,10 +16,10 @@ public class UpdateItemInfoInItems {
         StringBuilder sb1 = new StringBuilder();
         sb1.append("UPDATE items "														);
         sb1.append("SET "																);
-        sb1.append(		"item_category_name = ?, item_name = ?, item_description = ?, "	);
+        sb1.append(		"item_category_name =?, item_name = ?, item_description = ?, "	);
         sb1.append(		"price = ?, stock = ?, file_name = ? "							);
         sb1.append("WHERE "																);
-        sb1.append("item_id = ?"														);
+        sb1.append("item_id = ?;"														);
 
         String sql1 = sb1.toString();
 
@@ -28,9 +28,9 @@ public class UpdateItemInfoInItems {
         sb2.append("UPDATE ");
         sb2.append(		"options ");
         sb2.append("SET ");
-        sb2.append(		"option_category_name = ?, ");
+        sb2.append(		"option_category_name =?, ");
         sb2.append(		"option_category_increment_id = ? ");
-        sb2.append("WHERE item_id = ?");
+        sb2.append("WHERE item_id = ?;");
 
         String sql2 = sb2.toString();
 

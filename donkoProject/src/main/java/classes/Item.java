@@ -138,7 +138,7 @@ public class Item {
 	    // その他の場合は何もしない
 	}
 
-
+	//ふやしました
 	//商品登録画面から取得した値のnull値及び文字数をチェックして、ItemBeanにセット
 		public static ItemBean checkRegistItemDetail(String itemCategoryName, String itemName, String itemDescription, String price, String stock) {
 			//カテゴリー名
