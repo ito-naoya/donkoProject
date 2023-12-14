@@ -9,6 +9,8 @@ import jakarta.servlet.http.Part;
 import model.items.itemsDelete.DeleteItemFromItems;
 import model.items.itemsInsert.InsertNewItemToItems;
 import model.items.itemsSelect.SelectItemAllDetailFromItems;
+import model.items.itemsSelect.SelectItemAndOptionListAll;
+import model.items.itemsSelect.SelectItemAndOptionListByDelFlg;
 import model.items.itemsSelect.SelectItemDetailFromItems;
 import model.items.itemsSelect.SelectItemDetailOptionFromItems;
 import model.items.itemsSelect.SelectItemImageListFromItems;
@@ -44,10 +46,20 @@ public class Item {
 	}
 
 	//商品の一覧を取得する
-	public static ArrayList<ItemBean> getItemList(){
-		return SelectItemListFromItems.selectItemListFromItems();
+		public static ArrayList<ItemBean> getItemList(){
+			return SelectItemListFromItems.selectItemListFromItems();
+		};
+
+	//商品の一覧を取得する
+	public static ArrayList<ItemBean> getItemAndOptionListAll(){
+		return SelectItemAndOptionListAll.selectItemAndOptionListAll();
 	};
 
+	//商品の一覧を取得する
+	public static ArrayList<ItemBean> getItemAndOptionListByDelFlg(int itemDeleteFlg){
+		return SelectItemAndOptionListByDelFlg.selectItemAndOptionListByDelFlg(itemDeleteFlg);
+	};
+		
 	//商品の詳細を取得する
 	public static ItemBean getItemDetail(ItemBean itemBean){
 		return SelectItemDetailFromItems.selectItemDetailFromItems(itemBean);
