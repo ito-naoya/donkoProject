@@ -37,23 +37,23 @@ public class CartServlet extends HttpServlet {
 		loginedUser.setUserId(2);
 
 		//ログインしているユーザーがカートに追加した商品を全て取得
-		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
+		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(loginedUser);
 		
-		if(cartList != null) {
+		if(cartBeanList != null) {
 			
-			request.setAttribute("cartList", cartList);
+			request.setAttribute("cartBeanList", cartBeanList);
 	
 			//カート一覧ページを表示する
 			String view = "/WEB-INF/views/customer/cart.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 		
-		} else if(cartList == null) {
+		} else if(cartBeanList == null) {
 			//トップ画面にリダイレクトする
 			response.sendRedirect("home");
 		}
 	}
 
-	//商品の数量を更新する
+	//カート内の商品の数量を更新する
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

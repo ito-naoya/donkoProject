@@ -14,28 +14,28 @@ public class InsertItemToCarts {
 	public static void insertItemToCarts(CartBean cartBean) {
 
 		//カートに商品を追加するSQL
-		StringBuilder sql = new StringBuilder();
-		sql.append("INSERT INTO ");
-		sql.append(		"carts ");
-		sql.append(		"(");
-		sql.append(		"user_id, ");
-		sql.append(		"item_id, ");
-		sql.append(		"quantity");
-		sql.append(		") ");
-		sql.append("VALUES ");
-		sql.append(		"(");
+		StringBuilder sb = new StringBuilder();
+		sb.append("INSERT INTO ");
+		sb.append(		"carts ");
+		sb.append(		"(");
+		sb.append(		"user_id, ");
+		sb.append(		"item_id, ");
+		sb.append(		"quantity");
+		sb.append(		") ");
+		sb.append("VALUES ");
+		sb.append(		"(");
 		//ここでパラメータを使う(1/2)
-		sql.append(		"?, ");
+		sb.append(		"?, ");
 		//ここでパラメータを使う(2/2)
-		sql.append(		"?, ");
-		sql.append(		"1");
-		sql.append(		") ");
-		sql.append("ON DUPLICATE KEY UPDATE ");
-		sql.append(		"quantity = quantity + 1 ");
+		sb.append(		"?, ");
+		sb.append(		"1");
+		sb.append(		") ");
+		sb.append("ON DUPLICATE KEY UPDATE ");
+		sb.append(		"quantity = quantity + 1 ");
 		//sqlを文字列化
-		final String INSERT_CART_SQL = sql.toString();
+		final String INSERT_CART_SQL = sb.toString();
 
-		//追加したい商品のIDと登録したユーザーのIDをリストに追加
+		//追加したい商品のIDとログインしているユーザーのIDをリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(cartBean.getUserId());
 		params.add(cartBean.getItemId());
@@ -45,9 +45,11 @@ public class InsertItemToCarts {
 			try {
 				//商品をカートに追加
 				GeneralDao.executeUpdate(conn, INSERT_CART_SQL, params);
+				//sqlをコミット
 				conn.commit();
 			} catch (SQLException e) {
 				if (!conn.isClosed()) {
+					//一つでも処理が失敗したらロールバック
 					conn.rollback();
 				}
 				e.printStackTrace();

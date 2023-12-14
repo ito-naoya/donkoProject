@@ -14,17 +14,17 @@ public class DeleteItemFromCarts {
 	public static void deleteItemFromCarts(CartBean cartBean) {
 
 		//カートからユーザーが登録した商品を削除するSQL
-		StringBuilder sql = new StringBuilder();
-		sql.append("DELETE ");
-		sql.append("FROM ");
-		sql.append(		"carts ");
-		sql.append("WHERE ");
+		StringBuilder sb = new StringBuilder();
+		sb.append("DELETE ");
+		sb.append("FROM ");
+		sb.append(		"carts ");
+		sb.append("WHERE ");
 		//ここでパラメータを使う(1/2)
-		sql.append(		"user_id = ? ");
-		sql.append("AND ");
+		sb.append(		"user_id = ? ");
+		sb.append("AND ");
 		//ここでパラメータを使う(2/2)
-		sql.append(		"item_id = ? ");
-		final String DELETE_ITEMALL_SQL = sql.toString();
+		sb.append(		"item_id = ? ");
+		final String DELETE_ITEM_ALL_SQL = sb.toString();
 
 		//削除したい商品のIDと登録したユーザーのIDをリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
@@ -35,10 +35,12 @@ public class DeleteItemFromCarts {
 		try (Connection conn = DatabaseConnection.getConnection();) {
 			try {
 				//カートから対象の商品を削除
-				GeneralDao.executeUpdate(conn, DELETE_ITEMALL_SQL, params);
+				GeneralDao.executeUpdate(conn, DELETE_ITEM_ALL_SQL, params);
+				//sqlをコミット
 				conn.commit();
 			} catch (SQLException e) {
 				if (!conn.isClosed()) {
+					//一つでも処理が失敗したらロールバック
 					conn.rollback();
 				}
 				e.printStackTrace();

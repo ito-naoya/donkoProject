@@ -16,40 +16,40 @@ public class SelectItemListFromCarts {
 	public static ArrayList<CartBean> selectItemListFromCarts(CustomerUser customerUser) {
 
 		//カートから対象のユーザーが登録した商品の一覧を取得
-		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT ");
-		sql.append(		"items.item_id, ");
-		sql.append(		"items.item_name, ");
-		sql.append(		"items.file_name, ");
-		sql.append(		"items.price, ");
-		sql.append(		"items.stock, ");
-		sql.append(		"carts.quantity, ");
-		sql.append(		"group_concat(option_categories.option_category_value separator ',') ");
-		sql.append("FROM ");
-		sql.append(		"carts ");
-		sql.append("INNER JOIN ");
-		sql.append(		"items ");
-		sql.append("ON ");
-		sql.append(		"items.item_id = carts.item_id ");
-		sql.append("INNER JOIN ");
-		sql.append(		"`options` ");
-		sql.append("ON ");
-		sql.append(		"carts.item_id = `options`.item_id ");
-		sql.append("INNER JOIN ");
-		sql.append(		"option_categories ");
-		sql.append("ON ");
-		sql.append(		"`options`.option_category_name = option_categories.option_category_name ");
-		sql.append("AND ");
-		sql.append(		"`options`.option_category_increment_id = option_categories.option_category_increment_id ");
-		sql.append("WHERE ");
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT ");
+		sb.append(		"items.item_id, ");
+		sb.append(		"items.item_name, ");
+		sb.append(		"items.file_name, ");
+		sb.append(		"items.price, ");
+		sb.append(		"items.stock, ");
+		sb.append(		"carts.quantity, ");
+		sb.append(		"group_concat(option_categories.option_category_value separator ',') ");
+		sb.append("FROM ");
+		sb.append(		"carts ");
+		sb.append("INNER JOIN ");
+		sb.append(		"items ");
+		sb.append("ON ");
+		sb.append(		"items.item_id = carts.item_id ");
+		sb.append("INNER JOIN ");
+		sb.append(		"`options` ");
+		sb.append("ON ");
+		sb.append(		"carts.item_id = `options`.item_id ");
+		sb.append("INNER JOIN ");
+		sb.append(		"option_categories ");
+		sb.append("ON ");
+		sb.append(		"`options`.option_category_name = option_categories.option_category_name ");
+		sb.append("AND ");
+		sb.append(		"`options`.option_category_increment_id = option_categories.option_category_increment_id ");
+		sb.append("WHERE ");
 		//ここでパラメータを使う
-		sql.append(		"carts.user_id = ? ");
-		sql.append("GROUP BY ");
-		sql.append(		"items.item_id");
+		sb.append(		"carts.user_id = ? ");
+		sb.append("GROUP BY ");
+		sb.append(		"items.item_id");
 		//sqlを文字列化
-		final String SELECT_CARTLIST_SQL = sql.toString();
+		final String SELECT_CARTLIST_SQL = sb.toString();
 
-		//商品をカートに追加したユーザーのIDをリストに追加
+		//ログインしているユーザーのIDをリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(customerUser.getUserId());
 
@@ -77,6 +77,7 @@ public class SelectItemListFromCarts {
 
 			} catch (SQLException e) {
 				if (!conn.isClosed()) {
+					//一つでも処理が失敗したらロールバック
 					conn.rollback();
 				}
 				e.printStackTrace();
