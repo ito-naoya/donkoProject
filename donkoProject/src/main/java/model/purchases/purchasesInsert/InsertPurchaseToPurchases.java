@@ -141,15 +141,7 @@ public class InsertPurchaseToPurchases {
 						//購入詳細を全て追加する
 						GeneralDao.executeUpdate(conn, INSERT_PURCHASEDETAIL_SQL, insertPurchaseDetailparams);
 					} catch (SQLException e) {
-						try {
-							if(!conn.isClosed()) {
-								conn.rollback();
-							}
-						} catch (SQLException e1) {
-							// TODO 自動生成された catch ブロック
-							e1.printStackTrace();
-						}
-						e.printStackTrace();
+						throw new RuntimeException();
 					}
 				});
 				
@@ -163,14 +155,7 @@ public class InsertPurchaseToPurchases {
 						//商品の在庫数を減らす
 						GeneralDao.executeUpdate(conn, UPDATE_ITEMSTOCK_SQL, updateItemStockParams);
 					} catch (SQLException e) {
-						try {
-							if(!conn.isClosed()) {
-								conn.rollback();
-							}
-						} catch (SQLException e1) {
-							e1.printStackTrace();
-						}
-						e.printStackTrace();
+						throw new RuntimeException();
 					}
 					 
 				});
@@ -179,7 +164,7 @@ public class InsertPurchaseToPurchases {
 				GeneralDao.executeUpdate(conn, DELETE_ITEMALL_SQL, deleteCartItemAllparams);
 				
 				conn.commit();
-			} catch (SQLException e) {
+			} catch (SQLException | RuntimeException e) {
 				if (!conn.isClosed()) {
 					conn.rollback();
 				}
