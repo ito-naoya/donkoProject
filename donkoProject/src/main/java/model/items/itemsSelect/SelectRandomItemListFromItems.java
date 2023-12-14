@@ -9,7 +9,7 @@ import bean.ItemBean;
 import dao.DatabaseConnection;
 import dao.GeneralDao;
 
-public class SelectItemListFromItems {
+public class SelectRandomItemListFromItems {
 	
 	//商品の一覧を取得する
 	public static ArrayList<ItemBean> selectItemListFromItems(){
@@ -29,17 +29,16 @@ public class SelectItemListFromItems {
 				}
 				
 				while (result.next()) {
+					ItemBean IBeans = new ItemBean();
 				    int itemId = result.getInt("item_id");
 				    String imageFileName = result.getString("file_name");
 				    
-				    boolean check = isChecked(Itemlist, imageFileName);
-				    
-				    if(check == true) {
-				    	ItemBean IBeans = new ItemBean();
-						IBeans.setItemId(itemId);
+				    boolean isNotExist = isNotExist(Itemlist, imageFileName);
+					if (isNotExist == true) {
+						IBeans.setItemId(itemId);;
 						IBeans.setImageFileName(imageFileName);
 						Itemlist.add(IBeans);
-				    }
+					}
 				    
 				    if (Itemlist.size() == 8) {
 				    	break;
@@ -60,18 +59,20 @@ public class SelectItemListFromItems {
 		return Itemlist;
 	};
 	
-	protected static boolean isChecked(ArrayList<ItemBean> Itemlist, String imageFileName) {
-		 boolean isChecked = false;
-		    for (int i = 0; i < Itemlist.size(); i++) {
-             String imn = Itemlist.get(i).getImageFileName();
-             if (imn.equals(imageFileName)) {
-            	 isChecked = false;
-                 break;
-             } else {
-            	isChecked = true;
-             	i++;
-             }
-         }
-		return isChecked;
+	private static boolean isNotExist(ArrayList<ItemBean> Itemlist, String imageFileName) {
+		boolean isNotExist = false;
+		for (int i = 0; i < Itemlist.size(); i++) {
+			// i番目のファイル名の取得
+			ItemBean IB = Itemlist.get(i);
+			String FN_num_i = IB.getImageFileName();
+			
+			if (!imageFileName.equals(FN_num_i)) {
+				isNotExist = true;
+			} else {
+				isNotExist = false;
+				break;
+			}
+		}
+		return isNotExist;
 	}
 }
