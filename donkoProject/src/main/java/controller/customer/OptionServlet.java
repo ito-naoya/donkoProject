@@ -22,23 +22,24 @@ public class OptionServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String[] checkedOption = request.getParameterValues("option");
+		String[] checkedOptionList = request.getParameterValues("option");
 		String categoryName = request.getParameter("categoryName");
 		request.setAttribute("categoryName", categoryName);
 		
-		// オプション選択の取得
 		ItemBean itemBean = new ItemBean();
 		itemBean.setItemCategoryName(categoryName);
-		ArrayList<ArrayList<OptionCategoryBean>> ONValueListALL = OptionCategory.getOptionCategoryListAllByCategory(itemBean);
-		request.setAttribute("ONValueListALL", ONValueListALL);
 		
-		if (checkedOption != null && checkedOption.length > 0) {
-			// オプション選択した一覧
-			ArrayList<ItemBean> OCList = Item.getItemListByOption(checkedOption, categoryName);
-			request.setAttribute("itemList", OCList);
-			request.setAttribute("message", "検索キーワード : " + checkedOption(categoryName, checkedOption));
+		// オプション選択の項目を取得
+		ArrayList<ArrayList<OptionCategoryBean>> optionCategoryValueListAll = OptionCategory.getOptionCategoryListAllByCategory(itemBean);
+		request.setAttribute("optionCategoryValueListAll", optionCategoryValueListAll);
+		
+		if (checkedOptionList != null && checkedOptionList.length > 0) {
+			// オプション選択した一覧を取得
+			ArrayList<ItemBean> optionCategoryList = Item.getItemListByOption(checkedOptionList, categoryName);
+			request.setAttribute("itemList", optionCategoryList);
+			request.setAttribute("message", "検索キーワード : " + searchKeyword(categoryName, checkedOptionList));
 		} else {
-			// カテゴリー一覧
+			// カテゴリー一覧を取得
 			ArrayList<ItemBean> itemList =Item.getItemListByCategory(itemBean);
 			request.setAttribute("itemList", itemList);
 		}
@@ -47,11 +48,12 @@ public class OptionServlet extends HttpServlet {
         request.getRequestDispatcher(view).forward(request, response);
 	}
 	
-	private static String checkedOption(String categoryName, String[] checkedOption) {
-		String str = "[ " + categoryName + " ], [ " + checkedOption[0] + " ]";
-	    for (int index = 1; index < checkedOption.length; index++) {
-	        str += ", " + "[ " + checkedOption[index] + " ]";
+	// 検索したキーワードを文字連結して表示
+	private static String searchKeyword(String categoryName, String[] checkedOptionList) {
+		String searchKeyword = "[ " + categoryName + " ], [ " + checkedOptionList[0] + " ]";
+	    for (int i = 1; i < checkedOptionList.length; i++) {
+	    	searchKeyword += ", " + "[ " + checkedOptionList[i] + " ]";
 	    }
-	    return str;
+	    return searchKeyword;
 	}
 }

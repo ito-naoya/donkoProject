@@ -21,8 +21,10 @@ public class HomeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 商品の画像を取得
 		ArrayList<ItemBean> itemList = Item.getItemList();
 		request.setAttribute("itemList", itemList);
+		
 		String view = "/WEB-INF/views/customer/home.jsp";
         request.getRequestDispatcher(view).forward(request, response);
 	}
