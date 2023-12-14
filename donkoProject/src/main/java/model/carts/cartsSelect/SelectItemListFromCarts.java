@@ -15,25 +15,37 @@ public class SelectItemListFromCarts {
 	//カート内の商品一覧を取得する
 	public static ArrayList<CartBean> selectItemListFromCarts(CustomerUser customerUser) {
 
-		
 		//カートから対象のユーザーが登録した商品の一覧を取得
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT ");
-		sql.append(		"i.item_id, ");
-		sql.append(		"i.item_name, ");
-		sql.append(		"i.file_name, ");
-		sql.append(		"i.price, ");
-		sql.append(		"i.stock, ");
-		sql.append(		"c.quantity ");
+		sql.append(		"items.item_id, ");
+		sql.append(		"items.item_name, ");
+		sql.append(		"items.file_name, ");
+		sql.append(		"items.price, ");
+		sql.append(		"items.stock, ");
+		sql.append(		"carts.quantity, ");
+		sql.append(		"group_concat(option_categories.option_category_value separator ',') ");
 		sql.append("FROM ");
-		sql.append(		"carts as c ");
+		sql.append(		"carts ");
 		sql.append("INNER JOIN ");
-		sql.append(		"items as i ");
+		sql.append(		"items ");
 		sql.append("ON ");
-		sql.append(		"i.item_id = c.item_id ");
+		sql.append(		"items.item_id = carts.item_id ");
+		sql.append("INNER JOIN ");
+		sql.append(		"`options` ");
+		sql.append("ON ");
+		sql.append(		"carts.item_id = `options`.item_id ");
+		sql.append("INNER JOIN ");
+		sql.append(		"option_categories ");
+		sql.append("ON ");
+		sql.append(		"`options`.option_category_name = option_categories.option_category_name ");
+		sql.append("AND ");
+		sql.append(		"`options`.option_category_increment_id = option_categories.option_category_increment_id ");
 		sql.append("WHERE ");
-		//パラメータをここで使う
-		sql.append(		"c.user_id = ? ");
+		//ここでパラメータを使う
+		sql.append(		"carts.user_id = ? ");
+		sql.append("GROUP BY ");
+		sql.append(		"items.item_id");
 		//sqlを文字列化
 		final String SELECT_CARTLIST_SQL = sql.toString();
 
@@ -58,7 +70,8 @@ public class SelectItemListFromCarts {
 					cb.setItemPrice(rs.getInt("price"));
 					cb.setQuantity(rs.getInt("quantity"));
 					cb.setItemStock(rs.getInt("stock"));
-					 //カート情報を保持したcartBeanをcartBeanListに追加する
+					cb.setItemOptionDetail(rs.getString("group_concat(option_categories.option_category_value separator ',')"));
+					//カート情報を保持したcartBeanをcartBeanListに追加する
 					cartBeanList.add(cb);
 				}
 

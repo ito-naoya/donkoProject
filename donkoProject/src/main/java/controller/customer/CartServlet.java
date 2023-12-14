@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.CartBean;
-import bean.ItemBean;
 import classes.Cart;
-import classes.Item;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,6 +20,7 @@ public class CartServlet extends HttpServlet {
 		super();
 	}
 
+	//カート一覧ページを表示する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -37,24 +36,24 @@ public class CartServlet extends HttpServlet {
 		CustomerUser loginedUser = new CustomerUser();
 		loginedUser.setUserId(2);
 
-		//対象のユーザーのカート内の商品を全て取得
+		//ログインしているユーザーがカートに追加した商品を全て取得
 		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
 		
-		//カート内の商品のオプションを取得する
-		cartList.forEach(cb -> {
-			ItemBean ib = new ItemBean();
-			ib.setItemId(cb.getItemId());
-			ItemBean itemOptionDetail =  Item.getItemDetailOption(ib);
-			cb.setItemOptionDetail(itemOptionDetail.getItemFirstOptionValue());
-		});
+		if(cartList != null) {
+			
+			request.setAttribute("cartList", cartList);
+	
+			//カート一覧ページを表示する
+			String view = "/WEB-INF/views/customer/cart.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
 		
-		request.setAttribute("cartList", cartList);
-
-		String view = "/WEB-INF/views/customer/cart.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
-
+		} else if(cartList == null) {
+			//トップ画面にリダイレクトする
+			response.sendRedirect("home");
+		}
 	}
 
+	//商品の数量を更新する
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -68,15 +67,19 @@ public class CartServlet extends HttpServlet {
 		int itemId = Integer.parseInt(request.getParameter("itemId"));
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		
-		//カートの商品情報を保持するcartBeanをnew
+		//カートにある商品情報を保持するcartBeanをnew
 		CartBean cb = new CartBean();
+		//cartBeanにユーザーIDをセットする
 		cb.setUserId(loginedUser.getUserId());
+		//cartBeanに商品IDをセットする
 		cb.setItemId(itemId);
+		//cartBeanに数量をセットする
 		cb.setQuantity(quantity);
 		
 		 //カート内の商品の数量を更新する
 		Cart.updateItemQuantityInCart(cb);
 		
+		//doGetメソッドを実行(カート一覧ページを表示)
 		doGet(request, response);
 	}
 
