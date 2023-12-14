@@ -12,6 +12,8 @@ import dao.GeneralDao;
 public class SelectItemAndOptionListAll {
 
 	public static ArrayList<ItemBean>  selectItemAndOptionListAll(String itemCategoryName) {
+
+		//削除済みも含む全てのアイテムを抽出
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT "																						);
 		sb.append(    "items.item_id, "																			);

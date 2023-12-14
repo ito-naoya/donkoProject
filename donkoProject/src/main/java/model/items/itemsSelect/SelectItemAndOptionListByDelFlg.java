@@ -10,7 +10,9 @@ import dao.DatabaseConnection;
 import dao.GeneralDao;
 
 public class SelectItemAndOptionListByDelFlg {
+
 	public static ArrayList<ItemBean> selectItemAndOptionListByDelFlg(int itemDeleteFlg, String itemCategoryName){
+		//商品一覧をオプション込みで抽出、削除済みかどうかの切り替え、カテゴリでソートも可能
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT "																						);
 		sb.append(    "items.item_id, "																			);
