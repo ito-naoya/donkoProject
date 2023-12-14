@@ -36,7 +36,7 @@ public class OptionServlet extends HttpServlet {
 			// オプション選択した一覧
 			ArrayList<ItemBean> OCList = Item.getItemListByOption(checkedOption, categoryName);
 			request.setAttribute("itemList", OCList);
-			request.setAttribute("message", "検索キーワード : " + checkedOption(checkedOption));
+			request.setAttribute("message", "検索キーワード : " + checkedOption(categoryName, checkedOption));
 		} else {
 			// カテゴリー一覧
 			ArrayList<ItemBean> itemList =Item.getItemListByCategory(itemBean);
