@@ -20,11 +20,12 @@ public class DeleteItemIndexServlet extends HttpServlet {
 	}
 //カテゴリーなし
 //カテゴリー
-
+//以下テストコード
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String itemCategoryName = "";
-		ArrayList<ItemBean> itemList = Item.getItemAndOptionListAll(itemCategoryName);
+		String itemCategoryName = "衣類";
+		int flg = 1;
+		ArrayList<ItemBean> itemList = Item.getItemAndOptionListByDelFlg(flg,itemCategoryName);
 		request.setAttribute("item", itemList);
 	}
 

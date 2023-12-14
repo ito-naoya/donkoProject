@@ -10,6 +10,7 @@ import model.items.itemsDelete.DeleteItemFromItems;
 import model.items.itemsInsert.InsertNewItemToItems;
 import model.items.itemsSelect.SelectItemAllDetailFromItems;
 import model.items.itemsSelect.SelectItemAndOptionListAll;
+import model.items.itemsSelect.SelectItemAndOptionListByDelFlg;
 import model.items.itemsSelect.SelectItemDetailFromItems;
 import model.items.itemsSelect.SelectItemDetailOptionFromItems;
 import model.items.itemsSelect.SelectItemImageListFromItems;
@@ -54,10 +55,10 @@ public class Item {
 		return SelectItemAndOptionListAll.selectItemAndOptionListAll(itemCategoryName);
 	};
 
-//	//商品の一覧を取り扱い指定込みで取得する(カテゴリ指定も可能)
-//	public static ArrayList<ItemBean> getItemAndOptionListByDelFlg(int itemDeleteFlg, String itemCategoryName){
-//		return SelectItemAndOptionListByDelFlg.selectItemAndOptionListByDelFlg(itemDeleteFlg, itemCategoryName);
-//	};
+	//商品の一覧を取り扱い指定込みで取得する(カテゴリ指定も可能)
+	public static ArrayList<ItemBean> getItemAndOptionListByDelFlg(int itemDeleteFlg, String itemCategoryName){
+		return SelectItemAndOptionListByDelFlg.selectItemAndOptionListByDelFlg(itemDeleteFlg, itemCategoryName);
+	};
 
 	//商品の詳細を取得する
 	public static ItemBean getItemDetail(ItemBean itemBean){
