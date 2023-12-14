@@ -17,10 +17,11 @@ public class EditShippingAddressServlet extends HttpServlet {
     public EditShippingAddressServlet() {
         super();
     }
-
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// 配送先編集画面
+		String view = "/WEB-INF/views/customer/shippingAddressEdit.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	
