@@ -10,7 +10,6 @@ import bean.ShippingAddressBean;
 import classes.Cart;
 import classes.Item;
 import classes.Purchase;
-import classes.PurchaseDetail;
 import classes.ShippingAddress;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
@@ -88,9 +87,6 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		pb.setShippingAddressId(shippingAddressId);
 
 		Purchase.purchaseItem(pb);
-		PurchaseDetail.addPurchaseDetail(pb);
-		Item.updateItemStock(pb);
-		Cart.deleteAllItemFromCart(loginedUser);
 		
 		String view = "/WEB-INF/views/customer/purchaseComplete.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
