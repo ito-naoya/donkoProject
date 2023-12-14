@@ -91,6 +91,7 @@ public class SelectItemListFromItemsByOption {
 				isNotExist = true;
 			} else {
 				isNotExist = false;
+				break;
 			}
 		}
 		return isNotExist;
