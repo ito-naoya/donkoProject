@@ -29,12 +29,12 @@ public class CategoryServlet extends HttpServlet {
 		itemBean.setItemCategoryName(categoryName);
 		
 		// オプション選択の取得
-		ArrayList<ArrayList<OptionCategoryBean>> ONValueListALL = OptionCategory.getOptionCategoryListAllByCategory(itemBean);
+		ArrayList<ArrayList<OptionCategoryBean>> optionCategoryValueListAll = OptionCategory.getOptionCategoryListAllByCategory(itemBean);
 		// カテゴリー一覧の取得
 		ArrayList<ItemBean> itemList =Item.getItemListByCategory(itemBean);
 		
 		request.setAttribute("categoryName", categoryName);
-		request.setAttribute("ONValueListALL", ONValueListALL);
+		request.setAttribute("optionCategoryValueListAll", optionCategoryValueListAll);
 		request.setAttribute("itemList", itemList);
 		
 		String view = "/WEB-INF/views/customer/categoryIndex.jsp";
