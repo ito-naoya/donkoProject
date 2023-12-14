@@ -47,8 +47,8 @@ public class OptionServlet extends HttpServlet {
         request.getRequestDispatcher(view).forward(request, response);
 	}
 	
-	protected static String checkedOption(String[] checkedOption) {
-		String str = "[ " + checkedOption[0] + " ]";
+	private static String checkedOption(String categoryName, String[] checkedOption) {
+		String str = "[ " + categoryName + " ], [ " + checkedOption[0] + " ]";
 	    for (int index = 1; index < checkedOption.length; index++) {
 	        str += ", " + "[ " + checkedOption[index] + " ]";
 	    }
