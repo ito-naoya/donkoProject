@@ -39,7 +39,7 @@
 				<div class="form-group"
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
 					<input type="text" class="form-control" id="exampleInputAddresses"
-						aria-describedby="addresses" value="">
+						aria-describedby="addresses" name="addresses" value="">
 <%-- 					<input type="text" class="form-control" id="exampleInputUserId"
 						aria-describedby="userId" value="<%=users.getUserLoginId()%>"> --%>
 				</div>
@@ -49,7 +49,7 @@
 				<div class="form-group"
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
 					<input type="text" class="form-control" id="exampleInputPostCode"
-						aria-describedby="postCode" maxlength="8" value="">
+						aria-describedby="postCode" maxlength="8" name="postcode" value="">
 <%-- 					<input type="text" class="form-control" id="exampleInputPostCode"
 						aria-describedby="postCode" maxlength="8" value="<%=shippingAddress.getpostCode()%>"> --%>
 				</div>
@@ -58,8 +58,8 @@
 				</div>
         <div class="form-group"
           style="display: flex; justify-content: center; margin-bottom: 30px;">
-          <input type="text" class="form-control" id="exampleInputPostCode"
-            aria-describedby="postCode" value="">
+          <input type="text" class="form-control" id="exampleInputAddress"
+            aria-describedby="address" name="address" value="">
 <%--           <input type="text" class="form-control" id="exampleInputPostCode"
             aria-describedby="postCode" maxlength="8" value="<%=shippingAddress.getpostCode()%>"> --%>
         </div>
