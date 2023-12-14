@@ -10,7 +10,6 @@ import model.items.itemsDelete.DeleteItemFromItems;
 import model.items.itemsInsert.InsertNewItemToItems;
 import model.items.itemsSelect.SelectItemAllDetailFromItems;
 import model.items.itemsSelect.SelectItemAndOptionListAll;
-import model.items.itemsSelect.SelectItemAndOptionListByDelFlg;
 import model.items.itemsSelect.SelectItemDetailFromItems;
 import model.items.itemsSelect.SelectItemDetailOptionFromItems;
 import model.items.itemsSelect.SelectItemImageListFromItems;
@@ -50,16 +49,16 @@ public class Item {
 			return SelectItemListFromItems.selectItemListFromItems();
 		};
 
-	//商品の一覧を取得する
-	public static ArrayList<ItemBean> getItemAndOptionListAll(){
-		return SelectItemAndOptionListAll.selectItemAndOptionListAll();
+	//商品の一覧を取得する(カテゴリ指定も可能)
+	public static ArrayList<ItemBean> getItemAndOptionListAll(String itemCategoryName){
+		return SelectItemAndOptionListAll.selectItemAndOptionListAll(itemCategoryName);
 	};
 
-	//商品の一覧を取得する
-	public static ArrayList<ItemBean> getItemAndOptionListByDelFlg(int itemDeleteFlg){
-		return SelectItemAndOptionListByDelFlg.selectItemAndOptionListByDelFlg(itemDeleteFlg);
-	};
-		
+//	//商品の一覧を取り扱い指定込みで取得する(カテゴリ指定も可能)
+//	public static ArrayList<ItemBean> getItemAndOptionListByDelFlg(int itemDeleteFlg, String itemCategoryName){
+//		return SelectItemAndOptionListByDelFlg.selectItemAndOptionListByDelFlg(itemDeleteFlg, itemCategoryName);
+//	};
+
 	//商品の詳細を取得する
 	public static ItemBean getItemDetail(ItemBean itemBean){
 		return SelectItemDetailFromItems.selectItemDetailFromItems(itemBean);
@@ -99,7 +98,7 @@ public class Item {
 	public static void updateItemStock(PurchaseBean purchaseBean) {
 		UpdateItemStockInItems.updateItemStockInItems(purchaseBean);
 	}
-	
+
 	//商品を削除する（論理削除）
 	public static void deleteItem(ItemBean itemBean){
 		DeleteItemFromItems.deleteItemFromItems(itemBean);
