@@ -19,9 +19,9 @@ public class SelectItemAllDetailFromItems {
 		sb.append("FROM "																						);
 		sb.append(		"items "																				);
 		sb.append("INNER JOIN "																					);
-		sb.append(		"`options` "																			);
+		sb.append(		"options "																			);
 		sb.append("ON "																							);
-		sb.append(		"items.item_id = `options`.item_id "													);
+		sb.append(		"items.item_id = options.item_id "													);
 		sb.append("INNER JOIN "																					);
 		sb.append(		"option_categories "																	);
 		sb.append("ON "																							);
@@ -34,12 +34,13 @@ public class SelectItemAllDetailFromItems {
 		String sql = sb.toString();
 
 		ArrayList<Object> params = new ArrayList<Object>();
-
+		params.add(itemBean.getItemId());
 		ItemBean ib = new ItemBean();
 		try(Connection conn = DatabaseConnection.getConnection();){
 			try(ResultSet rs = GeneralDao.executeQuery(conn, sql, params)){
 
 				if(rs.next()){
+					ib.setItemId(rs.getInt("item_id"));
 		            ib.setItemCategoryName(rs.getString("item_category_name"));
 		            ib.setItemName(rs.getString("item_name"));
 		            ib.setItemDescription(rs.getString("item_description"));
