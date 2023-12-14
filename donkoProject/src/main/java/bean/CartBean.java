@@ -9,6 +9,7 @@ public class CartBean {
 	private String imageFileName;
 	private int itemPrice;
 	private int quantity;
+	private int itemStock;
 	private String itemOptionDetail;
 	
 	public CartBean(){};
@@ -70,19 +71,20 @@ public class CartBean {
 		this.quantity = quantity;
 	}
 
+	public int getItemStock() {
+		return itemStock;
+	}
+
+	public void setItemStock(int itemStock) {
+		this.itemStock = itemStock;
+	}
 
 	public String getItemOptionDetail() {
 		return itemOptionDetail;
 	}
 
-
 	public void setItemOptionDetail(String itemOptionDetail) {
 		this.itemOptionDetail = itemOptionDetail;
 	}
 
-
-
-	
-	
-	
 }

@@ -57,7 +57,7 @@
 										数量: 
 										<select name="quantity" style="border: none;">
 										<%
-										for(int i = 1; i <= 9; i ++) {
+										for(int i = 1; i <= cb.getItemStock(); i ++) {
 										%>
 											<%
 											if (i == cb.getQuantity()) {
