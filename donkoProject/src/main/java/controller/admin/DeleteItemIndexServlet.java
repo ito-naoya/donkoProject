@@ -51,16 +51,17 @@ public class DeleteItemIndexServlet extends HttpServlet {
 		Integer sortParam = Integer.parseInt(request.getParameter("sortParam"));
 
 		//以下、ソートSQL(戻り値がnullでもjspに渡す)
-		//ロジックをclassに書くべきか悩み中・・・
 		ArrayList<ItemBean> itemList = null;
 		if(!itemCategory.isEmpty() && sortParam == 2) { //sortParamが2なら、全商品を抽出
 			itemList = Item.getItemAndOptionListAll(itemCategory);
 
-		} else if(itemCategory.isEmpty() && sortParam < 2 ) { //全商品を、削除フラグを確認して抽出
+		} else if(itemCategory.isEmpty() && sortParam < 2 ) { //sortParamが2未満なら、削除フラグを確認して抽出
 			itemList = Item.getItemAndOptionListByDelFlg(sortParam, itemCategory);
 		}
-
 		request.setAttribute("itemList", itemList);
+		
+		String view = "/WEB-INF/views/admin/deleteItemIndex.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 }
