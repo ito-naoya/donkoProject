@@ -38,17 +38,17 @@
 			<strong>購入履歴</strong>
 		</h2>
 		<div
-			style="padding-top: 20px; padding-bottom: 20px; margin: 20px 40px 40px; border: 1px solid #333333; overflow-x: scroll;"
+			style="padding: 20px; margin: 20px 40px 40px; border: 1px solid #333333; overflow-x: scroll;"
 			class="border">
 			<table class="table table-borderless">
-				<thead align="center"
-					style="display: flex; justify-content: space-between;">
-					<th width="20" style="padding-left: 100px";><strong>No.</strong></th>
-					<th width="200"><strong>合計金額</strong></th>
-					<th width="200"><strong>購入日</strong></th>
-					<th width="300"><strong>配送先</strong></th>
-					<th width="300"><strong>配送ステータス</strong></th>
-					<br>
+				<thead align="center">
+				<tr>
+					<th style="width:10px;"><strong>No.</strong></th>
+					<th><strong>合計金額</strong></th>
+					<th><strong>購入日</strong></th>
+					<th><strong>配送先</strong></th>
+					<th><strong>配送ステータス</strong></th>
+					<tr>
 				</thead>
 				<tbody>
 					<%
@@ -57,20 +57,19 @@
 					<%
 					for (PurchaseBean purchaseBean : purchaseList) {
 					%>
-					<tr align="center"
-						style="display: flex; justify-content: space-between; height: auto; margin-right: 100px;">
+					<tr>
 						<!-- 購入履歴ID -->
-						<td width="20" style="padding-left: 100px";><a
+						<td align="middle" style="width:10px;"><a
 							href='orderDetail?purchase_id=<%=purchaseBean.getPurchaseId()%>'><%=purchaseBean.getPurchaseId()%></a>
 							</button></td>
 						<!-- 合計金額 -->
-						<td width="200" style="padding-left: 100px";>¥ <%=String.format("%,d", purchaseBean.getTotalAmount())%></td>
+						<td align="middle" style="width:150px;">¥ <%=String.format("%,d", purchaseBean.getTotalAmount())%></td>
 						<!-- 購入日 -->
-						<td width="200" style="padding-left: 100px";><%=purchaseBean.getPurchaseDate()%></td>
+						<td align="middle" style="width:150px;"><%=purchaseBean.getPurchaseDate()%></td>
 						<!-- 配送先 -->
-						<td width="200" style="padding-left: 100px";><%=purchaseBean.getShippingAddress()%></td>
+						<td align="middle"><%=purchaseBean.getShippingAddress()%></td>
 						<!-- 配送ステータス -->
-						<td width="200" style="padding-left: 100px";><%=purchaseBean.getShippingStatus()%></td>
+						<td align="middle" style="width:200px;"><%=purchaseBean.getShippingStatus()%></td>
 					</tr>
 					<%
 					}
