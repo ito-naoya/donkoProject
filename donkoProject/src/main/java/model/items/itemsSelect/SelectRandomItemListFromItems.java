@@ -18,7 +18,6 @@ public class SelectRandomItemListFromItems {
 		ArrayList<Object> paramList = new ArrayList<>() {{ }};
 		try (Connection conn = DatabaseConnection.getConnection()) {
 			try (ResultSet result = GeneralDao.executeQuery(conn, SELECT_ALL_ITEMLIST_SQL, paramList)) {
-				
 				// 1回目
 				if(result.next()){ 
 					ItemBean itemBean = new ItemBean();
@@ -65,7 +64,7 @@ public class SelectRandomItemListFromItems {
 		return itemlist;
 	};
 	
-	// 取得したデータを格納したList内に同じ画像名が存在するかを判定
+	// 取得したデータを格納した配列内に同じ画像名が存在するかを判定
 	private static boolean isNotExist(ArrayList<ItemBean> itemList, String imageFileName) {
 		boolean isNotExist = false;
 		for (int i = 0; i < itemList.size(); i++) {
