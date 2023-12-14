@@ -17,18 +17,31 @@ public class SelectItemDetailFromItems {
 		//商品の詳細情報を取得するSQL
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT ");
-		sql.append(		"item_id, ");
-		sql.append(		"item_category_name, ");
-		sql.append(		"item_name, ");
-		sql.append(		"item_description, ");
-		sql.append(		"price, ");
-		sql.append(		"stock, ");
-		sql.append(		"file_name ");
+		sql.append(		"items.item_id, ");
+		sql.append(		"items.item_name, ");
+		sql.append(		"items.item_category_name, ");
+		sql.append(		"items.item_description, ");
+		sql.append(		"items.price, ");
+		sql.append(		"items.stock, ");
+		sql.append(		"items.file_name, ");
+		sql.append(		"group_concat(option_categories.option_category_value separator ',')");
 		sql.append("FROM ");
 		sql.append(		"items ");
+		sql.append("INNER JOIN ");
+		sql.append(		"`options` ");
+		sql.append("ON ");
+		sql.append(		"items.item_id = `options`.item_id ");
+		sql.append("INNER JOIN ");
+		sql.append(		"option_categories ");
+		sql.append("ON ");
+		sql.append(		"`options`.option_category_name = option_categories.option_category_name ");
+		sql.append("AND ");
+		sql.append(		"`options`.option_category_increment_id = option_categories.option_category_increment_id ");
 		sql.append("WHERE ");
 		//パラメータをここで使う
-		sql.append(		"item_id = ?");
+		sql.append(		"items.item_id = ? ");
+		sql.append("GROUP BY ");
+		sql.append(		"items.item_id");
 		//sqlを文字列化
 		final String SELECT_ITEMDETAIL_SQL = sql.toString();
 
@@ -54,6 +67,7 @@ public class SelectItemDetailFromItems {
 					ib.setItemPrice(rs.getInt("price"));
 					ib.setItemStock(rs.getInt("stock"));
 					ib.setImageFileName(rs.getString("file_name"));
+					ib.setItemFirstOptionValue(rs.getString("group_concat(option_categories.option_category_value separator ',')"));
 				}
 
 			} catch (SQLException e) {

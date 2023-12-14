@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.CartBean;
-import bean.ItemBean;
 import bean.PurchaseBean;
 import bean.ShippingAddressBean;
 import classes.Cart;
-import classes.Item;
 import classes.Purchase;
 import classes.ShippingAddress;
 import classes.user.CustomerUser;
@@ -40,27 +38,26 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		CustomerUser loginedUser = new CustomerUser(); 
 		loginedUser.setUserId(2);
 		
+		//ログインしているユーザーのメインの配送先を取得
 		ShippingAddressBean shippingAddress = ShippingAddress.getMainShippingAddress(loginedUser);
+		//ログインしているユーザーがカートに追加した商品を全て取得
 		ArrayList<CartBean> cartList = Cart.getItemListFromCart(loginedUser);
 		
-		cartList.forEach(cb -> {
-			ItemBean ib = new ItemBean();
-			ib.setItemId(cb.getItemId());
-			ItemBean itemOptionDetail =  Item.getItemDetailOption(ib);
-			cb.setItemOptionDetail(itemOptionDetail.getItemFirstOptionValue());
-		});
-		
-		Integer totalPrice= cartList.stream()
-				.map(cb -> cb.getItemPrice() * cb.getQuantity())
-				.mapToInt( i -> i )
-				.sum();
-		
-		request.setAttribute("shippingAddress", shippingAddress);
-		request.setAttribute("cartList", cartList);
-		request.setAttribute("totalPrice", totalPrice);
-		
-		String view = "/WEB-INF/views/customer/purchaseConfirm.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		if(cartList != null && shippingAddress != null) {
+			
+			//カート内の商品の合計金額をtotalPriceに代入
+			Integer totalPrice= cartList.stream()
+					.map(cb -> cb.getItemPrice() * cb.getQuantity())
+					.mapToInt( i -> i )
+					.sum();
+			
+			request.setAttribute("shippingAddress", shippingAddress);
+			request.setAttribute("cartList", cartList);
+			request.setAttribute("totalPrice", totalPrice);
+			
+			String view = "/WEB-INF/views/customer/purchaseConfirm.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
