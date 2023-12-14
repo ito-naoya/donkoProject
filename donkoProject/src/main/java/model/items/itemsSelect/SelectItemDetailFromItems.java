@@ -15,35 +15,35 @@ public class SelectItemDetailFromItems {
 	public static ItemBean selectItemDetailFromItems(ItemBean itemBean) {
 
 		//商品の詳細情報を取得するSQL
-		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT ");
-		sql.append(		"items.item_id, ");
-		sql.append(		"items.item_name, ");
-		sql.append(		"items.item_category_name, ");
-		sql.append(		"items.item_description, ");
-		sql.append(		"items.price, ");
-		sql.append(		"items.stock, ");
-		sql.append(		"items.file_name, ");
-		sql.append(		"group_concat(option_categories.option_category_value separator ',')");
-		sql.append("FROM ");
-		sql.append(		"items ");
-		sql.append("INNER JOIN ");
-		sql.append(		"`options` ");
-		sql.append("ON ");
-		sql.append(		"items.item_id = `options`.item_id ");
-		sql.append("INNER JOIN ");
-		sql.append(		"option_categories ");
-		sql.append("ON ");
-		sql.append(		"`options`.option_category_name = option_categories.option_category_name ");
-		sql.append("AND ");
-		sql.append(		"`options`.option_category_increment_id = option_categories.option_category_increment_id ");
-		sql.append("WHERE ");
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT ");
+		sb.append(		"items.item_id, ");
+		sb.append(		"items.item_name, ");
+		sb.append(		"items.item_category_name, ");
+		sb.append(		"items.item_description, ");
+		sb.append(		"items.price, ");
+		sb.append(		"items.stock, ");
+		sb.append(		"items.file_name, ");
+		sb.append(		"group_concat(option_categories.option_category_value separator ',')");
+		sb.append("FROM ");
+		sb.append(		"items ");
+		sb.append("INNER JOIN ");
+		sb.append(		"`options` ");
+		sb.append("ON ");
+		sb.append(		"items.item_id = `options`.item_id ");
+		sb.append("INNER JOIN ");
+		sb.append(		"option_categories ");
+		sb.append("ON ");
+		sb.append(		"`options`.option_category_name = option_categories.option_category_name ");
+		sb.append("AND ");
+		sb.append(		"`options`.option_category_increment_id = option_categories.option_category_increment_id ");
+		sb.append("WHERE ");
 		//パラメータをここで使う
-		sql.append(		"items.item_id = ? ");
-		sql.append("GROUP BY ");
-		sql.append(		"items.item_id");
-		//sqlを文字列化
-		final String SELECT_ITEMDETAIL_SQL = sql.toString();
+		sb.append(		"items.item_id = ? ");
+		sb.append("GROUP BY ");
+		sb.append(		"items.item_id");
+		//sbを文字列化
+		final String SELECT_ITEM_DETAIL_SQL = sb.toString();
 
 		//詳細情報を取得したい商品のIDをリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
@@ -55,7 +55,7 @@ public class SelectItemDetailFromItems {
 		//データベース接続
 		try (Connection conn = DatabaseConnection.getConnection();) {
 			//商品の詳細情報を取得
-			try (ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEMDETAIL_SQL, params);) {
+			try (ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEM_DETAIL_SQL, params);) {
 
 				while (rs.next()) {
 					//商品情報を保持するitemBeanをnew

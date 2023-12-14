@@ -14,21 +14,21 @@ public class UpdateItemQuantityInCarts {
 	public static void updateItemQuantityInCarts(CartBean cartBean) {
 
 		//カート内の対象の商品の数量を更新するSQL
-		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE ");
-		sql.append(		"carts ");
-		sql.append("SET ");
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE ");
+		sb.append(		"carts ");
+		sb.append("SET ");
 		//パラメータをここで使う(1/3)
-		sql.append(		"quantity = ? ");
-		sql.append("WHERE ");
+		sb.append(		"quantity = ? ");
+		sb.append("WHERE ");
 		//パラメータをここで使う(2/3)
-		sql.append(		"user_id = ? ");
-		sql.append("AND ");
+		sb.append(		"user_id = ? ");
+		sb.append("AND ");
 		//パラメータをここで使う(3/3)
-		sql.append(		"item_id = ? ");
-		final String UPDATE_QUANTITY_SQL = sql.toString();
+		sb.append(		"item_id = ? ");
+		final String UPDATE_QUANTITY_SQL = sb.toString();
 
-		//数量更新したい商品IDと登録したユーザーのID、更新したい数量をリストに追加
+		//数量更新したい商品IDとログインしているユーザーのID、更新したい数量をリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(cartBean.getQuantity());
 		params.add(cartBean.getUserId());
@@ -39,6 +39,7 @@ public class UpdateItemQuantityInCarts {
 			try {
 				//カート内の商品の数量を更新
 				GeneralDao.executeUpdate(conn, UPDATE_QUANTITY_SQL, params);
+				//sqlをコミット
 				conn.commit();
 			} catch (SQLException e) {
 				if (!conn.isClosed()) {

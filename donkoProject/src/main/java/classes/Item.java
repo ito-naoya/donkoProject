@@ -13,12 +13,12 @@ import model.items.itemsSelect.SelectItemAndOptionListAll;
 import model.items.itemsSelect.SelectItemAndOptionListByDelFlg;
 import model.items.itemsSelect.SelectItemDetailFromItems;
 import model.items.itemsSelect.SelectItemImageListFromItems;
-import model.items.itemsSelect.SelectItemListFromItems;
 import model.items.itemsSelect.SelectItemListFromItemsByCategory;
 import model.items.itemsSelect.SelectItemListFromItemsByOption;
 import model.items.itemsSelect.SelectItemListWithoutDuplicate;
 import model.items.itemsSelect.SelectItemNameListFromItemsByCategory;
 import model.items.itemsSelect.SelectItemOptionListFromItems;
+import model.items.itemsSelect.SelectRandomItemListFromItems;
 import model.items.itemsUpdate.UpdateItemInfoInItems;
 
 public class Item {
@@ -45,7 +45,7 @@ public class Item {
 
 	//商品の一覧を取得する
 		public static ArrayList<ItemBean> getItemList(){
-			return SelectItemListFromItems.selectItemListFromItems();
+			return SelectRandomItemListFromItems.selectItemListFromItems();
 		};
 
 	//商品の一覧を取得する(カテゴリ指定も可能)

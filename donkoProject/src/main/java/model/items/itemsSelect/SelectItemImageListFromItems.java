@@ -15,46 +15,52 @@ public class SelectItemImageListFromItems {
 	public static ArrayList<ItemBean> selectItemImageListFromItems(ItemBean itemBean) {
 		
 		//詳細表示している商品の色違い画像を取得するSQL
-		StringBuilder sql = new StringBuilder();	
-		sql.append("SELECT "																			   );
-		sql.append(		"items.item_id, "																   );
-		sql.append(		"items.file_name "																   );
-		sql.append("FROM "																				   );
-		sql.append(		"items "																		   );
-		sql.append("INNER JOIN "																		   );
-		sql.append(		"item_categories "																   );
-		sql.append("ON "																				   );
-		sql.append(		"items.item_category_name = item_categories.item_category_name "				   );
-		sql.append("INNER JOIN "																		   );
-		sql.append(		"`options` "																	   );
-		sql.append("ON "																				   );
-		sql.append(		"items.item_id = options.item_id "												   );
-		sql.append("AND "																				   );
-		sql.append(		"item_categories.option_category_name = options.option_category_name "			   );
-		sql.append("AND "																				   );
-		sql.append(		"options.option_category_name != '色' "											   );
-		sql.append("WHERE "																				   );
-		sql.append(		"item_name = (SELECT "															   );
-		sql.append(						"item_name "													   );		  	                                                       
-		sql.append(					"FROM "																   );		  	                                                             
-		sql.append(						"items "														   );		 	                                                            
-		sql.append(					"WHERE "															   );		 	                                                            
+		StringBuilder sb = new StringBuilder();	
+		sb.append("SELECT ");
+		sb.append(		"items.item_id, ");
+		sb.append(		"items.file_name ");
+		sb.append("FROM ");
+		sb.append(		"items ");
+		sb.append("INNER JOIN ");
+		sb.append(		"item_categories ");
+		sb.append("ON ");
+		sb.append(		"items.item_category_name = item_categories.item_category_name ");
+		sb.append("INNER JOIN ");
+		sb.append(		"`options` ");
+		sb.append("ON ");
+		sb.append(		"items.item_id = options.item_id ");
+		sb.append("AND ");
+		sb.append(		"item_categories.option_category_name = options.option_category_name ");
+		sb.append("AND ");
+		sb.append(		"options.option_category_name != '色' ");
+		sb.append("WHERE ");
+		sb.append(		"item_name = ");
+		sb.append(					"(");
+		sb.append(						"SELECT ");
+		sb.append(							"item_name ");		  	                                                       
+		sb.append(						"FROM ");		  	                                                             
+		sb.append(							"items ");		 	                                                            
+		sb.append(						"WHERE ");		 	                                                            
 		//パラメータをここで使う（1/2回目)
-		sql.append(						"item_id = ? ) "												   );		  	                                                     
-		sql.append("AND "																				   );
-		sql.append(		"option_category_increment_id = (SELECT "						  				   );                                                                   
-		sql.append(											"option_category_increment_id "				   );                                                      
-		sql.append(										"FROM "							   				   );
-		sql.append(											"options "					   				   );
-		sql.append(										"WHERE "						   				   );
+		sb.append(							"item_id = ?");		  	                                                     
+		sb.append(					") ");		  	                                                     
+		sb.append("AND ");
+		sb.append(		"option_category_increment_id = ");                                                                   
+		sb.append(										"(");                                                                   
+		sb.append(											"SELECT ");                                                                   
+		sb.append(												"option_category_increment_id ");                                                      
+		sb.append(											"FROM ");
+		sb.append(												"options ");
+		sb.append(											"WHERE ");
 		//パラメータをここで使う（2/2回目)
-		sql.append(											"item_id = ? "				   				   );
-		sql.append(										"AND "							   			 	   );
-		sql.append(											"option_category_name != '色') "				   );
-		sql.append("AND "							   				  									   );
-		sql.append(		"items.item_delete_flg != 1 "  				  									   );                                                                  
+		sb.append(												"item_id = ? ");
+		sb.append(											"AND ");
+		sb.append(												"option_category_name != '色')"	);
+		sb.append(										") ");
+		sb.append("AND ");
+		sb.append(		"items.item_delete_flg != 1 ");                                                                  
 		//SQL文を文字列に変換
-		final String SELECT_ITEMIMAGELIST_SQL = sql.toString();
+		final String SELECT_ITEM_IMAGE_LIST_SQL = sb.toString();
 		
 		//比較するための商品IDをリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
@@ -66,8 +72,8 @@ public class SelectItemImageListFromItems {
 
 		//データベース接続
 		try (Connection conn = DatabaseConnection.getConnection();) {
-			//色違い画像の取得
-			try (ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEMIMAGELIST_SQL, params);) {
+			//同じ商品名の色違い画像の取得
+			try (ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEM_IMAGE_LIST_SQL, params);) {
 				
 				while (rs.next()) {
 					//取得した画像情報を保持するitemBeanをnew

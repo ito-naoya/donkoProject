@@ -15,10 +15,10 @@
 		<%@include file="../component/headerTopSpace.jsp"%>
 		<main class="m-5">
 			<%
-				ArrayList<CartBean> cartList = (ArrayList<CartBean>)request.getAttribute("cartList");
+				ArrayList<CartBean> cartBeanList = (ArrayList<CartBean>)request.getAttribute("cartBeanList");
 			%>
 			<%
-			if(cartList.size() > 0) {
+			if(cartBeanList.size() > 0) {
 			%>
 				<div>
 					<form action="purchaseConfirm" method="get" class="d-flex justify-content-end mb-3">
@@ -34,7 +34,7 @@
 				<div class="row justify-content-center">
 					<div class="col-11">
 						<%
-						if(cartList.size() == 0 ) {
+						if(cartBeanList.size() == 0 ) {
 						%>
 							<h1 class="text-center">現在カートの中に商品はありません</h1>
 						<%
@@ -42,7 +42,7 @@
 						%>
 						<table class="table table-borderless">
 							<%
-							for(CartBean cb : cartList) {
+							for(CartBean cb : cartBeanList) {
 							%>
 								<tr>
 									<td>
@@ -116,7 +116,7 @@
 						</table>
 					</div>
 					<%
-					if(cartList.size() > 0){
+					if(cartBeanList.size() > 0){
 					%>
 						<div class="d-flex justify-content-center">
 							<form action="deleteCart" method="POST" class="d-flex justify-content-end mt-3">

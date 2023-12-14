@@ -61,10 +61,10 @@
 					<hr>
 					<table class="table table-borderless">
 						<%
-						ArrayList<CartBean> cartList = (ArrayList<CartBean>) request.getAttribute("cartList");
+						ArrayList<CartBean> cartBeanList = (ArrayList<CartBean>) request.getAttribute("cartBeanList");
 						%>
 						<%
-						for(CartBean cb : cartList) {
+						for(CartBean cb : cartBeanList) {
 						%>
 							<tr>
 								<td style="width: 200px">
