@@ -1,4 +1,4 @@
-package controller.user;
+package controller.customer;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -14,11 +14,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/editUserInfo")
-public class EditUserInfoServlet extends HttpServlet {
+@WebServlet("/userInfoEdit")
+public class UserInfoEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public EditUserInfoServlet() {
+    public UserInfoEditServlet() {
         super();
     }
 
@@ -31,7 +31,7 @@ public class EditUserInfoServlet extends HttpServlet {
 		}
 		
 		CustomerUser customerUser = new CustomerUser();
-		customerUser.setUserId(user_id);
+		customerUser.setUserId(userId);
 		
 		// ユーザー情報取得
 		CustomerUser users = CustomerUser.getUserDetail(customerUser);
@@ -49,6 +49,8 @@ public class EditUserInfoServlet extends HttpServlet {
 			request.getRequestDispatcher(view).forward(request, response);
 		}
 		
+		
+		
 		// インスタンス生成
 		CustomerUser customerUser = new CustomerUser();
 		
@@ -62,6 +64,10 @@ public class EditUserInfoServlet extends HttpServlet {
 		// 更新処理実行
 		CustomerUser users = new CustomerUser();
 		users.updateUserInfo(customerUser);
+		
+		////////////
+		//ここから下のコード、response.sendRedirect("myPage")でいけますか？？
+		////////////
 		
 		// マイページに戻るためのデータセット
 		ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
