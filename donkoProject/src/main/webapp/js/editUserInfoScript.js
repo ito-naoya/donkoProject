@@ -1,7 +1,7 @@
-let switchBtn = document.getElementById('change');
-let passwordText = document.getElementById('exampleInputPassword');
+const switchBtn = document.getElementById('change');
+const passwordText = document.getElementById('exampleInputPassword');
 
-let changeElement = (el)=> {
+const changeElement = (el)=> {
   if(el.style.display==''){
     el.style.display='none';
   }else{
