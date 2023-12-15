@@ -41,7 +41,12 @@ public class SelectItemAndOptionListByDelFlg {
 			sb.append(		"item_category_name  = ? "															);
 		}
 		sb.append("ORDER BY "																					);
-		sb.append(    "items.item_id;"																			);
+		sb.append(    "items.item_id, "																			);
+		sb.append(	"CASE "																						);
+		sb.append(    "WHEN options.option_category_name = '色' "												);
+		sb.append(    "THEN 0 "																					);
+		sb.append(    "ELSE 1 "																					);
+		sb.append(  "END;"																						);
 
 		final String SELECT_ITEM_AND_OPTION_LIST_DELFLG_SQL = sb.toString();
 
@@ -80,7 +85,7 @@ public class SelectItemAndOptionListByDelFlg {
 	                    lastItemId = currentItemId; // 最後に処理したitem_idを更新
 	                } else {
 	                    // 同じitem_idの場合、2つ目のオプションを設定
-	                    currentIb.setItemSecondOptionName(rs.getString("option_category_value"));
+	                    currentIb.setItemSecondOptionValue(rs.getString("option_category_value"));
 	                }
 	            }
 
