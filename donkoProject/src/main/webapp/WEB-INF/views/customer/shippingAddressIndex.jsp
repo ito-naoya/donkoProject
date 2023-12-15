@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>doko</title>
+<title>donko</title>
 </head>
 <body>
   <%@include file="../component/header.jsp"%>
