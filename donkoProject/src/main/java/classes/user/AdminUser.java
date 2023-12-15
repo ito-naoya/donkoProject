@@ -12,17 +12,17 @@ public class AdminUser extends User {
 	};
 
 	//ユーザーを削除する
-	public void deleteUser(CustomerUser customerUser) {
+	public static void deleteUser(CustomerUser customerUser) {
 		DeleteUserFromUsers.deleteUserFromUsers(customerUser);
 	};
 
 	//削除したユーザー一覧を取得する
-	public ArrayList<CustomerUser> getDeletedUserList() {
+	public static ArrayList<CustomerUser> getDeletedUserList() {
 		return SelectDeletedUserListFromUsers.selectDeletedUserListFromUsers();
 	};
 
 	//全てのユーザー一覧を取得する
-	public ArrayList<CustomerUser> getUserList() {
+	public static ArrayList<CustomerUser> getUserList() {
 		return SelectUserListFromUsers.selectUserListFromUsers();
 	};
 
