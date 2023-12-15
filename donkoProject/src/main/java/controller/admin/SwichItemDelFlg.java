@@ -17,16 +17,15 @@ public class SwichItemDelFlg extends HttpServlet {
 		super();
 	}
 
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-//	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		//選択済みの商品ステータスを全て取得、配列に格納
-		String[] itemStatus = request.getParameterValues("itemStatus");
+//		String[] itemStatus = request.getParameterValues("itemStatus");
+
+		//テストコード
+		String[] itemStatus = {"1", "2", "3"};
+;
 
 		//選択済みの商品のステータスを切り替えるサーブレット
 		if(itemStatus != null && itemStatus.length > 0) {
@@ -34,4 +33,7 @@ public class SwichItemDelFlg extends HttpServlet {
 		}
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	}
 }

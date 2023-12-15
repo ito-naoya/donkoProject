@@ -97,8 +97,8 @@ public class Item {
 	};
 
 	//商品を削除する（論理削除）
-	public static void deleteItem(ItemBean itemBean){
-		DeleteItemFromItems.deleteItemFromItems(itemBean);
+	public static void deleteItem(String[] itemStatus){
+		DeleteItemFromItems.deleteItemFromItems(itemStatus);
 	};
 	//商品画像をドキュメント内に登録する
 	public static void registerNewImage(Part part,String fileName, String oldFileName){
