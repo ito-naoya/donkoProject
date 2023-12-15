@@ -30,7 +30,7 @@ public class SelectShippingAddressList {
 		
 		// ？の引数に渡す値
 		ArrayList<Object> param = new ArrayList<Object>();
-		param.add(CustomerUser.getUserLoginId());
+		param.add(CustomerUser.getUserId());
 		
 		ArrayList<ShippingAddressBean> shippingAddressList = new ArrayList<ShippingAddressBean>();
 		ShippingAddressBean shippingAddressBean;
