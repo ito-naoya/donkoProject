@@ -1,10 +1,12 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="bean.ItemCategoryBean"%>
-<%@page import="bean.ItemBean"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+ pageEncoding="UTF-8"%>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.ArrayList, bean.ItemBean, bean.ItemCategoryBean"%>
 <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
 <html>
 <head>
 <meta charset="UTF-8">
@@ -68,83 +70,99 @@
 							</div>
 						</form>
 					</div>
+				</div>
 				<!-- 商品一覧を掲載 -->
 				<div class="row justify-content-center">
 					<div class="col-11 mt-4">
 							<h2>商品一覧</h1>
-						<div class="overflow-auto" style="height: calc(100vh - 200px);">
-						<table class="table table-borderless  st-tbl1">
-							<thead>
-							    <tr>
-							      <th scope="col">ID</th>
-							      <th scope="col">商品名</th>
-							      <th scope="col">カテゴリー</th>
-							      <th scope="col">オプション1</th>
-							      <th scope="col">オプション2</th>
-							      <th scope="col">金額</th>
-							      <th scope="col">在庫数</th>
-							      <th scope="col">ステータス</th>
-							      <th scope="col">編集</th>
-							    </tr>
-							</thead>
-							<tbody>
-							<div class="overflow" style="overflow: auto;"></div>
-							<%
-							    ArrayList<ItemBean> itemList = (ArrayList<ItemBean>) request.getAttribute("itemList");
-							    if(itemList != null){
-							        for(ItemBean item : itemList){
-							%>
-							            <tr>
-							                <td><!-- ID -->
-							                    <p><%= item.getItemId() %></p>
-							                </td>
-							                <td><!-- 商品名 -->
-							                    <p><%= item.getItemName() %></p>
-							                </td>
-							                <td><!-- カテゴリー -->
-							                    <p><%= item.getItemCategoryName() %></p>
-							                </td>
-							                <td><!-- オプション1 -->
-							                    <p><%= item.getItemFirstOptionValue() %></p>
-							                </td>
-							                <td><!-- オプション2 -->
-							                    <% if(item.getItemSecondOptionValue() != null && !item.getItemSecondOptionValue().isEmpty()){ %>
-							                        <p><%= item.getItemSecondOptionValue() %></p>
-							                    <% } else { %>
-							                        <p>-</p>
-							                    <% } %>
-							                </td>
-							                <td><!-- 金額 -->
-							                    <p><%= item.getItemPrice() %></p>
-							                </td>
-							                <td><!-- 在庫 -->
-							                    <p><%= item.getItemStock() %></p>
-							                </td>
-							                <td><!-- ステータス -->
-							                    <% if(item.isDeleted()){ %>
-							                        <p style="color: #CCC">削除済み</p>
-							                    <% } else { %>
-							                        <p style="color: #00FF00">販売中</p>
-							                    <% } %>
-							                </td>
-							                <td><!-- 編集ボタン -->
-							                    <button type="submit" style="border: 1px solid #000000; background: #385A37; color: white; text-decoration: none; border-radius: 0.8rem;">
-												    <a href="editItemInfo1?itemId=<%= item.getItemId() %>" style="color: white; text-decoration: none;">編集</a>
-												</button>
-							                </td>
-							            </tr>
-							<%
-							        }
-							    }
-							%>
-
-							</div>
-							</tbody>
-						</table>
-						</div>
+						<!-- ここから削除切り替えフォーム  -->
+						<form action="swichItemDelFlg" method="get">
+								<div class="overflow-auto" style="height: calc(90vh - 200px);">
+								<table class="table table-borderless  st-tbl1">
+									<thead>
+									    <tr>
+									      <th scope="col">ID</th>
+									      <th scope="col">商品名</th>
+									      <th scope="col">カテゴリー</th>
+									      <th scope="col">オプション1</th>
+									      <th scope="col">オプション2</th>
+									      <th scope="col">金額</th>
+									      <th scope="col">在庫数</th>
+									      <th scope="col">ステータス</th>
+									      <th scope="col">編集</th>
+									    </tr>
+									</thead>
+									<tbody>
+											<div class="overflow" style="overflow: auto;"＞
+													<%
+													    ArrayList<ItemBean> itemList = (ArrayList<ItemBean>) request.getAttribute("itemList");
+													   	 if(itemList != null){
+													        for(ItemBean item : itemList){
+													%>
+											            <tr>
+											                <td><!-- ID -->
+											                    <p><%= item.getItemId() %></p>
+											                </td>
+											                <td><!-- 商品名 -->
+											                    <p><%= item.getItemName() %></p>
+											                </td>
+											                <td><!-- カテゴリー -->
+											                    <p><%= item.getItemCategoryName() %></p>
+											                </td>
+											                <td><!-- オプション1 -->
+											                    <p><%= item.getItemFirstOptionValue() %></p>
+											                </td>
+											                <td><!-- オプション2 -->
+											                    <% if(item.getItemSecondOptionValue() != null && !item.getItemSecondOptionValue().isEmpty()){ %>
+											                        <p><%= item.getItemSecondOptionValue() %></p>
+											                    <% } else { %>
+											                        <p>-</p>
+											                    <% } %>
+											                </td>
+											                <td><!-- 金額 -->
+											                    <p><%= item.getItemPrice() %></p>
+											                </td>
+											                <td><!-- 在庫 -->
+											                    <p><%= item.getItemStock() %></p>
+											                </td>
+											                <td><!-- ステータス -->
+											                    <% if(item.isDeleted()){ %>
+																    <input type="checkbox" name="itemStatus" id="item_<%= item.getItemId() %>" style="display: none;" value="<%= item.getItemId() %>" onclick="changeTextColor(this, 'itemLabel_<%= item.getItemId() %>')">
+																    <label for="item_<%= item.getItemId() %>" id="itemLabel_<%= item.getItemId() %>" style="color: #CCC; cursor: pointer;">削除済み</label>
+																<% } else { %>
+																    <input type="checkbox" name="itemStatus" id="item_<%= item.getItemId() %>" style="display: none;" value="<%= item.getItemId() %>" onclick="changeTextColor(this, 'itemLabel_<%= item.getItemId() %>')">
+																    <label for="item_<%= item.getItemId() %>" id="itemLabel_<%= item.getItemId() %>" style="color: #00FF00; cursor: pointer;">販売中</label>
+																<% } %>
+											                </td>
+											                <td><!-- 編集ボタン -->
+											                    <button type="submit" style="border: 1px solid #000000; background: #385A37; color: white; text-decoration: none; border-radius: 2rem;">
+																    <a href="editItemInfo1?itemId=<%= item.getItemId() %>" style="color: white; text-decoration: none;">編集</a>
+																</button>
+											                </td>
+											            </tr>
+													<%
+													        }
+													    }
+													%>
+											</div>
+									</tbody>
+								</table>
+								</div>
+								<br>
+								<div class="row">
+								    <div class="col-11 d-flex justify-content-end">
+								    チェックしたアイテムのステータスを切り替える
+								        <button type="submit" class="btn px-3" onclick="return confirmStatusChange();" style="background-color: #E5CCFF; color: black; border-radius: 2rem;">
+										    実行
+										</button>
+								    </div>
+								</div>
+						</form>
 					</div>
 				</div>
+
 	</div>
 </main>
+<script src="./js/deleteItemScript.js"></script>
 </body>
 </html>
