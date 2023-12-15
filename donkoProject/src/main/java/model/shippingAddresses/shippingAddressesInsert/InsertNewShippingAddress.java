@@ -33,7 +33,7 @@ public class InsertNewShippingAddress {
 		// 配送先住所の設定
 		sb.append(	"?, "										);
 		// 宛名
-		sb.append(	"?, "										);
+		sb.append(	"? "										);
 		sb.append(	") "										);
 		String sql = sb.toString();
 		
