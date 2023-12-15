@@ -12,14 +12,31 @@ import dao.GeneralDao;
 public class SelectItemListFromItemsByOption {
 	//商品をカテゴリとオプション指定して取得する
 	public static ArrayList<ItemBean> selectItemListFromItemsByOption(String[] checkedOption, String categoryName){
-		final String SELECT_OPTION_ITEMLIST_SQL = "SELECT items.item_id, items.item_name, items.file_name "
-				+ "FROM items "
-				+ "INNER JOIN options ON items.item_id = options.item_id "
-				+ "INNER JOIN option_categories ON "
-				+ "options.option_category_name = option_categories.option_category_name AND "
-				+ "options.option_category_increment_id = option_categories.option_category_increment_id "
-				+ "WHERE items.item_category_name = ? "
-				+ "AND option_categories.option_category_value IN (" + questionNum(checkedOption) + ")";
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT ");
+		sb.append("    items.item_id, ");
+		sb.append("    items.item_name, ");
+		sb.append("    items.file_name ");
+		sb.append("FROM ");
+		sb.append("    items ");
+		sb.append("INNER JOIN ");
+		sb.append("    options ");
+		sb.append("ON ");
+		sb.append("    items.item_id = options.item_id ");
+		sb.append("INNER JOIN ");
+		sb.append("    option_categories ");
+		sb.append("ON ");
+		sb.append("    options.option_category_name = option_categories.option_category_name ");
+		sb.append("AND ");
+		sb.append("    options.option_category_increment_id = option_categories.option_category_increment_id ");
+		sb.append("WHERE ");
+		sb.append("    items.item_category_name = ? ");
+		sb.append("AND ");
+		sb.append("    option_categories.option_category_value ");
+		sb.append("    IN (" + questionNum(checkedOption) + ")");
+		
+		// SQLを文字列化
+		final String SELECT_OPTION_ITEMLIST_SQL = sb.toString();
 
 		ArrayList<Object> paramList = new ArrayList<>() {{
 			add(categoryName);
@@ -31,33 +48,20 @@ public class SelectItemListFromItemsByOption {
 		try (Connection conn = DatabaseConnection.getConnection()) {
 			try (ResultSet result = GeneralDao.executeQuery(conn, SELECT_OPTION_ITEMLIST_SQL, paramList)) {
 				
-				// 1回目
-				if(result.next()){ 
-					ItemBean itemBean = new ItemBean();
-					int itemId = result.getInt("item_id");
-					String itemName = result.getString("item_name");
-					String imageFileName = result.getString("file_name");
-					itemBean.setItemId(itemId);
-					itemBean.setItemName(itemName);
-					itemBean.setImageFileName(imageFileName);
-					optionList.add(itemBean);
-				}
-				
-				// 2回目以降
 				while(result.next()){ 
-					ItemBean IBeans = new ItemBean();
+					ItemBean itemBean = new ItemBean();
 					int itemId = result.getInt("item_id");
 					String itemName = result.getString("item_name");
 					String imageFileName = result.getString("file_name");
 					
 					// 画像名が一致するかを判定
-					boolean isNotExist = isNotExist(optionList, imageFileName);
+					boolean isNotExist = checkExist(optionList, imageFileName);
 					// 一致しない場合は配列に格納
-					if (isNotExist == true) {
-						IBeans.setItemId(itemId);
-						IBeans.setItemName(itemName);
-						IBeans.setImageFileName(imageFileName);
-						optionList.add(IBeans);
+					if (isNotExist) {
+						itemBean.setItemId(itemId);
+						itemBean.setItemName(itemName);
+						itemBean.setImageFileName(imageFileName);
+						optionList.add(itemBean);
 					}
 				}
 				
@@ -84,18 +88,13 @@ public class SelectItemListFromItemsByOption {
 	    return str;
 	}
 	
-	// 取得したデータを格納する配列の中に同じ画像名がないかを判定
-	private static boolean isNotExist(ArrayList<ItemBean> optionList, String imageFileName) {
-		boolean isNotExist = false;
-		for (int i = 0; i < optionList.size(); i++) {
-			// i番目のファイル名の取得
-			ItemBean itembean = optionList.get(i);
-			String fileNameInList = itembean.getImageFileName();
+	// 取得したデータを格納した配列内に同じ画像名が存在するかを判定
+	private static boolean checkExist(ArrayList<ItemBean> itemList, String imageFileName) {
+		boolean isNotExist = true;
+		for (ItemBean item : itemList) {
+			String fileNameInList = item.getImageFileName();
 			
-			// ファイル名が一致するかを判定
-			if (!imageFileName.equals(fileNameInList)) {
-				isNotExist = true;
-			} else {
+			if (imageFileName.equals(fileNameInList)) {
 				isNotExist = false;
 				break;
 			}
