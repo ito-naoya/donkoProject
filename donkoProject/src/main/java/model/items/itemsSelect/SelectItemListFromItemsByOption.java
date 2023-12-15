@@ -49,7 +49,7 @@ public class SelectItemListFromItemsByOption {
 			try (ResultSet result = GeneralDao.executeQuery(conn, SELECT_OPTION_ITEMLIST_SQL, paramList)) {
 				
 				while(result.next()){ 
-					ItemBean IBeans = new ItemBean();
+					ItemBean itemBean = new ItemBean();
 					int itemId = result.getInt("item_id");
 					String itemName = result.getString("item_name");
 					String imageFileName = result.getString("file_name");
@@ -58,10 +58,10 @@ public class SelectItemListFromItemsByOption {
 					boolean isNotExist = checkExist(optionList, imageFileName);
 					// 一致しない場合は配列に格納
 					if (isNotExist) {
-						IBeans.setItemId(itemId);
-						IBeans.setItemName(itemName);
-						IBeans.setImageFileName(imageFileName);
-						optionList.add(IBeans);
+						itemBean.setItemId(itemId);
+						itemBean.setItemName(itemName);
+						itemBean.setImageFileName(imageFileName);
+						optionList.add(itemBean);
 					}
 				}
 				
