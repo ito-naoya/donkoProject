@@ -33,14 +33,14 @@ public class User {
 	};
 
 	//ユーザー情報を更新する
-	public static void updateUserInfo(CustomerUser customerUser) {
-		UpdateUserInfoInUsers.updateUserInfoInUsers(customerUser);
-	};
-// TODO: あとで戻す
-//	//ユーザー情報を更新する
-//	public void updateUserInfo(CustomerUser customerUser) {
+//	public static void updateUserInfo(CustomerUser customerUser) {
 //		UpdateUserInfoInUsers.updateUserInfoInUsers(customerUser);
 //	};
+
+	//ユーザー情報を更新する
+	public void updateUserInfo(CustomerUser customerUser) {
+		UpdateUserInfoInUsers.updateUserInfoInUsers(customerUser);
+	};
 
 	//ユーザーの詳細を取得する
 	public static CustomerUser getUserDetail(CustomerUser customerUser) {
