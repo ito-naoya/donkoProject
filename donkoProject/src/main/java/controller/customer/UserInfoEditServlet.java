@@ -2,10 +2,7 @@ package controller.customer;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
 
-import bean.PurchaseBean;
-import classes.Purchase;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,6 +20,7 @@ public class UserInfoEditServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// セッション確認
 		HttpSession session = request.getSession(false);
 		int userId = (int) session.getAttribute("user_id");
 		if (userId == 0) {
@@ -30,6 +28,7 @@ public class UserInfoEditServlet extends HttpServlet {
 			request.getRequestDispatcher(view).forward(request, response);
 		}
 		
+		// ユーザーIDをセット
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserId(userId);
 		
@@ -37,19 +36,19 @@ public class UserInfoEditServlet extends HttpServlet {
 		CustomerUser users = CustomerUser.getUserDetail(customerUser);
 		request.setAttribute("users", users);
 		
+		// ユーザ情報編集画面に遷移
 		String view = "/WEB-INF/views/customer/userInfoEdit.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// セッションを確認
 		HttpSession session = request.getSession(false);
 		int userId = (int) session.getAttribute("user_id");
 		if (userId == 0) {
 			String view = "/WEB-INF/views/customer/home.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 		}
-		
-		
 		
 		// インスタンス生成
 		CustomerUser customerUser = new CustomerUser();
@@ -65,18 +64,15 @@ public class UserInfoEditServlet extends HttpServlet {
 		CustomerUser users = new CustomerUser();
 		users.updateUserInfo(customerUser);
 		
-		////////////
-		//ここから下のコード、response.sendRedirect("myPage")でいけますか？？
-		////////////
+		// マイページに遷移
+		response.sendRedirect("myPage");
 		
-		// マイページに戻るためのデータセット
-		ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
-		request.setAttribute("purchaseList", purchaseList);
-		
-		// 更新後の画面遷移
-		String view = "/WEB-INF/views/customer/myPage.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
-		
-		
+//		// マイページに戻るためのデータセット
+//		ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
+//		request.setAttribute("purchaseList", purchaseList);
+//		
+//		// 更新後の画面遷移
+//		String view = "/WEB-INF/views/customer/myPage.jsp";
+//		request.getRequestDispatcher(view).forward(request, response);
 	}
 }
