@@ -39,31 +39,39 @@
 				<div class="form-group"
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
 					<input type="text" class="form-control" id="exampleInputUserId"
-						aria-describedby="userId" name="user_login_id" value="<%=users.getUserLoginId()%>">
+						aria-describedby="userId" name="user_login_id"
+						value="<%=users.getUserLoginId()%>">
 				</div>
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputUserName">ユーザー名</label><br>
 				</div>
 				<div class="form-group"
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
-
 					<input type="text" class="form-control" id="exampleInputUserName"
-						aria-describedby="userName" name="user_name" value="<%=users.getUserName()%>">
+						aria-describedby="userName" name="user_name"
+						value="<%=users.getUserName()%>">
 				</div>
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputPassword">パスワード</label><br>
 				</div>
-				<div class="form-group"
-					style="display: flex; justify-content: center; margin-bottom: 30px;"">
-					<input type="text" class="form-control" id="exampleInputPassword"
-						maxlength="8" name="password" value="">
+				<div class="btn-toolbar mb-3" role="toolbar"
+					aria-label="Toolbar with button groups">
+					<input type="checkbox" style="display:none;" name="password_checked" value="null" checked="checked">
+					<input type="checkbox" class="btn-check" id="change" autocomplete="off"
+						name="password_checked" value="changed">
+						<label class="btn btn-secondary me-2" for="change">change</label>
+					<div class="input-group">
+						<input type="text" class="form-control" id="exampleInputPassword"
+							aria-label="Input group example" aria-describedby="btnGroupAddon"
+							maxlength="8" name="password" style="display:none;">
+					</div>
 				</div>
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputGender">性別</label><br>
 				</div>
 				<div class="form-group"
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
-					<select class="form-control" name="gender">
+					<select class="form-control" name="gender" id="exampleInputGender">
 						<%
 						String selected = users.getGender();
 						String men = (selected != null && selected.equals("男性") ? "selected" : "");
@@ -79,8 +87,8 @@
 				</div>
 				<div class="form-group"
 					style="display: flex; justify-content: center; margin-bottom: 70px;">
-					<input type="date" class="form-control" id="exampleInputbirthday" name="birthday"
-						value="<%=users.getBirthday()%>">
+					<input type="date" class="form-control" id="exampleInputbirthday"
+						name="birthday" value="<%=users.getBirthday()%>">
 				</div>
 				<div class="cancelButton"
 					style="display: flex; justify-content: center; margin-bottom: 20px;">
@@ -90,5 +98,6 @@
 		</form>
 		</div>
 	</main>
+	 <script src="./js/editUserInfoScript.js"></script>
 </body>
 </html>

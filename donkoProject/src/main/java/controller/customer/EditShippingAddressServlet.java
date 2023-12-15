@@ -20,7 +20,7 @@ public class EditShippingAddressServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 配送先編集画面
-		String view = "/WEB-INF/views/customer/shippingAddressEdit.jsp";
+		String view = "/WEB-INF/views/customer/editShippingAddress.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 
