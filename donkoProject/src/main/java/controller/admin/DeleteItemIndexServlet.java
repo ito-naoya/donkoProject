@@ -55,19 +55,32 @@ public class DeleteItemIndexServlet extends HttpServlet {
 		//ソートを実行
 
 		//カテゴリーを取得
-		String itemCategory = request.getParameter("itemCategory");
+		String itemCategoryName = request.getParameter("itemCategoryName");
 		//表示方法を取得
-		Integer sortParam = Integer.parseInt(request.getParameter("sortParam"));
+		Integer sortParam = Integer.parseInt(request.getParameter("itemDelFlg"));
+
+		//カテゴリー一覧を取得(戻り値がnullでもjspに渡す)
+		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
+		//配列に「全ての商品」という項目を追加
+		ItemCategoryBean allItem = new ItemCategoryBean();
+		allItem.setItemCategoryName("全ての商品");
+		categoryList.add(allItem);
+		//ソートで指定されたカテゴリをセット
+		request.setAttribute("categoryName", itemCategoryName);
+		//カテゴリ一覧をセット
+		request.setAttribute("categoryList", categoryList);
 
 		//以下、ソートSQL(戻り値がnullでもjspに渡す)
 		ArrayList<ItemBean> itemList = null;
-		if(!itemCategory.isEmpty() && sortParam == 2) { //sortParamが2なら、全商品を抽出
-			itemList = Item.getItemAndOptionListAll(itemCategory);
+		if(!itemCategoryName.isEmpty() && sortParam == 2) { //sortParamが2なら、全商品を抽出
+			itemList = Item.getItemAndOptionListAll(itemCategoryName);
 
-		} else if(itemCategory.isEmpty() && sortParam < 2 ) { //sortParamが2未満なら、削除フラグを確認して抽出
-			itemList = Item.getItemAndOptionListByDelFlg(sortParam, itemCategory);
+		} else if(!itemCategoryName.isEmpty() && sortParam < 2 ) { //sortParamが2未満なら、削除フラグを確認して抽出
+			itemList = Item.getItemAndOptionListByDelFlg(sortParam, itemCategoryName);
 		}
 		request.setAttribute("itemList", itemList);
+		//指定された表示方法をセット
+		request.setAttribute("itemDelFlg", sortParam);
 
 		String view = "/WEB-INF/views/admin/deleteItemIndex.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
