@@ -12,6 +12,8 @@ import dao.GeneralDao;
 public class SelectItemAndOptionListAll {
 
 	public static ArrayList<ItemBean>  selectItemAndOptionListAll(String itemCategoryName) {
+
+		//削除済みも含む全てのアイテムを抽出
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT "																						);
 		sb.append(    "items.item_id, "																			);
@@ -40,7 +42,7 @@ public class SelectItemAndOptionListAll {
 		sb.append("ORDER BY "																					);
 		sb.append(    "items.item_id;"																			);
 
-		String sql = sb.toString();
+		final String SELECT_ITEM_AND_OPTION_ALL_SQL = sb.toString();
 
 		ArrayList<Object> params = new ArrayList<Object>();
 		if(!itemCategoryName.isEmpty()) {
@@ -49,7 +51,7 @@ public class SelectItemAndOptionListAll {
 		ArrayList<ItemBean> itemBeanList = new ArrayList<ItemBean>();
 
 		try(Connection conn = DatabaseConnection.getConnection();){
-			try(ResultSet rs = GeneralDao.executeQuery(conn, sql, params)){
+			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEM_AND_OPTION_ALL_SQL, params)){
 
 				ItemBean currentIb = null;
 	            int lastItemId = -1; // item_idがint型であるため、初期値として無効な値を設定
