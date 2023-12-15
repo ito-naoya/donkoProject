@@ -1,6 +1,6 @@
 package bean;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class PurchaseBean {
 	
@@ -11,7 +11,7 @@ public class PurchaseBean {
 	private int shippingId;;
 	private String shippingStatus;
 	private int totalAmount;
-	private Date purchaseDate;
+	private Timestamp purchaseDate;
 	
 	public PurchaseBean(){};
 	
@@ -71,11 +71,11 @@ public class PurchaseBean {
 		this.totalAmount = totalAmount;
 	}
 	
-	public Date getPurchaseDate() {
+	public Timestamp getPurchaseDate() {
 		return purchaseDate;
 	}
 	
-	public void setPurchaseDate(Date purchaseDate) {
+	public void setPurchaseDate(Timestamp purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 	

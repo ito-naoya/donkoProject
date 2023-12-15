@@ -5,6 +5,7 @@ import model.users.usersSelect.SelectUserDetailFromUsers;
 import model.users.usersSelect.SelectUserDuplicate;
 import model.users.usersSelect.SelectUserFromUsers;
 import model.users.usersUpdate.UpdateUserInfoInUsers;
+import model.users.usersUpdate.UpdateUserPasswords;
 
 public class User {
 
@@ -31,12 +32,7 @@ public class User {
 	public void checkUserDuplicate(CustomerUser customerUser){
 		SelectUserDuplicate.selectUserDuplicate(customerUser);
 	};
-
-	//ユーザー情報を更新する
-//	public static void updateUserInfo(CustomerUser customerUser) {
-//		UpdateUserInfoInUsers.updateUserInfoInUsers(customerUser);
-//	};
-
+	
 	//ユーザー情報を更新する
 	public void updateUserInfo(CustomerUser customerUser) {
 		UpdateUserInfoInUsers.updateUserInfoInUsers(customerUser);
@@ -45,6 +41,11 @@ public class User {
 	//ユーザーの詳細を取得する
 	public static CustomerUser getUserDetail(CustomerUser customerUser) {
 		return SelectUserDetailFromUsers.selectUserDetailFromUsers(customerUser);
+	};
+	
+	//ユーザーのパスワードを更新する
+	public void updateUserPasseord(CustomerUser customerUser) {
+		UpdateUserPasswords.updateUserPasseords(customerUser);
 	};
 
 	//ログアウトする

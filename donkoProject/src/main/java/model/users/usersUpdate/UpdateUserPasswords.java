@@ -1,5 +1,6 @@
 package model.users.usersUpdate;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,30 +8,34 @@ import java.util.ArrayList;
 import classes.user.CustomerUser;
 import dao.DatabaseConnection;
 import dao.GeneralDao;
+import hash.HashGenerator;
 
-public class UpdateUserInfoInUsers {
+public class UpdateUserPasswords {
 	
 	//ユーザー情報を更新する
-	public static void updateUserInfoInUsers(CustomerUser customerUser){
+	public static void updateUserPasseords(CustomerUser customerUser){
 		// SQLコマンド生成
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE "						);
 		sb.append(	"users "					);
 		sb.append("SET "						);
-		sb.append(	"user_login_id = ?, "		);
-		sb.append(	"user_name = ?, "			);
-		sb.append(	"birthday = ?, "			);
-		sb.append(	"gender = ? "				);
+		sb.append(	"password = ?, "		);
 		sb.append("WHERE "						);
 		sb.append(	"user_id = ? ;"				);
 		String sql = sb.toString();
 		
+		// パスワードのハッシュ化
+		String password = customerUser.getPassword();
+		String hashedPassword = null;
+		try {
+			hashedPassword = HashGenerator.generateHash(password);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		 
 		// ？の値を渡す
 		ArrayList<Object> param = new ArrayList<Object>();
-		param.add(customerUser.getUserLoginId());
-		param.add(customerUser.getUserName());
-		param.add(customerUser.getBirthday());
-		param.add(customerUser.getGender());
+		param.add(hashedPassword);
 		param.add(customerUser.getUserId());
 		
 		// SQL実行
