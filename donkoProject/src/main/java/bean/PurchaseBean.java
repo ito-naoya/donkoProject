@@ -12,8 +12,44 @@ public class PurchaseBean {
 	private String shippingStatus;
 	private int totalAmount;
 	private Timestamp purchaseDate;
+	private String userName;
+	private String postalCode;
+	private String address;
+	private String addressee;
 	
 	public PurchaseBean(){};
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getAddressee() {
+		return addressee;
+	}
+
+	public void setAddressee(String addressee) {
+		this.addressee = addressee;
+	}
 	
 	public int getPurchaseId() {
 		return purchaseId;
