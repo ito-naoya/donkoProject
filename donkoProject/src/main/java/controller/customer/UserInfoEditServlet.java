@@ -31,7 +31,7 @@ public class UserInfoEditServlet extends HttpServlet {
 		}
 		
 		CustomerUser customerUser = new CustomerUser();
-		customerUser.setUserId(user_id);
+		customerUser.setUserId(userId);
 		
 		// ユーザー情報取得
 		CustomerUser users = CustomerUser.getUserDetail(customerUser);
