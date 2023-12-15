@@ -14,10 +14,9 @@
 </style>
 </head>
 <body>
-<main class="container">
 	<%@include file="../component/header.jsp"%>
 	<%@include file="../component/headerTopSpace.jsp"%>
-	<main>
+<main class="container">
 		<div class="d-flex justify-content-between">
 			<a href="userInfoEdit"
 				class="d-inline-block border mx-2 mb-4 p-3 text-center"
@@ -60,7 +59,9 @@
 						<!-- 合計金額 -->
 						<td align="middle" style="width: 150px;">¥ <%=String.format("%,d", purchaseBean.getTotalAmount())%></td>
 						<!-- 購入日 -->
-						<td align="middle" style="width: 150px;"><%=purchaseBean.getPurchaseDate()%></td>
+						<td align="middle" style="width: 200px;">
+						<%=purchaseBean.getPurchaseDate()%></td>
+<%-- 						<%=new SimpleDateFormat("yyyy-MM-dd hh:mm").format(purchaseBean.getPurchaseDate())%></td> --%>
 						<!-- 配送先 -->
 						<td align="middle"><%=purchaseBean.getShippingAddress()%></td>
 						<!-- 配送ステータス -->
