@@ -25,7 +25,6 @@ public class SwichItemDelFlg extends HttpServlet {
 
 		//テストコード
 		String[] itemStatus = {"1", "2", "3"};
-;
 
 		//選択済みの商品のステータスを切り替えるサーブレット
 		if(itemStatus != null && itemStatus.length > 0) {
