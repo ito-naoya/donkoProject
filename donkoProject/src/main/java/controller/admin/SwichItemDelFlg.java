@@ -30,6 +30,10 @@ public class SwichItemDelFlg extends HttpServlet {
 		if(itemStatus != null && itemStatus.length > 0) {
 			Item.deleteItem(itemStatus);
 		}
+
+		//商品一覧ページに戻る
+		String view = "/WEB-INF/views/admin/deleteItemIndex.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
