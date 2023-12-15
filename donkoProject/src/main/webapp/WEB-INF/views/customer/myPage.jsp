@@ -20,7 +20,7 @@
 		<div class="row d-flex justify-content-center pt-2">
 			<div
 				style="margin: 0 15px; width: 30%; text-decoration: none; padding: 10px; padding: 1rem 4rem; font-weight: bold; border: 2px solid #385A37; text-align: center;">
-				<a href="editUserInfo"
+				<a href="userInfoEdit"
 					style="color: #385A37; vertical-align: middle; text-decoration: none;">個人情報の編集</a>
 			</div>
 			<div
