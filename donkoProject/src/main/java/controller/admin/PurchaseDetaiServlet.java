@@ -22,6 +22,7 @@ public class PurchaseDetaiServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 発送する機能をつける
 		doGet(request, response);
 	}
 
