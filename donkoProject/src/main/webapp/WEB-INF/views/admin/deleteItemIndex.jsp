@@ -151,7 +151,7 @@
 								<br>
 								<div class="row">
 								    <div class="col-11 d-flex justify-content-end">
-								    チェックしたアイテムのステータスを切り替える
+								    <p>チェックしたアイテムのステータスを切り替える</p>
 								        <button type="submit" class="btn px-3" onclick="return confirmStatusChange();" style="background-color: #E5CCFF; color: black; border-radius: 2rem;">
 										    実行
 										</button>

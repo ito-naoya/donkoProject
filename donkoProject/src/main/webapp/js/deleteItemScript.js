@@ -9,5 +9,5 @@ function changeTextColor(checkbox, labelId) {
     }
 }
 function confirmStatusChange() {
-    return confirm('ステータスを切り替えます。よろしいですか？');
+    return confirm('ステータスを切り替えます。よろしいですか？');//アラートがうごかねぇ
 }

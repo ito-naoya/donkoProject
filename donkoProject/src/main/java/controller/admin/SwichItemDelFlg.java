@@ -28,7 +28,7 @@ public class SwichItemDelFlg extends HttpServlet {
 			Item.deleteItem(itemStatus);
 		}
 
-		//商品一覧ページに戻る
+		//商品一覧ページに戻る（とりあえずリダイレクト）
 		response.sendRedirect("deleteItemIndex");
 	}
 
