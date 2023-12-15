@@ -43,8 +43,7 @@
            <% for (ShippingAddressBean shippingAddressBean : shippingAddressList) { %>
         <tr>
           <!-- 配送先ID -->
-            <td><%= shippingAddressBean.getShippingAddressId()%></a> 
-          </td>
+            <td><%= shippingAddressBean.getShippingAddressId()%></td>
           <!-- 郵便番号 -->
             <td><%= shippingAddressBean.getPostalCode()%></td>
           <!-- 住所 -->
