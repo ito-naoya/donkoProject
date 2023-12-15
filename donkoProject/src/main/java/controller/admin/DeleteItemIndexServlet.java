@@ -28,6 +28,15 @@ public class DeleteItemIndexServlet extends HttpServlet {
 
 		//カテゴリー一覧を取得(戻り値がnullでもjspに渡す)
 		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
+		//配列に「全ての商品」という項目を追加
+		ItemCategoryBean allItem = new ItemCategoryBean();
+		allItem.setItemCategoryName("全ての商品");
+		categoryList.add(allItem);
+		request.setAttribute("categoryName", "全ての商品");
+
+		//初期設定の商品一覧値をセット（item_delete_flgの有無に関係なく表示させる）
+		request.setAttribute("itemDelFlg", 2);
+
 		request.setAttribute("categoryList", categoryList);
 		//初期表示として、「すべてのカテゴリの商品を、削除済みのものも含めて全て表示する」(戻り値がnullでもjspに渡す)
 		ArrayList<ItemBean> itemList = Item.getItemAndOptionListAll("");
@@ -59,7 +68,7 @@ public class DeleteItemIndexServlet extends HttpServlet {
 			itemList = Item.getItemAndOptionListByDelFlg(sortParam, itemCategory);
 		}
 		request.setAttribute("itemList", itemList);
-		
+
 		String view = "/WEB-INF/views/admin/deleteItemIndex.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}

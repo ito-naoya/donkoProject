@@ -75,7 +75,7 @@ public class SelectItemAndOptionListAll {
 	                    lastItemId = currentItemId; // 最後に処理したitem_idを更新
 	                } else {
 	                    // 同じitem_idの場合、2つ目のオプションを設定
-	                    currentIb.setItemSecondOptionName(rs.getString("option_category_value"));
+	                    currentIb.setItemSecondOptionValue(rs.getString("option_category_value"));
 	                }
 	            }
 

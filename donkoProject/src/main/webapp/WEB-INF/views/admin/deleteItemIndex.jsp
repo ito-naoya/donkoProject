@@ -1,5 +1,6 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="bean.ItemCategoryBean"%>
+<%@page import="bean.ItemBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -7,6 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <title>DONKO</title>
 </head>
 <body>
@@ -24,43 +26,47 @@
 						</a>
 					</div>
 					<!-- ここから入力フォーム  -->
-					<form action="deleteItemIndex" method="post">
-						<div class="col-4">
-							<%
-							ArrayList<ItemCategoryBean> categoryList = (ArrayList<ItemCategoryBean>) request.getAttribute("categoryList");
-							Integer itemDelFlg = (Integer) getAttribute("itemDelFlg")
-							%>
-							<!-- カテゴリでソート(配列に「全商品」を追加する？) -->
-							<label for="category-select"  class="form-label">カテゴリー選択</label>
-							<select class="form-select" id="category-select"  name="itemCategoryName">
+					<div class="col-8">
+						<form action="deleteItemIndex" method="post">
+							<div class="row">
+								<div class="col-4">
 									<%
-									if(categoryList != null){
-										categoryList.forEachc(category) -> {
-											boolean isSelected1 = categoryList.getItemCategoryName() == categoryName;
+									    ArrayList<ItemCategoryBean> categoryList = (ArrayList<ItemCategoryBean>) request.getAttribute("categoryList");
+									    Integer itemDelFlg = (Integer) request.getAttribute("itemDelFlg");
+									    String categoryName = (String) request.getAttribute("categoryName"); // 現在のカテゴリ名を取得
 									%>
-											<option value="<%= categoryList.getItemCategoryName() %>" <%= isSelected1 ? "selected" : "" %>><%= categoryList.getgetItemCategoryName() %></option>
-									<%
-										}
-									}
-									%>
-							</select>
-						</div>
-						<div class="col-4">
-							<!-- 削除フラグでソート -->
-							<label for="delFlg-select"  class="form-label">現在の表示</label>
-							<select class="form-select" id="delFlg-select"  name="delFlg">
-									<option value="2" <%= itemDelFlg == 2 ? "selected" : "" %>>全ての商品</option>
-									<option value="0" <%= itemDelFlg == 0 ? "selected" : "" %>>掲載中の商品</option>
-									<option value="1" <%= itemDelFlg == 1 ? "selected" : "" %>>削除済みの商品</option>
-							</select>
-						</div>
-						<div class="col-2">
-							<button type="submit" class="btn p-2 ms-3" style="background-color: #e5ccff;">
-								検索
-							</button>
-						</div>
-					</form>
-				</div>
+									<!-- カテゴリでソート -->
+									<label for="category-select" class="form-label">カテゴリー選択</label>
+									<select class="form-select" id="category-select" name="itemCategoryName">
+									    <%
+									        if(categoryList != null){
+									            for(ItemCategoryBean category : categoryList){
+									                boolean isSelected = category.getItemCategoryName().equals(categoryName);
+									    %>
+									                <option value="<%= category.getItemCategoryName() %>" <%= isSelected ? "selected" : "" %>><%= category.getItemCategoryName() %></option>
+									    <%
+									            }
+									        }
+									    %>
+									</select>
+								</div>
+								<div class="col-4">
+									<!-- 削除フラグでソート -->
+									<label for="delFlg-select"  class="form-label">現在の表示</label>
+									<select class="form-select" id="delFlg-select"  name="delFlg">
+											<option value="2" <%= itemDelFlg == 2 ? "selected" : "" %>>全ての商品</option>
+											<option value="0" <%= itemDelFlg == 0 ? "selected" : "" %>>掲載中の商品</option>
+											<option value="1" <%= itemDelFlg == 1 ? "selected" : "" %>>削除済みの商品</option>
+									</select>
+								</div>
+								<div class="col-4">
+									<button type="submit" class="btn p-2 ms-3" style="background-color: #e5ccff;">
+										検索
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
 				<!-- 商品一覧を掲載 -->
 				<div class="row justify-content-center">
 					<div class="col-11">
@@ -80,59 +86,60 @@
 							    </tr>
 							</thead>
 							<div class="overflow" style="overflow: auto;"></div>
-								<%
-								ArrayList<ItemCategoryBean> itemList = (ArrayList<ItemCategoryBean>) request.getAttribute("itemList");
-								if(itemList != null){
-									itemList.forEachc(item) -> {
-								%>
-									<tr>
-										<td><!-- ID -->
-											<p><%= item.getItemId() %></p>
-										</td>
-										<td><!-- 商品名 -->
-											<p><%= item.getItemName() %></p>
-										</td>
-										<td><!-- カテゴリー -->
-											<p><%= item.getItemCategoryName() %></p>
-										</td>
-										<td><!-- オプション1 -->
-											<p><%= item.getItemFirstOptionValue() %></p>
-										</td>
-										<td><!-- オプション2 -->
-											<% if(item.getItemSecondOptionValue()){ %>
-												<p><%= item.getItemFirstOptionValue() %></p>
-											<% } else { %>
-												<p>-<p>
-											<% } %>
-										</td>
-										<td><!-- 金額 -->
-											<p><%= item.getItemPrice() %></p>
-										</td>
-										<td><!-- 在庫 -->
-											<p><%= item.getItemStock() %></p>
-										</td>
-										<td><!-- ステータス -->
-											<% if(item.isDeleted()){%>
-												<p style="color: #CCC">削除済み</p>
-											<% } else { %>
-												<p style="color: #00FF00">販売中</p>
-											<% } %>
-										</td>
-										<td><!-- 編集ボタン -->
-											<button type="submit" style="border: 1px solid #000000; background: #385A37; text-decoration: none; border-radius: 0.5rem;">
-													 <a href="editItemInfo?=<%= item.getItemId() %>"
-								            </button>
-										</td>
-									</tr>
-								<%
-									}
-								}
-								%>
+							<%
+							    ArrayList<ItemBean> itemList = (ArrayList<ItemBean>) request.getAttribute("itemList");
+							    if(itemList != null){
+							        for(ItemBean item : itemList){
+							%>
+							            <tr>
+							                <td><!-- ID -->
+							                    <p><%= item.getItemId() %></p>
+							                </td>
+							                <td><!-- 商品名 -->
+							                    <p><%= item.getItemName() %></p>
+							                </td>
+							                <td><!-- カテゴリー -->
+							                    <p><%= item.getItemCategoryName() %></p>
+							                </td>
+							                <td><!-- オプション1 -->
+							                    <p><%= item.getItemFirstOptionValue() %></p>
+							                </td>
+							                <td><!-- オプション2 -->
+							                    <% if(item.getItemSecondOptionValue() != null && !item.getItemSecondOptionValue().isEmpty()){ %>
+							                        <p><%= item.getItemSecondOptionValue() %></p>
+							                    <% } else { %>
+							                        <p>-</p>
+							                    <% } %>
+							                </td>
+							                <td><!-- 金額 -->
+							                    <p><%= item.getItemPrice() %></p>
+							                </td>
+							                <td><!-- 在庫 -->
+							                    <p><%= item.getItemStock() %></p>
+							                </td>
+							                <td><!-- ステータス -->
+							                    <% if(item.isDeleted()){ %>
+							                        <p style="color: #CCC">削除済み</p>
+							                    <% } else { %>
+							                        <p style="color: #00FF00">販売中</p>
+							                    <% } %>
+							                </td>
+							                <td><!-- 編集ボタン -->
+							                    <button type="submit" style="border: 1px solid #000000; background: #385A37; color: white; text-decoration: none; border-radius: 0.5rem;">
+							                        <a href="editItemInfo?itemId=<%= item.getItemId() %>">編集</a>
+							                    </button>
+							                </td>
+							            </tr>
+							<%
+							        }
+							    }
+							%>
+
 							</div>
 						</table>
 					</div>
 				</div>
-		</div>
+	</div>
 </main>
 </body>
 </html>
