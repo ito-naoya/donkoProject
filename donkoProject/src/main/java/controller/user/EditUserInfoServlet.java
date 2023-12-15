@@ -31,7 +31,12 @@ public class EditUserInfoServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO:テストコードです。最終的にはセッションから取得してくる予定
+		CustomerUser customerUser = new CustomerUser();
+		customerUser.setUserId(6);
 		
+		request.getParameter("users");
+		// User.updateUserInfo(customerUser);
 		
 	}
 }
