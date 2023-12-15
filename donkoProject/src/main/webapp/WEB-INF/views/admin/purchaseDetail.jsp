@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, bean.PurchaseBean, bean.PurchaseDetailBean, java.text.NumberFormat"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,10 +22,13 @@
 				<h4 class="mb-4 p-3 border-bottom">
 					<strong>受注詳細</strong>
 				</h4>
+				<%
+				ArrayList<PurchaseBean> purchaseInfo = (ArrayList<PurchaseBean>) request.getAttribute("purchaseInfo");
+				%>
 				<table class="table table-borderless">
 					<thead>
 						<tr>
-							<th>購入ID　：</th>
+							<th>購入ID　：　<% %></th>
 							<td></td>
 						</tr>
 						<tr>
@@ -40,21 +44,21 @@
 				<div class="border-top" style="height: 50px;"></div>
 				<table class="table table-borderless text-center">
 					<tbody>
-						<%-- <%
-						ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
+						<%
+						ArrayList<PurchaseDetailBean> purchaseDetailList = (ArrayList<PurchaseDetailBean>) request.getAttribute("purchaseDetailList");
 						%>
 						<%
-						for (PurchaseBean purchaseBean : purchaseList) {
-						%> --%>
+						for (PurchaseDetailBean purchaseDetail : purchaseDetailList) {
+						%>
 						<tr>
-							<td style="width: 10%;"><a href='#'>1</a></td>
-							<td>商品タイトル</td>
+							<td style="width: 10%;"><a href='#'><%= purchaseDetail.getPurchaseDetailId() %></a></td>
+							<td><%= purchaseDetail.getItemName() %></td>
 							<td>購入金額</td>
 							<td>個数</td>
 						</tr>
-						<%-- <%
+						<%
 						}
-						%> --%>
+						%>
 					</tbody>
 				</table>
 				<div class="d-flex justify-content-center">
