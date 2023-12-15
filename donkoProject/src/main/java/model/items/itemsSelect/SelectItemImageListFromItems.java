@@ -55,7 +55,7 @@ public class SelectItemImageListFromItems {
 		//パラメータをここで使う（2/2回目)
 		sb.append(												"item_id = ? ");
 		sb.append(											"AND ");
-		sb.append(												"option_category_name != '色')"	);
+		sb.append(												"option_category_name != '色'"	);
 		sb.append(										") ");
 		sb.append("AND ");
 		sb.append(		"items.item_delete_flg != 1 ");                                                                  
