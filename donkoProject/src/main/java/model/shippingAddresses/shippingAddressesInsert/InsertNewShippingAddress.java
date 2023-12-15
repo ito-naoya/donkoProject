@@ -35,7 +35,7 @@ public class InsertNewShippingAddress {
 		// 宛名
 		sb.append(	"? "										);
 		sb.append(	") "										);
-		String sql = sb.toString();
+		final　String INSERT_SHIPPING_ADDRESS_SQL = sb.toString();
 		
 		// ？の引数に渡す値
 		ArrayList<Object> param = new ArrayList<Object>();
@@ -47,7 +47,7 @@ public class InsertNewShippingAddress {
 		
 		try (Connection connection = DatabaseConnection.getConnection()) {
 			try {
-				GeneralDao.executeUpdate(connection, sql, param);
+				GeneralDao.executeUpdate(connection, INSERT_SHIPPING_ADDRESS_SQL, param);
 				connection.commit();
 			} catch (Exception e) {
 				if(!connection.isClosed()) {
