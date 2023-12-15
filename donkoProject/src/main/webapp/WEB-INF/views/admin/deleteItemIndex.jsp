@@ -25,13 +25,13 @@
 					</div>
 					<!-- ここから入力フォーム  -->
 					<form action="deleteItemIndex" method="post">
-						<div class="col-8">
+						<div class="col-4">
 							<%
 							ArrayList<ItemCategoryBean> categoryList = (ArrayList<ItemCategoryBean>) request.getAttribute("categoryList");
-							String itemDelFlg = (String) getAttribute("itemDelFlg")
+							Integer itemDelFlg = (Integer) getAttribute("itemDelFlg")
 							%>
 							<!-- カテゴリでソート(配列に「全商品」を追加する？) -->
-							<label for="category-select"  class="form-label">カテゴリー選択：</label>
+							<label for="category-select"  class="form-label">カテゴリー選択</label>
 							<select class="form-select" id="category-select"  name="itemCategoryName">
 									<%
 									if(categoryList != null){
@@ -44,9 +44,10 @@
 									}
 									%>
 							</select>
-
+						</div>
+						<div class="col-4">
 							<!-- 削除フラグでソート -->
-							<label for="delFlg-select"  class="form-label">現在の表示：</label>
+							<label for="delFlg-select"  class="form-label">現在の表示</label>
 							<select class="form-select" id="delFlg-select"  name="delFlg">
 									<option value="2" <%= itemDelFlg == 2 ? "selected" : "" %>>全ての商品</option>
 									<option value="0" <%= itemDelFlg == 0 ? "selected" : "" %>>掲載中の商品</option>
@@ -78,65 +79,58 @@
 							      <th scope="col">編集</th>
 							    </tr>
 							</thead>
+							<div class="overflow" style="overflow: auto;"></div>
 								<%
 								ArrayList<ItemCategoryBean> itemList = (ArrayList<ItemCategoryBean>) request.getAttribute("itemList");
 								if(itemList != null){
 									itemList.forEachc(item) -> {
 								%>
-								<tr>
-									<td><!-- ID -->
-										<p><%= item.getItemId() %></p>
-									</td>
-									<td><!-- 商品名 -->
-										<p><%= item.getItemName() %></p>
-									</td>
-									<td><!-- カテゴリー -->
-										<p><%= item.getItemCategoryName() %></p>
-									</td>
-									<td><!-- オプション1 -->
-										<p><%= item.getItemFirstOptionValue() %></p>
-									</td>
-									<td><!-- オプション2 -->
-										<% if(item.getItemSecondOptionValue()){ %>
+									<tr>
+										<td><!-- ID -->
+											<p><%= item.getItemId() %></p>
+										</td>
+										<td><!-- 商品名 -->
+											<p><%= item.getItemName() %></p>
+										</td>
+										<td><!-- カテゴリー -->
+											<p><%= item.getItemCategoryName() %></p>
+										</td>
+										<td><!-- オプション1 -->
 											<p><%= item.getItemFirstOptionValue() %></p>
-										<% } else { %>
-											<p>-<p>
-										<% } %>
-									</td>
-									<td><!-- 金額 -->
-										<p><%= item.getItemPrice() %></p>
-									</td>
-									<td><!-- 在庫 -->
-										<p><%= item.getItemStock() %></p>
-									</td>
-									<td><!-- ステータス -->
-										<p><%= item.getItemStock() %></p>
-									</td>
-									<td><!-- 編集ボタン -->
-										<button type="submit" style="border: 1px solid #000000; background: #385A37; text-decoration: none; border-radius: 0.5rem;">
-												 <a href="editShippingAddress?=<%= item.getItemId() %>"
-							            </button>
-									</td>
-								<tr>
+										</td>
+										<td><!-- オプション2 -->
+											<% if(item.getItemSecondOptionValue()){ %>
+												<p><%= item.getItemFirstOptionValue() %></p>
+											<% } else { %>
+												<p>-<p>
+											<% } %>
+										</td>
+										<td><!-- 金額 -->
+											<p><%= item.getItemPrice() %></p>
+										</td>
+										<td><!-- 在庫 -->
+											<p><%= item.getItemStock() %></p>
+										</td>
+										<td><!-- ステータス -->
+											<% if(item.isDeleted()){%>
+												<p style="color: #CCC">削除済み</p>
+											<% } else { %>
+												<p style="color: #00FF00">販売中</p>
+											<% } %>
+										</td>
+										<td><!-- 編集ボタン -->
+											<button type="submit" style="border: 1px solid #000000; background: #385A37; text-decoration: none; border-radius: 0.5rem;">
+													 <a href="editItemInfo?=<%= item.getItemId() %>"
+								            </button>
+										</td>
+									</tr>
 								<%
 									}
 								}
 								%>
+							</div>
 						</table>
 					</div>
-					<%
-					if(cartBeanList.size() > 0){
-					%>
-						<div class="d-flex justify-content-center">
-							<form action="deleteCart" method="POST" class="d-flex justify-content-end mt-3">
-								<button type=submit class="btn px-5 py-3 rounded-pill border border-danger" style="background-color: white; color: red;">
-									カートの中身を全て削除する
-								</button>
-							</form>
-						</div>
-					<%
-					}
-					%>
 				</div>
 		</div>
 </main>
