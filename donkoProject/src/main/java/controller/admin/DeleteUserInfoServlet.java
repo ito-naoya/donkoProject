@@ -18,7 +18,10 @@ public class DeleteUserInfoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+		
+		String view = "/WEB-INF/views/admin/deleteUserInfoIndex.jsp";
+        request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
