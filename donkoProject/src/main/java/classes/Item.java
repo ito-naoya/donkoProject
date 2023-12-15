@@ -50,11 +50,19 @@ public class Item {
 
 	//商品の一覧を取得する(カテゴリ指定も可能)
 	public static ArrayList<ItemBean> getItemAndOptionListAll(String itemCategoryName){
+		//全ての商品を抽出する場合は、値をセットしない
+		if (itemCategoryName.equals("全ての商品")) {
+			itemCategoryName = "";
+		}
 		return SelectItemAndOptionListAll.selectItemAndOptionListAll(itemCategoryName);
 	};
 
 	//商品の一覧を取り扱い指定込みで取得する(カテゴリ指定も可能)
 	public static ArrayList<ItemBean> getItemAndOptionListByDelFlg(int itemDeleteFlg, String itemCategoryName){
+		//全ての商品を抽出する場合は、値をセットしない
+		if(itemCategoryName.equals("全ての商品")) {
+			itemCategoryName = "";
+		}
 		return SelectItemAndOptionListByDelFlg.selectItemAndOptionListByDelFlg(itemDeleteFlg, itemCategoryName);
 	};
 

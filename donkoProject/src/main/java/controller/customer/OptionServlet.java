@@ -54,6 +54,7 @@ public class OptionServlet extends HttpServlet {
 	    for (int i = 1; i < checkedOptionList.length; i++) {
 	    	searchKeyword += ", " + "[ " + checkedOptionList[i] + " ]";
 	    }
+//	    exList.forEach(s -> System.out.println(s));
 	    return searchKeyword;
 	}
 }

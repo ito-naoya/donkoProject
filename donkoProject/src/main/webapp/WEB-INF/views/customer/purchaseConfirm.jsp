@@ -68,7 +68,7 @@
 						%>
 							<tr>
 								<td style="width: 200px">
-									<a href="#" class="me-3"
+									<a href="itemDetail?itemId=<%= cb.getItemId() %>" class="me-3"
 									style="text-decoration: none; display: inline-block;">
 										<div style="height: 150px; width: 150px;">
 											<img class="object-fit-cover w-100 h-100"

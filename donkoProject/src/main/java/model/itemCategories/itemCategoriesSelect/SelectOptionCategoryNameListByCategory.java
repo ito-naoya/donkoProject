@@ -16,7 +16,7 @@ public class SelectOptionCategoryNameListByCategory {
 
 	//カテゴリ指定してオプションを取得する
 	public static ArrayList<ItemCategoryBean> selectOptionCategoryNameListByCategory(ItemBean itemBean) {
-		//カテゴリ指定してカテゴリ名とオプション名を抽出するSQL（衣服：色、衣服；衣類サイズ）
+		//カテゴリ指定してカテゴリ名とオプション名を抽出するSQL[衣服,色],[衣服,衣類サイズ]
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("SELECT "						);
@@ -27,16 +27,16 @@ public class SelectOptionCategoryNameListByCategory {
 		sb.append("WHERE "						);
 		sb.append(	"item_category_name = ?;"	);
 
-		String sql = sb.toString();
+		final String SQL = sb.toString();
 
 		//引数のItemBeanからカテゴリを取得
 		String categoryName = itemBean.getItemCategoryName();
 
-
 		ArrayList<ItemCategoryBean> itemCategories = new ArrayList<>();
 		List<Object> params = Arrays.asList(categoryName);
+		//SQL
 		try (Connection conn = DatabaseConnection.getConnection()){
-			try(ResultSet rs = GeneralDao.executeQuery(conn, sql, params)) {
+			try(ResultSet rs = GeneralDao.executeQuery(conn, SQL, params)) {
 
 
 			//ItemCategoryBeanに挿入
@@ -50,9 +50,10 @@ public class SelectOptionCategoryNameListByCategory {
 				itemCategories.add(itemCategory);
 			}
 
-				//ItemCategoryBeanを並び替えて、オプションが2つある場合に、必ず1つ目のオプションに"色"を含むものが入る様にする
+				//外枠の配列（色、衣類サイズ）を並び替えて、オプションが2つある場合に、必ず1つ目のオプションに"色"を含むものが入る様にする
 				if (itemCategories.size() > 1) {
 					for (int i = 0; i < itemCategories.size(); i++) {
+						//i番目の要素を取得
 						ItemCategoryBean itemCategory = itemCategories.get(i);
 						if (itemCategory.getItemCategoryName().equals("色")) {
 							itemCategories.remove(i);
