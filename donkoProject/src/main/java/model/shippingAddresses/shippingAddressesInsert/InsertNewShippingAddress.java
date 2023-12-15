@@ -43,6 +43,7 @@ public class InsertNewShippingAddress {
 		param.add(shippingAddressBean.getPostalCode());
 		param.add(shippingAddressBean.getAddress());
 		param.add(shippingAddressBean.getMainShippingAddress());
+		param.add(shippingAddressBean.getAddressee());
 		
 		try (Connection connection = DatabaseConnection.getConnection()) {
 			try {
