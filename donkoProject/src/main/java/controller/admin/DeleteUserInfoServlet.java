@@ -1,7 +1,10 @@
 package controller.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import classes.user.AdminUser;
+import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,15 +21,33 @@ public class DeleteUserInfoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
-		
+
+		//削除済みのユーザー一覧を取得
+		ArrayList<CustomerUser> userList = AdminUser.getDeletedUserList();
+
+		request.setAttribute("userList", userList);
+
 		String view = "/WEB-INF/views/admin/deleteUserInfoIndex.jsp";
-        request.getRequestDispatcher(view).forward(request, response);
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
-	}
 
+		String showSelect = request.getParameter("showSelect");
+
+		if (showSelect == null) {
+			
+			doGet(request, response);
+			
+		} else if(showSelect.equals("showUserAll")){
+			
+			ArrayList<CustomerUser> userList = AdminUser.getUserList();
+			
+			request.setAttribute("userList", userList);
+			
+			String view = "/WEB-INF/views/admin/deleteUserInfoIndex.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+		}
+	}
 }
