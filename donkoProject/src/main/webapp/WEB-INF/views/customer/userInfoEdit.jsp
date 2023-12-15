@@ -52,21 +52,6 @@
 						value="<%=users.getUserName()%>">
 				</div>
 				<div style="margin-bottom: 10px;">
-					<label for="exampleInputPassword">パスワード</label><br>
-				</div>
-				<div class="btn-toolbar mb-3" role="toolbar"
-					aria-label="Toolbar with button groups">
-					<input type="checkbox" style="display:none;" name="password_checked" value="null" checked="checked">
-					<input type="checkbox" class="btn-check" id="change" autocomplete="off"
-						name="password_checked" value="changed">
-						<label class="btn btn-secondary me-2" for="change">change</label>
-					<div class="input-group">
-						<input type="text" class="form-control" id="exampleInputPassword"
-							aria-label="Input group example" aria-describedby="btnGroupAddon"
-							maxlength="8" name="password" style="display:none;">
-					</div>
-				</div>
-				<div style="margin-bottom: 10px;">
 					<label for="exampleInputGender">性別</label><br>
 				</div>
 				<div class="form-group"
