@@ -21,13 +21,13 @@
 		<div class="d-flex justify-content-between">
 			<a href="userInfoEdit"
 				class="d-inline-block border mx-2 mb-4 p-3 text-center"
-				style="width: 30%; border: 10px solid #385A37; background-color: white; color: #385A37; text-decoration:none;">個人情報の編集<a>
+				style="width: 30%; border: #385A37; background-color: white; color: #385A37; text-decoration:none;">個人情報の編集<a>
 					<a href="createShippingAddress"
 					class="d-inline-block border mx-2 mb-4 p-3 text-center"
-					style="width: 30%; border: 10px solid #385A37; background-color: white; color: #385A37; text-decoration:none;">配送先の登録<a>
+					style="width: 30%; border: #385A37; background-color: white; color: #385A37; text-decoration:none;">配送先の登録<a>
 							<a href="shippingAddressIndex"
 							class="d-inline-block border mx-2 mb-4 p-3 text-center"
-							style="width: 30%; border: 10px solid #385A37; background-color: white; color: #385A37; text-decoration:none;">配送先一覧<a>
+							style="width: 30%; border: #385A37; background-color: white; color: #385A37; text-decoration:none;">配送先一覧<a>
 		</div>
 		<h2 style="margin-left: 40px; margin-top: 30px;">
 			<strong>購入履歴</strong>
