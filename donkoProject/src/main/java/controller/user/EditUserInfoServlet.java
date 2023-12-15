@@ -24,8 +24,8 @@ public class EditUserInfoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		int user_id = (int) session.getAttribute("user_id");
-		if (user_id == 0) {
+		int userId = (int) session.getAttribute("user_id");
+		if (userId == 0) {
 			String view = "/WEB-INF/views/customer/home.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 		}
@@ -43,8 +43,8 @@ public class EditUserInfoServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		int user_id = (int) session.getAttribute("user_id");
-		if (user_id == 0) {
+		int userId = (int) session.getAttribute("user_id");
+		if (userId == 0) {
 			String view = "/WEB-INF/views/customer/home.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 		}
