@@ -1,4 +1,6 @@
 
+
+
     function previewImage(event) {
         const preview = document.getElementById('image-preview');
         const defaultText = document.getElementById('default-text');
@@ -72,4 +74,5 @@ if (registItem2Form) {
             event.target.value = value;
         });
     }
+
 

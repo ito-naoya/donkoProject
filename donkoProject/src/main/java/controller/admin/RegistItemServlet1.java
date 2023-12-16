@@ -29,8 +29,6 @@ public class RegistItemServlet1 extends HttpServlet {
 		//TODO:セッション管理
 		//ログイン画面実装後にセットします
 
-		//TODOチャレンジ：カテゴリーと商品一覧のリスト取得（時間があればやる）
-
 		//カテゴリー一覧を取得
 		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
 		request.setAttribute("categoryList", categoryList);
@@ -89,7 +87,6 @@ public class RegistItemServlet1 extends HttpServlet {
 				String view = "/WEB-INF/views/admin/registItem2.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 				dispatcher.forward(request, response);
-				//TODOチャレンジ；商品名から既存の登録済みオプションと写真情報を取得してjsp上で選択不可にする
 			}
 		}
 	}
