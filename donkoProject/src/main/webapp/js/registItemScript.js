@@ -1,3 +1,31 @@
+function formSwitch() {
+    // サイズの表示タイプ（セレクトボックスかチェックボックスか）に基づく表示の切り替え
+    const isSelectChecked = document.querySelector('input[name="sizeDisplayType"][value="select"]').checked;
+    const sizeSelect = document.getElementById('sizeSelect');
+    const sizeCheck = document.getElementById('sizeCheck');
+
+    if (sizeSelect && sizeCheck) {
+        sizeSelect.style.display = isSelectChecked ? "" : "none";
+        sizeCheck.style.display = isSelectChecked ? "none" : "";
+    }
+
+    // セレクトボックスのリセット
+    if (!isSelectChecked) {
+        const selectBoxes = sizeSelect.querySelectorAll('select');
+        selectBoxes.forEach(select => {
+            select.selectedIndex = 0;
+        });
+    }
+
+    // チェックボックスのリセット
+    if (isSelectChecked) {
+        const checkboxes = sizeCheck.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+    }
+}
+
 //写真をアップロード時にキャプションを表示する
 function previewImage(event) {
 	//アップロードした画像
