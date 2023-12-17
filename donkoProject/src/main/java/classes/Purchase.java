@@ -24,7 +24,7 @@ public class Purchase {
 	};
 	
 	//一件の購入情報を取得する
-	public static ArrayList<PurchaseBean> getPurchaseInfo(PurchaseBean purchaseBean){
+	public static PurchaseBean getPurchaseInfo(PurchaseBean purchaseBean){
 		return SelectPurchaseInfo.selectPurchaseInfo(purchaseBean);
 	};
 	

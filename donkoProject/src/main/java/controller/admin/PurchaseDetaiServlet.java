@@ -22,16 +22,16 @@ public class PurchaseDetaiServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
-		PurchaseDetailBean purchaseDetailBean = new PurchaseDetailBean();
+		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
 		PurchaseBean purchaseBean = new PurchaseBean();
-		purchaseDetailBean.setPurchaseId(4);
-		purchaseBean.setPurchaseId(4);
+		PurchaseDetailBean purchaseDetailBean = new PurchaseDetailBean();
+		purchaseBean.setPurchaseId(purchaseId);
+		purchaseDetailBean.setPurchaseId(purchaseId);
 		
 		// 購入IDをもとに購入情報を取得
-		ArrayList<PurchaseBean> purchaseInfo = Purchase.getPurchaseInfo(purchaseBean);
+		PurchaseBean purchaseInfo = Purchase.getPurchaseInfo(purchaseBean);
 		// 購入IDをもとに購入詳細情報を取得
-		ArrayList<PurchaseDetailBean> purchaseDetailList =PurchaseDetail.getPurchaseDetail(purchaseDetailBean);
+		ArrayList<PurchaseDetailBean> purchaseDetailList = PurchaseDetail.getPurchaseDetail(purchaseDetailBean);
 		
 		request.setAttribute("purchaseInfo", purchaseInfo);
 		request.setAttribute("purchaseDetailList", purchaseDetailList);

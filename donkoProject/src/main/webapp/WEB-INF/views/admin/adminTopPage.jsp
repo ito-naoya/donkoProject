@@ -49,19 +49,19 @@
 						NumberFormat nf = NumberFormat.getNumberInstance();
 						%>
 						<%
-						for (PurchaseBean purchaseBean : unshippingedItemList) {
+						for (PurchaseBean unshippingedItem : unshippingedItemList) {
 						%>
 						<tr>
-							<td class="td"><a href='purchaseDetail?id=<%= purchaseBean.getPurchaseId() %>'><%= purchaseBean.getPurchaseId() %></a></td>
-							<td class="td"><%= purchaseBean.getPurchaseDate() %></td>
-							<td class="td"><%= purchaseBean.getUserId() %></td>
-							<td class="td"><%= purchaseBean.getUserName() %></td>
-							<td class="td">￥ <%= nf.format(purchaseBean.getTotalAmount()) %></td>
+							<td class="td"><a href='purchaseDetail?purchaseId=<%= unshippingedItem.getPurchaseId() %>'><%= unshippingedItem.getPurchaseId() %></a></td>
+							<td class="td"><%= unshippingedItem.getPurchaseDate() %></td>
+							<td class="td"><%= unshippingedItem.getUserId() %></td>
+							<td class="td"><%= unshippingedItem.getUserName() %></td>
+							<td class="td">￥ <%= nf.format(unshippingedItem.getTotalAmount()) %></td>
 							<td class="td">
 								<small>
-								〒 <%= purchaseBean.getPostalCode() %><br>
-								<%= purchaseBean.getAddress() %><br>
-								<%= purchaseBean.getAddressee() %>
+								〒 <%= unshippingedItem.getPostalCode() %><br>
+								<%= unshippingedItem.getAddress() %><br>
+								<%= unshippingedItem.getAddressee() %>
 								</small>
 							</td>
 						</tr>

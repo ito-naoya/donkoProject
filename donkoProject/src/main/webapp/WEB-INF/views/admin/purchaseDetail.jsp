@@ -23,38 +23,40 @@
 					<strong>受注詳細</strong>
 				</h4>
 				<%
-				ArrayList<PurchaseBean> purchaseInfo = (ArrayList<PurchaseBean>) request.getAttribute("purchaseInfo");
+				PurchaseBean purchaseInfo = (PurchaseBean) request.getAttribute("purchaseInfo");
 				%>
+				<div></div>
 				<table class="table table-borderless">
-					<thead>
+					<tbody>
 						<tr>
-							<th>購入ID　：　<% %></th>
-							<td></td>
+							<td style="width: 10%;">購入ID　：　</td>
+							<th><%= purchaseInfo.getPurchaseId() %></th>
 						</tr>
 						<tr>
-							<th>購入者　：</th>
-							<td></td>
+							<td style="width: 10%;">購入者　：　</td>
+							<th><%= purchaseInfo.getUserName() %></th>
 						</tr>
 						<tr>
-							<th>購入日　：</th>
-							<td></td>
+							<td style="width: 10%;">購入日　：　</td>
+							<th><%= purchaseInfo.getPurchaseDate() %></th>
 						</tr>
-					</thead>
+					</tbody>
 				</table>
 				<div class="border-top" style="height: 50px;"></div>
 				<table class="table table-borderless text-center">
 					<tbody>
 						<%
 						ArrayList<PurchaseDetailBean> purchaseDetailList = (ArrayList<PurchaseDetailBean>) request.getAttribute("purchaseDetailList");
+						NumberFormat nf = NumberFormat.getNumberInstance();
 						%>
 						<%
 						for (PurchaseDetailBean purchaseDetail : purchaseDetailList) {
 						%>
 						<tr>
-							<td style="width: 10%;"><a href='#'><%= purchaseDetail.getPurchaseDetailId() %></a></td>
+							<td style="width: 10%;"><%= purchaseDetail.getPurchaseDetailId() %></td>
 							<td><%= purchaseDetail.getItemName() %></td>
-							<td>購入金額</td>
-							<td>個数</td>
+							<td>￥ <%= nf.format(purchaseDetail.getPurchaseAmount()) %></td>
+							<td><%= purchaseDetail.getQuantity() %> 個</td>
 						</tr>
 						<%
 						}
