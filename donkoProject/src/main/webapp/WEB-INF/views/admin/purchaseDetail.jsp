@@ -85,7 +85,7 @@
 					<% int shippingId = purchaseInfo.getShippingId(); %>
 					<% if (shippingId != 2) { %>
 					<div class="d-flex justify-content-center mb-5">
-						<form action="shipping" method="post">
+						<form action="shipping" method="post" onsubmit="return check()">
 							<input type="hidden" name="purchaseId" value="<%= purchaseInfo.getPurchaseId() %>">
 							<input type="hidden" name="shippingId" value="2">
 							<input type="submit" value="発送する" class="btn border" style="margin-top: 70px; background-color:#9933FF; color: white; padding: 12px 80px;">
@@ -96,5 +96,6 @@
 			</div>
 		</div>
 	</main>
+	<script src="./js/purchaseDetailScript.js"></script>
 </body>
 </html>
