@@ -57,6 +57,7 @@ public class RegistItemServlet1 extends HttpServlet {
 		if(newItem == null) {
 			//取得情報の不備があれば、再度入力画面に戻る
 			response.sendRedirect("registItem1");
+			return;
 		} else {
 			//取得した商品情報をセット
 			request.setAttribute("newItem", newItem);
@@ -67,6 +68,7 @@ public class RegistItemServlet1 extends HttpServlet {
 			if(itemCategoryList == null) {
 				//取得情報の不備があれば、再度入力画面に戻る
 				response.sendRedirect("registItem1");
+		        return;
 			} else {
 
 				//各オプションが持っているオプションの数分for文を回す

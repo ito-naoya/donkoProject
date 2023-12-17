@@ -5,7 +5,6 @@ import java.io.IOException;
 import bean.ItemBean;
 import classes.Item;
 import classes.Option;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -56,49 +55,49 @@ public class RegistItemServlet2 extends HttpServlet {
 	    // 最初のオプション（色）の値を取得
 	    String itemFirstOptionName = request.getParameter("optionCategoryName_1");
 	    String itemFirstOptionIncrementId = request.getParameter("optionValueS_1");
-
-	    // サイズ表示タイプの取得（セレクトボックスかチェックボックスか）
-	    String sizeDisplayType = request.getParameter("sizeDisplayType");
-	    String itemSecondOptionName = request.getParameter("optionCategoryName_2");
 	    String itemSecondOptionIncrementId = null;
-	    String[] itemSecondOptionIncrementIds = null;
-
-	    if (sizeDisplayType.equals("select")) {
-	        // セレクトボックスでサイズを選択した場合
-	        itemSecondOptionIncrementId = request.getParameter("optionValueS_2");
-	    } else {
-	        // チェックボックスでサイズを選択した場合
-	        itemSecondOptionIncrementIds = request.getParameterValues("optionValueC_2");
-	    }
+        String[] itemSecondOptionIncrementIds = null;
 
 	    // オプション値の検証と追加
 	    ItemBean newItemAddOption;
-	    if (selectBoxCount == 2) {
-	        newItemAddOption = Option.checkRegistItemOptionDetail(newItem, itemFirstOptionName, itemFirstOptionIncrementId, itemSecondOptionName, itemSecondOptionIncrementId, selectBoxCount);
-	    } else {
+	    if (selectBoxCount == 1) {
+	        // オプションが1つの場合
 	        newItemAddOption = Option.checkRegistItemOptionDetail(newItem, itemFirstOptionName, itemFirstOptionIncrementId, null, null, selectBoxCount);
+	    } else {
+	        // オプションが2つの場合
+	        String sizeDisplayType = request.getParameter("sizeDisplayType");
+	        String itemSecondOptionName = request.getParameter("optionCategoryName_2");
+
+	        if (sizeDisplayType.equals("select")) {
+	            // セレクトボックスでサイズを選択した場合
+	            itemSecondOptionIncrementId = request.getParameter("optionValueS_2");
+	            newItemAddOption = Option.checkRegistItemOptionDetail(newItem, itemFirstOptionName, itemFirstOptionIncrementId, itemSecondOptionName, itemSecondOptionIncrementId, selectBoxCount);
+	        } else {
+	            // チェックボックスでサイズを選択した場合
+	            itemSecondOptionIncrementIds = request.getParameterValues("optionValueC_2");
+	            newItemAddOption = Option.checkRegistItemOptionDetail(newItem, itemFirstOptionName, itemFirstOptionIncrementId, itemSecondOptionName, "0", selectBoxCount);
+	        }
 	    }
 
 	    if (newItemAddOption == null) {
 	        // オプション情報の不備があれば、再度入力画面に戻る
 	        response.sendRedirect("registItem1");
 	        return;
-
 	    } else {
 	        // 写真名を設定
 	        String fileName = itemName + itemFirstOptionIncrementId;
 	        newItemAddOption.setImageFileName(fileName);
 
 	        // itemsテーブルと、item_optionsテーブルを同じトランザクションで更新
-	        Item.registerNewItem(newItemAddOption, selectBoxCount);
+	        Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds);
 
 	        // 画像をドキュメント内に保管
 	        Item.registerNewImage(imgPart, fileName, null);
 	    }
 
 	    // 完了後、別のページにリダイレクト
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("deleteItemIndex");
-	    dispatcher.forward(request, response);
+	    response.sendRedirect("deleteItemIndex");
 	}
+
 
 }

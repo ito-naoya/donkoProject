@@ -53,7 +53,7 @@
 							</div>
 							<div class="mb-3">
 							    <label for="itemName" class="form-label">商品名</label>
-							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" required>
+							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30">
 						 	</div>
 						 	<div class="mb-3">
 							    <label for="itemDescription" class="form-label">商品説明</label>
@@ -74,6 +74,6 @@
 			</div>
 		</div>
 </main>
-<script src="./js/registItemScript.js"></script>
+<!-- <script src="./js/registItemScript.js"></script> -->
 </body>
 </html>

@@ -92,6 +92,7 @@
 							        if (counter == 1) {
 							            // 最初のカテゴリ（例：色）のセレクトボックスを生成
 							    %>
+							    		<input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryName %>">
 							            <label for="optionSelect_<%= counter %>" class="form-label mb-3"></label>
 							            <select class="form-select mb-3" id="optionSelect_<%= counter %>" name="optionValueS_<%= counter %>">
 							                <option selected>オプション選択： <%= optionCategoryName %></option>
@@ -112,6 +113,7 @@
 							                <input class="form-check-input" type="radio" name="sizeDisplayType" value="checkbox" onclick="formSwitch()">
 							                <label class="form-check-label">複数のアイテムを一度に登録</label>
 							            </div>
+							            <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryName %>">
 
 							            <!-- セレクトボックス -->
 							            <div id="sizeSelect">
@@ -143,7 +145,7 @@
 							    }
 							    %>
 							</div>
-
+							<input type="hidden" name="selectBoxCount" value="<%= itemCategoryListAll.size() %>">
 					    <br>
 					    <br>
 					    <button type=submit class="btn px-5 py-3" style="background-color: #9933FF; color: white; border-radius: 0.5rem;">登録</button>
