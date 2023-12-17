@@ -59,6 +59,7 @@
 						}
 						%>
 						<br>
+						<!-- 入力エラーがある場合、ここにエラーメッセージを出力 -->
 						<div id="error-message-container2" class="alert alert-danger d-none"></div>
 						<br>
 					<!-- 　フォーム入力 -->
@@ -70,8 +71,8 @@
 					    <input type="hidden" name="itemStock" value="<%= newItem.getItemStock() %>">
 					    <br>
 					    <div class="mb-3">
-						    <label for="formFile" class="form-label">商品写真を登録</label>
-						    <input type="file" class="form-control" id="formFile" name="img" accept=".jpg" onchange="previewImage(event);" />
+						    <label for="registFormFile" class="form-label">商品写真を登録</label>
+						    <input type="file" class="form-control" id="registFormFile" name="img" accept=".jpg" onchange="previewImage(event);" />
 						</div>
 					    <br>
 					    <div class="upload card mb-3 mx-2" style="width: 300px; height: 300px; display: inline-block;">
@@ -94,6 +95,7 @@
 							    %>
 							    		<input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryName %>">
 							            <label for="optionSelect_<%= counter %>" class="form-label mb-3"></label>
+							            <!-- 一つ目のオプションは必ずセレクトボックス（画像名と一意に紐づけるため） -->
 							            <select class="form-select mb-3" id="optionSelect_<%= counter %>" name="optionValueS_<%= counter %>">
 							                <option selected>オプション選択： <%= optionCategoryName %></option>
 							                <% for (OptionCategoryBean option : optionCategoryList) { %>
@@ -183,8 +185,6 @@ function formSwitch() {
         });
     }
 }
-
-
 
 </script>
 <script src="./js/registItemScript.js"></script>

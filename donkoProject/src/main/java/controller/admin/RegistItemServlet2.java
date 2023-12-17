@@ -83,21 +83,18 @@ public class RegistItemServlet2 extends HttpServlet {
 	        // オプション情報の不備があれば、再度入力画面に戻る
 	        response.sendRedirect("registItem1");
 	        return;
-	    } else {
-	        // 写真名を設定
-	        String fileName = itemName + itemFirstOptionIncrementId;
-	        newItemAddOption.setImageFileName(fileName);
-
-	        // itemsテーブルと、item_optionsテーブルを同じトランザクションで更新
-	        Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds);
-
-	        // 画像をドキュメント内に保管
-	        Item.registerNewImage(imgPart, fileName, null);
 	    }
+        // 写真名を設定(商品名＋オプションID)
+        String fileName = itemName + itemFirstOptionIncrementId;
+        newItemAddOption.setImageFileName(fileName);
 
-	    // 完了後、別のページにリダイレクト
+        // itemsテーブルと、item_optionsテーブルを同じトランザクションで更新
+        Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds);
+
+        // 画像をドキュメント内に保管
+        Item.registerNewImage(imgPart, fileName, null);
+
+	    // 完了後、商品一覧ページにリダイレクト
 	    response.sendRedirect("deleteItemIndex");
 	}
-
-
 }

@@ -31,9 +31,13 @@ public class RegistItemServlet1 extends HttpServlet {
 
 		//カテゴリー一覧を取得
 		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
+		if(categoryList == null) {
+			//取得情報の不備があれば、再度入力画面に戻る
+			response.sendRedirect("registItem1");
+			return;
+		}
 		request.setAttribute("categoryList", categoryList);
 		//商品登録画面1に転送
-		request.setAttribute("errorMessage", "");
 		String view = "/WEB-INF/views/admin/registItem1.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
@@ -50,7 +54,6 @@ public class RegistItemServlet1 extends HttpServlet {
 		String price = request.getParameter("price");
 		String stock = request.getParameter("stock");
 
-
 		//取得情報について、null値及び文字数制限の超過が無いかどうか確認し、itemBeanに登録
 		ItemBean newItem = Item.checkRegistItemDetail(itemCategoryName, itemName, itemDescription, price, stock);
 
@@ -58,38 +61,20 @@ public class RegistItemServlet1 extends HttpServlet {
 			//取得情報の不備があれば、再度入力画面に戻る
 			response.sendRedirect("registItem1");
 			return;
-		} else {
-			//取得した商品情報をセット
-			request.setAttribute("newItem", newItem);
-
-			//カテゴリー名からオプションを取得<衣類：色、衣類：衣類サイズ>
-			ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = new ArrayList<ArrayList<OptionCategoryBean>>();
-			ArrayList<ItemCategoryBean> itemCategoryList = ItemCategory.getItemOptionCategoryNameListByCategory(newItem);
-			if(itemCategoryList == null) {
-				//取得情報の不備があれば、再度入力画面に戻る
-				response.sendRedirect("registItem1");
-		        return;
-			} else {
-
-				//各オプションが持っているオプションの数分for文を回す
-				for (int i = 0; i < itemCategoryList.size(); i++) {
-				    ItemCategoryBean itemCategory = itemCategoryList.get(i);
-
-				    //オプションの詳細を取得する[色,1,緑],[色,2,白],[色,3,黒]
-				    ArrayList<OptionCategoryBean> options = OptionCategory.getOptionCategoryListByCategory(itemCategory);
-				    if(options == null) {
-						//取得情報の不備があれば、再度入力画面に戻る
-						response.sendRedirect("regisatItem1");
-					} else {
-						//詳細の配列を
-						itemCategoryListAll.add(options);
-					}
-				}
-				request.setAttribute("itemCategoryListAll", itemCategoryListAll);
-				String view = "/WEB-INF/views/admin/registItem2.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-				dispatcher.forward(request, response);
-			}
 		}
+		//取得した商品情報をセット
+		request.setAttribute("newItem", newItem);
+
+		//カテゴリー名からオプションを取得<衣類：色、衣類：衣類サイズ>
+		ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(newItem);
+		if(itemCategoryListAll == null) {
+			//取得情報の不備があれば、再度入力画面に戻る
+			response.sendRedirect("registItem1");
+	        return;
+		}
+
+		request.setAttribute("itemCategoryListAll", itemCategoryListAll);
+		String view = "/WEB-INF/views/admin/registItem2.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 }

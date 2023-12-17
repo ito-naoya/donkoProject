@@ -25,17 +25,9 @@
 					<br>
 					<h2>商品登録</h2>
 					<br>
-						<%
-						String errorMessage = (String) request.getAttribute("errorMessage");
-						if(errorMessage != null && !errorMessage.isEmpty()) {
-						%>
-						    <div class="alert alert-danger alert-message" role="alert">
-						        <%= errorMessage %>
-						    </div>
-						<%
-						}
-						%>
+						<!-- ここにエラーメッセージを表示 -->
 						<div id="error-message-container" class="alert alert-danger d-none"></div>
+
 						<!-- ここから入力フォーム  -->
 						<form action="registItem1" id="registItem1" method="post">
 							<div class="mb-3">
@@ -74,6 +66,6 @@
 			</div>
 		</div>
 </main>
-<!-- <script src="./js/registItemScript.js"></script> -->
+<script src="./js/registItemScript.js"></script>
 </body>
 </html>
