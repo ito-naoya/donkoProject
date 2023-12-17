@@ -19,7 +19,8 @@ public class SelectPurchaseInfo {
 		sb.append(    "p.purchase_id, "          );
 		sb.append(    "u.user_name, "            );
 		sb.append(    "p.purchase_date, "        );
-		sb.append(    "p.total_amount "          );
+		sb.append(    "p.total_amount, "         );
+		sb.append(    "p.shipping_id "         );
 		sb.append("FROM "                        );
 		sb.append(    "purchases p "             );
 		sb.append("INNER JOIN "                  );
