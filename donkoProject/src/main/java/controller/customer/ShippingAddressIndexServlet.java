@@ -29,12 +29,10 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 			String view = "/WEB-INF/views/customer/home.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 		}
-		
+		// ユーザIDをセット
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserId(userId);
 		// SQL実行
-//		ShippingAddressBean mainShippingAddressList = ShippingAddress.getMainShippingAddress(customerUser);
-		
 		ArrayList<ShippingAddressBean> shippingAddressList = ShippingAddress.getShippingAddressList(customerUser);
 		request.setAttribute("shippingAddressList", shippingAddressList);
 		
