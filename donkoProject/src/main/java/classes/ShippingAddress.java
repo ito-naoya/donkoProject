@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import bean.ShippingAddressBean;
 import classes.user.CustomerUser;
+import model.shippingAddresses.shippingAddressesDelete.DeleteIteShippingAddresses;
 import model.shippingAddresses.shippingAddressesInsert.InsertNewShippingAddress;
 import model.shippingAddresses.shippingAddressesSelect.SelectMainShippingAddress;
 import model.shippingAddresses.shippingAddressesSelect.SelectMainShippingAddressSort;
@@ -47,5 +48,9 @@ public class ShippingAddress {
 	//配送先一覧をメインの配送先順にソートして取得する
 	public static ArrayList<ShippingAddressBean> getMainShippingAddressSort(CustomerUser customerUser){
 		return SelectMainShippingAddressSort.selectMainShippingAddressSort(customerUser);
+	};
+	//配送先を削除
+	public static void deleteShippingAddresses(ShippingAddressBean shippingAddressBean){
+		DeleteIteShippingAddresses.deleteUpdateShippingAddress(shippingAddressBean);
 	};
 }
