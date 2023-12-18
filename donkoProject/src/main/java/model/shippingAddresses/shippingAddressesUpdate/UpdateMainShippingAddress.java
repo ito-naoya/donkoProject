@@ -22,7 +22,7 @@ public class UpdateMainShippingAddress {
 		sbDelete.append(	"shipping_addresses.user_id = ? "				);
 		sbDelete.append(	"AND "											);
 		sbDelete.append(	"shipping_addresses.main_shipping_address = 1 "	);
-		String sqlDelete = sbDelete.toString();
+		final String DELETE_MAIN_ADDRESS_SQL = sbDelete.toString();
 		
 		// ？の引数に渡す値(メイン設定削除)
 		ArrayList<Object> paramDelete = new ArrayList<Object>();
@@ -41,7 +41,7 @@ public class UpdateMainShippingAddress {
 		sbDelete.append(	"shipping_addresses.user_id = ?"				);
 		sbDelete.append(	"AND "											);
 		sbDelete.append(	"shipping_addresses.address = ? "	);
-		String sqlUpdate = sbUpdate.toString();
+		final String UPDATE_MAIN_ADDRESS_SQL = sbUpdate.toString();
 		
 		// ？の引数に渡す値(メイン設定)
 		ArrayList<Object> paramUpdate = new ArrayList<Object>();
@@ -51,8 +51,8 @@ public class UpdateMainShippingAddress {
 		
 		try (Connection connection = DatabaseConnection.getConnection()) {
 			try {
-				GeneralDao.executeUpdate(connection, sqlDelete, paramDelete);
-				GeneralDao.executeUpdate(connection, sqlUpdate, paramUpdate);
+				GeneralDao.executeUpdate(connection, DELETE_MAIN_ADDRESS_SQL, paramDelete);
+				GeneralDao.executeUpdate(connection, UPDATE_MAIN_ADDRESS_SQL, paramUpdate);
 				connection.commit();
 			} catch (Exception e) {
 				if(!connection.isClosed()) {

@@ -39,7 +39,7 @@ public class SelectMyPurchaseHistory {
 			sb.append(	"purchases.user_id = ? "													);
 			sb.append("ORDER BY "																	);
 			sb.append(	"purchases.purchase_date DESC;"												);
-			String sql = sb.toString();
+			final String SELECT_PURCHASE_HISTORY_SQL = sb.toString();
 			
 			// ？の値を渡す
 			ArrayList<Object> params = new ArrayList<Object>();
@@ -50,7 +50,7 @@ public class SelectMyPurchaseHistory {
 			
 			// SQL実行
 			try (Connection connection = DatabaseConnection.getConnection()){
-				try (ResultSet results = GeneralDao.executeQuery(connection, sql, params)) {
+				try (ResultSet results = GeneralDao.executeQuery(connection, SELECT_PURCHASE_HISTORY_SQL, params)) {
 					
 					while (results.next()) {
 						purchaseBean = new PurchaseBean();

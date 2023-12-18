@@ -1,12 +1,17 @@
 package controller.customer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import bean.ShippingAddressBean;
+import classes.ShippingAddress;
+import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/shippingAddressIndex")
 public class ShippingAddressIndexServlet extends HttpServlet {
@@ -17,13 +22,22 @@ public class ShippingAddressIndexServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// セッション確認
+		HttpSession session = request.getSession(false);
+		int userId = (int) session.getAttribute("user_id");
+		if (userId == 0) {
+			String view = "/WEB-INF/views/customer/home.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+		}
+		// ユーザIDをセット
+		CustomerUser customerUser = new CustomerUser();
+		customerUser.setUserId(userId);
+		// SQL実行
+		ArrayList<ShippingAddressBean> shippingAddressList = ShippingAddress.getShippingAddressList(customerUser);
+		request.setAttribute("shippingAddressList", shippingAddressList);
+		
 		// 配送先一覧
 		String view = "/WEB-INF/views/customer/shippingAddressIndex.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
 }

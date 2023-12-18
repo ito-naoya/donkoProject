@@ -26,17 +26,17 @@ public class SelectShippingAddressList {
 		sb.append(	"shipping_addresses "						);
 		sb.append("WHERE "										);
 		sb.append(	"shipping_addresses.user_id = ?"			);
-		String sql = sb.toString();
+		final String SELECT_ADDRESS_LIST_SQL = sb.toString();
 		
 		// ？の引数に渡す値
 		ArrayList<Object> param = new ArrayList<Object>();
-		param.add(CustomerUser.getUserLoginId());
+		param.add(CustomerUser.getUserId());
 		
 		ArrayList<ShippingAddressBean> shippingAddressList = new ArrayList<ShippingAddressBean>();
 		ShippingAddressBean shippingAddressBean;
 		
 		try (Connection connection = DatabaseConnection.getConnection()) {
-			try (ResultSet results = GeneralDao.executeQuery(connection, sql, param)) {
+			try (ResultSet results = GeneralDao.executeQuery(connection, SELECT_ADDRESS_LIST_SQL, param)) {
 				
 				while (results.next()) {
 					shippingAddressBean = new ShippingAddressBean();

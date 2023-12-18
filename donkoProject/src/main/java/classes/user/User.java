@@ -29,12 +29,12 @@ public class User {
 	};
 	
 	//ユーザー情報の重複をチェックする
-	public void checkUserDuplicate(CustomerUser customerUser){
+	public static void checkUserDuplicate(CustomerUser customerUser){
 		SelectUserDuplicate.selectUserDuplicate(customerUser);
 	};
 	
 	//ユーザー情報を更新する
-	public void updateUserInfo(CustomerUser customerUser) {
+	public static void updateUserInfo(CustomerUser customerUser) {
 		UpdateUserInfoInUsers.updateUserInfoInUsers(customerUser);
 	};
 
@@ -44,13 +44,13 @@ public class User {
 	};
 	
 	//ユーザーのパスワードを更新する
-	public void updateUserPasseord(CustomerUser customerUser) {
+	public static void updateUserPasseord(CustomerUser customerUser) {
 		UpdateUserPasswords.updateUserPasseords(customerUser);
 	};
 
 	//ログアウトする
 	//TODO セッション破棄のメソッドを記述する
-	public void logout() {
+	public static void logout() {
 	};
 
 	//ログインする
