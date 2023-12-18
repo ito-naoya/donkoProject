@@ -1,7 +1,10 @@
 package controller.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import bean.PurchaseBean;
+import classes.Purchase;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,6 +20,8 @@ public class PurchaseHistoryServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<PurchaseBean> orderItemList = Purchase.getOrderItemList();
+		request.setAttribute("orderItemList", orderItemList);
 		String view = "/WEB-INF/views/admin/purchaseHistory.jsp";
         request.getRequestDispatcher(view).forward(request, response);
 	}

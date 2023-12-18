@@ -9,7 +9,6 @@ import bean.OptionCategoryBean;
 import classes.Item;
 import classes.ItemCategory;
 import classes.OptionCategory;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -29,16 +28,20 @@ public class RegistItemServlet1 extends HttpServlet {
 		//TODO:セッション管理
 		//ログイン画面実装後にセットします
 
-		//TODOチャレンジ：カテゴリーと商品一覧のリスト取得（時間があればやる）
-
 		//カテゴリー一覧を取得
 		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
+
+		if(categoryList == null) {
+			//取得情報の不備があれば、エラー画面に遷移
+			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		}
 		request.setAttribute("categoryList", categoryList);
 		//商品登録画面1に転送
-		request.setAttribute("errorMessage", "");
 		String view = "/WEB-INF/views/admin/registItem1.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,45 +55,29 @@ public class RegistItemServlet1 extends HttpServlet {
 		String price = request.getParameter("price");
 		String stock = request.getParameter("stock");
 
-
 		//取得情報について、null値及び文字数制限の超過が無いかどうか確認し、itemBeanに登録
 		ItemBean newItem = Item.checkRegistItemDetail(itemCategoryName, itemName, itemDescription, price, stock);
 
 		if(newItem == null) {
 			//取得情報の不備があれば、再度入力画面に戻る
 			response.sendRedirect("registItem1");
-		} else {
-			//取得した商品情報をセット
-			request.setAttribute("newItem", newItem);
-
-			//カテゴリー名からオプションを取得<衣類：色、衣類：衣類サイズ>
-			ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = new ArrayList<ArrayList<OptionCategoryBean>>();
-			ArrayList<ItemCategoryBean> itemCategoryList = ItemCategory.getItemOptionCategoryNameListByCategory(newItem);
-			if(itemCategoryList == null) {
-				//取得情報の不備があれば、再度入力画面に戻る
-				response.sendRedirect("registItem1");
-			} else {
-
-				//各オプションが持っているオプションの数分for文を回す
-				for (int i = 0; i < itemCategoryList.size(); i++) {
-				    ItemCategoryBean itemCategory = itemCategoryList.get(i);
-
-				    //オプションの詳細を取得する[色,1,緑],[色,2,白],[色,3,黒]
-				    ArrayList<OptionCategoryBean> options = OptionCategory.getOptionCategoryListByCategory(itemCategory);
-				    if(options == null) {
-						//取得情報の不備があれば、再度入力画面に戻る
-						response.sendRedirect("regisatItem1");
-					} else {
-						//詳細の配列を
-						itemCategoryListAll.add(options);
-					}
-				}
-				request.setAttribute("itemCategoryListAll", itemCategoryListAll);
-				String view = "/WEB-INF/views/admin/registItem2.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-				dispatcher.forward(request, response);
-				//TODOチャレンジ；商品名から既存の登録済みオプションと写真情報を取得してjsp上で選択不可にする
-			}
+			return;
 		}
+		//取得した商品情報をセット
+		request.setAttribute("newItem", newItem);
+
+		//カテゴリー名からオプションを取得<衣類：色、衣類：衣類サイズ>
+		ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(newItem);
+		if(itemCategoryListAll == null) {
+			//取得情報の不備があれば、エラー画面に遷移
+			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		}
+
+		request.setAttribute("itemCategoryListAll", itemCategoryListAll);
+		String view = "/WEB-INF/views/admin/registItem2.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 }

@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class InsertNewItemToItems {
 
     // itemsテーブルに商品を新規登録する
-    public static void insertNewItemToItems(ItemBean itemBean, int selectBoxCount) {
+    public static void insertNewItemToItems(ItemBean itemBean, int selectBoxCount, String[] itemSecondOptionIncrementIds) {
         //itemsテーブルに商品を登録
         StringBuilder sb1 = new StringBuilder();
         sb1.append("INSERT INTO items "										);
@@ -54,33 +54,47 @@ public class InsertNewItemToItems {
         ArrayList<Object> params2 = new ArrayList<Object>();
         params2.add(itemBean.getItemFirstOptionName());
         params2.add(itemBean.getItemFirstOptionIncrementId());
-
         //セレクトボックスが2つの時
         ArrayList<Object> params3 = new ArrayList<Object>();
-        if(selectBoxCount == 2) {
+        if (selectBoxCount == 2 && itemSecondOptionIncrementIds == null) {
             params3.add(itemBean.getItemSecondOptionName());
             params3.add(itemBean.getItemSecondOptionIncrementId());
         }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
             try {
-            	GeneralDao.executeUpdate(conn, sql1, params1);
-            	GeneralDao.executeUpdate(conn, sql2, params2);
+                if (itemSecondOptionIncrementIds == null) {
+                    // セレクトボックスの場合
+                    GeneralDao.executeUpdate(conn, sql1, params1);
+                    GeneralDao.executeUpdate(conn, sql2, params2);
+                    if (selectBoxCount == 2) {
+                        GeneralDao.executeUpdate(conn, sql2, params3);
+                    }
+                } else {
+                    // チェックボックスの場合
+                    for (String optionId : itemSecondOptionIncrementIds) {
+                        // itemsテーブルに商品を登録
+                        GeneralDao.executeUpdate(conn, sql1, params1);
 
-            	if(selectBoxCount == 2) {
-            		GeneralDao.executeUpdate(conn, sql2, params3);
+                        // optionsテーブルに色を登録
+                        ArrayList<Object> paramsColor = new ArrayList<>(params2);
+                        GeneralDao.executeUpdate(conn, sql2, paramsColor);
+
+                        // optionsテーブルにサイズを登録
+                        ArrayList<Object> paramsSize = new ArrayList<>();
+                        paramsSize.add(itemBean.getItemSecondOptionName());
+                        paramsSize.add(optionId);
+                        GeneralDao.executeUpdate(conn, sql2, paramsSize);
+                    }
                 }
 
-            	conn.commit();  //コミットする
+                conn.commit(); // コミット
             } catch (SQLException e) {
-		    	if(!conn.isClosed()) {
-			        conn.rollback();
-			        e.printStackTrace();
-		    	}
-		    }
-
-		} catch (SQLException | ClassNotFoundException e) {
-		  e.printStackTrace();
-		}
-	}
+                conn.rollback(); // ロールバック
+                e.printStackTrace();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

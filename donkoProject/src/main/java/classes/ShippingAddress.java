@@ -6,6 +6,7 @@ import bean.ShippingAddressBean;
 import classes.user.CustomerUser;
 import model.shippingAddresses.shippingAddressesInsert.InsertNewShippingAddress;
 import model.shippingAddresses.shippingAddressesSelect.SelectMainShippingAddress;
+import model.shippingAddresses.shippingAddressesSelect.SelectMainShippingAddressSort;
 import model.shippingAddresses.shippingAddressesSelect.SelectShippingAddressDetail;
 import model.shippingAddresses.shippingAddressesSelect.SelectShippingAddressList;
 import model.shippingAddresses.shippingAddressesUpdate.UpdateMainShippingAddress;
@@ -43,5 +44,8 @@ public class ShippingAddress {
 		return SelectShippingAddressList.selectShippingAddressList(customerUser);
 	};
 	
-
+	//配送先一覧をメインの配送先順にソートして取得する
+	public static ArrayList<ShippingAddressBean> getMainShippingAddressSort(CustomerUser customerUser){
+		return SelectMainShippingAddressSort.selectMainShippingAddressSort(customerUser);
+	};
 }

@@ -82,7 +82,7 @@
 			<a href="deleteItemIndex" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">削除商品一覧</a>
 			<a href="deleteUserInfoIndex" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">削除ユーザ情報一覧</a>
 			<a href="userSignup" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">ユーザ新規登録</a>
-			<a href="#" class="mx-2" style="width: 30%;"></a>
+			<a href="home" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">ホーム画面に移動</a>
 		</div>
 	</main>
 </body>
