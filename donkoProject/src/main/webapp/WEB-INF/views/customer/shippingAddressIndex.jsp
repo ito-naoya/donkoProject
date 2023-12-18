@@ -22,12 +22,14 @@
     <div class="AddressChoice"
       style="display: flex; justify-content:end;">
       <!-- TODO:サーブレットができたら変える -->
-      <from action="" method="post">
-      <select class="form-control"style="width:400px;"  >
+                <% ArrayList<ShippingAddressBean> mainShippingAddressList =
+          (ArrayList<ShippingAddressBean>)request.getAttribute("mainShippingAddressList");%>
+      <from action="shippingAddressIndex" method="post">
+      <select class="form-control" name="main_shipping_address" style="width:400px;">
         <option hidden>デフォルト住所選択 修正予定</option>
-        <option value="住所A">大阪府守口市あいうえお町z-z-z</option>
-        <option value="住所B">京都府京都市伏見区かきくけこ町y-y</option>
-        <option value="住所C">愛知県名古屋市北区さしすせそ町x-x-x</option>
+           <% for (ShippingAddressBean mainShippingAddressBean : mainShippingAddressList) { %>
+        <option value=<%= mainShippingAddressBean.getShippingAddressId() %>><%= mainShippingAddressBean.getShippingAddress() %></option>
+              <% } %>
       </select>
       </from>
       <!--  -->
@@ -52,8 +54,8 @@
             <td><%= shippingAddressBean.getAddressee()%></td>
           <!-- 更新ボタン -->
           <td>
-           <button type="submit"class="btn" style="border: 1px solid #000000; background:   #E5CCFF;">
-            <a href="editShippingAddress?=<%= shippingAddressBean.getShippingAddressId() %>"
+           <button type="submit"class="btn" style="border: 1px solid #000000; background: #E5CCFF; >
+            <a href='editShippingAddress?id=<%= shippingAddressBean.getShippingAddressId() %>'
               style="color: #000000; vertical-align: middle; text-decoration: none;">編集</a> 
            </button>
           </td>
