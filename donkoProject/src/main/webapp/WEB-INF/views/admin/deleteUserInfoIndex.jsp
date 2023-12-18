@@ -29,14 +29,27 @@
 							</svg>
 						</div>
 					</a>
+					<%
+					String toIndicate = (String)request.getAttribute("toIndicate");
+					%>
 					<form action="deleteUserInfoIndex" method="POST">
-						<input type="checkbox" name="showSelect" value="showUserAll" id="showSelect">
-						<label for="showSelect">
-							全てのユーザーを表示
-						</label>
-						<button type="submit" class="btn border p-2 ms-3" style="background-color: e5ccff;">
-							表示
-						</button>
+						<%
+						if(toIndicate.equals("deletedUser")) {
+						%>
+							<input type="hidden" name="showSelect" value="notDeletedUser">
+							<button type="submit" class="btn border p-2 ms-3" style="background-color: #e5ccff;">
+								全てのユーザーを表示
+							</button>
+						<%
+						} else if(toIndicate.equals("notDeletedUser")) {
+						%>
+							<input type="hidden" name="showSelect" value="deletedUser">
+							<button type="submit" class="btn border p-2 ms-3" style="background-color: #e5ccff;">
+								無効のユーザーを表示
+							</button>
+						<%
+						}
+						%>
 					</form>
 				</div>
 				<div class="row">
@@ -65,7 +78,9 @@
 									<tr>
 										<td><!-- ID -->
 											<p>
-												<%= user.getUserId()  %>
+												<a href="editUserInfo?userId=<%= user.getUserId()  %>">
+													<%= user.getUserId()  %>
+												</a>
 											</p>
 										</td>
 										<td><!-- ログインID -->
