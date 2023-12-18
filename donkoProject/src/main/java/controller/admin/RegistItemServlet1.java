@@ -9,7 +9,6 @@ import bean.OptionCategoryBean;
 import classes.Item;
 import classes.ItemCategory;
 import classes.OptionCategory;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,16 +30,18 @@ public class RegistItemServlet1 extends HttpServlet {
 
 		//カテゴリー一覧を取得
 		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
+
 		if(categoryList == null) {
-			//取得情報の不備があれば、再度入力画面に戻る
-			response.sendRedirect("registItem1");
+			//取得情報の不備があれば、エラー画面に遷移
+			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
 			return;
 		}
 		request.setAttribute("categoryList", categoryList);
 		//商品登録画面1に転送
 		String view = "/WEB-INF/views/admin/registItem1.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -68,9 +69,11 @@ public class RegistItemServlet1 extends HttpServlet {
 		//カテゴリー名からオプションを取得<衣類：色、衣類：衣類サイズ>
 		ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(newItem);
 		if(itemCategoryListAll == null) {
-			//取得情報の不備があれば、再度入力画面に戻る
-			response.sendRedirect("registItem1");
-	        return;
+			//取得情報の不備があれば、エラー画面に遷移
+			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
 		}
 
 		request.setAttribute("itemCategoryListAll", itemCategoryListAll);
