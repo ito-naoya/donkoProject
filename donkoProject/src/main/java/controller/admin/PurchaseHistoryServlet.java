@@ -20,8 +20,10 @@ public class PurchaseHistoryServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 全ての受注情報を取得
 		ArrayList<PurchaseBean> orderItemList = Purchase.getOrderItemList();
 		request.setAttribute("orderItemList", orderItemList);
+		//遷移先
 		String view = "/WEB-INF/views/admin/purchaseHistory.jsp";
         request.getRequestDispatcher(view).forward(request, response);
 	}

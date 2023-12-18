@@ -23,6 +23,8 @@ public class PurchaseDetaiServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
+		
+		// Beanに値をセット
 		PurchaseBean purchaseBean = new PurchaseBean();
 		PurchaseDetailBean purchaseDetailBean = new PurchaseDetailBean();
 		purchaseBean.setPurchaseId(purchaseId);
@@ -39,10 +41,4 @@ public class PurchaseDetaiServlet extends HttpServlet {
 		String view = "/WEB-INF/views/admin/purchaseDetail.jsp";
         request.getRequestDispatcher(view).forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 発送する機能をつける
-		doGet(request, response);
-	}
-
 }
