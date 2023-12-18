@@ -9,6 +9,7 @@
 		<title>
 			donko
 		</title>
+		<link rel="stylesheet" href="./css/cartStyle.css">
 	</head>
 	<body>
 		<%@include file="../component/header.jsp"%>
@@ -49,7 +50,7 @@
 										<a href="itemDetail?itemId=<%= cb.getItemId() %>" class="me-3"
 										style="text-decoration: none; display: inline-block;">
 											<div style="height: 150px; width: 150px;">
-												<img class="object-fit-cover w-100 h-100"
+												<img class="object-fit-cover w-100 h-100 itemImage"
 													src="./images/<%= cb.getImageFileName() %>.jpg">
 											</div>
 										</a>
@@ -131,6 +132,7 @@
 				</div>
 			</div>
 		</main>
-		<%@include file="../component/footer.jsp"%>
+		<%@include file="../component/footer.jsp"%><a>
+		<script src="./js/cartScript.js"></script>
 	</body>
 </html>
