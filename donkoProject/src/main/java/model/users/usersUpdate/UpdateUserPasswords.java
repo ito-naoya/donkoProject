@@ -22,7 +22,7 @@ public class UpdateUserPasswords {
 		sb.append(	"password = ?, "		);
 		sb.append("WHERE "						);
 		sb.append(	"user_id = ? ;"				);
-		String sql = sb.toString();
+		final String UPDATE_USER_PASSWORD_SQL = sb.toString();
 		
 		// パスワードのハッシュ化
 		String password = customerUser.getPassword();
@@ -41,7 +41,7 @@ public class UpdateUserPasswords {
 		// SQL実行
 		try (Connection connection = DatabaseConnection.getConnection()) {
 			try {
-				GeneralDao.executeUpdate(connection, sql, param);
+				GeneralDao.executeUpdate(connection, UPDATE_USER_PASSWORD_SQL, param);
 				connection.commit();
 			} catch (Exception e) {
 				if(!connection.isClosed()) {

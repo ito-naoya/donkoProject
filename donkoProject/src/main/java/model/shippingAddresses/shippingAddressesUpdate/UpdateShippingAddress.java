@@ -23,7 +23,7 @@ public class UpdateShippingAddress {
 		sb.append(		"addressee = ? "				);
 		sb.append("WHERE "								);
 		sb.append(	"shipping_addresses.user_id = ?"	);
-		String sql = sb.toString();
+		final String UPDATE_ADDRESS_SQL = sb.toString();
 		
 		// ？の引数に渡す値
 		ArrayList<Object> param = new ArrayList<Object>();
@@ -34,7 +34,7 @@ public class UpdateShippingAddress {
 		
 		try (Connection connection = DatabaseConnection.getConnection()) {
 			try {
-				GeneralDao.executeUpdate(connection, sql, param);
+				GeneralDao.executeUpdate(connection, UPDATE_ADDRESS_SQL, param);
 				connection.commit();
 			} catch (Exception e) {
 				if(!connection.isClosed()) {

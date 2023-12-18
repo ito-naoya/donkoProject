@@ -25,7 +25,7 @@ public class SelectShippingAddressDetail {
 		sb.append(	"shipping_addresses.shipping_address_id = ? "			);
 		sb.append(	"AND "													);
 		sb.append(	"shipping_addresses.user_id = ?"						);
-		String sql = sb.toString();
+		final String SELECT_ADDRESS_DETAIL_SQL = sb.toString();
 
 		// ？の引数に渡す値
 		ArrayList<Object> param = new ArrayList<Object>();
@@ -33,7 +33,7 @@ public class SelectShippingAddressDetail {
 		param.add(shippingAddressBean.getUserId());
 		
 		try (Connection connection = DatabaseConnection.getConnection()) {
-			try (ResultSet results = GeneralDao.executeQuery(connection, sql, param)) {
+			try (ResultSet results = GeneralDao.executeQuery(connection, SELECT_ADDRESS_DETAIL_SQL, param)) {
 				
 				while (results.next()) {
 					shippingAddressBean = new ShippingAddressBean();
