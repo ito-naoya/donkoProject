@@ -66,8 +66,8 @@
 					<!-- 更新ボタン -->
 					<td>
 						<button type="submit" class="btn"
-							style="border: 1px solid #000000; background: #E5CCFF; >
-            <a href='editShippingAddress?id=<%=shippingAddressBean.getShippingAddressId()%>'
+							style="border: 1px solid #000000; background: #E5CCFF;" >
+            <a href='editShippingAddress?shipping_address_id=<%=shippingAddressBean.getShippingAddressId()%>'
               style="color: #000000; vertical-align: middle; text-decoration: none;">編集</a> 
            </button>
           </td>
@@ -79,7 +79,7 @@
             </button>
           </td>
           </tr>
-          <%}%>
+          <% } %>
     </table>
   </main>
   <%@include file="../component/footer.jsp"%>
