@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>donko</title>
 <style type="text/css">
-	a,label{cursor:pointer;}
+	a,label{ cursor:pointer; }
 	label:hover { color : #E5CCFF; }
 	}
 </style>

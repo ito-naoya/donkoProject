@@ -35,7 +35,7 @@ public class MyPageServlet extends HttpServlet {
 		
 		CustomerUser customerUser = new CustomerUser();
 		// TODO: testUserIdはテストコードです
-		int testUserId = 6;
+		int testUserId = 2;
 		session.setAttribute("user_id", testUserId);
 		int userId = (int) session.getAttribute("user_id");
 		customerUser.setUserId(userId);

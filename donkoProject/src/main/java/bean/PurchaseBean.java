@@ -16,9 +16,9 @@ public class PurchaseBean {
 	private String postalCode;
 	private String address;
 	private String addressee;
-	
+
 	public PurchaseBean(){};
-	
+
 	public String getUserName() {
 		return userName;
 	}

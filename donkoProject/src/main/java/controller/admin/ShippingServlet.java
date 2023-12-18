@@ -1,7 +1,10 @@
 package controller.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import bean.PurchaseBean;
+import classes.Purchase;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,12 +19,21 @@ public class ShippingServlet extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
+		int shippingId = Integer.parseInt(request.getParameter("shippingId"));
+	
+		PurchaseBean purchaseBean = new PurchaseBean();
+		purchaseBean.setPurchaseId(purchaseId);
+		purchaseBean.setShippingId(shippingId);
+		
+		Purchase.sendItems(purchaseBean);
+		
+		ArrayList<PurchaseBean> unshippingedItemList = Purchase.getUnshippingedItemListByDesc();
+		request.setAttribute("unshippingedItemList", unshippingedItemList);
+		
+		String view = "/WEB-INF/views/admin/adminTopPage.jsp";
+        request.getRequestDispatcher(view).forward(request, response);
 	}
 
 }
