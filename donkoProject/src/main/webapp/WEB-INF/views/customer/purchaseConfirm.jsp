@@ -10,6 +10,7 @@
 		<title>
 			donko
 		</title>
+		<link rel="stylesheet" href="./css/cartStyle.css">
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -18,7 +19,7 @@
 	</head>
 	<body>
 		<main>
-			<a href="#" class="m-5 mb-4" style="text-decoration: none; display: inline-block">
+			<a href="home" class="m-5 mb-4" style="text-decoration: none; display: inline-block">
 				<h6 class="py-2 px-5"style="color: #385a37; border: 1px solid #385a37; text-align: center; width: 200px;">
 					DONKO
 				</h6>
@@ -74,7 +75,7 @@
 										<a href="itemDetail?itemId=<%= cb.getItemId() %>" class="me-3"
 										style="text-decoration: none; display: inline-block;">
 											<div style="height: 150px; width: 150px;">
-												<img class="object-fit-cover w-100 h-100"
+												<img class="object-fit-cover w-100 h-100 itemImage"
 													src="./images/<%= cb.getImageFileName() %>.jpg">
 											</div>
 										</a>
@@ -124,5 +125,6 @@
 				</div>
 			</div>
 		</main>
+		<script src="./js/cartScript.js"></script>
 	</body>
 </html>
