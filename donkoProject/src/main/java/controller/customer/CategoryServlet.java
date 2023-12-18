@@ -25,6 +25,13 @@ public class CategoryServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String categoryName = request.getParameter("categoryName");
+		// カテゴリ名がnullの場合はホーム画面に遷移
+		if (categoryName == null) {
+			response.sendRedirect("home");
+			return;
+		}
+		
+		// Beanにカテゴリ名をセット
 		ItemBean itemBean = new ItemBean();
 		itemBean.setItemCategoryName(categoryName);
 		
@@ -32,6 +39,16 @@ public class CategoryServlet extends HttpServlet {
 		ArrayList<ArrayList<OptionCategoryBean>> optionCategoryValueListAll = OptionCategory.getOptionCategoryListAllByCategory(itemBean);
 		// カテゴリー一覧の取得
 		ArrayList<ItemBean> itemList = Item.getItemListByCategory(itemBean);
+		
+		// エラー画面に遷移
+		if (optionCategoryValueListAll == null) {
+			// 失敗したらmessage.jspに飛ぶ
+			return;
+		}
+		if (itemList == null) {
+			// 失敗したらmessage.jspに飛ぶ 
+			return;
+		}
 		
 		request.setAttribute("categoryName", categoryName);
 		request.setAttribute("optionCategoryValueListAll", optionCategoryValueListAll);
