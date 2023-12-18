@@ -10,7 +10,7 @@ import dao.GeneralDao;
 
 public class UpdateMainShippingAddress {
 	
-	//デフォルトの配送先を更新する
+	//メイン配送先を更新する
 	public static void updateMainShippingAddress(ShippingAddressBean shippingAddressBean){
 		// SQLコマンド生成(メイン設定削除)
 		StringBuilder sbDelete = new StringBuilder();
@@ -30,14 +30,14 @@ public class UpdateMainShippingAddress {
 		
 		// SQLコマンド生成(メイン設定)
 		StringBuilder sbUpdate = new StringBuilder();
-		sbUpdate.append("UPDATE " );
+		sbUpdate.append("UPDATE "											);
 		sbUpdate.append(	"shipping_addresses "							);
 		sbUpdate.append(	"SET "											);
 		sbUpdate.append(		"main_shipping_address = 1 "				);
 		sbUpdate.append("WHERE "											);
-		sbDelete.append(	"shipping_addresses.user_id = ?"				);
-		sbDelete.append(	"AND "											);
-		sbDelete.append(	"shipping_addresses.shipping_address_id = ? "	);
+		sbUpdate.append(	"shipping_addresses.user_id = ? "				);
+		sbUpdate.append(	"AND "											);
+		sbUpdate.append(	"shipping_addresses.shipping_address_id = ? "	);
 		final String UPDATE_MAIN_ADDRESS_SQL = sbUpdate.toString();
 		
 		// ？の引数に渡す値(メイン設定)
