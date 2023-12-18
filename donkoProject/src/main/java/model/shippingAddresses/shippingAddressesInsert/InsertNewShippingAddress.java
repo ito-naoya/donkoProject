@@ -35,7 +35,7 @@ public class InsertNewShippingAddress {
 		// 宛名
 		sb.append(	"? "										);
 		sb.append(	") "										);
-		final　String INSERT_SHIPPING_ADDRESS_SQL = sb.toString();
+		final String INSERT_SHIPPING_ADDRESS_SQL = sb.toString();
 		
 		// ？の引数に渡す値
 		ArrayList<Object> param = new ArrayList<Object>();
