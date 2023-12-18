@@ -100,19 +100,24 @@ public class Item {
 	public static void deleteItem(String[] itemStatus){
 		DeleteItemFromItems.deleteItemFromItems(itemStatus);
 	};
+
 	//商品画像をドキュメント内に登録する
-	public static void registerNewImage(Part part,String fileName, String oldFileName){
-		if(part != null && !fileName.isEmpty()) {
-			try {
-			    // フルパスじゃないと上手く読み込まれないみたいなので、自分のファイルパスに適宜変更してください。
-			    String filePath = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/" + fileName + ".jpg";
-			    // ファイルを保存
-				part.write(filePath);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	};
+	public static boolean registerNewImage(Part part, String fileName) {
+	    if (part != null && !fileName.isEmpty()) {
+	        try {
+	            // フルパスを指定
+	            String filePath = "/path/to/your/directory/" + fileName + ".jpg";
+	            // ファイルを保存
+	            part.write(filePath);
+	            return true;
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+	    }
+	    return false;
+	}
+
 
 	public static void renameNewImage(Part part, String fileName, String oldFileName) {
 	    String imagesDirectory = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/";

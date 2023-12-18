@@ -88,14 +88,24 @@ public class RegistItemServlet2 extends HttpServlet {
         String fileName = itemName + itemFirstOptionIncrementId;
         newItemAddOption.setImageFileName(fileName);
 
-        // itemsテーブルと、item_optionsテーブルを同じトランザクションで更新
-        if(Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {
-
+        if (Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {
+            boolean imageSaved = Item.registerNewImage(imgPart, fileName);
+            if (!imageSaved) {
+                // 画像の登録に失敗した場合の処理
+            	request.setAttribute("errorMessage", "写真の登録に失敗しました");
+    			request.setAttribute("url","adminTopPage");
+    			String view = "/WEB-INF/views/component/message.jsp";
+    			request.getRequestDispatcher(view).forward(request, response);
+    			return;
+            }
+        } else {
+            // データの登録に失敗した場合の処理
+        	request.setAttribute("errorMessage", "商品の登録に失敗しました");
+			request.setAttribute("url","adminTopPage");
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
         }
-
-        // 画像をドキュメント内に保管
-        Item.registerNewImage(imgPart, fileName, null);
-
 	    // 完了後、商品一覧ページにリダイレクト
 	    response.sendRedirect("deleteItemIndex");
 	}
