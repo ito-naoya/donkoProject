@@ -92,7 +92,7 @@ public class RegistItemServlet2 extends HttpServlet {
         Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds);
 
         // 画像をドキュメント内に保管
-        Item.registerNewImage(imgPart, fileName, null);
+        boolean registImg = Item.registerNewImage(imgPart, fileName, null);
 
 	    // 完了後、商品一覧ページにリダイレクト
 	    response.sendRedirect("deleteItemIndex");
