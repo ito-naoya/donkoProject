@@ -43,6 +43,7 @@ public class CategoryServlet extends HttpServlet {
 		// エラー画面に遷移
 		if (optionCategoryValueListAll == null) {
 			// 失敗したらmessage.jspに飛ぶ
+			
 			return;
 		}
 		if (itemList == null) {
