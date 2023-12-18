@@ -55,8 +55,8 @@ public class CreateShippingAddressServlet extends HttpServlet {
 				
 				// メイン配送先の設定確認
 				customerUser.setUserId(userId);
-				ShippingAddressBean idAddressBean = ShippingAddress.getMainShippingAddress(customerUser);
-				int shippingAddressId = idAddressBean.getShippingAddressId();
+				ShippingAddressBean getMainShippingAddress = ShippingAddress.getMainShippingAddress(customerUser);
+				int shippingAddressId = getMainShippingAddress.getShippingAddressId();
 				int status;
 				if(shippingAddressId == 0) {
 					status = 1;
