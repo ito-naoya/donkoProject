@@ -10,6 +10,7 @@
 <title>donko</title>
 </head>
 <body>
+
 <main class="m-5">
 		<div class="container　ml-5 mr-5">
 			<div class="row justify-content-center">
@@ -24,17 +25,9 @@
 					<br>
 					<h2>商品登録</h2>
 					<br>
-						<%
-						String errorMessage = (String) request.getAttribute("errorMessage");
-						if(errorMessage != null && !errorMessage.isEmpty()) {
-						%>
-						    <div class="alert alert-danger alert-message" role="alert">
-						        <%= errorMessage %>
-						    </div>
-						<%
-						}
-						%>
+						<!-- ここにエラーメッセージを表示 -->
 						<div id="error-message-container" class="alert alert-danger d-none"></div>
+
 						<!-- ここから入力フォーム  -->
 						<form action="registItem1" id="registItem1" method="post">
 							<div class="mb-3">
@@ -52,7 +45,7 @@
 							</div>
 							<div class="mb-3">
 							    <label for="itemName" class="form-label">商品名</label>
-							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" required>
+							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30">
 						 	</div>
 						 	<div class="mb-3">
 							    <label for="itemDescription" class="form-label">商品説明</label>

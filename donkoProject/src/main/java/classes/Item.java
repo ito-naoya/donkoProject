@@ -87,8 +87,8 @@ public class Item {
 	}
 
 	//商品を新規登録する
-	public static void registerNewItem(ItemBean itemBean, int selectBoxCount){
-		InsertNewItemToItems.insertNewItemToItems(itemBean,selectBoxCount);
+	public static void registerNewItem(ItemBean itemBean, int selectBoxCount, String[] itemSecondOptionIncrementIds){
+		InsertNewItemToItems.insertNewItemToItems(itemBean,selectBoxCount,itemSecondOptionIncrementIds);
 	};
 
 	//商品の情報を更新する
