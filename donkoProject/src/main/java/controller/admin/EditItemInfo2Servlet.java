@@ -78,7 +78,7 @@ public class EditItemInfo2Servlet extends HttpServlet {
 		Item.updateItemInfo(updateItemaddOption, selectBoxCount);
 
 		//画像をドキュメント内に保管
-		Item.renameNewImage(imgPart,fileName,oldItemFile);
+		boolean renameImg = Item.renameNewImage(imgPart,fileName,oldItemFile);
 
 	String view = "deleteItemIndex";
 	RequestDispatcher dispatcher = request.getRequestDispatcher(view);
