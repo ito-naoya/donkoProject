@@ -39,13 +39,25 @@ public class ItemDetailServlet extends HttpServlet {
 		//商品の登録されているオプションを全て取得する(衣類：S、M、L)
 		ArrayList<ItemBean> itemOptionList = Item.getItemOptionList(ib);
 		
-		request.setAttribute("item", item);
-		request.setAttribute("itemImageList", itemImageList);
-		request.setAttribute("itemOptionList", itemOptionList);
+		if(item != null && itemImageList != null && itemOptionList != null) {
+			request.setAttribute("item", item);
+			request.setAttribute("itemImageList", itemImageList);
+			request.setAttribute("itemOptionList", itemOptionList);
+			
+			//商品詳細ページを返す
+			String view = "/WEB-INF/views/customer/itemDetail.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+		} else {
+			
+			request.setAttribute("errorMessage", "商品詳細情報の取得に失敗しました。");
+			request.setAttribute("url", "home");
+
+			//エラーページを返す
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			
+		}
 		
-		//商品詳細ページを返す
-		String view = "/WEB-INF/views/customer/itemDetail.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
 	}
 	
 	//商品をカートに入れる
