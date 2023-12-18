@@ -52,7 +52,7 @@ public class EditUserInfoServlet extends HttpServlet {
 //		}
 		
 		String statusSelect = request.getParameter("status");
-		boolean deleteStatus = statusSelect.equals("true") ? true : false;
+		boolean deleteStatus = statusSelect.equals("delete") ? true : false;
 		
 		CustomerUser customerUser = new CustomerUser();
 		// PostされたデータをBeanにセット

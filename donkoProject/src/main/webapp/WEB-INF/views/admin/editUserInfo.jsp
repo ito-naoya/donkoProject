@@ -99,10 +99,10 @@
 						String isDeleted = user.isDeleted() ? "selected" : ""; 
 						String isNotDeleted = user.isDeleted() ? "" : "selected";
 						%>
-							<option value="true" <%= isDeleted %>>
+							<option value="delete" <%= isDeleted %>>
 								無効
 							</option>
-							<option value="false" <%= isNotDeleted %>>
+							<option value="notDelete" <%= isNotDeleted %>>
 								有効
 							</option>
 						</select>
