@@ -1,7 +1,8 @@
+<%@page import="classes.ShippingAddress"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@page import="java.sql.Date"%>
-<%@ page import="java.util.ArrayList, classes.user.CustomerUser"%>
+<%@ page import="java.util.ArrayList, bean.ShippingAddressBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +16,9 @@
 </head>
 <body class="container">
   <main>
-<%--    <%
-    CustomerUser users = (CustomerUser) request.getAttribute("users");
-    %> --%>
+ <%
+    ShippingAddressBean shippingAddressEdit = (ShippingAddressBean) request.getAttribute("shippingAddressEdit");
+    %>
     <form action="editShippingAddress" method="post"
       style="display: flex; justify-content: center; margin: 30px;">
       <div class="col-lg-5 m-5"
@@ -34,34 +35,28 @@
           </div>
         </div>
         <div style="margin-bottom: 10px;">
-          <label for="exampleInputUserId">宛名</label><br>
+          <label for="exampleInputAddresses">宛名</label><br>
         </div>
         <div class="form-group"
           style="display: flex; justify-content: center; margin-bottom: 30px;">
           <input type="text" class="form-control" id="exampleInputAddresses"
-            aria-describedby="addresses" name="addresses" value="">
-<%--          <input type="text" class="form-control" id="exampleInputUserId"
-            aria-describedby="userId" value="<%=users.getUserLoginId()%>"> --%>
+            aria-describedby="addresses" name="addressee" value="<%=shippingAddressEdit.getAddressee() %>">
         </div>
         <div style="margin-bottom: 10px;">
-          <label for="exampleInputUserName">郵便番号</label><br>
+          <label for="exampleInputPostalCode">郵便番号</label><br>
         </div>
         <div class="form-group"
           style="display: flex; justify-content: center; margin-bottom: 30px;">
-          <input type="text" class="form-control" id="exampleInputPostCode"
-            aria-describedby="postCode" maxlength="8" name="postcode" value="">
-<%--          <input type="text" class="form-control" id="exampleInputPostCode"
-            aria-describedby="postCode" maxlength="8" value="<%=shippingAddress.getpostCode()%>"> --%>
+          <input type="text" class="form-control" id="exampleInputPostalCode"
+            aria-describedby="postalcode" maxlength="8" name="postalcode" value="<%=shippingAddressEdit.getPostalCode() %>">
         </div>
         <div style="margin-bottom: 10px;">
-          <label for="exampleInputGender">住所</label><br>
+          <label for="exampleInputAddress">住所</label><br>
         </div>
         <div class="form-group"
           style="display: flex; justify-content: center; margin-bottom: 30px;">
           <input type="text" class="form-control" id="exampleInputAddress"
-            aria-describedby="address" name="address" value="">
-<%--           <input type="text" class="form-control" id="exampleInputPostCode"
-            aria-describedby="postCode" maxlength="8" value="<%=shippingAddress.getpostCode()%>"> --%>
+            aria-describedby="address" name="address" value="<%=shippingAddressEdit.getAddress() %>">
         </div>
         <div class="cancelButton"
           style="display: flex; justify-content: center; margin-bottom: 20px;">
