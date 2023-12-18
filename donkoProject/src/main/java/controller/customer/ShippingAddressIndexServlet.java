@@ -33,11 +33,11 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserId(userId);
 		
-		//のSQL実行
+		// 配送先一覧をメインの配送先順にソート SQL実行
 		ArrayList<ShippingAddressBean> mainShippingAddressList = ShippingAddress.getMainShippingAddressSort(customerUser);
 		request.setAttribute("mainShippingAddressList", mainShippingAddressList);
 		
-		// SQL実行
+		// 配送先一覧表示 SQL実行
 		ArrayList<ShippingAddressBean> shippingAddressList = ShippingAddress.getShippingAddressList(customerUser);
 		request.setAttribute("shippingAddressList", shippingAddressList);
 		
@@ -54,15 +54,18 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 			String view = "/WEB-INF/views/customer/home.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 		}
+		// インスタンス生成
+		ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
 		
 		// パラメーター作成
-		ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
+		shippingAddressBean.setAddressee(request.getParameter("addressee"));
+		shippingAddressBean.setPostalCode(request.getParameter("postalcode"));
+		shippingAddressBean.setAddress(request.getParameter("address"));
 		shippingAddressBean.setUserId(userId);
-		shippingAddressBean.setShippingAddressId(Integer.parseInt(request.getParameter("shippingAddressId")));
+		shippingAddressBean.setShippingAddressId(Integer.parseInt(request.getParameter("update_shipping_address")));
 		ShippingAddress.updateMainShippingAddress(shippingAddressBean);
 		
-		// 配送先編集画面
-		String view = "/WEB-INF/views/customer/shippingAddressIndex.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		// 配送先一覧画面
+		response.sendRedirect("shippingAddressIndex");
 	}
 }
