@@ -14,15 +14,17 @@ public class DeleteIteShippingAddresses {
 	public static void deleteUpdateShippingAddress(ShippingAddressBean shippingAddressBean){
 
 		StringBuilder sb = new StringBuilder();
-			//削除フラグ（item_delete_flg)の0と1を切り替えるSQL
-			sb.append("DELETE FROM "									);
-			sb.append(		"shipping_addresses "						);
-			sb.append("WHERE "											);
-			sb.append(		"shipping_address_id= ? "					);
+			sb.append("DELETE FROM "								);
+			sb.append(	"shipping_addresses "						);
+			sb.append("WHERE "										);
+			sb.append(	"user_id= ? "								);
+			sb.append("AND "										);
+			sb.append(	"shipping_address_id= ? "					);
 			final String DELETE_ADDRESS_SQL = sb.toString();
 			
 			//？に値をセットする
 			ArrayList<Object> param = new ArrayList<>();
+			param.add(shippingAddressBean.getUserId());
 			param.add(shippingAddressBean.getShippingAddressId());
 			
 			//データベースに接続

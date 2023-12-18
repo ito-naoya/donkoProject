@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, bean.ShippingAddressBean"%>
+<%@ page import="java.util.ArrayList, bean.ShippingAddressBean, java.util.Iterator"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,15 +48,17 @@
 		<table class="table table-borderless">
 			<tbody>
 				<%
-				ArrayList<ShippingAddressBean> shippingAddressList = (ArrayList<ShippingAddressBean>) request
-						.getAttribute("shippingAddressList");
-				%>
-				<%
-				for (ShippingAddressBean shippingAddressBean : shippingAddressList) {
+				// カウンタ変数の初期化
+		    int numbers = 1;
+          ArrayList<ShippingAddressBean> shippingAddressList = (ArrayList<ShippingAddressBean>) request.getAttribute("shippingAddressList");
+					// Iteratorを使用してShippingAddressBeanのリストをイテレート
+					Iterator<ShippingAddressBean> iterator = shippingAddressList.iterator();
+					while (iterator.hasNext()) {
+						ShippingAddressBean shippingAddressBean = iterator.next();
 				%>
 				<tr>
-					<!-- 配送先ID -->
-					<td><%=shippingAddressBean.getShippingAddressId()%></td>
+					<!-- No. -->
+					<td><%=numbers %></td>
 					<!-- 郵便番号 -->
 					<td><%=shippingAddressBean.getPostalCode()%></td>
 					<!-- 住所 -->
@@ -72,6 +74,10 @@
            </button>
           </td>
           <td>
+          <% 
+          int main_address = shippingAddressBean.getMainShippingAddress();
+          if(main_address != 1) { 
+          %>
           <button type="submit" class="btn ms-5"
               style="border: 1px solid #FF0000; background: #FFFFFF;">
           <a href="deleteShippingAddress?shipping_address_id=<%=shippingAddressBean.getShippingAddressId()%>"
@@ -79,7 +85,9 @@
             </button>
           </td>
           </tr>
-          <% } %>
+          <% }
+          numbers++;
+           } %>
     </table>
   </main>
   <%@include file="../component/footer.jsp"%>
