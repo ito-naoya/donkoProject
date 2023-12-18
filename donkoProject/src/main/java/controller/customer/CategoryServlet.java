@@ -31,7 +31,7 @@ public class CategoryServlet extends HttpServlet {
 		// オプション選択の取得
 		ArrayList<ArrayList<OptionCategoryBean>> optionCategoryValueListAll = OptionCategory.getOptionCategoryListAllByCategory(itemBean);
 		// カテゴリー一覧の取得
-		ArrayList<ItemBean> itemList =Item.getItemListByCategory(itemBean);
+		ArrayList<ItemBean> itemList = Item.getItemListByCategory(itemBean);
 		
 		request.setAttribute("categoryName", categoryName);
 		request.setAttribute("optionCategoryValueListAll", optionCategoryValueListAll);
