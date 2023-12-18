@@ -21,22 +21,18 @@ public class SwichItemDelFlg extends HttpServlet {
 			throws ServletException, IOException {
 
 		//選択済みの商品ステータスを全て取得、配列に格納
-//		String[] itemStatus = request.getParameterValues("itemStatus");
-
-		//テストコード
-		String[] itemStatus = {"1", "2", "3"};
+		String[] itemStatus = request.getParameterValues("itemStatus");
 
 		//選択済みの商品のステータスを切り替えるサーブレット
 		if(itemStatus != null && itemStatus.length > 0) {
 			Item.deleteItem(itemStatus);
 		}
 
-		//商品一覧ページに戻る
-		String view = "/WEB-INF/views/admin/deleteItemIndex.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		//商品一覧ページに戻る（とりあえずリダイレクト）
+		response.sendRedirect("deleteItemIndex");
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//	}
 }
