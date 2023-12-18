@@ -32,11 +32,36 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 		// ユーザIDをセット
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserId(userId);
+		
+		//のSQL実行
+		ArrayList<ShippingAddressBean> mainShippingAddressList = ShippingAddress.getMainShippingAddressSort(customerUser);
+		request.setAttribute("mainShippingAddressList", mainShippingAddressList);
+		
 		// SQL実行
 		ArrayList<ShippingAddressBean> shippingAddressList = ShippingAddress.getShippingAddressList(customerUser);
 		request.setAttribute("shippingAddressList", shippingAddressList);
 		
 		// 配送先一覧
+		String view = "/WEB-INF/views/customer/shippingAddressIndex.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// セッションを確認
+		HttpSession session = request.getSession(false);
+		int userId = (int) session.getAttribute("user_id");
+		if (userId == 0) {
+			String view = "/WEB-INF/views/customer/home.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+		}
+		
+		// パラメーター作成
+		ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
+		shippingAddressBean.setUserId(userId);
+		shippingAddressBean.setShippingAddressId(Integer.parseInt(request.getParameter("shippingAddressId")));
+		ShippingAddress.updateMainShippingAddress(shippingAddressBean);
+		
+		// 配送先編集画面
 		String view = "/WEB-INF/views/customer/shippingAddressIndex.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}

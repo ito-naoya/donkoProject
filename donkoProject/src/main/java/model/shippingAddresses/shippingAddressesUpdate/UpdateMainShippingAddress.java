@@ -26,9 +26,6 @@ public class UpdateMainShippingAddress {
 		
 		// ？の引数に渡す値(メイン設定削除)
 		ArrayList<Object> paramDelete = new ArrayList<Object>();
-		paramDelete.add(shippingAddressBean.getPostalCode());
-		paramDelete.add(shippingAddressBean.getAddress());
-		paramDelete.add(shippingAddressBean.getAddressee());
 		paramDelete.add(shippingAddressBean.getUserId());
 		
 		// SQLコマンド生成(メイン設定)
@@ -36,18 +33,17 @@ public class UpdateMainShippingAddress {
 		sbUpdate.append("UPDATE " );
 		sbUpdate.append(	"shipping_addresses "							);
 		sbUpdate.append(	"SET "											);
-		sbUpdate.append(		"main_shipping_address = '1' "				);
+		sbUpdate.append(		"main_shipping_address = 1 "				);
 		sbUpdate.append("WHERE "											);
 		sbDelete.append(	"shipping_addresses.user_id = ?"				);
 		sbDelete.append(	"AND "											);
-		sbDelete.append(	"shipping_addresses.address = ? "	);
+		sbDelete.append(	"shipping_addresses.shipping_address_id = ? "	);
 		final String UPDATE_MAIN_ADDRESS_SQL = sbUpdate.toString();
 		
 		// ？の引数に渡す値(メイン設定)
 		ArrayList<Object> paramUpdate = new ArrayList<Object>();
-		paramUpdate.add(shippingAddressBean.getPostalCode());
 		paramUpdate.add(shippingAddressBean.getUserId());
-		paramUpdate.add(shippingAddressBean.getAddress());
+		paramUpdate.add(shippingAddressBean.getShippingAddressId());
 		
 		try (Connection connection = DatabaseConnection.getConnection()) {
 			try {
