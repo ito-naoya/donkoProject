@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, bean.PurchaseBean, java.text.NumberFormat, java.text.SimpleDateFormat, java.sql.Timestamp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,22 +32,22 @@
 					<tr>
 				</thead>
 				<tbody>
-					<%-- <%
-					ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
+					<%
+					ArrayList<PurchaseBean> orderItemList = (ArrayList<PurchaseBean>) request.getAttribute("orderItemList");
 					%>
 					<%
-					for (PurchaseBean purchaseBean : purchaseList) {
-					%> --%>
+					for (PurchaseBean orderItem : orderItemList) {
+					%>
 					<tr>
-						<td><a href='#'></a></td>
+						<td><a href='#'><% %></a></td>
 						<td></td>
 						<td></td>
 						<td></td>
 						<td></td>
 					</tr>
-					<%-- <%
+					<%
 					}
-					%> --%>
+					%>
 				</tbody>
 			</table>
 		</div>
