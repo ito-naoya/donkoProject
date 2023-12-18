@@ -4,10 +4,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import hash.HashGenerator;
-import model.users.usersDelete.DeleteUserFromUsers;
 import model.users.usersSelect.SelectAdminFromAdmins;
 import model.users.usersSelect.SelectDeletedUserListFromUsers;
 import model.users.usersSelect.SelectUserListFromUsers;
+import model.users.usersUpdate.UpdateUserInfoByAdmin;
 
 public class AdminUser extends User {
 
@@ -47,8 +47,8 @@ public class AdminUser extends User {
 	}
 
 	//ユーザーを削除する
-	public static void deleteUser(CustomerUser customerUser) {
-		DeleteUserFromUsers.deleteUserFromUsers(customerUser);
+	public static void updateUserInfoByAdmin(CustomerUser customerUser) {
+		UpdateUserInfoByAdmin.updateUserInfoByAdmin(customerUser);
 	};
 
 	//削除したユーザー一覧を取得する

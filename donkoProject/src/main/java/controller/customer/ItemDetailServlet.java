@@ -48,7 +48,6 @@ public class ItemDetailServlet extends HttpServlet {
 			String view = "/WEB-INF/views/customer/itemDetail.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 		} else {
-			
 			request.setAttribute("errorMessage", "商品詳細情報の取得に失敗しました。");
 			request.setAttribute("url", "home");
 
@@ -57,7 +56,6 @@ public class ItemDetailServlet extends HttpServlet {
 			request.getRequestDispatcher(view).forward(request, response);
 			
 		}
-		
 	}
 	
 	//商品をカートに入れる

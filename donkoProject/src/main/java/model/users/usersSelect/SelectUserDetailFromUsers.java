@@ -17,11 +17,13 @@ public class SelectUserDetailFromUsers {
 		// SQLコマンド生成
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT " );
+		sb.append(	"user_id, " );
 		sb.append(	"user_login_id, "											);
 		sb.append(	"user_name, "												);
 		sb.append(	"password, "												);
 		sb.append(	"birthday, "												);
-		sb.append(	"gender "													);
+		sb.append(	"gender, "													);
+		sb.append(	"user_delete_flg "											);
 		sb.append("FROM "														);
 		sb.append(	"users "													);
 		sb.append("WHERE "														);
@@ -37,11 +39,13 @@ public class SelectUserDetailFromUsers {
 				
 				while (results.next()) {
 					customerUser = new CustomerUser();
+					customerUser.setUserId(results.getInt("user_id"));
 					customerUser.setUserLoginId(results.getString("user_login_id"));
 					customerUser.setUserName(results.getString("user_name"));
 					customerUser.setPassword(results.getString("password"));
 					customerUser.setBirthday(results.getDate("birthday"));
 					customerUser.setGender(results.getString("gender"));
+					customerUser.setDeleted(results.getBoolean("user_delete_flg"));
 				}
 			} catch (Exception e) {
 				if(!connection.isClosed()) {

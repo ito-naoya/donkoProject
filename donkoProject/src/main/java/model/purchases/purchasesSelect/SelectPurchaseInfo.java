@@ -36,10 +36,9 @@ public class SelectPurchaseInfo {
 		ArrayList<Object> paramList = new ArrayList<>() {{ 
 			add(purchaseBean.getPurchaseId());
 		}};
-		PurchaseBean purchaseInfo = new PurchaseBean();
 		
+		PurchaseBean purchaseInfo = new PurchaseBean();
 		try (Connection conn = DatabaseConnection.getConnection()) {
-			
 			try (ResultSet result = GeneralDao.executeQuery(conn, SELECT_PURCHASE_INFO_SQL, paramList)) {
 				
 				while (result.next()) {
