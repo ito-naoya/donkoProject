@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, bean.PurchaseBean"%>
+<%@ page import="java.util.ArrayList, bean.PurchaseBean, java.text.SimpleDateFormat, java.sql.Timestamp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,8 +60,7 @@
 						<td align="middle" style="width: 150px;">¥ <%=String.format("%,d", purchaseBean.getTotalAmount())%></td>
 						<!-- 購入日 -->
 						<td align="middle" style="width: 200px;">
-						<%=purchaseBean.getPurchaseDate()%></td>
-<%-- 						<%=new SimpleDateFormat("yyyy-MM-dd hh:mm").format(purchaseBean.getPurchaseDate())%></td> --%>
+          	<%=new SimpleDateFormat("yyyy/MM/dd hh:mm").format(purchaseBean.getPurchaseDate())%></td>
 						<!-- 配送先 -->
 						<td align="middle"><%=purchaseBean.getShippingAddress()%></td>
 						<!-- 配送ステータス -->

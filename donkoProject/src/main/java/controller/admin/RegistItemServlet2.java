@@ -106,6 +106,7 @@ public class RegistItemServlet2 extends HttpServlet {
 			request.getRequestDispatcher(view).forward(request, response);
 			return;
         }
+
 	    // 完了後、商品一覧ページにリダイレクト
 	    response.sendRedirect("deleteItemIndex");
 	}

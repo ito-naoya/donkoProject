@@ -118,11 +118,27 @@ public class Item {
 	    return false;
 	}
 
+	public static boolean registerNewImage(Part part,String fileName, String oldFileName){
+		if(part.getSize() == 0 || fileName.isEmpty()) {
+			return false;
+		} else {
+				try {
+				    // フルパスじゃないと上手く読み込まれないみたいなので、自分のファイルパスに適宜変更してください。
+				    String filePath = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/" + fileName + ".jpg";
+				    // ファイルを保存
+					part.write(filePath);
+				} catch (IOException e) {
+					e.printStackTrace();
+					return false;
+				}
+			return true;
+		}
+	};
 
-	public static void renameNewImage(Part part, String fileName, String oldFileName) {
+	public static boolean renameNewImage(Part part, String fileName, String oldFileName) {
 	    String imagesDirectory = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/";
-	    // 写真がある場合
-	    if (part != null) {
+
+	    if (part.getSize() != 0) {// 写真がある場合
 	        // 古いファイルを削除（名前が異なる場合）
 	        if (!fileName.equals(oldFileName)) {
 	            File oldFile = new File(imagesDirectory + oldFileName + ".jpg");
@@ -136,10 +152,9 @@ public class Item {
 	            part.write(newFilePath);
 	        } catch (IOException e) {
 	            e.printStackTrace();
+	            return false;
 	        }
-	    }
-	    // 写真がないが、名前が異なる場合
-	    else if (!fileName.equals(oldFileName)) {
+	    } else if (!fileName.equals(oldFileName)) {// 写真がないが、名前が異なる場合
 	        File oldFile = new File(imagesDirectory + oldFileName + ".jpg");
 	        File newFile = new File(imagesDirectory + fileName + ".jpg");
 	        // ファイル名を変更
@@ -147,44 +162,44 @@ public class Item {
 	            oldFile.renameTo(newFile);
 	        }
 	    }
-	    // その他の場合は何もしない
+	    // その他の場合は何もしない(商品名も写真名も変更がない時)
+	    return true;
 	}
 
-	//ふやしました
 	//商品登録画面から取得した値のnull値及び文字数をチェックして、ItemBeanにセット
-		public static ItemBean checkRegistItemDetail(String itemCategoryName, String itemName, String itemDescription, String price, String stock) {
-			//カテゴリー名
-			if(itemCategoryName.isEmpty() || itemCategoryName.length() > 20) {
-				return null;
-			}
-			//商品名
-			if(itemName.isEmpty() || itemName.length() > 30) {
-				return null;
-			}
-			//商品説明
-			if(itemDescription.isEmpty() || itemDescription.length() > 100) {
-				return null;
-			}
-			//金額
-			if(price.isEmpty() || price.length() > 11) {
-				return null;
-			}
-			//在庫
-			if(stock.isEmpty() || stock.length() > 11) {
-				return null;
-			}
+	public static ItemBean checkRegistItemDetail(String itemCategoryName, String itemName, String itemDescription, String price, String stock) {
+		//カテゴリー名
+		if(itemCategoryName.isEmpty() || itemCategoryName.length() > 20) {
+			return null;
+		}
+		//商品名
+		if(itemName.isEmpty() || itemName.length() > 30) {
+			return null;
+		}
+		//商品説明
+		if(itemDescription.isEmpty() || itemDescription.length() > 100) {
+			return null;
+		}
+		//金額
+		if(price.isEmpty() || price.length() > 11) {
+			return null;
+		}
+		//在庫
+		if(stock.isEmpty() || stock.length() > 11) {
+			return null;
+		}
 
-			//ItemBeanに値をセット
+		//ItemBeanに値をセット
 
-			ItemBean newItem = new ItemBean();
-			newItem.setItemCategoryName(itemCategoryName);
-			newItem.setItemName(itemName);
-			newItem.setItemDescription(itemDescription);
-			newItem.setItemPrice(Integer.valueOf(price.replaceAll(",", "")));
-			newItem.setItemStock(Integer.valueOf(stock));
+		ItemBean newItem = new ItemBean();
+		newItem.setItemCategoryName(itemCategoryName);
+		newItem.setItemName(itemName);
+		newItem.setItemDescription(itemDescription);
+		newItem.setItemPrice(Integer.valueOf(price.replaceAll(",", "")));
+		newItem.setItemStock(Integer.valueOf(stock));
 
-			return newItem;
+		return newItem;
 
-		};
+	};
 
 }
