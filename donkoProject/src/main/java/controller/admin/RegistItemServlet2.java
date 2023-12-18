@@ -89,7 +89,9 @@ public class RegistItemServlet2 extends HttpServlet {
         newItemAddOption.setImageFileName(fileName);
 
         // itemsテーブルと、item_optionsテーブルを同じトランザクションで更新
-        Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds);
+        if(Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {
+
+        }
 
         // 画像をドキュメント内に保管
         Item.registerNewImage(imgPart, fileName, null);
