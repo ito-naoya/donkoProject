@@ -16,13 +16,15 @@ public class UpdateShippingAddress {
 		// SQLコマンド生成
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE " );
-		sb.append(	"shipping_addresses "				);
-		sb.append(	"SET "								);
-		sb.append(		"postal_code = ? "				);
-		sb.append(		"address = ? "					);
-		sb.append(		"addressee = ? "				);
-		sb.append("WHERE "								);
-		sb.append(	"shipping_addresses.user_id = ?"	);
+		sb.append(	"shipping_addresses "							);
+		sb.append(	"SET "											);
+		sb.append(		"postal_code = ?, "							);
+		sb.append(		"address = ?, "								);
+		sb.append(		"addressee = ? "							);
+		sb.append("WHERE "											);
+		sb.append(	"shipping_addresses.user_id = ? "				);
+		sb.append(	"AND "											);
+		sb.append(	"shipping_addresses.shipping_address_id = ?"	);
 		final String UPDATE_ADDRESS_SQL = sb.toString();
 		
 		// ？の引数に渡す値
@@ -31,6 +33,7 @@ public class UpdateShippingAddress {
 		param.add(shippingAddressBean.getAddress());
 		param.add(shippingAddressBean.getAddressee());
 		param.add(shippingAddressBean.getUserId());
+		param.add(shippingAddressBean.getShippingAddressId());
 		
 		try (Connection connection = DatabaseConnection.getConnection()) {
 			try {

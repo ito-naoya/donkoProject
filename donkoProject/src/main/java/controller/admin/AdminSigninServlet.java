@@ -2,12 +2,13 @@ package controller.admin;
 
 import java.io.IOException;
 
-import classes.user.CustomerUser;
+import classes.user.AdminUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/adminSignin")
 public class AdminSigninServlet extends HttpServlet {
@@ -33,31 +34,26 @@ public class AdminSigninServlet extends HttpServlet {
 		String adminLoginId = (String) request.getParameter("adminLoginId");
 		String adminLoginPass = (String) request.getParameter("adminLoginPass");
 
-		//存在するか確認
-		//伊藤くんへ：AdminUserClassにログインIDとパスワードのフィールドがないのと、
-		//アドミン側のログインメソッドが無いけど、どうしましょうかね・・・？
-		//とりあえず、CostomerUserClassに入れた形にしてます。メソッドはまだ作って無い。
-		//あと、今のロジックだと、User.loginの戻り値はadmin_idを返す様にしてます・・・なんかいい方法あるかなぁ。
-		CustomerUser userClass = new CustomerUser();
-		userClass.setUserLoginId(adminLoginId);
+		//値をセット（万が一nullでもSQL発行時に弾く）
+		AdminUser userClass = new AdminUser();
+		userClass.setAdminLoginId(adminLoginId);
 		userClass.setPassword(adminLoginPass);
 
-		// ログイン処理を呼び出し
-////		Integer adminId = User.login(userClass);
-//
-//		//遷移先を決定
-//		String view;
-//		if(adminId == null) {
-//			//存在しないなら、エラーメッセージをつけてトップページへ転送
-//			request.setAttribute("errorMessage", "IDまたはパスワードが異なります");
-//			view = "/WEB-INF/views/admin/adminSignin.jsp";
-//		} else {
-//			//存在していたら、adminIdをせッションに登録してマイページへ転送
-//			HttpSession adminSession = request.getSession();
-//			adminSession.setAttribute("admin", adminId);
-//
-//			view = "/WEB-INF/views/admin/adminTopPage.jsp";
-//		}
-//		request.getRequestDispatcher(view).forward(request, response);
- 	}
+		//ログイン処理を呼び出し
+		boolean adminId = AdminUser.login(userClass);
+
+		//遷移先を決定
+		if(!adminId) {
+			//存在しないなら、エラーメッセージをつけてログインページへ転送
+			request.setAttribute("errorMessage", "IDまたはパスワードが異なります");
+			String view = "/WEB-INF/views/admin/adminSignin.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+		} else {
+			//存在していたら、adminIdをセッションに登録してマイページへリダイレクト
+			HttpSession adminSession = request.getSession();
+			adminSession.setAttribute("admin", adminLoginId);
+
+			response.sendRedirect("adminTopPage");
+		}
+	}
 }
