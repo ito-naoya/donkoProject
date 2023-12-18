@@ -11,7 +11,7 @@
 	rel="stylesheet"
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
-<title>doko</title>
+<title>donko</title>
 </head>
 <body class="container">
 	<main>
