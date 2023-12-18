@@ -27,7 +27,7 @@
 					.getAttribute("mainShippingAddressList");
 			%>
 			<form action="shippingAddressIndex" method="post" class="d-flex">
-				<select class="form-control d-flex ms-5"
+				<select class="form-control d-flex"
 					name="update_shipping_address" style="width: 400px;">
 					<%
 					for (ShippingAddressBean updateMainShippingAddress : mainShippingAddressList) {
@@ -39,7 +39,7 @@
 					%>
 				</select>
 				<button type="submit" class="btn"
-					style="border: 1px solid #000000; background: #E5CCFF;">更新</button>
+					style="border: 1px solid #000000; background: #E5CCFF; margin-left:5px;">更新</button>
 			</form>
 		</div>
 		<h2 style="margin-top: 30px; margin-bottom: 20px;">
