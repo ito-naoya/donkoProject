@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 
 import classes.user.CustomerUser;
+import classes.user.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -61,18 +62,9 @@ public class UserInfoEditServlet extends HttpServlet {
 		customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
 		
 		// 更新処理実行
-		CustomerUser users = new CustomerUser();
-		users.updateUserInfo(customerUser);
+		User.updateUserInfo(customerUser);
 		
 		// マイページに遷移
 		response.sendRedirect("myPage");
-		
-//		// マイページに戻るためのデータセット
-//		ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
-//		request.setAttribute("purchaseList", purchaseList);
-//		
-//		// 更新後の画面遷移
-//		String view = "/WEB-INF/views/customer/myPage.jsp";
-//		request.getRequestDispatcher(view).forward(request, response);
 	}
 }
