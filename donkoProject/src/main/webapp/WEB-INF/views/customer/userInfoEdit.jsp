@@ -18,7 +18,7 @@
 		<%
 		CustomerUser users = (CustomerUser) request.getAttribute("users");
 		%>
-		<form action="editUserInfo" method="post"
+		<form action="userInfoEdit" method="post"
 			style="display: flex; justify-content: center; margin: 30px;">
 			<div class="col-lg-5 m-5"
 				style="border: 1px solid #333333; padding: 65px;">
@@ -78,7 +78,7 @@
 				<div class="cancelButton"
 					style="display: flex; justify-content: center; margin-bottom: 20px;">
 					<button type="submit" class="btn btn-lg w-100"
-						style="border: 1px solid #000000; background: #E5CCFF; padding: 10px;">更新</button
+						style="border: 1px solid #000000; background: #E5CCFF; padding: 10px;">更新</button>
 				</div>
 		</form>
 		</div>
