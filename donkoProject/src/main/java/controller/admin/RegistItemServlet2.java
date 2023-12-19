@@ -98,7 +98,6 @@ public class RegistItemServlet2 extends HttpServlet {
     			request.setAttribute("url","adminTopPage");
     			String view = "/WEB-INF/views/component/message.jsp";
     			request.getRequestDispatcher(view).forward(request, response);
-    			return;
             }
         } else {
             // データの登録に失敗した場合の処理
@@ -106,7 +105,6 @@ public class RegistItemServlet2 extends HttpServlet {
 			request.setAttribute("url","adminTopPage");
 			String view = "/WEB-INF/views/component/message.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
-			return;
         }
 
 	    // 完了後、商品一覧ページにリダイレクト
