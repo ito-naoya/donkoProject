@@ -35,10 +35,12 @@
 								  <option selected>カテゴリーを選択</option>
 							            <%
 							            ArrayList<ItemCategoryBean> categoryList = (ArrayList<ItemCategoryBean>) request.getAttribute("categoryList");
-							            for (ItemCategoryBean category : categoryList){
-							            %>
-							            <option value="<%=category.getItemCategoryName()%>"><%=category.getItemCategoryName()%></option>
-							            <%
+							            if(categoryList != null && categoryList.size() > 0 ){
+								            for (ItemCategoryBean category : categoryList){
+								            %>
+								            <option value="<%=category.getItemCategoryName()%>"><%=category.getItemCategoryName()%></option>
+								            <%
+								            }
 							            }
 							            %>
 								</select>
