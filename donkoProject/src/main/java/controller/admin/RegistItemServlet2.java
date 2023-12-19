@@ -5,6 +5,7 @@ import java.io.IOException;
 import bean.ItemBean;
 import classes.Item;
 import classes.Option;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -88,11 +89,25 @@ public class RegistItemServlet2 extends HttpServlet {
         String fileName = itemName + itemFirstOptionIncrementId;
         newItemAddOption.setImageFileName(fileName);
 
-        // itemsテーブルと、item_optionsテーブルを同じトランザクションで更新
-        Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds);
-
-        // 画像をドキュメント内に保管
-        boolean registImg = Item.registerNewImage(imgPart, fileName, null);
+        if (Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {
+        	ServletContext context = getServletContext();
+            boolean imageSaved = Item.registerNewImage(imgPart, fileName, context);
+            if (!imageSaved) {
+                // 画像の登録に失敗した場合の処理
+            	request.setAttribute("errorMessage", "写真の登録に失敗しました");
+    			request.setAttribute("url","adminTopPage");
+    			String view = "/WEB-INF/views/component/message.jsp";
+    			request.getRequestDispatcher(view).forward(request, response);
+    			return;
+            }
+        } else {
+            // データの登録に失敗した場合の処理
+        	request.setAttribute("errorMessage", "商品の登録に失敗しました");
+			request.setAttribute("url","adminTopPage");
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+        }
 
 	    // 完了後、商品一覧ページにリダイレクト
 	    response.sendRedirect("deleteItemIndex");

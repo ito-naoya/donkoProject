@@ -28,7 +28,7 @@ public class SelectOptionCategoryListByCategory {
 		sb.append("WHERE "							);
 		sb.append(	"option_category_name = ?;"	);
 
-		String sql = sb.toString();
+		final String SELECT_OPTION_CATEFORY_BYCATEGORY_SQL = sb.toString();
 
 		//引数のItemBeanからカテゴリを取得
 		String categoryName = itemCategoryBean.getOptionCategoryName();
@@ -36,7 +36,7 @@ public class SelectOptionCategoryListByCategory {
 		ArrayList<OptionCategoryBean> optionCategories = new ArrayList<>();
 		List<Object> params = Arrays.asList(categoryName);
 		try (Connection conn = DatabaseConnection.getConnection()){
-			try(ResultSet rs = GeneralDao.executeQuery(conn, sql, params)) {
+			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_OPTION_CATEFORY_BYCATEGORY_SQL, params)) {
 
 					//OptionCategoryBeanに挿入
 					while(rs.next()) {
