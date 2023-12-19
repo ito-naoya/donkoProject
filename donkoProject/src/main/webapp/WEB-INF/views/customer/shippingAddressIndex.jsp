@@ -20,20 +20,23 @@
       </svg>
 			</div>
 		</a>
-		<div class="AddressChoice"
+		<%
+    ArrayList<ShippingAddressBean> mainShippingAddressList = (ArrayList<ShippingAddressBean>) request
+      .getAttribute("mainShippingAddressList");
+    %>
+    <div class="d-flex flex-colum mb-2" style="display: flex; justify-content: end; margin-right:435px;">
+        <label for="main_address_select"><strong>メイン発送先変更</strong></label>
+    </div>
+		<div class="AddressChoice d-flex"
 			style="display: flex; justify-content: end;">
-			<%
-			ArrayList<ShippingAddressBean> mainShippingAddressList = (ArrayList<ShippingAddressBean>) request
-					.getAttribute("mainShippingAddressList");
-			%>
 			<form action="shippingAddressIndex" method="post" class="d-flex">
 				<select class="form-control d-flex"
-					name="update_shipping_address" style="width: 400px;">
+					name="update_shipping_address" style="width: 500px;" id="main_address_select">
 					<%
 					for (ShippingAddressBean updateMainShippingAddress : mainShippingAddressList) {
 					%>
 					<option
-						value="<%=updateMainShippingAddress.getShippingAddressId()%>"><%=updateMainShippingAddress.getAddress()%></option>
+						value="<%=updateMainShippingAddress.getShippingAddressId()%>">〒 <%=updateMainShippingAddress.getPostalCode()%> <%=updateMainShippingAddress.getAddress()%> <%=updateMainShippingAddress.getAddressee()%></option>
 					<%
 					}
 					%>
@@ -60,7 +63,7 @@
 					<!-- No. -->
 					<td><%=numbers %></td>
 					<!-- 郵便番号 -->
-					<td><%=shippingAddressBean.getPostalCode()%></td>
+					<td>〒 <%=shippingAddressBean.getPostalCode()%></td>
 					<!-- 住所 -->
 					<td><%=shippingAddressBean.getAddress()%></td>
 					<!-- 宛名 -->

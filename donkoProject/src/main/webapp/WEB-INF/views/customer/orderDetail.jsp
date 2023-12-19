@@ -8,9 +8,11 @@
 <title>donko</title>
 </head>
 <body>
-	<main class="container">
 		<%@include file="../component/header.jsp"%>
 		<%@include file="../component/headerTopSpace.jsp"%>
+	<main class="container">
+	<div class="row">
+	<div class="col-lg-6 mx-auto my-5">
 		<%
 		int purchase_id = (int) request.getAttribute("purchase_id");
 		%>
@@ -23,9 +25,10 @@
       </svg>
 			</div>
 		</a>
-		<h2>
-			購入ID ：
+		<h2 class="my-4">
+			<strong>注文ID ：
 			<%=purchase_id%>
+			</strong>
 		</h2>
 		<table class="table table-borderless">
 			<tbody>
@@ -37,6 +40,7 @@
 				for (PurchaseDetailBean purchaseDetailBean : purchaseDetailList) {
 				%>
 				<tr>
+				  <!-- 画像 -->
 					<td><img class="object-fit-cover subImage"
 						style="height: 150px; width: 150px;"
 						src="./images/<%= purchaseDetailBean.getImageFileName()%>.jpg">
@@ -46,13 +50,15 @@
 					<!-- 合計金額 -->
 					<td valign="middle">¥<%= String.format("%,d", purchaseDetailBean.getPurchaseAmount())%></td>
 					<!-- 個数 -->
-					<td valign="middle" style="width: 10px;"><%= purchaseDetailBean.getQuantity()%></td>
+					<td valign="middle"><%= purchaseDetailBean.getQuantity()%> 個</td>
 				</tr>
 				<%
 				}
 				%>
 			</tbody>
 		</table>
+		</div>
+		</div>
 	</main>
 	<%@include file="../component/footer.jsp"%>
 </body>
