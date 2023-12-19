@@ -21,61 +21,74 @@
 	<main>
 		<%
 		ArrayList<PurchaseBean> unshippingedItemList = (ArrayList<PurchaseBean>) request.getAttribute("unshippingedItemList");
+		String message = (String) request.getAttribute("message");
 		%>
 		<div class="d-flex justify-content-between mx-5">
 			<h4 class="mt-5 mb-3">
-				<strong>未発送一覧　 (<%= unshippingedItemList.size() %>件)</strong>
+				<strong>未発送一覧　 
+					<% if (unshippingedItemList != null) { %>
+						(<%= unshippingedItemList.size() %>件)
+					<% } %>
+				</strong>
 			</h4>
 			<div class="logout d-flex justify-content-end" >
 				<a href="logout" class="btn mt-auto mb-3 border px-5 py-2">ログアウト</a>
 			</div>
 		</div>
-		<div style="margin-bottom:40px; border: 1px solid #000; overflow-x: scroll; overflow:scroll; height:400px;" class="border mx-5 px-3">
-			<table class="table table-borderless text-center my-5">
-				<thead>
-					<tr>
-						<th class="th">ID</th>
-						<th class="th" style="width:20%;">購入日</th>
-						<th class="th" style="width:10%;">購入者ID</th>
-						<th class="th">購入者</th>
-						<th class="th" style="width:15%;">合計金額</th>
-						<th class="th">配送先</th>
-					<tr>
-				</thead>
-				<tbody>
-					<% if (unshippingedItemList != null) { %>
-						<%
-						for (PurchaseBean unshippingedItem : unshippingedItemList) {
-						%>
-						<% 
-						NumberFormat nf = NumberFormat.getNumberInstance();
-						Timestamp ts = unshippingedItem.getPurchaseDate();
-					    SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM / dd　HH:mm");
-					    String formattedTime = sdf.format(ts);
-						%>
+		<% if (unshippingedItemList == null || unshippingedItemList.size() == 0) { %>
+			<div class="border mx-5 p-5 d-flex justify-content-center align-items-center" style="margin-bottom:40px; overflow-x: scroll; overflow:scroll; height:400px;">
+				<p class="mb-0" style="color: #385A37;"><%= message %></p>
+			</div>
+		<% } else { %>
+			<div style="margin-bottom:40px; border: 1px solid #000; overflow-x: scroll; overflow:scroll; height:400px;" class="border mx-5 px-3">
+				<table class="table table-borderless text-center my-5">
+					<thead>
 						<tr>
-							<td class="td"><a href='purchaseDetail?purchaseId=<%= unshippingedItem.getPurchaseId() %>'><%= unshippingedItem.getPurchaseId() %></a></td>
-							<td class="td"><%= formattedTime %></td>
-							<td class="td"><%= unshippingedItem.getUserId() %></td>
-							<td class="td"><%= unshippingedItem.getUserName() %></td>
-							<td class="td">￥ <%= nf.format(unshippingedItem.getTotalAmount()) %></td>
-							<td class="td">
-								<small>
-								〒 <%= unshippingedItem.getPostalCode() %><br>
-								<%= unshippingedItem.getAddress() %><br>
-								<%= unshippingedItem.getAddressee() %>
-								</small>
-							</td>
-						</tr>
-						<%
-						}
+							<th class="th">注文ID</th>
+							<th class="th" style="width:20%;">購入日</th>
+							<th class="th" style="width:10%;">購入者ID</th>
+							<th class="th">購入者</th>
+							<th class="th" style="width:15%;">合計金額</th>
+							<th class="th">配送先</th>
+						<tr>
+					</thead>
+					<tbody>
+						<% if (unshippingedItemList != null) { %>
+							<%
+							for (PurchaseBean unshippingedItem : unshippingedItemList) {
+							%>
+							<% 
+							NumberFormat nf = NumberFormat.getNumberInstance();
+							Timestamp ts = unshippingedItem.getPurchaseDate();
+						    SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM / dd　HH:mm");
+						    String formattedTime = sdf.format(ts);
+							%>
+							<tr>
+								<td class="td"><a href='purchaseDetail?purchaseId=<%= unshippingedItem.getPurchaseId() %>'><%= unshippingedItem.getPurchaseId() %></a></td>
+								<td class="td"><%= formattedTime %></td>
+								<td class="td"><%= unshippingedItem.getUserId() %></td>
+								<td class="td"><%= unshippingedItem.getUserName() %></td>
+								<td class="td">￥ <%= nf.format(unshippingedItem.getTotalAmount()) %></td>
+								<td class="td">
+									<small>
+									〒 <%= unshippingedItem.getPostalCode() %><br>
+									<%= unshippingedItem.getAddress() %><br>
+									<%= unshippingedItem.getAddressee() %>
+									</small>
+								</td>
+							</tr>
+							<%
+							}
+							%>
+						<% 
+						} 
 						%>
-					<% 
-					} 
-					%>
-				</tbody>
-			</table>
-		</div>
+					</tbody>
+				</table>
+			</div>
+		<%
+		} 
+		%>
 		<div class="row d-flex justify-content-center">
 			<a href="purchaseHistory" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">受注一覧</a>
 			<a href="registItem1" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">商品登録</a>

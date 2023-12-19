@@ -22,6 +22,12 @@ public class PurchaseDetaiServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// purchaseIdがリクエストパラメータに存在しない場合はアドミンのホーム画面に遷移
+		if (request.getParameter("purchaseId") == null) {
+			response.sendRedirect("adminTopPage");
+			return;
+		}
+		
 		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
 		
 		// Beanに値をセット
@@ -34,6 +40,13 @@ public class PurchaseDetaiServlet extends HttpServlet {
 		PurchaseBean purchaseInfo = Purchase.getPurchaseInfo(purchaseBean);
 		// 購入IDをもとに購入詳細情報を取得
 		ArrayList<PurchaseDetailBean> purchaseDetailList = PurchaseDetail.getPurchaseDetail(purchaseDetailBean);
+		
+		if (purchaseInfo == null || purchaseDetailList == null) {
+			request.setAttribute("errorMessage", "購入詳細のデータの取得に失敗しました");
+			request.setAttribute("url", "adminTopPage");
+			String view = "/WEB-INF/views/component/message.jsp";
+	        request.getRequestDispatcher(view).forward(request, response);
+		}
 		
 		request.setAttribute("purchaseInfo", purchaseInfo);
 		request.setAttribute("purchaseDetailList", purchaseDetailList);

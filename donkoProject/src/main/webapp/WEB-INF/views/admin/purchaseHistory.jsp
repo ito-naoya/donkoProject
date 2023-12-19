@@ -31,53 +31,66 @@
 				<h4 class="my-3 th">
 					<strong>受注一覧</strong>
 				</h4>
-				<div style=" overflow-x: scroll; overflow:scroll; height:500px;" class="border px-5">
-					<table class="table table-borderless text-center my-5">
-						<thead>
-							<tr>
-								<th class="th">ID</th>
-								<th class="th">購入日</th>
-								<th class="th">購入者ID</th>
-								<th class="th">購入者名</th>
-								<th class="th">合計金額</th>
-								<th class="th">配送先</th>
-								<th class="th">配送ステータス</th>
-							<tr>
-						</thead>
-						<tbody>
-							<%
-							ArrayList<PurchaseBean> orderItemList = (ArrayList<PurchaseBean>)request.getAttribute("orderItemList");
-							%>
-							<%
-							for (PurchaseBean orderItem : orderItemList) {
-							%>
-							<% 
-							NumberFormat nf = NumberFormat.getNumberInstance();
-							Timestamp ts = orderItem.getPurchaseDate();
-						    SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM / dd　HH:mm");
-						    String formattedTime = sdf.format(ts); 
-						    %>
-							<tr>
-								<td class="td"><a href='purchaseDetail?purchaseId=<%= orderItem.getPurchaseId() %>'><%= orderItem.getPurchaseId() %></a></td>
-								<td class="td"><%= formattedTime %></td>
-								<td class="td"><%= orderItem.getUserId() %></td>
-								<td class="td"><%= orderItem.getUserName() %></td>
-								<td class="td">￥ <%= nf.format(orderItem.getTotalAmount()) %></td>
-								<td class="td">
-									<small>
-										〒 <%= orderItem.getPostalCode() %><br>
-										<%= orderItem.getAddress() %><br>
-										<%= orderItem.getAddressee() %>
-									</small>
-								</td>
-								<td class="td"><%= orderItem.getShippingStatus() %></td>
-							</tr>
-							<%
-							}
-							%>
-						</tbody>
-					</table>
-				</div>
+				<% 
+				ArrayList<PurchaseBean> orderItemList = (ArrayList<PurchaseBean>) request.getAttribute("orderItemList");
+				String message = (String) request.getAttribute("message");
+				%>
+				<% 
+				if (orderItemList == null || orderItemList.size() == 0) {
+				%>
+					<div class="mx-5 p-5 d-flex justify-content-center align-items-center" style="overflow-x: scroll; overflow:scroll; height:400px;">
+						<p class="mb-0" style="color: #385A37;"><%= message %></p>
+					</div>
+				<% 
+				} else { 
+				%>
+					<div style=" overflow-x: scroll; overflow:scroll; height:500px;" class="border px-5">
+						<table class="table table-borderless text-center my-5">
+							<thead>
+								<tr>
+									<th class="th">ID</th>
+									<th class="th">購入日</th>
+									<th class="th">購入者ID</th>
+									<th class="th">購入者名</th>
+									<th class="th">合計金額</th>
+									<th class="th">配送先</th>
+									<th class="th">配送ステータス</th>
+								<tr>
+							</thead>
+							<tbody>
+								<%
+								for (PurchaseBean orderItem : orderItemList) {
+								%>
+									<% 
+									NumberFormat nf = NumberFormat.getNumberInstance();
+									Timestamp ts = orderItem.getPurchaseDate();
+								    SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM / dd　HH:mm");
+								    String formattedTime = sdf.format(ts); 
+								    %>
+									<tr>
+										<td class="td"><a href='purchaseDetail?purchaseId=<%= orderItem.getPurchaseId() %>'><%= orderItem.getPurchaseId() %></a></td>
+										<td class="td"><%= formattedTime %></td>
+										<td class="td"><%= orderItem.getUserId() %></td>
+										<td class="td"><%= orderItem.getUserName() %></td>
+										<td class="td">￥ <%= nf.format(orderItem.getTotalAmount()) %></td>
+										<td class="td">
+											<small>
+												〒 <%= orderItem.getPostalCode() %><br>
+												<%= orderItem.getAddress() %><br>
+												<%= orderItem.getAddressee() %>
+											</small>
+										</td>
+										<td class="td"><%= orderItem.getShippingStatus() %></td>
+									</tr>
+								<%
+								}
+								%>
+							</tbody>
+						</table>
+					</div>
+				<% 
+				}
+				%>
 			</div>
 		</div>
 	</main>
