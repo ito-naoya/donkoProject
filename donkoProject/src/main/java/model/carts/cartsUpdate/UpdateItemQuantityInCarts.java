@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class UpdateItemQuantityInCarts {
 
 	//カート内の商品の数量を更新する
-	public static void updateItemQuantityInCarts(CartBean cartBean) {
+	public static Boolean updateItemQuantityInCarts(CartBean cartBean) {
 
 		//カート内の対象の商品の数量を更新するSQL
 		StringBuilder sb = new StringBuilder();
@@ -33,6 +33,9 @@ public class UpdateItemQuantityInCarts {
 		params.add(cartBean.getQuantity());
 		params.add(cartBean.getUserId());
 		params.add(cartBean.getItemId());
+		
+		//コミットフラグをfalseで初期化
+		Boolean isCommit = false;
 
 		//データベース接続
 		try (Connection conn = DatabaseConnection.getConnection();) {
@@ -41,14 +44,19 @@ public class UpdateItemQuantityInCarts {
 				GeneralDao.executeUpdate(conn, UPDATE_QUANTITY_SQL, params);
 				//sqlをコミット
 				conn.commit();
+				isCommit = true;
 			} catch (SQLException e) {
 				if (!conn.isClosed()) {
 					conn.rollback();
 				}
 				e.printStackTrace();
+				return false;
 			}
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
+			return false;
 		}
+		
+		return isCommit;
 	};
 }

@@ -184,11 +184,12 @@ public class Item {
 			return null;
 		}
 		//金額
-		if(price.isEmpty() || price.length() > 11) {
-			return null;
-		}
+		String processedPrice = price.replaceAll(",", "");
+	    if(processedPrice.isEmpty() || processedPrice.length() > 11 || !processedPrice.matches("\\d+")) {
+	        return null;
+	    }
 		//在庫
-		if(stock.isEmpty() || stock.length() > 11) {
+		if(stock.isEmpty() || stock.length() > 1 || !stock.matches("\\d+")) {
 			return null;
 		}
 
@@ -198,7 +199,7 @@ public class Item {
 		newItem.setItemCategoryName(itemCategoryName);
 		newItem.setItemName(itemName);
 		newItem.setItemDescription(itemDescription);
-		newItem.setItemPrice(Integer.valueOf(price.replaceAll(",", "")));
+		newItem.setItemPrice(Integer.valueOf(processedPrice));
 		newItem.setItemStock(Integer.valueOf(stock));
 
 		return newItem;

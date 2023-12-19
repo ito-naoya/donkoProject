@@ -25,7 +25,7 @@ public class ItemDetailServlet extends HttpServlet {
     //商品の詳細情報を表示する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		int itemId = Integer.parseInt(request.getParameter("itemId"));
+		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
 		
 		//商品IDを保持するitemBeanをnew
 		ItemBean ib = new ItemBean();
@@ -39,23 +39,27 @@ public class ItemDetailServlet extends HttpServlet {
 		//商品の登録されているオプションを全て取得する(衣類：S、M、L)
 		ArrayList<ItemBean> itemOptionList = Item.getItemOptionList(ib);
 		
-		if(item != null && itemImageList != null && itemOptionList != null) {
-			request.setAttribute("item", item);
-			request.setAttribute("itemImageList", itemImageList);
-			request.setAttribute("itemOptionList", itemOptionList);
+		//データベースから取得できなかった時
+		if(item == null || itemImageList == null || itemOptionList == null) {
 			
-			//商品詳細ページを返す
-			String view = "/WEB-INF/views/customer/itemDetail.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-		} else {
-			request.setAttribute("errorMessage", "商品詳細情報の取得に失敗しました。");
+			//エラーメッセージ
+			request.setAttribute("errorMessage", "商品情報の取得時に問題が発生しました。");
+			//エラーページからの遷移先
 			request.setAttribute("url", "home");
-
 			//エラーページを返す
 			String view = "/WEB-INF/views/component/message.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
-			
-		}
+			return;
+		} 
+		
+		request.setAttribute("item", item);
+		request.setAttribute("itemImageList", itemImageList);
+		request.setAttribute("itemOptionList", itemOptionList);
+		
+		//商品詳細ページを返す
+		String view = "/WEB-INF/views/customer/itemDetail.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
+
 	}
 	
 	//商品をカートに入れる
@@ -83,7 +87,19 @@ public class ItemDetailServlet extends HttpServlet {
 		cb.setUserId(loginedUser.getUserId());
 		
 		//カートに商品を追加する
-		Cart.addItemToCart(cb);
+		Boolean isCommit = Cart.addItemToCart(cb);
+		
+		//カート追加に失敗した場合
+		if(!isCommit) {
+			//エラーメッセージ
+			request.setAttribute("errorMessage", "カート処理中に問題が発生しました。");
+			//エラーページからの遷移先
+			request.setAttribute("url", "cart");
+			//エラーページ表示
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		}
 		
 		//カート画面にリダイレクト
 		response.sendRedirect("cart");

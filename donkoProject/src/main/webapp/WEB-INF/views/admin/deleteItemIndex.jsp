@@ -42,7 +42,7 @@
 									<label for="category-select" class="form-label">カテゴリー選択</label>
 									<select class="form-select" id="category-select" name="itemCategoryName">
 									    <%
-									        if(categoryList != null){
+									        if(categoryList != null && itemDelFlg != null && !categoryName.isEmpty()){
 									            for(ItemCategoryBean category : categoryList){
 									                boolean isSelected = category.getItemCategoryName().equals(categoryName);
 									    %>
@@ -96,7 +96,7 @@
 											<div class="overflow" style="overflow: auto;"＞
 													<%
 													    ArrayList<ItemBean> itemList = (ArrayList<ItemBean>) request.getAttribute("itemList");
-													   	 if(itemList != null){
+													   	 if(itemList != null && itemList.size() > 0){
 													        for(ItemBean item : itemList){
 													%>
 											            <tr>
