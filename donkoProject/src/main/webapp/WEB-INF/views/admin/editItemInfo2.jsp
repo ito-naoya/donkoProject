@@ -30,7 +30,7 @@
 						int OptionName_1 = (Integer) item.getItemFirstOptionIncrementId();
 						int OptionName_2 = (Integer) item.getItemSecondOptionIncrementId();
 
-						if(item != null && item.size() > 0) {
+						if(item != null) {
 						%>
 								    <div class="col p-5" style="border:1px solid black" >
 								    	<table class="table table-borderless ">
@@ -90,7 +90,7 @@
 								   <%
 									ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = (ArrayList<ArrayList<OptionCategoryBean>>) request.getAttribute("itemCategoryListAll");
 
-								    if(itemCategoryListAll != 0 && itemCategoryListAll.size()){
+								    if(itemCategoryListAll != null && itemCategoryListAll.size() > 0){
 
 								    int counter = 1;
 									for (ArrayList<OptionCategoryBean> optionCategoryList : itemCategoryListAll) {

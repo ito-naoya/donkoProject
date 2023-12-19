@@ -28,7 +28,7 @@
 						<%
 						//渡されたidに基づく商品詳細を取得
 						ItemBean item = (ItemBean) request.getAttribute("item");
-						if(item != null && item.size() > 0){
+						if(item != null){
 							//カテゴリのデフォルト情報を取得
 							String defaultItemCategoryName = item.getItemCategoryName();
 							String errorMessage = (String) request.getAttribute("errorMessage");
