@@ -24,98 +24,101 @@
 					<br>
 					<h2>商品情報登録</h2>
 					<br>
-					<!-- リファクタリングは改めて・・・ -->
 					<!-- 　枠の中でnewItemを展開 -->
 						<%
 						ItemBean item = (ItemBean) request.getAttribute("item");
 						int OptionName_1 = (Integer) item.getItemFirstOptionIncrementId();
 						int OptionName_2 = (Integer) item.getItemSecondOptionIncrementId();
-						if(item != null) {
+
+						if(item != null && item.size() > 0) {
 						%>
-						    <div class="col p-5" style="border:1px solid black" >
-						    	<table class="table table-borderless ">
-									  <tbody>
-									    <tr>
-									      <th scope="row">カテゴリー</th>
-									      <td><%= item.getItemCategoryName() %></td>
-									    </tr>
-									    <tr>
-									      <th scope="row">商品名</th>
-									      <td><%= item.getItemName() %></td>
-									    </tr>
-									    <tr>
-									      <th scope="row">商品説明</th>
-									      <td><%= item.getItemDescription() %></td>
-									    </tr>
-									    <tr>
-									      <th scope="row">金額</th>
-									      <td><%= NumberFormat.getNumberInstance().format(item.getItemPrice())%></td>
-									    </tr>
-									    <tr>
-									      <th scope="row">在庫数</th>
-									      <td><%= item.getItemStock() %></td>
-									    </tr>
-									  </tbody>
-								</table>
-						    </div>
-						<%
-						}
-						%>
-						<br>
-						<div id="error-message-container2" class="alert alert-danger d-none"></div>
-						<br>
-					<!-- 　フォーム入力 -->
-					<form action="editItemInfo2"  id="registItem2"  method="post" enctype="multipart/form-data">
-					    <input type="hidden" name="itemId" value="<%= item.getItemId() %>">
-					    <input type="hidden" name="itemCategoryName" value="<%= item.getItemCategoryName() %>">
-					    <input type="hidden" name="itemName" value="<%= item.getItemName() %>">
-					    <input type="hidden" name="itemDescription" value="<%= item.getItemDescription() %>">
-					    <input type="hidden" name="itemPrice" value="<%= item.getItemPrice() %>">
-					    <input type="hidden" name="itemStock" value="<%= item.getItemStock() %>">
-					    <input type="text" name="itemImgFileName" value="<%= item.getImageFileName() %>">
-					    <br>
+								    <div class="col p-5" style="border:1px solid black" >
+								    	<table class="table table-borderless ">
+											  <tbody>
+											    <tr>
+											      <th scope="row">カテゴリー</th>
+											      <td><%= item.getItemCategoryName() %></td>
+											    </tr>
+											    <tr>
+											      <th scope="row">商品名</th>
+											      <td><%= item.getItemName() %></td>
+											    </tr>
+											    <tr>
+											      <th scope="row">商品説明</th>
+											      <td><%= item.getItemDescription() %></td>
+											    </tr>
+											    <tr>
+											      <th scope="row">金額</th>
+											      <td><%= NumberFormat.getNumberInstance().format(item.getItemPrice())%></td>
+											    </tr>
+											    <tr>
+											      <th scope="row">在庫数</th>
+											      <td><%= item.getItemStock() %></td>
+											    </tr>
+											  </tbody>
+										</table>
+								    </div>
 
-						<label for="default-text" class="form-label">現在登録済みの写真</label>
-					    <br>
-					    <div class="upload card mb-3 mx-2" style="width: 300px; height: 300px; display: inline-block;">
-						    <img src="./images/<%= item.getImageFileName() %>.jpg" id="default-text" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-						    <img id="image-preview" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
-						</div>
-						<div class="mb-3">
-						    <label for="formFile" class="form-label">商品写真を変更</label>
-						    <input type="file" class="form-control" id="formFile" name="img" accept=".jpg" onchange="previewImage(event);" />
-						</div>
+								<br>
+								<div id="error-message-container2" class="alert alert-danger d-none"></div>
+								<br>
+							<!-- 　フォーム入力 -->
+							<form action="editItemInfo2"  id="registItem2"  method="post" enctype="multipart/form-data">
+							    <input type="hidden" name="itemId" value="<%= item.getItemId() %>">
+							    <input type="hidden" name="itemCategoryName" value="<%= item.getItemCategoryName() %>">
+							    <input type="hidden" name="itemName" value="<%= item.getItemName() %>">
+							    <input type="hidden" name="itemDescription" value="<%= item.getItemDescription() %>">
+							    <input type="hidden" name="itemPrice" value="<%= item.getItemPrice() %>">
+							    <input type="hidden" name="itemStock" value="<%= item.getItemStock() %>">
+							    <input type="text" name="itemImgFileName" value="<%= item.getImageFileName() %>">
+							    <br>
 
-					    <br>
-					    <div class="mb-3">
-						    <!-- categoryListをSeleectで選択。（TODOチャレンジ:色に関して、既存の商品名で登録済みのものは表示しない -->
-						   <%
-							ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = (ArrayList<ArrayList<OptionCategoryBean>>) request.getAttribute("itemCategoryListAll");
-							int counter = 1;
-							for (ArrayList<OptionCategoryBean> optionCategoryList : itemCategoryListAll) {
-							    String optionCategoryName = optionCategoryList.get(0).getOptionCategoryName();
-							    int optionId = counter == 1 ? OptionName_1 : OptionName_2;
-							%>
-							    <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryName %>">
-							    <label for="options" class="form-label">現在のオプション：<%= optionCategoryName %></label>
-							    <select class="form-select option-select mb-3" id="options" name="optionValue_<%= counter %>">
-							        <%
-							        for (OptionCategoryBean option : optionCategoryList) {
-							            boolean isSelected = option.getOptionCategoryId() == optionId;
-							        %>
-							            <option value="<%= option.getOptionCategoryId() %>" <%= isSelected ? "selected" : "" %>><%= option.getOptionCategoryValue() %></option>
-							        <%
-							        }
-							        counter++;
-							    }
-							%>
+								<label for="default-text" class="form-label">現在登録済みの写真</label>
+							    <br>
+							    <div class="upload card mb-3 mx-2" style="width: 300px; height: 300px; display: inline-block;">
+								    <img src="./images/<%= item.getImageFileName() %>.jpg" id="default-text" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+								    <img id="image-preview" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
+								</div>
+								<div class="mb-3">
+								    <label for="formFile" class="form-label">商品写真を変更</label>
+								    <input type="file" class="form-control" id="formFile" name="img" accept=".jpg" onchange="previewImage(event);" />
+								</div>
 
-					        <input type="hidden" name="selectBoxCount" value="<%= counter - 1 %>">
-				        </div>
-					    <br>
-					    <br>
-					    <button type=submit class="btn px-5 py-3" style="background-color: #9933FF; color: white; border-radius: 0.5rem;">登録</button>
-					</form>
+							    <br>
+							    <div class="mb-3">
+								    <!-- categoryListをSeleectで選択。 -->
+								   <%
+									ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = (ArrayList<ArrayList<OptionCategoryBean>>) request.getAttribute("itemCategoryListAll");
+
+								    if(itemCategoryListAll != 0 && itemCategoryListAll.size()){
+
+								    int counter = 1;
+									for (ArrayList<OptionCategoryBean> optionCategoryList : itemCategoryListAll) {
+									    String optionCategoryName = optionCategoryList.get(0).getOptionCategoryName();
+									    int optionId = counter == 1 ? OptionName_1 : OptionName_2;
+									%>
+									    <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryName %>">
+									    <label for="options" class="form-label">現在のオプション：<%= optionCategoryName %></label>
+									    <select class="form-select option-select mb-3" id="options" name="optionValue_<%= counter %>">
+									        <%
+									        for (OptionCategoryBean option : optionCategoryList) {
+									            boolean isSelected = option.getOptionCategoryId() == optionId;
+									        %>
+									            <option value="<%= option.getOptionCategoryId() %>" <%= isSelected ? "selected" : "" %>><%= option.getOptionCategoryValue() %></option>
+									        <%
+									        }
+									        counter++;
+									    }
+									%>
+
+							        <input type="hidden" name="selectBoxCount" value="<%= counter - 1 %>">
+							        <% } %>
+						        </div>
+							    <br>
+							    <br>
+							    <button type=submit class="btn px-5 py-3" style="background-color: #9933FF; color: white; border-radius: 0.5rem;">登録</button>
+							</form>
+						<% } %>
 				</div>
 			</div>
 		</div>

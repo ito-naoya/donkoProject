@@ -27,41 +27,46 @@
 					<br>
 						<!-- ここにエラーメッセージを表示 -->
 						<div id="error-message-container" class="alert alert-danger d-none"></div>
-
+					<%
+						ArrayList<ItemCategoryBean> categoryList = (ArrayList<ItemCategoryBean>) request.getAttribute("categoryList");
+						if(categoryList != null && categoryList.size() > 0 ){
+					 %>
 						<!-- ここから入力フォーム  -->
 						<form action="registItem1" id="registItem1" method="post">
 							<div class="mb-3">
 								<select class="form-select category-select" name="itemCategoryName">
 								  <option selected>カテゴリーを選択</option>
 							            <%
-							            ArrayList<ItemCategoryBean> categoryList = (ArrayList<ItemCategoryBean>) request.getAttribute("categoryList");
-							            for (ItemCategoryBean category : categoryList){
-							            %>
-							            <option value="<%=category.getItemCategoryName()%>"><%=category.getItemCategoryName()%></option>
-							            <%
-							            }
+								            for (ItemCategoryBean category : categoryList){
+								         %>
+								            <option value="<%=category.getItemCategoryName()%>"><%=category.getItemCategoryName()%></option>
+								        <%
+							            	}
 							            %>
 								</select>
 							</div>
 							<div class="mb-3">
 							    <label for="itemName" class="form-label">商品名</label>
-							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30">
+							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" required>
 						 	</div>
 						 	<div class="mb-3">
 							    <label for="itemDescription" class="form-label">商品説明</label>
-							    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" required maxlength="100" ></textarea>
+							    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" maxlength="100"  required></textarea>
 						 	</div>
 						 	<div class="col-4 mb-3">
 							    <label for="price" class="form-label">金額</label>
-							    <input type="text" class="form-control" id="price" name="price" maxlength="11" required style="text-align: right">
+							    <input type="text" class="form-control" id="price" name="price" maxlength="11"  required style="text-align: right">
 						 	</div>
 						 	<div class="col-2 mb-3">
 							    <label for="stock" class="form-label">在庫</label>
-							    <input type="number" class="form-control" id="stock" name="stock" min="1" max="100" required style="text-align: center">
+							    <input type="number" class="form-control" id="stock" name="stock" min="1" max="9" required style="text-align: center">
 						 	</div>
 						 	<br>
 							<button type=submit class="btn px-5 py-3" style="background-color: #E5CCFF; color: black; border-radius: 0.5rem;">オプションの追加をする</button>
 						</form>
+						<%
+						}
+						%>
 				</div>
 			</div>
 		</div>

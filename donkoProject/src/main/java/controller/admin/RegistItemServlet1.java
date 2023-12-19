@@ -37,8 +37,8 @@ public class RegistItemServlet1 extends HttpServlet {
 			request.setAttribute("url","adminTopPage");
 			String view = "/WEB-INF/views/component/message.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
-			return;
 		}
+
 		request.setAttribute("categoryList", categoryList);
 		//商品登録画面1に転送
 		String view = "/WEB-INF/views/admin/registItem1.jsp";
@@ -75,7 +75,6 @@ public class RegistItemServlet1 extends HttpServlet {
 			request.setAttribute("url","adminTopPage");
 			String view = "/WEB-INF/views/component/message.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
-			return;
 		}
 
 		request.setAttribute("itemCategoryListAll", itemCategoryListAll);

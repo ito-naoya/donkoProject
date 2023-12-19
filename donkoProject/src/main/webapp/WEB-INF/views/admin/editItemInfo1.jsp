@@ -28,50 +28,50 @@
 						<%
 						//渡されたidに基づく商品詳細を取得
 						ItemBean item = (ItemBean) request.getAttribute("item");
+						if(item != null && item.size() > 0){
+							//カテゴリのデフォルト情報を取得
+							String defaultItemCategoryName = item.getItemCategoryName();
+							String errorMessage = (String) request.getAttribute("errorMessage");
+							if(errorMessage != null && !errorMessage.isEmpty()) {
+							%>
+							    <div class="alert alert-danger alert-message" role="alert">
+							        <%= errorMessage %>
+							    </div>
+							<%
+							}
+							%>
+							<div id="error-message-container" class="alert alert-danger d-none"></div>
+							<!-- ここから入力フォーム  -->
+							<form action="editItemInfo1" id="registItem1" method="post">
+								<div class="mb-3">
+									<label for="itemCategory" class="form-label">カテゴリ：<%= item.getItemCategoryName() %></label>
+								</div>
+								<div class="mb-3">
+								    <label for="itemName" class="form-label">商品名</label>
+								    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" value="<%= item.getItemName() %>" required>
+							 	</div>
+							 	<div class="mb-3">
+								    <label for="itemDescription" class="form-label">商品説明</label>
+								    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" required maxlength="100"><%= item.getItemDescription().trim() %></textarea>
+							 	</div>
+							 	<div class="col-4 mb-3">
+								    <label for="price" class="form-label">金額</label>
+								    <input type="text" class="form-control" id="price" name="price" maxlength="11"  value="<%= NumberFormat.getNumberInstance().format(item.getItemPrice()) %>" required style="text-align: right">
+							 	</div>
+							 	<div class="col-2 mb-3">
+								    <label for="stock" class="form-label">在庫</label>
+								    <input type="number" class="form-control" id="stock" name="stock" min="1" max="9" value="<%= item.getItemStock() %>" required style="text-align: center">
+							 	</div>
+							 	<br>
+							 	<input type="hidden" name="itemId" value="<%= item.getItemId() %>">
+							 	<input type="hidden" name="itemCategoryName" value="<%= item.getItemCategoryName() %>">
+							 	<input type="hidden" name="fileName" value="<%= item.getImageFileName() %>">
+							 	<input type="hidden" name="firstOptionId" value="<%= item.getItemFirstOptionIncrementId() %>">
+							 	<input type="hidden" name="secondOptionId" value="<%= item.getItemSecondOptionIncrementId() %>">
 
-						//カテゴリのデフォルト情報を取得
-						String defaultItemCategoryName = item.getItemCategoryName();
-						String errorMessage = (String) request.getAttribute("errorMessage");
-						if(errorMessage != null && !errorMessage.isEmpty()) {
-						%>
-						    <div class="alert alert-danger alert-message" role="alert">
-						        <%= errorMessage %>
-						    </div>
-						<%
-						}
-						%>
-						<div id="error-message-container" class="alert alert-danger d-none"></div>
-						<!-- ここから入力フォーム  -->
-						<!-- リファクタリングは改めて・・・ -->
-						<form action="editItemInfo1" id="registItem1" method="post">
-							<div class="mb-3">
-								<label for="itemCategory" class="form-label">カテゴリ：<%= item.getItemCategoryName() %></label>
-							</div>
-							<div class="mb-3">
-							    <label for="itemName" class="form-label">商品名</label>
-							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" value="<%= item.getItemName() %>" required>
-						 	</div>
-						 	<div class="mb-3">
-							    <label for="itemDescription" class="form-label">商品説明</label>
-							    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" required maxlength="100"><%= item.getItemDescription().trim() %></textarea>
-						 	</div>
-						 	<div class="col-4 mb-3">
-							    <label for="price" class="form-label">金額</label>
-							    <input type="text" class="form-control" id="price" name="price" maxlength="11"  value="<%= NumberFormat.getNumberInstance().format(item.getItemPrice()) %>" required style="text-align: right">
-						 	</div>
-						 	<div class="col-2 mb-3">
-							    <label for="stock" class="form-label">在庫</label>
-							    <input type="number" class="form-control" id="stock" name="stock" min="1" max="100" value="<%= item.getItemStock() %>" required style="text-align: center">
-						 	</div>
-						 	<br>
-						 	<input type="hidden" name="itemId" value="<%= item.getItemId() %>">
-						 	<input type="hidden" name="itemCategoryName" value="<%= item.getItemCategoryName() %>">
-						 	<input type="hidden" name="fileName" value="<%= item.getImageFileName() %>">
-						 	<input type="hidden" name="firstOptionId" value="<%= item.getItemFirstOptionIncrementId() %>">
-						 	<input type="hidden" name="secondOptionId" value="<%= item.getItemSecondOptionIncrementId() %>">
-
-							<button type=submit class="btn px-5 py-3" style="background-color: #E5CCFF; color: black; border-radius: 0.5rem;">オプションの追加をする</button>
-						</form>
+								<button type=submit class="btn px-5 py-3" style="background-color: #E5CCFF; color: black; border-radius: 0.5rem;">オプションの追加をする</button>
+							</form>
+						<% } %>
 				</div>
 			</div>
 		</div>
