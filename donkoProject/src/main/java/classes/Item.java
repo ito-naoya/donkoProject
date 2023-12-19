@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.ItemBean;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.Part;
 import model.items.itemsDelete.DeleteItemFromItems;
 import model.items.itemsInsert.InsertNewItemToItems;
@@ -102,7 +103,7 @@ public class Item {
 	};
 
 	//商品画像をドキュメント内に登録する
-	public static boolean registerNewImage(Part part, String fileName) {
+	public static boolean registerNewImage(Part part, String fileName, ServletContext context) {
 	    if (part != null && !fileName.isEmpty()) {
 	        try {
 	            // フルパスを指定
@@ -118,13 +119,15 @@ public class Item {
 	    return false;
 	}
 
-	public static boolean registerNewImage(Part part,String fileName, String oldFileName){
+	public static boolean registerNewImage(Part part,String fileName, String oldFileName, ServletContext context){
 		if(part.getSize() == 0 || fileName.isEmpty()) {
 			return false;
 		} else {
 				try {
-				    // フルパスじゃないと上手く読み込まれないみたいなので、自分のファイルパスに適宜変更してください。
-				    String filePath = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/" + fileName + ".jpg";
+					// サーブレットコンテキストで相対パスの場所を取得して、絶対パスに変換。最後に/をつける。
+		            String imagesDirectory = context.getRealPath("/images") + File.separator;
+		            String filePath = imagesDirectory + fileName + ".jpg";
+
 				    // ファイルを保存
 					part.write(filePath);
 				} catch (IOException e) {

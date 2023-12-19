@@ -5,6 +5,7 @@ import java.io.IOException;
 import bean.ItemBean;
 import classes.Item;
 import classes.Option;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -89,7 +90,8 @@ public class RegistItemServlet2 extends HttpServlet {
         newItemAddOption.setImageFileName(fileName);
 
         if (Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {
-            boolean imageSaved = Item.registerNewImage(imgPart, fileName);
+        	ServletContext context = getServletContext();
+            boolean imageSaved = Item.registerNewImage(imgPart, fileName, context);
             if (!imageSaved) {
                 // 画像の登録に失敗した場合の処理
             	request.setAttribute("errorMessage", "写真の登録に失敗しました");
