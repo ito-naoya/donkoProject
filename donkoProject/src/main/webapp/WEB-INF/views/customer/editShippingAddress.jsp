@@ -29,7 +29,7 @@
             <strong>配送先編集</strong>
           </h2>
           <div>
-            <a href="myPage"
+            <a href="shippingAddressIndex"
               style="text-decoration: none; text-align: center;"><button
                 type="button" class="btn-close border" aria-label="Close"></button>️</a>
           </div>
