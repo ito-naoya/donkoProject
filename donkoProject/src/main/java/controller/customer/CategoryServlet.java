@@ -41,13 +41,16 @@ public class CategoryServlet extends HttpServlet {
 		ArrayList<ItemBean> itemList = Item.getItemListByCategory(itemBean);
 		
 		// エラー画面に遷移
-		if (optionCategoryValueListAll == null) {
-			// 失敗したらmessage.jspに飛ぶ
-			
-			return;
-		}
-		if (itemList == null) {
-			// 失敗したらmessage.jspに飛ぶ 
+		if (optionCategoryValueListAll == null || itemList == null) {
+			// 失敗したらmessage.jspに遷移
+			if(optionCategoryValueListAll == null) {
+				request.setAttribute("errorMessage", "オプション選択が取得できませんでした");
+			} else {
+				request.setAttribute("errorMessage", "カテゴリー一覧が取得できませんでした");
+			}
+			request.setAttribute("url", "home");
+			String view = "/WEB-INF/views/customer/message.jsp";
+	        request.getRequestDispatcher(view).forward(request, response);
 			return;
 		}
 		

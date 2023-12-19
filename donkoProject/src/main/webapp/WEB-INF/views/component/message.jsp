@@ -16,13 +16,15 @@
 	<body>
 		<main>
 			<div class="container">
-				<div class="col d-flex align-items-center flex-column">
-					<%
-					String errorMessage = (String)request.getAttribute("errorMessage");
-					String url = (String)request.getAttribute("url");
-					%>
-					<h1  style="margin-top: 100px"><%= errorMessage %></h1>
-					<a href="<%= url %>" style="margin-top: 30px"> 戻る </a>
+				<div class="row" style="margin: 250px 0;">
+					<div class="col-lg-5 d-flex align-items-center flex-column border mx-auto p-5">
+						<%
+						String errorMessage = (String)request.getAttribute("errorMessage");
+						String url = (String)request.getAttribute("url");
+						%>
+						<h3><%= errorMessage %></h3>
+						<a href="<%= url %>" style="margin-top: 30px">戻る</a>
+					</div>
 				</div>
 			</div>
 		</main>

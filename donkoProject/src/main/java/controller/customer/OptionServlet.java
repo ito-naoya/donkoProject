@@ -24,14 +24,12 @@ public class OptionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] checkedOptionList = request.getParameterValues("option");
 		String categoryName = request.getParameter("categoryName");
-		request.setAttribute("categoryName", categoryName);
 		
 		ItemBean itemBean = new ItemBean();
 		itemBean.setItemCategoryName(categoryName);
 		
 		// オプション選択の項目を取得
 		ArrayList<ArrayList<OptionCategoryBean>> optionCategoryValueListAll = OptionCategory.getOptionCategoryListAllByCategory(itemBean);
-		request.setAttribute("optionCategoryValueListAll", optionCategoryValueListAll);
 		
 		if (checkedOptionList != null && checkedOptionList.length > 0) {
 			// オプション選択した一覧を取得
@@ -40,9 +38,12 @@ public class OptionServlet extends HttpServlet {
 			request.setAttribute("message", "検索キーワード : " + searchKeyword(categoryName, checkedOptionList));
 		} else {
 			// カテゴリー一覧を取得
-			ArrayList<ItemBean> itemList =Item.getItemListByCategory(itemBean);
+			ArrayList<ItemBean> itemList = Item.getItemListByCategory(itemBean);
 			request.setAttribute("itemList", itemList);
 		}
+		
+		request.setAttribute("categoryName", categoryName);
+		request.setAttribute("optionCategoryValueListAll", optionCategoryValueListAll);
 		
 		String view = "/WEB-INF/views/customer/categoryIndex.jsp";
         request.getRequestDispatcher(view).forward(request, response);
