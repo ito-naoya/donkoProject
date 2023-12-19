@@ -3,9 +3,7 @@ package controller.customer;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import bean.ItemBean;
 import bean.PurchaseBean;
-import classes.Item;
 import classes.Purchase;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
@@ -14,6 +12,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+/*
+ * マイページ表示画面用 Servlet
+ * */
 
 @WebServlet("/myPage")
 public class MyPageServlet extends HttpServlet {
@@ -24,28 +26,32 @@ public class MyPageServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// インスタンス生成
+		CustomerUser customerUser = new CustomerUser();
 		
+		// セッションの確認
 		HttpSession session = request.getSession(false);
 		if(session == null) {
-			ArrayList<ItemBean> itemList = Item.getItemList();
-			request.setAttribute("itemList", itemList);
-			String view = "/WEB-INF/views/customer/home.jsp";
-	        request.getRequestDispatcher(view).forward(request, response);
+			// セッションがなければホーム画面に遷移
+			response.sendRedirect("home");
+			return;
+		} else {
+			// TODO: testUserIdはテストコードなのでログイン機能が追加され次第削除
+			int testUserId = 2;
+			session.setAttribute("user_id", testUserId);
+			// セッションがあればuser_idを取得する
+			customerUser.setUserId((int)session.getAttribute("user_id"));
+		} 
+		
+		// コミットがされているかの確認
+		if (!response.isCommitted()) {
+			// 購入履歴の一覧を取得する
+			ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
+			request.setAttribute("purchaseList", purchaseList);
+			
+			// マイページに画面遷移
+			String view = "/WEB-INF/views/customer/myPage.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
 		}
-		
-		CustomerUser customerUser = new CustomerUser();
-		// TODO: testUserIdはテストコードです
-		int testUserId = 2;
-		session.setAttribute("user_id", testUserId);
-		int userId = (int) session.getAttribute("user_id");
-		customerUser.setUserId(userId);
-		// TODO:あとで書き換え↓
-		// customerUser.setUserId((int)session.getAttribute("user_id"));
-		
-		ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
-		request.setAttribute("purchaseList", purchaseList);
-		
-		String view = "/WEB-INF/views/customer/myPage.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
 	}
 }
