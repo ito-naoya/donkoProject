@@ -22,6 +22,7 @@
 						String errorMessage = (String)request.getAttribute("errorMessage");
 						String url = (String)request.getAttribute("url");
 						%>
+						<h1></h1>
 						<h3><%= errorMessage %></h3>
 						<a href="<%= url %>" style="margin-top: 30px">戻る</a>
 					</div>
