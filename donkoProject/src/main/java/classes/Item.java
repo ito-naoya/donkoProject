@@ -188,7 +188,7 @@ public class Item {
 			return null;
 		}
 		//在庫
-		if(stock.isEmpty() || stock.length() > 11) {
+		if(stock.isEmpty() || stock.length() > 1) {
 			return null;
 		}
 

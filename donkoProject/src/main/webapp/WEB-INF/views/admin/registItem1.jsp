@@ -59,7 +59,7 @@
 						 	</div>
 						 	<div class="col-2 mb-3">
 							    <label for="stock" class="form-label">在庫</label>
-							    <input type="number" class="form-control" id="stock" name="stock" min="1" max="100" required style="text-align: center">
+							    <input type="number" class="form-control" id="stock" name="stock" min="1" max="9" required style="text-align: center">
 						 	</div>
 						 	<br>
 							<button type=submit class="btn px-5 py-3" style="background-color: #E5CCFF; color: black; border-radius: 0.5rem;">オプションの追加をする</button>
