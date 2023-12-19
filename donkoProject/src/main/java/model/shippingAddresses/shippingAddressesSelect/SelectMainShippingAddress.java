@@ -15,29 +15,36 @@ public class SelectMainShippingAddress {
 	//メインの配送先を取得する
 	public static ShippingAddressBean selectMainShippingAddress(CustomerUser customerUser){
 		
-		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT "					);
-		sql.append("shipping_address_id, "		);
-		sql.append("postal_code, "				);
-		sql.append("address, "					);
-		sql.append("addressee "					);
-		sql.append("FROM "						);
-		sql.append("shipping_addresses "		);
-		sql.append("WHERE "						);
-		sql.append("user_id = ? "				);
-		sql.append("AND "						);
-		sql.append("main_shipping_address = 1"	);
-		final String SELECT_MAINADDRESS_SQL = sql.toString();
+		//メインの配送先を取得するSQL
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT ");
+		sb.append(		"shipping_address_id, ");
+		sb.append(		"postal_code, ");
+		sb.append(		"address, ");
+		sb.append(		"addressee ");
+		sb.append("FROM ");
+		sb.append		("shipping_addresses ");
+		sb.append("WHERE ");
+		//パラメータをここで使う
+		sb.append(		"user_id = ? ");
+		sb.append("AND ");
+		sb.append(		"main_shipping_address = 1");
+		//sqlを文字列化
+		final String SELECT_MAINADDRESS_SQL = sb.toString();
 		
+		//ログインしているユーザーのIDをリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(customerUser.getUserId());
 		
+		//配送先情報を保持するshippingAddressBeanをnullで初期化
 		ShippingAddressBean sa = null;
 		
+		//データベース接続
 		try(Connection conn = DatabaseConnection.getConnection();){
 			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_MAINADDRESS_SQL, params)) {
 				
 				while(rs.next()) {
+					//配送先情報を保持するshippingAddressBeanをnew
 					sa = new ShippingAddressBean();
 					sa.setShippingAddressId(rs.getInt("shipping_address_id"));
 					sa.setPostalCode(rs.getString("postal_code"));

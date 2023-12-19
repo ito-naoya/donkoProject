@@ -39,18 +39,26 @@ public class CartServlet extends HttpServlet {
 		//ログインしているユーザーがカートに追加した商品を全て取得
 		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(loginedUser);
 		
-		if(cartBeanList != null) {
+		//データベースから取得できなかった時
+		if(cartBeanList == null) {
 			
-			request.setAttribute("cartBeanList", cartBeanList);
-	
-			//カート一覧ページを表示する
-			String view = "/WEB-INF/views/customer/cart.jsp";
+			//エラーメッセージ
+			request.setAttribute("errorMessage", "カート情報の取得時に問題が発生しました。");
+			//エラーページからの遷移先
+			request.setAttribute("url", "home");
+			//エラーページ表示
+			String view = "/WEB-INF/views/component/message.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
-		
-		} else if(cartBeanList == null) {
-			//トップ画面にリダイレクトする
-			response.sendRedirect("home");
+			return;
 		}
+			
+		request.setAttribute("cartBeanList", cartBeanList);
+
+		//カート一覧ページを表示する
+		String view = "/WEB-INF/views/customer/cart.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
+		
+		
 	}
 
 	//カート内の商品の数量を更新する
@@ -64,8 +72,8 @@ public class CartServlet extends HttpServlet {
 		CustomerUser loginedUser = new CustomerUser();
 		loginedUser.setUserId(2);
 
-		int itemId = Integer.parseInt(request.getParameter("itemId"));
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
+		Integer quantity = Integer.valueOf(request.getParameter("quantity"));
 		
 		//カートにある商品情報を保持するcartBeanをnew
 		CartBean cb = new CartBean();
@@ -77,7 +85,19 @@ public class CartServlet extends HttpServlet {
 		cb.setQuantity(quantity);
 		
 		 //カート内の商品の数量を更新する
-		Cart.updateItemQuantityInCart(cb);
+		Boolean isCommit = Cart.updateItemQuantityInCart(cb);
+		
+		//数量更新に失敗したとき
+		if(!isCommit) {
+			//エラーメッセージ
+			request.setAttribute("errorMessage", "カート数量更新処理中に問題が発生しました。");
+			//エラーページからの遷移先
+			request.setAttribute("url", "cart");
+			//エラーページ表示
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		}
 		
 		//doGetメソッドを実行(カート一覧ページを表示)
 		doGet(request, response);

@@ -38,27 +38,38 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		//テストコード
 		CustomerUser loginedUser = new CustomerUser(); 
 		loginedUser.setUserId(2);
-		
+	
 		//ログインしているユーザーのメインの配送先を取得
 		ShippingAddressBean shippingAddress = ShippingAddress.getMainShippingAddress(loginedUser);
 		//ログインしているユーザーがカートに追加した商品を全て取得
 		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(loginedUser);
 		
-		if(cartBeanList != null && shippingAddress != null) {
+		//データベースから取得できなかった時
+		if(cartBeanList == null || shippingAddress == null) {
 			
-			//カート内の商品の合計金額をtotalPriceに代入
-			Integer totalPrice= cartBeanList.stream()
-					.map(cb -> cb.getItemPrice() * cb.getQuantity())
-					.mapToInt( i -> i )
-					.sum();
-			
-			request.setAttribute("shippingAddress", shippingAddress);
-			request.setAttribute("cartBeanList", cartBeanList);
-			request.setAttribute("totalPrice", totalPrice);
-			
-			String view = "/WEB-INF/views/customer/purchaseConfirm.jsp";
+			//エラーメッセージ
+			request.setAttribute("errorMessage", "購入情報の取得時に問題が発生しました。");
+			//エラーページからの遷移先
+			request.setAttribute("url", "home");
+			//エラーページを返す
+			String view = "/WEB-INF/views/component/message.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
+			return;
+			
 		}
+		
+		//カート内の商品の合計金額をtotalPriceに代入
+		Integer totalPrice= cartBeanList.stream()
+				.map(cb -> cb.getItemPrice() * cb.getQuantity())
+				.mapToInt( i -> i )
+				.sum();
+		
+		request.setAttribute("shippingAddress", shippingAddress);
+		request.setAttribute("cartBeanList", cartBeanList);
+		request.setAttribute("totalPrice", totalPrice);
+		
+		String view = "/WEB-INF/views/customer/purchaseConfirm.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	//購入処理をする
@@ -76,8 +87,8 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		CustomerUser loginedUser = new CustomerUser(); 
 		loginedUser.setUserId(2);
 
-		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
-		int shippingAddressId = Integer.parseInt(request.getParameter("shippingAddressId"));
+		Integer totalPrice = Integer.valueOf(request.getParameter("totalPrice"));
+		Integer shippingAddressId = Integer.valueOf(request.getParameter("shippingAddressId"));
 
 		//購入情報を保持するpurchaseBeanをnew
 		PurchaseBean pb = new PurchaseBean();
@@ -89,7 +100,19 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		pb.setShippingAddressId(shippingAddressId);
 
 		//商品を購入する
-		Purchase.purchaseItem(pb);
+		Boolean isCommit = Purchase.purchaseItem(pb);
+		
+		//商品を購入できなかった時
+		if(!isCommit) {
+			//エラーメッセージ
+			request.setAttribute("errorMessage", "商品購入処理中に問題が発生しました。");
+			//エラーページからの遷移先
+			request.setAttribute("url", "purchaseConfirm");
+			//エラーページ表示
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		}
 		
 		//購入完了画面を返す
 		String view = "/WEB-INF/views/customer/purchaseComplete.jsp";

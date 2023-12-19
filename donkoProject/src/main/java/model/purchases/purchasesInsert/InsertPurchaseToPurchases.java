@@ -14,7 +14,7 @@ import dao.GeneralDao;
 public class InsertPurchaseToPurchases {
 
 	//商品を購入する
-	public static void insertPurchaseToPurchases(PurchaseBean purchaseBean) {
+	public static Boolean insertPurchaseToPurchases(PurchaseBean purchaseBean) {
 
 		//購入情報を追加するSQL
 		StringBuilder insertPurchaseSb = new StringBuilder();
@@ -93,7 +93,7 @@ public class InsertPurchaseToPurchases {
 		//購入したユーザーのIDをcustomerUserにセット
 		customerUser.setUserId(purchaseBean.getUserId());
 		//カート内にある購入した商品の情報を全て取得
-		ArrayList<CartBean> cartList = Cart.getItemListFromCart(customerUser);
+		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(customerUser);
 		
 		//購入された商品の在庫数を減らすSQL
 		 StringBuilder updateItemStockSb  = new StringBuilder();
@@ -116,12 +116,15 @@ public class InsertPurchaseToPurchases {
 		//パラメータをここで使う
 		deleteCartItemAllSb.append(		"user_id = ? ");
 		//sqlを文字列化
-		final String DELETE_ITEM_ALL_SQL = deleteCartItemAllSb.toString();
+		final String DELETE_CART_ITEM_ALL_SQL = deleteCartItemAllSb.toString();
 
 		//ログインしているユーザーのユーザーIDをリストに追加
 		ArrayList<Object> deleteCartItemAllparams = new ArrayList<Object>();
 		deleteCartItemAllparams.add(purchaseBean.getUserId());
-
+		
+		//コミットフラグをfalseで初期化
+		Boolean isCommit = false;
+		
 		//データベース接続
 		try (Connection conn = DatabaseConnection.getConnection()) {
 			try {
@@ -129,7 +132,7 @@ public class InsertPurchaseToPurchases {
 				GeneralDao.executeUpdate(conn, INSERT_PURCHASE_SQL, insertPurchasParams);
 			
 				//購入詳細情報を購入の商品数の分だけ追加する
-				cartList.forEach(cb -> {
+				for(CartBean cb : cartBeanList) {
 					ArrayList<Object> insertPurchaseDetailparams = new ArrayList<Object>();
 					insertPurchaseDetailparams.add(purchaseBean.getUserId());
 					insertPurchaseDetailparams.add(purchaseBean.getUserId());
@@ -144,11 +147,11 @@ public class InsertPurchaseToPurchases {
 						//トランザクション処理によるロールバックをさせるための外側のcatch区にエラーを投げる
 						throw new RuntimeException();
 					}
-				});
+				}
 				
 				//商品の在庫数を購入された分だけ減らす
-				cartList.forEach(cb -> {
-					 ArrayList<Object> updateItemStockParams = new ArrayList<Object>();
+				for(CartBean cb : cartBeanList) {
+					ArrayList<Object> updateItemStockParams = new ArrayList<Object>();
 					 updateItemStockParams.add(cb.getQuantity());
 					 updateItemStockParams.add(cb.getItemId());
 					 
@@ -159,25 +162,28 @@ public class InsertPurchaseToPurchases {
 						//トランザクション処理によるロールバックをさせるための外側のcatch区にエラーを投げる
 						throw new RuntimeException();
 					}
-					 
-				});
+				}
 				
 				//カートからログインしているユーザーが購入した商品全て削除
-				GeneralDao.executeUpdate(conn, DELETE_ITEM_ALL_SQL, deleteCartItemAllparams);
+				GeneralDao.executeUpdate(conn, DELETE_CART_ITEM_ALL_SQL, deleteCartItemAllparams);
 				
 				//sqlをコミット
 				conn.commit();
+				isCommit = true;
 			} catch (SQLException | RuntimeException e) {
 				if (!conn.isClosed()) {
 					//一つでも処理が失敗したらロールバック
 					conn.rollback();
 				}
 				e.printStackTrace();
+				return false;
 			}
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
+			return false;
 		}
-
+		
+		return isCommit;
 	};
 
 }

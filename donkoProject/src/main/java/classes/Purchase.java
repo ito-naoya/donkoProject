@@ -34,8 +34,8 @@ public class Purchase {
 	};
 	
 	//商品を購入する
-	public static void purchaseItem(PurchaseBean purchaseBean){
-		InsertPurchaseToPurchases.insertPurchaseToPurchases(purchaseBean);
+	public static Boolean purchaseItem(PurchaseBean purchaseBean){
+		return InsertPurchaseToPurchases.insertPurchaseToPurchases(purchaseBean);
 	};
 	
 	//商品の発送処理をする

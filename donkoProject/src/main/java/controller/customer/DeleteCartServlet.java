@@ -29,7 +29,7 @@ public class DeleteCartServlet extends HttpServlet {
 		CustomerUser user = new CustomerUser();
 		user.setUserId(2);
 		
-		int itemId = Integer.parseInt(request.getParameter("itemId"));
+		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
 //		int userId = user.getUserId();
 		
 		//削除する商品の情報を保持するcartBeanをnew
@@ -40,7 +40,19 @@ public class DeleteCartServlet extends HttpServlet {
 		cb.setItemId(itemId);
 		
 		 //対象の商品をカートから削除
-		Cart.deleteItemFromCart(cb);
+		Boolean isCommit = Cart.deleteItemFromCart(cb);
+		
+		//カートから商品削除に失敗した時
+		if(!isCommit) {
+			//エラーメッセージ
+			request.setAttribute("errorMessage", "カート処理中に問題が発生しました。");
+			//エラーページからの遷移先
+			request.setAttribute("url", "cart");
+			//エラーページ表示
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		}
 		
 		//カート一覧ページにリダイレクト
 		response.sendRedirect("cart");
@@ -57,7 +69,19 @@ public class DeleteCartServlet extends HttpServlet {
 		user.setUserId(2);
 		
 		//カートから全ての商品を削除
-		Cart.deleteAllItemFromCart(user);
+		Boolean isCommit = Cart.deleteAllItemFromCart(user);
+		
+		//カートから商品削除に失敗した時
+		if(!isCommit) {
+			//エラーメッセージ
+			request.setAttribute("errorMessage", "カート処理中に問題が発生しました。");
+			//エラーページからの遷移先
+			request.setAttribute("url", "cart");
+			//エラーページ表示
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		}
 		
 		//カート一覧ページにリダイレクトする
 		response.sendRedirect("cart");

@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class DeleteItemAllFromCarts {
 
 	//カートから全ての商品を削除する
-	public static void deleteItemAllFromCarts(CustomerUser customerUser) {
+	public static Boolean deleteItemAllFromCarts(CustomerUser customerUser) {
 
 		//カートからログインしているユーザーが追加した商品を全て削除するSQL
 		StringBuilder sb = new StringBuilder();
@@ -27,6 +27,9 @@ public class DeleteItemAllFromCarts {
 		//対象のユーザーのuser_idをリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(customerUser.getUserId());
+		
+		//コミットフラグをfalseで初期化
+		Boolean isCommit = false;
 
 		//データベースに接続
 		try (Connection conn = DatabaseConnection.getConnection();) {
@@ -35,15 +38,21 @@ public class DeleteItemAllFromCarts {
 				GeneralDao.executeUpdate(conn, DELETE_ITEM_ALL_SQL, params);
 				//sqlをコミット
 				conn.commit();
+				isCommit = true;
 			} catch (SQLException e) {
 				if (!conn.isClosed()) {
 					//一つでも処理が失敗したらロールバック
 					conn.rollback();
 				}
 				e.printStackTrace();
+				return false;
 			}
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
+			return false;
 		}
+		
+		return isCommit;
+		
 	};
 }

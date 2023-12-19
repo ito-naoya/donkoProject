@@ -10,6 +10,7 @@
 		<title>
 			donko
 		</title>
+		<link rel="stylesheet" href="./css/cartStyle.css">
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -18,19 +19,12 @@
 	</head>
 	<body>
 		<main>
-			<a href="#" class="m-5 mb-4" style="text-decoration: none; display: inline-block">
+			<a href="cart" class="m-5 mb-4" style="text-decoration: none; display: inline-block">
 				<h6 class="py-2 px-5"style="color: #385a37; border: 1px solid #385a37; text-align: center; width: 200px;">
 					DONKO
 				</h6>
 			</a>
 			<br>
-			<a href="cart" class="mb-4" style="display: inline-block; margin-left: 52.5px;">
-				<div class="border text-center" style="width: 50px;">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-	  					<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-					</svg>
-				</div>
-			</a>
 			<div class="container">
 				<div class="row">
 					<div class="col-8">
@@ -74,7 +68,7 @@
 										<a href="itemDetail?itemId=<%= cb.getItemId() %>" class="me-3"
 										style="text-decoration: none; display: inline-block;">
 											<div style="height: 150px; width: 150px;">
-												<img class="object-fit-cover w-100 h-100"
+												<img class="object-fit-cover w-100 h-100 itemImage"
 													src="./images/<%= cb.getImageFileName() %>.jpg">
 											</div>
 										</a>
@@ -124,5 +118,6 @@
 				</div>
 			</div>
 		</main>
+		<script src="./js/cartScript.js"></script>
 	</body>
 </html>
