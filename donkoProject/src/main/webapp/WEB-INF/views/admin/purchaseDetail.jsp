@@ -35,6 +35,7 @@
 					Timestamp ts = purchaseInfo.getPurchaseDate();
 				    SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM / dd　HH:mm");
 				    String formattedTime = sdf.format(ts);
+				    int shippingId = purchaseInfo.getShippingId();
 					%>
 					<% 
 					if(purchaseInfo != null) { 

@@ -22,6 +22,11 @@ public class ShippingServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
 		int shippingId = Integer.parseInt(request.getParameter("shippingId"));
+		Integer purchase_id = Integer.valueOf(purchaseId);
+		Integer shipping_id = Integer.valueOf(shippingId);
+		if (purchase_id == null || shipping_id == null) {
+			
+		}
 	
 		PurchaseBean purchaseBean = new PurchaseBean();
 		purchaseBean.setPurchaseId(purchaseId);
