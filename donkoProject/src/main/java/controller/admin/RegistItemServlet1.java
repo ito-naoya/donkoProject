@@ -34,6 +34,7 @@ public class RegistItemServlet1 extends HttpServlet {
 		if(categoryList == null) {
 			//取得情報の不備があれば、エラー画面に遷移
 			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
+			request.setAttribute("url","adminTopPage");
 			String view = "/WEB-INF/views/component/message.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 			return;
@@ -71,6 +72,7 @@ public class RegistItemServlet1 extends HttpServlet {
 		if(itemCategoryListAll == null) {
 			//取得情報の不備があれば、エラー画面に遷移
 			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
+			request.setAttribute("url","adminTopPage");
 			String view = "/WEB-INF/views/component/message.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 			return;

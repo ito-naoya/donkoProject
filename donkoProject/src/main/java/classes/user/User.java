@@ -44,8 +44,8 @@ public class User {
 	};
 	
 	//ユーザーのパスワードを更新する
-	public static void updateUserPasseord(CustomerUser customerUser) {
-		UpdateUserPasswords.updateUserPasseords(customerUser);
+	public static void updateUserPassword(CustomerUser customerUser) {
+		UpdateUserPasswords.updateUserPasswords(customerUser);
 	};
 
 	//ログアウトする

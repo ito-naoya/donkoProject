@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class InsertNewItemToItems {
 
     // itemsテーブルに商品を新規登録する
-    public static void insertNewItemToItems(ItemBean itemBean, int selectBoxCount, String[] itemSecondOptionIncrementIds) {
+    public static boolean insertNewItemToItems(ItemBean itemBean, int selectBoxCount, String[] itemSecondOptionIncrementIds) {
         //itemsテーブルに商品を登録
         StringBuilder sb1 = new StringBuilder();
         sb1.append("INSERT INTO items "										);
@@ -20,7 +20,7 @@ public class InsertNewItemToItems {
         sb1.append("VALUES "												);
         sb1.append(		"(?, ?, ?, ?, ?, ?, 0)"								);
 
-        String sql1 = sb1.toString();
+        final String INSERT_NEWITEM_ITEM_SQL = sb1.toString();
 
         //新規に登録したitem_idを利用(itemテーブルをideでdesc)して、optionsテーブルにオプションの値を登録
         StringBuilder sb2 = new StringBuilder();
@@ -38,7 +38,7 @@ public class InsertNewItemToItems {
         sb2.append(		"LIMIT 1), "													);
         sb2.append(		"?, ?);"														);
 
-        String sql2 = sb2.toString();
+        final String INSERT_NEWITEM_OPTION_SQL = sb2.toString();
 
 
         //paramに値を格納
@@ -65,26 +65,26 @@ public class InsertNewItemToItems {
             try {
                 if (itemSecondOptionIncrementIds == null) {
                     // セレクトボックスの場合
-                    GeneralDao.executeUpdate(conn, sql1, params1);
-                    GeneralDao.executeUpdate(conn, sql2, params2);
+                    GeneralDao.executeUpdate(conn, INSERT_NEWITEM_ITEM_SQL, params1);
+                    GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, params2);
                     if (selectBoxCount == 2) {
-                        GeneralDao.executeUpdate(conn, sql2, params3);
+                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, params3);
                     }
                 } else {
                     // チェックボックスの場合
                     for (String optionId : itemSecondOptionIncrementIds) {
                         // itemsテーブルに商品を登録
-                        GeneralDao.executeUpdate(conn, sql1, params1);
+                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_ITEM_SQL, params1);
 
                         // optionsテーブルに色を登録
                         ArrayList<Object> paramsColor = new ArrayList<>(params2);
-                        GeneralDao.executeUpdate(conn, sql2, paramsColor);
+                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, paramsColor);
 
                         // optionsテーブルにサイズを登録
                         ArrayList<Object> paramsSize = new ArrayList<>();
                         paramsSize.add(itemBean.getItemSecondOptionName());
                         paramsSize.add(optionId);
-                        GeneralDao.executeUpdate(conn, sql2, paramsSize);
+                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, paramsSize);
                     }
                 }
 
@@ -92,9 +92,13 @@ public class InsertNewItemToItems {
             } catch (SQLException e) {
                 conn.rollback(); // ロールバック
                 e.printStackTrace();
+                return false;
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+            return false;
         }
+
+        return true;
     }
 }
