@@ -106,7 +106,7 @@ public class Item {
 	    if (part != null && !fileName.isEmpty()) {
 	        try {
 	            // フルパスを指定
-	            String filePath = "/path/to/your/directory/" + fileName + ".jpg";
+	            String filePath = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/" + fileName + ".jpg";
 	            // ファイルを保存
 	            part.write(filePath);
 	            return true;
