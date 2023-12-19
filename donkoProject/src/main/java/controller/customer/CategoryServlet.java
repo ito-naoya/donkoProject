@@ -44,14 +44,13 @@ public class CategoryServlet extends HttpServlet {
 		if (optionCategoryValueListAll == null || itemList == null) {
 			// 失敗したらmessage.jspに遷移
 			if(optionCategoryValueListAll == null) {
-				request.setAttribute("errorMessage", "オプション選択が取得できませんでした");
+				request.setAttribute("errorMessage", "オプション選択のデータが取得できませんでした");
 			} else {
-				request.setAttribute("errorMessage", "カテゴリー一覧が取得できませんでした");
+				request.setAttribute("errorMessage", "カテゴリ一覧のデータが取得できませんでした");
 			}
 			request.setAttribute("url", "home");
 			String view = "/WEB-INF/views/customer/message.jsp";
 	        request.getRequestDispatcher(view).forward(request, response);
-			return;
 		}
 		
 		request.setAttribute("categoryName", categoryName);

@@ -25,17 +25,19 @@ public class OptionServlet extends HttpServlet {
 		String[] checkedOptionList = request.getParameterValues("option");
 		String categoryName = request.getParameter("categoryName");
 		
+		
+		
 		ItemBean itemBean = new ItemBean();
 		itemBean.setItemCategoryName(categoryName);
 		
 		// オプション選択の項目を取得
 		ArrayList<ArrayList<OptionCategoryBean>> optionCategoryValueListAll = OptionCategory.getOptionCategoryListAllByCategory(itemBean);
 		
-		if (checkedOptionList != null && checkedOptionList.length > 0) {
+		if (checkedOptionList.length > 0) {
 			// オプション選択した一覧を取得
 			ArrayList<ItemBean> optionCategoryList = Item.getItemListByOption(checkedOptionList, categoryName);
 			request.setAttribute("itemList", optionCategoryList);
-			request.setAttribute("message", "検索キーワード : " + searchKeyword(categoryName, checkedOptionList));
+			request.setAttribute("message", "検索キーワード : " + searchKeyword(checkedOptionList, categoryName));
 		} else {
 			// カテゴリー一覧を取得
 			ArrayList<ItemBean> itemList = Item.getItemListByCategory(itemBean);
@@ -50,7 +52,7 @@ public class OptionServlet extends HttpServlet {
 	}
 	
 	// 検索したキーワードを文字連結して表示
-	private static String searchKeyword(String categoryName, String[] checkedOptionList) {
+	private static String searchKeyword(String[] checkedOptionList, String categoryName) {
 		String searchKeyword = "[ " + categoryName + " ], [ " + checkedOptionList[0] + " ]";
 	    for (int i = 1; i < checkedOptionList.length; i++) {
 	    	searchKeyword += ", " + "[ " + checkedOptionList[i] + " ]";

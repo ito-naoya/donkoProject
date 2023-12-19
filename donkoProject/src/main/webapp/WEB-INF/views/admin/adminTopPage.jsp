@@ -19,31 +19,23 @@
 </head>
 <body>
 	<main>
+		<div class="d-flex justify-content-between mx-5">
+			<h4 class="mt-5 mb-3">
+				<strong>未発送一覧　 (<%= unshippingedItemList.size() %>件)</strong>
+			</h4>
+			<div class="logout d-flex justify-content-end" >
+				<a href="logout" class="btn mt-auto mb-3 border px-5 py-2">ログアウト</a>
+			</div>
+		</div>
 		<%
 		ArrayList<PurchaseBean> unshippingedItemList = (ArrayList<PurchaseBean>) request.getAttribute("unshippingedItemList");
 		String message = (String) request.getAttribute("message");
 		%>
 		<% if (unshippingedItemList == null || unshippingedItemList.size() == 0) { %>
-			<div class="d-flex justify-content-between mx-5">
-				<h4 class="mt-5 mb-3">
-					<strong>未発送一覧</strong>
-				</h4>
-				<div class="logout d-flex justify-content-end" >
-					<a href="logout" class="btn mt-auto mb-3 border px-5 py-2">ログアウト</a>
-				</div>
-			</div>
-			<div class="border mx-5 p-5 d-flex justify-content-center align-items-center" style="margin-bottom:40px; border: 1px solid #000; overflow-x: scroll; overflow:scroll; height:400px;">
+			<div class="border mx-5 p-5 d-flex justify-content-center align-items-center" style="margin-bottom:40px; overflow-x: scroll; overflow:scroll; height:400px;">
 				<p class="mb-0" style="color: #385A37;"><%= message %></p>
 			</div>
 		<% } else { %>
-			<div class="d-flex justify-content-between mx-5">
-				<h4 class="mt-5 mb-3">
-					<strong>未発送一覧　 (<%= unshippingedItemList.size() %>件)</strong>
-				</h4>
-				<div class="logout d-flex justify-content-end" >
-					<a href="logout" class="btn mt-auto mb-3 border px-5 py-2">ログアウト</a>
-				</div>
-			</div>
 			<div style="margin-bottom:40px; border: 1px solid #000; overflow-x: scroll; overflow:scroll; height:400px;" class="border mx-5 px-3">
 				<table class="table table-borderless text-center my-5">
 					<thead>

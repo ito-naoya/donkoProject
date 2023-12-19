@@ -30,68 +30,78 @@
 					</h4>
 					<%
 					PurchaseBean purchaseInfo = (PurchaseBean) request.getAttribute("purchaseInfo");
+					ArrayList<PurchaseDetailBean> purchaseDetailList = (ArrayList<PurchaseDetailBean>) request.getAttribute("purchaseDetailList");
 					NumberFormat nf = NumberFormat.getNumberInstance();
 					Timestamp ts = purchaseInfo.getPurchaseDate();
 				    SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM / dd　HH:mm");
 				    String formattedTime = sdf.format(ts);
 					%>
-					<div class="m-3">
-						<small>合計金額</small>
-						<h4><strong>￥ <%= nf.format(purchaseInfo.getTotalAmount()) %></strong></h4>
-					</div>
-					<table class="table table-borderless ms-2">
-						<tbody>
-							<tr>
-								<td style="width: 120px;">購入ID　：　</td>
-								<th><%= purchaseInfo.getPurchaseId() %></th>
-							</tr>
-							<tr>
-								<td style="width: 120px;">購入者　：　</td>
-								<th><%= purchaseInfo.getUserName() %></th>
-							</tr>
-							<tr>
-								<td style="width: 120px;">購入日　：　</td>
-								<th><%= formattedTime %></th>
-							</tr>
-						</tbody>
-					</table>
-					<div class="border-top" style="height: 50px;"></div>
-					<%
-					ArrayList<PurchaseDetailBean> purchaseDetailList = (ArrayList<PurchaseDetailBean>) request.getAttribute("purchaseDetailList");
+					<% 
+					if(purchaseInfo != null) { 
 					%>
-					<table class="table table-borderless text-center">
-						<tbody>
-							<%
-							for (PurchaseDetailBean purchaseDetail : purchaseDetailList) {
-							%>
-							<tr>
-								<td class="td" style="width: 10%;"><%= purchaseDetail.getPurchaseDetailId() %></td>
-								<td class="td" style="width: 100px;">
-									<span class="card" style="width: 100px; height: 100px;">
-										<img src="./images/<%= purchaseDetail.getImageFileName() %>.jpg"
-											 class="card-img-top" alt="<%= purchaseDetail.getImageFileName() %>"
-											 style="object-fit: cover; height: 100%; display: block;">
-									</span>
-								</td>
-								<td class="td"><%= purchaseDetail.getItemName() %></td>
-								<td class="td">￥ <%= nf.format(purchaseDetail.getPurchaseAmount()) %></td>
-								<td class="td"><%= purchaseDetail.getQuantity() %> 個</td>
-							</tr>
-							<%
-							}
-							%>
-						</tbody>
-					</table>
-					<% int shippingId = purchaseInfo.getShippingId(); %>
-					<% if (shippingId != 2) { %>
-					<div class="d-flex justify-content-center mb-5">
-						<form action="shipping" method="post" onsubmit="return check()">
-							<input type="hidden" name="purchaseId" value="<%= purchaseInfo.getPurchaseId() %>">
-							<input type="hidden" name="shippingId" value="2">
-							<input type="submit" value="発送する" class="btn border" style="margin-top: 70px; background-color:#9933FF; color: white; padding: 12px 80px;">
-						</form>
-					</div>
-					<% } %>
+						<div class="m-3">
+							<small>合計金額</small>
+							<h4><strong>￥ <%= nf.format(purchaseInfo.getTotalAmount()) %></strong></h4>
+						</div>
+						<table class="table table-borderless ms-2">
+							<tbody>
+								<tr>
+									<td style="width: 120px;">購入ID　：　</td>
+									<th><%= purchaseInfo.getPurchaseId() %></th>
+								</tr>
+								<tr>
+									<td style="width: 120px;">購入者　：　</td>
+									<th><%= purchaseInfo.getUserName() %></th>
+								</tr>
+								<tr>
+									<td style="width: 120px;">購入日　：　</td>
+									<th><%= formattedTime %></th>
+								</tr>
+							</tbody>
+						</table>
+						<div class="border-top" style="height: 50px;"></div>
+						<table class="table table-borderless text-center">
+							<tbody>
+								<%
+								for (PurchaseDetailBean purchaseDetail : purchaseDetailList) {
+								%>
+								<tr>
+									<td class="td" style="width: 10%;"><%= purchaseDetail.getPurchaseDetailId() %></td>
+									<td class="td" style="width: 100px;">
+										<span class="card" style="width: 100px; height: 100px;">
+											<img src="./images/<%= purchaseDetail.getImageFileName() %>.jpg"
+												 class="card-img-top" alt="<%= purchaseDetail.getImageFileName() %>"
+												 style="object-fit: cover; height: 100%; display: block;">
+										</span>
+									</td>
+									<td class="td"><%= purchaseDetail.getItemName() %></td>
+									<td class="td">￥ <%= nf.format(purchaseDetail.getPurchaseAmount()) %></td>
+									<td class="td"><%= purchaseDetail.getQuantity() %> 個</td>
+								</tr>
+								<%
+								}
+								%>
+							</tbody>
+						</table>
+						<% 
+						
+						%>
+						<% 
+						if (shippingId != 2) { 
+						%>
+						<div class="d-flex justify-content-center mb-5">
+							<form action="shipping" method="post" onsubmit="return check()">
+								<input type="hidden" name="purchaseId" value="<%= purchaseInfo.getPurchaseId() %>">
+								<input type="hidden" name="shippingId" value="2">
+								<input type="submit" value="発送する" class="btn border" style="margin-top: 70px; background-color:#9933FF; color: white; padding: 12px 80px;">
+							</form>
+						</div>
+						<% 
+						} 
+						%>
+					<%
+					} 
+					%>
 				</div>
 			</div>
 		</div>
