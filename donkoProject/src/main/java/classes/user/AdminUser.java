@@ -47,8 +47,8 @@ public class AdminUser extends User {
 	}
 
 	//ユーザーを削除する
-	public static void updateUserInfoByAdmin(CustomerUser customerUser) {
-		UpdateUserInfoByAdmin.updateUserInfoByAdmin(customerUser);
+	public static Boolean updateUserInfoByAdmin(CustomerUser customerUser) {
+		return UpdateUserInfoByAdmin.updateUserInfoByAdmin(customerUser);
 	};
 
 	//削除したユーザー一覧を取得する
