@@ -22,7 +22,11 @@ public class AdminTopPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 未発送の購入情報を一覧表示
 		ArrayList<PurchaseBean> unshippingedItemList = Purchase.getUnshippingedItemListByDesc();
-		request.setAttribute("unshippingedItemList", unshippingedItemList);
+		if (unshippingedItemList.size() > 0) {
+			request.setAttribute("unshippingedItemList", unshippingedItemList);
+		} else {
+			request.setAttribute("message", "現在未発送の商品はありません");
+		}
 		// 遷移先
 		String view = "/WEB-INF/views/admin/adminTopPage.jsp";
         request.getRequestDispatcher(view).forward(request, response);
