@@ -10,7 +10,7 @@ import dao.GeneralDao;
 
 public class UpdateUserInfoByAdmin {
 	
-	//ユーザーを削除する(論理削除)
+	//ユーザー情報を編集する(アドミン権限)
 	public static Boolean updateUserInfoByAdmin(CustomerUser customerUser){
 		
 		// ユーザー情報を更新するSQL（アドミン権限）
@@ -51,11 +51,14 @@ public class UpdateUserInfoByAdmin {
 		// SQL実行
 		try (Connection conn = DatabaseConnection.getConnection()) {
 			try {
+				//ユーザー情報の更新
 				GeneralDao.executeUpdate(conn, UPDATE_USER_INFO_SQL, param);
+				//sqlをコミット
 				conn.commit();
 				isCommit = true;
 			} catch (SQLException e) {
 				if(!conn.isClosed()) {
+					//一つでも処理が失敗したらロールバック
 					conn.rollback();
 				}
 				e.printStackTrace();
