@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../css/style.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
 <title>donko</title>
 <style>
 .border::-webkit-scrollbar {
@@ -18,7 +18,7 @@
 	<%@include file="../component/headerTopSpace.jsp"%>
 <main class="container">
 <!--  メニューボタンの表示 -->
-		<div class="d-flex justify-content-between">
+		<div class="d-flex justify-content-between my-4">
 			<a href="userInfoEdit"
 				class="d-inline-block border mx-2 mb-4 p-3 text-center"
 				style="width: 30%; border: #385A37; background-color: white; color: #385A37; text-decoration:none;">個人情報の編集<a>
@@ -29,23 +29,21 @@
 							class="d-inline-block border mx-2 mb-4 p-3 text-center"
 							style="width: 30%; border: #385A37; background-color: white; color: #385A37; text-decoration:none;">配送先一覧<a>
 		</div>
-		<h2 style="margin-left: 40px; margin-top: 30px;">
+	<div class="logout d-flex justify-content-between">
+		<h2 style="margin-left: 40px; margin-bottom:0;">
 			<strong>購入履歴</strong>
 		</h2>
 		<!-- 中間発表時は発送ステータスのそうと機能は非表示 -->
-    <!--
-     <div class="logout d-flex justify-content-end">
 		  <button class="btn" id="hideShippedButton" name="status_sort" value="hidden"
         style="color: ＃000000; background-color: #E5CCFF; border-radius: 40px; margin-right: 40px;">発送済みを非表示</button>
     </div>
-    -->
 		<div
-			style="padding: 20px; margin: 40px 40px 40px; border: 1px solid #333333; overflow-x: scroll;"
+			style="padding: 20px; margin: 20px 40px 40px; border: 1px solid #333333; overflow-x: scroll;"
 			class="border">
 			<table class="table table-borderless">
 				<thead align="center">
 					<tr>
-						<th><strong style="white-space:nowrap;">注文番号</strong></th>
+						<th><strong style="white-space:nowrap;">注文ID</strong></th>
 						<th><strong>合計金額</strong></th>
 						<th><strong>購入日</strong></th>
 						<th><strong>配送先</strong></th>
@@ -71,7 +69,7 @@
 						<td align="middle" style="white-space:nowrap;">
           	<%=new SimpleDateFormat("yyyy/MM/dd hh:mm").format(purchaseBean.getPurchaseDate())%></td>
 						<!-- 配送先 -->
-						<td align="middle" style="white-space:nowrap;"><%=purchaseBean.getShippingAddress()%></td>
+						<td align="middle" style="white-space:nowrap;">〒 <%=purchaseBean.getPostalCode()%> <%=purchaseBean.getShippingAddress()%> <%=purchaseBean.getAddressee()%></td>
 						<!-- 配送ステータス -->
 						<td align="middle"><%=purchaseBean.getShippingStatus()%></td>
 					</tr>
