@@ -72,7 +72,7 @@ public class SelectItemImageListFromItems {
 
 		//データベース接続
 		try (Connection conn = DatabaseConnection.getConnection();) {
-			//同じ商品名の色違い画像の取得
+			//同じ商品の色違い画像の取得
 			try (ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEM_IMAGE_LIST_SQL, params);) {
 				
 				while (rs.next()) {

@@ -38,7 +38,6 @@ public class EditUserInfoServlet extends HttpServlet {
 		
 		//データベースから取得できなかった時
 		if(user == null) {
-			
 			//エラーメッセージ
 			request.setAttribute("errorMessage", "ユーザー情報の取得時に問題が発生しました。");
 			//エラーページからの遷移先
