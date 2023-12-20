@@ -30,7 +30,6 @@ public class DeleteCartServlet extends HttpServlet {
 		user.setUserId(2);
 		
 		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
-//		int userId = user.getUserId();
 		
 		//削除する商品の情報を保持するcartBeanをnew
 		CartBean cb = new CartBean();
