@@ -50,7 +50,14 @@ public class CartServlet extends HttpServlet {
 			request.getRequestDispatcher(view).forward(request, response);
 			return;
 		}
-			
+		
+		//カート内の商品の合計金額をtotalPriceに代入
+		Integer totalPrice= cartBeanList.stream()
+				.map(cb -> cb.getItemPrice() * cb.getQuantity())
+				.mapToInt( i -> i )
+				.sum();
+	
+		request.setAttribute("totalPrice", totalPrice);
 		request.setAttribute("cartBeanList", cartBeanList);
 
 		//カートページを表示する
