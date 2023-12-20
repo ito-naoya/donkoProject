@@ -64,7 +64,7 @@
 						    String formattedTime = sdf.format(ts);
 							%>
 							<tr>
-								<td class="td"><a href='purchaseDetail?purchaseId=<%= unshippingedItem.getPurchaseId() %>'><%= unshippingedItem.getPurchaseId() %></a></td>
+								<td class="td"><a href='purchaseDetail?purchaseId=<%= unshippingedItem.getPurchaseId() %>&source=adminTopPage'><%= unshippingedItem.getPurchaseId() %></a></td>
 								<td class="td"><%= formattedTime %></td>
 								<td class="td"><%= unshippingedItem.getUserId() %></td>
 								<td class="td"><%= unshippingedItem.getUserName() %></td>
