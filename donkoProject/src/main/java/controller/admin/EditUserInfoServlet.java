@@ -19,7 +19,6 @@ public class EditUserInfoServlet extends HttpServlet {
  
     public EditUserInfoServlet() {
         super();
-  
     }
 
     //ユーザーの詳細情報を取得
