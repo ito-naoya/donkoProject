@@ -88,8 +88,9 @@
 						
 						%>
 						<% 
-						if (shippingId != 2) { 
+						if (shippingId == 1) { 
 						%>
+						<%= shippingId %>
 						<div class="d-flex justify-content-center mb-5">
 							<form action="shipping" method="post" onsubmit="return check()">
 								<input type="hidden" name="purchaseId" value="<%= purchaseInfo.getPurchaseId() %>">

@@ -8,7 +8,7 @@ public class PurchaseBean {
 	private int userId;
 	private int shippingAddressId;
 	private String shippingAddress;
-	private int shippingId;;
+	private int shippingId;
 	private String shippingStatus;
 	private int totalAmount;
 	private Timestamp purchaseDate;
