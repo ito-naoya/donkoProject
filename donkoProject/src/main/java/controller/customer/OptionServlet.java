@@ -29,7 +29,7 @@ public class OptionServlet extends HttpServlet {
 		String encodedCategoryName = URLEncoder.encode(categoryName, "UTF-8");
 		
 		// 取得した値がnullの場合はリダイレクトする
-		if (checkedOptionList == null || !categoryName.isEmpty()) {
+		if (checkedOptionList == null && !categoryName.isEmpty()) {
 			response.sendRedirect("category?categoryName=" + encodedCategoryName);
 			return;
 		}
