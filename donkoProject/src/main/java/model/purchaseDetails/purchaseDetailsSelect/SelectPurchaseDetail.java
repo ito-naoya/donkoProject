@@ -17,22 +17,22 @@ public class SelectPurchaseDetail {
 		// SQLコマンド生成
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT "                                         );
-		sb.append(	  "purchase_details.purchase_id, "				);
-		sb.append(	  "purchase_details.purchase_detail_id, "		);
-		sb.append(	  "purchase_details.purchase_amount, "			);
-		sb.append(	  "purchase_details.quantity, "					);
-		sb.append(	  "items.item_name, "							);	
-		sb.append(	  "items.file_name "							);
+		sb.append(	  "pd.purchase_id, "							);
+		sb.append(	  "pd.purchase_detail_id, "						);
+		sb.append(	  "pd.purchase_amount, "						);
+		sb.append(	  "pd.quantity, "								);
+		sb.append(	  "i.item_name, "								);	
+		sb.append(	  "i.file_name "								);
 		sb.append("FROM "											);
 		sb.append(	  "( "											);
-		sb.append(	  "purchase_details "							);
+		sb.append(	  "purchase_details pd "						);
 		sb.append("INNER JOIN "										);
-		sb.append(	  "items "										);
+		sb.append(	  "items i "									);
 		sb.append("ON "											    );
-		sb.append(	  "purchase_details.item_id = items.item_id "   );
+		sb.append(	  "pd.item_id = i.item_id "  				    );
 		sb.append(	  ") "											);
 		sb.append("WHERE "											);
-		sb.append(	  "purchase_details.purchase_id = ?"			);
+		sb.append(	  "pd.purchase_id = ?"							);
 		String sql = sb.toString();
 		
 		// ？の引数に渡す値
