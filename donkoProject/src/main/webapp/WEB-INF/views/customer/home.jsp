@@ -21,7 +21,7 @@
 				<%
 				for (ItemBean item : itemList) {
 				%>
-				<a href="itemDetail?itemId=<%= item.getItemId() %>&home=home" style="color: #385a37; display: block; text-decoration:none;" class="mx-2">
+				<a href="itemDetail?itemId=<%= item.getItemId() %>&source=home" style="color: #385a37; display: block; text-decoration:none;" class="mx-2">
 					<span class="card mb-3" style="width: 300px; height: 300px;">
 						<img src="./images/<%= item.getImageFileName() %>.jpg"
 							class="card-img-top" alt="<%= item.getImageFileName() %>"
