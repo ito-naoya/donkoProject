@@ -5,7 +5,6 @@ import java.io.IOException;
 import bean.ItemBean;
 import classes.Item;
 import classes.Option;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -80,9 +79,7 @@ public class EditItemInfo2Servlet extends HttpServlet {
 		//画像をドキュメント内に保管
 		boolean renameImg = Item.renameNewImage(imgPart,fileName,oldItemFile);
 
-	String view = "deleteItemIndex";
-	RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-	dispatcher.forward(request, response);
+		response.sendRedirect("deleteItemIndex");
 	}
 
 }

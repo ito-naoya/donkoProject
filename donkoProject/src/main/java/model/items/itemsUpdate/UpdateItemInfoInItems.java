@@ -28,12 +28,13 @@ public class UpdateItemInfoInItems {
         sb2.append("UPDATE ");
         sb2.append(		"options ");
         sb2.append("SET ");
-        sb2.append(		"option_category_name =?, ");
         sb2.append(		"option_category_increment_id = ? ");
-        sb2.append("WHERE item_id = ?;");
+        sb2.append("WHERE ");
+        sb2.append(		"option_category_name =? ");
+        sb2.append("AND ");
+        sb2.append(		"item_id = ?;");
 
         String sql2 = sb2.toString();
-
 
         //paramに値を格納
         ArrayList<Object> params1 = new ArrayList<Object>();
@@ -47,27 +48,30 @@ public class UpdateItemInfoInItems {
 
         //セレクトボックスが1つの時
         ArrayList<Object> params2 = new ArrayList<Object>();
-        params2.add(itemBean.getItemFirstOptionName());
         params2.add(itemBean.getItemFirstOptionIncrementId());
+        params2.add(itemBean.getItemFirstOptionName());
         params2.add(itemBean.getItemId());
 
         //セレクトボックスが2つの時
         ArrayList<Object> params3 = new ArrayList<Object>();
         if(selectBoxCount == 2) {
+        	params3.add(itemBean.getItemSecondOptionIncrementId());
             params3.add(itemBean.getItemSecondOptionName());
-            params3.add(itemBean.getItemSecondOptionIncrementId());
             params3.add(itemBean.getItemId());
         }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
             try {
-            	//itemテーブルとoptionテーブルを更新
-            	GeneralDao.executeUpdate(conn, sql1, params1);
-            	GeneralDao.executeUpdate(conn, sql2, params2);
-            	//optionが2つある場合、optionテーブルを更新
-            	if(selectBoxCount == 2) {
-            		GeneralDao.executeUpdate(conn, sql2, params3);
+            	// itemsテーブルを更新
+                GeneralDao.executeUpdate(conn, sql1, params1);
+                GeneralDao.executeUpdate(conn, sql2, params2);
+
+
+                // optionが2つある場合の重複チェックと更新
+                if (selectBoxCount == 2) {
+                    GeneralDao.executeUpdate(conn, sql2, params3);
                 }
+
 
             	conn.commit();  //コミットする
             } catch (SQLException e) {
