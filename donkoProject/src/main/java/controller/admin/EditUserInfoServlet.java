@@ -64,16 +64,16 @@ public class EditUserInfoServlet extends HttpServlet {
 //			response.sendRedirect("userSignin");
 //		}
 		
-		String statusSelect = request.getParameter("status");
+		String status = request.getParameter("status");
 		
 		CustomerUser customerUser = new CustomerUser();
 		// PostされたデータをBeanにセット
-		customerUser.setUserId(Integer.parseInt(request.getParameter("userId")));
+		customerUser.setUserId(Integer.valueOf(request.getParameter("userId")));
 		customerUser.setUserLoginId(request.getParameter("user_login_id"));
 		customerUser.setUserName(request.getParameter("user_name"));
 		customerUser.setGender(request.getParameter("gender"));
 		customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
-		customerUser.setDeleted(statusSelect.equals("delete") ? true : false);
+		customerUser.setDeleted(status.equals("delete") ? true : false);
 		
 		// 更新処理実行
 		Boolean isCommit = AdminUser.updateUserInfoByAdmin(customerUser);

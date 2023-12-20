@@ -38,12 +38,12 @@ public class UpdateUserInfoByAdmin {
 		final String UPDATE_USER_INFO_SQL = sb.toString();
 		
 		//更新する値をすべてリストに追加
-		ArrayList<Object> param = new ArrayList<Object>();
-		param.add(customerUser.getUserLoginId());
-		param.add(customerUser.getUserName());
-		param.add(customerUser.getBirthday());
-		param.add(customerUser.getGender());
-		param.add(customerUser.getUserId());
+		ArrayList<Object> params = new ArrayList<Object>();
+		params.add(customerUser.getUserLoginId());
+		params.add(customerUser.getUserName());
+		params.add(customerUser.getBirthday());
+		params.add(customerUser.getGender());
+		params.add(customerUser.getUserId());
 		
 		//コミットフラグをfalseで初期化
 		Boolean isCommit = false;
@@ -52,7 +52,7 @@ public class UpdateUserInfoByAdmin {
 		try (Connection conn = DatabaseConnection.getConnection()) {
 			try {
 				//ユーザー情報の更新
-				GeneralDao.executeUpdate(conn, UPDATE_USER_INFO_SQL, param);
+				GeneralDao.executeUpdate(conn, UPDATE_USER_INFO_SQL, params);
 				//sqlをコミット
 				conn.commit();
 				isCommit = true;
