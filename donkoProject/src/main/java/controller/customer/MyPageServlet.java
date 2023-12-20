@@ -43,8 +43,6 @@ public class MyPageServlet extends HttpServlet {
 			customerUser.setUserId((int)session.getAttribute("user_id"));
 		} 
 		
-		// コミットがされているかの確認
-		if (!response.isCommitted()) {
 			// 購入履歴の一覧を取得する
 			ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
 			request.setAttribute("purchaseList", purchaseList);
@@ -52,6 +50,5 @@ public class MyPageServlet extends HttpServlet {
 			// マイページに画面遷移
 			String view = "/WEB-INF/views/customer/myPage.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
-		}
 	}
 }

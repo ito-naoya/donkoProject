@@ -22,6 +22,8 @@ public class SelectMyPurchaseHistory {
 			sb.append(	"purchases.total_amount, "													);
 			sb.append(	"purchases.purchase_date, "													);
 			sb.append(	"shipping_addresses.address, "												);
+			sb.append(	"shipping_addresses.postal_code, "											);
+			sb.append(	"shipping_addresses.addressee, "											);
 			sb.append(	"shippings.shipping_status "												);
 			sb.append("FROM "																		);
 			sb.append(	"( "																		);
@@ -54,11 +56,12 @@ public class SelectMyPurchaseHistory {
 					
 					while (results.next()) {
 						purchaseBean = new PurchaseBean();
-						
 						purchaseBean.setPurchaseId(results.getInt("purchase_id"));
 						purchaseBean.setTotalAmount(results.getInt("total_amount"));
 						purchaseBean.setPurchaseDate(results.getTimestamp("purchase_date"));
 						purchaseBean.setShippingAddress(results.getString("address"));
+						purchaseBean.setPostalCode(results.getString("postal_code"));
+						purchaseBean.setAddressee(results.getString("addressee"));
 						purchaseBean.setShippingStatus(results.getString("shipping_status"));
 						purchaseList.add(purchaseBean);
 						}

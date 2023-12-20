@@ -43,11 +43,11 @@ public class DeleteItemIndexServlet extends HttpServlet {
 		request.setAttribute("categoryName", "全ての商品");
 
 		//初期設定の商品一覧値をセット（item_delete_flgの有無に関係なく表示させる）
-		request.setAttribute("itemDelFlg", 2);
+		request.setAttribute("itemDelFlg", 1);
 
 		request.setAttribute("categoryList", categoryList);
 		//初期表示として、「すべてのカテゴリの商品を、削除済みのものも含めて全て表示する」(戻り値がnullでもjspに渡す)
-		ArrayList<ItemBean> itemList = Item.getItemAndOptionListAll("");
+		ArrayList<ItemBean> itemList = Item.getItemAndOptionListByDelFlg(1, "全ての商品");
 		if(itemList == null) {
 			//取得情報の不備があれば、エラー画面に遷移
 			request.setAttribute("errorMessage", "商品一覧の取得に失敗しました");
