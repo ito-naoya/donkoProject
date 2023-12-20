@@ -132,14 +132,14 @@ public class InsertPurchaseToPurchases {
 				GeneralDao.executeUpdate(conn, INSERT_PURCHASE_SQL, insertPurchasParams);
 			
 				//購入詳細情報を購入の商品数の分だけ追加する
-				for(CartBean cb : cartBeanList) {
+				cartBeanList.forEach(cb -> {
 					ArrayList<Object> insertPurchaseDetailparams = new ArrayList<Object>();
 					insertPurchaseDetailparams.add(purchaseBean.getUserId());
 					insertPurchaseDetailparams.add(purchaseBean.getUserId());
 					insertPurchaseDetailparams.add(cb.getItemId());
 					insertPurchaseDetailparams.add(cb.getItemPrice() * cb.getQuantity());
 					insertPurchaseDetailparams.add(cb.getQuantity());
-						
+					
 					try {
 						//購入詳細を全て追加する
 						GeneralDao.executeUpdate(conn, INSERT_PURCHASE_DETAIL_SQL, insertPurchaseDetailparams);
@@ -147,10 +147,11 @@ public class InsertPurchaseToPurchases {
 						//トランザクション処理によるロールバックをさせるための外側のcatch区にエラーを投げる
 						throw new RuntimeException();
 					}
-				}
+					
+				});
 				
 				//商品の在庫数を購入された分だけ減らす
-				for(CartBean cb : cartBeanList) {
+				cartBeanList.forEach(cb -> {
 					ArrayList<Object> updateItemStockParams = new ArrayList<Object>();
 					 updateItemStockParams.add(cb.getQuantity());
 					 updateItemStockParams.add(cb.getItemId());
@@ -162,7 +163,8 @@ public class InsertPurchaseToPurchases {
 						//トランザクション処理によるロールバックをさせるための外側のcatch区にエラーを投げる
 						throw new RuntimeException();
 					}
-				}
+					
+				});
 				
 				//カートからログインしているユーザーが購入した商品全て削除
 				GeneralDao.executeUpdate(conn, DELETE_CART_ITEM_ALL_SQL, deleteCartItemAllparams);
