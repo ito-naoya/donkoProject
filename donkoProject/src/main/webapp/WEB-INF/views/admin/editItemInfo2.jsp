@@ -70,7 +70,7 @@
 							    <input type="hidden" name="itemDescription" value="<%= item.getItemDescription() %>">
 							    <input type="hidden" name="itemPrice" value="<%= item.getItemPrice() %>">
 							    <input type="hidden" name="itemStock" value="<%= item.getItemStock() %>">
-							    <input type="text" name="itemImgFileName" value="<%= item.getImageFileName() %>">
+							    <input type="hidden" name="itemImgFileName" value="<%= item.getImageFileName() %>">
 							    <br>
 
 								<label for="default-text" class="form-label">現在登録済みの写真</label>
