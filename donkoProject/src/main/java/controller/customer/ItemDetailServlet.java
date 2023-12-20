@@ -26,6 +26,8 @@ public class ItemDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
+		String source = request.getParameter("source");
+		String categoryName = request.getParameter("categoryName");
 		
 		//商品IDを保持するitemBeanをnew
 		ItemBean ib = new ItemBean();
@@ -51,6 +53,13 @@ public class ItemDetailServlet extends HttpServlet {
 			return;
 		} 
 		
+		//カテゴリ別商品一覧ページからの遷移
+		if(source != null && categoryName != null) {
+			request.setAttribute("url", source + "?categoryName=" + categoryName);
+		//トップページの商品一覧からの遷移
+		}else if(source != null && categoryName == null) {
+			request.setAttribute("url", source);
+		}
 		request.setAttribute("item", item);
 		request.setAttribute("itemImageList", itemImageList);
 		request.setAttribute("itemOptionList", itemOptionList);
