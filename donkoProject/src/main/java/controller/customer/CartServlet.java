@@ -41,7 +41,6 @@ public class CartServlet extends HttpServlet {
 		
 		//データベースから取得できなかった時
 		if(cartBeanList == null) {
-			
 			//エラーメッセージ
 			request.setAttribute("errorMessage", "カート情報の取得時に問題が発生しました。");
 			//エラーページからの遷移先
@@ -54,7 +53,7 @@ public class CartServlet extends HttpServlet {
 			
 		request.setAttribute("cartBeanList", cartBeanList);
 
-		//カート一覧ページを表示する
+		//カートページを表示する
 		String view = "/WEB-INF/views/customer/cart.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 		
@@ -99,7 +98,7 @@ public class CartServlet extends HttpServlet {
 			return;
 		}
 		
-		//doGetメソッドを実行(カート一覧ページを表示)
+		//doGetメソッドを実行(カートページを表示)
 		doGet(request, response);
 	}
 

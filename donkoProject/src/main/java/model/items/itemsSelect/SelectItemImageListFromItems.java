@@ -17,48 +17,48 @@ public class SelectItemImageListFromItems {
 		//詳細表示している商品の色違い画像を取得するSQL
 		StringBuilder sb = new StringBuilder();	
 		sb.append("SELECT ");
-		sb.append(		"items.item_id, ");
-		sb.append(		"items.file_name ");
+		sb.append(	"items.item_id, ");
+		sb.append(	"items.file_name ");
 		sb.append("FROM ");
-		sb.append(		"items ");
+		sb.append(	"items ");
 		sb.append("INNER JOIN ");
-		sb.append(		"item_categories ");
+		sb.append(	"item_categories ");
 		sb.append("ON ");
-		sb.append(		"items.item_category_name = item_categories.item_category_name ");
+		sb.append(	"items.item_category_name = item_categories.item_category_name ");
 		sb.append("INNER JOIN ");
-		sb.append(		"`options` ");
+		sb.append(	"`options` ");
 		sb.append("ON ");
-		sb.append(		"items.item_id = options.item_id ");
+		sb.append(	"items.item_id = options.item_id ");
 		sb.append("AND ");
-		sb.append(		"item_categories.option_category_name = options.option_category_name ");
+		sb.append(	"item_categories.option_category_name = options.option_category_name ");
 		sb.append("AND ");
-		sb.append(		"options.option_category_name != '色' ");
+		sb.append(	"options.option_category_name != '色' ");
 		sb.append("WHERE ");
-		sb.append(		"item_name = ");
-		sb.append(					"(");
-		sb.append(						"SELECT ");
-		sb.append(							"item_name ");		  	                                                       
-		sb.append(						"FROM ");		  	                                                             
-		sb.append(							"items ");		 	                                                            
-		sb.append(						"WHERE ");		 	                                                            
+		sb.append(	"item_name = ");
+		sb.append(				"(");
+		sb.append(					"SELECT ");
+		sb.append(						"item_name ");		  	                                                       
+		sb.append(					"FROM ");		  	                                                             
+		sb.append(						"items ");		 	                                                            
+		sb.append(					"WHERE ");		 	                                                            
 		//パラメータをここで使う（1/2回目)
-		sb.append(							"item_id = ?");		  	                                                     
-		sb.append(					") ");		  	                                                     
+		sb.append(						"item_id = ?");		  	                                                     
+		sb.append(				") ");		  	                                                     
 		sb.append("AND ");
-		sb.append(		"option_category_increment_id = ");                                                                   
-		sb.append(										"(");                                                                   
-		sb.append(											"SELECT ");                                                                   
-		sb.append(												"option_category_increment_id ");                                                      
-		sb.append(											"FROM ");
-		sb.append(												"options ");
-		sb.append(											"WHERE ");
+		sb.append(	"option_category_increment_id = ");                                                                   
+		sb.append(									"(");                                                                   
+		sb.append(										"SELECT ");                                                                   
+		sb.append(											"option_category_increment_id ");                                                      
+		sb.append(										"FROM ");
+		sb.append(											"options ");
+		sb.append(										"WHERE ");
 		//パラメータをここで使う（2/2回目)
-		sb.append(												"item_id = ? ");
-		sb.append(											"AND ");
-		sb.append(												"option_category_name != '色'"	);
-		sb.append(										") ");
+		sb.append(											"item_id = ? ");
+		sb.append(										"AND ");
+		sb.append(											"option_category_name != '色'"	);
+		sb.append(									") ");
 		sb.append("AND ");
-		sb.append(		"items.item_delete_flg != 1 ");                                                                  
+		sb.append(	"items.item_delete_flg != 1 ");                                                                  
 		//SQL文を文字列に変換
 		final String SELECT_ITEM_IMAGE_LIST_SQL = sb.toString();
 		
@@ -72,7 +72,7 @@ public class SelectItemImageListFromItems {
 
 		//データベース接続
 		try (Connection conn = DatabaseConnection.getConnection();) {
-			//同じ商品名の色違い画像の取得
+			//同じ商品の色違い画像の取得
 			try (ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEM_IMAGE_LIST_SQL, params);) {
 				
 				while (rs.next()) {

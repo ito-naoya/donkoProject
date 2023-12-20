@@ -18,34 +18,34 @@ public class SelectItemListFromCarts {
 		//カートから対象のユーザーが登録した商品の一覧を取得
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT ");
-		sb.append(		"items.item_id, ");
-		sb.append(		"items.item_name, ");
-		sb.append(		"items.file_name, ");
-		sb.append(		"items.price, ");
-		sb.append(		"items.stock, ");
-		sb.append(		"carts.quantity, ");
-		sb.append(		"group_concat(option_categories.option_category_value separator ',') ");
+		sb.append(	"items.item_id, ");
+		sb.append(	"items.item_name, ");
+		sb.append(	"items.file_name, ");
+		sb.append(	"items.price, ");
+		sb.append(	"items.stock, ");
+		sb.append(	"carts.quantity, ");
+		sb.append(	"group_concat(option_categories.option_category_value separator ',') ");
 		sb.append("FROM ");
-		sb.append(		"carts ");
+		sb.append(	"carts ");
 		sb.append("INNER JOIN ");
-		sb.append(		"items ");
+		sb.append(	"items ");
 		sb.append("ON ");
-		sb.append(		"items.item_id = carts.item_id ");
+		sb.append(	"items.item_id = carts.item_id ");
 		sb.append("INNER JOIN ");
-		sb.append(		"`options` ");
+		sb.append(	"`options` ");
 		sb.append("ON ");
-		sb.append(		"carts.item_id = `options`.item_id ");
+		sb.append(	"carts.item_id = `options`.item_id ");
 		sb.append("INNER JOIN ");
-		sb.append(		"option_categories ");
+		sb.append(	"option_categories ");
 		sb.append("ON ");
-		sb.append(		"`options`.option_category_name = option_categories.option_category_name ");
+		sb.append(	"`options`.option_category_name = option_categories.option_category_name ");
 		sb.append("AND ");
-		sb.append(		"`options`.option_category_increment_id = option_categories.option_category_increment_id ");
+		sb.append(	"`options`.option_category_increment_id = option_categories.option_category_increment_id ");
 		sb.append("WHERE ");
 		//ここでパラメータを使う
-		sb.append(		"carts.user_id = ? ");
+		sb.append(	"carts.user_id = ? ");
 		sb.append("GROUP BY ");
-		sb.append(		"items.item_id");
+		sb.append(	"items.item_id");
 		//sqlを文字列化
 		final String SELECT_CARTLIST_SQL = sb.toString();
 

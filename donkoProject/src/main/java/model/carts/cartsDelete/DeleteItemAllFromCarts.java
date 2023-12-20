@@ -17,10 +17,10 @@ public class DeleteItemAllFromCarts {
 		StringBuilder sb = new StringBuilder();
 		sb.append("DELETE ");
 		sb.append("FROM ");
-		sb.append(		"carts ");
+		sb.append(	"carts ");
 		sb.append("WHERE ");
 		//パラメータをここで使う
-		sb.append(		"user_id = ? ");
+		sb.append(	"user_id = ? ");
 		//sqlを文字列化
 		final String DELETE_ITEM_ALL_SQL = sb.toString();
 
