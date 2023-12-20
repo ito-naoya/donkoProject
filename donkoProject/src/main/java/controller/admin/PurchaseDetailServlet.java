@@ -14,10 +14,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/purchaseDetail")
-public class PurchaseDetaiServlet extends HttpServlet {
+public class PurchaseDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public PurchaseDetaiServlet() {
+	public PurchaseDetailServlet() {
 		super();
 	}
 

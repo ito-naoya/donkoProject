@@ -20,7 +20,7 @@ public class SelectPurchaseInfo {
 		sb.append(    "u.user_name, "            );
 		sb.append(    "p.purchase_date, "        );
 		sb.append(    "p.total_amount, "         );
-		sb.append(    "p.shipping_id "         );
+		sb.append(    "p.shipping_id "           );
 		sb.append("FROM "                        );
 		sb.append(    "purchases p "             );
 		sb.append("INNER JOIN "                  );
@@ -46,10 +46,12 @@ public class SelectPurchaseInfo {
 					String userName = result.getString("user_name");
 					Timestamp purchaseDate = result.getTimestamp("purchase_date");
 					int totalAmount = result.getInt("total_amount");
+					int shippingId = result.getInt("shipping_id");
 					purchaseInfo.setPurchaseId(purchaseId);
 					purchaseInfo.setUserName(userName);
 					purchaseInfo.setPurchaseDate(purchaseDate);
 					purchaseInfo.setTotalAmount(totalAmount);
+					purchaseInfo.setShippingId(shippingId);
 				}
 				
 			} catch (Exception e) {

@@ -61,7 +61,7 @@
 				for (ItemBean item : itemList) { 
 				%>
 				<div>
-					<a href="itemDetail?itemId=<%= item.getItemId() %>" style="color: #385a37; display: block; text-decoration:none;">
+					<a href="itemDetail?itemId=<%= item.getItemId() %>&source=category&categoryName=<%= (String)request.getAttribute("categoryName") %>" style="color: #385a37; display: block; text-decoration:none;">
 						<span class="card mx-2" style="width: 200px; height: 200px;">
 						<img src="./images/<%= item.getImageFileName() %>.jpg"
 							class="card-img-top" alt="<%= item.getImageFileName() %>"
