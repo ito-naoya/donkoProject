@@ -17,31 +17,31 @@ public class SelectItemDetailFromItems {
 		//商品の詳細情報を取得するSQL
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT ");
-		sb.append(		"items.item_id, ");
-		sb.append(		"items.item_name, ");
-		sb.append(		"items.item_category_name, ");
-		sb.append(		"items.item_description, ");
-		sb.append(		"items.price, ");
-		sb.append(		"items.stock, ");
-		sb.append(		"items.file_name, ");
-		sb.append(		"group_concat(option_categories.option_category_value separator ',')");
+		sb.append(	"items.item_id, ");
+		sb.append(	"items.item_name, ");
+		sb.append(	"items.item_category_name, ");
+		sb.append(	"items.item_description, ");
+		sb.append(	"items.price, ");
+		sb.append(	"items.stock, ");
+		sb.append(	"items.file_name, ");
+		sb.append(	"group_concat(option_categories.option_category_value separator ',')");
 		sb.append("FROM ");
-		sb.append(		"items ");
+		sb.append(	"items ");
 		sb.append("INNER JOIN ");
-		sb.append(		"`options` ");
+		sb.append(	"`options` ");
 		sb.append("ON ");
-		sb.append(		"items.item_id = `options`.item_id ");
+		sb.append(	"items.item_id = `options`.item_id ");
 		sb.append("INNER JOIN ");
-		sb.append(		"option_categories ");
+		sb.append(	"option_categories ");
 		sb.append("ON ");
-		sb.append(		"`options`.option_category_name = option_categories.option_category_name ");
+		sb.append(	"`options`.option_category_name = option_categories.option_category_name ");
 		sb.append("AND ");
-		sb.append(		"`options`.option_category_increment_id = option_categories.option_category_increment_id ");
+		sb.append(	"`options`.option_category_increment_id = option_categories.option_category_increment_id ");
 		sb.append("WHERE ");
 		//パラメータをここで使う
-		sb.append(		"items.item_id = ? ");
+		sb.append(	"items.item_id = ? ");
 		sb.append("GROUP BY ");
-		sb.append(		"items.item_id");
+		sb.append(	"items.item_id");
 		//sbを文字列化
 		final String SELECT_ITEM_DETAIL_SQL = sb.toString();
 

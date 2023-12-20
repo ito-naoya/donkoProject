@@ -54,7 +54,7 @@ public class DeleteCartServlet extends HttpServlet {
 			return;
 		}
 		
-		//カート一覧ページにリダイレクト
+		//カートページにリダイレクト
 		response.sendRedirect("cart");
 	}
 
@@ -83,7 +83,7 @@ public class DeleteCartServlet extends HttpServlet {
 			return;
 		}
 		
-		//カート一覧ページにリダイレクトする
+		//カートページにリダイレクトする
 		response.sendRedirect("cart");
 		
 	}

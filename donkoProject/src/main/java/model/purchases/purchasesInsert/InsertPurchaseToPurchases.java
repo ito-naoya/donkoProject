@@ -19,15 +19,15 @@ public class InsertPurchaseToPurchases {
 		//購入情報を追加するSQL
 		StringBuilder insertPurchaseSb = new StringBuilder();
 		insertPurchaseSb.append("INSERT INTO ");
-		insertPurchaseSb.append(		"purchases");
-		insertPurchaseSb.append("(");
-		insertPurchaseSb.append(		"user_id, ");
-		insertPurchaseSb.append(		"total_amount, ");
-		insertPurchaseSb.append(		"shipping_address_id, ");
-		insertPurchaseSb.append(		"shipping_id");
-		insertPurchaseSb.append(")");
+		insertPurchaseSb.append(	"purchases");
+		insertPurchaseSb.append(			"(");
+		insertPurchaseSb.append(				"user_id, ");
+		insertPurchaseSb.append(				"total_amount, ");
+		insertPurchaseSb.append(				"shipping_address_id, ");
+		insertPurchaseSb.append(				"shipping_id");
+		insertPurchaseSb.append(			")");
 		insertPurchaseSb.append("VALUES ");
-		insertPurchaseSb.append("(");
+		insertPurchaseSb.append(	"(");
 		//パラメータをここで使う(1/3)
 		insertPurchaseSb.append(		"?, ");
 		//パラメータをここで使う(2/3)
@@ -35,7 +35,7 @@ public class InsertPurchaseToPurchases {
 		//パラメータをここで使う(3/3)
 		insertPurchaseSb.append(		"?, ");
 		insertPurchaseSb.append(		"1");
-		insertPurchaseSb.append(")");
+		insertPurchaseSb.append(	")");
 		//sqlを文字列化
 		final String INSERT_PURCHASE_SQL = insertPurchaseSb.toString();
 		
@@ -48,43 +48,44 @@ public class InsertPurchaseToPurchases {
 		//購入詳細情報を追加するSQL
 		StringBuilder insertPurchaseDetailSb = new StringBuilder();
 		insertPurchaseDetailSb.append("INSERT INTO ");
-		insertPurchaseDetailSb.append(		"purchase_details ");
-		insertPurchaseDetailSb.append("(");
-		insertPurchaseDetailSb.append(		"purchase_id, ");
-		insertPurchaseDetailSb.append(		"item_id, ");
-		insertPurchaseDetailSb.append(		"purchase_amount, ");
-		insertPurchaseDetailSb.append(		"quantity");
-		insertPurchaseDetailSb.append(")");
+		insertPurchaseDetailSb.append(	"purchase_details ");
+		insertPurchaseDetailSb.append(					"(");
+		insertPurchaseDetailSb.append(						"purchase_id, ");
+		insertPurchaseDetailSb.append(						"item_id, ");
+		insertPurchaseDetailSb.append(						"purchase_amount, ");
+		insertPurchaseDetailSb.append(						"quantity");
+		insertPurchaseDetailSb.append(					")");
 		insertPurchaseDetailSb.append("VALUES ");
-		insertPurchaseDetailSb.append("(");
 		insertPurchaseDetailSb.append(	"(");
-		insertPurchaseDetailSb.append(		"SELECT ");
-		insertPurchaseDetailSb.append(			"purchase_id ");
-		insertPurchaseDetailSb.append(		"FROM ");
-		insertPurchaseDetailSb.append( 			"purchases ");
-		insertPurchaseDetailSb.append( 		"WHERE ");
+		insertPurchaseDetailSb.append(		"(");
+		insertPurchaseDetailSb.append(			"SELECT ");
+		insertPurchaseDetailSb.append(				"purchase_id ");
+		insertPurchaseDetailSb.append(			"FROM ");
+		insertPurchaseDetailSb.append( 				"purchases ");
+		insertPurchaseDetailSb.append( 			"WHERE ");
 		//パラメータをここで使う(1/5)
-		insertPurchaseDetailSb.append( 			"user_id = ? ");
-		insertPurchaseDetailSb.append( 		"AND ");
-		insertPurchaseDetailSb.append(			"purchase_date = (");
-		insertPurchaseDetailSb.append(								"SELECT	");
-		insertPurchaseDetailSb.append(									"MAX(purchase_date)	");
-		insertPurchaseDetailSb.append(								"FROM ");
-		insertPurchaseDetailSb.append(									"purchases	");
-		insertPurchaseDetailSb.append(								"WHERE ");
+		insertPurchaseDetailSb.append( 				"user_id = ? ");
+		insertPurchaseDetailSb.append( 			"AND ");
+		insertPurchaseDetailSb.append(				"purchase_date = ");
+		insertPurchaseDetailSb.append(								"(");
+		insertPurchaseDetailSb.append(									"SELECT	");
+		insertPurchaseDetailSb.append(										"MAX(purchase_date)	");
+		insertPurchaseDetailSb.append(									"FROM ");
+		insertPurchaseDetailSb.append(										"purchases	");
+		insertPurchaseDetailSb.append(									"WHERE ");
 		//パラメータをここで使う(2/5)
-		insertPurchaseDetailSb.append(								"user_id = ? ");
-		insertPurchaseDetailSb.append(								"GROUP BY ");
-		insertPurchaseDetailSb.append(								"user_id ");
-		insertPurchaseDetailSb.append(							")");
-		insertPurchaseDetailSb.append(	"), ");
+		insertPurchaseDetailSb.append(										"user_id = ? ");
+		insertPurchaseDetailSb.append(									"GROUP BY ");
+		insertPurchaseDetailSb.append(										"user_id ");
+		insertPurchaseDetailSb.append(								")");
+		insertPurchaseDetailSb.append(		"), ");
 		//パラメータをここで使う(3/5)
-		insertPurchaseDetailSb.append(	"?, ");
+		insertPurchaseDetailSb.append(		"?, ");
 		//パラメータをここで使う(4/5)
-		insertPurchaseDetailSb.append(	"?, ");
+		insertPurchaseDetailSb.append(		"?, ");
 		//パラメータをここで使う(5/5)
-		insertPurchaseDetailSb.append(	"?");
-		insertPurchaseDetailSb.append(")");
+		insertPurchaseDetailSb.append(		"?");
+		insertPurchaseDetailSb.append(	")");
 		//sqlを文字列化
 		final String INSERT_PURCHASE_DETAIL_SQL = insertPurchaseDetailSb.toString();
 		

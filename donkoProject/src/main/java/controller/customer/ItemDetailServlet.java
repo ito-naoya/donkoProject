@@ -41,7 +41,6 @@ public class ItemDetailServlet extends HttpServlet {
 		
 		//データベースから取得できなかった時
 		if(item == null || itemImageList == null || itemOptionList == null) {
-			
 			//エラーメッセージ
 			request.setAttribute("errorMessage", "商品情報の取得時に問題が発生しました。");
 			//エラーページからの遷移先

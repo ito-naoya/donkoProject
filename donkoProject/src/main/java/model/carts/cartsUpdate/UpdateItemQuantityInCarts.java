@@ -16,16 +16,16 @@ public class UpdateItemQuantityInCarts {
 		//カート内の対象の商品の数量を更新するSQL
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE ");
-		sb.append(		"carts ");
+		sb.append(	"carts ");
 		sb.append("SET ");
 		//パラメータをここで使う(1/3)
-		sb.append(		"quantity = ? ");
+		sb.append(	"quantity = ? ");
 		sb.append("WHERE ");
 		//パラメータをここで使う(2/3)
-		sb.append(		"user_id = ? ");
+		sb.append(	"user_id = ? ");
 		sb.append("AND ");
 		//パラメータをここで使う(3/3)
-		sb.append(		"item_id = ? ");
+		sb.append(	"item_id = ? ");
 		final String UPDATE_QUANTITY_SQL = sb.toString();
 
 		//数量更新したい商品IDとログインしているユーザーのID、更新したい数量をリストに追加
@@ -47,6 +47,7 @@ public class UpdateItemQuantityInCarts {
 				isCommit = true;
 			} catch (SQLException e) {
 				if (!conn.isClosed()) {
+					//一つでも処理が失敗したらロールバック
 					conn.rollback();
 				}
 				e.printStackTrace();

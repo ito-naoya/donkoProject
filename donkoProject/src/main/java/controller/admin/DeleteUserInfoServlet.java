@@ -28,7 +28,6 @@ public class DeleteUserInfoServlet extends HttpServlet {
 		
 		//データベースから取得できなかった時
 		if(userList == null) {
-			
 			//エラーメッセージ
 			request.setAttribute("errorMessage", "ユーザー情報の取得時に問題が発生しました。");
 			//エラーページからの遷移先
@@ -62,12 +61,10 @@ public class DeleteUserInfoServlet extends HttpServlet {
 			
 			//データベースから取得できなかった時
 			if(userList == null) {
-				
 				//エラーメッセージ
 				request.setAttribute("errorMessage", "ユーザー情報の取得時に問題が発生しました。");
 				//エラーページからの遷移先
 				request.setAttribute("url", "adminTopPage");
-				
 				//エラーページ表示
 				String view = "/WEB-INF/views/component/message.jsp";
 				request.getRequestDispatcher(view).forward(request, response);

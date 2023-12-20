@@ -17,13 +17,13 @@ public class DeleteItemFromCarts {
 		StringBuilder sb = new StringBuilder();
 		sb.append("DELETE ");
 		sb.append("FROM ");
-		sb.append(		"carts ");
+		sb.append(	"carts ");
 		sb.append("WHERE ");
 		//ここでパラメータを使う(1/2)
-		sb.append(		"user_id = ? ");
+		sb.append(	"user_id = ? ");
 		sb.append("AND ");
 		//ここでパラメータを使う(2/2)
-		sb.append(		"item_id = ? ");
+		sb.append(	"item_id = ? ");
 		final String DELETE_ITEM_ALL_SQL = sb.toString();
 
 		//削除したい商品のIDと登録したユーザーのIDをリストに追加

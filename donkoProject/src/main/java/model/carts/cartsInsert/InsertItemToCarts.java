@@ -16,22 +16,22 @@ public class InsertItemToCarts {
 		//カートに商品を追加するSQL
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO ");
-		sb.append(		"carts ");
-		sb.append(			"(");
-		sb.append(				"user_id, ");
-		sb.append(				"item_id, ");
-		sb.append(				"quantity");
-		sb.append(			") ");
-		sb.append("VALUES ");
+		sb.append(	"carts ");
 		sb.append(		"(");
-		//ここでパラメータを使う(1/2)
-		sb.append(			"?, ");
-		//ここでパラメータを使う(2/2)
-		sb.append(			"?, ");
-		sb.append(			"1");
+		sb.append(			"user_id, ");
+		sb.append(			"item_id, ");
+		sb.append(			"quantity");
 		sb.append(		") ");
+		sb.append("VALUES ");
+		sb.append(	"(");
+		//ここでパラメータを使う(1/2)
+		sb.append(		"?, ");
+		//ここでパラメータを使う(2/2)
+		sb.append(		"?, ");
+		sb.append(		"1");
+		sb.append(	") ");
 		sb.append("ON DUPLICATE KEY UPDATE ");
-		sb.append(		"quantity = quantity + 1 ");
+		sb.append(	"quantity = quantity + 1 ");
 		//sqlを文字列化
 		final String INSERT_CART_SQL = sb.toString();
 

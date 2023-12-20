@@ -46,7 +46,6 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		
 		//データベースから取得できなかった時
 		if(cartBeanList == null || shippingAddress == null) {
-			
 			//エラーメッセージ
 			request.setAttribute("errorMessage", "購入情報の取得時に問題が発生しました。");
 			//エラーページからの遷移先
@@ -68,6 +67,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		request.setAttribute("cartBeanList", cartBeanList);
 		request.setAttribute("totalPrice", totalPrice);
 		
+		//購入確認画面を返す
 		String view = "/WEB-INF/views/customer/purchaseConfirm.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}
