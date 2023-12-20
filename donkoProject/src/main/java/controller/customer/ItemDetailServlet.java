@@ -59,6 +59,8 @@ public class ItemDetailServlet extends HttpServlet {
 		//トップページの商品一覧からの遷移
 		}else if(source != null && categoryName == null) {
 			request.setAttribute("url", source);
+		}else {
+			request.setAttribute("url", "itemDetail?itemId=" + itemId);
 		}
 		request.setAttribute("item", item);
 		request.setAttribute("itemImageList", itemImageList);
