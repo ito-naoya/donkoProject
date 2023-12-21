@@ -3,8 +3,8 @@ package controller.customer;
 import java.io.IOException;
 import java.sql.Date;
 
+import classes.user.AdminUser;
 import classes.user.CustomerUser;
-import classes.user.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,11 +12,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/userInfoEdit")
-public class UserInfoEditServlet extends HttpServlet {
+@WebServlet("/userInfoPage")
+public class UserInfoIndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public UserInfoEditServlet() {
+    public UserInfoIndexServlet() {
         super();
     }
 
@@ -36,9 +36,10 @@ public class UserInfoEditServlet extends HttpServlet {
 		// ユーザー情報取得
 		CustomerUser users = CustomerUser.getUserDetail(customerUser);
 		request.setAttribute("users", users);
+		request.setAttribute("user_id", userId);
 		
 		// ユーザ情報編集画面に遷移
-		String view = "/WEB-INF/views/customer/userInfoEdit.jsp";
+		String view = "/WEB-INF/views/customer/userInfoIndex.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 
@@ -62,9 +63,21 @@ public class UserInfoEditServlet extends HttpServlet {
 		customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
 		
 		// 更新処理実行
-		User.updateUserInfo(customerUser);
-		
-		// マイページに遷移
-		response.sendRedirect("userInfoPage");
+		Boolean deleteFlag = AdminUser.updateUserInfoByAdmin(customerUser);
+		if(deleteFlag) {
+			// 処理が成功すればにホーム画面に遷移
+			response.sendRedirect("home");
+		} else {
+			
+			// エラーメッセージ
+			request.setAttribute("errorMessage", "退会処理が失敗しました");
+			
+			// ユーザー情報の画面に遷移
+			request.setAttribute("url", "userInfoPage");
+			
+			// エラー画面に遷移
+			String view = "/WEB-INF/views/component/message.jsp";
+	        request.getRequestDispatcher(view).forward(request, response);
+		}
 	}
 }
