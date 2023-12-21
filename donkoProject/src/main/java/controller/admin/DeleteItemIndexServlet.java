@@ -1,6 +1,7 @@
 package controller.admin;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import bean.ItemBean;
@@ -23,51 +24,6 @@ public class DeleteItemIndexServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//TODO:セッション管理
-		//ログイン画面実装後にセットします
-
-		//カテゴリー一覧を取得
-		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
-		if(categoryList == null) {
-			//取得情報の不備があれば、エラー画面に遷移
-			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
-			request.setAttribute("url","adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-		}
-
-		//配列に「全ての商品」という項目を追加
-		ItemCategoryBean allItem = new ItemCategoryBean();
-		allItem.setItemCategoryName("全ての商品");
-		categoryList.add(allItem);
-		request.setAttribute("categoryName", "全ての商品");
-
-		//初期設定の商品一覧値をセット（item_delete_flgの有無に関係なく表示させる）
-		request.setAttribute("itemDelFlg", 1);
-
-		request.setAttribute("categoryList", categoryList);
-		//初期表示として、「すべてのカテゴリの商品を、削除済みのものも含めて全て表示する」(戻り値がnullでもjspに渡す)
-		ArrayList<ItemBean> itemList = Item.getItemAndOptionListByDelFlg(1, "全ての商品");
-		if(itemList == null) {
-			//取得情報の不備があれば、エラー画面に遷移
-			request.setAttribute("errorMessage", "商品一覧の取得に失敗しました");
-			request.setAttribute("url","adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-		}
-		request.setAttribute("itemList", itemList);
-
-		//商品一覧画面に遷移
-		String view = "/WEB-INF/views/admin/deleteItemIndex.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
-
-	}
-
-	//ソートを実行
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		//TODO:セッション管理
-		//ログイン画面実装後にセットします
 
 		//カテゴリーを取得
 		String itemCategoryName = request.getParameter("itemCategoryName");
@@ -78,11 +34,9 @@ public class DeleteItemIndexServlet extends HttpServlet {
 		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
 		if(categoryList == null) {
 			//取得情報の不備があれば、エラー画面に遷移
-			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
-			request.setAttribute("url","adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			errorHandling(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
 		}
+
 		//配列に「全ての商品」という項目を追加
 		ItemCategoryBean allItem = new ItemCategoryBean();
 		allItem.setItemCategoryName("全ての商品");
@@ -103,10 +57,7 @@ public class DeleteItemIndexServlet extends HttpServlet {
 
 		if(itemList == null) {
 			//取得情報の不備があれば、エラー画面に遷移
-			request.setAttribute("errorMessage", "商品一覧の取得に失敗しました");
-			request.setAttribute("url","adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			errorHandling(request,response,"商品一覧の取得に失敗しました","adminTopPage","管理者ページに");
 		}
 
 		request.setAttribute("itemList", itemList);
@@ -114,6 +65,41 @@ public class DeleteItemIndexServlet extends HttpServlet {
 		request.setAttribute("itemDelFlg", sortParam);
 
 		String view = "/WEB-INF/views/admin/deleteItemIndex.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
+
+	}
+
+	//ソートを実行
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		//カテゴリーを取得
+		String itemCategoryName = request.getParameter("itemCategoryName");
+
+		//選択済みの商品ステータスを全て取得、配列に格納
+		String[] itemStatus = request.getParameterValues("itemStatus");
+
+		//選択済みの商品のステータスを切り替えるサーブレット
+		if(itemStatus != null && itemStatus.length > 0) {
+			Item.deleteItem(itemStatus);
+		}
+
+		//商品一覧ページに戻る（とりあえずリダイレクト）
+		String encodedItemCategoryName = URLEncoder.encode(itemCategoryName, "UTF-8");
+        String redirectURL = "deleteItemIndex?itemCategoryName=" + encodedItemCategoryName + "&itemDelFlg=" + "2";
+        response.sendRedirect(redirectURL);
+	}
+
+	protected void errorHandling(HttpServletRequest request, HttpServletResponse response, String message, String url, String returnPage)
+			throws ServletException, IOException {
+		// エラーメッセージをセット
+		request.setAttribute("errorMessage", message);
+		// 戻り先のURL
+		request.setAttribute("url", url);
+		// 戻るボタンの表示文言
+		request.setAttribute("returnPage", returnPage);
+		// エラー画面に遷移
+		String view = "/WEB-INF/views/component/message.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 

@@ -33,10 +33,7 @@ public class RegistItemServlet1 extends HttpServlet {
 
 		if(categoryList == null) {
 			//取得情報の不備があれば、エラー画面に遷移
-			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
-			request.setAttribute("url","adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			errorHandling(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
 		}
 
 		request.setAttribute("categoryList", categoryList);
@@ -71,14 +68,24 @@ public class RegistItemServlet1 extends HttpServlet {
 		ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(newItem);
 		if(itemCategoryListAll == null) {
 			//取得情報の不備があれば、エラー画面に遷移
-			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
-			request.setAttribute("url","adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			errorHandling(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
 		}
 
 		request.setAttribute("itemCategoryListAll", itemCategoryListAll);
 		String view = "/WEB-INF/views/admin/registItem2.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
+	}
+	
+	protected void errorHandling(HttpServletRequest request, HttpServletResponse response, String message, String url, String returnPage)
+			throws ServletException, IOException {
+		// エラーメッセージをセット
+		request.setAttribute("errorMessage", message);
+		// 戻り先のURL
+		request.setAttribute("url", url);
+		// 戻るボタンの表示文言
+		request.setAttribute("returnPage", returnPage);
+		// エラー画面に遷移
+		String view = "/WEB-INF/views/component/message.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 }
