@@ -61,7 +61,7 @@
 						<div id="error-message-container2" class="alert alert-danger d-none"></div>
 						<br>
 						<!-- 　フォーム入力 -->
-						<form action="registItem2"  id="registItem2"  method="post" enctype="multipart/form-data">
+						<form action="registItem2"  id="registItem2"  method="post" enctype="multipart/form-data"  class="needs-validation" novalidate>
 						    <input type="hidden" name="itemCategoryName" value="<%= newItem.getItemCategoryName() %>">
 						    <input type="hidden" name="itemName" value="<%= newItem.getItemName() %>">
 						    <input type="hidden" name="itemDescription" value="<%= newItem.getItemDescription() %>">
@@ -101,6 +101,7 @@
 									                    <option value="<%=option.getOptionCategoryId()%>"><%=option.getOptionCategoryValue()%></option>
 									                <% } %>
 									            </select>
+									            <div class="invalid-feedback">写真を登録してください</div>
 									            <br>
 									    <%
 									        } else if (counter == 2) {
@@ -125,6 +126,7 @@
 									                        <option value="<%=option.getOptionCategoryId()%>"><%=option.getOptionCategoryValue()%></option>
 									                    <% } %>
 									                </select>
+									                <div class="invalid-feedback">オプションを選択してください</div>
 									                <br>
 									            </div>
 
@@ -137,6 +139,7 @@
 									                    <label class="form-check-label me-3" for="optionBox_<%= counter %>">
 									                        <%=option.getOptionCategoryValue()%>
 									                    </label>
+									                    <div class="invalid-feedback">チェックは一つ以上につけてください</div>
 									                <% } %>
 									                <br><br>
 									            </div>

@@ -1,3 +1,21 @@
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+        form.classList.add('was-validated')
+      }
+    }, false)
+  })
+})()
+
 function formSwitch() {
     // サイズの表示タイプ（セレクトボックスかチェックボックスか）に基づく表示の切り替え
     const isSelectChecked = document.querySelector('input[name="sizeDisplayType"][value="select"]').checked;
@@ -56,22 +74,6 @@ function previewImage(event) {
     }
 }
 
-//submit押下時の処理1(regist,edit共通)
-const registItem1Form = document.getElementById('registItem1');
-if (registItem1Form) {
-    registItem1Form.addEventListener('submit', function(event) {
-        const selectCategoryElement = document.querySelector('.category-select');
-        const selectedCategoryValue = selectCategoryElement.value;
-        const errorMessageContainer = document.getElementById('error-message-container');
-		//カテゴリー選択の表示のままだったら、エラーメッセージを表示
-        if(selectedCategoryValue === "カテゴリーを選択") {
-			// submitイベントの本来の動作を止める
-            event.preventDefault();
-            errorMessageContainer.textContent = 'カテゴリーを選択してください';
-            errorMessageContainer.classList.remove('d-none');
-        }
-    });
-}
 
 //submit押下時の処理2(regist,edit共通)
 const registItem2Form = document.getElementById('registItem2');
