@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class UpdateItemInfoInItems {
 
 	//商品の情報を更新する
-	public static void updateItemInfoInItems(ItemBean itemBean, int selectBoxCount){
+	public static Boolean updateItemInfoInItems(ItemBean itemBean, int selectBoxCount){
 		//itemsテーブルの商品を更新
         StringBuilder sb1 = new StringBuilder();
         sb1.append("UPDATE items "														);
@@ -78,12 +78,15 @@ public class UpdateItemInfoInItems {
 		    	if(!conn.isClosed()) {
 			        conn.rollback();
 			        e.printStackTrace();
+			        return false;
 		    	}
 		    }
 
 		} catch (SQLException | ClassNotFoundException e) {
 		  e.printStackTrace();
+		  return false;
 		}
+        return true;
 	};
 
 }

@@ -93,8 +93,8 @@ public class Item {
 	};
 
 	//商品の情報を更新する
-	public static void updateItemInfo(ItemBean itemBean,  int selectBoxCount){
-		UpdateItemInfoInItems.updateItemInfoInItems(itemBean, selectBoxCount);
+	public static Boolean updateItemInfo(ItemBean itemBean,  int selectBoxCount){
+		return (UpdateItemInfoInItems.updateItemInfoInItems(itemBean, selectBoxCount));
 	};
 
 	//商品を削除する（論理削除）
@@ -119,6 +119,7 @@ public class Item {
 	    return false;
 	}
 
+	//写真を新規登録
 	public static boolean registerNewImage(Part part,String fileName, String oldFileName, ServletContext context){
 		if(part.getSize() == 0 || fileName.isEmpty()) {
 			return false;
@@ -138,9 +139,11 @@ public class Item {
 		}
 	};
 
-	public static boolean renameNewImage(Part part, String fileName, String oldFileName) {
-	    String imagesDirectory = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/";
+	//写真を編集、変更
+	public static boolean renameNewImage(Part part, String fileName, String oldFileName, ServletContext context) {
 
+		// サーブレットコンテキストで相対パスの場所を取得して、絶対パスに変換。最後に/をつける。
+        String imagesDirectory = context.getRealPath("/images") + File.separator;
 	    if (part.getSize() != 0) {// 写真がある場合
 	        // 古いファイルを削除（名前が異なる場合）
 	        if (!fileName.equals(oldFileName)) {
