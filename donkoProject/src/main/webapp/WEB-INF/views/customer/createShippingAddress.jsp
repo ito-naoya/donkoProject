@@ -19,7 +19,7 @@
     CustomerUser users = (CustomerUser) request.getAttribute("users");
     %> --%>
 		<form action="createShippingAddress" method="post"
-			style="display: flex; justify-content: center; margin: 30px;">
+			style="display: flex; justify-content: center; margin: 30px;" class="needs-validation" novalidate>
 			<div class="col-lg-5 m-5"
 				style="border: 1px solid #333333; padding: 65px;">
 				<div class="cancelButton"
@@ -40,7 +40,8 @@
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
 					<input type="text" class="form-control" id="exampleInputAddresses"
 						aria-describedby="addresses" name="addresses" value=""
-						placeholder="">
+						placeholder="伊藤 直也" required>
+					<div class="invalid-feedback">宛名を入力してください</div>
 				</div>
 				<div>
 					<label for="exampleInputUserName">郵便番号</label><br>
@@ -49,7 +50,8 @@
 					style="display: flex; justify-content: center; margin-bottom: 5px;">
 					<input type="text" class="form-control" id="exampleInputPostCode"
 						aria-describedby="postCode" maxlength="8" name="postcode" value=""
-						placeholder="">
+						placeholder="650-0001" required>
+					<div class="invalid-feedback">郵便番号を入力してください</div>
 				</div>
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputAddress">住所</label><br>
@@ -57,7 +59,8 @@
 				<div class="form-group"
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
 					<input type="text" class="form-control" id="exampleInputAddress"
-						aria-describedby="address" name="address" value="" placeholder="">
+						aria-describedby="address" name="address" value="" placeholder="兵庫県神戸市中央区加納町４丁目２−１" required>
+					<div class="invalid-feedback">住所を入力してください</div>
 				</div>
 				<div class="cancelButton"
 					style="display: flex; justify-content: center; margin-bottom: 20px;">
@@ -67,5 +70,6 @@
 		</form>
 		</div>
 	</main>
+	<script src="./js/nullValidationScript.js"></script>
 </body>
 </html>
