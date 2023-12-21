@@ -65,7 +65,7 @@
 							%>
 								<tr>
 									<td style="width: 200px">
-										<a href="itemDetail?itemId=<%= cb.getItemId() %>" class="me-3"
+										<a href="itemDetail?itemId=<%= cb.getItemId() %>&source=purchaseConfirm" class="me-3"
 										style="text-decoration: none; display: inline-block;">
 											<div style="height: 150px; width: 150px;">
 												<img class="object-fit-cover w-100 h-100 itemImage"
@@ -82,8 +82,8 @@
 										</strong>
 									</td>
 									<td style="vertical-align: middle;">
-										¥ 
-										<%= String.format("%,d", cb.getItemPrice() * cb.getQuantity()) %>
+										価格 ¥ 
+										<%= String.format("%,d", cb.getItemPrice()) %>
 									</td>
 									<td style="vertical-align: middle;">
 										<p style="margin: 0">
