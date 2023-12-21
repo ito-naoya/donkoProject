@@ -96,7 +96,7 @@ public class RegistItemServlet2 extends HttpServlet {
 
 	    // 完了後、商品一覧ページにリダイレクト
         String encodedItemCategoryName = URLEncoder.encode(itemCategoryName, "UTF-8");
-        String redirectURL = "deleteItemIndex?itemCategoryName=" + encodedItemCategoryName + "&itemDelFlg=" + "0";
+        String redirectURL = "deleteItemIndex?itemCategoryName=" + encodedItemCategoryName + "&itemDelFlg=0";
         response.sendRedirect(redirectURL);
 
 	}

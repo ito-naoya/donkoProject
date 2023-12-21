@@ -75,7 +75,6 @@ public class DeleteItemIndexServlet extends HttpServlet {
 
 		//カテゴリーを取得
 		String itemCategoryName = request.getParameter("itemCategoryName");
-
 		//選択済みの商品ステータスを全て取得、配列に格納
 		String[] itemStatus = request.getParameterValues("itemStatus");
 
