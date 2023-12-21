@@ -21,7 +21,6 @@ public class SelectPurchaseInfo {
 		sb.append(    "p.purchase_date, "                                    );
 		sb.append(    "p.total_amount, "                                     );
 		sb.append(    "p.shipping_id, "                                      );
-		sb.append(    "p.shipping_Address_id, "                              );
 		sb.append(    "s.postal_code, "                                      );
 		sb.append(    "s.address, "                                          );
 		sb.append(    "s.addressee "                                         );
@@ -55,7 +54,6 @@ public class SelectPurchaseInfo {
 					Timestamp purchaseDate = result.getTimestamp("purchase_date");
 					int totalAmount = result.getInt("total_amount");
 					int shippingId = result.getInt("shipping_id");
-					int shippingAddressId = result.getInt("shipping_address_id");
 					String postalCode = result.getString("postal_code");
 					String address = result.getString("address");
 					String addressee = result.getString("addressee");
@@ -64,7 +62,6 @@ public class SelectPurchaseInfo {
 					purchaseInfo.setPurchaseDate(purchaseDate);
 					purchaseInfo.setTotalAmount(totalAmount);
 					purchaseInfo.setShippingId(shippingId);
-					purchaseInfo.setShippingAddressId(shippingAddressId);
 					purchaseInfo.setPostalCode(postalCode);
 					purchaseInfo.setAddress(address);
 					purchaseInfo.setAddressee(addressee);
