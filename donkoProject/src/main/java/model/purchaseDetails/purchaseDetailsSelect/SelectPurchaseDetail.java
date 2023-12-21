@@ -23,6 +23,7 @@ public class SelectPurchaseDetail {
 		sb.append(	  "pd.quantity, "			            									);
 		sb.append(	  "i.item_name, "				    										);	
 		sb.append(	  "i.file_name, "				    										);
+		sb.append(	  "i.price, "				    				   		    				);
 		sb.append(	  "group_concat(oc.option_category_value separator ',') "					);
 		sb.append("FROM "											           					);
 		sb.append(	  "purchase_details pd "													);
@@ -66,6 +67,7 @@ public class SelectPurchaseDetail {
 					purchaseDetailBeans.setItemName(results.getString("item_name"));
 					purchaseDetailBeans.setImageFileName(results.getString("file_name"));
 					purchaseDetailBeans.setOptionCategoryValue(results.getString("group_concat(oc.option_category_value separator ',')"));
+					purchaseDetailBeans.setPrice(results.getInt("price"));
 					
 					purchaseDetailList.add(purchaseDetailBeans);
 				}
