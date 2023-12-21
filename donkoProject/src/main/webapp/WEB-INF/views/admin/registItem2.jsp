@@ -106,30 +106,10 @@
 									        } else if (counter == 2) {
 									            // 2つ目のカテゴリ（例：サイズ）の表示タイプを選択するラジオボタン
 									    %>
-									            <div class="form-check">
-									                <input class="form-check-input" type="radio" name="sizeDisplayType" value="select" onclick="formSwitch()" checked>
-									                <label class="form-check-label mb-1">一つのアイテムを登録</label>
-									            </div>
-									            <div class="form-check">
-									                <input class="form-check-input" type="radio" name="sizeDisplayType" value="checkbox" onclick="formSwitch()">
-									                <label class="form-check-label">複数のアイテムを一度に登録</label>
-									            </div>
 									            <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryName %>">
 
-									            <!-- セレクトボックス -->
-									            <div id="sizeSelect">
-									                <label for="optionSelect_<%= counter %>" class="form-label mb-3"></label>
-									                <select class="form-select mb-3" id="optionSelect_<%= counter %>" name="optionValueS_<%= counter %>">
-									                    <option selected>オプション選択： <%= optionCategoryName %></option>
-									                    <% for (OptionCategoryBean option : optionCategoryList) { %>
-									                        <option value="<%=option.getOptionCategoryId()%>"><%=option.getOptionCategoryValue()%></option>
-									                    <% } %>
-									                </select>
-									                <br>
-									            </div>
-
-									            <!-- チェックボックス -->
-									            <div id="sizeCheck" style="display: none;">
+												<!-- チェックボックス -->
+									            <div id="sizeCheck"">
 									                <label for="optionBox_<%= counter %>" class="form-label mb-3 mt-3">オプション選択 : <%= optionCategoryName %></label>
 									                <br>
 									                <% for (OptionCategoryBean option : optionCategoryList) { %>
