@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, bean.PurchaseBean, bean.ShippingAddressBean, bean.PurchaseDetailBean, java.text.SimpleDateFormat, java.sql.Timestamp"%>
+<%@ page import="java.util.ArrayList, bean.PurchaseBean, bean.PurchaseDetailBean, java.text.SimpleDateFormat, java.sql.Timestamp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +27,6 @@
 		</a>
 		<%
 		  PurchaseBean purchaseInfo = (PurchaseBean) request.getAttribute("purchaseInfo");
-		  ShippingAddressBean shippingAddressInfo = (ShippingAddressBean) request.getAttribute("shippingAddressInfo");
     %>
 		<h4 class="my-3"><strong>購入詳細</strong></h4>
 		<hr>
@@ -43,8 +42,8 @@
 		  <table class="table table-borderless ms-2">
 		  <tbody>
 		  <tr><td>購入日　：　</td><th><%=new SimpleDateFormat("yyyy/MM/dd hh:mm").format(purchaseInfo.getPurchaseDate())%></th></tr>
-		  <tr><td>宛先　：　</td><th><%= shippingAddressInfo.getAddressee() %></th></tr>
-		  <tr><td>配送先　：　</td><th>〒<%= shippingAddressInfo.getPostalCode() %> <%= shippingAddressInfo.getAddress() %></th></tr>
+		  <tr><td>宛先　：　</td><th><%= purchaseInfo.getAddressee() %></th></tr>
+		  <tr><td>配送先　：　</td><th>〒<%= purchaseInfo.getPostalCode() %> <%= purchaseInfo.getAddress() %></th></tr>
 		  </tbody>
 		  </table>
 		<hr>
@@ -72,7 +71,7 @@
 						src="./images/<%= purchaseDetailBean.getImageFileName()%>.jpg">
 					</td>
 					<!-- 商品タイトル -->
-					<td valign="middle"><%= purchaseDetailBean.getItemName()%></td>
+					<td valign="middle"><%= purchaseDetailBean.getItemName()%> <small>(<%= purchaseDetailBean.getOptionCategoryValue()%>)</small></td>
           <!-- 単価 -->
           <td valign="middle">¥<%= String.format("%,d",purchaseDetailBean.getPrice())%></td>
 					<!-- 個数 -->

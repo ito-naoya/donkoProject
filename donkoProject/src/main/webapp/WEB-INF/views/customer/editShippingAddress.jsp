@@ -73,6 +73,6 @@
 		</form>
 		</div>
 	</main>
-	<script src="./js/editShippingAddressScript.js"></script>
+	<script src="./js/nullValidationScript.js"></script>
 </body>
 </html>
