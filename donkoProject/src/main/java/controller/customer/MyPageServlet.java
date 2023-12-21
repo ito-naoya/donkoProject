@@ -47,8 +47,25 @@ public class MyPageServlet extends HttpServlet {
 			ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
 			request.setAttribute("purchaseList", purchaseList);
 			
-			// マイページに画面遷移
-			String view = "/WEB-INF/views/customer/myPage.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			// Valueチェック
+			if(purchaseList == null) {
+				// エラーメッセージをセット
+				request.setAttribute("errorMessage", "マイページへのアクセスが失敗しました");
+				
+				// ログイン画面に誘導
+				request.setAttribute("url", "userSignin");
+				
+				// TODO:全部できたらコメントアウト削除予定
+				// 戻るボタンの表示文言
+				// request.setAttribute("returnPage", "ログイン画面に戻る");
+				
+				// エラー画面に遷移
+				String view = "/WEB-INF/views/component/message.jsp";
+				request.getRequestDispatcher(view).forward(request, response);
+			} else {
+				// マイページに画面遷移
+				String view = "/WEB-INF/views/customer/myPage.jsp";
+				request.getRequestDispatcher(view).forward(request, response);
+			}
 	}
 }
