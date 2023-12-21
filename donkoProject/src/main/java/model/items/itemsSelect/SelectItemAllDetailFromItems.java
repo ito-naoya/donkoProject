@@ -31,13 +31,13 @@ public class SelectItemAllDetailFromItems {
 		sb.append("WHERE "																						);
 		sb.append(		"items.item_id = ?;"																	);
 
-		String sql = sb.toString();
+		final String SELECT_ITEM_ALLDETAIL = sb.toString();
 
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(itemBean.getItemId());
 		ItemBean ib = new ItemBean();
 		try(Connection conn = DatabaseConnection.getConnection();){
-			try(ResultSet rs = GeneralDao.executeQuery(conn, sql, params)){
+			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEM_ALLDETAIL, params)){
 
 				if(rs.next()){
 					ib.setItemId(rs.getInt("item_id"));
