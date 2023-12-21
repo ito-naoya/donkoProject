@@ -59,7 +59,7 @@ public class SelectMyPurchaseHistory {
 						purchaseBean.setPurchaseId(results.getInt("purchase_id"));
 						purchaseBean.setTotalAmount(results.getInt("total_amount"));
 						purchaseBean.setPurchaseDate(results.getTimestamp("purchase_date"));
-						purchaseBean.setShippingAddress(results.getString("address"));
+						purchaseBean.setAddress(results.getString("address"));
 						purchaseBean.setPostalCode(results.getString("postal_code"));
 						purchaseBean.setAddressee(results.getString("addressee"));
 						purchaseBean.setShippingStatus(results.getString("shipping_status"));
