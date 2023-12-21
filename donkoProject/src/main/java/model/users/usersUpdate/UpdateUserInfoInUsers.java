@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class UpdateUserInfoInUsers {
 	
 	//ユーザー情報を更新する
-	public static void updateUserInfoInUsers(CustomerUser customerUser){
+	public static boolean updateUserInfoInUsers(CustomerUser customerUser){
 		// SQLコマンド生成
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE "						);
@@ -47,5 +47,6 @@ public class UpdateUserInfoInUsers {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+		return true;
 	};
 }
