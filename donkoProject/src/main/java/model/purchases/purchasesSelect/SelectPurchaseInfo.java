@@ -15,20 +15,28 @@ public class SelectPurchaseInfo {
 	//一件の購入情報を取得する
 	public static PurchaseBean selectPurchaseInfo(PurchaseBean purchaseBean){
   		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT "                      );
-		sb.append(    "p.purchase_id, "          );
-		sb.append(    "u.user_name, "            );
-		sb.append(    "p.purchase_date, "        );
-		sb.append(    "p.total_amount, "         );
-		sb.append(    "p.shipping_id "           );
-		sb.append("FROM "                        );
-		sb.append(    "purchases p "             );
-		sb.append("INNER JOIN "                  );
-		sb.append(    "users u "                 );
-		sb.append("ON "                          );
-		sb.append(    "p.user_id = u.user_id "   );
-		sb.append("WHERE "                       );
-		sb.append(    "p.purchase_id = ?"        );
+		sb.append("SELECT "                                                  );
+		sb.append(    "p.purchase_id, "                                      );
+		sb.append(    "u.user_name, "                                        );
+		sb.append(    "p.purchase_date, "                                    );
+		sb.append(    "p.total_amount, "                                     );
+		sb.append(    "p.shipping_id, "                                      );
+		sb.append(    "p.shipping_Address_id, "                              );
+		sb.append(    "s.postal_code, "                                      );
+		sb.append(    "s.address, "                                          );
+		sb.append(    "s.addressee "                                         );
+		sb.append("FROM "                                                    );
+		sb.append(    "purchases p "                                         );
+		sb.append("INNER JOIN "                                              );
+		sb.append(    "users u "                                             );
+		sb.append("ON "                                                      );
+		sb.append(    "p.user_id = u.user_id "                               );
+		sb.append("INNER JOIN "                                              );
+		sb.append(    "shipping_addresses s "                                );
+		sb.append("ON "                                                      );
+		sb.append(    "p.shipping_Address_id = s.shipping_Address_id "       );
+		sb.append("WHERE "                                                   );
+		sb.append(    "p.purchase_id = ?"                                    );
 		
 		// SQLを文字列化
 		final String SELECT_PURCHASE_INFO_SQL = sb.toString();
@@ -47,11 +55,19 @@ public class SelectPurchaseInfo {
 					Timestamp purchaseDate = result.getTimestamp("purchase_date");
 					int totalAmount = result.getInt("total_amount");
 					int shippingId = result.getInt("shipping_id");
+					int shippingAddressId = result.getInt("shipping_address_id");
+					String postalCode = result.getString("postal_code");
+					String address = result.getString("address");
+					String addressee = result.getString("addressee");
 					purchaseInfo.setPurchaseId(purchaseId);
 					purchaseInfo.setUserName(userName);
 					purchaseInfo.setPurchaseDate(purchaseDate);
 					purchaseInfo.setTotalAmount(totalAmount);
 					purchaseInfo.setShippingId(shippingId);
+					purchaseInfo.setShippingAddressId(shippingAddressId);
+					purchaseInfo.setPostalCode(postalCode);
+					purchaseInfo.setAddress(address);
+					purchaseInfo.setAddressee(addressee);
 				}
 				
 			} catch (Exception e) {
