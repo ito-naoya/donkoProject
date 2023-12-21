@@ -5,10 +5,8 @@ import java.util.ArrayList;
 
 import bean.PurchaseBean;
 import bean.PurchaseDetailBean;
-import bean.ShippingAddressBean;
 import classes.Purchase;
 import classes.PurchaseDetail;
-import classes.ShippingAddress;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,10 +24,9 @@ public class OrderDetailServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// ユーザーID取得のためにインスタンス化
+		// インスタンス化
 		CustomerUser customerUser = new CustomerUser();
 		PurchaseBean purchaseBean = new PurchaseBean();
-		ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
 		
 		// セッション確認
 		HttpSession session = request.getSession(false);
@@ -51,14 +48,6 @@ public class OrderDetailServlet extends HttpServlet {
 		// 1件の購入情報を取得
 		PurchaseBean purchaseInfo = Purchase.getPurchaseInfo(purchaseBean);
 		request.setAttribute("purchaseInfo", purchaseInfo);
-		
-		// ShippingAddressBeanにセット
-		shippingAddressBean.setUserId(customerUser.getUserId());
-		shippingAddressBean.setShippingAddressId(purchaseInfo.getShippingAddressId());
-		
-		// 配送先詳細情報取得
-		ShippingAddressBean shippingAddressInfo = ShippingAddress.getShippingAddressDetail(shippingAddressBean);
-		request.setAttribute("shippingAddressInfo", shippingAddressInfo);
 		
 		// PurchaseDetailBeanにセット
 		PurchaseDetailBean purchaseDetailBean = new PurchaseDetailBean();
