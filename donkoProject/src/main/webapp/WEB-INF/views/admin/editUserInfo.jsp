@@ -20,7 +20,7 @@
 			<%
 			CustomerUser user = (CustomerUser) request.getAttribute("user");
 			%>
-			<form action="editUserInfo" method="post" style="display: flex; justify-content: center; margin: 30px;">
+			<form action="editUserInfo" method="post" style="display: flex; justify-content: center; margin: 30px;" class="needs-validation" novalidate>
 				<input type="hidden" name="userId" value="<%= user.getUserId() %>">
 				<div class="col-lg-5 m-5" style="border: 1px solid #333333; padding: 65px;">
 					<div class="cancelButton" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
@@ -43,7 +43,7 @@
 						<br>
 					</div>
 					<div class="form-group" style="display: flex; justify-content: center; margin-bottom: 30px;">
-						<input type="text" class="form-control" id="exampleInputUserId" name="user_login_id" value="<%=user.getUserLoginId()%>">
+						<input type="text" class="form-control" id="exampleInputUserId" name="user_login_id" value="<%=user.getUserLoginId()%>" required>
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputUserName">
@@ -52,7 +52,7 @@
 						<br>
 					</div>
 					<div class="form-group" style="display: flex; justify-content: center; margin-bottom: 30px;">
-						<input type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName" name="user_name" value="<%=user.getUserName()%>">
+						<input type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName" name="user_name" value="<%=user.getUserName()%>" required>
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputGender">
@@ -61,7 +61,7 @@
 						<br>
 					</div>
 					<div class="form-group" style="display: flex; justify-content: center; margin-bottom: 30px;">
-						<select class="form-control" name="gender" id="exampleInputGender">
+						<select class="form-control" name="gender" id="exampleInputGender" required>
 							<%
 							String selected = user.getGender();
 							String men = (selected != null && selected.equals("男性") ? "selected" : "");
@@ -85,7 +85,7 @@
 						<br>
 					</div>
 					<div class="form-group" style="display: flex; justify-content: center; margin-bottom: 30px;">
-						<input type="date" class="form-control" id="exampleInputbirthday" name="birthday" value="<%=user.getBirthday()%>">
+						<input type="date" class="form-control" id="exampleInputbirthday" name="birthday" value="<%=user.getBirthday()%>" required>
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputbirthday">
@@ -94,7 +94,7 @@
 						<br>
 					</div>
 					<div class="form-group" style="display: flex; justify-content: center; margin-bottom: 70px;">
-						<select class="form-control" name="status">
+						<select class="form-control" name="status" required>
 						<%
 						String isDeleted = user.isDeleted() ? "selected" : ""; 
 						String isNotDeleted = user.isDeleted() ? "" : "selected";
@@ -115,5 +115,6 @@
 				</div>
 			</form>
 		</main>
+		<script src="./js/script.js"></script>
 	</body>
 </html>
