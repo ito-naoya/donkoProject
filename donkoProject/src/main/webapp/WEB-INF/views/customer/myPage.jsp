@@ -19,9 +19,9 @@
 <main class="container">
 <!--  メニューボタンの表示 -->
 		<div class="d-flex justify-content-between my-4">
-			<a href="userInfoEdit"
+			<a href="userInfoPage"
 				class="d-inline-block border mx-2 mb-4 p-3 text-center"
-				style="width: 30%; border: #385A37; background-color: white; color: #385A37; text-decoration:none;">個人情報の編集<a>
+				style="width: 30%; border: #385A37; background-color: white; color: #385A37; text-decoration:none;">個人情報一覧<a>
 					<a href="createShippingAddress"
 					class="d-inline-block border mx-2 mb-4 p-3 text-center"
 					style="width: 30%; border: #385A37; background-color: white; color: #385A37; text-decoration:none;">配送先の登録<a>
@@ -33,7 +33,6 @@
 		<h2 style="margin-left: 40px; margin-bottom:0;">
 			<strong>購入履歴</strong>
 		</h2>
-		<!-- 中間発表時は発送ステータスのそうと機能は非表示 -->
 		  <button class="btn" id="hideShippedButton" name="status_sort" value="hidden"
         style="color: ＃000000; background-color: #E5CCFF; border-radius: 40px; margin-right: 40px;">発送済みを非表示</button>
     </div>
