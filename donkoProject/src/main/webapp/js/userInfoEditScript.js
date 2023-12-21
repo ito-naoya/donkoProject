@@ -11,6 +11,8 @@
       if (!form.checkValidity()) {
         event.preventDefault()
         event.stopPropagation()
+      } else {
+      // 何も処理を書かない
       }
 
       form.classList.add('was-validated')
