@@ -2,6 +2,7 @@
  const mainImage = document.querySelector("#mainImage");
  const mainSrc = mainImage.getAttribute("src");
  const subImages = document.querySelectorAll(".subImage");
+ 
 
 subImages.forEach(img => {
 	
@@ -32,6 +33,3 @@ sizes.forEach(size => {
 	
 })
 
- 
- 
- 
