@@ -38,7 +38,7 @@
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputAddresses">宛名</label><br>
 				</div>
-				<div class="form-group"
+				<div class="form-group d-flex flex-wrap"
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
 					<input type="text" class="form-control" id="exampleInputAddresses"
 						aria-describedby="addresses" name="addressee"
@@ -48,7 +48,7 @@
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputPostalCode">郵便番号</label><br>
 				</div>
-				<div class="form-group"
+				<div class="form-group d-flex flex-wrap"
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
 					<input type="text" class="form-control" id="exampleInputPostalCode"
 						aria-describedby="postalcode" maxlength="8" name="postalcode"
@@ -58,7 +58,7 @@
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputAddress">住所</label><br>
 				</div>
-				<div class="form-group"
+				<div class="form-group d-flex flex-wrap"
 					style="display: flex; justify-content: center; margin-bottom: 30px;">
 					<input type="text" class="form-control" id="exampleInputAddress"
 						aria-describedby="address" name="address"
