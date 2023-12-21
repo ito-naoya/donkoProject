@@ -32,6 +32,7 @@
 					</a>
 					<br>
 					<h2>商品情報編集</h2>
+					<h6 style="color: red;">※全て必須項目です</h6>
 					<br>
 						<%
 							if(errorMessage != null && !errorMessage.isEmpty()) {
@@ -65,7 +66,7 @@
 							 	</div>
 							 	<div class="col-2 mb-3">
 								    <label for="stock" class="form-label">在庫</label>
-								    <input type="number" class="form-control" id="stock" name="stock" min="1" max="9" value="<%= item.getItemStock() %>" required style="text-align: center">
+								    <input type="number" class="form-control" id="stock" name="stock" min="0" max="9" value="<%= item.getItemStock() %>" required style="text-align: center">
 								    <div class="invalid-feedback">在庫を入力してください</div>
 							 	</div>
 							 	<br>
