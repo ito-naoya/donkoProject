@@ -81,7 +81,7 @@
 		</div>
 </main>
 <script src="./js/registItemScript.js"></script>
-<script src="./js/nullValidationScript.js"></sctipt>
+<script src="./js/nullValidationScript.js"></script>
 </body>
 </html>
 
