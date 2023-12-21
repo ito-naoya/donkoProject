@@ -4,6 +4,7 @@ import model.users.usersInsert.InsertNewUserToUsers;
 import model.users.usersSelect.SelectUserDetailFromUsers;
 import model.users.usersSelect.SelectUserDuplicate;
 import model.users.usersSelect.SelectUserFromUsers;
+import model.users.usersUpdate.UpdateUserDeleteFlag;
 import model.users.usersUpdate.UpdateUserInfoInUsers;
 import model.users.usersUpdate.UpdateUserPasswords;
 
@@ -46,6 +47,11 @@ public class User {
 	//ユーザーのパスワードを更新する
 	public static void updateUserPassword(CustomerUser customerUser) {
 		UpdateUserPasswords.updateUserPasswords(customerUser);
+	};
+	
+	//ユーザーを論理削除する
+	public static boolean updateUserDeleteFlag(CustomerUser customerUser) {
+		return UpdateUserDeleteFlag.updateUserDeleteFlags(customerUser);
 	};
 
 	//ログアウトする

@@ -35,28 +35,29 @@
 				<tbody>
 					<tr>
 						<td>ユーザーID</td>
-						<th><%=users.getUserLoginId()%></th>
+						<td><strong><%=users.getUserLoginId()%></strong></td>
 					</tr>
 					<tr>
 						<td>ユーザー名</td>
-						<th><%=users.getUserName()%></th>
+						<td><strong><%=users.getUserName()%><strong></td>
 					</tr>
 					<tr>
 						<td>性別</td>
-						<th><%=users.getGender()%></th>
+						<td ><strong><%=users.getGender()%></strong></td>
 					</tr>
 					<tr>
 						<td>誕生日</td>
-						<th><%=new SimpleDateFormat("yyyy/MM/dd").format(users.getBirthday())%></th>
+						<td><strong><%=new SimpleDateFormat("yyyy/MM/dd").format(users.getBirthday())%><strong></td>
 					</tr>
 				</tbody>
 			</table>
 			<div class="d-flex">
 			<% int userId = (int) request.getAttribute("user_id"); %>
-				<button class="btn"
-					style="border: 1px solid #000000; background: #E5CCFF; padding: 10px; margin-right: 30px; width:50%;"><a href="userInfoEdit?=<%=userId%>"
-                style="color: #000000; vertical-align: middle; text-decoration: none; ">編集</a></button>
-				<form action="userIndexPage" method="post" style="width:50%;">
+			<a href="userInfoEdit?=<%=userId%>"
+          style="color: #000000; vertical-align: middle; text-decoration: none; width:50%; margin-right:30px;">
+				<button class="btn w-100"
+					style="border: 1px solid #000000; background: #E5CCFF; padding:10px;">編集</button></a>
+				<form action="userInfoPage" method="post" style="width:50%;">
 					<button type="submit" class="btn text-nowrap w-100"
 						style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000; padding: 10px;">退会</button>
 				</form>
