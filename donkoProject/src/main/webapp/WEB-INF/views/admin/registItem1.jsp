@@ -35,7 +35,7 @@
 						<form action="registItem1" id="registItem1" method="post" class="needs-validation" novalidate>
 							<div class="mb-3">
 								<select class="form-select category-select" name="itemCategoryName">
-								  <option selected disabled>カテゴリーを選択</option>
+								  <option selected hidden disabled value="">カテゴリーを選択</option>
 							            <%
 								            for (ItemCategoryBean category : categoryList){
 								         %>

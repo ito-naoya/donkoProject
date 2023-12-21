@@ -93,7 +93,7 @@
 									            <label for="optionSelect_<%= counter %>" class="form-label mb-3"></label>
 									            <!-- 一つ目のオプションは必ずセレクトボックス（画像名と一意に紐づけるため） -->
 									            <select class="form-select mb-3" id="optionSelect_<%= counter %>" name="optionValueS_<%= counter %>">
-									                <option  selected disabled>オプション選択： <%= optionCategoryName %></option>
+									                <option selected hidden disabled value="">オプション選択： <%= optionCategoryName %></option>
 									                <% for (OptionCategoryBean option : optionCategoryList) { %>
 									                    <option value="<%=option.getOptionCategoryId()%>"><%=option.getOptionCategoryValue()%></option>
 									                <% } %>
