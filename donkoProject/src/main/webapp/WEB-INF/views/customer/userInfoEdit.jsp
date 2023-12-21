@@ -87,6 +87,7 @@
 		</form>
 		</div>
 	</main>
+	<script src="./js/nullValidationScript.js"></script>
 	<script src="./js/userInfoEditScript.js"></script>
 </body>
 </html>
