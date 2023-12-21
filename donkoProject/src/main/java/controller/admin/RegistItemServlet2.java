@@ -63,7 +63,7 @@ public class RegistItemServlet2 extends HttpServlet {
 	    ItemBean newItemAddOption;
 	    if (selectBoxCount == 1) {
 	        // オプションが1つの場合
-	        newItemAddOption = Option.checkRegistItemOptionDetail(newItem, itemFirstOptionName, itemFirstOptionIncrementId, null, null, selectBoxCount);
+	        newItemAddOption = Option.checkRegistItemOptionDetail("0", newItem, itemFirstOptionName, itemFirstOptionIncrementId, null, null, selectBoxCount);
 	    } else {
 	        // オプションが2つの場合
 	        String sizeDisplayType = request.getParameter("sizeDisplayType");
@@ -72,11 +72,11 @@ public class RegistItemServlet2 extends HttpServlet {
 	        if (sizeDisplayType.equals("select")) {
 	            // セレクトボックスでサイズを選択した場合
 	            itemSecondOptionIncrementId = request.getParameter("optionValueS_2");
-	            newItemAddOption = Option.checkRegistItemOptionDetail(newItem, itemFirstOptionName, itemFirstOptionIncrementId, itemSecondOptionName, itemSecondOptionIncrementId, selectBoxCount);
+	            newItemAddOption = Option.checkRegistItemOptionDetail("0", newItem, itemFirstOptionName, itemFirstOptionIncrementId, itemSecondOptionName, itemSecondOptionIncrementId, selectBoxCount);
 	        } else {
 	            // チェックボックスでサイズを選択した場合
 	            itemSecondOptionIncrementIds = request.getParameterValues("optionValueC_2");
-	            newItemAddOption = Option.checkRegistItemOptionDetail(newItem, itemFirstOptionName, itemFirstOptionIncrementId, itemSecondOptionName, "0", selectBoxCount);
+	            newItemAddOption = Option.checkRegistItemOptionDetail("0", newItem, itemFirstOptionName, itemFirstOptionIncrementId, itemSecondOptionName, "0", selectBoxCount);
 	        }
 	    }
 
