@@ -16,6 +16,7 @@ public class SelectPurchaseDetail {
 		
 		// SQLコマンド生成
 		StringBuilder sb = new StringBuilder();
+
 		sb.append("SELECT "                                       			    				);
 		sb.append(	  "pd.purchase_id, "			            								);
 		sb.append(	  "pd.purchase_detail_id, "	                								);
@@ -45,6 +46,7 @@ public class SelectPurchaseDetail {
 		sb.append("GROUP BY "																	);
 		sb.append(	  "pd.purchase_detail_id, "													);
 		sb.append(	  "i.item_id "																);
+
 		String sql = sb.toString();
 		
 		// ？の引数に渡す値
