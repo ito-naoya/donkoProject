@@ -16,31 +16,18 @@
 		<%@include file="../component/headerTopSpace.jsp"%>
 		<main class="m-5">
 			<%
-				ArrayList<CartBean> cartBeanList = (ArrayList<CartBean>)request.getAttribute("cartBeanList");
-			%>
-			<%
-			if(cartBeanList.size() > 0) {
-			%>
-				<div>
-					<form action="purchaseConfirm" method="get" class="d-flex justify-content-end mb-3">
-						<button type=submit class="btn px-5 py-3" style="background-color: #9933ff; color: white; width: 210px;">
-							レジに進む
-						</button>
-					</form>
-				</div>
-			<%
-			}
+			ArrayList<CartBean> cartBeanList = (ArrayList<CartBean>)request.getAttribute("cartBeanList");
 			%>
 			<div class="container">
 				<div class="row justify-content-center">
-					<div class="col-11">
-						<%
-						if(cartBeanList.size() == 0 ) {
-						%>
-							<h1 class="text-center">現在カートの中に商品はありません</h1>
-						<%
-						}
-						%>
+					<%	
+					if(cartBeanList.size() == 0 ) {
+					%>
+						<h1 class="text-center">現在カートの中に商品はありません</h1>
+					<%
+					}
+					%>
+					<div class="col-9">
 						<table class="table table-borderless">
 							<%
 							for(CartBean cb : cartBeanList) {
@@ -64,14 +51,15 @@
 										</strong>
 									</td>
 									<td style="vertical-align: middle;">
-										¥ <%= String.format("%,d", cb.getItemPrice() * cb.getQuantity()) %>
+										価格 ¥ 
+										<%= String.format("%,d", cb.getItemPrice()) %>
 									</td>
 									<form action="cart" method="POST" style="width: 120px;">
 										<td style="vertical-align: middle; width: 150px;">
 											<input type="hidden" value="<%= cb.getItemId() %>" name="itemId">
-											<p class="border p-2" style="margin: 0; width: 120px;">
+											<p style="margin: 0; width: 120px;">
 												数量: 
-												<select name="quantity" style="border: none;">
+												<select name="quantity" style="display: inline-block">
 													<%
 													for(int i = 1; i <= cb.getItemStock(); i ++) {
 													%>
@@ -115,20 +103,42 @@
 							} 
 							%>
 						</table>
+						<%
+						if(cartBeanList.size() > 0){
+						%>
+							<div class="d-flex justify-content-center">
+								<form action="deleteCart" method="POST" class="d-flex justify-content-end mt-3">
+									<button type=submit class="btn px-5 py-3 rounded-pill border border-danger" style="background-color: white; color: red;">
+										カートの中身を全て削除する
+									</button>
+								</form>
+							</div>
+						<%
+						}
+						%>
 					</div>
-					<%
-					if(cartBeanList.size() > 0){
-					%>
-						<div class="d-flex justify-content-center">
-							<form action="deleteCart" method="POST" class="d-flex justify-content-end mt-3">
-								<button type=submit class="btn px-5 py-3 rounded-pill border border-danger" style="background-color: white; color: red;">
-									カートの中身を全て削除する
-								</button>
-							</form>
-						</div>
-					<%
-					}
-					%>
+					<div class="col-3">
+						<%
+						if(cartBeanList.size() > 0) {
+						%>
+							<div class="d-flex flex-column border p-5 align-items-center justify-content-center" style="width: 280px; height: 200px;">
+								<% 
+								Integer totalPrice = (Integer)request.getAttribute("totalPrice");
+								%>
+								<p>
+									合計金額 ¥ 
+									<%= String.format("%,d", totalPrice) %>
+								</p>
+								<form action="purchaseConfirm" method="get" class="d-flex justify-content-end mb-3">
+									<button type=submit class="btn px-5 py-3" style="background-color: #9933ff; color: white; width: 210px;">
+										レジに進む
+									</button>
+								</form>
+							</div>
+						<%
+						}
+						%>
+					</div>
 				</div>
 			</div>
 		</main>

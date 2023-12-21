@@ -82,8 +82,8 @@
 										</strong>
 									</td>
 									<td style="vertical-align: middle;">
-										¥ 
-										<%= String.format("%,d", cb.getItemPrice() * cb.getQuantity()) %>
+										価格 ¥ 
+										<%= String.format("%,d", cb.getItemPrice()) %>
 									</td>
 									<td style="vertical-align: middle;">
 										<p style="margin: 0">
