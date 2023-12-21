@@ -165,5 +165,6 @@
 		</div>
 </main>
 <script src="./js/registItemScript.js"></script>
+<script src="./js/nullValidationScript.js">
 </body>
 </html>
