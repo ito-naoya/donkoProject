@@ -57,11 +57,8 @@
 						    </div>
 
 						<br>
-						<!-- 入力エラーがある場合、ここにエラーメッセージを出力 -->
-						<div id="error-message-container2" class="alert alert-danger d-none"></div>
-						<br>
 						<!-- 　フォーム入力 -->
-						<form action="registItem2"  id="registItem2"  method="post" enctype="multipart/form-data">
+						<form action="registItem2"  id="registItem2"  method="post" enctype="multipart/form-data"  class="needs-validation" novalidate>
 						    <input type="hidden" name="itemCategoryName" value="<%= newItem.getItemCategoryName() %>">
 						    <input type="hidden" name="itemName" value="<%= newItem.getItemName() %>">
 						    <input type="hidden" name="itemDescription" value="<%= newItem.getItemDescription() %>">
@@ -96,18 +93,18 @@
 									            <label for="optionSelect_<%= counter %>" class="form-label mb-3"></label>
 									            <!-- 一つ目のオプションは必ずセレクトボックス（画像名と一意に紐づけるため） -->
 									            <select class="form-select mb-3" id="optionSelect_<%= counter %>" name="optionValueS_<%= counter %>">
-									                <option selected>オプション選択： <%= optionCategoryName %></option>
+									                <option selected hidden disabled value="">オプション選択： <%= optionCategoryName %></option>
 									                <% for (OptionCategoryBean option : optionCategoryList) { %>
 									                    <option value="<%=option.getOptionCategoryId()%>"><%=option.getOptionCategoryValue()%></option>
 									                <% } %>
 									            </select>
+									            <div class="invalid-feedback">写真を登録してください</div>
 									            <br>
 									    <%
 									        } else if (counter == 2) {
 									            // 2つ目のカテゴリ（例：サイズ）の表示タイプを選択するラジオボタン
 									    %>
 									            <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryName %>">
-
 												<!-- チェックボックス -->
 									            <div id="sizeCheck"">
 									                <label for="optionBox_<%= counter %>" class="form-label mb-3 mt-3">オプション選択 : <%= optionCategoryName %></label>
@@ -117,6 +114,7 @@
 									                    <label class="form-check-label me-3" for="optionBox_<%= counter %>">
 									                        <%=option.getOptionCategoryValue()%>
 									                    </label>
+									                    <div class="invalid-feedback">チェックは一つ以上につけてください</div>
 									                <% } %>
 									                <br><br>
 									            </div>
@@ -142,5 +140,6 @@
 		</div>
 </main>
 <script src="./js/registItemScript.js"></script>
+<script src="./js/nullValidationScript.js"></script>
 </body>
 </html>
