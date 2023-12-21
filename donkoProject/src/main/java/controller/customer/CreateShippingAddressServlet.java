@@ -79,9 +79,8 @@ public class CreateShippingAddressServlet extends HttpServlet {
 				ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
 				request.setAttribute("purchaseList", purchaseList);
 				
-				// 更新後の画面遷移
-				String view = "/WEB-INF/views/customer/myPage.jsp";
-				request.getRequestDispatcher(view).forward(request, response);
+				// 配送先一覧の画面に遷移
+				response.sendRedirect("shippingAddressIndex");
 	}
 
 }
