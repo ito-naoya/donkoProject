@@ -40,7 +40,7 @@
 		<div
 			style="padding: 20px; margin: 20px 40px 40px; border: 1px solid #333333; overflow-x: scroll;"
 			class="border">
-			<table class="table table-borderless">
+			<table class="table table-hover table-borderless">
 				<thead align="center">
 					<tr>
 						<th><strong style="white-space:nowrap;">注文ID</strong></th>
@@ -58,18 +58,17 @@
 					<%
 						for (PurchaseBean purchaseBean : purchaseList) {
 						%>
-					<tr>
+					
+					<tr class="ms-2" onclick="location.href='orderDetail?purchase_id=<%=purchaseBean.getPurchaseId()%>'" style="cursor: pointer;">
 						<!-- 注文番号 -->
-						<td align="middle"><a
-							href='orderDetail?purchase_id=<%=purchaseBean.getPurchaseId()%>' style="width: 10px; color:#385A37;"><%=purchaseBean.getPurchaseId()%></a>
-							</button></td>
-						<!-- 合計金額 -->
+						<td align="middle" style="color: #385A37;"><%=purchaseBean.getPurchaseId()%></td>
+						<!-- 単価 -->
 						<td align="middle" style="white-space:nowrap; ">¥ <%=String.format("%,d", purchaseBean.getTotalAmount())%></td>
 						<!-- 購入日 -->
 						<td align="middle" style="white-space:nowrap;">
           	<%=new SimpleDateFormat("yyyy/MM/dd hh:mm").format(purchaseBean.getPurchaseDate())%></td>
 						<!-- 配送先 -->
-						<td align="middle" style="white-space:nowrap;">〒 <%=purchaseBean.getPostalCode()%> <%=purchaseBean.getShippingAddress()%> <%=purchaseBean.getAddressee()%></td>
+						<td align="middle" style="white-space:nowrap;">〒 <%=purchaseBean.getPostalCode()%> <%=purchaseBean.getAddress()%> <%=purchaseBean.getAddressee()%></td>
 						<!-- 配送ステータス -->
 						<td align="middle"><%=purchaseBean.getShippingStatus()%></td>
 					</tr>
