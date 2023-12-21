@@ -115,6 +115,6 @@
 				</div>
 			</form>
 		</main>
-		<script src="./js/script.js"></script>
+		<script src="./js/nullValidationScript.js"></script>
 	</body>
 </html>
