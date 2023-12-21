@@ -78,7 +78,7 @@
 												 style="object-fit: cover; height: 100%; display: block;">
 										</span>
 									</td>
-									<td class="td"><%= purchaseDetail.getItemName() %></td>
+									<td class="td"><%= purchaseDetail.getItemName() %> ( <%= purchaseDetail.getOptionCategoryValue() %> )</td>
 									<td class="td">￥ <%= nf.format(purchaseDetail.getPurchaseAmount()) %></td>
 									<td class="td"><%= purchaseDetail.getQuantity() %> 個</td>
 								</tr>

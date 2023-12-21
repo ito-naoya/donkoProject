@@ -8,6 +8,7 @@ import bean.ItemCategoryBean;
 import bean.OptionCategoryBean;
 import classes.Item;
 import classes.ItemCategory;
+import classes.Option;
 import classes.OptionCategory;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -34,80 +35,83 @@ public class EditItemInfo1Servlet extends HttpServlet {
 
 		//カテゴリー一覧を取得
 		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
-		request.setAttribute("categoryList", categoryList);
-
-		//商品登録画面1に転送
-		request.setAttribute("errorMessage", "");
+		if(categoryList == null) {
+			//取得情報の不備があれば、エラー画面に遷移
+			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
+			request.setAttribute("url","adminTopPage");
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+		}
 
 		//商品詳細を取得
-
 		ItemBean editItem = Item.getItemAllDetail(item);
+		if(editItem == null) {
+			//取得情報の不備があれば、エラー画面に遷移
+			request.setAttribute("errorMessage", "商品詳細の取得に失敗しました");
+			request.setAttribute("url","adminTopPage");
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+		}
+
+		//問題なければ商品編集画面1に遷移
 		request.setAttribute("item", editItem);
 		String view = "/WEB-INF/views/admin/editItemInfo1.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
 
 	}
-	//リファクタリングは改めて・・・
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		//TODO:セッション管理
 		//カテゴリー、商品名、商品説明、金額、在庫数を取得
-		Integer itemId = Integer.parseInt(request.getParameter("itemId"));
+		String itemId = request.getParameter("itemId");
 		String itemCategoryName = request.getParameter("itemCategoryName");
 		String itemName = request.getParameter("itemName");
 		String itemDescription = request.getParameter("itemDescription");
 		String price = request.getParameter("price");
 		String stock = request.getParameter("stock");
 		String fileName = request.getParameter("fileName");
-		int firstOptionId = Integer.parseInt(request.getParameter("firstOptionId"));
-		int secondOptionId = Integer.parseInt(request.getParameter("secondOptionId"));
+		String firstOptionId = request.getParameter("firstOptionId");
+		String secondOptionId = request.getParameter("secondOptionId");
 
-		//取得情報について、null値及び文字数制限の超過が無いかどうか確認し、itemBeanに登録
+		//入力した取得情報について、null値及び文字数制限の超過が無いかどうか確認し、itemBeanに登録
 		ItemBean updateItem = Item.checkRegistItemDetail(itemCategoryName, itemName, itemDescription, price, stock);
-
 		if(updateItem == null) {
 			//取得情報の不備があれば、再度入力画面に戻る
-			response.sendRedirect("registItem1");
-		} else {
-			//オプション属性をセット(null値チェックどこでしようか考え中）
-			updateItem.setItemId(itemId);
-			updateItem.setImageFileName(fileName);
-			updateItem.setItemFirstOptionIncrementId(firstOptionId);
-			updateItem.setItemSecondOptionIncrementId(secondOptionId);
-			//取得した商品情報をセット
-			request.setAttribute("item", updateItem);
-
-			//カテゴリー名からオプションを取得<衣類：色、衣類：衣類サイズ>
-			ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = new ArrayList<ArrayList<OptionCategoryBean>>();
-			ArrayList<ItemCategoryBean> itemCategoryList = ItemCategory.getItemOptionCategoryNameListByCategory(updateItem);
-			if(itemCategoryList == null) {
-				//取得情報の不備があれば、再度入力画面に戻る
-				response.sendRedirect("editItem1");
-			} else {
-
-				//各オプションが持っているオプションの数分for文を回す
-				for (int i = 0; i < itemCategoryList.size(); i++) {
-				    ItemCategoryBean itemCategory = itemCategoryList.get(i);
-
-				    //オプションの詳細を取得する[色,1,緑],[色,2,白],[色,3,黒]
-				    ArrayList<OptionCategoryBean> options = OptionCategory.getOptionCategoryListByCategory(itemCategory);
-				    if(options == null) {
-						//取得情報の不備があれば、再度入力画面に戻る
-						response.sendRedirect("editItem1");
-					} else {
-						//詳細の配列を追加
-						itemCategoryListAll.add(options);
-					}
-				}
-				request.setAttribute("itemCategoryListAll", itemCategoryListAll);
-				String view = "/WEB-INF/views/admin/editItemInfo2.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-				dispatcher.forward(request, response);
-				//TODOチャレンジ；商品名から既存の登録済みオプションと写真情報を取得してjsp上で選択不可にする
-			}
+			response.sendRedirect("editItem1");
+			return;
 		}
+
+		//カテゴリー名からオプションを取得<衣類：色、衣類：衣類サイズ>
+		ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(updateItem);
+		if(itemCategoryListAll == null) {
+			//取得情報の不備があれば、エラー画面に遷移
+			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
+			request.setAttribute("url","adminTopPage");
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+		}
+
+		// オプションの数を取得
+	    int selectBoxCount = itemCategoryListAll.size();
+		//商品の持つ他の情報について、null値及び文字数制限の超過が無いかどうか確認し、itemBeanに登録
+		updateItem = Option.checkItemAndOptionDetail(updateItem,itemId,fileName,firstOptionId,secondOptionId,selectBoxCount);
+		if(updateItem == null) {
+			//取得情報の不備があれば、再度入力画面に戻る
+			response.sendRedirect("editItem1");
+			return;
+		}
+
+		//取得した商品情報をセット
+		request.setAttribute("item", updateItem);
+
+		//問題なければ商品編集画面2に遷移
+		request.setAttribute("itemCategoryListAll", itemCategoryListAll);
+		String view = "/WEB-INF/views/admin/editItemInfo2.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+		dispatcher.forward(request, response);
 	}
 }
 

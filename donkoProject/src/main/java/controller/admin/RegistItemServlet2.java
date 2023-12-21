@@ -56,28 +56,20 @@ public class RegistItemServlet2 extends HttpServlet {
 	    // 最初のオプション（色）の値を取得
 	    String itemFirstOptionName = request.getParameter("optionCategoryName_1");
 	    String itemFirstOptionIncrementId = request.getParameter("optionValueS_1");
-	    String itemSecondOptionIncrementId = null;
         String[] itemSecondOptionIncrementIds = null;
 
 	    // オプション値の検証と追加
 	    ItemBean newItemAddOption;
 	    if (selectBoxCount == 1) {
 	        // オプションが1つの場合
-	        newItemAddOption = Option.checkRegistItemOptionDetail(newItem, itemFirstOptionName, itemFirstOptionIncrementId, null, null, selectBoxCount);
+	        newItemAddOption = Option.checkRegistItemOptionDetail("0", newItem, itemFirstOptionName, itemFirstOptionIncrementId, null, null, selectBoxCount);
 	    } else {
 	        // オプションが2つの場合
-	        String sizeDisplayType = request.getParameter("sizeDisplayType");
 	        String itemSecondOptionName = request.getParameter("optionCategoryName_2");
 
-	        if (sizeDisplayType.equals("select")) {
-	            // セレクトボックスでサイズを選択した場合
-	            itemSecondOptionIncrementId = request.getParameter("optionValueS_2");
-	            newItemAddOption = Option.checkRegistItemOptionDetail(newItem, itemFirstOptionName, itemFirstOptionIncrementId, itemSecondOptionName, itemSecondOptionIncrementId, selectBoxCount);
-	        } else {
-	            // チェックボックスでサイズを選択した場合
-	            itemSecondOptionIncrementIds = request.getParameterValues("optionValueC_2");
-	            newItemAddOption = Option.checkRegistItemOptionDetail(newItem, itemFirstOptionName, itemFirstOptionIncrementId, itemSecondOptionName, "0", selectBoxCount);
-	        }
+            // チェックボックスでサイズを選択した場合
+            itemSecondOptionIncrementIds = request.getParameterValues("optionValueC_2");
+            newItemAddOption = Option.checkRegistItemOptionDetail("0", newItem, itemFirstOptionName, itemFirstOptionIncrementId, itemSecondOptionName, "0", selectBoxCount);
 	    }
 
 	    if (newItemAddOption == null) {

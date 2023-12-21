@@ -10,9 +10,28 @@ public class PurchaseDetailBean {
 	private int purchaseAmount;
 	private int quantity;
 	private String imageFileName;
+	private String optionCategoryValue;
+	private int price;
 	
 	public PurchaseDetailBean() {};
 	
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	
+	public String getOptionCategoryValue() {
+		return optionCategoryValue;
+	}
+
+	public void setOptionCategoryValue(String optionCategoryValue) {
+		this.optionCategoryValue = optionCategoryValue;
+	}
+
 	public int getPurchaseDetailId() {
 		return purchaseDetailId;
 	}
