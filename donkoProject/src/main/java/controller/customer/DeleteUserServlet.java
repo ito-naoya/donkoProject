@@ -12,49 +12,28 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/userInfoPage")
-public class UserInfoPageServlet extends HttpServlet {
+@WebServlet("/deleteUser")
+public class DeleteUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public UserInfoPageServlet() {
+    public DeleteUserServlet() {
         super();
     }
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// セッション確認
-		HttpSession session = request.getSession(false);
-		int userId = (int) session.getAttribute("user_id");
-		if (userId == 0) {
-			String view = "/WEB-INF/views/customer/home.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-		}
-		
-		// ユーザーIDをセット
-		CustomerUser customerUser = new CustomerUser();
-		customerUser.setUserId(userId);
-		
-		// ユーザー情報取得
-		CustomerUser users = CustomerUser.getUserDetail(customerUser);
-		request.setAttribute("users", users);
-		request.setAttribute("user_id", userId);
-		
-		// ユーザ情報編集画面に遷移
-		String view = "/WEB-INF/views/customer/userInfoPage.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// セッションを確認
 		HttpSession session = request.getSession(false);
-		int userId = (int) session.getAttribute("user_id");
-		if (userId == 0) {
-			String view = "/WEB-INF/views/customer/home.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+		Object userId = (String) session.getAttribute("user_id");
+		
+		// userIdがなければホーム画面に戻す
+		if (userId == null) {
+			response.sendRedirect("home");
+			return;
 		}
 		
 		// ユーザーIDをセット
 		CustomerUser customerUser = new CustomerUser();
-		customerUser.setUserId(userId);
+		customerUser.setUserId((int) userId);
 		
 		// 削除フラグを設定するSQL
 		Boolean deleteFlagStatus = User.updateUserDeleteFlag(customerUser);
