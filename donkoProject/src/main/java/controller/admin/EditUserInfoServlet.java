@@ -78,7 +78,7 @@ public class EditUserInfoServlet extends HttpServlet {
 		
 		
 		//入力チェック
-		Boolean isIncomplete = BeanValidation.validate(request, response, "user", customerUser, GroupB.class);
+		Boolean isIncomplete = BeanValidation.validate(request, "user", customerUser, GroupB.class);
         
 		//入力内容に不備があった場合
 	      if(isIncomplete) {

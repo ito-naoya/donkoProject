@@ -10,11 +10,10 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 public class BeanValidation {
 	
-	public static <T, I> Boolean validate (HttpServletRequest request, HttpServletResponse response, String key, T bean, Class<I> groupClass ) {
+	public static <T, I> Boolean validate (HttpServletRequest request, String key, T bean, Class<I> groupClass ) {
 		
 		// Validator を取得
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
