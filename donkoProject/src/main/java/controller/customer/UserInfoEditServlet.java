@@ -33,22 +33,20 @@ public class UserInfoEditServlet extends HttpServlet {
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserId(userId);
 		
-		// ユーザー情報取得
+		// ユーザ情報を取得
 		CustomerUser users = CustomerUser.getUserDetail(customerUser);
 		
-		// Valueチェック
-		if(users == null || users.getUserLoginId() == null || 
-				users.getGender() == null || users.getBirthday() == null) {
-			// エラー画面を返す
-			errorHandling(request, response, "ユーザ編集画面へのアクセスに失敗しました", "userInfoPage");
+		// データの取得結果を判定
+		if(users == null) {
+			// 値取得が失敗した場合はエラー画面に返す
+			errorHandling(request, response, "ユーザ編集画面へのアクセスに失敗しました", "userInfoPage", "ユーザ情報確認画面に");
 		} else {
-			// ユーザー情報の値をセット
+			// 値取得が成功した場合はユーザー情報の値をセット
 			request.setAttribute("users", users);
+			// ユーザ情報編集画面に遷移
+			String view = "/WEB-INF/views/customer/userInfoEdit.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
 		}
-		
-		// ユーザ情報編集画面に遷移
-		String view = "/WEB-INF/views/customer/userInfoEdit.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -63,21 +61,17 @@ public class UserInfoEditServlet extends HttpServlet {
 		// インスタンス生成
 		CustomerUser customerUser = new CustomerUser();
 		
-		// Valueチェック
-		if (session.getAttribute("user_id") == null || request.getParameter("user_login_id") == null ||
-				request.getParameter("user_name") == null || request.getParameter("gender") == null || 
-				request.getParameter("birthday") == null
-				) {
-			// エラー画面を返す
-			errorHandling(request,response,"編集処理に失敗しました","userInfoEdit");
-		} else {
-			// nullがなければ値をBeanにセットする
-			customerUser.setUserId((int)session.getAttribute("user_id"));
-			customerUser.setUserLoginId(request.getParameter("user_login_id"));
-			customerUser.setUserName(request.getParameter("user_name"));
-			customerUser.setGender(request.getParameter("gender"));
-			customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
-		}
+		// CustomerBeanに値をセットする
+		customerUser.setUserId((int)session.getAttribute("user_id"));
+		customerUser.setUserLoginId(request.getParameter("user_login_id"));
+		customerUser.setUserName(request.getParameter("user_name"));
+		customerUser.setGender(request.getParameter("gender"));
+		customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
+		
+		/*
+		 *  TODO:バリテーションチェック
+		 *  こんがらがってきたので、一旦あとで
+		 * */
 		
 		// 更新処理実行
 		Boolean updateStatus = User.updateUserInfo(customerUser);
@@ -88,20 +82,17 @@ public class UserInfoEditServlet extends HttpServlet {
 			response.sendRedirect("userInfoPage");
 		} else {
 			// 処理が失敗した場合はエラー画面に返す
-			errorHandling(request,response,"編集処理に失敗しました", "userInfoEdit");
+			errorHandling(request,response,"編集処理に失敗しました", "userInfoEdit", "ユーザ情報編集画面に");
 		}
 	}
 	
-	protected void errorHandling(HttpServletRequest request,  HttpServletResponse response, String message, String url) throws ServletException, IOException {
+	protected void errorHandling(HttpServletRequest request,  HttpServletResponse response, String message, String url, String returnPage) throws ServletException, IOException {
 		// エラーメッセージをセット
 		request.setAttribute("errorMessage", message);
-		
-		// 戻り先のURL
+		// 戻り先のURLをセット
 		request.setAttribute("url", url);
-		
-		// TODO:全部できたらコメントアウト削除予定
-		// 戻るボタンの表示文言
-		// request.setAttribute("returnPage", returnPage);
+		// 戻り先のメッセージをセット
+		request.setAttribute("returnPage", returnPage);
 		
 		// エラー画面に遷移
 		String view = "/WEB-INF/views/component/message.jsp";

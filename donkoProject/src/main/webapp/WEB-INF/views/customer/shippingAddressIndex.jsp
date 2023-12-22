@@ -50,6 +50,7 @@
 					</form>
 				</div>
 			</div>
+
 		</div>
 		
 		<h4 style="margin-top: 50px; margin-bottom: 20px;">
@@ -104,7 +105,6 @@
 				numbers++;
 				}
 				%>
-			
 		</table>
 	</main>
 	<%@include file="../component/footer.jsp"%>
