@@ -2,6 +2,7 @@ package controller.customer;
 
 import java.io.IOException;
 
+import classes.ErrorHandling;
 import classes.user.CustomerUser;
 import classes.user.User;
 import jakarta.servlet.ServletException;
@@ -31,7 +32,13 @@ public class UpdateUserPasswordServlet extends HttpServlet {
 		customerUser.setPassword(request.getParameter("password"));
 		
 		// SQL実行
-		User.updateUserPassword(customerUser);
+		Boolean updateStatus = User.updateUserPassword(customerUser);
+		
+		if(!updateStatus) {
+			// エラー画面に遷移
+			ErrorHandling.transitionToErrorPage(request,response,"パスワードの更新に失敗しました。","userPasswordUpdate","パスワード変更画面に");
+			return;
+		}
 		
 		// ホーム画面に遷移
 		response.sendRedirect("home");

@@ -45,12 +45,12 @@ public class User {
 	};
 	
 	//ユーザーのパスワードを更新する
-	public static void updateUserPassword(CustomerUser customerUser) {
-		UpdateUserPasswords.updateUserPasswords(customerUser);
+	public static Boolean updateUserPassword(CustomerUser customerUser) {
+		return UpdateUserPasswords.updateUserPasswords(customerUser);
 	};
 	
 	//ユーザーを論理削除する
-	public static boolean updateUserDeleteFlag(CustomerUser customerUser) {
+	public static Boolean updateUserDeleteFlag(CustomerUser customerUser) {
 		return UpdateUserDeleteFlag.updateUserDeleteFlags(customerUser);
 	};
 

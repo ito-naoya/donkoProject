@@ -36,8 +36,8 @@ public class ShippingAddress {
 	};
 	
 	//配送先情報を更新する
-	public static void updateShippingAddress(ShippingAddressBean shippingAddressBean){
-		UpdateShippingAddress.updateShippingAddress(shippingAddressBean);
+	public static Boolean updateShippingAddress(ShippingAddressBean shippingAddressBean){
+		return UpdateShippingAddress.updateShippingAddress(shippingAddressBean);
 	};
 	
 	//配送住所の一覧を取得する
@@ -50,7 +50,7 @@ public class ShippingAddress {
 		return SelectMainShippingAddressSort.selectMainShippingAddressSort(customerUser);
 	};
 	//配送先を削除
-	public static void deleteShippingAddresses(ShippingAddressBean shippingAddressBean){
-		DeleteIteShippingAddresses.deleteUpdateShippingAddress(shippingAddressBean);
+	public static Boolean deleteShippingAddresses(ShippingAddressBean shippingAddressBean){
+		return DeleteIteShippingAddresses.deleteUpdateShippingAddress(shippingAddressBean);
 	};
 }

@@ -184,7 +184,7 @@
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
 			%>
-			<table class="table table-hover table-borderless my-3">
+			<table class="purchaseDetailTable table-hover table-borderless my-3">
 				<thead align="center">
 					<tr>
 						<th class="th"><strong style="white-space: nowrap;">注文ID</strong></th>

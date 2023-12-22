@@ -46,7 +46,7 @@ public class MyPageServlet extends HttpServlet {
 			// Valueチェック
 			if(purchaseList == null) {	
 				// エラー画面に遷移
-				ErrorHandling.transitionToErrorPage(request,response,"マイページへのアクセスが失敗しました","userSignin","ログイン画面に");
+				ErrorHandling.transitionToErrorPage(request,response,"購入履歴の取得に失敗しました","home","ホームに");
 				return;
 			} else {
 			// purchaseListに値をセット
@@ -56,6 +56,12 @@ public class MyPageServlet extends HttpServlet {
 			// 以下追加
 			// ユーザー情報取得
 			CustomerUser users = CustomerUser.getUserDetail(customerUser);
+			
+			if(users == null) {
+				// エラー画面に遷移
+				ErrorHandling.transitionToErrorPage(request,response,"ユーザー情報の取得に失敗しました","userSignin","ログイン画面に");
+				return;
+			}
 			request.setAttribute("users", users);
 			request.setAttribute("user_id", customerUser.getUserId());
 			// ここまで

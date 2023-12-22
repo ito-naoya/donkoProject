@@ -3,6 +3,7 @@ package controller.customer;
 import java.io.IOException;
 
 import bean.ShippingAddressBean;
+import classes.ErrorHandling;
 import classes.ShippingAddress;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
@@ -44,7 +45,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		
 		// セッション確認
 		HttpSession session = request.getSession(false);
-		Object userId = (String) session.getAttribute("user_id");
+		Object userId = session.getAttribute("user_id");
 
 		// userIdがnullの場合はマイページに遷移
 		if(userId == null) {
@@ -60,7 +61,8 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		int shippingAddressId = 0;
 		if (getMainShippingAddress == null) {
 			// エラー画面を返す
-			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
+			ErrorHandling.transitionToErrorPage(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
+			return;
 		} else {
 			// shippingAddressIdが存在するか
 			shippingAddressId = getMainShippingAddress.getShippingAddressId();
@@ -96,20 +98,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 			response.sendRedirect("shippingAddressIndex");
 		} else {
 			// エラー画面を返す
-			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
+			ErrorHandling.transitionToErrorPage(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
 		}
-	}
-
-	protected void errorHandling(HttpServletRequest request, HttpServletResponse response, String message, String url, String returnPage)
-			throws ServletException, IOException {
-		// エラーメッセージをセット
-		request.setAttribute("errorMessage", message);
-		// 戻り先のURL
-		request.setAttribute("url", url);
-		// 戻るボタンの表示文言
-		request.setAttribute("returnPage", returnPage);
-		// エラー画面に遷移
-		String view = "/WEB-INF/views/component/message.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
 	}
 }
