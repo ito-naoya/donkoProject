@@ -54,12 +54,12 @@ public class UpdateMainShippingAddress {
 				if(!connection.isClosed()) {
 					connection.rollback();
 					e.printStackTrace();
-					return null;
+					return false;
 				}
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			return null;
+			return false;
 			}
 		return true;
 	}
