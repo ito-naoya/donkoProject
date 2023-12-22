@@ -2,15 +2,9 @@ package controller.admin;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
+import classes.BeanValidation;
 import classes.user.CustomerUser;
 import classes.user.User;
 import jakarta.servlet.ServletException;
@@ -81,25 +75,12 @@ public class EditUserInfoServlet extends HttpServlet {
 		customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
 		customerUser.setDeleted(status.equals("delete") ? true : false);
 		
-		// Validator を取得
-		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
+		Map<String, String> validationMap = BeanValidation.validate(customerUser);
         
-        // バリデーションを実行
-        Set<ConstraintViolation<CustomerUser>> result = validator.validate(customerUser);
-        
-        //バリデーションメッセージを保持するmapをnew
-        Map<String, String> validationMsg = new LinkedHashMap<String, String>();
-        
-         //バリデーションメッセージのセット
-        for(ConstraintViolation<CustomerUser> rs : result){
-        validationMsg.put(rs.getPropertyPath().toString(), rs.getMessage());
-        }
-        
-        if(result.size() > 0) {
+        if(validationMap.size() > 0) {
         	
-        	for(Map.Entry<String, String> msg : validationMsg.entrySet()) {
-        		request.setAttribute(msg.getKey() + "Msg", msg.getValue());
+        	for(Map.Entry<String, String> msg : validationMap.entrySet()) {
+        		request.setAttribute(msg.getKey(), msg.getValue());
         	}
         	
         	request.setAttribute("user", customerUser);

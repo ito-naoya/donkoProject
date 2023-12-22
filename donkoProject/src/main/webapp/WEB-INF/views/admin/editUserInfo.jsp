@@ -45,14 +45,14 @@
 					<div class="form-group　d-flex flex-wrap　justify-content-center" style="margin-bottom: 30px;">
 						<input type="text" class="form-control" id="exampleInputUserId" name="user_login_id" value="<%=user.getUserLoginId()%>" required>
 						<div class="invalid-feedback">ユーザーIDを入力してください</div>
-						<% String userLoginIdMsg = (String)request.getAttribute("userLoginIdMsg"); %>
-						<% if (userLoginIdMsg == null) {%>
+						<% String userLoginId = (String)request.getAttribute("userLoginId"); %>
+						<% if (userLoginId == null) {%>
 						<div class="invalid-feedback">
 						ユーザーIDを入力してください
 						</div>
 						<%} else {%>
 						<p style="color: red; margin: 0;">
-							<%= userLoginIdMsg %>
+							<%= userLoginId %>
 						</p>
 						<%} %>
 					</div>
@@ -65,14 +65,14 @@
 					<div class="form-group d-flex flex-wrap justify-content-start" style="margin-bottom: 30px;">
 						<input type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName" name="user_name" value="<%=user.getUserName()%>" required>
 						
-						<% String userNameMsg = (String)request.getAttribute("userNameMsg"); %>
-						<% if (userNameMsg == null) {%>
+						<% String userName = (String)request.getAttribute("userName"); %>
+						<% if (userName == null) {%>
 						<div class="invalid-feedback">
 							ユーザー名を入力してください
 						</div>
 						<%} else {%>
 						<p style="color: red; margin: 0;">
-							<%= userNameMsg %>
+							<%= userName %>
 						</p>
 						<%} %>
 					</div>
