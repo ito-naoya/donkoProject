@@ -46,7 +46,7 @@ public class MyPageServlet extends HttpServlet {
 			// Valueチェック
 			if(purchaseList == null) {	
 				// エラー画面に遷移
-				ErrorHandling.transitionToErrorPage(request,response,"マイページへのアクセスが失敗しました","userSignin","ログイン画面に");
+				ErrorHandling.transitionToErrorPage(request,response,"購入履歴の取得に失敗しました","home","ホームに");
 				return;
 			} else {
 			// purchaseListに値をセット
