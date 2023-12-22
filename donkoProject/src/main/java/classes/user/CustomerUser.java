@@ -11,10 +11,10 @@ public class CustomerUser extends User {
 	};
 
 	//ログインID
-	@Size(min= 5 , max= 10, message="{min}文字以上{max}文字以下で入力してください。" )
+	@Size(min=5 , max= 10, message="{min}文字以上{max}文字以下で入力してください。" )
 	private String userLoginId;
 	//パスワード
-	@Size(min=8, max=8, message="８文字で入力してください。" ) 
+	@Size(min=8, max=16, message="{min}文字以上{max}文字以内で入力してください。" ) 
 	private String password;
 	//ユーザー名
 	@Size(min=1, max= 25, message="{min}文字以上{max}文字以内で入力してください。") 
