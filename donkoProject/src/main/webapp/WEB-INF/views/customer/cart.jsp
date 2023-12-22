@@ -17,6 +17,7 @@
 		<main>
 			<%
 			ArrayList<CartBean> cartBeanList = (ArrayList<CartBean>)request.getAttribute("cartBeanList");
+			String userName = (String)request.getAttribute("userName");
 			%>
 			<div class="container">
 				<div class="row justify-content-center" style="margin-top:40px;">
@@ -36,7 +37,7 @@
 						if(cartBeanList.size() > 0){
 						%>
 							<div class="d-flex align-items-center justify-content-between">
-								<h6 class="mb-0">伊藤さん のカート</h6>
+								<h6 class="mb-0"><%= userName %> さんのカート</h6>
 								<form action="deleteCart" method="POST">
 									<button type=submit class="btn btn-sm px-4 py-2 rounded-pill border border-danger" style="background-color: white; color: red;">
 										商品を全て削除
