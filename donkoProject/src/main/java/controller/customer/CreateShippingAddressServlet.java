@@ -24,12 +24,13 @@ public class CreateShippingAddressServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// セッション確認
 		HttpSession session = request.getSession(false);
-		int userId = (int) session.getAttribute("user_id");
-		if (userId == 0) {
-			String view = "/WEB-INF/views/customer/home.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-		}
+		Object userId = session.getAttribute("user_id");
 
+		// userIdがnullの場合はマイページに遷移
+		if(userId == null) {
+			response.sendRedirect("home");
+			return;
+		}
 		// 配送先登録画面
 		String view = "/WEB-INF/views/customer/createShippingAddress.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
