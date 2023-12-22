@@ -45,7 +45,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		
 		// セッション確認
 		HttpSession session = request.getSession(false);
-		Object userId = (String) session.getAttribute("user_id");
+		Object userId = session.getAttribute("user_id");
 
 		// userIdがnullの場合はマイページに遷移
 		if(userId == null) {
