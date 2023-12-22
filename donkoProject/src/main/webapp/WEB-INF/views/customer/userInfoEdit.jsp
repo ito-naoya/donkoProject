@@ -19,7 +19,8 @@
 		CustomerUser users = (CustomerUser) request.getAttribute("users");
 		%>
 		<form action="userInfoEdit" method="post"
-			style="display: flex; justify-content: center; margin: 30px;" class="needs-validation" novalidate>
+			style="display: flex; justify-content: center; margin: 30px;"
+			class="needs-validation" novalidate>
 			<div class="col-lg-5 m-5"
 				style="border: 1px solid #333333; padding: 65px;">
 				<div class="cancelButton"
@@ -37,28 +38,40 @@
 					<label for="exampleInputUserId">ユーザーID</label><br>
 				</div>
 				<div class="form-group d-flex flex-wrap"
-					style="display: flex; justify-content: center; margin-bottom: 30px;">
+					style="display: flex; justify-content: center;">
 					<input type="text" class="form-control" id="exampleInputUserId"
 						aria-describedby="userId" name="user_login_id"
-						value="<%=users.getUserLoginId()%>" required>
-					<div class="invalid-feedback">ユーザーIDを入力してください</div>
+						value="<%=users.getUserLoginId()%>">
+				</div>
+				<div class="d-flex flex-wrap"
+					style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+					<% String userLoginId = (String)request.getAttribute("userLoginId"); %>
+					<% if (userLoginId != null) { %>
+					<%= userLoginId %>
+					<% } %>
 				</div>
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputUserName">ユーザー名</label><br>
 				</div>
 				<div class="form-group d-flex flex-wrap"
-					style="display: flex; justify-content: center; margin-bottom: 30px;">
+					style="display: flex; justify-content: center;">
 					<input type="text" class="form-control" id="exampleInputUserName"
 						aria-describedby="userName" name="user_name"
-						value="<%=users.getUserName()%>" required>
-					<div class="invalid-feedback">ユーザー名を入力してください</div>
+						value="<%=users.getUserName()%>">
+				</div>
+				<div class="d-flex flex-wrap"
+					style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+					<% String userName = (String)request.getAttribute("userName"); %>
+					<% if (userName != null) { %>
+					<%= userName %>
+					<% } %>
 				</div>
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputGender">性別</label><br>
 				</div>
 				<div class="form-group d-flex flex-wrap"
-					style="display: flex; justify-content: center; margin-bottom: 30px;">
-					<select class="form-control" name="gender" id="exampleInputGender" required>
+					style="display: flex; justify-content: center;">
+					<select class="form-control" name="gender" id="exampleInputGender">
 						<%
 						String selected = users.getGender();
 						String men = (selected != null && selected.equals("男性") ? "selected" : "");
@@ -68,16 +81,28 @@
 						<option value="男性" <%=men%>>男性</option>
 						<option value="女性" <%=woman%>>女性</option>
 					</select>
-					<div class="invalid-feedback">性別を選択してください</div>
+				</div>
+				<div class="d-flex flex-wrap"
+					style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+					<% String gender = (String)request.getAttribute("gender"); %>
+					<% if (gender != null) { %>
+					<%= gender %>
+					<% } %>
 				</div>
 				<div style="margin-bottom: 10px;">
 					<label for="exampleInputbirthday">誕生日</label><br>
 				</div>
 				<div class="form-group d-flex flex-wrap"
-					style="display: flex; justify-content: center; margin-bottom: 70px;">
+					style="display: flex; justify-content: center;">
 					<input type="date" class="form-control" id="exampleInputbirthday"
-						name="birthday" value="<%=users.getBirthday()%>" required>
-					<div class="invalid-feedback">誕生日を選択してください</div>
+						name="birthday" value="<%=users.getBirthday()%>">
+				</div>
+				<div class="d-flex flex-wrap"
+					style="display: flex; justify-content: start; margin-bottom: 70px; color: #FF0000;">
+					<% String birthday = (String)request.getAttribute("birthday"); %>
+					<% if (birthday != null) { %>
+					<%= birthday %>
+					<% } %>
 				</div>
 				<div class="cancelButton"
 					style="display: flex; justify-content: center; margin-bottom: 20px;">

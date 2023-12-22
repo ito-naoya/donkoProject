@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class UpdateUserInfoInUsers {
 	
 	//ユーザー情報を更新する
-	public static boolean updateUserInfoInUsers(CustomerUser customerUser){
+	public static Boolean updateUserInfoInUsers(CustomerUser customerUser){
 		// SQLコマンド生成
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE "						);
@@ -42,10 +42,12 @@ public class UpdateUserInfoInUsers {
 				if(!connection.isClosed()) {
 					connection.rollback();
 					e.printStackTrace();
+					return null;
 				}
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
 		return true;
 	};

@@ -35,7 +35,7 @@ public class User {
 	};
 	
 	//ユーザー情報を更新する
-	public static boolean updateUserInfo(CustomerUser customerUser) {
+	public static Boolean updateUserInfo(CustomerUser customerUser) {
 		return UpdateUserInfoInUsers.updateUserInfoInUsers(customerUser);
 	};
 
