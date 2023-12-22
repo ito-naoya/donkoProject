@@ -52,7 +52,7 @@
 			</div>
 		</div>
 		
-		<h4 style="margin-top: 30px; margin-bottom: 20px;">
+		<h4 style="margin-top: 50px; margin-bottom: 20px;">
 			<strong>配送先一覧</strong>
 		</h4>
 		<table class="table table-borderless">

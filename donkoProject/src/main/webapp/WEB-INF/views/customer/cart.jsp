@@ -23,9 +23,13 @@
 					<%	
 					if(cartBeanList.size() == 0 ) {
 					%>
-						<h1 class="text-center">現在カートの中に商品はありません</h1>
+					<div class="col-lg-8 d-flex justify-content-center align-items-center p-2" style="height:60vh;">
+						<div>
+							<h6 class="border text-center px-5 py-3" style="border-radius:40px; color:lightgray;">現在カートの中に商品はありません</h6>
+						</div>
+					</div>
 					<%
-					}
+					} else {
 					%>
 					<div class="col-9">
 						<table class="table table-borderless">
@@ -139,6 +143,9 @@
 						}
 						%>
 					</div>
+					<% 
+					} 
+					%>
 				</div>
 			</div>
 		</main>
