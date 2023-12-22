@@ -1,6 +1,5 @@
 package classes;
 
-import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -10,13 +9,12 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class BeanValidation {
 	
-	public static <T> Boolean validate (HttpServletRequest request, HttpServletResponse response, String key, T bean) throws ServletException, IOException{
+	public static <T> Boolean validate (HttpServletRequest request, HttpServletResponse response, String key, T bean) {
 		
 		// Validator を取得
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -51,8 +49,6 @@ public class BeanValidation {
         //入力内容にエラーなし
         return false;
         
-        
-
 	}
 
 }
