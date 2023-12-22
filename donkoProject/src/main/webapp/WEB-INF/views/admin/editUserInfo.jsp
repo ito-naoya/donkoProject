@@ -20,7 +20,7 @@
 			<%
 			CustomerUser user = (CustomerUser) request.getAttribute("user");
 			%>
-			<form action="editUserInfo" method="post" style="display: flex; justify-content: center; margin: 30px;" class="needs-validation" novalidate>
+			<form action="editUserInfo" method="post" style="display: flex; justify-content: center; margin: 30px;">
 				<input type="hidden" name="userId" value="<%= user.getUserId() %>">
 				<div class="col-lg-5 m-5" style="border: 1px solid #333333; padding: 65px;">
 					<div class="cancelButton" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
@@ -43,14 +43,9 @@
 						<br>
 					</div>
 					<div class="form-group　d-flex flex-wrap　justify-content-center" style="margin-bottom: 30px;">
-						<input type="text" class="form-control" id="exampleInputUserId" name="user_login_id" value="<%=user.getUserLoginId()%>" required>
-						<div class="invalid-feedback">ユーザーIDを入力してください</div>
+						<input type="text" class="form-control" id="exampleInputUserId" name="user_login_id" value="<%=user.getUserLoginId()%>">
 						<% String userLoginId = (String)request.getAttribute("userLoginId"); %>
-						<% if (userLoginId == null) {%>
-						<div class="invalid-feedback">
-						ユーザーIDを入力してください
-						</div>
-						<%} else {%>
+						<% if (userLoginId != null) {%>
 						<p style="color: red; margin: 0;">
 							<%= userLoginId %>
 						</p>
@@ -63,14 +58,10 @@
 						<br>
 					</div>
 					<div class="form-group d-flex flex-wrap justify-content-start" style="margin-bottom: 30px;">
-						<input type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName" name="user_name" value="<%=user.getUserName()%>" required>
+						<input type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName" name="user_name" value="<%=user.getUserName()%>">
 						
 						<% String userName = (String)request.getAttribute("userName"); %>
-						<% if (userName == null) {%>
-						<div class="invalid-feedback">
-							ユーザー名を入力してください
-						</div>
-						<%} else {%>
+						<% if (userName != null) {%>
 						<p style="color: red; margin: 0;">
 							<%= userName %>
 						</p>
@@ -83,7 +74,7 @@
 						<br>
 					</div>
 					<div class="form-group d-flex flex-wrap justify-content-center" style="margin-bottom: 30px;">
-						<select class="form-control" name="gender" id="exampleInputGender" required>
+						<select class="form-control" name="gender" id="exampleInputGender">
 							<%
 							String selected = user.getGender();
 							String men = (selected != null && selected.equals("男性") ? "selected" : "");
@@ -105,7 +96,7 @@
 						<br>
 					</div>
 					<div class="form-group d-flex flex-wrap justify-content-center" style="margin-bottom: 30px;">
-						<input type="date" class="form-control" id="exampleInputbirthday" name="birthday" value="<%=user.getBirthday()%>" required>
+						<input type="date" class="form-control" id="exampleInputbirthday" name="birthday" value="<%=user.getBirthday()%>">
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputbirthday">
@@ -136,6 +127,5 @@
 				</div>
 			</form>
 		</main>
-		<script src="./js/nullValidationScript.js"></script>
 	</body>
 </html>
