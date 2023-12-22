@@ -28,7 +28,7 @@
 						<strong>ユーザ情報編集</strong>
 					</h2>
 					<div>
-						<a href="userInfoPage"
+						<a href="myPage"
 							style="text-decoration: none; text-align: center;"><button
 								type="button" class="btn-close border" aria-label="Close"></button>️</a>
 					</div>
