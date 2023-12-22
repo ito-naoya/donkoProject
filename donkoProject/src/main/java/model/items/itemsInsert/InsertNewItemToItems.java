@@ -56,36 +56,27 @@ public class InsertNewItemToItems {
         params2.add(itemBean.getItemFirstOptionIncrementId());
         //セレクトボックスが2つの時
         ArrayList<Object> params3 = new ArrayList<Object>();
-        if (selectBoxCount == 2 && itemSecondOptionIncrementIds == null) {
+        if (selectBoxCount == 2) {
             params3.add(itemBean.getItemSecondOptionName());
             params3.add(itemBean.getItemSecondOptionIncrementId());
         }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
             try {
-                if (itemSecondOptionIncrementIds == null) {
-                    // セレクトボックスの場合
+            	//チェックボックスの個数分回す
+                for (String optionId : itemSecondOptionIncrementIds) {
+                    // itemsテーブルに商品を登録
                     GeneralDao.executeUpdate(conn, INSERT_NEWITEM_ITEM_SQL, params1);
-                    GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, params2);
-                    if (selectBoxCount == 2) {
-                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, params3);
-                    }
-                } else {
-                    // チェックボックスの場合
-                    for (String optionId : itemSecondOptionIncrementIds) {
-                        // itemsテーブルに商品を登録
-                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_ITEM_SQL, params1);
 
-                        // optionsテーブルに色を登録
-                        ArrayList<Object> paramsColor = new ArrayList<>(params2);
-                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, paramsColor);
+                    // optionsテーブルに色を登録
+                    ArrayList<Object> paramsColor = new ArrayList<>(params2);
+                    GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, paramsColor);
 
-                        // optionsテーブルにサイズを登録
-                        ArrayList<Object> paramsSize = new ArrayList<>();
-                        paramsSize.add(itemBean.getItemSecondOptionName());
-                        paramsSize.add(optionId);
-                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, paramsSize);
-                    }
+                    // optionsテーブルにサイズを登録
+                    ArrayList<Object> paramsSize = new ArrayList<>();
+                    paramsSize.add(itemBean.getItemSecondOptionName());
+                    paramsSize.add(optionId);
+                    GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, paramsSize);
                 }
 
                 conn.commit(); // コミット

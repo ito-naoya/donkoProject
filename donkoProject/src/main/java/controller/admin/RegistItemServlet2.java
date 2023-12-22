@@ -2,6 +2,7 @@ package controller.admin;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import bean.ItemBean;
 import classes.Item;
@@ -81,6 +82,15 @@ public class RegistItemServlet2 extends HttpServlet {
         // 写真名を設定(商品名＋オプションID)
         String fileName = itemName + itemFirstOptionIncrementId;
         newItemAddOption.setImageFileName(fileName);
+
+        //商品名とオプションについて、既存のアイテムと重複がないか確認する
+        ArrayList<Integer> existId = Item.checkItemAlreadyExist(newItemAddOption);
+        if(existId != null) {
+        	request.setAttribute("errorMessage", "この商品は既に存在しています。商品ID；" + existId);
+    		//商品登録画面1に転送
+    		String view = "/WEB-INF/views/admin/registItem1.jsp";
+    		request.getRequestDispatcher(view).forward(request, response);
+        }
 
         if (Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {
         	ServletContext context = getServletContext();

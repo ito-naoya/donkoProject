@@ -75,7 +75,7 @@ public class RegistItemServlet1 extends HttpServlet {
 		String view = "/WEB-INF/views/admin/registItem2.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}
-	
+
 	protected void errorHandling(HttpServletRequest request, HttpServletResponse response, String message, String url, String returnPage)
 			throws ServletException, IOException {
 		// エラーメッセージをセット
