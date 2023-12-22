@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.PurchaseBean;
+import classes.ErrorHandling;
 import classes.Purchase;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -46,10 +47,8 @@ public class ShippingServlet extends HttpServlet {
 		
 		// 取得した値の状態によって挙動を条件分岐
 		if (unshippingedItemList == null){
-			request.setAttribute("errorMessage", "データの取得に失敗しました");
-			request.setAttribute("url", "adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-	        request.getRequestDispatcher(view).forward(request, response);
+	        ErrorHandling.transitionToErrorPage(request, response, "データの取得に失敗しました","adminTopPage","管理者ページに");
+			return;
 		} else if (unshippingedItemList.size() > 0) {
 			request.setAttribute("unshippingedItemList", unshippingedItemList);
 		} else {

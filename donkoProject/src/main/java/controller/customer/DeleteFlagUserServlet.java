@@ -3,6 +3,7 @@ package controller.customer;
 import java.io.IOException;
 import java.sql.Date;
 
+import classes.ErrorHandling;
 import classes.user.AdminUser;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
@@ -72,16 +73,9 @@ public class DeleteFlagUserServlet extends HttpServlet {
 			// 処理が成功すればにホーム画面に遷移
 			response.sendRedirect("home");
 		} else {
-			
-			// エラーメッセージ
-			request.setAttribute("errorMessage", "退会処理が失敗しました");
-			
-			// ユーザー情報の画面に遷移
-			request.setAttribute("url", "userInfoPage");
-			
-			// エラー画面に遷移
-			String view = "/WEB-INF/views/component/message.jsp";
-	        request.getRequestDispatcher(view).forward(request, response);
+	      //エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response,"退会処理が失敗しました","userInfoPage","ユーザー情報画面に");
+			return;
 		}
 	}
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.ShippingAddressBean;
+import classes.ErrorHandling;
 import classes.ShippingAddress;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
@@ -39,8 +40,10 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 		// 配送先一覧を取得
 		ArrayList<ShippingAddressBean> shippingAddressList = ShippingAddress.getShippingAddressList(customerUser);
 		
-		if (mainShippingAddressList == null || shippingAddressList == null) {
-			errorHandling(request, response, "配送先一覧画面へのアクセスに失敗しました", "myPage", "マイページ画面に");
+		if (mainShippingAddressList == null || shippingAddressList == null) {			
+			// エラー画面に遷移
+			ErrorHandling.transitionToErrorPage(request,response,"配送先一覧画面へのアクセスに失敗しました","myPage","マイページ画面に");
+			return;
 		} else {
 			// データ取得に成功した場合に値をセットする
 			request.setAttribute("mainShippingAddressList", mainShippingAddressList);
@@ -78,23 +81,12 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 		Boolean updateStatus = ShippingAddress.updateMainShippingAddress(shippingAddressBean);
 		
 		if (!updateStatus) {
-			errorHandling(request, response, "メイン配送先の更新に失敗しました", "shippingAddressIndex", "配送先一覧の画面に");
+			// エラー画面に遷移
+			ErrorHandling.transitionToErrorPage(request,response,"メイン配送先の更新に失敗しました。","shippingAddressIndex","配送先一覧の画面に");
+			return;
 		} else {
 			// 配送先一覧画面
 			response.sendRedirect("shippingAddressIndex");
 		}
 	}
-	
-	protected void errorHandling(HttpServletRequest request,  HttpServletResponse response, String message, String url, String returnPage) throws ServletException, IOException {
-		// エラーメッセージをセット
-		request.setAttribute("errorMessage", message);
-		// 戻り先のURL
-		request.setAttribute("url", url);
-		// 戻るボタンの表示文言
-		request.setAttribute("returnPage", returnPage);
-			
-		// エラー画面に遷移
-		String view = "/WEB-INF/views/component/message.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
-		}
 }

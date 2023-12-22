@@ -3,6 +3,7 @@ package controller.admin;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import classes.ErrorHandling;
 import classes.user.AdminUser;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
@@ -28,13 +29,8 @@ public class DeleteUserInfoServlet extends HttpServlet {
 		
 		//データベースから取得できなかった時
 		if(userList == null) {
-			//エラーメッセージ
-			request.setAttribute("errorMessage", "ユーザー情報の取得時に問題が発生しました。");
-			//エラーページからの遷移先
-			request.setAttribute("url", "adminTopPage");
-			//エラーページ表示
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			//エラーページに遷移する
+			ErrorHandling.transitionToErrorPage(request, response,  "ユーザー情報の取得時に問題が発生しました。", "adminTopPage", "管理者ページに");
 			return;
 		}
 
@@ -61,13 +57,8 @@ public class DeleteUserInfoServlet extends HttpServlet {
 			
 			//データベースから取得できなかった時
 			if(userList == null) {
-				//エラーメッセージ
-				request.setAttribute("errorMessage", "ユーザー情報の取得時に問題が発生しました。");
-				//エラーページからの遷移先
-				request.setAttribute("url", "adminTopPage");
-				//エラーページ表示
-				String view = "/WEB-INF/views/component/message.jsp";
-				request.getRequestDispatcher(view).forward(request, response);
+				//エラーページに遷移する
+				ErrorHandling.transitionToErrorPage(request, response,  "ユーザー情報の取得時に問題が発生しました。", "adminTopPage", "管理者ページに");
 				return;
 			}
 			

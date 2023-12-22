@@ -7,6 +7,7 @@ import bean.CartBean;
 import bean.PurchaseBean;
 import bean.ShippingAddressBean;
 import classes.Cart;
+import classes.ErrorHandling;
 import classes.Purchase;
 import classes.ShippingAddress;
 import classes.user.CustomerUser;
@@ -46,15 +47,9 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		
 		//データベースから取得できなかった時
 		if(cartBeanList == null || shippingAddress == null) {
-			//エラーメッセージ
-			request.setAttribute("errorMessage", "購入情報の取得時に問題が発生しました。");
-			//エラーページからの遷移先
-			request.setAttribute("url", "home");
-			//エラーページを返す
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			// エラー画面に遷移
+			ErrorHandling.transitionToErrorPage(request,response,"購入情報の取得時に問題が発生しました。","home","ホームに");
 			return;
-			
 		}
 		
 		//カート内の商品の合計金額をtotalPriceに代入
@@ -103,14 +98,9 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		Boolean isCommit = Purchase.purchaseItem(pb);
 		
 		//商品を購入できなかった時
-		if(!isCommit) {
-			//エラーメッセージ
-			request.setAttribute("errorMessage", "商品購入処理中に問題が発生しました。");
-			//エラーページからの遷移先
-			request.setAttribute("url", "purchaseConfirm");
-			//エラーページ表示
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+		if(!isCommit) {			
+			// エラー画面に遷移
+			ErrorHandling.transitionToErrorPage(request,response,"商品購入処理中に問題が発生しました。","purchaseConfirm","購入確認画面に");
 			return;
 		}
 		

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import bean.CartBean;
 import classes.Cart;
+import classes.ErrorHandling;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -40,14 +41,9 @@ public class CartServlet extends HttpServlet {
 		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(loginedUser);
 		
 		//データベースから取得できなかった時
-		if(cartBeanList == null) {
-			//エラーメッセージ
-			request.setAttribute("errorMessage", "カート情報の取得時に問題が発生しました。");
-			//エラーページからの遷移先
-			request.setAttribute("url", "home");
-			//エラーページ表示
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+		if(cartBeanList == null) {			
+			//エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response,"カート情報の取得時に問題が発生しました。","home","ホームに");
 			return;
 		}
 		
@@ -95,13 +91,8 @@ public class CartServlet extends HttpServlet {
 		
 		//数量更新に失敗したとき
 		if(!isCommit) {
-			//エラーメッセージ
-			request.setAttribute("errorMessage", "カート数量更新処理中に問題が発生しました。");
-			//エラーページからの遷移先
-			request.setAttribute("url", "cart");
-			//エラーページ表示
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			//エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response,"カート数量更新処理中に問題が発生しました。","cart","カートに");
 			return;
 		}
 		

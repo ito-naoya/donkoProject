@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.PurchaseBean;
+import classes.ErrorHandling;
 import classes.Purchase;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,11 +24,9 @@ public class AdminTopPageServlet extends HttpServlet {
 		// 未発送の購入情報を一覧表示
 		ArrayList<PurchaseBean> unshippingedItemList = Purchase.getUnshippingedItemListByDesc();
 		
-		if (unshippingedItemList == null){
-			request.setAttribute("errorMessage", "データの取得に失敗しました");
-			request.setAttribute("url", "adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-	        request.getRequestDispatcher(view).forward(request, response);
+		if (unshippingedItemList == null) {
+	        ErrorHandling.transitionToErrorPage(request, response, "データの取得に失敗しました","adminTopPage","管理者ページに");
+			return;
 		} else if (unshippingedItemList.size() > 0) {
 			request.setAttribute("unshippingedItemList", unshippingedItemList);
 		} else {
