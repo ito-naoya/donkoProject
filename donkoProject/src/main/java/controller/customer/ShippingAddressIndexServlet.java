@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 import bean.ShippingAddressBean;
 import classes.ErrorHandling;
+import classes.BeanValidation;
 import classes.ShippingAddress;
 import classes.user.CustomerUser;
+import interfaces.group.GroupB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,7 +27,7 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// セッション確認
 		HttpSession session = request.getSession(false);
-		Object userId = session.getAttribute("user_id");
+		Object userId = (String) session.getAttribute("user_id");
 		if(userId == null) {
 			response.sendRedirect("home");
 			return;
@@ -58,7 +60,7 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// セッション確認
 		HttpSession session = request.getSession(false);
-		Object userId = session.getAttribute("user_id");
+		Object userId = (String) session.getAttribute("user_id");
 		if(userId == null) {
 			response.sendRedirect("home");
 			return;
@@ -73,9 +75,16 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 		shippingAddressBean.setUserId((int) userId);
 		shippingAddressBean.setShippingAddressId(Integer.parseInt(request.getParameter("update_shipping_address")));
 		
-		/*
-		 * TODO:バリーションは後ほど
-		 * */
+		// 入力チェック
+		Boolean isIncomplete = BeanValidation.validate(request, "mainShippingAddressList", shippingAddressBean,GroupB.class);
+		
+		// 入力チェックの結果を判定
+		if (isIncomplete) {
+			// 配送先編集画面
+			String view = "/WEB-INF/views/customer/editShippingAddress.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		} 
 		
 		// メイン配送先の更新処理
 		Boolean updateStatus = ShippingAddress.updateMainShippingAddress(shippingAddressBean);

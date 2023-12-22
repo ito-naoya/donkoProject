@@ -38,6 +38,7 @@ public class RegistItemServlet1 extends HttpServlet {
 			return;
 		}
 
+		request.setAttribute("existId", null);
 		request.setAttribute("categoryList", categoryList);
 		//商品登録画面1に転送
 		String view = "/WEB-INF/views/admin/registItem1.jsp";

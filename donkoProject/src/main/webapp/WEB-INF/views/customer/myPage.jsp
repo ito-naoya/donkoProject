@@ -25,58 +25,58 @@
 	<%@include file="../component/headerTopSpace.jsp"%>
 	<main class="container">
 		<!--  メニューボタンの表示 -->
-		<div class="d-flex justify-content-between mx-5 mt-4 mb-2">
-			<!-- <a href="userInfoPage"
-				class="d-inline-block border mx-2 mb-4 p-3 text-center"
-				style="width: 30%; border: 1px #385A37 solid; color: #385A37; text-decoration: none;">
-				ユーザ情報を確認 </a>  -->
-			<label class="open mx-1" for="pop-up" style="width: 32%;"> 
+		<div class="d-flex justify-content-between m-5 mb-2">
+			<label class="open mx-1" for="pop-up" style="width: 32%;">
 				<div
-				class="d-inline-block border mb-4 p-3 w-100 text-center text-nowrap"
-				style="color: #385A37; text-decoration: none;">
-				<p class="mb-0">ユーザー情報を確認</p></div>
-			</label>
-			<input type="checkbox" id="pop-up">
+					class="d-inline-block border mb-4 p-3 w-100 text-center text-nowrap"
+					style="color: #385A37; text-decoration: none;">
+					<p class="mb-0">ユーザー情報を確認</p>
+				</div>
+			</label> <input type="checkbox" id="pop-up">
 			<div class="overlay">
 				<div class="window">
-					<label class="close m-3" for="pop-up">
-						<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
-						  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-						  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+					<label class="close m-3" for="pop-up"> <svg
+							xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+							fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+						  <path
+								d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+						  <path
+								d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
 						</svg>
 					</label>
 					<%
 					CustomerUser users = (CustomerUser) request.getAttribute("users");
 					%>
-					<div class="row d-flex justify-content-centert" style="height:100%;">
+					<div class="row d-flex justify-content-centert"
+						style="height: 100%;">
 						<div class="my-auto p-5">
 							<div class="cancelButton"
 								style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-								<h4>
+								<h5>
 									<strong>ユーザー情報</strong>
-								</h4>
+								</h5>
 							</div>
 							<table class="table table-borderless">
 								<tbody>
 									<tr>
 										<td>ユーザーID</td>
-										<td><strong><%=users.getUserLoginId()%></strong></td>
+										<td><%=users.getUserLoginId()%></td>
 									</tr>
 									<tr>
 										<td>ユーザー名</td>
-										<td><strong><%=users.getUserName()%><strong></td>
+										<td><%=users.getUserName()%></td>
 									</tr>
 									<tr>
 										<td>性別</td>
-										<td><strong><%=users.getGender()%></strong></td>
+										<td><%=users.getGender()%></td>
 									</tr>
 									<tr>
 										<td>誕生日</td>
-										<td><strong><%=new SimpleDateFormat("yyyy/MM/dd").format(users.getBirthday())%><strong></td>
+										<td><%=new SimpleDateFormat("yyyy/MM/dd").format(users.getBirthday())%></td>
 									</tr>
 								</tbody>
 							</table>
-							<div class="d-flex">
+							<div class="d-flex mt-5">
 								<%
 								int userId = (int) request.getAttribute("user_id");
 								%>
@@ -97,8 +97,7 @@
 			<a href="createShippingAddress"
 				class="d-inline-block border mb-4 p-3 text-center"
 				style="width: 32%; color: #385A37; text-decoration: none;">
-				配送先の登録 </a> 
-			<a href="shippingAddressIndex"
+				配送先の登録 </a> <a href="shippingAddressIndex"
 				class="d-inline-block border mb-4 p-3 text-center"
 				style="width: 32%; color: #385A37; text-decoration: none;">
 				配送先一覧 </a>
@@ -111,8 +110,14 @@
 				value="hidden"
 				style="color: ＃000000; background-color: #E5CCFF; border-radius: 40px;">発送済みを非表示</button>
 		</div>
-		<div style="overflow-x: scroll; height: 40vh;"
+		<div style="overflow-x: scroll; height: 30vh;"
 			class="border mx-5 my-3">
+			<%
+			ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
+			%>
+			<%
+			if (purchaseList != null && purchaseList.size() > 0) {
+			%>
 			<table class="table table-hover table-borderless m-3">
 				<thead align="center">
 					<tr>
@@ -126,14 +131,8 @@
 				<tbody>
 					<!-- PurchaseBeanから順次値を取得して表示 -->
 					<%
-					ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
+					for (PurchaseBean purchaseBean : purchaseList) {
 					%>
-					<%
-					  if ( purchaseList != null && purchaseList.size() > 0) {
-					%>
-					<%
-					   for (PurchaseBean purchaseBean : purchaseList) {
-					   %>
 					<tr
 						onclick="location.href='orderDetail?purchase_id=<%=purchaseBean.getPurchaseId()%>'"
 						style="cursor: pointer;">
@@ -147,25 +146,37 @@
 						<td align="middle" style="white-space: nowrap;">〒 <%=purchaseBean.getPostalCode()%>
 							<%=purchaseBean.getAddress()%> <%=purchaseBean.getAddressee()%></td>
 						<!-- 配送ステータス -->
-						<% if ((purchaseBean.getShippingStatus()).equals("処理中")) { %>
+						<%
+						if ((purchaseBean.getShippingStatus()).equals("処理中")) {
+						%>
 						<td align="middle" style="color: #CCC;"><%=purchaseBean.getShippingStatus()%></td>
-						<% } else { %>
+						<%
+						} else {
+						%>
 						<td align="middle" style="color: #00FF00;"><%=purchaseBean.getShippingStatus()%></td>
-						<% } %>
+						<%
+						}
+						%>
 					</tr>
 					<%
 					}
 					%>
-					<%
-		    }
-			 %>
 				</tbody>
 			</table>
-		</div>
-		<div class="logout d-flex justify-content-end">
-			<a href="logout" class="btn px-4"
-				style="color: white; background-color: #385A37; border-radius: 40px; margin-bottom: 40px; margin-right: 40px;">ログアウト</a>
-		</div>
+			<%
+			} else {
+			%>
+			<div>
+				<p>購入履歴はありません</p>
+
+				<%
+				}
+				%>
+			</div>
+			<div class="logout d-flex justify-content-end mt-5">
+				<a href="logout" class="btn px-4"
+					style="color: white; background-color: #385A37; border-radius: 40px; margin-right: 45px;">ログアウト</a>
+			</div>
 	</main>
 	<%@include file="../component/footer.jsp"%>
 	<script src="./js/myPageScript.js"></script>
