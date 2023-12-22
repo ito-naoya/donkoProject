@@ -114,8 +114,8 @@
 		             					</form>
 									</td>
 									<td style="vertical-align: middle;">
-										<small>小計</small>
-										￥ <%= String.format("%,d", (cb.getItemPrice())*(cb.getQuantity())) %>
+										<small>小計</small><br>
+										<strong>￥ <%= String.format("%,d", (cb.getItemPrice())*(cb.getQuantity())) %></strong>
 									</td>
 									<td class="text-center" style="vertical-align: middle; width:10%;">
 										<form action="deleteCart" method="GET">
