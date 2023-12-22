@@ -20,22 +20,22 @@ public class BeanValidation {
         Validator validator = factory.getValidator();
         
         // バリデーションを実行
-        Set<ConstraintViolation<T>> result = validator.validate(bean, groupClass);
+        Set<ConstraintViolation<T>> ConstraintViolationResult = validator.validate(bean, groupClass);
         
         //バリデーションメッセージを保持するmapをnew
-        Map<String, String> validationMap = new LinkedHashMap<String, String>();
+        Map<String, String> violationMap = new LinkedHashMap<String, String>();
         
          //beanのフィールドをキー、エラーメッセージをバリューとしてMapに追加
-        for(ConstraintViolation<T> rs : result){
-        validationMap.put(rs.getPropertyPath().toString(), rs.getMessage());
+        for(ConstraintViolation<T> cv : ConstraintViolationResult){
+        	violationMap.put(cv.getPropertyPath().toString(), cv.getMessage());
         }
         
         //mapの長さが０より大きい場合（validateのアノテーションでいずれかが引っかかった場合）
-        if(validationMap.size() > 0) {
+        if(violationMap.size() > 0) {
         	
         	//beanのフィールドをキー、エラーメッセージをバリューとしてsetAttributeする
-        	for(Map.Entry<String, String> msg : validationMap.entrySet()) {
-        		request.setAttribute(msg.getKey(), msg.getValue());
+        	for(Map.Entry<String, String> violation : violationMap.entrySet()) {
+        		request.setAttribute(violation.getKey(), violation.getValue());
         	}
         	
         	//入力された値を保持したbeanを任意のキーでsetAttribute
