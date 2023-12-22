@@ -21,8 +21,8 @@ public class ShippingAddress {
 	};
 	
 	//メインの配送先を更新する
-	public static void updateMainShippingAddress(ShippingAddressBean shippingAddressBean){
-		UpdateMainShippingAddress.updateMainShippingAddress(shippingAddressBean);
+	public static Boolean updateMainShippingAddress(ShippingAddressBean shippingAddressBean){
+		return UpdateMainShippingAddress.updateMainShippingAddress(shippingAddressBean);
 	};
 	
 	//メインのお届け先を取得する
