@@ -5,7 +5,9 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import bean.ItemBean;
+import bean.ItemCategoryBean;
 import classes.Item;
+import classes.ItemCategory;
 import classes.Option;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -87,11 +89,16 @@ public class RegistItemServlet2 extends HttpServlet {
         ArrayList<Integer> existId = Item.checkItemAlreadyExist(newItemAddOption,itemSecondOptionIncrementIds);
         if(existId == null) {
         	errorHandling(request,response,"写真の取得に失敗しました","adminTopPage","管理者ページに");
-        } else if (existId.isEmpty()) { //商品が重複していた場合
+        } else if (!existId.isEmpty()) { //商品が重複していた場合
         	request.setAttribute("existId", existId);
+        	//カテゴリー一覧を取得
+    		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
+    		if(categoryList == null) {
+    			//取得情報の不備があれば、エラー画面に遷移
+    			errorHandling(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
+    		}
         	String view = "/WEB-INF/views/admin/registItem1.jsp";
     		request.getRequestDispatcher(view).forward(request, response);
-	        return;
         }
 
         if (Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {

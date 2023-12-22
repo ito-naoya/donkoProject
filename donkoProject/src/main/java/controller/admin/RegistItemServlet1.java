@@ -36,6 +36,7 @@ public class RegistItemServlet1 extends HttpServlet {
 			errorHandling(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
 		}
 
+		request.setAttribute("existId", null);
 		request.setAttribute("categoryList", categoryList);
 		//商品登録画面1に転送
 		String view = "/WEB-INF/views/admin/registItem1.jsp";
