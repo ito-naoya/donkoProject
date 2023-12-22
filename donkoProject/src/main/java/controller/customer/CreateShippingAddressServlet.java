@@ -37,24 +37,20 @@ public class CreateShippingAddressServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// セッション確認
-		HttpSession session = request.getSession(false);
-		int userId = (int) session.getAttribute("user_id");
-		if (userId == 0) {
-			String view = "/WEB-INF/views/customer/home.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-		}
-
 		// インスタス生成
 		CustomerUser customerUser = new CustomerUser();
 		ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
+		
+		// セッション確認
+		HttpSession session = request.getSession(false);
+		Object userId = session.getAttribute("user_id");
 
-		// メイン配送先の設定確認
-		if (userId == 0) {
-			// エラー画面を返す
-			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
-		} else {
-			// userIdに値をセット
+		// userIdがnullの場合はマイページに遷移
+		if(userId == null) {
+			response.sendRedirect("home");
+			return;
+		}　else {
+			// userIdがある場合は値をセット
 			customerUser.setUserId(userId);
 		}
 
