@@ -94,10 +94,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- <a href="createShippingAddress"
-				class="d-inline-block border mb-4 p-3 text-center"
-				style="width: 32%; color: #385A37; text-decoration: none;">
-				配送先の登録 </a>  -->
 			<label class="open mx-1" for="pop-up2" style="width: 32%;">
 				<div
 					class="d-inline-block border mb-4 p-3 w-100 text-center text-nowrap"
@@ -250,6 +246,7 @@
 			</div>
 	</main>
 	<%@include file="../component/footer.jsp"%>
+	<script src="./js/nullValidationScript.js"></script>
 	<script src="./js/myPageScript.js"></script>
 </body>
 </html>
