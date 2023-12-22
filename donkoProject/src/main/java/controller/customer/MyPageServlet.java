@@ -13,10 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-/*
- * マイページ表示画面用 Servlet
- * */
-
 @WebServlet("/myPage")
 public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,7 +41,6 @@ public class MyPageServlet extends HttpServlet {
 		
 			// 購入履歴の一覧を取得する
 			ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
-			request.setAttribute("purchaseList", purchaseList);
 			
 			// Valueチェック
 			if(purchaseList == null) {
@@ -63,9 +58,11 @@ public class MyPageServlet extends HttpServlet {
 				String view = "/WEB-INF/views/component/message.jsp";
 				request.getRequestDispatcher(view).forward(request, response);
 			} else {
-				// マイページに画面遷移
-				String view = "/WEB-INF/views/customer/myPage.jsp";
-				request.getRequestDispatcher(view).forward(request, response);
+			// purchaseListに値をセット
+			request.setAttribute("purchaseList", purchaseList);
 			}
+			// マイページに画面遷移
+			String view = "/WEB-INF/views/customer/myPage.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
 	}
 }
