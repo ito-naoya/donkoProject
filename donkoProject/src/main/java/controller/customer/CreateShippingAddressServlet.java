@@ -24,12 +24,13 @@ public class CreateShippingAddressServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// セッション確認
 		HttpSession session = request.getSession(false);
-		int userId = (int) session.getAttribute("user_id");
-		if (userId == 0) {
-			String view = "/WEB-INF/views/customer/home.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-		}
+		Object userId = session.getAttribute("user_id");
 
+		// userIdがnullの場合はマイページに遷移
+		if(userId == null) {
+			response.sendRedirect("home");
+			return;
+		}
 		// 配送先登録画面
 		String view = "/WEB-INF/views/customer/createShippingAddress.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
@@ -37,25 +38,21 @@ public class CreateShippingAddressServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// セッション確認
-		HttpSession session = request.getSession(false);
-		int userId = (int) session.getAttribute("user_id");
-		if (userId == 0) {
-			String view = "/WEB-INF/views/customer/home.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-		}
-
 		// インスタス生成
 		CustomerUser customerUser = new CustomerUser();
 		ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
+		
+		// セッション確認
+		HttpSession session = request.getSession(false);
+		Object userId = session.getAttribute("user_id");
 
-		// メイン配送先の設定確認
-		if (userId == 0) {
-			// エラー画面を返す
-			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress");
-		} else {
-			// userIdに値をセット
-			customerUser.setUserId(userId);
+		// userIdがnullの場合はマイページに遷移
+		if(userId == null) {
+			response.sendRedirect("home");
+			return;
+		}　else {
+			// userIdがある場合は値をセット
+			customerUser.setUserId((int)userId);
 		}
 
 		// メイン配送先の設定が必要かを確認する処理
@@ -63,7 +60,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		int shippingAddressId = 0;
 		if (getMainShippingAddress == null) {
 			// エラー画面を返す
-			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress");
+			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
 		} else {
 			// shippingAddressIdが存在するか
 			shippingAddressId = getMainShippingAddress.getShippingAddressId();
@@ -85,6 +82,10 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		shippingAddressBean.setPostalCode(request.getParameter("postcode"));
 		shippingAddressBean.setAddress(request.getParameter("address"));
 		shippingAddressBean.setMainShippingAddress(status);
+		
+		/*
+		 * TODO:バリテーションチェックは後ほど
+		 * */
 
 		// 新規配送先を登録する
 		Boolean insertStatus = ShippingAddress.registerNewShippingAddress(shippingAddressBean);
@@ -95,22 +96,18 @@ public class CreateShippingAddressServlet extends HttpServlet {
 			response.sendRedirect("shippingAddressIndex");
 		} else {
 			// エラー画面を返す
-			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress");
+			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
 		}
 	}
 
-	protected void errorHandling(HttpServletRequest request, HttpServletResponse response, String message, String url)
+	protected void errorHandling(HttpServletRequest request, HttpServletResponse response, String message, String url, String returnPage)
 			throws ServletException, IOException {
 		// エラーメッセージをセット
 		request.setAttribute("errorMessage", message);
-
 		// 戻り先のURL
 		request.setAttribute("url", url);
-
-		// TODO:全部できたらコメントアウト削除予定
 		// 戻るボタンの表示文言
-		// request.setAttribute("returnPage", returnPage);
-
+		request.setAttribute("returnPage", returnPage);
 		// エラー画面に遷移
 		String view = "/WEB-INF/views/component/message.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
