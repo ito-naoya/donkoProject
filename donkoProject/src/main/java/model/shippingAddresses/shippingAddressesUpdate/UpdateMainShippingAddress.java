@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class UpdateMainShippingAddress {
 	
 	//メイン配送先を更新する
-	public static void updateMainShippingAddress(ShippingAddressBean shippingAddressBean){
+	public static Boolean updateMainShippingAddress(ShippingAddressBean shippingAddressBean){
 		// SQLコマンド生成(メイン設定削除)
 		StringBuilder sbDelete = new StringBuilder();
 		sbDelete.append("UPDATE " );
@@ -54,10 +54,13 @@ public class UpdateMainShippingAddress {
 				if(!connection.isClosed()) {
 					connection.rollback();
 					e.printStackTrace();
+					return null;
 				}
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-		}
+			return null;
+			}
+		return true;
 	}
 }

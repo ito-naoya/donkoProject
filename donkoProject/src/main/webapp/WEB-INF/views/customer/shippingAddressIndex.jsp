@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, bean.ShippingAddressBean, java.util.Iterator"%>
+<%@ page
+	import="java.util.ArrayList, bean.ShippingAddressBean, java.util.Iterator"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,25 +25,35 @@
     ArrayList<ShippingAddressBean> mainShippingAddressList = (ArrayList<ShippingAddressBean>) request
       .getAttribute("mainShippingAddressList");
     %>
-    <div class="d-flex flex-colum mb-2" style="display: flex; justify-content: end; margin-right:435px;">
-        <label for="main_address_select"><strong>メイン発送先変更</strong></label>
-    </div>
+		<div class="d-flex flex-colum mb-2"
+			style="display: flex; justify-content: end; margin-right: 435px;">
+			<label for="main_address_select"><strong>メイン発送先変更</strong></label>
+		</div>
 		<div class="AddressChoice d-flex"
 			style="display: flex; justify-content: end;">
 			<form action="shippingAddressIndex" method="post" class="d-flex">
-				<select class="form-control d-flex"
-					name="update_shipping_address" style="width: 500px;" id="main_address_select">
+				<select class="form-control d-flex" name="update_shipping_address"
+					style="width: 500px;" id="main_address_select">
+					<% if (mainShippingAddressList.size() > 0 ) { %>
 					<%
-					for (ShippingAddressBean updateMainShippingAddress : mainShippingAddressList) {
-					%>
+					  for (ShippingAddressBean updateMainShippingAddress : mainShippingAddressList) {
+					 %>
 					<option
-						value="<%=updateMainShippingAddress.getShippingAddressId()%>">〒 <%=updateMainShippingAddress.getPostalCode()%> <%=updateMainShippingAddress.getAddress()%> <%=updateMainShippingAddress.getAddressee()%></option>
+						value="<%=updateMainShippingAddress.getShippingAddressId()%>">〒
+						<%=updateMainShippingAddress.getPostalCode()%>
+						<%=updateMainShippingAddress.getAddress()%>
+						<%=updateMainShippingAddress.getAddressee()%></option>
 					<%
-					}
+					 }
+					 %>
+					<%
+					} else {
 					%>
+					<option hidden> 配送先を登録してください </option>
+					<% } %>
 				</select>
 				<button type="submit" class="btn"
-					style="border: 1px solid #000000; background: #E5CCFF; margin-left:5px;">更新</button>
+					style="border: 1px solid #000000; background: #E5CCFF; margin-left: 5px;">更新</button>
 			</form>
 		</div>
 		<h2 style="margin-top: 30px; margin-bottom: 20px;">
@@ -54,6 +65,7 @@
 				// カウンタ変数の初期化
 		    int numbers = 1;
           ArrayList<ShippingAddressBean> shippingAddressList = (ArrayList<ShippingAddressBean>) request.getAttribute("shippingAddressList");
+         if (shippingAddressList.size() > 0) {
 					// Iteratorを使用してShippingAddressBeanのリストをイテレート
 					Iterator<ShippingAddressBean> iterator = shippingAddressList.iterator();
 					while (iterator.hasNext()) {
@@ -71,28 +83,32 @@
 					<!-- 更新ボタン -->
 					<td>
 						<button type="submit" class="btn"
-							style="border: 1px solid #000000; background: #E5CCFF;" >
-            <a href='editShippingAddress?shipping_address_id=<%=shippingAddressBean.getShippingAddressId()%>'
-              style="color: #000000; vertical-align: middle; text-decoration: none;">編集</a> 
-           </button>
-          </td>
-          <td>
-          <% 
+							style="border: 1px solid #000000; background: #E5CCFF;">
+							<a
+								href='editShippingAddress?shipping_address_id=<%=shippingAddressBean.getShippingAddressId()%>'
+								style="color: #000000; vertical-align: middle; text-decoration: none;">編集</a>
+						</button>
+					</td>
+					<td>
+						<% 
           int main_address = shippingAddressBean.getMainShippingAddress();
           if(main_address != 1) { 
           %>
-          <button type="submit" class="btn ms-5"
-              style="border: 1px solid #FF0000; background: #FFFFFF;">
-          <a href="deleteShippingAddress?shipping_address_id=<%=shippingAddressBean.getShippingAddressId()%>"
-                style="color: #FF0000; vertical-align: middle; text-decoration: none;">削除</a>
-            </button>
-          </td>
-          </tr>
-          <% }
+						<button type="submit" class="btn ms-5"
+							style="border: 1px solid #FF0000; background: #FFFFFF;">
+							<a
+								href="deleteShippingAddress?shipping_address_id=<%=shippingAddressBean.getShippingAddressId()%>"
+								style="color: #FF0000; vertical-align: middle; text-decoration: none;">削除</a>
+						</button>
+					</td>
+				</tr>
+				<% }
           numbers++;
-           } %>
-    </table>
-  </main>
-  <%@include file="../component/footer.jsp"%>
+           } } else { %>
+           <tr><td>配送先が登録されていません<td></tr>
+			<% } %>
+		</table>
+	</main>
+	<%@include file="../component/footer.jsp"%>
 </body>
 </html>
