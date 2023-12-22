@@ -61,6 +61,14 @@ public class MyPageServlet extends HttpServlet {
 			// purchaseListに値をセット
 			request.setAttribute("purchaseList", purchaseList);
 			}
+			
+			// 以下追加
+			// ユーザー情報取得
+			CustomerUser users = CustomerUser.getUserDetail(customerUser);
+			request.setAttribute("users", users);
+			request.setAttribute("user_id", customerUser.getUserId());
+			// ここまで
+			
 			// マイページに画面遷移
 			String view = "/WEB-INF/views/customer/myPage.jsp";
 			request.getRequestDispatcher(view).forward(request, response);

@@ -89,9 +89,9 @@
 					</div>
 	    		</li>
 	    		<li class="ms-auto me-3" style="list-style:none; display: flex; align-items: center;">
-	    			<small class="ms-1">お知らせ</small>
+	    			<small class="link ms-1">お知らせ</small>
 	    		</li>
-	    		<li class="mx-3" style="list-style:none; display: flex; align-items: center;">
+	    		<li class="link mx-3" style="list-style:none; display: flex; align-items: center;">
 	    			<small>利用ガイド</small>
 	    		</li>
 	    	</ul>
