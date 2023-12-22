@@ -14,30 +14,47 @@ public class InsertItemToCarts {
 	public static Boolean insertItemToCarts(CartBean cartBean) {
 
 		//カートに商品を追加するSQL
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();		
 		sb.append("INSERT INTO ");
 		sb.append(	"carts ");
-		sb.append(		"(");
+		sb.append(		"( ");
 		sb.append(			"user_id, ");
 		sb.append(			"item_id, ");
-		sb.append(			"quantity");
+		sb.append(			"quantity ");
 		sb.append(		") ");
 		sb.append("VALUES ");
-		sb.append(	"(");
-		//ここでパラメータを使う(1/2)
+		sb.append(	"( ");
+		//ここでパラメータを使う(1/3)
 		sb.append(		"?, ");
-		//ここでパラメータを使う(2/2)
+		//ここでパラメータを使う(2/3)
 		sb.append(		"?, ");
 		sb.append(		"1");
 		sb.append(	") ");
-		sb.append("ON DUPLICATE KEY UPDATE ");
-		sb.append(	"quantity = quantity + 1 ");
+		sb.append("ON ");
+		sb.append(	"DUPLICATE ");
+		sb.append("KEY UPDATE ");
+		sb.append(	"quantity = IF");
+		sb.append(				"( ");
+		sb.append(					"quantity < ( ");
+		sb.append(									"SELECT ");
+		sb.append(										"stock ");
+		sb.append(									"FROM ");
+		sb.append(										"items ");
+		sb.append(									"WHERE ");
+		//ここでパラメータを使う(3/3)
+		sb.append(										"item_id = ? ");
+		sb.append(								"), ");
+		sb.append(								"quantity + 1, ");
+		sb.append(								"quantity ");
+		sb.append(				")");
+		
 		//sqlを文字列化
 		final String INSERT_CART_SQL = sb.toString();
 
 		//追加したい商品のIDとログインしているユーザーのIDをリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(cartBean.getUserId());
+		params.add(cartBean.getItemId());
 		params.add(cartBean.getItemId());
 
 		//コミットフラグをfalseで初期化
