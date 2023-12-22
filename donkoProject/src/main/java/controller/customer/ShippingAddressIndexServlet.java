@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.ShippingAddressBean;
-import classes.ErrorHandling;
 import classes.BeanValidation;
+import classes.ErrorHandling;
 import classes.ShippingAddress;
 import classes.user.CustomerUser;
 import interfaces.group.GroupB;
@@ -27,7 +27,7 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// セッション確認
 		HttpSession session = request.getSession(false);
-		Object userId = (String) session.getAttribute("user_id");
+		Object userId = session.getAttribute("user_id");
 		if(userId == null) {
 			response.sendRedirect("home");
 			return;

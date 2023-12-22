@@ -23,7 +23,7 @@ public class DeleteUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// セッションを確認
 		HttpSession session = request.getSession(false);
-		Object userId = (String) session.getAttribute("user_id");
+		Object userId = session.getAttribute("user_id");
 		
 		// userIdがなければホーム画面に戻す
 		if (userId == null) {
