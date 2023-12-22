@@ -118,6 +118,7 @@
 						<%
 						} 
 						%>
+						<input type="number" name="" min="1" step="1" class="form-control" style="width:80px;">
 						<%
 						if (item.getItemStock() > 0) { 
 						%>
