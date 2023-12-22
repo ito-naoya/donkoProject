@@ -44,13 +44,13 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		
 		// セッション確認
 		HttpSession session = request.getSession(false);
-		Object userId = session.getAttribute("user_id");
+		Object userId = (String) session.getAttribute("user_id");
 
 		// userIdがnullの場合はマイページに遷移
 		if(userId == null) {
 			response.sendRedirect("home");
 			return;
-		}　else {
+		} else {
 			// userIdがある場合は値をセット
 			customerUser.setUserId((int)userId);
 		}
@@ -77,7 +77,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		}
 
 		// ShippingAddressBeanに値をセット
-		shippingAddressBean.setUserId(userId);
+		shippingAddressBean.setUserId((int)userId);
 		shippingAddressBean.setAddressee(request.getParameter("addresses"));
 		shippingAddressBean.setPostalCode(request.getParameter("postcode"));
 		shippingAddressBean.setAddress(request.getParameter("address"));

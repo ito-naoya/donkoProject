@@ -10,6 +10,7 @@ import jakarta.servlet.http.Part;
 import model.items.itemsDelete.DeleteItemFromItems;
 import model.items.itemsInsert.InsertNewItemToItems;
 import model.items.itemsSelect.SelectItemAllDetailFromItems;
+import model.items.itemsSelect.SelectItemAlreadyExistFromItems;
 import model.items.itemsSelect.SelectItemAndOptionListAll;
 import model.items.itemsSelect.SelectItemAndOptionListByDelFlg;
 import model.items.itemsSelect.SelectItemDetailFromItems;
@@ -90,6 +91,11 @@ public class Item {
 	//商品を新規登録する
 	public static boolean registerNewItem(ItemBean itemBean, int selectBoxCount, String[] itemSecondOptionIncrementIds){
 		return(InsertNewItemToItems.insertNewItemToItems(itemBean,selectBoxCount,itemSecondOptionIncrementIds));
+	};
+
+	//商品が既に存在するかをチェックする
+	public static ArrayList<Integer> checkItemAlreadyExist(ItemBean itemAddOption,  String[] itemSecondOptionIncrementIds) {
+		return (SelectItemAlreadyExistFromItems.selectItemAlreadyExistFromItems(itemAddOption, itemSecondOptionIncrementIds));
 	};
 
 	//商品の情報を更新する
@@ -207,6 +213,8 @@ public class Item {
 
 		return newItem;
 
-	};
+	}
+
+
 
 }

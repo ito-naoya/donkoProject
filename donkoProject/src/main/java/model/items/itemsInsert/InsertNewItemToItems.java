@@ -56,7 +56,7 @@ public class InsertNewItemToItems {
         params2.add(itemBean.getItemFirstOptionIncrementId());
         //セレクトボックスが2つの時
         ArrayList<Object> params3 = new ArrayList<Object>();
-        if (selectBoxCount == 2 && itemSecondOptionIncrementIds == null) {
+        if (selectBoxCount == 2) {
             params3.add(itemBean.getItemSecondOptionName());
             params3.add(itemBean.getItemSecondOptionIncrementId());
         }
@@ -64,7 +64,7 @@ public class InsertNewItemToItems {
         try (Connection conn = DatabaseConnection.getConnection()) {
             try {
                 if (itemSecondOptionIncrementIds == null) {
-                    // セレクトボックスの場合
+                    // optionが1つしかない商品の場合
                     GeneralDao.executeUpdate(conn, INSERT_NEWITEM_ITEM_SQL, params1);
                     GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, params2);
                     if (selectBoxCount == 2) {
@@ -87,7 +87,6 @@ public class InsertNewItemToItems {
                         GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, paramsSize);
                     }
                 }
-
                 conn.commit(); // コミット
             } catch (SQLException e) {
                 conn.rollback(); // ロールバック

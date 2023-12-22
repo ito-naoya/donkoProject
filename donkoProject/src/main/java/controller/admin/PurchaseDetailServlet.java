@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import bean.PurchaseBean;
 import bean.PurchaseDetailBean;
+import classes.ErrorHandling;
 import classes.Purchase;
 import classes.PurchaseDetail;
 import jakarta.servlet.ServletException;
@@ -42,10 +43,9 @@ public class PurchaseDetailServlet extends HttpServlet {
 		ArrayList<PurchaseDetailBean> purchaseDetailList = PurchaseDetail.getPurchaseDetail(purchaseDetailBean);
 		
 		if (purchaseInfo == null || purchaseDetailList == null) {
-			request.setAttribute("errorMessage", "購入詳細のデータの取得に失敗しました");
-			request.setAttribute("url", "adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-	        request.getRequestDispatcher(view).forward(request, response);
+	        //エラーページに遷移
+	        ErrorHandling.transitionToErrorPage(request, response, "購入詳細のデータの取得に失敗しました","adminTopPage","管理者ページに");
+			return;
 		}
 		
 		request.setAttribute("purchaseInfo", purchaseInfo);

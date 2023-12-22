@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.PurchaseBean;
+import classes.ErrorHandling;
 import classes.Purchase;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
@@ -43,20 +44,10 @@ public class MyPageServlet extends HttpServlet {
 			ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);
 			
 			// Valueチェック
-			if(purchaseList == null) {
-				// エラーメッセージをセット
-				request.setAttribute("errorMessage", "マイページへのアクセスが失敗しました");
-				
-				// ログイン画面に誘導
-				request.setAttribute("url", "userSignin");
-				
-				// TODO:全部できたらコメントアウト削除予定
-				// 戻るボタンの表示文言
-				// request.setAttribute("returnPage", "ログイン画面に戻る");
-				
+			if(purchaseList == null) {	
 				// エラー画面に遷移
-				String view = "/WEB-INF/views/component/message.jsp";
-				request.getRequestDispatcher(view).forward(request, response);
+				ErrorHandling.transitionToErrorPage(request,response,"マイページへのアクセスが失敗しました","userSignin","ログイン画面に");
+				return;
 			} else {
 			// purchaseListに値をセット
 			request.setAttribute("purchaseList", purchaseList);
