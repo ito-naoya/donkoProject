@@ -3,6 +3,7 @@ package controller.customer;
 import java.io.IOException;
 import java.sql.Date;
 
+import classes.ErrorHandling;
 import classes.user.CustomerUser;
 import classes.user.User;
 import jakarta.servlet.ServletException;
@@ -38,8 +39,9 @@ public class UserInfoEditServlet extends HttpServlet {
 		
 		// データの取得結果を判定
 		if(users == null) {
-			// 値取得が失敗した場合はエラー画面に返す
-			errorHandling(request, response, "ユーザ編集画面へのアクセスに失敗しました", "userInfoPage", "ユーザ情報確認画面に");
+			// エラー画面に遷移
+			ErrorHandling.transitionToErrorPage(request,response,"ユーザ編集画面へのアクセスに失敗しました","userInfoPage","ユーザ情報確認画面に");
+			return;
 		} else {
 			// 値取得が成功した場合はユーザー情報の値をセット
 			request.setAttribute("users", users);
@@ -81,21 +83,9 @@ public class UserInfoEditServlet extends HttpServlet {
 			// マイページに遷移
 			response.sendRedirect("userInfoPage");
 		} else {
-			// 処理が失敗した場合はエラー画面に返す
-			errorHandling(request,response,"編集処理に失敗しました", "userInfoEdit", "ユーザ情報編集画面に");
+			// エラー画面に遷移
+			ErrorHandling.transitionToErrorPage(request,response,"編集処理に失敗しました","userInfoEdit","ユーザ情報編集画面に");
+			return;
 		}
-	}
-	
-	protected void errorHandling(HttpServletRequest request,  HttpServletResponse response, String message, String url, String returnPage) throws ServletException, IOException {
-		// エラーメッセージをセット
-		request.setAttribute("errorMessage", message);
-		// 戻り先のURLをセット
-		request.setAttribute("url", url);
-		// 戻り先のメッセージをセット
-		request.setAttribute("returnPage", returnPage);
-		
-		// エラー画面に遷移
-		String view = "/WEB-INF/views/component/message.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
 	}
 }

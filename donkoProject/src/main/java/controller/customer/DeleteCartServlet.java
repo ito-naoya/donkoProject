@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import bean.CartBean;
 import classes.Cart;
+import classes.ErrorHandling;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -43,13 +44,8 @@ public class DeleteCartServlet extends HttpServlet {
 		
 		//カートから商品削除に失敗した時
 		if(!isCommit) {
-			//エラーメッセージ
-			request.setAttribute("errorMessage", "カート処理中に問題が発生しました。");
-			//エラーページからの遷移先
-			request.setAttribute("url", "cart");
-			//エラーページ表示
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			//エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response,"カート処理中に問題が発生しました。","cart","カートに");
 			return;
 		}
 		
@@ -72,13 +68,8 @@ public class DeleteCartServlet extends HttpServlet {
 		
 		//カートから商品削除に失敗した時
 		if(!isCommit) {
-			//エラーメッセージ
-			request.setAttribute("errorMessage", "カート処理中に問題が発生しました。");
-			//エラーページからの遷移先
-			request.setAttribute("url", "cart");
-			//エラーページ表示
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			//エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response,"カート処理中に問題が発生しました。","cart","カートに");
 			return;
 		}
 		

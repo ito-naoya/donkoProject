@@ -2,6 +2,7 @@ package controller.customer;
 
 import java.io.IOException;
 
+import classes.ErrorHandling;
 import classes.user.CustomerUser;
 import classes.user.User;
 import jakarta.servlet.ServletException;
@@ -65,26 +66,13 @@ public class UserInfoPageServlet extends HttpServlet {
 				// セッションを破棄
 				session.invalidate();
 			}
-			// エラーメッセージ
-			request.setAttribute("errorMessage", "退会処理が完了しました。"+ "<br>" +"ご利用ありがとうございました。");
-			
-			// ホーム画面に誘導
-			request.setAttribute("url", "home");
-			
 			// エラー画面に遷移
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			ErrorHandling.transitionToErrorPage(request,response,"退会処理が完了しました。"+ "<br>" +"ご利用ありがとうございました。","home","ホームに");
+			return;
 		} else {
-			
-			// エラーメッセージ
-			request.setAttribute("errorMessage", "退会処理が失敗しました");
-			
-			// ユーザー情報の画面に誘導
-			request.setAttribute("url", "userInfoPage");
-			
 			// エラー画面に遷移
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			ErrorHandling.transitionToErrorPage(request,response,"退会処理が失敗しました","userInfoPage","ユーザー情報確認画面に");
+			return;
 		}
 	}
 }

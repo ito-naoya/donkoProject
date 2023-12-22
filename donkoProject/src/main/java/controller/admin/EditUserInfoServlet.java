@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 
 import classes.BeanValidation;
+import classes.ErrorHandling;
 import classes.user.AdminUser;
 import classes.user.CustomerUser;
 import classes.user.User;
@@ -39,13 +40,8 @@ public class EditUserInfoServlet extends HttpServlet {
 		
 		//データベースから取得できなかった時
 		if(user == null) {
-			//エラーメッセージ
-			request.setAttribute("errorMessage", "ユーザー情報の取得時に問題が発生しました。");
-			//エラーページからの遷移先
-			request.setAttribute("url", "adminTopPage");
-			//エラーページ表示
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			//エラーページ遷移
+			ErrorHandling.transitionToErrorPage(request, response, "ユーザー情報の取得時に問題が発生しました。","adminTopPage","管理者ページに");
 			return;
 		}
 		
@@ -92,13 +88,8 @@ public class EditUserInfoServlet extends HttpServlet {
 		
 		//ユーザー情報の更新に失敗したとき
 		if(!isCommit) {
-			//エラーメッセージ
-			request.setAttribute("errorMessage", "ユーザー情報の更新時に問題が発生しました。");
-			//エラーページからの遷移先
-			request.setAttribute("url", "adminTopPage");
-			//エラーページ表示
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			//エラーページ遷移
+			ErrorHandling.transitionToErrorPage(request, response, "ユーザー情報の更新時に問題が発生しました。","adminTopPage","管理者ページに");
 			return;
 		}
 		

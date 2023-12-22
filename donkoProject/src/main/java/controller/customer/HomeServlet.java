@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.ItemBean;
+import classes.ErrorHandling;
 import classes.Item;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,10 +26,9 @@ public class HomeServlet extends HttpServlet {
 		ArrayList<ItemBean> itemList = Item.getItemList();
 		
 		if (itemList == null) {
-			request.setAttribute("errorMessage", "画像の取得に失敗しました");
-			request.setAttribute("url", "home");
-			String view = "/WEB-INF/views/customer/home.jsp";
-	        request.getRequestDispatcher(view).forward(request, response);
+	      //エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response,"画像の取得に失敗しました","home","ホームに");
+			return;
 		}
 		
 		request.setAttribute("itemList", itemList);
