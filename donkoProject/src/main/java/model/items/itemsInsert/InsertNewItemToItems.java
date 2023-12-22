@@ -63,22 +63,30 @@ public class InsertNewItemToItems {
 
         try (Connection conn = DatabaseConnection.getConnection()) {
             try {
-            	//チェックボックスの個数分回す
-                for (String optionId : itemSecondOptionIncrementIds) {
-                    // itemsテーブルに商品を登録
+                if (itemSecondOptionIncrementIds == null) {
+                    // optionが1つしかない商品の場合
                     GeneralDao.executeUpdate(conn, INSERT_NEWITEM_ITEM_SQL, params1);
+                    GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, params2);
+                    if (selectBoxCount == 2) {
+                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, params3);
+                    }
+                } else {
+                    // チェックボックスの場合
+                    for (String optionId : itemSecondOptionIncrementIds) {
+                        // itemsテーブルに商品を登録
+                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_ITEM_SQL, params1);
 
-                    // optionsテーブルに色を登録
-                    ArrayList<Object> paramsColor = new ArrayList<>(params2);
-                    GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, paramsColor);
+                        // optionsテーブルに色を登録
+                        ArrayList<Object> paramsColor = new ArrayList<>(params2);
+                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, paramsColor);
 
-                    // optionsテーブルにサイズを登録
-                    ArrayList<Object> paramsSize = new ArrayList<>();
-                    paramsSize.add(itemBean.getItemSecondOptionName());
-                    paramsSize.add(optionId);
-                    GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, paramsSize);
+                        // optionsテーブルにサイズを登録
+                        ArrayList<Object> paramsSize = new ArrayList<>();
+                        paramsSize.add(itemBean.getItemSecondOptionName());
+                        paramsSize.add(optionId);
+                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, paramsSize);
+                    }
                 }
-
                 conn.commit(); // コミット
             } catch (SQLException e) {
                 conn.rollback(); // ロールバック

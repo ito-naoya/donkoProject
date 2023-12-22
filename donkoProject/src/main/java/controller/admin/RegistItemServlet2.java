@@ -97,8 +97,10 @@ public class RegistItemServlet2 extends HttpServlet {
     			//取得情報の不備があれば、エラー画面に遷移
     			errorHandling(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
     		}
+    		request.setAttribute("categoryList", categoryList);
         	String view = "/WEB-INF/views/admin/registItem1.jsp";
     		request.getRequestDispatcher(view).forward(request, response);
+    		return;
         }
 
         if (Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {
