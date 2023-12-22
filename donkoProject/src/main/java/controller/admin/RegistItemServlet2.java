@@ -1,14 +1,12 @@
 package controller.admin;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import bean.ItemBean;
 import classes.ErrorHandling;
-import bean.ItemCategoryBean;
 import classes.Item;
-import classes.ItemCategory;
 import classes.Option;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -89,39 +87,36 @@ public class RegistItemServlet2 extends HttpServlet {
         //商品名とオプションについて、既存のアイテムと重複がないか確認する
         ArrayList<Integer> existId = Item.checkItemAlreadyExist(newItemAddOption,itemSecondOptionIncrementIds);
         if(existId == null) {
-        	errorHandling(request,response,"写真の取得に失敗しました","adminTopPage","管理者ページに");
+        	ErrorHandling.transitionToErrorPage(request,response,"商品情報の取得に失敗しました","adminTopPage","管理者ページに");
         } else if (!existId.isEmpty()) { //商品が重複していた場合
-        	request.setAttribute("existId", existId);
-        	//カテゴリー一覧を取得
-    		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
-    		if(categoryList == null) {
-    			//取得情報の不備があれば、エラー画面に遷移
-    			errorHandling(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
-    		}
-    		request.setAttribute("categoryList", categoryList);
-        	String view = "/WEB-INF/views/admin/registItem1.jsp";
-    		request.getRequestDispatcher(view).forward(request, response);
-    		return;
+        	String idsStr = existId.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", "));
+        	request.setAttribute("existId", "商品が重複しています。重複商品ID：" + idsStr);
+        } else { //重複がなければ登録
+
+	        if (Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {
+	        	ServletContext context = getServletContext();
+	            boolean imageSaved = Item.registerNewImage(imgPart, fileName, context);
+	            if (!imageSaved) {
+	                // 画像の登録に失敗した場合の処理
+	            	ErrorHandling.transitionToErrorPage(request, response, "写真の取得に失敗しました","adminTopPage","管理者ページに");
+	    			return;
+	            }
+	        } else {
+	            // データの登録に失敗した場合の処理
+	        	ErrorHandling.transitionToErrorPage(request, response, "商品の登録に失敗しました","adminTopPage","管理者ページに");
+				return;
+	        }
+	        request.setAttribute("existId", "商品を登録しました");
         }
 
-        if (Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {
-        	ServletContext context = getServletContext();
-            boolean imageSaved = Item.registerNewImage(imgPart, fileName, context);
-            if (!imageSaved) {
-                // 画像の登録に失敗した場合の処理
-            	ErrorHandling.transitionToErrorPage(request, response, "写真の取得に失敗しました","adminTopPage","管理者ページに");
-    			return;
-            }
-        } else {
-            // データの登録に失敗した場合の処理
-        	ErrorHandling.transitionToErrorPage(request, response, "商品の登録に失敗しました","adminTopPage","管理者ページに");
-			return;
-        }
 
-	    // 完了後、商品一覧ページにリダイレクト
-        String encodedItemCategoryName = URLEncoder.encode(itemCategoryName, "UTF-8");
-        String redirectURL = "deleteItemIndex?itemCategoryName=" + encodedItemCategoryName + "&itemDelFlg=0";
-        response.sendRedirect(redirectURL);
+        request.setAttribute("itemDelFlg","0");
+	    // 完了後、商品一覧ページに遷移
+		request.setAttribute("categoryList", itemCategoryName);
+    	String view = "deleteItemIndex";
+		request.getRequestDispatcher(view).forward(request, response);
 
 	}
 }
