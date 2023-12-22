@@ -15,7 +15,7 @@ public class CustomerUser extends User {
 
 	//ログインID
 	@NotNull(message= "入力必須項目です")
-	@Length(min= 5 , max= 10, message="{min}以上{max}以下で入力してください。" )
+	@Length(min= 5 , max= 10, message="{min}文字以上{max}文字以下で入力してください。" )
 	private String userLoginId;
 	//パスワード
 	@Range(min=8, max=8, message="８文字で入力してください。" ) 
@@ -23,7 +23,7 @@ public class CustomerUser extends User {
 	private String password;
 	//ユーザー名
 	@NotNull(message= "入力必須項目です")
-	@Length(min=1, max= 25, message="{max}以内で入力してください。") 
+	@Length(min=1, max= 25, message="{max}文字以内で入力してください。") 
 	private String userName;
 	//性別
 	private String gender;
