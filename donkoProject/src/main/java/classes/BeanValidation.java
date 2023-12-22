@@ -11,14 +11,14 @@ import javax.validation.ValidatorFactory;
 
 public class BeanValidation {
 	
-	public static <T> Map<String, String> validate (T validateBean){
+	public static <T> Map<String, String> validate (T bean){
 		
 		// Validator を取得
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         
         // バリデーションを実行
-        Set<ConstraintViolation<T>> result = validator.validate(validateBean);
+        Set<ConstraintViolation<T>> result = validator.validate(bean);
         
         //バリデーションメッセージを保持するmapをnew
         Map<String, String> validationMap = new LinkedHashMap<String, String>();
