@@ -62,7 +62,7 @@
 					ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
 					%>
 					<%
-					  if ( purchaseList != null && purchaseList.size() > 1) {
+					  if ( purchaseList != null && purchaseList.size() > 0) {
 					%>
 					<%
 					   for (PurchaseBean purchaseBean : purchaseList) {
