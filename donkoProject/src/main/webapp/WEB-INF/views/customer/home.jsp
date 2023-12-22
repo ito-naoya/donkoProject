@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="./css/popUpWindow.css" type="text/css">
 <title>donko</title>
 </head>
 <body>
@@ -21,10 +22,10 @@
 					<img src="./images/広告1.png" class="d-block w-100" alt="..." style="height:550px; object-fit:cover;">
 				</div>
 				<div class="carousel-item">
-					<img src="./images/eleni-afiontzi-gLU8GZpHtRA-unsplash.jpg" class="d-block w-100" alt="..." style="height:550px; object-fit:cover;">
+					<img src="./images/広告2.png" class="d-block w-100" alt="..." style="height:550px; object-fit:cover;">
 				</div>
 				<div class="carousel-item">
-					<img src="./images/eleni-afiontzi-gLU8GZpHtRA-unsplash.jpg" class="d-block w-100" alt="..." style="height:550px; object-fit:cover;">
+					<img src="./images/広告3.jpeg" class="d-block w-100" alt="..." style="height:550px; object-fit:cover;">
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button"
@@ -47,7 +48,7 @@
 					<%
 					for (ItemBean item : itemList) {
 					%>
-					<a href="itemDetail?itemId=<%= item.getItemId() %>&source=home"
+					<%-- <a href="itemDetail?itemId=<%= item.getItemId() %>&source=home"
 						style="color: #385a37; display: block; text-decoration: none;"
 						class="mx-2"> 
 						<span class="card mb-3"
@@ -57,8 +58,25 @@
 								class="card-img-top" alt="<%= item.getImageFileName() %>"
 								style="object-fit: cover; height: 100%;">
 						</span>
-					</a>
-					<%
+					</a>  --%>
+					<label class="open mx-1" for="pop-up"> 
+						<span class="card mb-2"
+						style="width: 300px; height: 300px;"> 
+							<img
+								src="./images/<%= item.getImageFileName() %>.jpg"
+								class="card-img-top" alt="<%= item.getImageFileName() %>"
+								style="object-fit: cover; height: 100%;">
+						</span>
+					</label>
+					<input type="checkbox" id="pop-up">
+					<div class="overlay">
+						<div class="window">
+							<label class="close" for="pop-up">閉じる</label>
+							<h4>ポップアップウィンドウ</h4>
+							<p>この窓が表示されている間は窓の外の操作はできません。ウィンドウを閉じて操作して下さい。</p>
+						</div>
+					</div>
+				<%
 					}
 					%>
 				<%

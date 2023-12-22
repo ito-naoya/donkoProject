@@ -23,7 +23,7 @@
 		<% 
 		if (optionCategoryValueListAll != null || optionCategoryValueListAll.size() > 0) {
 		%>
-			<form action="option" method="get">
+			<form action="option" method="get" class="mt-3">
 				<div class="d-flex">
 					<div class="col-lg-6 d-flex border ms-auto me-3 p-3" style="width:auto; height: 70px; box-shadow:5px 5px 5px lightgray;">
 						<% 
