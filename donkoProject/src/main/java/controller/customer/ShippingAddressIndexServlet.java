@@ -61,7 +61,7 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// セッション確認
 		HttpSession session = request.getSession(false);
-		Object userId = (String) session.getAttribute("user_id");
+		Object userId = session.getAttribute("user_id");
 		if(userId == null) {
 			response.sendRedirect("home");
 			return;

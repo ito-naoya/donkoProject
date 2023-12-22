@@ -38,6 +38,7 @@
 							<form action="shippingAddressIndex" method="post" class="d-flex">
 								<select class="form-control d-flex" name="update_shipping_address"
 									style="width: 500px;" id="main_address_select">
+									<% if(mainShippingAddressList.size() > 0) { %>
 									<%
 									for (ShippingAddressBean updateMainShippingAddress : mainShippingAddressList) {
 									%>
@@ -49,6 +50,9 @@
 									<%
 									}
 									%>
+									<% } else { %>
+									<option hidden>デフォルトの配送先を登録してください</option>
+									<% } %>
 								</select>
 								<button type="submit" class="btn"
 									style="border: 1px solid #000000; background: #E5CCFF; margin-left: 15px;">更新</button>
@@ -67,6 +71,7 @@
 						int numbers = 1;
 						ArrayList<ShippingAddressBean> shippingAddressList = (ArrayList<ShippingAddressBean>) request
 								.getAttribute("shippingAddressList");
+						if (shippingAddressList.size() > 0) {
 						// Iteratorを使用してShippingAddressBeanのリストをイテレート
 						Iterator<ShippingAddressBean> iterator = shippingAddressList.iterator();
 						while (iterator.hasNext()) {
@@ -108,7 +113,10 @@
 						}
 						numbers++;
 						}
+						} else {
 						%>
+						<tr><td>配送先が登録されていません</td></tr>
+						<% } %>
 				</table>
 			</div>
 		</div>
