@@ -95,8 +95,14 @@
 						</label>
 						<br>
 					</div>
-					<div class="form-group d-flex flex-wrap justify-content-center" style="margin-bottom: 30px;">
+					<div class="form-group d-flex flex-wrap justify-content-start" style="margin-bottom: 30px;">
 						<input type="date" class="form-control" id="exampleInputbirthday" name="birthday" value="<%=user.getBirthday()%>">
+						<% String birthday = (String)request.getAttribute("birthday"); %>
+						<% if (birthday != null) {%>
+						<p style="color: red; margin: 0;">
+							<%= birthday %>
+						</p>
+						<%} %>
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputbirthday">

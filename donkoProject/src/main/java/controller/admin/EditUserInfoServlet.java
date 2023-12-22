@@ -7,6 +7,7 @@ import classes.BeanValidation;
 import classes.user.AdminUser;
 import classes.user.CustomerUser;
 import classes.user.User;
+import interfaces.group.GroupB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -77,7 +78,7 @@ public class EditUserInfoServlet extends HttpServlet {
 		
 		
 		//入力チェック
-		Boolean isIncomplete = BeanValidation.validate(request, response, "user", customerUser);
+		Boolean isIncomplete = BeanValidation.validate(request, response, "user", customerUser, GroupB.class);
         
 		//入力内容に不備があった場合
 	      if(isIncomplete) {
