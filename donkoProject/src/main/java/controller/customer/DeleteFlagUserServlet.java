@@ -1,11 +1,10 @@
 package controller.customer;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import classes.ErrorHandling;
-import classes.user.AdminUser;
 import classes.user.CustomerUser;
+import classes.user.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -56,26 +55,22 @@ public class DeleteFlagUserServlet extends HttpServlet {
 		// インスタンス生成
 		CustomerUser customerUser = new CustomerUser();
 		
-		// 
-//		Date date = Date.valueOf(request.getParameter("birthday"));
+
+		//Date date = Date.valueOf(request.getParameter("birthday"));
 		// Timestamp timestamp = new Timestamp(date);
 		
-		// PostされたデータをBeanにセット
+		//削除するユーザーのIDをセッションから取得
 		customerUser.setUserId((int)session.getAttribute("user_id"));
-		customerUser.setUserLoginId(request.getParameter("user_login_id"));
-		customerUser.setUserName(request.getParameter("user_name"));
-		customerUser.setGender(request.getParameter("gender"));
-		Date date = Date.valueOf(request.getParameter("birthday"));
 		
-		// 更新処理実行
-		Boolean deleteFlag = AdminUser.updateUserInfoByAdmin(customerUser);
-		if(deleteFlag) {
-			// 処理が成功すればにホーム画面に遷移
-			response.sendRedirect("home");
-		} else {
+		// ユーザー削除処理実行（論理削除）
+		Boolean deleteFlag = User.updateUserDeleteFlag(customerUser);
+		
+		if(!deleteFlag) {
 	      //エラーページに遷移
 			ErrorHandling.transitionToErrorPage(request,response,"退会処理が失敗しました","userInfoPage","ユーザー情報画面に");
 			return;
 		}
+		
+		response.sendRedirect("home");
 	}
 }

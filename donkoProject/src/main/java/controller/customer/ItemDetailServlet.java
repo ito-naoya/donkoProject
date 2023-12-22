@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import bean.CartBean;
 import bean.ItemBean;
 import classes.Cart;
+import classes.ErrorHandling;
 import classes.Item;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
@@ -42,14 +43,9 @@ public class ItemDetailServlet extends HttpServlet {
 		ArrayList<ItemBean> itemOptionList = Item.getItemOptionList(ib);
 		
 		//データベースから取得できなかった時
-		if(item == null || itemImageList == null || itemOptionList == null) {
-			//エラーメッセージ
-			request.setAttribute("errorMessage", "商品情報の取得時に問題が発生しました。");
-			//エラーページからの遷移先
-			request.setAttribute("url", "home");
-			//エラーページを返す
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+		if(item == null || itemImageList == null || itemOptionList == null) {			
+			//エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response,"商品情報の取得時に問題が発生しました。","home","ホームに");
 			return;
 		} 
 		
@@ -102,13 +98,8 @@ public class ItemDetailServlet extends HttpServlet {
 		
 		//カート追加に失敗した場合
 		if(!isCommit) {
-			//エラーメッセージ
-			request.setAttribute("errorMessage", "カート処理中に問題が発生しました。");
-			//エラーページからの遷移先
-			request.setAttribute("url", "cart");
-			//エラーページ表示
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			//エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response, "カート処理中に問題が発生しました。","cart","カートに");
 			return;
 		}
 		

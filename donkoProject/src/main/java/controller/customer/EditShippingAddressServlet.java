@@ -3,6 +3,7 @@ package controller.customer;
 import java.io.IOException;
 
 import bean.ShippingAddressBean;
+import classes.ErrorHandling;
 import classes.ShippingAddress;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -39,6 +40,13 @@ public class EditShippingAddressServlet extends HttpServlet {
 		
 		//SQL実行
 		ShippingAddressBean shippingAddressEdit = ShippingAddress.getShippingAddressDetail(shippingAddressBean);
+		
+		if(shippingAddressEdit == null) {
+			//エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response,"配送先情報の取得に失敗しました","shippingAddressIndex","配送先一覧画面に");
+			return;
+		}
+		
 		request.setAttribute("shippingAddressEdit", shippingAddressEdit);
 		
 		// 配送先編集画面
@@ -63,7 +71,13 @@ public class EditShippingAddressServlet extends HttpServlet {
 		shippingAddressBean.setAddressee(request.getParameter("addressee"));
 		shippingAddressBean.setPostalCode(request.getParameter("postalcode"));
 		shippingAddressBean.setAddress(request.getParameter("address"));
-		ShippingAddress.updateShippingAddress(shippingAddressBean);
+		Boolean updateStatus = ShippingAddress.updateShippingAddress(shippingAddressBean);
+		
+		if(!updateStatus) {
+			//エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response,"配送先情報の更新に失敗しました","shippingAddressIndex","配送先一覧画面に");
+			return;
+		}
 		
 		// 配送先一覧画面表示
 		response.sendRedirect("shippingAddressIndex");

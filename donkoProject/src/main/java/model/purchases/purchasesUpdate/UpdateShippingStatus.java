@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class UpdateShippingStatus {
 	
 	//商品の発送処理をする
-	public static void updateShippingStatus(PurchaseBean purchaseBean){
+	public static Boolean updateShippingStatus(PurchaseBean purchaseBean){
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE "						);
 		sb.append(		"purchases "			);
@@ -33,8 +33,9 @@ public class UpdateShippingStatus {
 			} catch (SQLException e) {
 				if (conn != null && !conn.isClosed()&& !conn.getAutoCommit()) {
 					conn.rollback();
-					e.printStackTrace();
 				}
+				e.printStackTrace();
+				return false;
 			} finally {
 		        if (conn != null && !conn.isClosed()) {
 		            conn.close();
@@ -42,6 +43,8 @@ public class UpdateShippingStatus {
 		    }
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	};
 }

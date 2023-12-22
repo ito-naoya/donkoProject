@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class UpdateUserDeleteFlag {
 	
 	//ユーザーを論理削除
-	public static boolean updateUserDeleteFlags(CustomerUser customerUser){
+	public static Boolean updateUserDeleteFlags(CustomerUser customerUser){
 		// SQLコマンド生成
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE "								);
@@ -34,11 +34,13 @@ public class UpdateUserDeleteFlag {
 			} catch (Exception e) {
 				if(!connection.isClosed()) {
 					connection.rollback();
-					e.printStackTrace();
 				}
+				e.printStackTrace();
+				return false;
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		return true;
 	};

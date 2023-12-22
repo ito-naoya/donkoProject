@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class DeleteIteShippingAddresses {
 
 	//配送先を削除する
-	public static void deleteUpdateShippingAddress(ShippingAddressBean shippingAddressBean){
+	public static Boolean deleteUpdateShippingAddress(ShippingAddressBean shippingAddressBean){
 
 		StringBuilder sb = new StringBuilder();
 			sb.append("DELETE FROM "								);
@@ -37,10 +37,14 @@ public class DeleteIteShippingAddresses {
 						conn.rollback();
 					}
 					e.printStackTrace();
+					return false;
 				}
 			} catch (SQLException | ClassNotFoundException e) {
 				e.printStackTrace();
+				return false;
 			}
+			
+			return true;
 
 	};
 }
