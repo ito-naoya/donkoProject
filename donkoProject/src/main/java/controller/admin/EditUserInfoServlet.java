@@ -2,8 +2,13 @@ package controller.admin;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Set;
 
-import classes.user.AdminUser;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
 import classes.user.CustomerUser;
 import classes.user.User;
 import jakarta.servlet.ServletException;
@@ -74,23 +79,34 @@ public class EditUserInfoServlet extends HttpServlet {
 		customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
 		customerUser.setDeleted(status.equals("delete") ? true : false);
 		
-		// 更新処理実行
-		Boolean isCommit = AdminUser.updateUserInfoByAdmin(customerUser);
+		// Validator を取得
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        
+        // バリデーションを実行
+        Set<ConstraintViolation<CustomerUser>> result = validator.validate(customerUser);
+        
+        System.out.println(result);
+        System.out.println("errorcount : " + result.size());
+        System.out.println("message : " + result.iterator().next().getMessage());
 		
-		//ユーザー情報の更新に失敗したとき
-		if(!isCommit) {
-			//エラーメッセージ
-			request.setAttribute("errorMessage", "ユーザー情報の更新時に問題が発生しました。");
-			//エラーページからの遷移先
-			request.setAttribute("url", "adminTopPage");
-			//エラーページ表示
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-			return;
-		}
-		
-		// ユーザー一覧に遷移
-		response.sendRedirect("deleteUserInfoIndex");
+//		// 更新処理実行
+//		Boolean isCommit = AdminUser.updateUserInfoByAdmin(customerUser);
+//		
+//		//ユーザー情報の更新に失敗したとき
+//		if(!isCommit) {
+//			//エラーメッセージ
+//			request.setAttribute("errorMessage", "ユーザー情報の更新時に問題が発生しました。");
+//			//エラーページからの遷移先
+//			request.setAttribute("url", "adminTopPage");
+//			//エラーページ表示
+//			String view = "/WEB-INF/views/component/message.jsp";
+//			request.getRequestDispatcher(view).forward(request, response);
+//			return;
+//		}
+//		
+//		// ユーザー一覧に遷移
+//		response.sendRedirect("deleteUserInfoIndex");
 		
 	}
 
