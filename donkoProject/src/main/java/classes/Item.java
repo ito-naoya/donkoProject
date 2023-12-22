@@ -94,8 +94,8 @@ public class Item {
 	};
 
 	//商品が既に存在するかをチェックする
-	public static ArrayList<Integer> checkItemAlreadyExist(ItemBean itemAddOption) {
-		return (SelectItemAlreadyExistFromItems.selectItemAlreadyExistFromItems(itemAddOption, null));
+	public static ArrayList<Integer> checkItemAlreadyExist(ItemBean itemAddOption,  String[] itemSecondOptionIncrementIds) {
+		return (SelectItemAlreadyExistFromItems.selectItemAlreadyExistFromItems(itemAddOption, itemSecondOptionIncrementIds));
 	};
 
 	//商品の情報を更新する

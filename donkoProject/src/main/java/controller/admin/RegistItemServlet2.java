@@ -84,12 +84,14 @@ public class RegistItemServlet2 extends HttpServlet {
         newItemAddOption.setImageFileName(fileName);
 
         //商品名とオプションについて、既存のアイテムと重複がないか確認する
-        ArrayList<Integer> existId = Item.checkItemAlreadyExist(newItemAddOption);
-        if(existId != null) {
-        	request.setAttribute("errorMessage", "この商品は既に存在しています。商品ID；" + existId);
-    		//商品登録画面1に転送
-    		String view = "/WEB-INF/views/admin/registItem1.jsp";
+        ArrayList<Integer> existId = Item.checkItemAlreadyExist(newItemAddOption,itemSecondOptionIncrementIds);
+        if(existId == null) {
+        	errorHandling(request,response,"写真の取得に失敗しました","adminTopPage","管理者ページに");
+        } else if (existId.isEmpty()) { //商品が重複していた場合
+        	request.setAttribute("existId", existId);
+        	String view = "/WEB-INF/views/admin/registItem1.jsp";
     		request.getRequestDispatcher(view).forward(request, response);
+	        return;
         }
 
         if (Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {
