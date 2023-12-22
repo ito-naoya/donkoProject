@@ -7,6 +7,7 @@ import bean.CartBean;
 import classes.Cart;
 import classes.ErrorHandling;
 import classes.user.CustomerUser;
+import classes.user.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -40,8 +41,11 @@ public class CartServlet extends HttpServlet {
 		//ログインしているユーザーがカートに追加した商品を全て取得
 		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(loginedUser);
 		
+		//ログインしているユーザー情報を取得
+		CustomerUser customerUser = User.getUserDetail(loginedUser);
+		
 		//データベースから取得できなかった時
-		if(cartBeanList == null) {			
+		if(cartBeanList == null || customerUser == null) {			
 			//エラーページに遷移
 			ErrorHandling.transitionToErrorPage(request,response,"カート情報の取得時に問題が発生しました。","home","ホームに");
 			return;
@@ -53,6 +57,7 @@ public class CartServlet extends HttpServlet {
 				.mapToInt( i -> i )
 				.sum();
 	
+		request.setAttribute("userName", customerUser.getUserName());
 		request.setAttribute("totalPrice", totalPrice);
 		request.setAttribute("cartBeanList", cartBeanList);
 
@@ -77,7 +82,7 @@ public class CartServlet extends HttpServlet {
 		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
 		Integer quantity = Integer.valueOf(request.getParameter("quantity"));
 		
-		//カートにある商品情報を保持するcartBeanをnew
+		//カートにある商品情報を保持するcar)tBeanをnew
 		CartBean cb = new CartBean();
 		//cartBeanにユーザーIDをセットする
 		cb.setUserId(loginedUser.getUserId());
