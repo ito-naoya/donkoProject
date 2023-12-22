@@ -40,7 +40,7 @@
 								<h6 class="mb-0"><%= userName %> さんのカート</h6>
 								<form action="deleteCart" method="POST">
 									<button type=submit class="btn btn-sm px-4 py-2 rounded-pill border border-danger" style="background-color: white; color: red;">
-										商品を全て削除
+										全ての商品を削除
 									</button>
 								</form>
 							</div>
@@ -135,7 +135,7 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="col-lg-3 mx-3 mt-2">
+					<div class="col-lg-3 mx-3">
 						<%
 						if(cartBeanList.size() > 0) {
 						%>
@@ -150,7 +150,7 @@
 									</h4>
 								</div>
 								<form action="purchaseConfirm" method="get" class="d-flex justify-content-end mb-3">
-									<button type=submit class="btn btn-sm px-5 py-2 w-100" style="background-color: #9933ff; color: white; width: auto;">
+									<button type=submit class="btn btn-sm px-5 py-2 w-100" style="background-color: #E5CCFF; width: auto;">
 										レジに進む
 									</button>
 								</form>

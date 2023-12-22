@@ -65,7 +65,7 @@
 					data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling"
 					aria-labelledby="offcanvasScrollingLabel"
 					style="background-color:#63A162; opacity: 0.96;">
-						<div class="offcanvas-header">
+						<div class="offcanvas-header" style="border-bottom:1px white solid;">
 							<h5 class="offcanvas-title ms-3 mt-3 text-light" id="offcanvasScrollingLabel">
 								<strong>カテゴリー一覧</strong>
 							</h5>
