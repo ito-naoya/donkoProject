@@ -26,19 +26,6 @@
 					<br>
 					<h2>商品登録</h2>
 					<br>
-					<%
-					ArrayList<Integer> existId = (ArrayList<Integer>) request.getAttribute("existId");
-					if (existId != null && !existId.isEmpty()) {
-					    String idsStr = existId.stream()
-					                           .map(String::valueOf)
-					                           .collect(Collectors.joining(", "));
-					%>
-					    <div class="alert alert-warning" role="alert">
-					        商品が重複しています。重複商品ID： <%= idsStr %>
-					    </div>
-					<%
-					}
-					%>
 
 					<h6 style="color: red;">※全て必須項目です</h6>
 					<br>
