@@ -1,6 +1,7 @@
 package controller.admin;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import bean.ItemBean;
 import classes.Item;
@@ -86,20 +87,30 @@ public class RegistItemServlet2 extends HttpServlet {
             boolean imageSaved = Item.registerNewImage(imgPart, fileName, context);
             if (!imageSaved) {
                 // 画像の登録に失敗した場合の処理
-            	request.setAttribute("errorMessage", "写真の登録に失敗しました");
-    			request.setAttribute("url","adminTopPage");
-    			String view = "/WEB-INF/views/component/message.jsp";
-    			request.getRequestDispatcher(view).forward(request, response);
+            	errorHandling(request,response,"写真の取得に失敗しました","adminTopPage","管理者ページに");
             }
         } else {
             // データの登録に失敗した場合の処理
-        	request.setAttribute("errorMessage", "商品の登録に失敗しました");
-			request.setAttribute("url","adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+        	errorHandling(request,response,"商品の登録に失敗しました","adminTopPage","管理者ページに");
         }
 
 	    // 完了後、商品一覧ページにリダイレクト
-	    response.sendRedirect("deleteItemIndex");
+        String encodedItemCategoryName = URLEncoder.encode(itemCategoryName, "UTF-8");
+        String redirectURL = "deleteItemIndex?itemCategoryName=" + encodedItemCategoryName + "&itemDelFlg=0";
+        response.sendRedirect(redirectURL);
+
+	}
+
+	protected void errorHandling(HttpServletRequest request, HttpServletResponse response, String message, String url, String returnPage)
+			throws ServletException, IOException {
+		// エラーメッセージをセット
+		request.setAttribute("errorMessage", message);
+		// 戻り先のURL
+		request.setAttribute("url", url);
+		// 戻るボタンの表示文言
+		request.setAttribute("returnPage", returnPage);
+		// エラー画面に遷移
+		String view = "/WEB-INF/views/component/message.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 }

@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class InsertNewShippingAddress {
 	
 	//新規配送先を登録する
-	public static void insertNewShippingAddress(ShippingAddressBean shippingAddressBean){
+	public static boolean insertNewShippingAddress(ShippingAddressBean shippingAddressBean){
 		
 		// SQLコマンド生成
 		StringBuilder sb = new StringBuilder();
@@ -53,11 +53,14 @@ public class InsertNewShippingAddress {
 				if(!connection.isClosed()) {
 					connection.rollback();
 					e.printStackTrace();
+					return false;
 				}
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 }

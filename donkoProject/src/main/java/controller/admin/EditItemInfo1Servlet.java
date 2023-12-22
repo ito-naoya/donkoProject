@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.ItemBean;
-import bean.ItemCategoryBean;
 import bean.OptionCategoryBean;
 import classes.Item;
-import classes.ItemCategory;
 import classes.Option;
 import classes.OptionCategory;
 import jakarta.servlet.RequestDispatcher;
@@ -33,24 +31,11 @@ public class EditItemInfo1Servlet extends HttpServlet {
 		ItemBean item = new ItemBean();
 		item.setItemId(itemId);
 
-		//カテゴリー一覧を取得
-		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
-		if(categoryList == null) {
-			//取得情報の不備があれば、エラー画面に遷移
-			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
-			request.setAttribute("url","adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-		}
-
 		//商品詳細を取得
 		ItemBean editItem = Item.getItemAllDetail(item);
 		if(editItem == null) {
 			//取得情報の不備があれば、エラー画面に遷移
-			request.setAttribute("errorMessage", "商品詳細の取得に失敗しました");
-			request.setAttribute("url","adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			errorHandling(request,response,"商品詳細の取得に失敗しました","adminTopPage","管理者ページに");
 		}
 
 		//問題なければ商品編集画面1に遷移
@@ -88,10 +73,7 @@ public class EditItemInfo1Servlet extends HttpServlet {
 		ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(updateItem);
 		if(itemCategoryListAll == null) {
 			//取得情報の不備があれば、エラー画面に遷移
-			request.setAttribute("errorMessage", "カテゴリー一覧の取得に失敗しました");
-			request.setAttribute("url","adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			errorHandling(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
 		}
 
 		// オプションの数を取得
@@ -112,6 +94,19 @@ public class EditItemInfo1Servlet extends HttpServlet {
 		String view = "/WEB-INF/views/admin/editItemInfo2.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
+	}
+
+	protected void errorHandling(HttpServletRequest request, HttpServletResponse response, String message, String url, String returnPage)
+			throws ServletException, IOException {
+		// エラーメッセージをセット
+		request.setAttribute("errorMessage", message);
+		// 戻り先のURL
+		request.setAttribute("url", url);
+		// 戻るボタンの表示文言
+		request.setAttribute("returnPage", returnPage);
+		// エラー画面に遷移
+		String view = "/WEB-INF/views/component/message.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 }
 

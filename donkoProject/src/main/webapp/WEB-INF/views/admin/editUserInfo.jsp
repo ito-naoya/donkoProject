@@ -20,7 +20,7 @@
 			<%
 			CustomerUser user = (CustomerUser) request.getAttribute("user");
 			%>
-			<form action="editUserInfo" method="post" style="display: flex; justify-content: center; margin: 30px;">
+			<form action="editUserInfo" method="post" style="display: flex; justify-content: center; margin: 30px;" class="needs-validation" novalidate>
 				<input type="hidden" name="userId" value="<%= user.getUserId() %>">
 				<div class="col-lg-5 m-5" style="border: 1px solid #333333; padding: 65px;">
 					<div class="cancelButton" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
@@ -42,8 +42,9 @@
 						</label>
 						<br>
 					</div>
-					<div class="form-group" style="display: flex; justify-content: center; margin-bottom: 30px;">
-						<input type="text" class="form-control" id="exampleInputUserId" name="user_login_id" value="<%=user.getUserLoginId()%>">
+					<div class="form-group　d-flex flex-wrap　justify-content-center" style="margin-bottom: 30px;">
+						<input type="text" class="form-control" id="exampleInputUserId" name="user_login_id" value="<%=user.getUserLoginId()%>" required>
+						<div class="invalid-feedback">ユーザーIDを入力してください</div>
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputUserName">
@@ -51,8 +52,11 @@
 						</label>
 						<br>
 					</div>
-					<div class="form-group" style="display: flex; justify-content: center; margin-bottom: 30px;">
-						<input type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName" name="user_name" value="<%=user.getUserName()%>">
+					<div class="form-group d-flex flex-wrap justify-content-center" style="margin-bottom: 30px;">
+						<input type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName" name="user_name" value="<%=user.getUserName()%>" required>
+						<div class="invalid-feedback">
+							ユーザー名を入力してください
+						</div>
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputGender">
@@ -60,16 +64,13 @@
 						</label>
 						<br>
 					</div>
-					<div class="form-group" style="display: flex; justify-content: center; margin-bottom: 30px;">
-						<select class="form-control" name="gender" id="exampleInputGender">
+					<div class="form-group d-flex flex-wrap justify-content-center" style="margin-bottom: 30px;">
+						<select class="form-control" name="gender" id="exampleInputGender" required>
 							<%
 							String selected = user.getGender();
 							String men = (selected != null && selected.equals("男性") ? "selected" : "");
 							String woman = (selected != null && selected.equals("女性") ? "selected" : "");
 							%>
-							<option hidden>
-								選択してください
-							</option>
 							<option value="男性" <%=men%>>
 								男性
 							</option>
@@ -77,6 +78,7 @@
 								女性
 							</option>
 						</select>
+						<div class="invalid-feedback">性別を選択してください</div>
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputbirthday">
@@ -84,8 +86,8 @@
 						</label>
 						<br>
 					</div>
-					<div class="form-group" style="display: flex; justify-content: center; margin-bottom: 30px;">
-						<input type="date" class="form-control" id="exampleInputbirthday" name="birthday" value="<%=user.getBirthday()%>">
+					<div class="form-group d-flex flex-wrap justify-content-center" style="margin-bottom: 30px;">
+						<input type="date" class="form-control" id="exampleInputbirthday" name="birthday" value="<%=user.getBirthday()%>" required>
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputbirthday">
@@ -93,8 +95,8 @@
 						</label>
 						<br>
 					</div>
-					<div class="form-group" style="display: flex; justify-content: center; margin-bottom: 70px;">
-						<select class="form-control" name="status">
+					<div class="form-group d-flex flex-wrap justify-content-center" style="margin-bottom: 70px;">
+						<select class="form-control" name="status" required>
 						<%
 						String isDeleted = user.isDeleted() ? "selected" : ""; 
 						String isNotDeleted = user.isDeleted() ? "" : "selected";
@@ -106,8 +108,9 @@
 								有効
 							</option>
 						</select>
+						<div class="invalid-feedback">誕生日を選択してください</div>
 					</div>
-					<div style="display: flex; justify-content: center; margin-bottom: 20px;">
+					<div class="d-flex justify-content-center" style="margin-bottom: 20px;">
 						<button type="submit" class="btn btn-lg w-100" style="border: 1px solid #000000; background: #E5CCFF; padding: 10px;">
 							更新
 						</button
@@ -115,5 +118,6 @@
 				</div>
 			</form>
 		</main>
+		<script src="./js/nullValidationScript.js"></script>
 	</body>
 </html>
