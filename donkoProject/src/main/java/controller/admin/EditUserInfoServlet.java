@@ -2,9 +2,12 @@ package controller.admin;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.Path;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -86,9 +89,15 @@ public class EditUserInfoServlet extends HttpServlet {
         // バリデーションを実行
         Set<ConstraintViolation<CustomerUser>> result = validator.validate(customerUser);
         
-        System.out.println(result);
-        System.out.println("errorcount : " + result.size());
-        System.out.println("message : " + result.iterator().next().getMessage());
+        //バリデーションメッセージを保持するmapをnew
+        Map<Path, String> validationMsg = new LinkedHashMap<Path, String>();
+        
+         //バリデーションメッセージのセット
+        for(ConstraintViolation<CustomerUser> rs : result){
+        validationMsg.put(rs.getPropertyPath(), rs.getMessage());
+        }
+        
+        System.out.println(validationMsg);
 		
 //		// 更新処理実行
 //		Boolean isCommit = AdminUser.updateUserInfoByAdmin(customerUser);
