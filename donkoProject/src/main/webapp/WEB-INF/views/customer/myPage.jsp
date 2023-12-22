@@ -180,7 +180,7 @@
 				<thead align="center">
 					<tr>
 						<th class="th"><strong style="white-space: nowrap;">注文ID</strong></th>
-						<th class="th"><strong>合計金額</strong></th>
+						<th class="th"><strong style="white-space: nowrap;">合計金額</strong></th>
 						<th class="th"><strong>購入日</strong></th>
 						<th class="th"><strong>配送先</strong></th>
 						<th class="th"><strong style="white-space: nowrap;">配送ステータス</strong></th>
