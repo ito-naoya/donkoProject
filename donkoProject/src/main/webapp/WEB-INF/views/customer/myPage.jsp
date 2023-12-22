@@ -126,36 +126,28 @@
 							</div>
 							<!-- フォームを入れる -->
 							<form action="createShippingAddress" method="post">
-								<div style="margin-bottom: 10px;">
+								<div class="form-group mb-3">
 									<label for="exampleInputUserId">宛名</label><br>
-								</div>
-								<div class="form-group"
-									style="display: flex; justify-content: center; margin-bottom: 30px;">
 									<input type="text" class="form-control"
 										id="exampleInputAddresses" aria-describedby="addresses"
 										name="addresses" value="" placeholder="伊藤 直也" required>
 								</div>
-								<div>
+								<div class="form-group mb-3">
 									<label for="exampleInputUserName">郵便番号</label><br>
-								</div>
-								<div class="form-group"
-									style="display: flex; justify-content: center; margin-bottom: 5px;">
 									<input type="text" class="form-control" id="exampleInputPostCode"
 										aria-describedby="postCode" maxlength="8" name="postcode" value=""
 										placeholder="650-0001" required>
 								</div>
-								<div style="margin-bottom: 10px;">
+								<div class="form-group mb-3">
 									<label for="exampleInputAddress">住所</label><br>
-								</div>
-								<div class="form-group"
-									style="display: flex; justify-content: center; margin-bottom: 30px;">
 									<input type="text" class="form-control" id="exampleInputAddress"
 										aria-describedby="address" name="address" value="" placeholder="兵庫県神戸市中央区加納町４丁目２−１" required>
 								</div>
-								<div class="cancelButton"
-									style="display: flex; justify-content: center; margin-bottom: 20px;">
-									<button type="submit" class="btn btn-lg w-100"
-										style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; padding: 10px;">登録</button>
+								<div class="cancelButton mt-5 d-flex justify-content-center">
+									<button type="submit" class="btn"
+										style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; padding: 10px; width:50%;">
+										登録
+									</button>
 								</div>
 							</form>
 						</div>
@@ -184,7 +176,7 @@
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
 			%>
-			<table class="table purchaseDetailTable table-hover table-borderless my-3">
+			<table class="table purchaseDetailTable table-hover table-borderless my-4">
 				<thead align="center">
 					<tr>
 						<th class="th"><strong style="white-space: nowrap;">注文ID</strong></th>
