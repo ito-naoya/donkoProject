@@ -21,6 +21,7 @@
 						<%
 						String errorMessage = (String)request.getAttribute("errorMessage");
 						String url = (String)request.getAttribute("url");
+						String returnPage = (String)request.getAttribute("returnPage");
 						%>
 						<h1></h1>
 						<h3><%= errorMessage %></h3>
