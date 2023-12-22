@@ -26,8 +26,7 @@ public class UserInfoEditServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		int userId = (int) session.getAttribute("user_id");
 		if (userId == 0) {
-			String view = "/WEB-INF/views/customer/home.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			response.sendRedirect("home");
 		}
 		
 		// ユーザーIDをセット

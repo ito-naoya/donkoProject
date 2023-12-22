@@ -85,7 +85,7 @@
 									<button class="btn w-100"
 										style="border: 1px solid #000000; background: #E5CCFF; padding: 10px;">編集</button>
 								</a>
-								<form action="userInfoPage" method="post" style="width: 50%;">
+								<form action="deleteUser" method="post" style="width: 50%;">
 									<button type="submit" class="btn text-nowrap w-100"
 										style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000; padding: 10px;">退会</button>
 								</form>

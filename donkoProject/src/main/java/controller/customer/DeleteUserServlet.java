@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/userInfoPage")
+@WebServlet("/deleteUser")
 public class DeleteUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,19 +49,21 @@ public class DeleteUserServlet extends HttpServlet {
 		String view = "/WEB-INF/views/customer/userInfoPage.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}
-
+  
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// セッションを確認
 		HttpSession session = request.getSession(false);
-		int userId = (int) session.getAttribute("user_id");
-		if (userId == 0) {
-			String view = "/WEB-INF/views/customer/home.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+		Object userId = session.getAttribute("user_id");
+		
+		// userIdがなければホーム画面に戻す
+		if (userId == null) {
+			response.sendRedirect("home");
+			return;
 		}
 		
 		// ユーザーIDをセット
 		CustomerUser customerUser = new CustomerUser();
-		customerUser.setUserId(userId);
+		customerUser.setUserId((int) userId);
 		
 		// 削除フラグを設定するSQL
 		Boolean deleteFlagStatus = User.updateUserDeleteFlag(customerUser);
