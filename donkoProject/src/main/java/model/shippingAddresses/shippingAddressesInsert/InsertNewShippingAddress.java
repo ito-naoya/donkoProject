@@ -11,7 +11,7 @@ import dao.GeneralDao;
 public class InsertNewShippingAddress {
 	
 	//新規配送先を登録する
-	public static Boolean insertNewShippingAddress(ShippingAddressBean shippingAddressBean){
+	public static boolean insertNewShippingAddress(ShippingAddressBean shippingAddressBean){
 		
 		// SQLコマンド生成
 		StringBuilder sb = new StringBuilder();
