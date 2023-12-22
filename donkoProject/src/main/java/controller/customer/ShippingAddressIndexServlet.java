@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.ShippingAddressBean;
-import classes.ErrorHandling;
 import classes.BeanValidation;
+import classes.ErrorHandling;
 import classes.ShippingAddress;
 import classes.user.CustomerUser;
 import interfaces.group.GroupB;
@@ -46,7 +46,8 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 			// エラー画面に遷移
 			ErrorHandling.transitionToErrorPage(request,response,"配送先一覧画面へのアクセスに失敗しました","myPage","マイページ画面に");
 			return;
-		} else {
+		} 
+		
 			// データ取得に成功した場合に値をセットする
 			request.setAttribute("mainShippingAddressList", mainShippingAddressList);
 			request.setAttribute("shippingAddressList", shippingAddressList);
@@ -54,7 +55,7 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 			// 配送先一覧
 			String view = "/WEB-INF/views/customer/shippingAddressIndex.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
-		}
+		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -93,9 +94,10 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 			// エラー画面に遷移
 			ErrorHandling.transitionToErrorPage(request,response,"メイン配送先の更新に失敗しました。","shippingAddressIndex","配送先一覧の画面に");
 			return;
-		} else {
+		} 
+		
 			// 配送先一覧画面
 			response.sendRedirect("shippingAddressIndex");
-		}
+	
 	}
 }

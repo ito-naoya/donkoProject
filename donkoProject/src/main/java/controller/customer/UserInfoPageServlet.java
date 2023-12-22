@@ -35,6 +35,13 @@ public class UserInfoPageServlet extends HttpServlet {
 		
 		// ユーザー情報取得
 		CustomerUser users = CustomerUser.getUserDetail(customerUser);
+		
+		if(users == null) {
+			// エラー画面に遷移
+			ErrorHandling.transitionToErrorPage(request,response,"ユーザー情報の取得に失敗しました","home","ホームに");
+			return;
+		}
+		
 		request.setAttribute("users", users);
 		request.setAttribute("user_id", userId);
 		

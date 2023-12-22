@@ -40,7 +40,12 @@ public class ShippingServlet extends HttpServlet {
 		purchaseBean.setShippingId(shippingId);
 		
 		// 配送ステータスの更新処理
-		Purchase.sendItems(purchaseBean);
+		Boolean sendStatus = Purchase.sendItems(purchaseBean);
+		
+		if(!sendStatus) {
+			 ErrorHandling.transitionToErrorPage(request, response, "発送処理に失敗しました","adminTopPage","管理者ページに");
+			return;
+		}
 		
 		// アドミンのホーム画面で表示するデータを取得
 		ArrayList<PurchaseBean> unshippingedItemList = Purchase.getUnshippingedItemListByDesc();
@@ -49,7 +54,9 @@ public class ShippingServlet extends HttpServlet {
 		if (unshippingedItemList == null){
 	        ErrorHandling.transitionToErrorPage(request, response, "データの取得に失敗しました","adminTopPage","管理者ページに");
 			return;
-		} else if (unshippingedItemList.size() > 0) {
+		} 
+		
+		if (unshippingedItemList.size() > 0) {
 			request.setAttribute("unshippingedItemList", unshippingedItemList);
 		} else {
 			request.setAttribute("message", "現在未発送の商品はありません");

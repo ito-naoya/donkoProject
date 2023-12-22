@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import bean.PurchaseBean;
 import bean.PurchaseDetailBean;
+import classes.ErrorHandling;
 import classes.Purchase;
 import classes.PurchaseDetail;
 import classes.user.CustomerUser;
@@ -24,6 +25,7 @@ public class OrderDetailServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// インスタンス化
 		CustomerUser customerUser = new CustomerUser();
 		PurchaseBean purchaseBean = new PurchaseBean();
@@ -38,16 +40,15 @@ public class OrderDetailServlet extends HttpServlet {
 			customerUser.setUserId((int)session.getAttribute("user_id"));
 		}
 		
+		
 		// 購入ID取得 
 		int purchase_id = Integer.parseInt(request.getParameter("purchase_id"));
-		request.setAttribute("purchase_id", purchase_id);
 		
 		// 購入IDをセット
 		purchaseBean.setPurchaseId(purchase_id);
 		
 		// 1件の購入情報を取得
 		PurchaseBean purchaseInfo = Purchase.getPurchaseInfo(purchaseBean);
-		request.setAttribute("purchaseInfo", purchaseInfo);
 		
 		// PurchaseDetailBeanにセット
 		PurchaseDetailBean purchaseDetailBean = new PurchaseDetailBean();
@@ -55,6 +56,15 @@ public class OrderDetailServlet extends HttpServlet {
 		
 		// 購入情報詳細取得
 		ArrayList<PurchaseDetailBean> purchaseDetailList = PurchaseDetail.getPurchaseDetail(purchaseDetailBean);
+		
+		if(purchaseInfo == null || purchaseDetailList == null) {
+			// エラー画面に遷移
+			ErrorHandling.transitionToErrorPage(request,response,"購入情報の取得に失敗しました。","home","ホームに");
+			return;
+		}
+		
+		request.setAttribute("purchase_id", purchase_id);
+		request.setAttribute("purchaseInfo", purchaseInfo);
 		request.setAttribute("purchaseDetailList", purchaseDetailList);
 		
 		// 購入詳細画面表示

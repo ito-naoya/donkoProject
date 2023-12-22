@@ -3,6 +3,7 @@ package controller.customer;
 import java.io.IOException;
 
 import bean.ShippingAddressBean;
+import classes.ErrorHandling;
 import classes.ShippingAddress;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -37,7 +38,15 @@ public class DeleteShippingAddressServlet extends HttpServlet {
 		shippingAddressBean.setShippingAddressId(Integer.parseInt(request.getParameter("shipping_address_id")));
 		
 		// 更新処理実行
-		ShippingAddress.deleteShippingAddresses(shippingAddressBean);
+		Boolean deleteStatus = ShippingAddress.deleteShippingAddresses(shippingAddressBean);
+		
+		//配送先削除処理に失敗した場合
+		if(!deleteStatus) {
+			// エラー画面を返す
+			ErrorHandling.transitionToErrorPage(request, response, "配送先削除処理に失敗しました", "shippingAddressIndex", "配送先一覧画面に");
+			return;
+		}
+			
 		
 		// マイページに遷移
 		response.sendRedirect("shippingAddressIndex");
