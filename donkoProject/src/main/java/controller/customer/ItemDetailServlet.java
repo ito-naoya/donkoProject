@@ -85,6 +85,7 @@ public class ItemDetailServlet extends HttpServlet {
 		loginedUser.setUserId(2);
 		
 		String itemId = request.getParameter("itemId");
+		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
 		
 		//商品IDとユーザーIDを保持するcartBeanをnewする
 		CartBean cb = new CartBean();
@@ -92,6 +93,8 @@ public class ItemDetailServlet extends HttpServlet {
 		cb.setItemId(Integer.parseInt(itemId));
 		//ログインしているユーザーのIDをcartBeanにセットする
 		cb.setUserId(loginedUser.getUserId());
+		//商品の数量をcartBeanにセットする
+		cb.setQuantity(quantity);
 		
 		//カートに商品を追加する
 		Boolean isCommit = Cart.addItemToCart(cb);

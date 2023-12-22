@@ -71,6 +71,19 @@
 						</form>
 					</div>
 				</div>
+				<!-- 各種メッセージ -->
+				<%
+				    // リクエストからmessage属性を取得
+				    String message = (String) request.getAttribute("message");
+				    // messageがnullでない場合にのみ表示
+				    if (message != null) {
+				%>
+				        <div class="alert alert-warning" role="alert">
+				            <%= message %>
+				        </div>
+				<%
+				    }
+				%>
 				<!-- 商品一覧を掲載 -->
 				<div class="row justify-content-center">
 					<div class="col-11 mt-4">

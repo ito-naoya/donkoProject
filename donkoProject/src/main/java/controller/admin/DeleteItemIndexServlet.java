@@ -30,6 +30,8 @@ public class DeleteItemIndexServlet extends HttpServlet {
 		String itemCategoryName = request.getParameter("itemCategoryName");
 		//表示方法を取得
 		Integer sortParam = Integer.parseInt(request.getParameter("itemDelFlg"));
+		//メッセージを取得
+		String message = request.getParameter("existId");
 
 		//カテゴリー一覧を取得
 		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
@@ -47,6 +49,7 @@ public class DeleteItemIndexServlet extends HttpServlet {
 		request.setAttribute("categoryName", itemCategoryName);
 		//カテゴリ一覧をセット
 		request.setAttribute("categoryList", categoryList);
+		request.setAttribute("message", message);
 
 		//以下、ソートSQL
 		ArrayList<ItemBean> itemList = null;
