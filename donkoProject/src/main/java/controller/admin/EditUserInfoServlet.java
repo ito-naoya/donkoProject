@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Path;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -90,17 +89,17 @@ public class EditUserInfoServlet extends HttpServlet {
         Set<ConstraintViolation<CustomerUser>> result = validator.validate(customerUser);
         
         //バリデーションメッセージを保持するmapをnew
-        Map<Path, String> validationMsg = new LinkedHashMap<Path, String>();
+        Map<String, String> validationMsg = new LinkedHashMap<String, String>();
         
          //バリデーションメッセージのセット
         for(ConstraintViolation<CustomerUser> rs : result){
-        validationMsg.put(rs.getPropertyPath(), rs.getMessage());
+        validationMsg.put(rs.getPropertyPath().toString(), rs.getMessage());
         }
         
         if(result.size() > 0) {
         	
-        	for(Map.Entry<Path, String> msg : validationMsg.entrySet()) {
-        		request.setAttribute(msg.getKey().toString(), msg.getValue());
+        	for(Map.Entry<String, String> msg : validationMsg.entrySet()) {
+        		request.setAttribute(msg.getKey() + "Msg", msg.getValue());
         	}
         	
         	request.setAttribute("user", customerUser);
