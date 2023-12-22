@@ -21,10 +21,11 @@
 						<%
 						String errorMessage = (String)request.getAttribute("errorMessage");
 						String url = (String)request.getAttribute("url");
+						String returnPage = (String)request.getAttribute("returnPage");
 						%>
 						<h1></h1>
 						<h3><%= errorMessage %></h3>
-						<a href="<%= url %>" style="margin-top: 30px">戻る</a>
+						<a href="<%= url %>" style="margin-top: 30px"><%= returnPage %>戻る</a>
 					</div>
 				</div>
 			</div>

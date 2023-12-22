@@ -12,9 +12,10 @@
 .border::-webkit-scrollbar {
 	display: none;
 }
-.th{
- 	position: sticky;
-    top: 0;
+
+.th {
+	position: sticky;
+	top: 0;
 }
 </style>
 </head>
@@ -24,15 +25,16 @@
 	<main class="container">
 		<!--  メニューボタンの表示 -->
 		<div class="d-flex justify-content-between mx-5 mt-4 mb-2">
-			<a href="userInfoPage" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; border: 1px #385A37 solid; color: #385A37; text-decoration: none;">
-				ユーザ情報を確認
-			</a>
-			<a href="createShippingAddress" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; border: 1px #385A37 solid; color: #385A37; text-decoration: none;">
-				配送先の登録
-			</a>
-			<a href="shippingAddressIndex" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; border: 1px #385A37 solid; color: #385A37; text-decoration: none;">
-				配送先一覧
-			</a>
+			<a href="userInfoPage"
+				class="d-inline-block border mx-2 mb-4 p-3 text-center"
+				style="width: 30%; border: 1px #385A37 solid; color: #385A37; text-decoration: none;">
+				ユーザ情報を確認 </a> <a href="createShippingAddress"
+				class="d-inline-block border mx-2 mb-4 p-3 text-center"
+				style="width: 30%; border: 1px #385A37 solid; color: #385A37; text-decoration: none;">
+				配送先の登録 </a> <a href="shippingAddressIndex"
+				class="d-inline-block border mx-2 mb-4 p-3 text-center"
+				style="width: 30%; border: 1px #385A37 solid; color: #385A37; text-decoration: none;">
+				配送先一覧 </a>
 		</div>
 		<div class="logout d-flex justify-content-between mx-5">
 			<h4 style="margin-bottom: 0;">
@@ -42,8 +44,7 @@
 				value="hidden"
 				style="color: ＃000000; background-color: #E5CCFF; border-radius: 40px;">発送済みを非表示</button>
 		</div>
-		<div
-			style="overflow-x: scroll; height:40vh;"
+		<div style="overflow-x: scroll; height: 40vh;"
 			class="border mx-5 my-3">
 			<table class="table table-hover table-borderless m-3">
 				<thead align="center">
@@ -61,10 +62,13 @@
 					ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
 					%>
 					<%
-					for (PurchaseBean purchaseBean : purchaseList) {
+					  if ( purchaseList != null && purchaseList.size() > 0) {
 					%>
-
-					<tr onclick="location.href='orderDetail?purchase_id=<%=purchaseBean.getPurchaseId()%>'"
+					<%
+					   for (PurchaseBean purchaseBean : purchaseList) {
+					   %>
+					<tr
+						onclick="location.href='orderDetail?purchase_id=<%=purchaseBean.getPurchaseId()%>'"
 						style="cursor: pointer;">
 						<!-- 注文番号 -->
 						<td align="middle" style="color: #385A37;"><%=purchaseBean.getPurchaseId()%></td>
@@ -77,14 +81,17 @@
 							<%=purchaseBean.getAddress()%> <%=purchaseBean.getAddressee()%></td>
 						<!-- 配送ステータス -->
 						<% if ((purchaseBean.getShippingStatus()).equals("処理中")) { %>
-							<td align="middle" style="color:#CCC;"><%=purchaseBean.getShippingStatus()%></td>
+						<td align="middle" style="color: #CCC;"><%=purchaseBean.getShippingStatus()%></td>
 						<% } else { %>
-							<td align="middle" style="color:#00FF00;"><%=purchaseBean.getShippingStatus()%></td>
+						<td align="middle" style="color: #00FF00;"><%=purchaseBean.getShippingStatus()%></td>
 						<% } %>
 					</tr>
 					<%
 					}
 					%>
+					<%
+		    }
+			 %>
 				</tbody>
 			</table>
 		</div>

@@ -16,8 +16,8 @@ import model.shippingAddresses.shippingAddressesUpdate.UpdateShippingAddress;
 public class ShippingAddress {
 	
 	//新規配送先を登録する
-	public static void registerNewShippingAddress(ShippingAddressBean shippingAddressBean){
-		InsertNewShippingAddress.insertNewShippingAddress(shippingAddressBean);
+	public static boolean registerNewShippingAddress(ShippingAddressBean shippingAddressBean){
+		return InsertNewShippingAddress.insertNewShippingAddress(shippingAddressBean);
 	};
 	
 	//メインの配送先を更新する

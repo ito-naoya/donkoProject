@@ -14,6 +14,7 @@
 			rel="stylesheet"
 			integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 			crossorigin="anonymous">
+		<link rel="stylesheet" href="./css/deleteUserInfoIndex.css">
 	</head>
 	<body>
 		<main>
@@ -54,7 +55,7 @@
 				</div>
 				<div class="row">
 					<div class="col">
-						<table class="table table-borderless  st-tbl1">
+						<table class="table table-borderless st-tbl1" id="userTable" style="padding: 10px">
 							<thead>
 							    <tr>
 							      <th scope="col">
@@ -75,12 +76,10 @@
 								<%
 								for(CustomerUser user : userList){
 								%>
-									<tr>
+									<tr style="cursor: pointer;" onclick="location.href='editUserInfo?userId=<%= user.getUserId() %>'" >
 										<td><!-- ID -->
 											<p>
-												<a href="editUserInfo?userId=<%= user.getUserId()  %>">
-													<%= user.getUserId()  %>
-												</a>
+												<%= user.getUserId()  %>
 											</p>
 										</td>
 										<td><!-- ログインID -->

@@ -1,10 +1,9 @@
 package controller.customer;
 
 import java.io.IOException;
-import java.sql.Date;
 
-import classes.user.AdminUser;
 import classes.user.CustomerUser;
+import classes.user.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,10 +12,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/userInfoPage")
-public class UserInfoIndexServlet extends HttpServlet {
+public class UserInfoPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public UserInfoIndexServlet() {
+    public UserInfoPageServlet() {
         super();
     }
 
@@ -39,7 +38,7 @@ public class UserInfoIndexServlet extends HttpServlet {
 		request.setAttribute("user_id", userId);
 		
 		// ユーザ情報編集画面に遷移
-		String view = "/WEB-INF/views/customer/userInfoIndex.jsp";
+		String view = "/WEB-INF/views/customer/userInfoPage.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 
@@ -52,32 +51,40 @@ public class UserInfoIndexServlet extends HttpServlet {
 			request.getRequestDispatcher(view).forward(request, response);
 		}
 		
-		// インスタンス生成
+		// ユーザーIDをセット
 		CustomerUser customerUser = new CustomerUser();
+		customerUser.setUserId(userId);
 		
-		// PostされたデータをBeanにセット
-		customerUser.setUserId((int)session.getAttribute("user_id"));
-		customerUser.setUserLoginId(request.getParameter("user_login_id"));
-		customerUser.setUserName(request.getParameter("user_name"));
-		customerUser.setGender(request.getParameter("gender"));
-		customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
+		// 削除フラグを設定するSQL
+		Boolean deleteFlagStatus = User.updateUserDeleteFlag(customerUser);
 		
-		// 更新処理実行
-		Boolean deleteFlag = AdminUser.updateUserInfoByAdmin(customerUser);
-		if(deleteFlag) {
-			// 処理が成功すればにホーム画面に遷移
-			response.sendRedirect("home");
+		// 削除フラグの処理結果を判定
+		if(deleteFlagStatus) {
+			// セッションがある場合
+			if (session != null) {
+				// セッションを破棄
+				session.invalidate();
+			}
+			// エラーメッセージ
+			request.setAttribute("errorMessage", "退会処理が完了しました。"+ "<br>" +"ご利用ありがとうございました。");
+			
+			// ホーム画面に誘導
+			request.setAttribute("url", "home");
+			
+			// エラー画面に遷移
+			String view = "/WEB-INF/views/component/message.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
 		} else {
 			
 			// エラーメッセージ
 			request.setAttribute("errorMessage", "退会処理が失敗しました");
 			
-			// ユーザー情報の画面に遷移
+			// ユーザー情報の画面に誘導
 			request.setAttribute("url", "userInfoPage");
 			
 			// エラー画面に遷移
 			String view = "/WEB-INF/views/component/message.jsp";
-	        request.getRequestDispatcher(view).forward(request, response);
+			request.getRequestDispatcher(view).forward(request, response);
 		}
 	}
 }

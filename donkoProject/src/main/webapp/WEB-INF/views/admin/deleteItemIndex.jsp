@@ -30,7 +30,7 @@
 					</div>
 					<!-- ここから入力フォーム  -->
 					<div class="col-8">
-						<form action="deleteItemIndex" method="post">
+						<form action="deleteItemIndex" method="get">
 							<div class="row">
 								<div class="col-4">
 									<%
@@ -76,7 +76,7 @@
 					<div class="col-11 mt-4">
 							<h2>削除商品一覧</h1>
 						<!-- ここから削除切り替えフォーム  -->
-						<form action="swichItemDelFlg" method="get">
+						<form action="deleteItemIndex" method="post">
 								<div class="overflow-auto" style="height: calc(90vh - 200px);">
 								<table class="table table-borderless  st-tbl1">
 									<thead>
@@ -149,6 +149,7 @@
 								</table>
 								</div>
 								<br>
+								<input type=hidden name="itemCategoryName" value="<%= categoryName %>">
 								<div class="row">
 								    <div class="col-11 d-flex justify-content-end">
 								    <p>チェックしたアイテムのステータスを切り替える</p>

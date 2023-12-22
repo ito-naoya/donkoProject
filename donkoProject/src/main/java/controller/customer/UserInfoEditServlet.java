@@ -35,7 +35,16 @@ public class UserInfoEditServlet extends HttpServlet {
 		
 		// ユーザー情報取得
 		CustomerUser users = CustomerUser.getUserDetail(customerUser);
-		request.setAttribute("users", users);
+		
+		// Valueチェック
+		if(users == null || users.getUserLoginId() == null || 
+				users.getGender() == null || users.getBirthday() == null) {
+			// エラー画面を返す
+			errorHandling(request, response, "ユーザ編集画面へのアクセスに失敗しました", "userInfoPage");
+		} else {
+			// ユーザー情報の値をセット
+			request.setAttribute("users", users);
+		}
 		
 		// ユーザ情報編集画面に遷移
 		String view = "/WEB-INF/views/customer/userInfoEdit.jsp";
@@ -54,17 +63,48 @@ public class UserInfoEditServlet extends HttpServlet {
 		// インスタンス生成
 		CustomerUser customerUser = new CustomerUser();
 		
-		// PostされたデータをBeanにセット
-		customerUser.setUserId((int)session.getAttribute("user_id"));
-		customerUser.setUserLoginId(request.getParameter("user_login_id"));
-		customerUser.setUserName(request.getParameter("user_name"));
-		customerUser.setGender(request.getParameter("gender"));
-		customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
+		// Valueチェック
+		if (session.getAttribute("user_id") == null || request.getParameter("user_login_id") == null ||
+				request.getParameter("user_name") == null || request.getParameter("gender") == null || 
+				request.getParameter("birthday") == null
+				) {
+			// エラー画面を返す
+			errorHandling(request,response,"編集処理に失敗しました","userInfoEdit");
+		} else {
+			// nullがなければ値をBeanにセットする
+			customerUser.setUserId((int)session.getAttribute("user_id"));
+			customerUser.setUserLoginId(request.getParameter("user_login_id"));
+			customerUser.setUserName(request.getParameter("user_name"));
+			customerUser.setGender(request.getParameter("gender"));
+			customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
+		}
 		
 		// 更新処理実行
-		User.updateUserInfo(customerUser);
+		Boolean updateStatus = User.updateUserInfo(customerUser);
 		
-		// マイページに遷移
-		response.sendRedirect("userInfoPage");
+		// 更新結果を判定
+		if (updateStatus) {
+			// マイページに遷移
+			response.sendRedirect("userInfoPage");
+		} else {
+			// 処理が失敗した場合はエラー画面に返す
+			errorHandling(request,response,"編集処理に失敗しました", "userInfoEdit");
+		}
+	}
+	
+	protected void errorHandling(HttpServletRequest request,  HttpServletResponse response, String message, String url) throws ServletException, IOException {
+		// エラーメッセージをセット
+		request.setAttribute("errorMessage", message);
+		
+		// 戻り先のURL
+		request.setAttribute("url", url);
+		
+		// TODO:全部できたらコメントアウト削除予定
+		// 戻るボタンの表示文言
+		// request.setAttribute("returnPage", returnPage);
+		
+		// エラー画面に遷移
+		String view = "/WEB-INF/views/component/message.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 }

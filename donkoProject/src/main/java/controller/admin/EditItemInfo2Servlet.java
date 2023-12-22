@@ -1,6 +1,7 @@
 package controller.admin;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import bean.ItemBean;
 import classes.Item;
@@ -87,21 +88,30 @@ public class EditItemInfo2Servlet extends HttpServlet {
 		//画像をドキュメント内に保管
 		boolean renameImg = Item.renameNewImage(imgPart,fileName,oldItemFile,context);
 		if (!renameImg) {
-            // 画像の登録に失敗した場合の処理
-        	request.setAttribute("errorMessage", "写真の登録に失敗しました");
-			request.setAttribute("url","adminTopPage");
-			String view = "/WEB-INF/views/component/message.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			// データの登録に失敗した場合の処理
+        	errorHandling(request,response,"写真の登録に失敗しました","adminTopPage","管理者ページに");
         }
     } else {
-        // データの登録に失敗した場合の処理
-    	request.setAttribute("errorMessage", "この商品は既にデータベース上に存在するため、編集による変更ができません");
-		request.setAttribute("url","adminTopPage");
-		String view = "/WEB-INF/views/component/message.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+    	// データの登録に失敗した場合の処理
+    	errorHandling(request,response,"商品の登録に失敗しました","adminTopPage","管理者ページに");
     }
 
-	//全ての変更が完了したら、リダイレクトする
-	response.sendRedirect("deleteItemIndex");
+	// 完了後、商品一覧ページにリダイレクト
+    String encodedItemCategoryName = URLEncoder.encode(itemCategoryName, "UTF-8");
+    String redirectURL = "deleteItemIndex?itemCategoryName=" + encodedItemCategoryName + "&itemDelFlg=0";
+    response.sendRedirect(redirectURL);
+	}
+	
+	protected void errorHandling(HttpServletRequest request, HttpServletResponse response, String message, String url, String returnPage)
+			throws ServletException, IOException {
+		// エラーメッセージをセット
+		request.setAttribute("errorMessage", message);
+		// 戻り先のURL
+		request.setAttribute("url", url);
+		// 戻るボタンの表示文言
+		request.setAttribute("returnPage", returnPage);
+		// エラー画面に遷移
+		String view = "/WEB-INF/views/component/message.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 }

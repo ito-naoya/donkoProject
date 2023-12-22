@@ -25,17 +25,17 @@
 					<br>
 					<h2>商品登録</h2>
 					<br>
-						<!-- ここにエラーメッセージを表示 -->
-						<div id="error-message-container" class="alert alert-danger d-none"></div>
+					<h6 style="color: red;">※全て必須項目です</h6>
+					<br>
 					<%
 						ArrayList<ItemCategoryBean> categoryList = (ArrayList<ItemCategoryBean>) request.getAttribute("categoryList");
 						if(categoryList != null && categoryList.size() > 0 ){
 					 %>
 						<!-- ここから入力フォーム  -->
-						<form action="registItem1" id="registItem1" method="post">
+						<form action="registItem1" id="registItem1" method="post" class="needs-validation" novalidate>
 							<div class="mb-3">
 								<select class="form-select category-select" name="itemCategoryName">
-								  <option selected>カテゴリーを選択</option>
+								  <option selected hidden disabled value="">カテゴリーを選択</option>
 							            <%
 								            for (ItemCategoryBean category : categoryList){
 								         %>
@@ -44,22 +44,27 @@
 							            	}
 							            %>
 								</select>
+								<div class="invalid-feedback">カテゴリーを選択してください</div>
 							</div>
 							<div class="mb-3">
 							    <label for="itemName" class="form-label">商品名</label>
 							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" required>
+							    <div class="invalid-feedback">商品名を入力してください</div>
 						 	</div>
 						 	<div class="mb-3">
 							    <label for="itemDescription" class="form-label">商品説明</label>
 							    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" maxlength="100"  required></textarea>
+							    <div class="invalid-feedback">商品説明を入力してください</div>
 						 	</div>
 						 	<div class="col-4 mb-3">
 							    <label for="price" class="form-label">金額</label>
 							    <input type="text" class="form-control" id="price" name="price" maxlength="11"  required style="text-align: right">
+							    <div class="invalid-feedback">金額を入力してください</div>
 						 	</div>
 						 	<div class="col-2 mb-3">
 							    <label for="stock" class="form-label">在庫</label>
-							    <input type="number" class="form-control" id="stock" name="stock" min="1" max="9" required style="text-align: center">
+							    <input type="number" class="form-control" id="stock" name="stock" min="0" max="9" required style="text-align: center">
+							    <div class="invalid-feedback">在庫を入力してください</div>
 						 	</div>
 						 	<br>
 							<button type=submit class="btn px-5 py-3" style="background-color: #E5CCFF; color: black; border-radius: 0.5rem;">オプションの追加をする</button>
@@ -72,5 +77,6 @@
 		</div>
 </main>
 <script src="./js/registItemScript.js"></script>
+<script src="./js/nullValidationScript.js"></script>
 </body>
 </html>

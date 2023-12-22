@@ -63,7 +63,7 @@
 								<div id="error-message-container2" class="alert alert-danger d-none"></div>
 								<br>
 							<!-- 　フォーム入力 -->
-							<form action="editItemInfo2"  id="registItem2"  method="post" enctype="multipart/form-data">
+							<form action="editItemInfo2"  id="registItem2"  method="post" enctype="multipart/form-data"  class="needs-validation" novalidate>
 							    <input type="hidden" name="itemId" value="<%= item.getItemId() %>">
 							    <input type="hidden" name="itemCategoryName" value="<%= item.getItemCategoryName() %>">
 							    <input type="hidden" name="itemName" value="<%= item.getItemName() %>">
@@ -108,6 +108,10 @@
 									        <%
 									        }
 									        counter++;
+									        %>
+									     </select>
+									     <div class="invalid-feedback">オプションを選択してください</div>
+									<%
 									    }
 									%>
 
