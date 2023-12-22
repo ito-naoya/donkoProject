@@ -52,7 +52,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		// メイン配送先の設定確認
 		if (userId == 0) {
 			// エラー画面を返す
-			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress");
+			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
 		} else {
 			// userIdに値をセット
 			customerUser.setUserId(userId);
@@ -63,7 +63,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		int shippingAddressId = 0;
 		if (getMainShippingAddress == null) {
 			// エラー画面を返す
-			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress");
+			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
 		} else {
 			// shippingAddressIdが存在するか
 			shippingAddressId = getMainShippingAddress.getShippingAddressId();
@@ -85,6 +85,10 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		shippingAddressBean.setPostalCode(request.getParameter("postcode"));
 		shippingAddressBean.setAddress(request.getParameter("address"));
 		shippingAddressBean.setMainShippingAddress(status);
+		
+		/*
+		 * TODO:バリテーションチェックは後ほど
+		 * */
 
 		// 新規配送先を登録する
 		Boolean insertStatus = ShippingAddress.registerNewShippingAddress(shippingAddressBean);
@@ -95,22 +99,18 @@ public class CreateShippingAddressServlet extends HttpServlet {
 			response.sendRedirect("shippingAddressIndex");
 		} else {
 			// エラー画面を返す
-			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress");
+			errorHandling(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
 		}
 	}
 
-	protected void errorHandling(HttpServletRequest request, HttpServletResponse response, String message, String url)
+	protected void errorHandling(HttpServletRequest request, HttpServletResponse response, String message, String url, String returnPage)
 			throws ServletException, IOException {
 		// エラーメッセージをセット
 		request.setAttribute("errorMessage", message);
-
 		// 戻り先のURL
 		request.setAttribute("url", url);
-
-		// TODO:全部できたらコメントアウト削除予定
 		// 戻るボタンの表示文言
-		// request.setAttribute("returnPage", returnPage);
-
+		request.setAttribute("returnPage", returnPage);
 		// エラー画面に遷移
 		String view = "/WEB-INF/views/component/message.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
