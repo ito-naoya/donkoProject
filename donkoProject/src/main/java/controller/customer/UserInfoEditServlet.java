@@ -3,9 +3,11 @@ package controller.customer;
 import java.io.IOException;
 import java.sql.Date;
 
+import classes.BeanValidation;
 import classes.ErrorHandling;
 import classes.user.CustomerUser;
 import classes.user.User;
+import interfaces.group.GroupB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,26 +18,29 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/userInfoEdit")
 public class UserInfoEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public UserInfoEditServlet() {
-        super();
-    }
+
+	public UserInfoEditServlet() {
+		super();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// セッション確認
 		HttpSession session = request.getSession(false);
-		int userId = (int) session.getAttribute("user_id");
-		if (userId == 0) {
+		Object userId = session.getAttribute("user_id");
+
+		// userIdがない場合はホーム画面に遷移
+		if (userId == null) {
 			response.sendRedirect("home");
+			return;
 		}
-		
+
 		// ユーザーIDをセット
 		CustomerUser customerUser = new CustomerUser();
-		customerUser.setUserId(userId);
-		
+		customerUser.setUserId((int) userId);
+
 		// ユーザ情報を取得
 		CustomerUser users = CustomerUser.getUserDetail(customerUser);
-		
+
 		// データの取得結果を判定
 		if(users == null) {
 			// エラー画面に遷移
@@ -58,10 +63,10 @@ public class UserInfoEditServlet extends HttpServlet {
 			String view = "/WEB-INF/views/customer/home.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 		}
-		
+
 		// インスタンス生成
 		CustomerUser customerUser = new CustomerUser();
-		
+
 		// CustomerBeanに値をセットする
 		customerUser.setUserId((int)session.getAttribute("user_id"));
 		customerUser.setUserLoginId(request.getParameter("user_login_id"));
@@ -69,10 +74,15 @@ public class UserInfoEditServlet extends HttpServlet {
 		customerUser.setGender(request.getParameter("gender"));
 		customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
 		
-		/*
-		 *  TODO:バリテーションチェック
-		 *  こんがらがってきたので、一旦あとで
-		 * */
+		//入力チェック
+		Boolean isIncomplete = BeanValidation.validate(request, "users", customerUser, GroupB.class);
+		
+		//入力内容に不備があった場合
+		if(isIncomplete) {
+			String view = "/WEB-INF/views/customer/userInfoEdit.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		}
 		
 		// 更新処理実行
 		Boolean updateStatus = User.updateUserInfo(customerUser);
@@ -83,8 +93,7 @@ public class UserInfoEditServlet extends HttpServlet {
 			ErrorHandling.transitionToErrorPage(request,response,"編集処理に失敗しました","userInfoEdit","ユーザ情報編集画面に");
 			return;
 		} 
-		
 		// マイページに遷移
-		response.sendRedirect("userInfoPage");
+		response.sendRedirect("myPage");
 	}
 }
