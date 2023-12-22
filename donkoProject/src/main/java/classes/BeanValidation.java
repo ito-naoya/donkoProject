@@ -10,33 +10,32 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 public class BeanValidation {
 	
-	public static <T> Boolean validate (HttpServletRequest request, HttpServletResponse response, String key, T bean) {
+	public static <T, I> Boolean validate (HttpServletRequest request, String key, T bean, Class<I> groupClass ) {
 		
 		// Validator を取得
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         
         // バリデーションを実行
-        Set<ConstraintViolation<T>> result = validator.validate(bean);
+        Set<ConstraintViolation<T>> ConstraintViolationResult = validator.validate(bean, groupClass);
         
         //バリデーションメッセージを保持するmapをnew
-        Map<String, String> validationMap = new LinkedHashMap<String, String>();
+        Map<String, String> violationMap = new LinkedHashMap<String, String>();
         
          //beanのフィールドをキー、エラーメッセージをバリューとしてMapに追加
-        for(ConstraintViolation<T> rs : result){
-        validationMap.put(rs.getPropertyPath().toString(), rs.getMessage());
+        for(ConstraintViolation<T> cv : ConstraintViolationResult){
+        	violationMap.put(cv.getPropertyPath().toString(), cv.getMessage());
         }
         
         //mapの長さが０より大きい場合（validateのアノテーションでいずれかが引っかかった場合）
-        if(validationMap.size() > 0) {
+        if(violationMap.size() > 0) {
         	
         	//beanのフィールドをキー、エラーメッセージをバリューとしてsetAttributeする
-        	for(Map.Entry<String, String> msg : validationMap.entrySet()) {
-        		request.setAttribute(msg.getKey(), msg.getValue());
+        	for(Map.Entry<String, String> violation : violationMap.entrySet()) {
+        		request.setAttribute(violation.getKey(), violation.getValue());
         	}
         	
         	//入力された値を保持したbeanを任意のキーでsetAttribute
@@ -50,5 +49,4 @@ public class BeanValidation {
         return false;
         
 	}
-
 }

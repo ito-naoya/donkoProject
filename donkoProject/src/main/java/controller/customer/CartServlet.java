@@ -23,14 +23,14 @@ public class CartServlet extends HttpServlet {
 	//カート一覧ページを表示する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		//		HttpSession session = request.getSession();
-		//		CustomerUser loginedUser = (CustomerUser)session.getAttribute("user");
-		//		
-		//		if(loginedUser == null) {
-		//			response.sendRedirect("login");
-		//			return;
-		//		}
+//
+//				HttpSession session = request.getSession();
+//				Object userId = session.getAttribute("user_id");
+//				
+//				if(userId == null) {
+//					response.sendRedirect("login");
+//					return;
+//				}
 
 		//テストコード
 		CustomerUser loginedUser = new CustomerUser();
