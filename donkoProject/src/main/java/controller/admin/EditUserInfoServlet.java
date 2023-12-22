@@ -97,7 +97,18 @@ public class EditUserInfoServlet extends HttpServlet {
         validationMsg.put(rs.getPropertyPath(), rs.getMessage());
         }
         
-        System.out.println(validationMsg);
+        if(result.size() > 0) {
+        	
+        	for(Map.Entry<Path, String> msg : validationMsg.entrySet()) {
+        		request.setAttribute(msg.getKey().toString(), msg.getValue());
+        	}
+        	
+        	request.setAttribute("user", customerUser);
+    		
+    		String view = "/WEB-INF/views/admin/editUserInfo.jsp";
+            request.getRequestDispatcher(view).forward(request, response);
+        }
+        
 		
 //		// 更新処理実行
 //		Boolean isCommit = AdminUser.updateUserInfoByAdmin(customerUser);
