@@ -52,7 +52,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 			return;
 		}　else {
 			// userIdがある場合は値をセット
-			customerUser.setUserId(userId);
+			customerUser.setUserId((int)userId);
 		}
 
 		// メイン配送先の設定が必要かを確認する処理
