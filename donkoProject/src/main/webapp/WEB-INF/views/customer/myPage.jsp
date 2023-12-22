@@ -25,11 +25,7 @@
 	<%@include file="../component/headerTopSpace.jsp"%>
 	<main class="container">
 		<!--  メニューボタンの表示 -->
-		<div class="d-flex justify-content-between mx-5 mt-4 mb-2">
-			<!-- <a href="userInfoPage"
-				class="d-inline-block border mx-2 mb-4 p-3 text-center"
-				style="width: 30%; border: 1px #385A37 solid; color: #385A37; text-decoration: none;">
-				ユーザ情報を確認 </a>  -->
+		<div class="d-flex justify-content-between m-5 mb-2">
 			<label class="open mx-1" for="pop-up" style="width: 32%;"> 
 				<div
 				class="d-inline-block border mb-4 p-3 w-100 text-center text-nowrap"
@@ -52,31 +48,31 @@
 						<div class="my-auto p-5">
 							<div class="cancelButton"
 								style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-								<h4>
+								<h5>
 									<strong>ユーザー情報</strong>
-								</h4>
+								</h5>
 							</div>
 							<table class="table table-borderless">
 								<tbody>
 									<tr>
 										<td>ユーザーID</td>
-										<td><strong><%=users.getUserLoginId()%></strong></td>
+										<td><%=users.getUserLoginId()%></td>
 									</tr>
 									<tr>
 										<td>ユーザー名</td>
-										<td><strong><%=users.getUserName()%><strong></td>
+										<td><%=users.getUserName()%></td>
 									</tr>
 									<tr>
 										<td>性別</td>
-										<td><strong><%=users.getGender()%></strong></td>
+										<td><%=users.getGender()%></td>
 									</tr>
 									<tr>
 										<td>誕生日</td>
-										<td><strong><%=new SimpleDateFormat("yyyy/MM/dd").format(users.getBirthday())%><strong></td>
+										<td><%=new SimpleDateFormat("yyyy/MM/dd").format(users.getBirthday())%></td>
 									</tr>
 								</tbody>
 							</table>
-							<div class="d-flex">
+							<div class="d-flex mt-5">
 								<%
 								int userId = (int) request.getAttribute("user_id");
 								%>
@@ -111,7 +107,7 @@
 				value="hidden"
 				style="color: ＃000000; background-color: #E5CCFF; border-radius: 40px;">発送済みを非表示</button>
 		</div>
-		<div style="overflow-x: scroll; height: 40vh;"
+		<div style="overflow-x: scroll; height: 30vh;"
 			class="border mx-5 my-3">
 			<table class="table table-hover table-borderless m-3">
 				<thead align="center">
@@ -162,9 +158,9 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="logout d-flex justify-content-end">
+		<div class="logout d-flex justify-content-end mt-5">
 			<a href="logout" class="btn px-4"
-				style="color: white; background-color: #385A37; border-radius: 40px; margin-bottom: 40px; margin-right: 40px;">ログアウト</a>
+				style="color: white; background-color: #385A37; border-radius: 40px; margin-right: 45px;">ログアウト</a>
 		</div>
 	</main>
 	<%@include file="../component/footer.jsp"%>
