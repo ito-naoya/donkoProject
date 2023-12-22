@@ -87,7 +87,7 @@
 											<p class="mb-0 w-100">
 												<input type="hidden" value="<%= cb.getItemId() %>" name="itemId">
 												<small class="me-auto">数量:</small>
-												<select name="quantity" style="display: inline-block" class="form-control">
+												<select name="quantity" style="display: inline-block" class="form-control" onchange="submit(this.form)">
 													<%
 													for(int i = 1; i <= cb.getItemStock(); i ++) {
 													%>
@@ -111,9 +111,6 @@
 													%>
 												</select>
 											</p>
-											<button type="submit" class="btn px-2 ms-3 mt-auto text-nowrap" style="background-color: #e5ccff; border: 1px gray solid;">
-												<small>更新</small>
-											</button>
 		             					</form>
 									</td>
 									<td style="vertical-align: middle;">
