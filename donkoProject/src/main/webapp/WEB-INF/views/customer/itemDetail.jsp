@@ -118,18 +118,18 @@
 						<%
 						} 
 						%>
-						<form action="itemDetail?itemId=<%= item.getItemId() %>" method="post">
-							<%
-							if (item.getItemStock() > 0) { 
-							%>
-								<input type="number" name="quantity" min="1" step="1" max="<%=item.getItemStock()%>" class="form-control" style="width:80px;">
-								<button type=submit class="btn px-5 py-3" style="background-color: #9933ff; color: white;">
-									カートに入れる
-								</button>
-							<%
-							} 
-							%>
-						</form>
+						<%
+						if (item.getItemStock() > 0) { 
+						%>
+							<form action="itemDetail?itemId=<%= item.getItemId() %>" method="post">
+									<input type="number" name="quantity" min="1" step="1" max="<%=item.getItemStock()%>" class="form-control" style="width:80px;">
+									<button type=submit class="btn px-5 py-3" style="background-color: #9933ff; color: white;">
+										カートに入れる
+									</button>
+							</form>
+						<%
+						} 
+						%>
 					</div>
 				</div>
 			</div>
