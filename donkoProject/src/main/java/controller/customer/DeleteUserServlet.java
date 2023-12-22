@@ -13,10 +13,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/userInfoPage")
-public class UserInfoPageServlet extends HttpServlet {
+public class DeleteUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public UserInfoPageServlet() {
+    public DeleteUserServlet() {
         super();
     }
 
