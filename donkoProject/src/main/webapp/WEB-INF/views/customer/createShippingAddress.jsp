@@ -68,7 +68,6 @@
 						style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; padding: 10px;">更新</button
 				</div>
 		</form>
-		</div>
 	</main>
 	<script src="./js/nullValidationScript.js"></script>
 </body>
