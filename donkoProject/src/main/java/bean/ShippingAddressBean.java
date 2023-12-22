@@ -1,11 +1,18 @@
 package bean;
 
+import org.hibernate.validator.constraints.Length;
+
+import interfaces.group.GroupB;
+
 public class ShippingAddressBean {
 	
 	private int shippingAddressId;
 	private int userId;
+	@Length(groups = {GroupB.class}, min= 8 , max= 8, message="{max}文字で入力してください。" )
 	private String postalCode;
+	@Length(groups = {GroupB.class}, min=1 , max=25, message="{min}文字以上{max}文字以下で入力してください。" )
 	private String addressee;
+	@Length(groups = {GroupB.class}, min=1 , message="{min}文字以上で入力してください。" )
 	private String address;
 	private int mainShippingAddress;
 	
