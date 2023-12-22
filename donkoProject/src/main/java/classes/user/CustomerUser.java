@@ -2,12 +2,15 @@ package classes.user;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.Length;
+
 public class CustomerUser extends User {
 
 	public CustomerUser() {
 	};
 
 	//ログインID
+	@Length(min= 5 , max= 10 )
 	private String userLoginId;
 	//パスワード
 	private String password;
