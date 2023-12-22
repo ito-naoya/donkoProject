@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // ボタンを押した時に表示を切り替える
     hideShippedButton.addEventListener("click", function () {
-        const tableRows = document.querySelectorAll("table.table tbody tr");
+        const tableRows = document.querySelectorAll("table.purchaseDetailTable tbody tr");
 
         if (hideShippedButton.innerText === "発送済みを非表示") {
             for (let i = 0; i < tableRows.length; i++) {

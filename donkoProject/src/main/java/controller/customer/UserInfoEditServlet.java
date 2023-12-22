@@ -26,8 +26,7 @@ public class UserInfoEditServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		int userId = (int) session.getAttribute("user_id");
 		if (userId == 0) {
-			String view = "/WEB-INF/views/customer/home.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+			response.sendRedirect("home");
 		}
 		
 		// ユーザーIDをセット
@@ -79,13 +78,13 @@ public class UserInfoEditServlet extends HttpServlet {
 		Boolean updateStatus = User.updateUserInfo(customerUser);
 		
 		// 更新結果を判定
-		if (updateStatus) {
-			// マイページに遷移
-			response.sendRedirect("userInfoPage");
-		} else {
+		if (!updateStatus) {
 			// エラー画面に遷移
 			ErrorHandling.transitionToErrorPage(request,response,"編集処理に失敗しました","userInfoEdit","ユーザ情報編集画面に");
 			return;
-		}
+		} 
+		
+		// マイページに遷移
+		response.sendRedirect("userInfoPage");
 	}
 }

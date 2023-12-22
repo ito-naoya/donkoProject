@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import bean.ItemBean;
+
+import bean.ItemCategoryBean;
+
 import classes.ErrorHandling;
 import classes.Item;
 import classes.Option;
@@ -109,6 +112,19 @@ public class RegistItemServlet2 extends HttpServlet {
 				return;
 	        }
 	        request.setAttribute("existId", "商品を登録しました");
+        	ErrorHandling.transitionToErrorPage(request,response,"写真の取得に失敗しました","adminTopPage","管理者ページに");
+        } else if (!existId.isEmpty()) { //商品が重複していた場合
+        	request.setAttribute("existId", existId);
+        	//カテゴリー一覧を取得
+    		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
+    		if(categoryList == null) {
+    			//取得情報の不備があれば、エラー画面に遷移
+    			ErrorHandling.transitionToErrorPage(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
+    		}
+    		request.setAttribute("categoryList", categoryList);
+        	String view = "/WEB-INF/views/admin/registItem1.jsp";
+    		request.getRequestDispatcher(view).forward(request, response);
+    		return;
         }
 
 

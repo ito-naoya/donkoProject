@@ -39,8 +39,8 @@ public class Purchase {
 	};
 	
 	//商品の発送処理をする
-	public static void sendItems(PurchaseBean purchaseBean){
-		UpdateShippingStatus.updateShippingStatus(purchaseBean);
+	public static Boolean sendItems(PurchaseBean purchaseBean){
+		return UpdateShippingStatus.updateShippingStatus(purchaseBean);
 	};
 
 }

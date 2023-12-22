@@ -37,3 +37,18 @@
 	right: 4px;
 	cursor:pointer;
 }
+
+#pop-up2 {
+	display: none;
+}
+	
+#pop-up2:checked + .overlay {
+	display: block;
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	background: rgba(0, 0, 0, 0.6);
+}

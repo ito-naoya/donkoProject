@@ -13,7 +13,7 @@ import hash.HashGenerator;
 public class UpdateUserPasswords {
 	
 	//ユーザー情報を更新する
-	public static void updateUserPasswords(CustomerUser customerUser){
+	public static Boolean updateUserPasswords(CustomerUser customerUser){
 		// SQLコマンド生成
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE "								);
@@ -46,11 +46,14 @@ public class UpdateUserPasswords {
 			} catch (Exception e) {
 				if(!connection.isClosed()) {
 					connection.rollback();
-					e.printStackTrace();
 				}
+				e.printStackTrace();
+				return false;
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	};
 }
