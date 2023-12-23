@@ -28,7 +28,7 @@ public class CartServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		String loginedUserId = (String)session.getAttribute("user_id");
+		Object loginedUserId = session.getAttribute("user_id");
 		
 		if(loginedUserId == null) {
 			response.sendRedirect("userSignin");
@@ -36,7 +36,7 @@ public class CartServlet extends HttpServlet {
 		}
 
 		CustomerUser customerUser = new CustomerUser();
-		customerUser.setUserId(Integer.parseInt(loginedUserId));
+		customerUser.setUserId(Integer.parseInt(loginedUserId.toString()));
 
 		//ログインしているユーザーがカートに追加した商品を全て取得
 		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(customerUser);
@@ -73,7 +73,7 @@ public class CartServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		String loginedUserId = (String)session.getAttribute("user_id");
+		Object loginedUserId = session.getAttribute("user_id");
 		
 		if(loginedUserId == null) {
 			response.sendRedirect("userSignin");
@@ -86,7 +86,7 @@ public class CartServlet extends HttpServlet {
 		//カートにある商品情報を保持するcar)tBeanをnew
 		CartBean cb = new CartBean();
 		//cartBeanにユーザーIDをセットする
-		cb.setUserId(Integer.parseInt(loginedUserId));
+		cb.setUserId(Integer.parseInt(loginedUserId.toString()));
 		//cartBeanに商品IDをセットする
 		cb.setItemId(itemId);
 		//cartBeanに数量をセットする

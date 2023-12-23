@@ -71,7 +71,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		String loginedUserId = (String)session.getAttribute("user_id");
+		Object loginedUserId = session.getAttribute("user_id");
 		
 		if(loginedUserId == null) {
 			response.sendRedirect("userSignin");
@@ -80,7 +80,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 
 		//テストコード
 		CustomerUser customerUser = new CustomerUser(); 
-		customerUser.setUserId(Integer.parseInt(loginedUserId));
+		customerUser.setUserId(Integer.parseInt(loginedUserId.toString()));
 
 		Integer totalPrice = Integer.valueOf(request.getParameter("totalPrice"));
 		
@@ -97,7 +97,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		//購入情報を保持するpurchaseBeanをnew
 		PurchaseBean pb = new PurchaseBean();
 		//purchaseBeanにユーザーIDをセット
-		pb.setUserId(Integer.parseInt(loginedUserId));
+		pb.setUserId(Integer.parseInt(loginedUserId.toString()));
 		//purchaseBeanに合計金額をセット
 		pb.setTotalAmount(totalPrice);
 		//purchaseBeanに住所をセット
