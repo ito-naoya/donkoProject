@@ -2,8 +2,11 @@ package controller.user;
 
 import java.io.IOException;
 
+import classes.BeanValidation;
+import classes.ErrorHandling;
 import classes.user.CustomerUser;
 import classes.user.User;
+import interfaces.group.GroupC;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,7 +30,8 @@ public class UserSignupServlet extends HttpServlet {
 		if (admin != null) {
 			request.setAttribute("admin",admin);
 		}
-
+		CustomerUser users = new CustomerUser();
+		request.setAttribute("users", users);
 		//ログイン時の初期メッセージ
 		request.setAttribute("errorMessage", "");
 		String view = "/WEB-INF/views/user/userSignup.jsp";
@@ -35,43 +39,50 @@ public class UserSignupServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//ユーザーIDとパスワードを受け取る
-		String adminLoginId = (String) request.getParameter("adminLoginId");
-		String adminLoginName = (String) request.getParameter("adminLoginName");
-		String adminLoginPass = (String) request.getParameter("adminLoginPass");
 
 		//値をセット（バリデーションでうまいことする）
 		CustomerUser user = new CustomerUser();
-		user.setUserId(Integer.parseInt(adminLoginId));
-		user.setUserName(adminLoginName);
-		user.setPassword(adminLoginPass);
+		user.setUserLoginId(request.getParameter("userLoginId"));
+		user.setUserName(request.getParameter("userLoginName"));
+		user.setPassword(request.getParameter("userLoginPass"));
 
-		//仮のメソッド
-		//ユーザー名とパスワードの重複がないか確認(確認方法に応じてStringで返す？)
-		User.checkUserDuplicate(user);
-		//存在するなら、結果に応じたエラーメッセージをつけてログインページへ転送
-		request.setAttribute("errorMessage", "このIDは既に使用されています");
-		request.setAttribute("errorMessage", "このパスワードは既に使用されています");
-		request.setAttribute("errorMessage", "このID及びパスワードは既に使用されています");
-		String view = "/WEB-INF/views/user/userSignup.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		//入力文字チェック。入力内容に不備があった場合、元の画面にリダイレクト
+		if(BeanValidation.validate(request, "users", user, GroupC.class)) {
+			String view = "/WEB-INF/views/user/userSignup.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		}
+
+		//ユーザ-ログインIDの重複がないか確認
+		Integer checkResult = User.checkUserDuplicate(user);
+		if (checkResult == null) {
+		    // checkResult が null の場合の処理
+		    ErrorHandling.transitionToErrorPage(request, response, "新規登録に失敗しました","home","トップページに");
+		    return;
+		} else if (checkResult > 0) {
+		    // checkResult が 0 より大きい場合の処理
+		    request.setAttribute("errorMessage", "このIDは既に使用されています");
+		    String view = "/WEB-INF/views/user/userSignup.jsp";
+		    request.getRequestDispatcher(view).forward(request, response);
+		}
 
 		//問題なければ新規登録メソッド発動
-		User.registerNewUser(user);
-
+		if(!User.registerNewUser(user)) {
+			//失敗した場合
+			ErrorHandling.transitionToErrorPage(request,response,"新規登録に失敗しました","home","トップページに");
+			return;
+		}
 
 		//遷移先を決定
 		//セッションを確認。
 		HttpSession session = request.getSession();
 		String admin = (String) session.getAttribute("admin");
-		if (!admin.isEmpty()) {
-			//セッションがない＝User側。ログイン画面にリダイレクト
-			response.sendRedirect("userSignin");
+		if (admin != null) {
+			//セッションがある=Admin側。管理者画面にリダイレクト
+			response.sendRedirect("adminTopPage");
 		}
-
-		//セッションがある=Admin側。管理者画面にリダイレクト
-		response.sendRedirect("adminTopPage");
-
+		//セッションがない＝User側。ログイン画面にリダイレクト
+		response.sendRedirect("home");
 	}
 
 }
