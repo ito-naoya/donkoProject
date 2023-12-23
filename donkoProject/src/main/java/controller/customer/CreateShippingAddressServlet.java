@@ -61,7 +61,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		int shippingAddressId = 0;
 		if (getMainShippingAddress == null) {
 			// エラー画面を返す
-			ErrorHandling.transitionToErrorPage(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
+			ErrorHandling.transitionToErrorPage(request, response, "配送先登録処理に失敗しました", "myPage", "マイページに");
 			return;
 		} else {
 			// shippingAddressIdが存在するか
@@ -98,7 +98,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 			response.sendRedirect("shippingAddressIndex");
 		} else {
 			// エラー画面を返す
-			ErrorHandling.transitionToErrorPage(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
+			ErrorHandling.transitionToErrorPage(request, response, "配送先登録処理に失敗しました", "myPage", "マイページに");
 		}
 	}
 }
