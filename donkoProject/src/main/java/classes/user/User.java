@@ -60,8 +60,8 @@ public class User {
 	};
 
 	//ログインする
-	public static void login(CustomerUser customerUser) {
-		SelectUserFromUsers.selectUserFromUsers(customerUser);
+	public static CustomerUser login(CustomerUser customerUser) {
+		return SelectUserFromUsers.selectUserFromUsers(customerUser);
 	};
 
 }
