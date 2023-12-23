@@ -57,7 +57,7 @@ public class CartServlet extends HttpServlet {
 				.mapToInt( i -> i )
 				.sum();
 	
-		request.setAttribute("userName", customerUser.getUserName());
+		request.setAttribute("userName", cu.getUserName());
 		request.setAttribute("totalPrice", totalPrice);
 		request.setAttribute("cartBeanList", cartBeanList);
 

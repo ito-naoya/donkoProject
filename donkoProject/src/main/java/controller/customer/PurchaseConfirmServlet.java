@@ -30,7 +30,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		String loginedUserId = (String)session.getAttribute("user_id");
+		Object loginedUserId = session.getAttribute("user_id");
 		
 		if(loginedUserId == null) {
 			response.sendRedirect("userSignin");
@@ -38,7 +38,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		}
 		
 		CustomerUser customerUser = new CustomerUser();
-		customerUser.setUserId(Integer.parseInt(loginedUserId));
+		customerUser.setUserId(Integer.parseInt(loginedUserId.toString()));
 	
 		//ログインしているユーザーのメインの配送先を取得
 		ShippingAddressBean shippingAddress = ShippingAddress.getMainShippingAddress(customerUser);
