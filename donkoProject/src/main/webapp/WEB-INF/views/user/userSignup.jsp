@@ -16,6 +16,9 @@
 </head>
 <body>
   <main>
+  		<%
+		CustomerUser users = (CustomerUser) request.getAttribute("users");
+		%>
 		<div class="container　ml-5 mr-5">
 			<div class="row justify-content-center">
 				<div class="col-5 mt-5 p-5" style="border: 1px solid #333333;">
@@ -30,7 +33,7 @@
 			            <div class="cancelButton"
 							style="display: flex; justify-content: space-between; margin-bottom: 20px;">
 							<h2>
-								<strong>ユーザ情報編集</strong>
+								<strong>ユーザー新規登録</strong>
 							</h2>
 							<!-- アドミン側のみ表示 -->
 							<%if (admin != null){ %>
@@ -51,26 +54,47 @@
 						%>
 
 						<!-- ここからフォーム -->
-					    <form action="adminSignin" method="post">
+					    <form action="userSignup" method="post">
 				            <div class="row mb-5 mt-3">
-				              <label for="adminLoginId" class="form-label">ユーザーID</label>
+				              <label for="userLoginId" class="form-label">ユーザーID</label>
 				              <div class="col-12">
-				                <input type="text" class="form-control" id="adminLoginId" name="adminLoginId"  maxlength="10"  required>
+				                <input type="text" class="form-control" id="userLoginId" name="userLoginId"  maxlength="10" value="<%=users.getUserLoginId()%>" required>
 				              </div>
-				            </div>
+				              <% String userLoginId = (String)request.getAttribute("userLoginId");
+									 if (userLoginId != null) {
+							  %>
+				              <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+									<%= userLoginId %>
+							  </div>
+							  <% } %>
+							</div>
 
 				            <div class="row mb-5 mt-3">
-				              <label for="adminLoginUser" class="form-label">ユーザー名</label>
+				              <label for="userLoginUser" class="form-label">ユーザー名</label>
 				              <div class="col-12">
-				                <input type="text" class="form-control" id="adminLoginUser" name="adminLoginUser"  maxlength="25" required>
+				                <input type="text" class="form-control" id="userLoginName" name="userLoginName"  maxlength="25" value="<%=users.getUserName()%>" required>
 				              </div>
+				              <% String userName = (String)request.getAttribute("userName");
+									 if (userName != null) {
+							  %>
+				              <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+									<%= userName %>
+							  </div>
+							  <% } %>
 				            </div>
 
 				            <div class="row mb-3">
-				              <label for="adminLoginPass" class="form-label">パスワード</label>
+				              <label for="userLoginPass" class="form-label">パスワード</label>
 				              <div class="col-12">
-				                <input type="text" class="form-control" id="adminLoginPass" name="adminLoginPass"  maxlength="16" required>
+				                <input type="text" class="form-control" id="userLoginPass" name="userLoginPass"  maxlength="16"  value="<%=users.getPassword()%>" required>
 				              </div>
+				              <% String password = (String)request.getAttribute("password");
+									 if (password != null) {
+							  %>
+				              <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+									<%= password %>
+							  </div>
+							  <% } %>
 				            </div>
 
 				            <div class="row">
