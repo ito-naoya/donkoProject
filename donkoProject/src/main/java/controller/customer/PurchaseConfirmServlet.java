@@ -42,11 +42,19 @@ public class PurchaseConfirmServlet extends HttpServlet {
 	
 		//ログインしているユーザーのメインの配送先を取得
 		ShippingAddressBean shippingAddress = ShippingAddress.getMainShippingAddress(customerUser);
+		
+		//メイン配送先を取得できなかった場合
+		if(shippingAddress == null) {
+			// エラー画面に遷移
+			ErrorHandling.transitionToErrorPage(request,response,"配送先情報の取得時に問題が発生しました。","shippingAddressIndex","配送先一覧画面に");
+			return;
+		}
+		
 		//ログインしているユーザーがカートに追加した商品を全て取得
 		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(customerUser);
 		
-		//データベースから取得できなかった時
-		if(cartBeanList == null || shippingAddress == null) {
+		//カートの中身を取得できなかった場合
+		if(cartBeanList == null) {
 			// エラー画面に遷移
 			ErrorHandling.transitionToErrorPage(request,response,"購入情報の取得時に問題が発生しました。","home","ホームに");
 			return;
