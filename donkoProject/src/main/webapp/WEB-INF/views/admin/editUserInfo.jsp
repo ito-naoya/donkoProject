@@ -79,12 +79,16 @@
 							String selected = user.getGender();
 							String men = (selected != null && selected.equals("男性") ? "selected" : "");
 							String woman = (selected != null && selected.equals("女性") ? "selected" : "");
+							String noAnswer = (selected != null && selected.equals("無回答") ? "selected" : "");
 							%>
 							<option value="男性" <%=men%>>
 								男性
 							</option>
 							<option value="女性" <%=woman%>>
 								女性
+							</option>
+							<option value="無回答" <%=noAnswer%>>
+								無回答
 							</option>
 						</select>
 						<div class="invalid-feedback">性別を選択してください</div>

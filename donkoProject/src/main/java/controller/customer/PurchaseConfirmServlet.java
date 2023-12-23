@@ -83,7 +83,16 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		loginedUser.setUserId(2);
 
 		Integer totalPrice = Integer.valueOf(request.getParameter("totalPrice"));
-		Integer shippingAddressId = Integer.valueOf(request.getParameter("shippingAddressId"));
+		
+		//ログインしているユーザーのメインの配送先を取得
+		ShippingAddressBean sa = ShippingAddress.getMainShippingAddress(loginedUser);
+		
+		//住所を取得できなかった場合
+		if(sa == null) {
+			//エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request, response, "住所の取得に失敗しました","purchaseConfirm", "購入確認画面に");
+			return;
+		}
 
 		//購入情報を保持するpurchaseBeanをnew
 		PurchaseBean pb = new PurchaseBean();
@@ -91,9 +100,12 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		pb.setUserId(loginedUser.getUserId());
 		//purchaseBeanに合計金額をセット
 		pb.setTotalAmount(totalPrice);
-		//purchaseBeanに配送先IDをセット
-		pb.setShippingAddressId(shippingAddressId);
-
+		//purchaseBeanに住所をセット
+		pb.setAddress(sa.getAddress());
+		//purchaseBeanに宛名をセット
+		pb.setAddressee(sa.getAddressee());
+		//purchaseBeanに郵便番号をセット
+		pb.setPostalCode(sa.getPostalCode());
 		//商品を購入する
 		Boolean isCommit = Purchase.purchaseItem(pb);
 		

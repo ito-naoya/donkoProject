@@ -41,7 +41,6 @@
 							</div>
 							<form action="purchaseConfirm" method="post" class="ms-auto">
 								<input type="hidden" value="<%= totalPrice %>" name="totalPrice">
-								<input type="hidden" value="<%= sa.getShippingAddressId() %>" name="shippingAddressId">
 								<button type=submit class="btn px-5 py-2" style="background-color: #9933ff; color: white;">
 									注文確定
 								</button>
@@ -54,7 +53,7 @@
 						<div class="p-3">
 							<p class="mb-0">
 								〒 
-								<%= sa.getPostalCode() %>
+								<%= new StringBuilder(sa.getPostalCode()).insert(3, "-") %>
 							</p>
 							<p>
 								<%= sa.getAddress() %>
