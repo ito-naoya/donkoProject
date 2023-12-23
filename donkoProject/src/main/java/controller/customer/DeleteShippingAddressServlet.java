@@ -24,17 +24,19 @@ public class DeleteShippingAddressServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// セッションを確認
 		HttpSession session = request.getSession(false);
-		int userId = (int) session.getAttribute("user_id");
-		if (userId == 0) {
-			String view = "/WEB-INF/views/customer/home.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+		Object userId = session.getAttribute("user_id");
+		
+		// userIdがない場合はホーム画面に遷移
+		if (userId == null) {
+			response.sendRedirect("home");
+			return;
 		}
 		
 		// インスタンス生成
 		ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
 		
 		// PostされたデータをBeanにセット
-		shippingAddressBean.setUserId(userId);
+		shippingAddressBean.setUserId((int) userId);
 		shippingAddressBean.setShippingAddressId(Integer.parseInt(request.getParameter("shipping_address_id")));
 		
 		// 更新処理実行
@@ -47,7 +49,6 @@ public class DeleteShippingAddressServlet extends HttpServlet {
 			return;
 		}
 			
-		
 		// マイページに遷移
 		response.sendRedirect("shippingAddressIndex");
 	}

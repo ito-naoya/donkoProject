@@ -88,9 +88,9 @@
 								削除
 							</a>
 						</button>
+
 					</div>
 				</div>
-				
 				<%
 				}
 				numbers++;
