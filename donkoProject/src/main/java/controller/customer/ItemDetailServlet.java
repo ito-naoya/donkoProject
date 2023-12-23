@@ -8,12 +8,12 @@ import bean.ItemBean;
 import classes.Cart;
 import classes.ErrorHandling;
 import classes.Item;
-import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/itemDetail")
 public class ItemDetailServlet extends HttpServlet {
@@ -72,17 +72,14 @@ public class ItemDetailServlet extends HttpServlet {
 	//商品をカートに入れる
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		HttpSession session = request.getSession();
-//		CustomerUser loginedUser = (CustomerUser)session.getAttribute("user");
+		HttpSession session = request.getSession();
+		String loginedUserId = (String)session.getAttribute("user_id");
 		
-//		if(loginedUser == null) {
-//			response.sendRedirect("login");
-//			return;
-//		}
+		if(loginedUserId == null) {
+			response.sendRedirect("userSignin");
+			return;
+		}
 		
-		//テストコード
-		CustomerUser loginedUser = new CustomerUser();
-		loginedUser.setUserId(2);
 		
 		String itemId = request.getParameter("itemId");
 		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -92,7 +89,7 @@ public class ItemDetailServlet extends HttpServlet {
 		//商品IDをcartBeanにセットする
 		cb.setItemId(Integer.parseInt(itemId));
 		//ログインしているユーザーのIDをcartBeanにセットする
-		cb.setUserId(loginedUser.getUserId());
+		cb.setUserId(Integer.parseInt(loginedUserId));
 		//商品の数量をcartBeanにセットする
 		cb.setQuantity(quantity);
 		

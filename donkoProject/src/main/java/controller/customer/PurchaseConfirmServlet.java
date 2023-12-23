@@ -16,6 +16,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/purchaseConfirm")
 public class PurchaseConfirmServlet extends HttpServlet {
@@ -28,22 +29,21 @@ public class PurchaseConfirmServlet extends HttpServlet {
     //購入確認をする
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		HttpSession session = request.getSession();
-//		CustomerUser loginedUser = (CustomerUser)session.getAttribute("customerUser");
-//		
-//		if(loginedUser == null) {
-//			response.sendRedirect("login");
-//			return;
-//		}
+		HttpSession session = request.getSession();
+		String loginedUserId = (String)session.getAttribute("user_id");
 		
-		//テストコード
-		CustomerUser loginedUser = new CustomerUser(); 
-		loginedUser.setUserId(2);
+		if(loginedUserId == null) {
+			response.sendRedirect("userSignin");
+			return;
+		}
+		
+		CustomerUser customerUser = new CustomerUser();
+		customerUser.setUserId(Integer.parseInt(loginedUserId));
 	
 		//ログインしているユーザーのメインの配送先を取得
-		ShippingAddressBean shippingAddress = ShippingAddress.getMainShippingAddress(loginedUser);
+		ShippingAddressBean shippingAddress = ShippingAddress.getMainShippingAddress(customerUser);
 		//ログインしているユーザーがカートに追加した商品を全て取得
-		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(loginedUser);
+		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(customerUser);
 		
 		//データベースから取得できなかった時
 		if(cartBeanList == null || shippingAddress == null) {
@@ -70,22 +70,22 @@ public class PurchaseConfirmServlet extends HttpServlet {
 	//購入処理をする
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		HttpSession session = request.getSession();
-//		CustomerUser loginedUser = (CustomerUser)session.getAttribute("customerUser");
-//		
-//		if(loginedUser == null) {
-//			response.sendRedirect("login");
-//			return;
-//		}
+		HttpSession session = request.getSession();
+		String loginedUserId = (String)session.getAttribute("user_id");
+		
+		if(loginedUserId == null) {
+			response.sendRedirect("userSignin");
+			return;
+		}
 
 		//テストコード
-		CustomerUser loginedUser = new CustomerUser(); 
-		loginedUser.setUserId(2);
+		CustomerUser customerUser = new CustomerUser(); 
+		customerUser.setUserId(Integer.parseInt(loginedUserId));
 
 		Integer totalPrice = Integer.valueOf(request.getParameter("totalPrice"));
 		
 		//ログインしているユーザーのメインの配送先を取得
-		ShippingAddressBean sa = ShippingAddress.getMainShippingAddress(loginedUser);
+		ShippingAddressBean sa = ShippingAddress.getMainShippingAddress(customerUser);
 		
 		//住所を取得できなかった場合
 		if(sa == null) {
@@ -97,7 +97,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		//購入情報を保持するpurchaseBeanをnew
 		PurchaseBean pb = new PurchaseBean();
 		//purchaseBeanにユーザーIDをセット
-		pb.setUserId(loginedUser.getUserId());
+		pb.setUserId(Integer.parseInt(loginedUserId));
 		//purchaseBeanに合計金額をセット
 		pb.setTotalAmount(totalPrice);
 		//purchaseBeanに住所をセット

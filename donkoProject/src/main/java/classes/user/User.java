@@ -1,5 +1,8 @@
 package classes.user;
 
+import java.security.NoSuchAlgorithmException;
+
+import hash.HashGenerator;
 import model.users.usersInsert.InsertNewUserToUsers;
 import model.users.usersSelect.SelectUserDetailFromUsers;
 import model.users.usersSelect.SelectUserDuplicate;
@@ -25,15 +28,20 @@ public class User {
 	}
 
 	//ユーザー新規登録する
-	public static void registerNewUser(CustomerUser customerUser) {
-		InsertNewUserToUsers.insertNewUserToUsers(customerUser);
+	public static Boolean registerNewUser(CustomerUser customerUser) {
+		try {
+			customerUser.setPassword(HashGenerator.generateHash(customerUser.getPassword()));
+		} catch (NoSuchAlgorithmException e) {
+			return false;
+		}
+		return InsertNewUserToUsers.insertNewUserToUsers(customerUser);
 	};
-	
+
 	//ユーザー情報の重複をチェックする
-	public static void checkUserDuplicate(CustomerUser customerUser){
-		SelectUserDuplicate.selectUserDuplicate(customerUser);
+	public static Integer checkUserDuplicate(CustomerUser customerUser){
+		return SelectUserDuplicate.selectUserDuplicate(customerUser);
 	};
-	
+
 	//ユーザー情報を更新する
 	public static Boolean updateUserInfo(CustomerUser customerUser) {
 		return UpdateUserInfoInUsers.updateUserInfoInUsers(customerUser);
@@ -43,12 +51,12 @@ public class User {
 	public static CustomerUser getUserDetail(CustomerUser customerUser) {
 		return SelectUserDetailFromUsers.selectUserDetailFromUsers(customerUser);
 	};
-	
+
 	//ユーザーのパスワードを更新する
 	public static Boolean updateUserPassword(CustomerUser customerUser) {
 		return UpdateUserPasswords.updateUserPasswords(customerUser);
 	};
-	
+
 	//ユーザーを論理削除する
 	public static Boolean updateUserDeleteFlag(CustomerUser customerUser) {
 		return UpdateUserDeleteFlag.updateUserDeleteFlags(customerUser);
@@ -60,8 +68,8 @@ public class User {
 	};
 
 	//ログインする
-	public static void login(CustomerUser customerUser) {
-		SelectUserFromUsers.selectUserFromUsers(customerUser);
+	public static CustomerUser login(CustomerUser customerUser) {
+		return SelectUserFromUsers.selectUserFromUsers(customerUser);
 	};
 
 }

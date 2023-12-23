@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
@@ -25,27 +26,26 @@ public class CartServlet extends HttpServlet {
 	//カート一覧ページを表示する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//
-//				HttpSession session = request.getSession();
-//				Object userId = session.getAttribute("user_id");
-//				
-//				if(userId == null) {
-//					response.sendRedirect("login");
-//					return;
-//				}
 
-		//テストコード
-		CustomerUser loginedUser = new CustomerUser();
-		loginedUser.setUserId(2);
+		HttpSession session = request.getSession();
+		String loginedUserId = (String)session.getAttribute("user_id");
+		
+		if(loginedUserId == null) {
+			response.sendRedirect("userSignin");
+			return;
+		}
+
+		CustomerUser customerUser = new CustomerUser();
+		customerUser.setUserId(Integer.parseInt(loginedUserId));
 
 		//ログインしているユーザーがカートに追加した商品を全て取得
-		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(loginedUser);
+		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(customerUser);
 		
 		//ログインしているユーザー情報を取得
-		CustomerUser customerUser = User.getUserDetail(loginedUser);
+		CustomerUser cu = User.getUserDetail(customerUser);
 		
 		//データベースから取得できなかった時
-		if(cartBeanList == null || customerUser == null) {			
+		if(cartBeanList == null || cu == null) {			
 			//エラーページに遷移
 			ErrorHandling.transitionToErrorPage(request,response,"カート情報の取得時に問題が発生しました。","home","ホームに");
 			return;
@@ -72,12 +72,13 @@ public class CartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//		HttpSession session = request.getSession();
-		//		CustomerUser loginedUser = (CustomerUser)session.getAttribute("user");
-
-		//テストコード
-		CustomerUser loginedUser = new CustomerUser();
-		loginedUser.setUserId(2);
+		HttpSession session = request.getSession();
+		String loginedUserId = (String)session.getAttribute("user_id");
+		
+		if(loginedUserId == null) {
+			response.sendRedirect("userSignin");
+			return;
+		}
 
 		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
 		Integer quantity = Integer.valueOf(request.getParameter("quantity"));
@@ -85,7 +86,7 @@ public class CartServlet extends HttpServlet {
 		//カートにある商品情報を保持するcar)tBeanをnew
 		CartBean cb = new CartBean();
 		//cartBeanにユーザーIDをセットする
-		cb.setUserId(loginedUser.getUserId());
+		cb.setUserId(Integer.parseInt(loginedUserId));
 		//cartBeanに商品IDをセットする
 		cb.setItemId(itemId);
 		//cartBeanに数量をセットする
