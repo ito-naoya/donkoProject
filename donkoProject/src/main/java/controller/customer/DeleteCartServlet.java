@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 @WebServlet("/deleteCart")
@@ -24,18 +25,20 @@ public class DeleteCartServlet extends HttpServlet {
     //カート内の商品を一つだけ削除する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		HttpSession session = request.getSession();
-//		CustomerUser user = (CustomerUser)session.getAttribute("user");
+		HttpSession session = request.getSession();
+		String loginedUserId = (String)session.getAttribute("user_id");
 		
-		CustomerUser user = new CustomerUser();
-		user.setUserId(2);
+		if(loginedUserId == null) {
+			response.sendRedirect("userSignin");
+			return;
+		}
 		
 		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
 		
 		//削除する商品の情報を保持するcartBeanをnew
 		CartBean cb = new CartBean();
 		//ユーザーIDをcartBeanにセット
-		cb.setUserId(user.getUserId());
+		cb.setUserId(Integer.parseInt(loginedUserId));
 		//商品IDをcartBeanにセット
 		cb.setItemId(itemId);
 		
@@ -56,15 +59,19 @@ public class DeleteCartServlet extends HttpServlet {
 	//カート内の商品をすべて削除する
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		HttpSession session = request.getSession();
-//		CustomerUser user = (CustomerUser)session.getAttribute("user");
+		HttpSession session = request.getSession();
+		String loginedUserId = (String)session.getAttribute("user_id");
 		
-//		int userId = user.getUserId();
-		CustomerUser user = new CustomerUser();
-		user.setUserId(2);
+		if(loginedUserId == null) {
+			response.sendRedirect("userSignin");
+			return;
+		}
+		
+		CustomerUser customerUser = new CustomerUser();
+		customerUser.setUserId(Integer.parseInt(loginedUserId));
 		
 		//カートから全ての商品を削除
-		Boolean isCommit = Cart.deleteAllItemFromCart(user);
+		Boolean isCommit = Cart.deleteAllItemFromCart(customerUser);
 		
 		//カートから商品削除に失敗した時
 		if(!isCommit) {
