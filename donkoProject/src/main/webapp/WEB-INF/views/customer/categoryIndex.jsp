@@ -56,27 +56,29 @@
 				</div>
 			</form>
 			
-			<div class="d-flex flex-wrap justify-content-center mx-5 my-4">
-				<% 
-				for (ItemBean item : itemList) { 
-				%>
-				<div>
-					<a href="itemDetail?itemId=<%= item.getItemId() %>&source=category&categoryName=<%= (String)request.getAttribute("categoryName") %>" style="color: #385a37; display: block; text-decoration:none;">
-						<span class="card mx-2" style="width: 200px; height: 200px;">
-						<img src="./images/<%= item.getImageFileName() %>.jpg"
-							class="card-img-top" alt="<%= item.getImageFileName() %>"
-							style="object-fit: cover; height: 100%; display: block;">
-						</span>
-					</a>
-					<div class="mb-3 mx-2">
-						<a href="itemDetail?itemId=<%= item.getItemId() %>" style="color: #385a37;">
-							<%= item.getItemName() %>
+			<div class="row my-4 mx-auto">
+				<div class="d-flex flex-wrap">
+					<% 
+					for (ItemBean item : itemList) { 
+					%>
+					<div class="px-2" style="width:20%;">
+						<a href="itemDetail?itemId=<%= item.getItemId() %>&source=category&categoryName=<%= (String)request.getAttribute("categoryName") %>" style="color: #385a37; display: block; text-decoration:none;">
+							<span class="card">
+							<img src="./images/<%= item.getImageFileName() %>.jpg"
+								class="card-img-top" alt="<%= item.getImageFileName() %>"
+								style="object-fit: cover;  width: 100%; aspect-ratio: 1 / 1; display: block;">
+							</span>
 						</a>
+						<div class="mb-3">
+							<a href="itemDetail?itemId=<%= item.getItemId() %>" style="color: #385a37;">
+								<%= item.getItemName() %>
+							</a>
+						</div>
 					</div>
+					<% 
+					} 
+					%>
 				</div>
-				<% 
-				} 
-				%>
 			</div>
 		<% 
 		} else {
