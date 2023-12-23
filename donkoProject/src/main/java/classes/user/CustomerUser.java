@@ -25,7 +25,7 @@ public class CustomerUser extends User {
 	//性別
 	private String gender;
 	//生年月日
-	@Past(groups = {GroupA.class, GroupB.class}, message= "不正な値が入力されています。")
+	@Past(groups = {GroupA.class, GroupB.class}, message= "無効な値が入力されています。")
 	private Date birthday;
 	//削除フラグ
 	private boolean isDeleted;

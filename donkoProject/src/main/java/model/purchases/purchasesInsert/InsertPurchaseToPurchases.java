@@ -23,16 +23,22 @@ public class InsertPurchaseToPurchases {
 		insertPurchaseSb.append(			"(");
 		insertPurchaseSb.append(				"user_id, ");
 		insertPurchaseSb.append(				"total_amount, ");
-		insertPurchaseSb.append(				"shipping_address_id, ");
+		insertPurchaseSb.append(				"postal_code, ");
+		insertPurchaseSb.append(				"address, ");
+		insertPurchaseSb.append(				"addressee, ");
 		insertPurchaseSb.append(				"shipping_id");
 		insertPurchaseSb.append(			")");
 		insertPurchaseSb.append("VALUES ");
 		insertPurchaseSb.append(	"(");
-		//パラメータをここで使う(1/3)
+		//パラメータをここで使う(1/5)
 		insertPurchaseSb.append(		"?, ");
-		//パラメータをここで使う(2/3)
+		//パラメータをここで使う(2/5)
 		insertPurchaseSb.append(		"?, ");
-		//パラメータをここで使う(3/3)
+		//パラメータをここで使う(3/5)
+		insertPurchaseSb.append(		"?, ");
+		//パラメータをここで使う(4/5)
+		insertPurchaseSb.append(		"?, ");
+		//パラメータをここで使う(5/5)
 		insertPurchaseSb.append(		"?, ");
 		insertPurchaseSb.append(		"1");
 		insertPurchaseSb.append(	")");
@@ -43,7 +49,9 @@ public class InsertPurchaseToPurchases {
 		ArrayList<Object> insertPurchasParams = new ArrayList<Object>();
 		insertPurchasParams.add(purchaseBean.getUserId());
 		insertPurchasParams.add(purchaseBean.getTotalAmount());
-		insertPurchasParams.add(purchaseBean.getShippingAddressId());
+		insertPurchasParams.add(purchaseBean.getPostalCode());
+		insertPurchasParams.add(purchaseBean.getAddress());
+		insertPurchasParams.add(purchaseBean.getAddressee());
 		
 		//購入詳細情報を追加するSQL
 		StringBuilder insertPurchaseDetailSb = new StringBuilder();
@@ -93,8 +101,6 @@ public class InsertPurchaseToPurchases {
 		CustomerUser customerUser = new CustomerUser();
 		//購入したユーザーのIDをcustomerUserにセット
 		customerUser.setUserId(purchaseBean.getUserId());
-		//カート内にある購入した商品の情報を全て取得
-		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(customerUser);
 		
 		//購入された商品の在庫数を減らすSQL
 		 StringBuilder updateItemStockSb  = new StringBuilder();
@@ -131,6 +137,12 @@ public class InsertPurchaseToPurchases {
 			try {
 				//購入情報を追加する
 				GeneralDao.executeUpdate(conn, INSERT_PURCHASE_SQL, insertPurchasParams);
+				
+				//カート内にある購入した商品の情報を全て取得
+				ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(customerUser);
+				
+				//カートの情報を取得できなかった場合
+				if(cartBeanList == null) throw new RuntimeException();
 			
 				//購入詳細情報を購入の商品数の分だけ追加する
 				cartBeanList.forEach(cb -> {
