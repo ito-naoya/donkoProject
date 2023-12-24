@@ -1,19 +1,53 @@
 package bean;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
+import interfaces.group.GroupA;
+import interfaces.group.GroupB;
+import interfaces.group.GroupC;
+
 public class ItemBean {
 
+
 	private int itemId;
+
+	@Length(groups = {GroupA.class}, min=1 , max= 20, message="{min}文字以上{max}文字以下で入力してください。" )
+	@NotNull(groups = {GroupA.class}, message = "カテゴリーを選択してください")
 	private String itemCategoryName;
+
+	@Length(groups = {GroupA.class}, min=1 , max= 30, message="{min}文字以上{max}文字以下で入力してください。" )
 	private String itemName;
+
+	@Length(groups = {GroupA.class}, min=1 , max= 100, message="{min}文字以上{max}文字以下で入力してください。" )
 	private String itemDescription;
+
+	@Min(groups = {GroupA.class}, value = 1, message = "¥1~10,000,000,000で入力してください。")
+    @Max(groups = {GroupA.class}, value = 1000000000, message = "¥1~10,000,000,000で入力してください。")
 	private int itemPrice;
-	private int itemStock;
+
+	@Min(groups = {GroupA.class}, value = 0, message = "0~9で入力してください。")
+    @Max(groups = {GroupA.class}, value = 9, message = "0~9で入力してください。")
+    private int itemStock;
+
 	private boolean isDeleted;
+
+	@Length(groups = {GroupB.class,GroupC.class}, min=1 , max= 35,  message="写真を登録できません")
 	private String imageFileName;
+
+	@Length(groups = {GroupC.class}, min=1 , max= 20, message="正しい値を選択してください" )
 	private String itemFirstOptionName;
+	@Length(groups = {GroupB.class,GroupC.class}, min=1 , max= 20, message="正しい値を選択してください" )
 	private String itemSecondOptionName;
+
 	private String itemFirstOptionValue;
 	private String itemSecondOptionValue;
+
+	@Min(groups = {GroupB.class,GroupC.class}, value = 1, message = "正しい値を選択してください")
+    @Max(groups = {GroupB.class,GroupC.class}, value = 1000000000, message = "正しい値を選択してください")
 	private int itemFirstOptionIncrementId;
     private int itemSecondOptionIncrementId;
 

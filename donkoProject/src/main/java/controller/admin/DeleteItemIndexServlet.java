@@ -31,7 +31,7 @@ public class DeleteItemIndexServlet extends HttpServlet {
 		//表示方法を取得
 		Integer sortParam = Integer.parseInt(request.getParameter("itemDelFlg"));
 		//メッセージを取得
-		String message = request.getParameter("existId");
+		String message = (String)request.getParameter("existId");
 
 		//カテゴリー一覧を取得
 		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();

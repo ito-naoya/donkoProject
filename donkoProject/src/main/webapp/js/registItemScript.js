@@ -34,9 +34,11 @@ const priceInput = document.getElementById('price');
 if (priceInput) {
     priceInput.addEventListener('input', function (event) {
         let value = event.target.value;
-        //全ての半角数字のみ受け付ける
+        // 最初の0を削除
+        value = value.replace(/^0+/, '');
+        // 全ての非数字を削除
         value = value.replace(/[^\d]/g, '');
-        //3桁ごとにカンマ区切りにする
+        // 3桁ごとにカンマ区切りにする
         value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         event.target.value = value;
     });
