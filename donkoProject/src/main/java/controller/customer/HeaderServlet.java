@@ -27,19 +27,53 @@ public class HeaderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// セッションからユーザIDを取得
 		HttpSession session = request.getSession(false);
-		Object ui = (Object) session.getAttribute("user_id");
-		int userId = ((Integer) ui).intValue();
-		Integer user_id = Integer.valueOf(userId);
-		if (user_id != null) {
+
+		if (session != null) {
+			
+			Object user_id = session.getAttribute("user_id");
+			
 			CustomerUser customerUser = new CustomerUser();
-			customerUser.setUserId(userId);
+			customerUser.setUserId(Integer.parseInt(user_id.toString()));
 			
 			// デフォルト住所を取得
 			ShippingAddressBean mainShippingAddress = ShippingAddress.getMainShippingAddress(customerUser);
 			
 			// カート一覧の取得
 			ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(customerUser);
-			int cartItemNum = cartBeanList.size();
+//			int cartItemNum = cartBeanList.size();
+			
+			int cartItemNum = cartBeanList.stream()
+					.map(cb -> cb.getQuantity())
+					.mapToInt(i -> i)
+					.sum();			
+			// 値をセット
+			request.setAttribute("mainShippingAddress", mainShippingAddress);
+			request.setAttribute("cartItemNum", cartItemNum);
+		}
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// セッションからユーザIDを取得
+		HttpSession session = request.getSession(false);
+		
+		if (session != null) {
+			
+			Object user_id = session.getAttribute("user_id");
+			
+			CustomerUser customerUser = new CustomerUser();
+			customerUser.setUserId(Integer.parseInt(user_id.toString()));
+			
+			// デフォルト住所を取得
+			ShippingAddressBean mainShippingAddress = ShippingAddress.getMainShippingAddress(customerUser);
+			
+			// カート一覧の取得
+			ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(customerUser);
+//			int cartItemNum = cartBeanList.size();
+			
+			int cartItemNum = cartBeanList.stream()
+					.map(cb -> cb.getQuantity())
+					.mapToInt(i -> i)
+					.sum();	
 			
 			// 値をセット
 			request.setAttribute("mainShippingAddress", mainShippingAddress);
