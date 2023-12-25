@@ -2,9 +2,11 @@ package controller.customer;
 
 import java.io.IOException;
 
+import classes.BeanValidation;
 import classes.ErrorHandling;
 import classes.user.CustomerUser;
 import classes.user.User;
+import interfaces.group.GroupB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,7 +33,17 @@ public class UpdateUserPasswordServlet extends HttpServlet {
 		customerUser.setUserLoginId(request.getParameter("user_login_id"));
 		customerUser.setPassword(request.getParameter("password"));
 		
-		// SQL実行
+		// 入力チェック
+		Boolean isIncomplete = BeanValidation.validate(request, "users", customerUser, GroupB.class);
+		
+		//入力内容に不備があった場合
+		if(isIncomplete) {
+			String view = "/WEB-INF/views/customer/userPasswordUpdate.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		}
+		
+		// パスワード更新処理
 		Boolean updateStatus = User.updateUserPassword(customerUser);
 		
 		if(!updateStatus) {
@@ -41,7 +53,7 @@ public class UpdateUserPasswordServlet extends HttpServlet {
 		}
 		
 		// ホーム画面に遷移
-		response.sendRedirect("home");
+		response.sendRedirect("userSignin");
 		/*
 		 *  ホーム画面に遷移させていますが、ログイン画面ができていればログイン画面に遷移させようと考えています。
 		 *  更新後の遷移先について、ホーム画面かログイン画面への遷移のどちらがいいか教えてください。

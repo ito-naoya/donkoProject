@@ -68,7 +68,19 @@
 									</tr>
 									<tr>
 										<td>性別</td>
+										<%
+										if (users.getGender() == null) {
+										%>
+										<td>未設定</td>
+										<%
+										} else {
+										%>
 										<td><%=users.getGender()%></td>
+										<%
+										}
+										%>
+									</tr>
+									<tr>
 									</tr>
 									<tr>
 										<td>誕生日</td>
@@ -200,7 +212,11 @@
 						<!-- 購入日 -->
 						<td align="middle" style="white-space: nowrap;"><%=new SimpleDateFormat("yyyy/MM/dd hh:mm").format(purchaseBean.getPurchaseDate())%></td>
 						<!-- 配送先 -->
-						<td align="middle" style="white-space: nowrap;">〒 <%=purchaseBean.getPostalCode()%>
+						<td align="middle" style="white-space: nowrap;">〒 
+						<% String postalCode = (String) purchaseBean.getPostalCode();%>
+						<% String head = postalCode.substring(0, 3);
+						  String end = postalCode.substring(4);
+						%> <%= head %>-<%= end %>
 							<%=purchaseBean.getAddress()%> <%=purchaseBean.getAddressee()%></td>
 						<!-- 配送ステータス -->
 						<%
