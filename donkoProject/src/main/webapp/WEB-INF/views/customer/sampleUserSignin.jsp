@@ -37,32 +37,34 @@
 
 						<!-- ここからフォーム -->
 					    <form action="userSignin" method="post">
-				            <div class="row mb-5 mt-3">
-				              <label for="adminLoginId" class="form-label">ユーザーID</label>
+				            <div class="row mb-3 mt-3">
+				              <label for="userLoginId" class="form-label">ユーザーID</label>
 				              <div class="col-12">
 				                <input type="text" class="form-control" id="userLoginId" name="userLoginId" required>
 				              </div>
 				            </div>
 
 				            <div class="row mb-3">
-				              <label for="adminLoginPass" class="form-label">パスワード</label>
+				              <label for="userLoginPass" class="form-label">パスワード</label>
 				              <div class="col-12">
 				                <input type="text" class="form-control" id="userLoginPass" name="userLoginPass" required>
 				              </div>
 				            </div>
 
-				            <div class="row">
+				            <div class="row mb-3">
 				              <div class="col-12 mt-5 d-flex justify-content-center">
 				                <input type="submit" value="ログイン" class="btn border" style="background-color:#9933FF; color: white; padding: 12px 80px;">
 				              </div>
 				            </div>
 				        </form>
 				        
-				        <div class="row">
-				              <div class="col-12 mt-5 d-flex justify-content-center">
-				                <input type="submit" value="パスワード変更" class="btn border" style="background-color:#9933FF; color: white; padding: 12px 80px;">
-				              </div>
-				         </div>
+				        <form action="updateUserPassword" method="GET">
+					        <div class="row">
+					              <div class="col-12 mt-5 d-flex justify-content-center">
+					                <input type="submit" value="パスワード変更" class="btn border" style="background-color:#e5ccff; color: black; padding: 12px 80px;">
+					              </div>
+					         </div>
+				        </form>
 				</div>
 			</div>
     	</div>

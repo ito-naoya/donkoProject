@@ -39,12 +39,19 @@ public class PurchaseDetailServlet extends HttpServlet {
 		
 		// 購入IDをもとに購入情報を取得
 		PurchaseBean purchaseInfo = Purchase.getPurchaseInfo(purchaseBean);
+		
+		if (purchaseInfo == null) {
+	        //エラーページに遷移
+	        ErrorHandling.transitionToErrorPage(request, response, "購入情報の取得に失敗しました","adminTopPage","管理者ページに");
+			return;
+		}
+		
 		// 購入IDをもとに購入詳細情報を取得
 		ArrayList<PurchaseDetailBean> purchaseDetailList = PurchaseDetail.getPurchaseDetail(purchaseDetailBean);
 		
-		if (purchaseInfo == null || purchaseDetailList == null) {
+		if (purchaseDetailList == null) {
 	        //エラーページに遷移
-	        ErrorHandling.transitionToErrorPage(request, response, "購入詳細のデータの取得に失敗しました","adminTopPage","管理者ページに");
+	        ErrorHandling.transitionToErrorPage(request, response, "購入詳細情報の取得に失敗しました","adminTopPage","管理者ページに");
 			return;
 		}
 		
