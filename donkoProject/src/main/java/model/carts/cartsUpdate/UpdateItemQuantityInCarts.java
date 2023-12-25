@@ -41,10 +41,12 @@ public class UpdateItemQuantityInCarts {
 		try (Connection conn = DatabaseConnection.getConnection();) {
 			try {
 				//カート内の商品の数量を更新
-				GeneralDao.executeUpdate(conn, UPDATE_QUANTITY_SQL, params);
+				int updatedRows = GeneralDao.executeUpdate(conn, UPDATE_QUANTITY_SQL, params);
 				//sqlをコミット
 				conn.commit();
-				isCommit = true;
+				
+				if(updatedRows > 0) isCommit = true;
+				if(!isCommit) throw new SQLException();
 			} catch (SQLException e) {
 				if (!conn.isClosed()) {
 					//一つでも処理が失敗したらロールバック
