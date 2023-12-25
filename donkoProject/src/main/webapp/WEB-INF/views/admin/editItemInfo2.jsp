@@ -110,7 +110,6 @@
 									        counter++;
 									        %>
 									     </select>
-									     <div class="invalid-feedback">オプションを選択してください</div>
 									<%
 									    }
 									%>
