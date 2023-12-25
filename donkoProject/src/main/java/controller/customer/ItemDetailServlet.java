@@ -73,7 +73,7 @@ public class ItemDetailServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		String loginedUserId = (String)session.getAttribute("user_id");
+		Object loginedUserId = session.getAttribute("user_id");
 		
 		if(loginedUserId == null) {
 			response.sendRedirect("userSignin");
@@ -89,7 +89,7 @@ public class ItemDetailServlet extends HttpServlet {
 		//商品IDをcartBeanにセットする
 		cb.setItemId(Integer.parseInt(itemId));
 		//ログインしているユーザーのIDをcartBeanにセットする
-		cb.setUserId(Integer.parseInt(loginedUserId));
+		cb.setUserId(Integer.parseInt(loginedUserId.toString()));
 		//商品の数量をcartBeanにセットする
 		cb.setQuantity(quantity);
 		

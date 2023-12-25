@@ -52,12 +52,19 @@
 					while (iterator.hasNext()) {
 						ShippingAddressBean shippingAddressBean = iterator.next();
 					%>
+          <%
+          String postalCode = (String) shippingAddressBean.getPostalCode();
+          %>
+          <%
+          String head = postalCode.substring(0, 3);
+          String end = postalCode.substring(4);
+          %>
 					<div class="card me-2 mb-2" style="width: calc(50% - 8px);">
 						<div class="card-body">
 							<%= numbers %>
 							<h5 class="card-title"><%= shippingAddressBean.getAddressee() %></h5>
 							<h6 class="card-subtitle mb-2 text-body-secondary">
-							〒 <%= shippingAddressBean.getPostalCode() %><br>
+							〒 <%= head %>-<%= end %><br>
 							<%= shippingAddressBean.getAddress() %>
 							</h6>
 							<button type="submit" class="btn" style="border: 1px solid #000000; background: #E5CCFF;">
@@ -98,18 +105,20 @@
 								name="update_shipping_address"
 								id="main_address_select">
 								<%
-								for (ShippingAddressBean updateMainShippingAddress : mainShippingAddressList) {
-								%>
-								<option
-									value="<%=updateMainShippingAddress.getShippingAddressId()%>">
-									〒
-									<%=updateMainShippingAddress.getPostalCode()%>
-									<%=updateMainShippingAddress.getAddress()%>
-									<%=updateMainShippingAddress.getAddressee()%>
-								</option>
-								<%
-								}
-								%>
+                for (ShippingAddressBean updateMainShippingAddress : mainShippingAddressList) {
+                %>
+                <%String postalCode = (String)updateMainShippingAddress.getPostalCode();%>
+                <% String head = postalCode.substring(0, 3);
+                   String end = postalCode.substring(4);
+                     %>
+                <option
+                  value="<%=updateMainShippingAddress.getShippingAddressId()%>">
+                  〒 <%= head %>-<%= end %>
+                  <%=updateMainShippingAddress.getAddress()%>
+                  <%=updateMainShippingAddress.getAddressee()%></option>
+                <%
+                }
+                %>
 							</select>
 							<button type="submit" class="btn text-nowrap"
 								style="border: 1px solid #000000; background: #E5CCFF; margin-left: 15px;">更新</button>

@@ -30,7 +30,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		String loginedUserId = (String)session.getAttribute("user_id");
+		Object loginedUserId = session.getAttribute("user_id");
 		
 		if(loginedUserId == null) {
 			response.sendRedirect("userSignin");
@@ -38,15 +38,23 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		}
 		
 		CustomerUser customerUser = new CustomerUser();
-		customerUser.setUserId(Integer.parseInt(loginedUserId));
+		customerUser.setUserId(Integer.parseInt(loginedUserId.toString()));
 	
 		//ログインしているユーザーのメインの配送先を取得
 		ShippingAddressBean shippingAddress = ShippingAddress.getMainShippingAddress(customerUser);
+		
+		//メイン配送先を取得できなかった場合
+		if(shippingAddress == null) {
+			// エラー画面に遷移
+			ErrorHandling.transitionToErrorPage(request,response,"配送先情報の取得時に問題が発生しました。","shippingAddressIndex","配送先一覧画面に");
+			return;
+		}
+		
 		//ログインしているユーザーがカートに追加した商品を全て取得
 		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(customerUser);
 		
-		//データベースから取得できなかった時
-		if(cartBeanList == null || shippingAddress == null) {
+		//カートの中身を取得できなかった場合
+		if(cartBeanList == null) {
 			// エラー画面に遷移
 			ErrorHandling.transitionToErrorPage(request,response,"購入情報の取得時に問題が発生しました。","home","ホームに");
 			return;
@@ -71,7 +79,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		String loginedUserId = (String)session.getAttribute("user_id");
+		Object loginedUserId = session.getAttribute("user_id");
 		
 		if(loginedUserId == null) {
 			response.sendRedirect("userSignin");
@@ -80,7 +88,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 
 		//テストコード
 		CustomerUser customerUser = new CustomerUser(); 
-		customerUser.setUserId(Integer.parseInt(loginedUserId));
+		customerUser.setUserId(Integer.parseInt(loginedUserId.toString()));
 
 		Integer totalPrice = Integer.valueOf(request.getParameter("totalPrice"));
 		
@@ -97,7 +105,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		//購入情報を保持するpurchaseBeanをnew
 		PurchaseBean pb = new PurchaseBean();
 		//purchaseBeanにユーザーIDをセット
-		pb.setUserId(Integer.parseInt(loginedUserId));
+		pb.setUserId(Integer.parseInt(loginedUserId.toString()));
 		//purchaseBeanに合計金額をセット
 		pb.setTotalAmount(totalPrice);
 		//purchaseBeanに住所をセット
