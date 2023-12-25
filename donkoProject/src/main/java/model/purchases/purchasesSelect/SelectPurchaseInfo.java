@@ -16,24 +16,20 @@ public class SelectPurchaseInfo {
 	public static PurchaseBean selectPurchaseInfo(PurchaseBean purchaseBean){
   		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT "                                                  );
-		sb.append(    "p.purchase_id, "                                      );
+		sb.append(   "p.purchase_id, "                                      );
 		sb.append(    "u.user_name, "                                        );
 		sb.append(    "p.purchase_date, "                                    );
 		sb.append(    "p.total_amount, "                                     );
 		sb.append(    "p.shipping_id, "                                      );
-		sb.append(    "s.postal_code, "                                      );
-		sb.append(    "s.address, "                                          );
-		sb.append(    "s.addressee "                                         );
+		sb.append(    "p.postal_code, "                                      );
+		sb.append(    "p.address, "                                          );
+		sb.append(    "p.addressee "                                         );
 		sb.append("FROM "                                                    );
 		sb.append(    "purchases p "                                         );
 		sb.append("INNER JOIN "                                              );
 		sb.append(    "users u "                                             );
 		sb.append("ON "                                                      );
 		sb.append(    "p.user_id = u.user_id "                               );
-		sb.append("INNER JOIN "                                              );
-		sb.append(    "shipping_addresses s "                                );
-		sb.append("ON "                                                      );
-		sb.append(    "p.shipping_Address_id = s.shipping_Address_id "       );
 		sb.append("WHERE "                                                   );
 		sb.append(    "p.purchase_id = ?"                                    );
 		
