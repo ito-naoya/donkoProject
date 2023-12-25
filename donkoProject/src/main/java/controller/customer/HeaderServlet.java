@@ -32,7 +32,7 @@ public class HeaderServlet extends HttpServlet {
 			
 			CustomerUser customerUser = new CustomerUser();
 			
-			if(user_id != null) customerUser.setUserId(Integer.parseInt(user_id.toString()));
+			 customerUser.setUserId(Integer.parseInt(user_id.toString()));
 			
 			// デフォルト住所を取得
 			ShippingAddressBean mainShippingAddress = ShippingAddress.getMainShippingAddress(customerUser);
