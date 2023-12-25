@@ -26,7 +26,7 @@ public class DeleteCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		String loginedUserId = (String)session.getAttribute("user_id");
+		Object loginedUserId = session.getAttribute("user_id");
 		
 		if(loginedUserId == null) {
 			response.sendRedirect("userSignin");
@@ -38,7 +38,7 @@ public class DeleteCartServlet extends HttpServlet {
 		//削除する商品の情報を保持するcartBeanをnew
 		CartBean cb = new CartBean();
 		//ユーザーIDをcartBeanにセット
-		cb.setUserId(Integer.parseInt(loginedUserId));
+		cb.setUserId(Integer.parseInt(loginedUserId.toString()));
 		//商品IDをcartBeanにセット
 		cb.setItemId(itemId);
 		
@@ -60,7 +60,7 @@ public class DeleteCartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		String loginedUserId = (String)session.getAttribute("user_id");
+		Object loginedUserId = session.getAttribute("user_id");
 		
 		if(loginedUserId == null) {
 			response.sendRedirect("userSignin");
@@ -68,7 +68,7 @@ public class DeleteCartServlet extends HttpServlet {
 		}
 		
 		CustomerUser customerUser = new CustomerUser();
-		customerUser.setUserId(Integer.parseInt(loginedUserId));
+		customerUser.setUserId(Integer.parseInt(loginedUserId.toString()));
 		
 		//カートから全ての商品を削除
 		Boolean isCommit = Cart.deleteAllItemFromCart(customerUser);

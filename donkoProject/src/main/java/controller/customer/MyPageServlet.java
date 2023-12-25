@@ -30,12 +30,9 @@ public class MyPageServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if(session == null) {
 			// セッションがなければホーム画面に遷移
-			response.sendRedirect("home");
+			response.sendRedirect("userSignin");
 			return;
 		} else {
-			// TODO: testUserIdはテストコードなのでログイン機能が追加され次第削除
-			int testUserId = 2;
-			session.setAttribute("user_id", testUserId);
 			// セッションがあればuser_idを取得する
 			customerUser.setUserId((int)session.getAttribute("user_id"));
 		} 

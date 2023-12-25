@@ -8,13 +8,14 @@ public class ShippingAddressBean {
 	
 	private int shippingAddressId;
 	private int userId;
-	@Length(groups = {GroupB.class}, min= 8 , max= 8, message="{max}文字で入力してください。" )
+	@Length(groups = {GroupB.class}, min=7 , max=7, message="{max}文字で入力してください。" )
 	private String postalCode;
 	@Length(groups = {GroupB.class}, min=1 , max=25, message="{min}文字以上{max}文字以下で入力してください。" )
 	private String addressee;
 	@Length(groups = {GroupB.class}, min=1 , message="{min}文字以上で入力してください。" )
 	private String address;
 	private int mainShippingAddress;
+	private int mainShippingAddressCount;
 	
 	public ShippingAddressBean() {};
 	
@@ -64,6 +65,14 @@ public class ShippingAddressBean {
 	
 	public void setMainShippingAddress(int mainShippingAddress) {
 		this.mainShippingAddress = mainShippingAddress;
+	}
+	
+	public int getmainShippingAddressCount() {
+		return mainShippingAddressCount;
+	}
+	
+	public void setmainShippingAddressCount(int mainShippingAddressCount) {
+		this.mainShippingAddressCount = mainShippingAddressCount;
 	}
 	
 }

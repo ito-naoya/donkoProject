@@ -7,6 +7,7 @@ import classes.user.CustomerUser;
 import model.shippingAddresses.shippingAddressesDelete.DeleteIteShippingAddresses;
 import model.shippingAddresses.shippingAddressesInsert.InsertNewShippingAddress;
 import model.shippingAddresses.shippingAddressesSelect.SelectMainShippingAddress;
+import model.shippingAddresses.shippingAddressesSelect.SelectMainShippingAddressCount;
 import model.shippingAddresses.shippingAddressesSelect.SelectMainShippingAddressSort;
 import model.shippingAddresses.shippingAddressesSelect.SelectShippingAddressDetail;
 import model.shippingAddresses.shippingAddressesSelect.SelectShippingAddressList;
@@ -49,8 +50,14 @@ public class ShippingAddress {
 	public static ArrayList<ShippingAddressBean> getMainShippingAddressSort(CustomerUser customerUser){
 		return SelectMainShippingAddressSort.selectMainShippingAddressSort(customerUser);
 	};
+	
 	//配送先を削除
 	public static Boolean deleteShippingAddresses(ShippingAddressBean shippingAddressBean){
 		return DeleteIteShippingAddresses.deleteUpdateShippingAddress(shippingAddressBean);
+	};
+	
+	// メイン配送先の件数をカウント
+	public static Boolean selectMainShippingAddressCount(CustomerUser customerUser){
+		return SelectMainShippingAddressCount.selectMainShippingAddressCounts(customerUser);
 	};
 }

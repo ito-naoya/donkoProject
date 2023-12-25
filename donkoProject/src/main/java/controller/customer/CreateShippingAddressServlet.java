@@ -55,29 +55,28 @@ public class CreateShippingAddressServlet extends HttpServlet {
 			// userIdがある場合は値をセット
 			customerUser.setUserId((int)userId);
 		}
-
-		// メイン配送先の設定が必要かを確認する処理
-		ShippingAddressBean getMainShippingAddress = ShippingAddress.getMainShippingAddress(customerUser);
-		int shippingAddressId = 0;
-		if (getMainShippingAddress == null) {
+		// 
+		ShippingAddressBean getMainStatus = new ShippingAddressBean();
+		Boolean mainStatus = ShippingAddress.selectMainShippingAddressCount(customerUser);
+		int mainAddressstatus;
+		if (mainStatus == null) {
 			// エラー画面を返す
-			ErrorHandling.transitionToErrorPage(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
+			ErrorHandling.transitionToErrorPage(request, response, "配送先登録処理に失敗しました", "myPage", "マイページに");
 			return;
 		} else {
 			// shippingAddressIdが存在するか
-			shippingAddressId = getMainShippingAddress.getShippingAddressId();
+		 mainAddressstatus = getMainStatus.getmainShippingAddressCount();
 		}
-
-		// shippingAddressIdの存在の有無によってメイン配送先のステータスを設定
+		
 		int status;
-		if (shippingAddressId == 0) {
+		if (mainAddressstatus == 0) {
 			// メイン配送先として作成
 			status = 1;
 		} else {
 			// 追加の配送先として作成
 			status = 0;
 		}
-
+		
 		// ShippingAddressBeanに値をセット
 		shippingAddressBean.setUserId((int)userId);
 		shippingAddressBean.setAddressee(request.getParameter("addresses"));
@@ -88,7 +87,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		/*
 		 * TODO:バリテーションチェックは後ほど
 		 * */
-
+		
 		// 新規配送先を登録する
 		Boolean insertStatus = ShippingAddress.registerNewShippingAddress(shippingAddressBean);
 		
@@ -98,7 +97,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 			response.sendRedirect("shippingAddressIndex");
 		} else {
 			// エラー画面を返す
-			ErrorHandling.transitionToErrorPage(request, response, "配送先登録処理に失敗しました", "createShippingAddress", "配送先登録画面に");
+			ErrorHandling.transitionToErrorPage(request, response, "配送先登録処理に失敗しました", "myPage", "マイページに");
 		}
 	}
 }
