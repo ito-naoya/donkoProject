@@ -14,7 +14,7 @@
 		<div class="container　ml-5 mr-5">
 			<div class="row  justify-content-center">
 				<div class="col-6">
-					<a href="registItem1" class="mb-3" style="display: inline-block">
+					<a href="editItem1" class="mb-3" style="display: inline-block">
 						<div class="border text-center" style="width: 50px;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
 			  					<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
@@ -63,7 +63,7 @@
 								<div id="error-message-container2" class="alert alert-danger d-none"></div>
 								<br>
 							<!-- 　フォーム入力 -->
-							<form action="editItemInfo2"  id="registItem2"  method="post" enctype="multipart/form-data"  class="needs-validation" novalidate>
+							<form action="editItemInfo2"  id="registItem2"  method="post" enctype="multipart/form-data">
 							    <input type="hidden" name="itemId" value="<%= item.getItemId() %>">
 							    <input type="hidden" name="itemCategoryName" value="<%= item.getItemCategoryName() %>">
 							    <input type="hidden" name="itemName" value="<%= item.getItemName() %>">
@@ -86,37 +86,64 @@
 
 							    <br>
 							    <div class="mb-3">
-								    <!-- categoryListをSeleectで選択。 -->
-								   <%
-									ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = (ArrayList<ArrayList<OptionCategoryBean>>) request.getAttribute("itemCategoryListAll");
+								    <label for="options" class="form-label">オプションを登録</label>
+								    <%
+								    ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = (ArrayList<ArrayList<OptionCategoryBean>>) request.getAttribute("itemCategoryListAll");
+								    if(itemCategoryListAll != null && itemCategoryListAll.size() > 0 ){
+									    int counter = 1;
+									    for (ArrayList<OptionCategoryBean> optionCategoryList : itemCategoryListAll){
+									        String optionCategoryName = optionCategoryList.get(0).getOptionCategoryName();
 
-								    if(itemCategoryListAll != null && itemCategoryListAll.size() > 0){
-
-								    int counter = 1;
-									for (ArrayList<OptionCategoryBean> optionCategoryList : itemCategoryListAll) {
-									    String optionCategoryName = optionCategoryList.get(0).getOptionCategoryName();
-									    int optionId = counter == 1 ? OptionName_1 : OptionName_2;
-									%>
-									    <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryName %>">
-									    <label for="options" class="form-label">現在のオプション：<%= optionCategoryName %></label>
-									    <select class="form-select option-select mb-3" id="options" name="optionValue_<%= counter %>">
-									        <%
-									        for (OptionCategoryBean option : optionCategoryList) {
-									            boolean isSelected = option.getOptionCategoryId() == optionId;
-									        %>
-									            <option value="<%= option.getOptionCategoryId() %>" <%= isSelected ? "selected" : "" %>><%= option.getOptionCategoryValue() %></option>
-									        <%
+									        if (counter == 1) {
+									            // 最初のカテゴリ（例：色）のセレクトボックスを生成
+									    %>
+									    		<input type="hidden" name="optionCategoryName_1" value="<%= optionCategoryName %>">
+									            <label for="optionSelect_<%= counter %>" class="form-label mb-3"></label>
+									            <!-- 一つ目のオプションは必ずセレクトボックス（画像名と一意に紐づけるため） -->
+									            <select class="form-select mb-3" id="optionSelect_1" name="optionValue_1">
+									                <option selected hidden disabled value="">オプション選択： <%= optionCategoryName %></option>
+									                <% for (OptionCategoryBean option : optionCategoryList) {
+									                	boolean isSelected = item.getItemFirstOptionIncrementId() >= 0 && item.getItemFirstOptionIncrementId() == option.getOptionCategoryId();
+									                %>
+									                    <option value="<%=option.getOptionCategoryId()%>" <%= isSelected ? "selected" : "" %>><%=option.getOptionCategoryValue()%></option>
+									                <% } %>
+									            </select>
+									            <%
+													String itemFirstOptionIncrementId = (String) request.getAttribute("itemFirstOptionIncrementId");
+													if (itemFirstOptionIncrementId != null && !itemFirstOptionIncrementId.isEmpty()) {
+												%>
+										              <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+															<%= itemFirstOptionIncrementId %>
+													  </div>
+												<% } %>
+									            <br>
+									    <%
+									        } else if (counter == 2) {
+									            // 2つ目のカテゴリ（例：サイズ）の表示タイプを選択するラジオボタン
+									    %>
+									            <input type="hidden" name="optionCategoryName_2" value="<%= optionCategoryName %>">
+									            <select class="form-select mb-3" id="optionSelect_2" name="optionValue_2">
+									                <option selected hidden disabled value="">オプション選択： <%= optionCategoryName %></option>
+									                <% for (OptionCategoryBean option : optionCategoryList) {
+									                	boolean isSelected = item.getItemSecondOptionIncrementId() >= 0 && item.getItemSecondOptionIncrementId() == option.getOptionCategoryId();
+									                %>
+									                    <option value="<%=option.getOptionCategoryId()%>" <%= isSelected ? "selected" : "" %>><%=option.getOptionCategoryValue()%></option>
+									                <% } %>
+									            </select>
+									            <%
+													String itemSecondOptionIncrementId = (String) request.getAttribute("itemSecondOptionIncrementId");
+													if (itemSecondOptionIncrementId != null && !itemSecondOptionIncrementId.isEmpty()) {
+												%>
+										              <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+															<%= itemSecondOptionIncrementId %>
+													  </div>
+												<% }
 									        }
 									        counter++;
-									        %>
-									     </select>
-									     <div class="invalid-feedback">オプションを選択してください</div>
-									<%
-									    }
-									%>
-
-							        <input type="hidden" name="selectBoxCount" value="<%= counter - 1 %>">
-							        <% } %>
+								    	}
+								    }
+								    %>
+								    <input type="hidden" name="selectBoxCount" value="<%= itemCategoryListAll.size() %>">
 						        </div>
 							    <br>
 							    <br>
