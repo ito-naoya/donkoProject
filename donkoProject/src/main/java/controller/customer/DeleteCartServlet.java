@@ -6,6 +6,7 @@ import bean.CartBean;
 import classes.Cart;
 import classes.ErrorHandling;
 import classes.user.CustomerUser;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,13 +26,18 @@ public class DeleteCartServlet extends HttpServlet {
     //カート内の商品を一つだけ削除する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		Object loginedUserId = session.getAttribute("user_id");
+		HttpSession session = request.getSession(false);
 		
-		if(loginedUserId == null) {
+		if(session == null) {
 			response.sendRedirect("userSignin");
 			return;
 		}
+		
+		String disp = "/header";
+		RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		dispatch.include(request, response);
+		
+		Object loginedUserId = session.getAttribute("user_id");
 		
 		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
 		
@@ -60,12 +66,17 @@ public class DeleteCartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		Object loginedUserId = session.getAttribute("user_id");
 		
-		if(loginedUserId == null) {
+		if(session == null) {
 			response.sendRedirect("userSignin");
 			return;
 		}
+		
+		String disp = "/header";
+		RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		dispatch.include(request, response);
+		
+		Object loginedUserId = session.getAttribute("user_id");
 		
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserId(Integer.parseInt(loginedUserId.toString()));

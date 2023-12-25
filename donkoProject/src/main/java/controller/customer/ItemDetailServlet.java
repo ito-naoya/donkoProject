@@ -8,6 +8,7 @@ import bean.ItemBean;
 import classes.Cart;
 import classes.ErrorHandling;
 import classes.Item;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -29,6 +30,10 @@ public class ItemDetailServlet extends HttpServlet {
 		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
 		String source = request.getParameter("source");
 		String categoryName = request.getParameter("categoryName");
+		
+		String disp = "/header";
+		RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		dispatch.include(request, response);
 		
 		//商品IDを保持するitemBeanをnew
 		ItemBean ib = new ItemBean();
@@ -90,14 +95,18 @@ public class ItemDetailServlet extends HttpServlet {
 	//商品をカートに入れる
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		Object loginedUserId = session.getAttribute("user_id");
+		HttpSession session = request.getSession(false);
 		
-		if(loginedUserId == null) {
+		if(session == null) {
 			response.sendRedirect("userSignin");
 			return;
 		}
 		
+		Object loginedUserId = session.getAttribute("user_id");
+		
+		String disp = "/header";
+		RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		dispatch.include(request, response);
 		
 		String itemId = request.getParameter("itemId");
 		Integer quantity = Integer.parseInt(request.getParameter("quantity"));

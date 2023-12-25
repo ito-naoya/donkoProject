@@ -69,14 +69,17 @@ public class SelectItemDetailFromItems {
 					ib.setImageFileName(rs.getString("file_name"));
 					ib.setItemFirstOptionValue(rs.getString("group_concat(option_categories.option_category_value separator ',')"));
 				}
+				
+				//取得件数が0件の場合
+				if(ib == null) throw new SQLException();
 
 			} catch (SQLException e) {
 				if (!conn.isClosed()) {
 					//SQL文が一つでも失敗したらロールバックする
 					conn.rollback();
-					e.printStackTrace();
-					return null;
 				}
+				e.printStackTrace();
+				return null;
 			}
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();

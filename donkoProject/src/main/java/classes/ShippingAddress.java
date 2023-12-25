@@ -57,7 +57,7 @@ public class ShippingAddress {
 	};
 	
 	// メイン配送先の件数をカウント
-	public static Boolean selectMainShippingAddressCount(CustomerUser customerUser){
+	public static Integer selectMainShippingAddressCount(CustomerUser customerUser){
 		return SelectMainShippingAddressCount.selectMainShippingAddressCounts(customerUser);
 	};
 }
