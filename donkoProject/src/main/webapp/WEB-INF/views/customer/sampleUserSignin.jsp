@@ -48,7 +48,6 @@
 									name="userLoginId" required>
 							</div>
 						</div>
-
 						<div class="row mb-3">
 							<label for="adminLoginPass" class="form-label">パスワード</label>
 							<div class="col-12">
