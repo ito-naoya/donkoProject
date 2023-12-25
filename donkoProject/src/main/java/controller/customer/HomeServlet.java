@@ -33,7 +33,6 @@ public class HomeServlet extends HttpServlet {
 			return;
 		}
 		
-		
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			String disp = "/header";

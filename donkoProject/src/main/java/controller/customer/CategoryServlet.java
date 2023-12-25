@@ -8,11 +8,13 @@ import bean.OptionCategoryBean;
 import classes.ErrorHandling;
 import classes.Item;
 import classes.OptionCategory;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/category")
 public class CategoryServlet extends HttpServlet {
@@ -24,6 +26,14 @@ public class CategoryServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// ヘッダーの値を取得
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			String disp = "/header";
+		    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		    dispatch.include(request, response);
+		}
+		
 		String categoryName = request.getParameter("categoryName");
 		// カテゴリ名がnullの場合はホーム画面に遷移
 		if (categoryName == null) {

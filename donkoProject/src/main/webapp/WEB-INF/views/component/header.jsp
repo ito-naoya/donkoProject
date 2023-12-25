@@ -19,7 +19,10 @@
 	Object userId = session.getAttribute("user_id");
 	ShippingAddressBean mainShippingAddress = (ShippingAddressBean)request.getAttribute("mainShippingAddress");
 	Object cartItemNum = request.getAttribute("cartItemNum");
-	%>
+    String postalCode = (String) mainShippingAddress.getPostalCode();
+    String head = postalCode.substring(0, 3);
+    String end = postalCode.substring(3);
+    %>
 	<div id="top"></div>
 	<header class="fixed-top" style="background-color:white;">
     	<div style="height:54px; background-color:#385A37; position:relative; top: 0; left: 0; z-index:2; display:flex; align-items:center;">
@@ -31,7 +34,7 @@
     			</li>
     			<% if (mainShippingAddress != null) { %>
     			<li class="mx-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
-    				<small><%= mainShippingAddress.getPostalCode() %><br><%= mainShippingAddress.getAddress() %></small>
+    				<small>〒 <%= head %>-<%= end %><br><%= mainShippingAddress.getAddress() %></small>
     			</li>
     			<% 
     			} 
