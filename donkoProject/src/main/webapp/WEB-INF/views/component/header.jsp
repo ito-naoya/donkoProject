@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="bean.ShippingAddressBean"%>
+<%-- <%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="javax.servlet.http.HttpServletRequest" %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +15,10 @@
 <title>donko</title>
 </head>
 <body>
+	<%
+	String userId = (String)session.getAttribute("user_id");
+	ShippingAddressBean mainShippingAddress = (ShippingAddressBean)request.getAttribute("mainShippingAddress");
+	%>
 	<div id="top"></div>
 	<header class="fixed-top" style="background-color:white;">
     	<div style="height:54px; background-color:#385A37; position:relative; top: 0; left: 0; z-index:2; display:flex; align-items:center;">
@@ -21,20 +28,30 @@
 	    				<img src="./images/donkoLogo.png" style="height:50px;">
 	    			</a>
     			</li>
+    			<% if (mainShippingAddress != null) { %>
     			<li class="mx-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
-    				<small>郵便番号<br>デフォルト住所</small>
+    				<small><%= mainShippingAddress.getPostalCode() %><br><%= mainShippingAddress.getAddress() %></small>
     			</li>
-    			<li class="me-3 ms-auto" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
+    			<% 
+    			} 
+    			%>
+    			<% 
+    			if (userId == null) {
+    			%>
+    			<li class="ms-auto me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
     				<a href="userSignup" class="link2 btn btn-sm px-4" style="color:white; background-color:#9933FF; border-radius:40px;">
     					新規登録
     				</a>
     			</li>
-    			<li class="mx-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
+    			<li class="ms-3 me-4" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
     				<a href="userSignin" class="link" style="color:white; text-decoration:none;">
     					<small>ログイン</small>
     				</a>
     			</li>
-    			<li class="mx-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
+    			<% 
+    			} else {
+    			%>
+    			<li class="ms-auto me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
     				<a href="myPage" class="link" style="color:white; text-decoration:none;">
     					<small>購入履歴</small>
     				</a>
@@ -48,6 +65,9 @@
 						  <span class="badge ms-1" style="background-color:#333;">4</span>
     				</a>
     			</li>
+    			<% 
+    			}
+    			%>
     		</ul>
     	</div>
 	    <nav style="height:40px; background-color:#D5E8D4; display:flex; align-items:center;">
