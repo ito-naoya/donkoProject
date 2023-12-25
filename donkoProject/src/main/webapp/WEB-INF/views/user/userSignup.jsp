@@ -58,7 +58,7 @@
 				            <div class="row mb-5 mt-3">
 				              <label for="userLoginId" class="form-label">ユーザーID</label>
 				              <div class="col-12">
-				                <input type="text" class="form-control" id="userLoginId" name="userLoginId"  maxlength="10" value="<%=users.getUserLoginId()%>" required>
+				                <input type="text" class="form-control" id="userLoginId" name="userLoginId"  maxlength="10" value="<%= users.getUserLoginId() != null ? users.getUserLoginId() : "" %>" required>
 				              </div>
 				              <% String userLoginId = (String)request.getAttribute("userLoginId");
 									 if (userLoginId != null) {
@@ -72,7 +72,7 @@
 				            <div class="row mb-5 mt-3">
 				              <label for="userLoginUser" class="form-label">ユーザー名</label>
 				              <div class="col-12">
-				                <input type="text" class="form-control" id="userLoginName" name="userLoginName"  maxlength="25" value="<%=users.getUserName()%>" required>
+				                <input type="text" class="form-control" id="userLoginName" name="userLoginName"  maxlength="25" value="<%= users.getUserName() != null ? users.getUserName() : "" %>" required>
 				              </div>
 				              <% String userName = (String)request.getAttribute("userName");
 									 if (userName != null) {
@@ -86,7 +86,7 @@
 				            <div class="row mb-3">
 				              <label for="userLoginPass" class="form-label">パスワード</label>
 				              <div class="col-12">
-				                <input type="text" class="form-control" id="userLoginPass" name="userLoginPass"  maxlength="16"  value="<%=users.getPassword()%>" required>
+				                <input type="text" class="form-control" id="userLoginPass" name="userLoginPass"  maxlength="16"  value="<%= users.getPassword() != null ? users.getPassword() : "" %>" required>
 				              </div>
 				              <% String password = (String)request.getAttribute("password");
 									 if (password != null) {
