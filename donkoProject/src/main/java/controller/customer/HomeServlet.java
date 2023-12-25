@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import bean.ItemBean;
 import classes.ErrorHandling;
 import classes.Item;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 @WebServlet("/home")
@@ -29,6 +31,14 @@ public class HomeServlet extends HttpServlet {
 	      //エラーページに遷移
 			ErrorHandling.transitionToErrorPage(request,response,"画像の取得に失敗しました","home","ホームに");
 			return;
+		}
+		
+		
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			String disp = "/header";
+		    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		    dispatch.include(request, response);
 		}
 		
 		request.setAttribute("itemList", itemList);
