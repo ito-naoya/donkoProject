@@ -10,6 +10,9 @@
 <title>donko</title>
 </head>
 <body>
+<%
+	ItemBean item = (ItemBean) request.getAttribute("item");
+%>
 <main class="m-5">
 		<div class="container　ml-5 mr-5">
 			<div class="row  justify-content-center">
@@ -75,6 +78,14 @@
 								<span id="default-text" style="position: absolute; width: 100%; height: 100%;">ここに画像が表示されます</span>
 							    <img id="image-preview" style="width: 100%; height: 100%; object-fit: cover; display: none;"/>
 							</div>
+							<%
+								String imageFileName = (String) request.getAttribute("imageFileName");
+								if (imageFileName != null && !imageFileName.isEmpty()) {
+							%>
+					              <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+										<%= imageFileName %>
+								  </div>
+							<% } %>
 							<br>
 						    <br>
 						    <!-- オプション登録 -->
@@ -95,11 +106,20 @@
 									            <!-- 一つ目のオプションは必ずセレクトボックス（画像名と一意に紐づけるため） -->
 									            <select class="form-select mb-3" id="optionSelect_<%= counter %>" name="optionValueS_<%= counter %>">
 									                <option selected hidden disabled value="">オプション選択： <%= optionCategoryName %></option>
-									                <% for (OptionCategoryBean option : optionCategoryList) { %>
-									                    <option value="<%=option.getOptionCategoryId()%>"><%=option.getOptionCategoryValue()%></option>
+									                <% for (OptionCategoryBean option : optionCategoryList) {
+									                	boolean isSelected = newItem.getItemFirstOptionIncrementId() >= 0 && item.getItemFirstOptionIncrementId() == option.getOptionCategoryId();
+									                %>
+									                    <option value="<%=option.getOptionCategoryId()%>" <%= isSelected ? "selected" : "" %>><%=option.getOptionCategoryValue()%></option>
 									                <% } %>
 									            </select>
-									            <div class="invalid-feedback">写真を登録してください</div>
+									            <%
+													String itemFirstOptionIncrementId = (String) request.getAttribute("itemFirstOptionIncrementId");
+													if (itemFirstOptionIncrementId != null && !itemFirstOptionIncrementId.isEmpty()) {
+												%>
+										              <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+															<%= itemFirstOptionIncrementId %>
+													  </div>
+												<% } %>
 									            <br>
 									    <%
 									        } else if (counter == 2) {
@@ -115,8 +135,15 @@
 									                    <label class="form-check-label me-3" for="optionBox_<%= counter %>">
 									                        <%=option.getOptionCategoryValue()%>
 									                    </label>
-									                    <div class="invalid-feedback">チェックは一つ以上につけてください</div>
 									                <% } %>
+									                <%
+													String itemSecondOptionIncrementId = (String) request.getAttribute("itemSecondOptionIncrementId");
+													if (itemSecondOptionIncrementId != null && !itemSecondOptionIncrementId.isEmpty()) {
+												%>
+										              <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+															<%= itemSecondOptionIncrementId %>
+													  </div>
+												<% } %>
 									                <br><br>
 									            </div>
 									<%

@@ -35,7 +35,8 @@ public class ItemBean {
 
 	private boolean isDeleted;
 
-	@Length(groups = {GroupB.class,GroupC.class}, min=1 , max= 35,  message="写真を登録できません")
+	@Length(groups = {GroupB.class,GroupC.class}, min=1 , max= 35,  message="写真を登録してください")
+	@NotNull(groups = {GroupB.class,GroupC.class}, message = "写真を登録してください")
 	private String imageFileName;
 
 	@Length(groups = {GroupC.class}, min=1 , max= 20, message="正しい値を選択してください" )
@@ -46,9 +47,12 @@ public class ItemBean {
 	private String itemFirstOptionValue;
 	private String itemSecondOptionValue;
 
-	@Min(groups = {GroupB.class,GroupC.class}, value = 1, message = "正しい値を選択してください")
+	@Min(groups = {GroupB.class,GroupC.class}, value = 1, message = "オプションを選択してください")
     @Max(groups = {GroupB.class,GroupC.class}, value = 1000000000, message = "正しい値を選択してください")
 	private int itemFirstOptionIncrementId;
+
+	@Min(groups = {GroupB.class,GroupC.class}, value = 1, message = "オプションを選択してください")
+    @Max(groups = {GroupB.class,GroupC.class}, value = 1000000000, message = "正しい値を選択してください")
     private int itemSecondOptionIncrementId;
 
 	public ItemBean(){};

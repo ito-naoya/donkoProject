@@ -36,25 +36,29 @@
 						<!-- ここから入力フォーム  -->
 						<form action="registItem1" id="registItem1" method="post" class="needs-validation">
 							<div class="mb-3">
-								<select class="form-select category-select" name="itemCategoryName">
-								  <option selected hidden disabled value="">カテゴリーを選択</option>
-							            <%
-								            for (ItemCategoryBean category : categoryList){
-								         %>
-								            <option value="<%=category.getItemCategoryName()%>"><%=category.getItemCategoryName()%></option>
-								        <%
-							            	}
-							            %>
-								</select>
-								<div class="invalid-feedback">カテゴリーを選択してください</div>
-								<% String itemCategoryName = (String)request.getAttribute("itemCategoryName");
-									 if (itemCategoryName != null) {
-							 	 %>
-						              <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
-											<%= itemCategoryName %>
-									  </div>
-								  <% } %>
+							    <select class="form-select category-select" name="itemCategoryName">
+							        <option selected hidden disabled value="">カテゴリーを選択</option>
+							        <%
+							            for (ItemCategoryBean category : categoryList){
+							                // item.getItemCategoryName()がnullの場合も考慮
+							                boolean isSelected = item.getItemCategoryName() != null && item.getItemCategoryName().equals(category.getItemCategoryName());
+							        %>
+							            <option value="<%= category.getItemCategoryName() %>" <%= isSelected ? "selected" : "" %>><%= category.getItemCategoryName() %></option>
+							        <%
+							            }
+							        %>
+							    </select>
+							    <div class="invalid-feedback">カテゴリーを選択してください</div>
+							    <%
+							        String itemCategoryName = (String)request.getAttribute("itemCategoryName");
+							        if (itemCategoryName != null) {
+							    %>
+							        <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+							            <%= itemCategoryName %>
+							        </div>
+							    <% } %>
 							</div>
+
 
 							<div class="mb-3">
 							    <label for="itemName" class="form-label">商品名</label>
@@ -85,7 +89,8 @@
 						 	<div class="col-4 mb-3">
 							    <label for="price" class="form-label">金額</label>
 							    <label for="price" class="form-label"  style="font-size: small; color: grey;">¥1~入力可※半角数字以外は入力不可</label>
-							    <input type="text" class="form-control" id="price" name="price" maxlength="11" style="text-align: right" required value="<%= item.getItemPrice() >= 0 ? item.getItemPrice() : "" %>">
+							    <% boolean isPriceSelected = item.getItemPrice() >= 0; %>
+							    <input type="text" class="form-control" id="price" name="price" maxlength="11" style="text-align: right" required value="<%= isPriceSelected ? item.getItemPrice() : "" %>">
 							    <%
 								String itemPrice = (String) request.getAttribute("itemPrice");
 								if (itemPrice != null && !itemPrice.isEmpty()) {
@@ -99,7 +104,8 @@
 						 	<div class="col-2 mb-3">
 							    <label for="stock" class="form-label">在庫</label>
 							    <label for="stock" class="form-label"  style="font-size: small; color: grey;">0~9で設定可</label>
-							    <input type="number" class="form-control" id="stock" name="stock" min="0" max="9" required style="text-align: center">
+							    <% boolean isStockSelected = item.getItemStock() >= 0; %>
+							    <input type="number" class="form-control" id="stock" name="stock" min="0" max="9" required style="text-align: center" value="<%= isStockSelected ? item.getItemStock() : "" %>">
 							    <% String itemStock = (String)request.getAttribute("itemStock");
 									 if (itemStock != null) {
 							 	 %>
