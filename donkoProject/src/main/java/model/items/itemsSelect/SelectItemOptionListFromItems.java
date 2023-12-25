@@ -63,9 +63,9 @@ public class SelectItemOptionListFromItems {
 			}catch(SQLException e) {
 				if(!conn.isClosed()) {
 					conn.rollback();
-					e.printStackTrace();
-					return null;
 				}
+				e.printStackTrace();
+				return null;
 			}
 		}catch(SQLException | ClassNotFoundException e) {
 			e.printStackTrace();

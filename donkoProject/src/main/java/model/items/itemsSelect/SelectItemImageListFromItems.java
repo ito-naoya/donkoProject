@@ -88,9 +88,9 @@ public class SelectItemImageListFromItems {
 				if (!conn.isClosed()) {
 					//SQL文が一つでも失敗したらロールバックする
 					conn.rollback();
-					e.printStackTrace();
-					return null;
 				}
+				e.printStackTrace();
+				return null;
 			}
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
