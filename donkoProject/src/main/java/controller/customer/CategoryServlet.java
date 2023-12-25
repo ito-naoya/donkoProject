@@ -38,16 +38,21 @@ public class CategoryServlet extends HttpServlet {
 		// オプション選択の取得
 		ArrayList<ArrayList<OptionCategoryBean>> optionCategoryValueListAll = OptionCategory
 				.getOptionCategoryListAllByCategory(itemBean);
+
+		// エラー画面に遷移
+		if (optionCategoryValueListAll == null) {
+			// 失敗したらmessage.jspに遷移
+			ErrorHandling.transitionToErrorPage(request, response, "オプション選択のデータが取得できませんでした", "home", "ホームに");
+			return;
+		}
+
 		// カテゴリー一覧の取得
 		ArrayList<ItemBean> itemList = Item.getItemListByCategory(itemBean);
 
 		// エラー画面に遷移
-		if (optionCategoryValueListAll == null || itemList == null) {
+		if (itemList == null) {
 			// 失敗したらmessage.jspに遷移
-			ErrorHandling.transitionToErrorPage(request, response,
-					optionCategoryValueListAll == null ? "オプション選択のデータが取得できませんでした" : "カテゴリ一覧のデータが取得できませんでした", 
-					"home",
-					"ホームに");
+			ErrorHandling.transitionToErrorPage(request, response, "カテゴリ一覧のデータが取得できませんでした", "home", "ホームに");
 			return;
 		}
 

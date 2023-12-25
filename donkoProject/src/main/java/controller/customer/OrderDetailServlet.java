@@ -50,6 +50,12 @@ public class OrderDetailServlet extends HttpServlet {
 		// 1件の購入情報を取得
 		PurchaseBean purchaseInfo = Purchase.getPurchaseInfo(purchaseBean);
 		
+		if(purchaseInfo == null) {
+			// エラー画面に遷移
+			ErrorHandling.transitionToErrorPage(request,response,"購入情報の取得に失敗しました。","home","ホームに");
+			return;
+		}
+		
 		// PurchaseDetailBeanにセット
 		PurchaseDetailBean purchaseDetailBean = new PurchaseDetailBean();
 		purchaseDetailBean.setPurchaseId(purchase_id);
@@ -57,9 +63,9 @@ public class OrderDetailServlet extends HttpServlet {
 		// 購入情報詳細取得
 		ArrayList<PurchaseDetailBean> purchaseDetailList = PurchaseDetail.getPurchaseDetail(purchaseDetailBean);
 		
-		if(purchaseInfo == null || purchaseDetailList == null) {
+		if( purchaseDetailList == null) {
 			// エラー画面に遷移
-			ErrorHandling.transitionToErrorPage(request,response,"購入情報の取得に失敗しました。","home","ホームに");
+			ErrorHandling.transitionToErrorPage(request,response,"購入詳細情報の取得に失敗しました。","home","ホームに");
 			return;
 		}
 		

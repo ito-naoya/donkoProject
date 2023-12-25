@@ -78,6 +78,7 @@ public class EditUserInfoServlet extends HttpServlet {
         
 		//入力内容に不備があった場合
 	      if(isIncomplete) {
+	    	  //ユーザー編集画面に戻す（エラーメッセージを出して再度入力を促す）
 	    	  String view = "/WEB-INF/views/admin/editUserInfo.jsp";
 	    	  request.getRequestDispatcher(view).forward(request, response);
 	    	  return;
