@@ -52,12 +52,19 @@
 					while (iterator.hasNext()) {
 						ShippingAddressBean shippingAddressBean = iterator.next();
 					%>
+          <%
+          String postalCode = (String) shippingAddressBean.getPostalCode();
+          %>
+          <%
+          String head = postalCode.substring(0, 3);
+          String end = postalCode.substring(4);
+          %>
 					<div class="card me-2 mb-2" style="width: calc(50% - 8px);">
 						<div class="card-body">
 							<%= numbers %>
 							<h5 class="card-title"><%= shippingAddressBean.getAddressee() %></h5>
 							<h6 class="card-subtitle mb-2 text-body-secondary">
-							〒 <%= shippingAddressBean.getPostalCode() %><br>
+							〒 <%= head %>-<%= end %><br>
 							<%= shippingAddressBean.getAddress() %>
 							</h6>
 							<button type="submit" class="btn" style="border: 1px solid #000000; background: #E5CCFF;">
@@ -70,7 +77,6 @@
 							int main_address = shippingAddressBean.getMainShippingAddress();
 							if (main_address != 1) {
 							%>
-<<<<<<< HEAD
 							<button type="submit" class="btn"
 								style="border: 1px solid #FF0000; background: #FFFFFF;">
 								<a href="deleteShippingAddress?shipping_address_id=<%= shippingAddressBean.getShippingAddressId() %>"
@@ -80,19 +86,6 @@
 							</button>
 							<% 
 							} 
-=======
-							<%String postalCode = (String)updateMainShippingAddress.getPostalCode();%>
-							<% String head = postalCode.substring(0, 3);
-							   String end = postalCode.substring(4);
-							     %>
-							<option
-								value="<%=updateMainShippingAddress.getShippingAddressId()%>">
-								〒 <%= head %>-<%= end %>
-								<%=updateMainShippingAddress.getAddress()%>
-								<%=updateMainShippingAddress.getAddressee()%></option>
-							<%
-							}
->>>>>>> refs/remotes/origin/develop
 							%>
 						</div>
 					</div>
@@ -102,7 +95,6 @@
 					%>
 				</div>
 			</div>
-<<<<<<< HEAD
 			<div class="col-lg-4 px-4">
 				<div style="position: sticky; top:130px;">
 					<label for="main_address_select"><strong>メイン発送先</strong></label>
@@ -113,72 +105,24 @@
 								name="update_shipping_address"
 								id="main_address_select">
 								<%
-								for (ShippingAddressBean updateMainShippingAddress : mainShippingAddressList) {
-								%>
-								<option
-									value="<%=updateMainShippingAddress.getShippingAddressId()%>">
-									〒
-									<%=updateMainShippingAddress.getPostalCode()%>
-									<%=updateMainShippingAddress.getAddress()%>
-									<%=updateMainShippingAddress.getAddressee()%>
-								</option>
-								<%
-								}
-								%>
+                for (ShippingAddressBean updateMainShippingAddress : mainShippingAddressList) {
+                %>
+                <%String postalCode = (String)updateMainShippingAddress.getPostalCode();%>
+                <% String head = postalCode.substring(0, 3);
+                   String end = postalCode.substring(4);
+                     %>
+                <option
+                  value="<%=updateMainShippingAddress.getShippingAddressId()%>">
+                  〒 <%= head %>-<%= end %>
+                  <%=updateMainShippingAddress.getAddress()%>
+                  <%=updateMainShippingAddress.getAddressee()%></option>
+                <%
+                }
+                %>
 							</select>
 							<button type="submit" class="btn text-nowrap"
 								style="border: 1px solid #000000; background: #E5CCFF; margin-left: 15px;">更新</button>
 						</form>
-=======
-		</div>
-		<h4><strong>配送先一覧</strong></h4>
-		<div class="d-flex">
-				<%
-				// カウンタ変数の初期化
-				int numbers = 1;
-				ArrayList<ShippingAddressBean> shippingAddressList = (ArrayList<ShippingAddressBean>) request
-						.getAttribute("shippingAddressList");
-				// Iteratorを使用してShippingAddressBeanのリストをイテレート
-				Iterator<ShippingAddressBean> iterator = shippingAddressList.iterator();
-				while (iterator.hasNext()) {
-					ShippingAddressBean shippingAddressBean = iterator.next();
-				%>
-			<%
-			String postalCode = (String) shippingAddressBean.getPostalCode();
-			%>
-			<%
-			String head = postalCode.substring(0, 3);
-			String end = postalCode.substring(4);
-			%>
-			<div class="card" style="width: 18rem;">
-					<div class="card-body">
-						<%= numbers %>
-						<h5 class="card-title"><%= shippingAddressBean.getAddressee() %></h5>
-						<h6 class="card-subtitle mb-2 text-body-secondary">
-						〒 <%= head %>-<%= end %><br>
-						<%= shippingAddressBean.getAddress() %>
-						</h6>
-						<button type="submit" class="btn" style="border: 1px solid #000000; background: #E5CCFF;">
-							<a href='editShippingAddress?shipping_address_id=<%= shippingAddressBean.getShippingAddressId() %>'
-								style="color: #000000; vertical-align: middle; text-decoration: none;">
-								編集
-							</a>
-						</button>
-						<%
-						int main_address = shippingAddressBean.getMainShippingAddress();
-						if (main_address != 1) {
-						%>
-						<button type="submit" class="btn"
-							style="border: 1px solid #FF0000; background: #FFFFFF;">
-							<a href="deleteShippingAddress?shipping_address_id=<%= shippingAddressBean.getShippingAddressId() %>"
-								style="color: #FF0000; vertical-align: middle; text-decoration: none;">
-								削除
-							</a>
-						</button>
-						<% 
-						} 
-						%>
->>>>>>> refs/remotes/origin/develop
 					</div>
 				</div>
 			</div>
