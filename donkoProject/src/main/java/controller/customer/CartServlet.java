@@ -39,6 +39,7 @@ public class CartServlet extends HttpServlet {
 	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
 	    dispatch.include(request, response);
 		
+
 		Object loginedUserId = session.getAttribute("user_id");
 
 		CustomerUser customerUser = new CustomerUser();
@@ -48,7 +49,7 @@ public class CartServlet extends HttpServlet {
 		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(customerUser);
 		
 		//データベースから取得できなかった時
-		if(cartBeanList == null) {			
+		if(cartBeanList == null) {
 			//エラーページに遷移
 			ErrorHandling.transitionToErrorPage(request,response,"カート情報の取得時に問題が発生しました。","home","ホームに");
 			return;
@@ -97,6 +98,12 @@ public class CartServlet extends HttpServlet {
 		String disp = "/header";
 	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
 	    dispatch.include(request, response);
+
+		Object loginedUserId = session.getAttribute("user_id");
+		
+		String disp = "/header";
+		RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		dispatch.include(request, response);
 
 		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
 		Integer quantity = Integer.valueOf(request.getParameter("quantity"));
