@@ -39,8 +39,8 @@ public class CartServlet extends HttpServlet {
 	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
 	    dispatch.include(request, response);
 		
-	    Object loginedUserId = session.getAttribute("user_id");
 
+		Object loginedUserId = session.getAttribute("user_id");
 
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserId(Integer.parseInt(loginedUserId.toString()));
@@ -92,6 +92,12 @@ public class CartServlet extends HttpServlet {
 			response.sendRedirect("userSignin");
 			return;
 		}
+		
+		Object loginedUserId = session.getAttribute("user_id");
+		
+		String disp = "/header";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
 
 		Object loginedUserId = session.getAttribute("user_id");
 		
