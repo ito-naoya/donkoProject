@@ -57,7 +57,7 @@
           %>
           <%
           String head = postalCode.substring(0, 3);
-          String end = postalCode.substring(4);
+          String end = postalCode.substring(3);
           %>
 					<div class="card me-2 mb-2" style="width: calc(50% - 8px);">
 						<div class="card-body">
@@ -109,7 +109,7 @@
                 %>
                 <%String postalCode = (String)updateMainShippingAddress.getPostalCode();%>
                 <% String head = postalCode.substring(0, 3);
-                   String end = postalCode.substring(4);
+                   String end = postalCode.substring(3);
                      %>
                 <option
                   value="<%=updateMainShippingAddress.getShippingAddressId()%>">

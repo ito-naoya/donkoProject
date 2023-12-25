@@ -16,7 +16,7 @@ public class SelectPurchaseInfo {
 	public static PurchaseBean selectPurchaseInfo(PurchaseBean purchaseBean){
   		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT "                                                  );
-		sb.append(    "p.purchase_id, "                                      );
+		sb.append(   "p.purchase_id, "                                      );
 		sb.append(    "u.user_name, "                                        );
 		sb.append(    "p.purchase_date, "                                    );
 		sb.append(    "p.total_amount, "                                     );
