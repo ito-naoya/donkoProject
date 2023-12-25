@@ -25,7 +25,6 @@ public class HomeServlet extends HttpServlet {
 		// 商品の画像を取得
 		ArrayList<ItemBean> itemList = Item.getItemList();
 		
-		
 		if (itemList == null) {
 	      //エラーページに遷移
 			ErrorHandling.transitionToErrorPage(request,response,"画像の取得に失敗しました","home","ホームに");

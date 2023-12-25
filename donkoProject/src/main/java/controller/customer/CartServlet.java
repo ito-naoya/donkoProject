@@ -41,13 +41,20 @@ public class CartServlet extends HttpServlet {
 		//ログインしているユーザーがカートに追加した商品を全て取得
 		ArrayList<CartBean> cartBeanList = Cart.getItemListFromCart(customerUser);
 		
+		//データベースから取得できなかった時
+		if(cartBeanList == null) {			
+			//エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response,"カート情報の取得時に問題が発生しました。","home","ホームに");
+			return;
+		}
+		
 		//ログインしているユーザー情報を取得
 		CustomerUser cu = User.getUserDetail(customerUser);
 		
 		//データベースから取得できなかった時
-		if(cartBeanList == null || cu == null) {			
+		if(cu == null) {			
 			//エラーページに遷移
-			ErrorHandling.transitionToErrorPage(request,response,"カート情報の取得時に問題が発生しました。","home","ホームに");
+			ErrorHandling.transitionToErrorPage(request,response,"ユーザー情報の取得時に問題が発生しました。","home","ホームに");
 			return;
 		}
 		

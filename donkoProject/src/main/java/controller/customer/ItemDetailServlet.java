@@ -37,15 +37,32 @@ public class ItemDetailServlet extends HttpServlet {
 
 		//商品IDを元に商品の詳細情報を取得する
 		ItemBean item = Item.getItemDetail(ib);
+		
+		//データベースから取得できなかった時
+		if(item == null ) {			
+			//エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response,"商品詳細情報の取得時に問題が発生しました。","home","ホームに");
+			return;
+		} 
+		
 		//詳細表示する商品の色違い画像を取得する
 		ArrayList<ItemBean> itemImageList = Item.getItemImageList(ib);
+		
+		//データベースから取得できなかった時
+		if(itemImageList == null ) {			
+			//エラーページに遷移
+			ErrorHandling.transitionToErrorPage(request,response,"商品画像の取得時に問題が発生しました。","home","ホームに");
+			return;
+		} 
+		
+		
 		//商品の登録されているオプションを全て取得する(衣類：S、M、L)
 		ArrayList<ItemBean> itemOptionList = Item.getItemOptionList(ib);
 		
 		//データベースから取得できなかった時
-		if(item == null || itemImageList == null || itemOptionList == null) {			
+		if(itemOptionList == null) {			
 			//エラーページに遷移
-			ErrorHandling.transitionToErrorPage(request,response,"商品情報の取得時に問題が発生しました。","home","ホームに");
+			ErrorHandling.transitionToErrorPage(request,response,"商品オプションの取得時に問題が発生しました。","home","ホームに");
 			return;
 		} 
 		
@@ -59,6 +76,7 @@ public class ItemDetailServlet extends HttpServlet {
 		}else {
 			request.setAttribute("url", "itemDetail?itemId=" + itemId);
 		}
+		
 		request.setAttribute("item", item);
 		request.setAttribute("itemImageList", itemImageList);
 		request.setAttribute("itemOptionList", itemOptionList);

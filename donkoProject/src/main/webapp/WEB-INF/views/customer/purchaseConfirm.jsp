@@ -41,6 +41,9 @@
 							</div>
 							<form action="purchaseConfirm" method="post" class="ms-auto">
 								<input type="hidden" value="<%= totalPrice %>" name="totalPrice">
+								<input type="hidden" value="<%= sa.getAddress() %>" name="address">
+								<input type="hidden" value="<%= sa.getPostalCode() %>" name="postalCode">
+								<input type="hidden" value="<%= sa.getAddressee() %>" name="addressee">
 								<button type=submit class="btn px-5 py-2" style="background-color: #9933ff; color: white;">
 									注文確定
 								</button>

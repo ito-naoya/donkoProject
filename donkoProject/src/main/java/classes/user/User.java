@@ -3,6 +3,8 @@ package classes.user;
 import java.security.NoSuchAlgorithmException;
 
 import hash.HashGenerator;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import model.users.usersInsert.InsertNewUserToUsers;
 import model.users.usersSelect.SelectUserDetailFromUsers;
 import model.users.usersSelect.SelectUserDuplicate;
@@ -64,7 +66,15 @@ public class User {
 
 	//ログアウトする
 	//TODO セッション破棄のメソッドを記述する
-	public static void logout() {
+	public static Boolean logout(HttpServletRequest request) {
+	HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.removeAttribute("user_id");
+			session.invalidate();
+			return true;
+		} else {
+			return false;
+		}
 	};
 
 	//ログインする
