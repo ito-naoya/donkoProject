@@ -60,7 +60,9 @@
 				        
 				        <div class="row">
 				              <div class="col-12 mt-5 d-flex justify-content-center">
+				              <a href="updateUserPassword"; text-decoration: none;">
 				                <input type="submit" value="パスワード変更" class="btn border" style="background-color:#9933FF; color: white; padding: 12px 80px;">
+				                </a>
 				              </div>
 				         </div>
 				</div>
