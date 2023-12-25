@@ -24,6 +24,14 @@ public class HomeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			String disp = "/header";
+		    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		    dispatch.include(request, response);
+		}
+		
 		// 商品の画像を取得
 		ArrayList<ItemBean> itemList = Item.getItemList();
 		
@@ -31,13 +39,6 @@ public class HomeServlet extends HttpServlet {
 	      //エラーページに遷移
 			ErrorHandling.transitionToErrorPage(request,response,"画像の取得に失敗しました","home","ホームに");
 			return;
-		}
-		
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			String disp = "/header";
-		    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
-		    dispatch.include(request, response);
 		}
 		
 		request.setAttribute("itemList", itemList);
