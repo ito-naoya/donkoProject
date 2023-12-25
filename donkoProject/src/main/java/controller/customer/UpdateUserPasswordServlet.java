@@ -6,7 +6,7 @@ import classes.BeanValidation;
 import classes.ErrorHandling;
 import classes.user.CustomerUser;
 import classes.user.User;
-import interfaces.group.GroupB;
+import interfaces.group.GroupC;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,7 +34,7 @@ public class UpdateUserPasswordServlet extends HttpServlet {
 		customerUser.setPassword(request.getParameter("password"));
 		
 		// 入力チェック
-		Boolean isIncomplete = BeanValidation.validate(request, "users", customerUser, GroupB.class);
+		Boolean isIncomplete = BeanValidation.validate(request, "users", customerUser, GroupC.class);
 		
 		//入力内容に不備があった場合
 		if(isIncomplete) {
@@ -52,13 +52,7 @@ public class UpdateUserPasswordServlet extends HttpServlet {
 			return;
 		}
 		
-		// ホーム画面に遷移
+		// ログイン画面に遷移
 		response.sendRedirect("userSignin");
-		/*
-		 *  ホーム画面に遷移させていますが、ログイン画面ができていればログイン画面に遷移させようと考えています。
-		 *  更新後の遷移先について、ホーム画面かログイン画面への遷移のどちらがいいか教えてください。
-		 *  
-		 * */
-		
 	}
 }
