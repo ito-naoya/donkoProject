@@ -31,7 +31,7 @@ public class SelectPurchaseInfo {
 		sb.append("ON "                                                      );
 		sb.append(    "p.user_id = u.user_id "                               );
 		sb.append("WHERE "                                                   );
-		sb.append(    "p.user_id = ?"                                    );
+		sb.append(    "p.purchase_id = ?"                                    );
 		
 		// SQLを文字列化
 		final String SELECT_PURCHASE_INFO_SQL = sb.toString();
