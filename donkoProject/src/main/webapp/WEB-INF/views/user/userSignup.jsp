@@ -12,6 +12,10 @@
         rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
         crossorigin="anonymous">
+    <style>
+	.link:hover{opacity: 0.7;}
+	.link2:hover{opacity: 0.8;}
+	</style>
     <title>donko</title>
 </head>
 <body>
@@ -21,20 +25,25 @@
 		%>
 		<div class="container　ml-5 mr-5">
 			<div class="row justify-content-center">
-				<div class="col-5 mt-5 p-5" style="border: 1px solid #333333;">
-					<%
-						String admin = (String) request.getAttribute("admin");
-						if (admin == null){
-					%>
-					<!-- ここにdonko画像を表示 -->
-					<%
-						}
-					%>
+				<%
+					String admin = (String) request.getAttribute("admin");
+					if (admin == null){
+				%>
+				<!-- ここにdonko画像を表示 -->
+				<span class="d-block d-flex justify-content-center my-3">
+					<a href="home" class="link" style="text-decoration: none;"> 
+						<img src="./images/donkoLogo2.png" style="height: 80px;">
+					</a>
+				</span>
+				<%
+					}
+				%>
+				<div class="col-5 p-5 border" style="border-radius:10px;">
 			            <div class="cancelButton"
-							style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-							<h2>
+							style="display: flex; justify-content: space-between;">
+							<h4 class="mt-3">
 								<strong>ユーザー新規登録</strong>
-							</h2>
+							</h4>
 							<!-- アドミン側のみ表示 -->
 							<%if (admin != null){ %>
 							<div>
@@ -46,16 +55,16 @@
 						String errorMessage = (String) request.getAttribute("errorMessage");
 						if(errorMessage != null && !errorMessage.isEmpty()) {
 						%>
-						    <div class="alert alert-danger alert-message" role="alert">
-						        <%= errorMessage %>
-						    </div>
+					    <div class="alert alert-danger alert-message" role="alert">
+					        <%= errorMessage %>
+					    </div>
 						<%
 						}
 						%>
-
+						<br>
 						<!-- ここからフォーム -->
 					    <form action="userSignup" method="post">
-				            <div class="row mb-5 mt-3">
+				            <div class="row my-3">
 				              <label for="userLoginId" class="form-label">ユーザーID</label>
 				              <div class="col-12">
 				                <input type="text" class="form-control" id="userLoginId" name="userLoginId"  maxlength="10" value="<%=users.getUserLoginId()%>" required>
@@ -68,8 +77,8 @@
 							  </div>
 							  <% } %>
 							</div>
-
-				            <div class="row mb-5 mt-3">
+	
+				            <div class="row mb-3">
 				              <label for="userLoginUser" class="form-label">ユーザー名</label>
 				              <div class="col-12">
 				                <input type="text" class="form-control" id="userLoginName" name="userLoginName"  maxlength="25" value="<%=users.getUserName()%>" required>
@@ -82,8 +91,8 @@
 							  </div>
 							  <% } %>
 				            </div>
-
-				            <div class="row mb-3">
+	
+				            <div class="row">
 				              <label for="userLoginPass" class="form-label">パスワード</label>
 				              <div class="col-12">
 				                <input type="text" class="form-control" id="userLoginPass" name="userLoginPass"  maxlength="16"  value="<%=users.getPassword()%>" required>
@@ -96,23 +105,21 @@
 							  </div>
 							  <% } %>
 				            </div>
-
+	
 				            <div class="row">
 				              <div class="col-12 mt-5 d-flex justify-content-center">
-				                <input type="submit" value="作成する" class="btn border" style="background-color:#9933FF; color: white; padding: 12px 80px;">
+				                <input type="submit" value="作成する" class="btn border" style="background-color:#9933FF; color: white; width:50%;">
 				              </div>
 				            </div>
 				        </form>
 				</div>
 			</div>
-			<div class="row justify-content-center">
-        		<div class="col-5 mb-5 p-5">
+			<div class="row justify-content-center my-3">
+        		<div class="col-5">
 					<!-- ユーザー側のみログイン画面にいくボタン表示 -->
 					<%if (admin == null){ %>
-						<div class="cancelButton"style="display: flex; justify-content: center; margin-bottom: 20px;">
-							<button type="submit" class="btn btn-lg w-100" style="border: 1px solid #000000; background: #E5CCFF; padding: 10px;">
-							<a href="userSignin" style="color: black; text-decoration: none;">ログイン画面に移動</a>
-							</button>
+						<div class="cancelButton">
+							<a href="userSignin" class="link" style="color:#385A37; text-decoration: none;">ログインはこちら</a>
 						</div>
 					<%
 						}

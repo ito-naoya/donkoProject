@@ -230,7 +230,7 @@
 			}
 			%>
 		</div>
-		<div class="logout d-flex justify-content-end mt-5">
+		<div class="logout d-flex justify-content-end my-4">
 			<a href="logout" class="btn px-4"
 				style="color: white; background-color: #385A37; border-radius: 40px; margin-right: 45px;">ログアウト</a>
 		</div>
