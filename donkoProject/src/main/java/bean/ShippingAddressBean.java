@@ -15,7 +15,6 @@ public class ShippingAddressBean {
 	@Length(groups = {GroupB.class}, min=1 , message="{min}文字以上で入力してください。" )
 	private String address;
 	private int mainShippingAddress;
-	private int mainShippingAddressCount;
 	
 	public ShippingAddressBean() {};
 	
@@ -65,14 +64,6 @@ public class ShippingAddressBean {
 	
 	public void setMainShippingAddress(int mainShippingAddress) {
 		this.mainShippingAddress = mainShippingAddress;
-	}
-	
-	public int getmainShippingAddressCount() {
-		return mainShippingAddressCount;
-	}
-	
-	public void setmainShippingAddressCount(int mainShippingAddressCount) {
-		this.mainShippingAddressCount = mainShippingAddressCount;
 	}
 	
 }
