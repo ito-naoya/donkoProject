@@ -78,7 +78,11 @@ public class InsertItemToCarts {
 		try (Connection conn = DatabaseConnection.getConnection();) {
 			try {
 				//商品をカートに追加
-				GeneralDao.executeUpdate(conn, INSERT_CART_SQL, params);
+				int updatedRows = GeneralDao.executeUpdate(conn, INSERT_CART_SQL, params);
+				
+				//更新件数が0件の場合
+				if(updatedRows == 0) throw new SQLException();
+				
 				//sqlをコミット
 				conn.commit();
 				isCommit = true;

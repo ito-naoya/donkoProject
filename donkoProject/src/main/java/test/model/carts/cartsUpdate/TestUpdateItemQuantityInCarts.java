@@ -9,39 +9,27 @@ import model.carts.cartsUpdate.UpdateItemQuantityInCarts;
 
 class TestUpdateItemQuantityInCarts {
 
-	//数量更新成功時のテスト
-//	@Test
-//	void success() {
-//		CartBean cb = new CartBean();
-//		cb.setUserId(2);
-//		cb.setItemId(1);
-//		cb.setQuantity(3);
-//		Boolean result = UpdateItemQuantityInCarts.updateItemQuantityInCarts(cb);
-//		assertTrue(result);
-//	}
-	
-	//以下、falseを返すテスト
-	
-	//userIdが存在しなかった場合は
-//	@Test
-//	void doesNotExitstUserId() {
-//		CartBean cb = new CartBean();
-//		cb.setUserId(0);
-//		cb.setItemId(1);
-//		cb.setQuantity(3);
-//		Boolean result = UpdateItemQuantityInCarts.updateItemQuantityInCarts(cb);
-//		assertFalse(result);
-//	}
-	
-	//itemIdが存在しなかった場合
+	//成功テスト
 	@Test
-	void doesNotExitstItemId() {
+	void testSuccess() {
 		CartBean cb = new CartBean();
 		cb.setUserId(2);
-		cb.setItemId(124534734);
+		cb.setItemId(1);
 		cb.setQuantity(3);
+		Boolean result = UpdateItemQuantityInCarts.updateItemQuantityInCarts(cb);
+		assertTrue(result);
+	}
+	
+	
+	//更新件数が０件の場合
+	@Test
+	void testUpdatedRowsIsZero() {
+		CartBean cb = new CartBean();
+		cb.setUserId(0);
+		cb.setItemId(0);
+		cb.setQuantity(0);
 		Boolean result = UpdateItemQuantityInCarts.updateItemQuantityInCarts(cb);
 		assertFalse(result);
 	}
-
+	
 }
