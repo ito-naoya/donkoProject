@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="bean.ShippingAddressBean"%>
-<%-- <%@ page import="javax.servlet.http.HttpSession" %>
-<%@ page import="javax.servlet.http.HttpServletRequest" %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +17,6 @@
 	Object userId = session.getAttribute("user_id");
 	ShippingAddressBean mainShippingAddress = (ShippingAddressBean)request.getAttribute("mainShippingAddress");
 	Object cartItemNum = request.getAttribute("cartItemNum");
-    String postalCode = (String) mainShippingAddress.getPostalCode();
-    String head = postalCode.substring(0, 3);
-    String end = postalCode.substring(3);
     %>
 	<div id="top"></div>
 	<header class="fixed-top" style="background-color:white;">
@@ -33,6 +28,11 @@
 	    			</a>
     			</li>
     			<% if (mainShippingAddress != null) { %>
+    			<%
+    			String postalCode = (String) mainShippingAddress.getPostalCode();
+    		    String head = postalCode.substring(0, 3);
+    		    String end = postalCode.substring(3);
+    			%>
     			<li class="mx-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
     				<small>〒 <%= head %>-<%= end %><br><%= mainShippingAddress.getAddress() %></small>
     			</li>
