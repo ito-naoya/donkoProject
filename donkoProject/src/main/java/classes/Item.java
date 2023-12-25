@@ -179,35 +179,19 @@ public class Item {
 	}
 
 	//商品登録画面から取得した値のnull値及び文字数をチェックして、ItemBeanにセット
-	public static ItemBean checkRegistItemDetail(String itemCategoryName, String itemName, String itemDescription, String price, String stock) {
-		//カテゴリー名
-		if(itemCategoryName.isEmpty() || itemCategoryName.length() > 20) {
-			return null;
-		}
-		//商品名
-		if(itemName.isEmpty() || itemName.length() > 30) {
-			return null;
-		}
-		//商品説明
-		if(itemDescription.isEmpty() || itemDescription.length() > 100) {
-			return null;
-		}
+	public static ItemBean checkRegistItemDetail(ItemBean newItem,String price, String stock) {
+
 		//金額
 		String processedPrice = price.replaceAll(",", "");
-	    if(processedPrice.isEmpty() || processedPrice.length() > 11 || !processedPrice.matches("\\d+")) {
+	    if(processedPrice.isEmpty() || !processedPrice.matches("\\d+")) {
 	        return null;
 	    }
 		//在庫
-		if(stock.isEmpty() || stock.length() > 1 || !stock.matches("\\d+")) {
+		if(stock.isEmpty() || !stock.matches("\\d+")) {
 			return null;
 		}
 
 		//ItemBeanに値をセット
-
-		ItemBean newItem = new ItemBean();
-		newItem.setItemCategoryName(itemCategoryName);
-		newItem.setItemName(itemName);
-		newItem.setItemDescription(itemDescription);
 		newItem.setItemPrice(Integer.valueOf(processedPrice));
 		newItem.setItemStock(Integer.valueOf(stock));
 

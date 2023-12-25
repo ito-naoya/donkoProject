@@ -23,7 +23,7 @@ public class AdminTopPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 未発送の購入情報を一覧表示
 		ArrayList<PurchaseBean> unshippingedItemList = Purchase.getUnshippingedItemListByDesc();
-		
+
 		if (unshippingedItemList == null) {
 	        ErrorHandling.transitionToErrorPage(request, response, "データの取得に失敗しました","adminTopPage","管理者ページに");
 			return;
@@ -32,7 +32,7 @@ public class AdminTopPageServlet extends HttpServlet {
 		} else {
 			request.setAttribute("message", "現在未発送の商品はありません");
 		}
-		
+
 		// 遷移先
 		String view = "/WEB-INF/views/admin/adminTopPage.jsp";
         request.getRequestDispatcher(view).forward(request, response);
