@@ -33,9 +33,9 @@
 				</div>
 			</div>
 			<div class="row d-flex justify-content-center">
-				<div class="col-lg-3">
-					<div class="m-auto" style="height: 300px; width: 300px;">
-						<img class="object-fit-cover w-100 h-100" id="mainImage" src="./images/<%=item.getImageFileName()%>.jpg">
+				<div class="col-lg-3 mb-4">
+					<div class="m-auto" style="width: 100%;">
+						<img class="object-fit-cover" style=" width: 100%; aspect-ratio: 1 / 1;" id="mainImage" src="./images/<%=item.getImageFileName()%>.jpg">
 					</div>
 				</div>
 				<div class="col-lg-7">

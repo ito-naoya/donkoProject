@@ -11,42 +11,40 @@ public class Option {
 	}
 
 	//商品登録画面から取得したオプション項目のnull値及び文字数をチェックして、ItemBeanにセット
-	public static ItemBean checkRegistItemOptionDetail(String itemId, ItemBean itemBean, String itemFirstOptionName,
-            String itemFirstOptionIncrementId, String itemSecondOptionName, String itemSecondOptionIncrementId, int selectBoxCount) {
-		//セレクトボックスの数で、セットする値を分岐
-		// 商品id
-	    if(itemId.isEmpty() || itemId.length() > 11) {
+	public static ItemBean checkRegistItemOptionDetail(String itemId, ItemBean itemBean, String itemFirstOptionIncrementId, String[] itemSecondOptionIncrementIds) {
+	    // 商品id
+	    if (itemId.isEmpty() || !itemId.matches("\\d+")) {
 	        return null;
 	    }
 
-	    // オプション1 <色>
-	    if(itemFirstOptionName.isEmpty() || itemFirstOptionName.length() > 20) {
+	    // オプションId1
+	    int firstOptionId;
+	    if (itemFirstOptionIncrementId == null) {
+	        firstOptionId = 0;
+	    } else if (!itemFirstOptionIncrementId.matches("\\d+")) {
 	        return null;
+	    } else {
+	        firstOptionId = Integer.valueOf(itemFirstOptionIncrementId);
 	    }
-	    // オプションId1 <1(白)>
-	    if(itemFirstOptionIncrementId.isEmpty() || itemFirstOptionIncrementId.length() > 11) {
-	        return null;
+
+	    // オプションId2
+	    int secondOptionId = 0; // 初期値を0に設定
+	    if (itemSecondOptionIncrementIds != null && itemSecondOptionIncrementIds.length > 0) {
+	        if (!itemSecondOptionIncrementIds[0].matches("\\d+")) {
+	            return null;
+	        }
+	        secondOptionId = Integer.valueOf(itemSecondOptionIncrementIds[0]);
 	    }
 
 	    itemBean.setItemId(Integer.valueOf(itemId));
-	    itemBean.setItemFirstOptionName(itemFirstOptionName);
-	    itemBean.setItemFirstOptionIncrementId(Integer.valueOf(itemFirstOptionIncrementId));
-
-	    // オプション2 <衣類サイズ> ※セレクトボックスが2つある場合にのみ処理
-	    if(selectBoxCount == 2) {
-	        if(itemSecondOptionName.isEmpty() || itemSecondOptionName.length() > 20) {
-	            return null;
-	        }
-	        if(itemSecondOptionIncrementId.isEmpty() || itemSecondOptionIncrementId.length() > 11) {
-	            return null;
-	        }
-
-	        itemBean.setItemSecondOptionName(itemSecondOptionName);
-	        itemBean.setItemSecondOptionIncrementId(Integer.valueOf(itemSecondOptionIncrementId));
-	    }
+	    itemBean.setItemFirstOptionIncrementId(Integer.valueOf(firstOptionId));
+	    itemBean.setItemSecondOptionIncrementId(secondOptionId);
 
 	    return itemBean;
 	}
+
+
+
 
 	public static ItemBean checkItemAndOptionDetail(ItemBean updateItem, String itemId, String fileName,
 			String firstOptionId, String secondOptionId, int selectBoxCount) {

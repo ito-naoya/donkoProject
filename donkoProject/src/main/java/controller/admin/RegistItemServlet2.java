@@ -1,13 +1,20 @@
 package controller.admin;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import bean.ItemBean;
+import bean.OptionCategoryBean;
+import classes.BeanValidation;
 import classes.ErrorHandling;
 import classes.Item;
 import classes.Option;
+import classes.OptionCategory;
+import interfaces.group.GroupA;
+import interfaces.group.GroupB;
+import interfaces.group.GroupC;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -35,67 +42,74 @@ public class RegistItemServlet2 extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
 
-	    // 既に取得済みの商品情報を再取得
-	    String itemCategoryName = request.getParameter("itemCategoryName");
-	    String itemName = request.getParameter("itemName");
-	    String itemDescription = request.getParameter("itemDescription");
-	    String itemPrice = request.getParameter("itemPrice");
-	    String itemStock = request.getParameter("itemStock");
+		ItemBean newItem = new ItemBean();
+		//TODO:セッション管理
+		//カテゴリー、商品名、商品説明、金額、在庫数を取得
+		newItem.setItemCategoryName(request.getParameter("itemCategoryName"));
+		newItem.setItemName(request.getParameter("itemName"));
+		newItem.setItemDescription(request.getParameter("itemDescription"));
+		String price = request.getParameter("itemPrice");
+		String stock = request.getParameter("itemStock");
 
 	    // 画像情報を取得
 	    Part imgPart = request.getPart("img");
 
-	    // 取得情報のnull値及び文字数制限の超過を確認し、ItemBeanに登録
-	    ItemBean newItem = Item.checkRegistItemDetail(itemCategoryName, itemName, itemDescription, itemPrice, itemStock);
-	    if (newItem == null) {
-	        // 取得情報の不備があれば、再度入力画面に戻る
-	        response.sendRedirect("registItem1");
-	        return;
-	    }
+	    //int型のフィールドの取得情報について、null値及び数値以外の値がないかどうか確認し、itemBeanに登録
+  		newItem = Item.checkRegistItemDetail(newItem, price, stock);
+  		if(newItem == null) {
+  			//取得情報の不備があれば、再度入力画面に戻る
+  			response.sendRedirect("registItem1");
+  			return;
+  		}
+  		checkBalidation(request, response, newItem, GroupA.class);
 
 	    // セレクトボックスの個数を取得
 	    int selectBoxCount = Integer.parseInt(request.getParameter("selectBoxCount"));
 
 	    // 最初のオプション（色）の値を取得
-	    String itemFirstOptionName = request.getParameter("optionCategoryName_1");
+	    newItem.setItemFirstOptionName(request.getParameter("optionCategoryName_1"));
 	    String itemFirstOptionIncrementId = request.getParameter("optionValueS_1");
         String[] itemSecondOptionIncrementIds = null;
-
 	    // オプション値の検証と追加
-	    ItemBean newItemAddOption;
 	    if (selectBoxCount == 1) {
-	        // オプションが1つの場合
-	        newItemAddOption = Option.checkRegistItemOptionDetail("0", newItem, itemFirstOptionName, itemFirstOptionIncrementId, null, null, selectBoxCount);
-	    } else {
-	        // オプションが2つの場合
-	        String itemSecondOptionName = request.getParameter("optionCategoryName_2");
-
-            // チェックボックスでサイズを選択した場合
+	    	newItem = Option.checkRegistItemOptionDetail("0", newItem, itemFirstOptionIncrementId, null);
+        } else {
+        	newItem.setItemSecondOptionName(request.getParameter("optionCategoryName_2"));
             itemSecondOptionIncrementIds = request.getParameterValues("optionValueC_2");
-            newItemAddOption = Option.checkRegistItemOptionDetail("0", newItem, itemFirstOptionName, itemFirstOptionIncrementId, itemSecondOptionName, "0", selectBoxCount);
+            newItem = Option.checkRegistItemOptionDetail("0", newItem, itemFirstOptionIncrementId, itemSecondOptionIncrementIds);
+        }
+	    if (newItem == null) {
+	    	//不正な値を入力していた場合はリダイレクト
+	        regist2Foward(request, response, newItem);
 	    }
 
-	    if (newItemAddOption == null) {
-	        // オプション情報の不備があれば、再度入力画面に戻る
-	        response.sendRedirect("registItem1");
-	        return;
+        // 写真がセットされている事を確認して、写真名を設定(商品名＋オプションID)
+	    String fileName = null;
+	    if(imgPart.getSize() != 0) {
+	        fileName = newItem.getItemName() + itemFirstOptionIncrementId;
+	        newItem.setImageFileName(fileName);
 	    }
-        // 写真名を設定(商品名＋オプションID)
-        String fileName = itemName + itemFirstOptionIncrementId;
-        newItemAddOption.setImageFileName(fileName);
 
+        //バリデーションチェック
+        if (selectBoxCount == 1) {
+        	checkBalidation(request, response, newItem, GroupB.class);
+        } else {
+        	checkBalidation(request, response, newItem, GroupC.class);
+        }
+
+        String message = null;
         //商品名とオプションについて、既存のアイテムと重複がないか確認する
-        ArrayList<Integer> existId = Item.checkItemAlreadyExist(newItemAddOption,itemSecondOptionIncrementIds);
+        ArrayList<Integer> existId = Item.checkItemAlreadyExist(newItem,itemSecondOptionIncrementIds);
         if(existId == null) {
-        	ErrorHandling.transitionToErrorPage(request,response,"商品情報の取得に失敗しました","adminTopPage","管理者ページに");
+        	regist2Foward(request, response, newItem);
         } else if (!existId.isEmpty()) { //商品が重複していた場合
         	String idsStr = existId.stream()
                     .map(String::valueOf)
                     .collect(Collectors.joining(", "));
-        	request.setAttribute("existId", "商品が重複しています。重複商品ID：" + idsStr);
-        } else { //重複がなければ登録
+        	message = "商品が重複しています。重複商品ID：" + idsStr;
 
-	        if (Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {
+        } else { //重複がなければ登録
+	        if (Item.registerNewItem(newItem, selectBoxCount, itemSecondOptionIncrementIds)) {
 	        	ServletContext context = getServletContext();
 	            boolean imageSaved = Item.registerNewImage(imgPart, fileName, context);
 	            if (!imageSaved) {
@@ -108,13 +122,42 @@ public class RegistItemServlet2 extends HttpServlet {
 	        	ErrorHandling.transitionToErrorPage(request, response, "商品の登録に失敗しました","adminTopPage","管理者ページに");
 				return;
 	        }
-	        request.setAttribute("existId", "商品を登録しました");
+	        message ="商品を登録しました";
         }
-        request.setAttribute("itemDelFlg","0");
-	    // 完了後、商品一覧ページに遷移
-		request.setAttribute("categoryList", itemCategoryName);
-    	String view = "deleteItemIndex";
-		request.getRequestDispatcher(view).forward(request, response);
 
+	    // 完了後、商品一覧ページに遷移
+        String encodedItemCategoryName = URLEncoder.encode(newItem.getItemCategoryName(), "UTF-8");
+        String encodedMessage = URLEncoder.encode(message, "UTF-8");
+        String redirectURL = "deleteItemIndex?itemCategoryName=" + encodedItemCategoryName + "&itemDelFlg=" + "0" + "&message=" + encodedMessage;
+        response.sendRedirect(redirectURL);
+	}
+
+	private void regist2Foward(HttpServletRequest request, HttpServletResponse response, ItemBean newItem)
+			throws ServletException, IOException {
+		// オプション情報の不備があれば、再度入力画面に戻る
+		ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(newItem);
+		request.setAttribute("itemCategoryListAll", itemCategoryListAll);
+		request.setAttribute("newItem", newItem);
+		String view = "/WEB-INF/views/admin/registItem2.jsp";
+		request.getRequestDispatcher(view).forward(request, response);
+	}
+
+	private void checkBalidation(HttpServletRequest request, HttpServletResponse response, ItemBean newItem, Class<?> groupClass)
+			throws ServletException, IOException {
+		//入力文字チェック。入力内容に不備があった場合、オプションリストを作成して、元の画面にリダイレクト
+		if(BeanValidation.validate(request, "item", newItem, groupClass)) {
+			//オプション一覧を取得
+			ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(newItem);
+			if(itemCategoryListAll == null) {
+				//取得情報の不備があれば、エラー画面に遷移
+				ErrorHandling.transitionToErrorPage(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
+				return;
+			}
+			request.setAttribute("newItem", newItem);
+			request.setAttribute("itemCategoryListAll", itemCategoryListAll);
+			String view = "/WEB-INF/views/admin/registItem2.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		}
 	}
 }
