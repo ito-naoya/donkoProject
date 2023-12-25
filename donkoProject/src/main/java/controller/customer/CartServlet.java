@@ -8,6 +8,7 @@ import classes.Cart;
 import classes.ErrorHandling;
 import classes.user.CustomerUser;
 import classes.user.User;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,13 +28,18 @@ public class CartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-		Object loginedUserId = session.getAttribute("user_id");
+		HttpSession session = request.getSession(false);
 		
-		if(loginedUserId == null) {
+		if(session == null) {
 			response.sendRedirect("userSignin");
 			return;
 		}
+
+		String disp = "/header";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+		
+		Object loginedUserId = session.getAttribute("user_id");
 
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserId(Integer.parseInt(loginedUserId.toString()));
@@ -79,13 +85,18 @@ public class CartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-		Object loginedUserId = session.getAttribute("user_id");
+		HttpSession session = request.getSession(false);
 		
-		if(loginedUserId == null) {
+		if(session == null) {
 			response.sendRedirect("userSignin");
 			return;
 		}
+		
+		Object loginedUserId = session.getAttribute("user_id");
+		
+		String disp = "/header";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
 
 		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
 		Integer quantity = Integer.valueOf(request.getParameter("quantity"));
