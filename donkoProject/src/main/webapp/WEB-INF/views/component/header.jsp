@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="bean.ShippingAddressBean"%>
-<%-- <%@ page import="javax.servlet.http.HttpSession" %>
-<%@ page import="javax.servlet.http.HttpServletRequest" %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,10 +14,10 @@
 </head>
 <body>
 	<%
-	Object userId = session.getAttribute("user_id");
+	Object user_id = session.getAttribute("user_id");
 	ShippingAddressBean mainShippingAddress = (ShippingAddressBean)request.getAttribute("mainShippingAddress");
 	Object cartItemNum = request.getAttribute("cartItemNum");
-	%>
+    %>
 	<div id="top"></div>
 	<header class="fixed-top" style="background-color:white;">
     	<div style="height:54px; background-color:#385A37; position:relative; top: 0; left: 0; z-index:2; display:flex; align-items:center;">
@@ -30,14 +28,19 @@
 	    			</a>
     			</li>
     			<% if (mainShippingAddress != null) { %>
+    			<%
+    			String postalCode = (String) mainShippingAddress.getPostalCode();
+    		    String head = postalCode.substring(0, 3);
+    		    String end = postalCode.substring(3);
+    			%>
     			<li class="mx-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
-    				<small><%= mainShippingAddress.getPostalCode() %><br><%= mainShippingAddress.getAddress() %></small>
+    				<small>〒 <%= head %>-<%= end %><br><%= mainShippingAddress.getAddress() %></small>
     			</li>
     			<% 
     			} 
     			%>
     			<% 
-    			if (userId == null) {
+    			if (user_id == null) {
     			%>
     			<li class="ms-auto me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
     				<a href="userSignup" class="link2 btn btn-sm px-4" style="color:white; background-color:#9933FF; border-radius:40px;">
