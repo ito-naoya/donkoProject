@@ -84,7 +84,13 @@
 									</tr>
 									<tr>
 										<td>誕生日</td>
+									<%
+                    if (users.getBirthday() == null) {
+                    %>
+                    <td>未設定</td>
+                    <% } else { %>
 										<td><%=new SimpleDateFormat("yyyy/MM/dd").format(users.getBirthday())%></td>
+										<% } %>
 									</tr>
 								</tbody>
 							</table>
