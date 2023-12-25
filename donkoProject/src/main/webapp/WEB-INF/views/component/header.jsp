@@ -14,7 +14,7 @@
 </head>
 <body>
 	<%
-	Object userId = session.getAttribute("user_id");
+	Object user_id = session.getAttribute("user_id");
 	ShippingAddressBean mainShippingAddress = (ShippingAddressBean)request.getAttribute("mainShippingAddress");
 	Object cartItemNum = request.getAttribute("cartItemNum");
     %>
@@ -40,7 +40,7 @@
     			} 
     			%>
     			<% 
-    			if (userId == null) {
+    			if (user_id == null) {
     			%>
     			<li class="ms-auto me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
     				<a href="userSignup" class="link2 btn btn-sm px-4" style="color:white; background-color:#9933FF; border-radius:40px;">
