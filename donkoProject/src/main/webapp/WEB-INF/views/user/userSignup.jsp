@@ -108,7 +108,7 @@
 	
 				            <div class="row">
 				              <div class="col-12 mt-5 d-flex justify-content-center">
-				                <input type="submit" value="作成する" class="btn border" style="background-color:#9933FF; color: white; width:50%;">
+				                <input type="submit" value="登録する" class="btn border" style="background-color:#9933FF; color: white; width:50%;">
 				              </div>
 				            </div>
 				        </form>
