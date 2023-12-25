@@ -29,13 +29,14 @@ public class PurchaseConfirmServlet extends HttpServlet {
     //購入確認をする
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		Object loginedUserId = session.getAttribute("user_id");
+		HttpSession session = request.getSession(false);
 		
-		if(loginedUserId == null) {
+		if(session == null) {
 			response.sendRedirect("userSignin");
 			return;
 		}
+		
+		Object loginedUserId = session.getAttribute("user_id");
 		
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserId(Integer.parseInt(loginedUserId.toString()));
