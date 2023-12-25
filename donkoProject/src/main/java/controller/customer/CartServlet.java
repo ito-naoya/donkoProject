@@ -99,12 +99,6 @@ public class CartServlet extends HttpServlet {
 	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
 	    dispatch.include(request, response);
 
-		Object loginedUserId = session.getAttribute("user_id");
-		
-		String disp = "/header";
-		RequestDispatcher dispatch = request.getRequestDispatcher(disp);
-		dispatch.include(request, response);
-
 		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
 		Integer quantity = Integer.valueOf(request.getParameter("quantity"));
 		
