@@ -26,14 +26,15 @@ public class ItemDetailServlet extends HttpServlet {
 
     //商品の詳細情報を表示する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+			
+		String disp = "/header";
+		RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		dispatch.include(request, response);
+		
 		Integer itemId = Integer.valueOf(request.getParameter("itemId"));
 		String source = request.getParameter("source");
 		String categoryName = request.getParameter("categoryName");
 		
-		String disp = "/header";
-		RequestDispatcher dispatch = request.getRequestDispatcher(disp);
-		dispatch.include(request, response);
 		
 		//商品IDを保持するitemBeanをnew
 		ItemBean ib = new ItemBean();
@@ -54,7 +55,7 @@ public class ItemDetailServlet extends HttpServlet {
 		ArrayList<ItemBean> itemImageList = Item.getItemImageList(ib);
 		
 		//データベースから取得できなかった時
-		if(itemImageList == null ) {			
+		if(itemImageList == null ) {
 			//エラーページに遷移
 			ErrorHandling.transitionToErrorPage(request,response,"商品画像の取得時に問題が発生しました。","home","ホームに");
 			return;
@@ -65,7 +66,7 @@ public class ItemDetailServlet extends HttpServlet {
 		ArrayList<ItemBean> itemOptionList = Item.getItemOptionList(ib);
 		
 		//データベースから取得できなかった時
-		if(itemOptionList == null) {			
+		if(itemOptionList == null) {
 			//エラーページに遷移
 			ErrorHandling.transitionToErrorPage(request,response,"商品オプションの取得時に問題が発生しました。","home","ホームに");
 			return;
@@ -96,13 +97,12 @@ public class ItemDetailServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession(false);
+		Object loginedUserId = session.getAttribute("user_id");
 		
-		if(session == null) {
+		if(loginedUserId == null) {
 			response.sendRedirect("userSignin");
 			return;
 		}
-		
-		Object loginedUserId = session.getAttribute("user_id");
 		
 		String disp = "/header";
 		RequestDispatcher dispatch = request.getRequestDispatcher(disp);
@@ -132,5 +132,6 @@ public class ItemDetailServlet extends HttpServlet {
 		
 		//カート画面にリダイレクト
 		response.sendRedirect("cart");
+		
 	}
 }

@@ -27,7 +27,6 @@ public class SampleUserSigninServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		String userLoginId = request.getParameter("userLoginId");
 		String userLoginPass = request.getParameter("userLoginPass");
 		
@@ -39,6 +38,7 @@ public class SampleUserSigninServlet extends HttpServlet {
 		
 		if(customerUser == null) {
 			ErrorHandling.transitionToErrorPage(request, response, "ログインに失敗しました", "userSignin", "ログイン画面に");
+			return;
 		}
 		
 		HttpSession session = request.getSession();

@@ -28,9 +28,10 @@ public class CartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
+		Object loginedUserId = session.getAttribute("user_id");
 		
-		if(session == null) {
+		if(loginedUserId == null) {
 			response.sendRedirect("userSignin");
 			return;
 		}
@@ -40,7 +41,6 @@ public class CartServlet extends HttpServlet {
 	    dispatch.include(request, response);
 		
 
-		Object loginedUserId = session.getAttribute("user_id");
 
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserId(Integer.parseInt(loginedUserId.toString()));
@@ -87,13 +87,13 @@ public class CartServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
+		Object loginedUserId = session.getAttribute("user_id");
 		
-		if(session == null) {
+		if(loginedUserId == null) {
 			response.sendRedirect("userSignin");
 			return;
 		}
 		
-		Object loginedUserId = session.getAttribute("user_id");
 		
 		String disp = "/header";
 	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
