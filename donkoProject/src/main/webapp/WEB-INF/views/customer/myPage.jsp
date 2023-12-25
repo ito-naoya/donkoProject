@@ -215,7 +215,7 @@
 						<td align="middle" style="white-space: nowrap;">〒 
 						<% String postalCode = (String) purchaseBean.getPostalCode();%>
 						<% String head = postalCode.substring(0, 3);
-						  String end = postalCode.substring(4);
+						  String end = postalCode.substring(3);
 						%> <%= head %>-<%= end %>
 							<%=purchaseBean.getAddress()%> <%=purchaseBean.getAddressee()%></td>
 						<!-- 配送ステータス -->
