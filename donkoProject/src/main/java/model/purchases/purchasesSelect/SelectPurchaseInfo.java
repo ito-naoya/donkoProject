@@ -21,21 +21,17 @@ public class SelectPurchaseInfo {
 		sb.append(    "p.purchase_date, "                                    );
 		sb.append(    "p.total_amount, "                                     );
 		sb.append(    "p.shipping_id, "                                      );
-		sb.append(    "s.postal_code, "                                      );
-		sb.append(    "s.address, "                                          );
-		sb.append(    "s.addressee "                                         );
+		sb.append(    "p.postal_code, "                                      );
+		sb.append(    "p.address, "                                          );
+		sb.append(    "p.addressee "                                         );
 		sb.append("FROM "                                                    );
 		sb.append(    "purchases p "                                         );
 		sb.append("INNER JOIN "                                              );
 		sb.append(    "users u "                                             );
 		sb.append("ON "                                                      );
 		sb.append(    "p.user_id = u.user_id "                               );
-		sb.append("INNER JOIN "                                              );
-		sb.append(    "shipping_addresses s "                                );
-		sb.append("ON "                                                      );
-		sb.append(    "p.shipping_Address_id = s.shipping_Address_id "       );
 		sb.append("WHERE "                                                   );
-		sb.append(    "p.purchase_id = ?"                                    );
+		sb.append(    "p.user_id = ?"                                    );
 		
 		// SQLを文字列化
 		final String SELECT_PURCHASE_INFO_SQL = sb.toString();

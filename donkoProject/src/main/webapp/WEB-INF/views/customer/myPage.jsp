@@ -139,13 +139,13 @@
 							<!-- フォームを入れる -->
 							<form action="createShippingAddress" method="post">
 								<div class="form-group mb-3">
-									<label for="exampleInputUserId">宛名</label><br>
+									<label for="exampleInputAddresses">宛名</label><br>
 									<input type="text" class="form-control"
 										id="exampleInputAddresses" aria-describedby="addresses"
 										name="addresses" value="" placeholder="伊藤 直也" required>
 								</div>
 								<div class="form-group mb-3">
-									<label for="exampleInputUserName">郵便番号</label><br>
+									<label for="exampleInputPostCode">郵便番号</label><br>
 									<input type="text" class="form-control" id="exampleInputPostCode"
 										aria-describedby="postCode" maxlength="8" name="postcode" value=""
 										placeholder="6500001" required>
