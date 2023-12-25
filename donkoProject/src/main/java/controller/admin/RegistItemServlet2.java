@@ -53,7 +53,7 @@ public class RegistItemServlet2 extends HttpServlet {
 	    // 画像情報を取得
 	    Part imgPart = request.getPart("img");
 
-	    //int型のフィールドの取得情報について、null値及び文字数制限の超過が無いかどうか確認し、itemBeanに登録
+	    //int型のフィールドの取得情報について、null値及び数値以外の値がないかどうか確認し、itemBeanに登録
   		newItem = Item.checkRegistItemDetail(newItem, price, stock);
   		if(newItem == null) {
   			//取得情報の不備があれば、再度入力画面に戻る
@@ -101,7 +101,7 @@ public class RegistItemServlet2 extends HttpServlet {
                     .map(String::valueOf)
                     .collect(Collectors.joining(", "));
         	String message = "商品が重複しています。重複商品ID：" + idsStr;
-        	request.setAttribute("existId", message);
+        	request.setAttribute("message", message);
 
         } else { //重複がなければ登録
 	        if (Item.registerNewItem(newItemAddOption, selectBoxCount, itemSecondOptionIncrementIds)) {
@@ -117,15 +117,15 @@ public class RegistItemServlet2 extends HttpServlet {
 	        	ErrorHandling.transitionToErrorPage(request, response, "商品の登録に失敗しました","adminTopPage","管理者ページに");
 				return;
 	        }
-	        request.setAttribute("existId", "商品を登録しました");
+	        request.setAttribute("message", "商品を登録しました");
         }
-        request.setAttribute("existId", "test");
-        request.setAttribute("itemDelFlg","0");
+
 	    // 完了後、商品一覧ページに遷移
 		request.setAttribute("categoryList", newItem.getItemCategoryName());
+        request.setAttribute("itemDelFlg","0");
+        request.setAttribute("message", "test");
     	String view = "deleteItemIndex";
 		request.getRequestDispatcher(view).forward(request, response);
-
 	}
 
 	private void regist2Foward(HttpServletRequest request, HttpServletResponse response, ItemBean newItem)
