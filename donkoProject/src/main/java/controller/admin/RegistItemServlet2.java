@@ -68,14 +68,14 @@ public class RegistItemServlet2 extends HttpServlet {
 
 	    // 最初のオプション（色）の値を取得
 	    newItem.setItemFirstOptionName(request.getParameter("optionCategoryName_1"));
-	    String itemFirstOptionIncrementId = request.getParameter("optionValueS_1");
+	    String itemFirstOptionIncrementId = request.getParameter("optionValue_1");
         String[] itemSecondOptionIncrementIds = null;
 	    // オプション値の検証と追加
 	    if (selectBoxCount == 1) {
 	    	newItem = Option.checkRegistItemOptionDetail("0", newItem, itemFirstOptionIncrementId, null);
         } else {
         	newItem.setItemSecondOptionName(request.getParameter("optionCategoryName_2"));
-            itemSecondOptionIncrementIds = request.getParameterValues("optionValueC_2");
+            itemSecondOptionIncrementIds = request.getParameterValues("optionValue_2");
             newItem = Option.checkRegistItemOptionDetail("0", newItem, itemFirstOptionIncrementId, itemSecondOptionIncrementIds);
         }
 	    if (newItem == null) {

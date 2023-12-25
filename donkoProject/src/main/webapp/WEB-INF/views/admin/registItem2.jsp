@@ -62,7 +62,7 @@
 
 						<br>
 						<!-- 　フォーム入力 -->
-						<form action="registItem2"  id="registItem2"  method="post" enctype="multipart/form-data"  class="needs-validation" novalidate>
+						<form action="registItem2"  id="registItem2"  method="post" enctype="multipart/form-data">
 						    <input type="hidden" name="itemCategoryName" value="<%= newItem.getItemCategoryName() %>">
 						    <input type="hidden" name="itemName" value="<%= newItem.getItemName() %>">
 						    <input type="hidden" name="itemDescription" value="<%= newItem.getItemDescription() %>">
@@ -101,10 +101,10 @@
 									        if (counter == 1) {
 									            // 最初のカテゴリ（例：色）のセレクトボックスを生成
 									    %>
-									    		<input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryName %>">
-									            <label for="optionSelect_<%= counter %>" class="form-label mb-3"></label>
+									    		<input type="hidden" name="optionCategoryName_1" value="<%= optionCategoryName %>">
+									            <label for="optionSelect_1" class="form-label mb-3"></label>
 									            <!-- 一つ目のオプションは必ずセレクトボックス（画像名と一意に紐づけるため） -->
-									            <select class="form-select mb-3" id="optionSelect_<%= counter %>" name="optionValueS_<%= counter %>">
+									            <select class="form-select mb-3" id="optionSelect_1" name="optionValue_1">
 									                <option selected hidden disabled value="">オプション選択： <%= optionCategoryName %></option>
 									                <% for (OptionCategoryBean option : optionCategoryList) {
 									                	boolean isSelected = newItem.getItemFirstOptionIncrementId() >= 0 && item.getItemFirstOptionIncrementId() == option.getOptionCategoryId();
@@ -125,14 +125,14 @@
 									        } else if (counter == 2) {
 									            // 2つ目のカテゴリ（例：サイズ）の表示タイプを選択するラジオボタン
 									    %>
-									            <input type="hidden" name="optionCategoryName_<%= counter %>" value="<%= optionCategoryName %>">
+									            <input type="hidden" name="optionCategoryName_2" value="<%= optionCategoryName %>">
 												<!-- チェックボックス -->
 									            <div id="sizeCheck"">
-									                <label for="optionBox_<%= counter %>" class="form-label mb-3 mt-3">オプション選択 : <%= optionCategoryName %></label>
+									                <label for="optionBox_2" class="form-label mb-3 mt-3">オプション選択 : <%= optionCategoryName %></label>
 									                <br>
 									                <% for (OptionCategoryBean option : optionCategoryList) { %>
-									                    <input class="form-check-input me-2" type="checkbox" id="optionBox_<%= counter %>" name="optionValueC_<%= counter %>" value="<%=option.getOptionCategoryId()%>">
-									                    <label class="form-check-label me-3" for="optionBox_<%= counter %>">
+									                    <input class="form-check-input me-2" type="checkbox" id="optionBox_2" name="optionValue_2" value="<%=option.getOptionCategoryId()%>">
+									                    <label class="form-check-label me-3" for="optionBox_2">
 									                        <%=option.getOptionCategoryValue()%>
 									                    </label>
 									                <% } %>
