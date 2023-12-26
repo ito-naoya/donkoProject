@@ -2,7 +2,6 @@ package controller.user;
 
 import java.io.IOException;
 
-import classes.ErrorHandling;
 import classes.user.CustomerUser;
 import classes.user.User;
 import jakarta.servlet.ServletException;
@@ -37,7 +36,9 @@ public class SampleUserSigninServlet extends HttpServlet {
 		CustomerUser customerUser = User.login(cu);
 		
 		if(customerUser == null) {
-			ErrorHandling.transitionToErrorPage(request, response, "ログインに失敗しました", "userSignin", "ログイン画面に");
+			request.setAttribute("errorMessage", "IDまたはパスワードが異なります");
+			String view = "/WEB-INF/views/customer/sampleUserSignin.jsp";
+			request.getRequestDispatcher(view).forward(request, response);
 			return;
 		}
 		

@@ -23,8 +23,8 @@ public class HomeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// ヘッダーの値を取得
+
+		// ヘッダーに表示する値を取得
 		String disp = "/header";
 	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
 	    dispatch.include(request, response);
