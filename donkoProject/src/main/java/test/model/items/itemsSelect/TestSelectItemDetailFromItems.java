@@ -18,9 +18,9 @@ class TestSelectItemDetailFromItems {
 		assertTrue(result instanceof ItemBean);
 	}
 	
-	//取得件数が０件の場合
+	//失敗テスト
 	@Test
-	void testSelectIsNull() {
+	void testException() {
 		ItemBean ib = new ItemBean();
 		ib.setItemId(0);
 		ItemBean result = SelectItemDetailFromItems.selectItemDetailFromItems(ib);
