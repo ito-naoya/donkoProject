@@ -12,84 +12,79 @@
 	rel="stylesheet"
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
-<title>doko</title>
+<title>donko</title>
 </head>
-<body class="container">
+<body>
 	<main>
-		<%
-    ShippingAddressBean shippingAddressEdit = (ShippingAddressBean) request.getAttribute("shippingAddressEdit");
-    %>
-		<form action="editShippingAddress" method="post"
-			style="display: flex; justify-content: center; margin: 30px;"
-			class="needs-validation" novalidate>
-			<div class="col-lg-5 m-5"
-				style="border: 1px solid #333333; padding: 65px;">
-				<div class="cancelButton"
-					style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-					<h2>
-						<strong>配送先編集</strong>
-					</h2>
-					<div>
-						<a href="shippingAddressIndex"
-							style="text-decoration: none; text-align: center;"><button
-								type="button" class="btn-close border" aria-label="Close"></button>
-							️</a>
+		<div class="container">
+			<%
+		    ShippingAddressBean shippingAddressEdit = (ShippingAddressBean) request.getAttribute("shippingAddressEdit");
+		    %>
+		    <div class="row" style="height:100vh;">
+				<form action="editShippingAddress" method="post"
+					style="display: flex; justify-content:"
+					class="needs-validation" novalidate>
+					<div class="col-lg-5 m-auto p-5 border" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
+						<div class="cancelButton"
+							style="display: flex; justify-content: space-between;">
+							<h4>
+								<strong>配送先編集</strong>
+							</h4>
+							<div>
+								<a href="shippingAddressIndex"
+									style="text-decoration: none; text-align: center;"><button
+										type="button" class="btn-close border" aria-label="Close"></button>
+									️</a>
+							</div>
+						</div>
+						<br>
+						<div class="form-group d-flex flex-wrap mb-3">
+							<label for="exampleInputAddresses">宛名</label>
+							<input type="text" class="form-control" id="exampleInputAddresses"
+								aria-describedby="addresses" name="addressee"
+								value="<%=shippingAddressEdit.getAddressee() %>">
+						</div>
+						<div class="d-flex flex-wrap"
+							style="display: flex; justify-content: start; color: #FF0000;">
+							<% String addressee = (String) request.getAttribute("addressee"); %>
+							<% if (addressee != null) { %>
+							<%= addressee %>
+							<% } %>
+						</div>
+						<div class="form-group d-flex flex-wrap mb-3">
+							<label for="exampleInputPostalCode">郵便番号</label>
+							<input type="text" class="form-control" id="exampleInputPostalCode"
+								aria-describedby="postalcode" maxlength="8" name="postalcode"
+								value="<%=shippingAddressEdit.getPostalCode() %>">
+						</div>
+						<div class="d-flex flex-wrap"
+							style="display: flex; justify-content: start; color: #FF0000;">
+							<% String postalCode = (String) request.getAttribute("postalCode"); %>
+							<% if (postalCode != null) { %>
+							<%= postalCode %>
+							<% } %>
+						</div>
+						<div class="form-group d-flex flex-wrap mb-3">
+							<label for="exampleInputAddress">住所</label>
+							<input type="text" class="form-control" id="exampleInputAddress"
+								aria-describedby="address" name="address"
+								value="<%=shippingAddressEdit.getAddress() %>">
+						</div>
+						<div class="d-flex flex-wrap"
+							style="display: flex; justify-content: start; color: #FF0000;">
+							<% String address = (String) request.getAttribute("address"); %>
+							<% if (address != null) { %>
+							<%= address %>
+							<% } %>
+						</div>
+						<div class="cancelButton mt-5"
+							style="display: flex; justify-content: center;">
+							<button type="submit" class="btn w-50 p-2"
+								style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF;">更新</button
+						</div>
 					</div>
-				</div>
-				<div style="margin-bottom: 10px;">
-					<label for="exampleInputAddresses">宛名</label><br>
-				</div>
-				<div class="form-group d-flex flex-wrap"
-					style="display: flex; justify-content: center;">
-					<input type="text" class="form-control" id="exampleInputAddresses"
-						aria-describedby="addresses" name="addressee"
-						value="<%=shippingAddressEdit.getAddressee() %>">
-				</div>
-				<div class="d-flex flex-wrap"
-					style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
-					<% String addressee = (String) request.getAttribute("addressee"); %>
-					<% if (addressee != null) { %>
-					<%= addressee %>
-					<% } %>
-				</div>
-				<div style="margin-bottom: 10px;">
-					<label for="exampleInputPostalCode">郵便番号</label><br>
-				</div>
-				<div class="form-group d-flex flex-wrap"
-					style="display: flex; justify-content: center;">
-					<input type="text" class="form-control" id="exampleInputPostalCode"
-						aria-describedby="postalcode" maxlength="8" name="postalcode"
-						value="<%=shippingAddressEdit.getPostalCode() %>">
-				</div>
-				<div class="d-flex flex-wrap"
-					style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
-					<% String postalCode = (String) request.getAttribute("postalCode"); %>
-					<% if (postalCode != null) { %>
-					<%= postalCode %>
-					<% } %>
-				</div>
-				<div style="margin-bottom: 10px;">
-					<label for="exampleInputAddress">住所</label><br>
-				</div>
-				<div class="form-group d-flex flex-wrap"
-					style="display: flex; justify-content: center;">
-					<input type="text" class="form-control" id="exampleInputAddress"
-						aria-describedby="address" name="address"
-						value="<%=shippingAddressEdit.getAddress() %>">
-				</div>
-				<div class="d-flex flex-wrap"
-					style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
-					<% String address = (String) request.getAttribute("address"); %>
-					<% if (address != null) { %>
-					<%= address %>
-					<% } %>
-				</div>
-				<div class="cancelButton"
-					style="display: flex; justify-content: center; margin-bottom: 20px;">
-					<button type="submit" class="btn btn-lg w-100"
-						style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; padding: 10px;">更新</button
-				</div>
-		</form>
+				</form>
+			</div>
 		</div>
 	</main>
 	<script src="./js/nullValidationScript.js"></script>

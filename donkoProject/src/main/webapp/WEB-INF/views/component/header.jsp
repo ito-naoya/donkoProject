@@ -33,9 +33,16 @@
     		    String head = postalCode.substring(0, 3);
     		    String end = postalCode.substring(3);
     			%>
-    			<li class="mx-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
-    				<small>〒 <%= head %>-<%= end %><br><%= mainShippingAddress.getAddress() %></small>
-    			</li>
+    			<a href="shippingAddressIndex" class="link2 my-auto" style="text-decoration:none;">
+	    			<div class="border d-flex p-1">
+		    			<li class="ms-3 me-2" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
+		    				<small>お届け先</small>
+		    			</li>
+		    			<li class="ms-2 me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
+		    				<small>〒 <%= head %>-<%= end %><br><%= mainShippingAddress.getAddress() %></small>
+		    			</li>
+	    			</div>
+    			</a>
     			<% 
     			} 
     			%>
@@ -43,11 +50,11 @@
     			if (user_id == null) {
     			%>
     			<li class="ms-auto me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
-    				<a href="userSignup" class="link2 btn btn-sm px-4" style="color:white; background-color:#9933FF; border-radius:40px;">
+    				<a href="userSignup" class="link2 btn btn-sm px-4" style="color:white; background-color:#9933FF; border-radius:40px; border:1px #333 solid;">
     					新規登録
     				</a>
     			</li>
-    			<li class="ms-3 me-4" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
+    			<li class="ms-2 me-4" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
     				<a href="userSignin" class="link" style="color:white; text-decoration:none;">
     					<small>ログイン</small>
     				</a>
@@ -60,7 +67,7 @@
     					<small>購入履歴</small>
     				</a>
     			</li>
-				<li class="ms-3 me-4" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
+				<li class="ms-2 me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
 	    			<a href="cart" class="link" style="color:white; text-decoration:none;" class="position-relative">
 						  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3 me-1" viewBox="0 0 16 16">
 							<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>

@@ -29,7 +29,7 @@
 						<%
 						ShippingAddressBean sa = (ShippingAddressBean)request.getAttribute("shippingAddress");
 						%>
-						<div class="d-flex border p-4 align-items-center" style="width: auto; height: auto;">
+						<div class="d-flex border p-4 align-items-center" style="width: auto; height: auto; border-radius:5px;">
 							<% 
 							Integer totalPrice = (Integer)request.getAttribute("totalPrice");
 							%>
@@ -47,7 +47,7 @@
 									<input type="hidden" value="<%= sa.getAddress() %>" name="address">
 									<input type="hidden" value="<%= sa.getPostalCode() %>" name="postalCode">
 									<input type="hidden" value="<%= sa.getAddressee() %>" name="addressee">
-									<button type=submit class="btn px-5 py-2" style="background-color: #9933ff; color: white;">
+									<button type=submit class="btn px-5 py-2" style="border: 1px solid gray; background-color: #9933ff; color: white;">
 										注文確定
 									</button>
 								</form>
