@@ -28,7 +28,6 @@ function previewImage(event) {
     }
 }
 
-
 //金額について、正規表現でカンマ区切りの半角のみ受け付ける
 const priceInput = document.getElementById('price');
 if (priceInput) {
@@ -43,19 +42,3 @@ if (priceInput) {
         event.target.value = value;
     });
 }
-
-// name属性でチェックボックスを取得する
-const checkBoxes = $('[name="fruit"]');
-
-//チェックボックスの状態変化時に処理する
-checkBoxes.on('change', () => {
-
-  //チェック済チェックボックス数をカウント
-  const isCheckedCount = checkBoxes.filter(':checked');
-
-  isCheckedCount.length > 0
-    //カウントが1以上の場合は全チェックボックスのrequired属性を削除する
-    ? checkBoxes.attr('required', false)
-    //カウントが0の場合は全チェックボックスにrequired属性を付与する
-    : checkBoxes.attr('required', true);
-});
