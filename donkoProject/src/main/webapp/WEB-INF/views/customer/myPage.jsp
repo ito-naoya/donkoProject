@@ -69,7 +69,8 @@
 									<tr>
 										<td>性別</td>
 										<%
-										if (users.getGender() == null) {
+										String gender = users.getGender();
+										if (gender == null || gender.equals("") || gender.equals("選択してください")) {
 										%>
 										<td>未設定</td>
 										<%
