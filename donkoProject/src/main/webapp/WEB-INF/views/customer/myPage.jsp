@@ -148,21 +148,24 @@
 									<label for="exampleInputAddresses">宛名</label><br>
 									<input type="text" class="form-control"
 										id="exampleInputAddresses" aria-describedby="addresses"
-										name="addresses" value="" placeholder="伊藤 直也" required>
+										name="addresses" value="" placeholder="伊藤 直也">
 								</div>
+								<p id="errorMessageAddressee" style="color:red;"></p>
 								<div class="form-group mb-3">
 									<label for="exampleInputPostCode">郵便番号</label><br>
 									<input type="text" class="form-control" id="exampleInputPostCode"
-										aria-describedby="postCode" maxlength="8" name="postcode" value=""
-										placeholder="6500001" required>
+										aria-describedby="postCode" maxlength="7" maxlength="7" name="postcode" value=""
+										placeholder="6500001">
 								</div>
+								<p id="errorMessagePostalCode" style="color:red;"></p>
 								<div class="form-group mb-3">
 									<label for="exampleInputAddress">住所</label><br>
 									<input type="text" class="form-control" id="exampleInputAddress"
-										aria-describedby="address" name="address" value="" placeholder="兵庫県神戸市中央区加納町４丁目２−１" required>
+										aria-describedby="address" name="address" value="" placeholder="兵庫県神戸市中央区加納町４丁目２−１">
 								</div>
+								<p id="errorMessageAddress" style="color:red;"></p>
 								<div class="cancelButton mt-5 d-flex justify-content-center">
-									<button type="submit" class="btn"
+									<button type="submit" class="btn" id="createButton"
 										style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; padding: 10px; width:50%;">
 										登録
 									</button>
@@ -258,6 +261,7 @@
 		</div>
 	</main>
 	<%@include file="../component/footer.jsp"%>
+	<script src="./js/createShippingAddress.js"></script>
 	<script src="./js/nullValidationScript.js"></script>
 	<script src="./js/myPageScript.js"></script>
 </body>
