@@ -111,19 +111,19 @@
 						<% 
 						if (item.getItemStock() == 0) {
 						%>
-							<p class="mt-4 p-3" style=" width: 100px; color: red; border: 1px red solid;">
+							<p class="mb-0 px-3 py-2" style=" width: 100px; color: red; border: 1px red solid; border-radius:5px;">
 								入荷待ち
 							</p>
 						<% 
 						} else if (item.getItemStock() <= 3) {
 						%>
-							<p class="mt-4 px-3 py-1 text-center" style=" width: 100px; color: red; border: 1px red solid;">
+							<p class="mb-0 px-3 py-2 text-center" style=" width: 100px; color: red; border: 1px red solid; border-radius:5px;">
 								残り<%=item.getItemStock()%>点
 							</p>
 						<%		
 						} else {
 						%>
-							<p class="border px-3 py-1 mt-4 text-center" style=" width: 100px;">
+							<p class="border mb-0 px-3 py-2 text-center" style=" width: 100px; border-radius:5px;">
 								残り<%=item.getItemStock()%>点
 							</p>
 						<%
