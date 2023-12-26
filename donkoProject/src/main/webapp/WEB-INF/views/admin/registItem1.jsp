@@ -62,8 +62,8 @@
 
 							<div class="mb-3">
 							    <label for="itemName" class="form-label">商品名</label>
-							    <label for="itemName" class="form-label"  style="font-size: small; color: grey;">20文字以内</label>
-							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" required value="<%= item.getItemName() != null ? item.getItemName() : "" %>">
+							    <label for="itemName" class="form-label"  style="font-size: small; color: grey;">30文字以内</label>
+							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30"  value="<%= item.getItemName() != null ? item.getItemName() : "" %>">
 							    <% String itemName = (String)request.getAttribute("itemName");
 									 if (itemName != null) {
 							 	 %>
@@ -90,7 +90,7 @@
 							    <label for="price" class="form-label">金額</label>
 							    <label for="price" class="form-label"  style="font-size: small; color: grey;">¥1~入力可※半角数字以外は入力不可</label>
 							    <% boolean isPriceSelected = item.getItemPrice() >= 0; %>
-							    <input type="text" class="form-control" id="price" name="price" maxlength="11" style="text-align: right" required value="<%= isPriceSelected ? item.getItemPrice() : "" %>">
+							    <input type="text" class="form-control" id="price" name="price"  style="text-align: right"  value="<%= isPriceSelected ? item.getItemPrice() : "" %>">
 							    <%
 								String itemPrice = (String) request.getAttribute("itemPrice");
 								if (itemPrice != null && !itemPrice.isEmpty()) {
@@ -105,7 +105,7 @@
 							    <label for="stock" class="form-label">在庫</label>
 							    <label for="stock" class="form-label"  style="font-size: small; color: grey;">0~9で設定可</label>
 							    <% boolean isStockSelected = item.getItemStock() >= 0; %>
-							    <input type="number" class="form-control" id="stock" name="stock" min="0" max="9" required style="text-align: center" value="<%= isStockSelected ? item.getItemStock() : "" %>">
+							    <input type="number" class="form-control" id="stock" name="stock"   style="text-align: center" value="<%= isStockSelected ? item.getItemStock() : "" %>">
 							    <% String itemStock = (String)request.getAttribute("itemStock");
 									 if (itemStock != null) {
 							 	 %>

@@ -116,6 +116,7 @@ public class EditItemInfo2Servlet extends HttpServlet {
 		    ArrayList<Integer> existId = Item.checkItemAlreadyExist(updateItem,secondIds);
 		    if(existId == null) {
 		    	ErrorHandling.transitionToErrorPage(request,response,"商品情報の取得に失敗しました","adminTopPage","管理者ページに");
+		    	return;
 		    } else if (!existId.isEmpty()) { //商品が重複していた場合
 		    	message = "商品が重複しています。重複商品ID：" + existId.get(0);
 		    	deleteItemRedirect(response, updateItem, message);

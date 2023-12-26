@@ -107,7 +107,7 @@
 									            <select class="form-select mb-3" id="optionSelect_1" name="optionValue_1">
 									                <option selected hidden disabled value="">オプション選択： <%= optionCategoryName %></option>
 									                <% for (OptionCategoryBean option : optionCategoryList) {
-									                	boolean isSelected = newItem.getItemFirstOptionIncrementId() >= 0 && item.getItemFirstOptionIncrementId() == option.getOptionCategoryId();
+									                	boolean isSelected = newItem.getItemFirstOptionIncrementId() >= 0 && newItem.getItemFirstOptionIncrementId() == option.getOptionCategoryId();
 									                %>
 									                    <option value="<%=option.getOptionCategoryId()%>" <%= isSelected ? "selected" : "" %>><%=option.getOptionCategoryValue()%></option>
 									                <% } %>

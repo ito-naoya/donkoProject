@@ -179,26 +179,26 @@ public class Item {
 	}
 
 	//商品登録画面から取得した値のnull値及び文字数をチェックして、ItemBeanにセット
-	public static ItemBean checkRegistItemDetail(ItemBean newItem,String price, String stock) {
+	public static ItemBean checkRegistItemDetail(ItemBean newItem, String price, String stock) {
+	    int processedPrice = -1;
+	    int processedStock = -1;
 
-		//金額
-		String processedPrice = price.replaceAll(",", "");
-	    if(processedPrice.isEmpty() || !processedPrice.matches("\\d+")) {
-	        return null;
+	    // 金額の処理
+	    if (!price.isEmpty() && price.matches("\\d+")) {
+	        String cleanedPrice = price.replaceAll(",", "");
+	        processedPrice = Integer.parseInt(cleanedPrice);
 	    }
-		//在庫
-		if(stock.isEmpty() || !stock.matches("\\d+")) {
-			return null;
-		}
 
-		//ItemBeanに値をセット
-		newItem.setItemPrice(Integer.valueOf(processedPrice));
-		newItem.setItemStock(Integer.valueOf(stock));
+	    // 在庫の処理
+	    if (!stock.isEmpty() && stock.matches("\\d+")) {
+	        processedStock = Integer.parseInt(stock);
+	    }
 
-		return newItem;
+	    // ItemBeanに値をセット
+	    newItem.setItemPrice(processedPrice);
+	    newItem.setItemStock(processedStock);
 
+	    return newItem;
 	}
-
-
 
 }
