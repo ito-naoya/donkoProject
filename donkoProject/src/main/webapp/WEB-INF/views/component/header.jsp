@@ -33,9 +33,16 @@
     		    String head = postalCode.substring(0, 3);
     		    String end = postalCode.substring(3);
     			%>
-    			<li class="mx-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
-    				<small>〒 <%= head %>-<%= end %><br><%= mainShippingAddress.getAddress() %></small>
-    			</li>
+    			<a href="shippingAddressIndex" class="link2 my-auto" style="text-decoration:none;">
+	    			<div class="border d-flex p-1">
+		    			<li class="ms-3 me-2" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
+		    				<small>お届け先</small>
+		    			</li>
+		    			<li class="ms-2 me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
+		    				<small>〒 <%= head %>-<%= end %><br><%= mainShippingAddress.getAddress() %></small>
+		    			</li>
+	    			</div>
+    			</a>
     			<% 
     			} 
     			%>
