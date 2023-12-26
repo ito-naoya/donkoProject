@@ -9,6 +9,7 @@ import classes.ErrorHandling;
 import classes.ShippingAddress;
 import classes.user.CustomerUser;
 import interfaces.group.GroupB;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,6 +32,11 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 		if(userId == null) {
 			response.sendRedirect("home");
 			return;
+		} else {
+			// ヘッダー表示用
+			String disp = "/header";
+			RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+			dispatch.include(request, response);
 		}
 		
 		// ユーザIDをセット

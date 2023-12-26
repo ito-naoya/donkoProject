@@ -7,6 +7,7 @@ import bean.PurchaseBean;
 import classes.ErrorHandling;
 import classes.Purchase;
 import classes.user.CustomerUser;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,9 +35,14 @@ public class MyPageServlet extends HttpServlet {
 			response.sendRedirect("userSignin");
 			return;
 		} else {
+			// ヘッダー表示用
+			String disp = "/header";
+			RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+			dispatch.include(request, response);
+		
 			// セッションがあればuser_idを取得する
 			customerUser.setUserId((int)session.getAttribute("user_id"));
-		} 
+		}
 		
 			// 購入履歴の一覧を取得する
 			ArrayList<PurchaseBean> purchaseList = Purchase.getMyPurchaseHistory(customerUser);

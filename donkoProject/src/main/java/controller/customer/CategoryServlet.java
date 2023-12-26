@@ -8,6 +8,7 @@ import bean.OptionCategoryBean;
 import classes.ErrorHandling;
 import classes.Item;
 import classes.OptionCategory;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,6 +25,11 @@ public class CategoryServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// ヘッダーの値を取得
+		String disp = "/header";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+		
 		String categoryName = request.getParameter("categoryName");
 		// カテゴリ名がnullの場合はホーム画面に遷移
 		if (categoryName == null) {

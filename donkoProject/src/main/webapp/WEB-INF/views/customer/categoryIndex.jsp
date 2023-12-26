@@ -10,6 +10,8 @@
 	a,label{ cursor:pointer; }
 	label:hover { color : #E5CCFF; }
 	}
+	.link:hover{opacity: 0.7;}
+	.link2:hover{opacity: 0.8;}
 </style>
 </head>
 <body>
@@ -24,34 +26,39 @@
 		if (optionCategoryValueListAll != null || optionCategoryValueListAll.size() > 0) {
 		%>
 			<form action="option" method="get" class="mt-3">
-				<div class="d-flex">
-					<div class="col-lg-6 d-flex border ms-auto me-3 p-3" style="width:auto; height: 70px; box-shadow:5px 5px 5px lightgray;">
+				<div>
+					<div class="col d-flex border mx-3 p-3" style="width:auto; height: auto; box-shadow:5px 5px 5px lightgray;">
 						<% 
+						int num = 1;
 						for (ArrayList<OptionCategoryBean> optionCategoryValueList : optionCategoryValueListAll) {
 						%>
-						<div class="d-flex justify-content-center border mx-2 px-3" style="width:auto; height: 35px; background-color: #D5E8D4";">
-							<% 
-							for (OptionCategoryBean optionCategoryValue : optionCategoryValueList) { 
-							%>
-							<small class="mx-3" style="display: flex; align-items: center;">
-								<input type="checkbox" name="option"
-								id="<%= optionCategoryValue.getOptionCategoryValue() %>"
-								onclick="chebg('<%= optionCategoryValue.getOptionCategoryValue() %>')" 
-								style="display: none;" 
-								value="<%= optionCategoryValue.getOptionCategoryValue() %>"> 
-								<label for="<%= optionCategoryValue.getOptionCategoryValue() %>">
-									<%= optionCategoryValue.getOptionCategoryValue() %>
-								</label>
-							</small>
-							<% 
-							} 
-							%>
-						</div>
+							<div class="d-flex flex-wrap">
+								<small>オプション選択<%= num %></small>
+								<div class="d-flex justify-content-center border mx-2 px-3" style="border-radius:5px; width:auto; height: 35px;">
+									<% 
+									for (OptionCategoryBean optionCategoryValue : optionCategoryValueList) { 
+									%>
+									<small class="mx-3" style="display: flex; align-items: center;">
+										<input type="checkbox" name="option"
+										id="<%= optionCategoryValue.getOptionCategoryValue() %>"
+										onclick="chebg('<%= optionCategoryValue.getOptionCategoryValue() %>')" 
+										style="display: none;" 
+										value="<%= optionCategoryValue.getOptionCategoryValue() %>"> 
+										<label for="<%= optionCategoryValue.getOptionCategoryValue() %>">
+											<%= optionCategoryValue.getOptionCategoryValue() %>
+										</label>
+									</small>
+									<% 
+									} 
+									%>
+								</div>
+							</div>
 						<%
+						num++;
 						} 
 						%>
 						<input type="hidden" name="categoryName" value="<%= (String)request.getAttribute("categoryName") %>">
-						<button type="submit" class="btn text-nowrap ms-3" style="background-color: #E5CCFF;" onclick="return testCheck()">こだわり検索</button>
+						<button type="submit" class="btn text-nowrap ms-auto" style="border:1px gray solid; background-color: #E5CCFF;" onclick="return testCheck()">こだわり検索</button>
 					</div>
 				</div>
 			</form>

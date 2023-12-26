@@ -67,7 +67,7 @@
 							〒 <%= head %>-<%= end %><br>
 							<%= shippingAddressBean.getAddress() %>
 							</h6>
-							<button type="submit" class="btn" style="border: 1px solid #000000; background: #E5CCFF;">
+							<button type="submit" class="btn" style="border: 1px solid gray; background: #E5CCFF;">
 								<a href='editShippingAddress?shipping_address_id=<%= shippingAddressBean.getShippingAddressId() %>'
 									style="color: #000000; vertical-align: middle; text-decoration: none;">
 									編集
@@ -121,7 +121,7 @@
                 %>
 							</select>
 							<button type="submit" class="btn text-nowrap"
-								style="border: 1px solid #000000; background: #E5CCFF; margin-left: 15px;">更新</button>
+								style="border: 1px solid gray; background: #E5CCFF; margin-left: 15px;">更新</button>
 						</form>
 					</div>
 				</div>
