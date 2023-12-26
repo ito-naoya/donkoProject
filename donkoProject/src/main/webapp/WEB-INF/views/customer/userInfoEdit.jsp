@@ -19,22 +19,22 @@
 		CustomerUser users = (CustomerUser) request.getAttribute("users");
 		%>
 		<form action="userInfoEdit" method="post"
-			style="display: flex; justify-content: center; margin: 30px;"
-			class="needs-validation" novalidate>
-			<div class="col-lg-5 m-5"
-				style="border: 1px solid #333333; padding: 65px;">
+			style="display: flex; justify-content: center;"
+			class="needs-validation mt-5" novalidate>
+			<div class="col-lg-5 border p-5">
 				<div class="cancelButton"
-					style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-					<h2>
+					style="display: flex; justify-content: space-between;">
+					<h4>
 						<strong>ユーザ情報編集</strong>
-					</h2>
+					</h4>
 					<div>
 						<a href="myPage"
 							style="text-decoration: none; text-align: center;"><button
-								type="button" class="btn-close border" aria-label="Close"></button>️</a>
+							type="button" class="btn-close border" aria-label="Close"></button>️</a>
 					</div>
 				</div>
-				<div style="margin-bottom: 10px;">
+				<br>
+				<div>
 					<label for="exampleInputUserId">ユーザーID</label><br>
 				</div>
 				<div class="form-group d-flex flex-wrap"
@@ -44,13 +44,13 @@
 						value="<%=users.getUserLoginId()%>">
 				</div>
 				<div class="d-flex flex-wrap"
-					style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+					style="display: flex; justify-content: start; color: #FF0000;">
 					<% String userLoginId = (String)request.getAttribute("userLoginId"); %>
 					<% if (userLoginId != null) { %>
 					<%= userLoginId %>
 					<% } %>
 				</div>
-				<div style="margin-bottom: 10px;">
+				<div>
 					<label for="exampleInputUserName">ユーザー名</label><br>
 				</div>
 				<div class="form-group d-flex flex-wrap"
@@ -60,13 +60,13 @@
 						value="<%=users.getUserName()%>">
 				</div>
 				<div class="d-flex flex-wrap"
-					style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+					style="display: flex; justify-content: start; color: #FF0000;">
 					<% String userName = (String)request.getAttribute("userName"); %>
 					<% if (userName != null) { %>
 					<%= userName %>
 					<% } %>
 				</div>
-				<div style="margin-bottom: 10px;">
+				<div>
 					<label for="exampleInputGender">性別</label><br>
 				</div>
 				<div class="form-group d-flex flex-wrap"
@@ -83,13 +83,13 @@
 					</select>
 				</div>
 				<div class="d-flex flex-wrap"
-					style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+					style="display: flex; justify-content: start; color: #FF0000;">
 					<% String gender = (String)request.getAttribute("gender"); %>
 					<% if (gender != null) { %>
 					<%= gender %>
 					<% } %>
 				</div>
-				<div style="margin-bottom: 10px;">
+				<div>
 					<label for="exampleInputbirthday">誕生日</label><br>
 				</div>
 				<div class="form-group d-flex flex-wrap"
@@ -98,16 +98,16 @@
 						name="birthday" value="<%=users.getBirthday()%>">
 				</div>
 				<div class="d-flex flex-wrap"
-					style="display: flex; justify-content: start; margin-bottom: 70px; color: #FF0000;">
+					style="display: flex; justify-content: start; color: #FF0000;">
 					<% String birthday = (String)request.getAttribute("birthday"); %>
 					<% if (birthday != null) { %>
 					<%= birthday %>
 					<% } %>
 				</div>
-				<div class="cancelButton"
-					style="display: flex; justify-content: center; margin-bottom: 20px;">
-					<button type="submit" class="btn btn-lg w-100"
-						style="border: 1px solid #000000; background: #E5CCFF; padding: 10px;">更新</button>
+				<div class="cancelButton mt-5 mb-3"
+					style="display: flex; justify-content: center;">
+					<button type="submit" class="btn w-100"
+						style="border: 1px solid #000000; background: #E5CCFF;">更新</button>
 				</div>
 		</form>
 		</div>
