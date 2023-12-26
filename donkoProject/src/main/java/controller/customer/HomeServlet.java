@@ -12,7 +12,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 
 @WebServlet("/home")
@@ -24,13 +23,10 @@ public class HomeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			String disp = "/header";
-		    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
-		    dispatch.include(request, response);
-		}
+		// ヘッダーに表示する値を取得
+		String disp = "/header";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
 		
 		// 商品の画像を取得
 		ArrayList<ItemBean> itemList = Item.getItemList();
