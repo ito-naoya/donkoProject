@@ -65,16 +65,28 @@ public class User {
 	};
 
 	//ログアウトする
-	//TODO セッション破棄のメソッドを記述する
-	public static Boolean logout(HttpServletRequest request) {
+	public static String logout(HttpServletRequest request) {
 	HttpSession session = request.getSession(false);
-		if (session != null) {
+		// セッションの確認
+		Object userId = session.getAttribute("user_id");
+		Object admin = session.getAttribute("admin");
+		
+		// ユーザー側のログインかどうかを確認
+		if (userId != null) {
+			// ユーザー側のセッションがあれば破棄
 			session.removeAttribute("user_id");
 			session.invalidate();
-			return true;
-		} else {
-			return false;
+			// 画面遷移先のリンクはホーム画面
+			return "home";
+		}	// 管理者側のログインかどうかを確認
+			else if (admin != null) {
+			// 管理者側のセッションがあれば破棄
+			session.removeAttribute("admin");
+			session.invalidate();
+			// 画面遷移先のリンクは管理者のログイン画面
+			return "adminSignin";
 		}
+		return null;
 	};
 
 	//ログインする
