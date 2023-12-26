@@ -181,19 +181,25 @@
 				style="width: 32%; color: #385A37; text-decoration: none;">
 				配送先一覧 </a>
 		</div>
+		<%
+		ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
+		%>
 		<div class="logout d-flex justify-content-between mx-5">
 			<h4 style="margin-bottom: 0;">
 				<strong>購入履歴</strong>
 			</h4>
+			<%
+			if (purchaseList != null && purchaseList.size() > 0) {
+			%>
 			<button class="btn btn-sm" id="hideShippedButton" name="status_sort"
 				value="hidden"
 				style="border: 1px solid gray; background-color: #E5CCFF; border-radius: 40px;">発送済みを非表示</button>
+			<% 
+			} 
+			%>
 		</div>
 		<div style="overflow-x: scroll; height: 30vh;"
 			class="border mx-5 my-3">
-			<%
-			ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
-			%>
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
 			%>
