@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, bean.ItemCategoryBean, bean.ItemBean"%>
+<%@ page import="java.text.NumberFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +64,7 @@
 							<div class="mb-3">
 							    <label for="itemName" class="form-label">商品名</label>
 							    <label for="itemName" class="form-label"  style="font-size: small; color: grey;">30文字以内</label>
-							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30"  value="<%= item.getItemName() != null ? item.getItemName() : "" %>">
+							    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" required  value="<%= item.getItemName() != null ? item.getItemName() : "" %>">
 							    <% String itemName = (String)request.getAttribute("itemName");
 									 if (itemName != null) {
 							 	 %>
@@ -76,7 +77,7 @@
 						 	<div class="mb-3">
 							    <label for="itemDescription" class="form-label">商品説明</label>
 							    <label for="itemDescription" class="form-label" style="font-size: small; color: grey;">100文字以内</label>
-							    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" maxlength="100" ><%= item.getItemDescription() != null ? item.getItemDescription() : "" %></textarea>
+							    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" maxlength="100" required ><%= item.getItemDescription() != null ? item.getItemDescription() : "" %></textarea>
 							     <% String itemDescription = (String)request.getAttribute("itemDescription");
 									 if (itemDescription != null) {
 							 	 %>
@@ -90,7 +91,7 @@
 							    <label for="price" class="form-label">金額</label>
 							    <label for="price" class="form-label"  style="font-size: small; color: grey;">¥1~入力可※半角数字以外は入力不可</label>
 							    <% boolean isPriceSelected = item.getItemPrice() >= 0; %>
-							    <input type="text" class="form-control" id="price" name="price"  style="text-align: right"  value="<%= isPriceSelected ? item.getItemPrice() : "" %>">
+							    <input type="text" class="form-control" id="price" name="price"  style="text-align: right" maxlength="10" value="<%= isPriceSelected ? NumberFormat.getNumberInstance().format(item.getItemPrice()) : "" %>">
 							    <%
 								String itemPrice = (String) request.getAttribute("itemPrice");
 								if (itemPrice != null && !itemPrice.isEmpty()) {
@@ -105,7 +106,7 @@
 							    <label for="stock" class="form-label">在庫</label>
 							    <label for="stock" class="form-label"  style="font-size: small; color: grey;">0~9で設定可</label>
 							    <% boolean isStockSelected = item.getItemStock() >= 0; %>
-							    <input type="number" class="form-control" id="stock" name="stock"   style="text-align: center" value="<%= isStockSelected ? item.getItemStock() : "" %>">
+							    <input type="number" class="form-control" id="stock" name="stock" style="text-align: center" min="0" max="9" value="<%= isStockSelected ? item.getItemStock() : "" %>">
 							    <% String itemStock = (String)request.getAttribute("itemStock");
 									 if (itemStock != null) {
 							 	 %>

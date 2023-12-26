@@ -71,6 +71,7 @@
 						</form>
 					</div>
 				</div>
+				<br>
 				<!-- 各種メッセージ -->
 				<%
 				    // リクエストからmessage属性を取得
@@ -133,7 +134,11 @@
 											                    <% } %>
 											                </td>
 											                <td><!-- 金額 -->
-											                    <p><%= item.getItemPrice() %></p>
+											                    <%
+																    NumberFormat formatter = NumberFormat.getInstance();
+																    String formattedPrice = formatter.format(item.getItemPrice());
+																%>
+																<p><%= formattedPrice %></p>
 											                </td>
 											                <td><!-- 在庫 -->
 											                    <p><%= item.getItemStock() %></p>

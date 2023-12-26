@@ -69,10 +69,12 @@
 						    <input type="hidden" name="itemPrice" value="<%= newItem.getItemPrice() %>">
 						    <input type="hidden" name="itemStock" value="<%= newItem.getItemStock() %>">
 						    <br>
+						    
 						    <div class="mb-3">
-							    <label for="registFormFile" class="form-label">商品写真を登録</label>
-							    <input type="file" class="form-control" id="registFormFile" name="img" accept=".jpg" onchange="previewImage(event);" />
-							</div>
+						        <label for="registFormFile" class="form-label">商品写真を登録(2MBまで)</label>
+						        <input type="file" class="form-control" id="registFormFile" name="img" accept=".jpg" required onchange="previewImage(event);" />
+						    </div>
+						    
 						    <br>
 						    <div class="upload card mb-3 mx-2" style="width: 300px; height: 300px; display: inline-block;">
 								<span id="default-text" style="position: absolute; width: 100%; height: 100%;">ここに画像が表示されます</span>
@@ -86,6 +88,7 @@
 										<%= imageFileName %>
 								  </div>
 							<% } %>
+							
 							<br>
 						    <br>
 						    <!-- オプション登録 -->
@@ -130,8 +133,10 @@
 									            <div id="sizeCheck"">
 									                <label for="optionBox_2" class="form-label mb-3 mt-3">オプション選択 : <%= optionCategoryName %></label>
 									                <br>
-									                <% for (OptionCategoryBean option : optionCategoryList) { %>
-									                    <input class="form-check-input me-2" type="checkbox" id="optionBox_2" name="optionValue_2" value="<%=option.getOptionCategoryId()%>">
+									                <% for (OptionCategoryBean option : optionCategoryList) {
+									                boolean isSelected2 = newItem.getItemSecondOptionIncrementId() >= 0 && newItem.getItemSecondOptionIncrementId() == option.getOptionCategoryId();
+									                %>
+									                    <input class="form-check-input me-2" type="checkbox" id="optionBox_2" name="optionValue_2" value="<%=option.getOptionCategoryId()%>" <%= isSelected2 ? "checked" : "" %> >
 									                    <label class="form-check-label me-3" for="optionBox_2">
 									                        <%=option.getOptionCategoryValue()%>
 									                    </label>
@@ -139,7 +144,7 @@
 									                <%
 													String itemSecondOptionIncrementId = (String) request.getAttribute("itemSecondOptionIncrementId");
 													if (itemSecondOptionIncrementId != null && !itemSecondOptionIncrementId.isEmpty()) {
-												%>
+													%>
 										              <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
 															<%= itemSecondOptionIncrementId %>
 													  </div>

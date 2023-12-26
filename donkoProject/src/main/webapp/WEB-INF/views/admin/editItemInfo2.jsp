@@ -81,7 +81,7 @@
 								</div>
 								<div class="mb-3">
 								    <label for="formFile" class="form-label">商品写真を変更</label>
-								    <input type="file" class="form-control" id="formFile" name="img" accept=".jpg" onchange="previewImage(event);" />
+								    <input type="file" class="form-control" id="registFormFile" name="img" accept=".jpg" onchange="previewImage(event);" />
 								</div>
 
 							    <br>
@@ -101,7 +101,6 @@
 									            <label for="optionSelect_<%= counter %>" class="form-label mb-3"></label>
 									            <!-- 一つ目のオプションは必ずセレクトボックス（画像名と一意に紐づけるため） -->
 									            <select class="form-select mb-3" id="optionSelect_1" name="optionValue_1">
-									                <option selected hidden disabled value="">オプション選択： <%= optionCategoryName %></option>
 									                <% for (OptionCategoryBean option : optionCategoryList) {
 									                	boolean isSelected = item.getItemFirstOptionIncrementId() >= 0 && item.getItemFirstOptionIncrementId() == option.getOptionCategoryId();
 									                %>
@@ -123,7 +122,6 @@
 									    %>
 									            <input type="hidden" name="optionCategoryName_2" value="<%= optionCategoryName %>">
 									            <select class="form-select mb-3" id="optionSelect_2" name="optionValue_2">
-									                <option selected hidden disabled value="">オプション選択： <%= optionCategoryName %></option>
 									                <% for (OptionCategoryBean option : optionCategoryList) {
 									                	boolean isSelected = item.getItemSecondOptionIncrementId() >= 0 && item.getItemSecondOptionIncrementId() == option.getOptionCategoryId();
 									                %>
