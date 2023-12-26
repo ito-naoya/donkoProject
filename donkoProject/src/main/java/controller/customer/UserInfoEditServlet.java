@@ -72,7 +72,10 @@ public class UserInfoEditServlet extends HttpServlet {
 		customerUser.setUserLoginId(request.getParameter("user_login_id"));
 		customerUser.setUserName(request.getParameter("user_name"));
 		customerUser.setGender(request.getParameter("gender"));
-		customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
+		String birthdayString = request.getParameter("birthday");
+		if (birthdayString != "") {
+			customerUser.setBirthday(Date.valueOf(birthdayString));
+		}
 		
 		//入力チェック
 		Boolean isIncomplete = BeanValidation.validate(request, "users", customerUser, GroupB.class);
