@@ -144,21 +144,21 @@
 							</div>
 							<!-- フォームを入れる -->
 							<form action="createShippingAddress" method="post">
-								<div class="form-group mb-3">
+								<div class="form-group">
 									<label for="exampleInputAddresses">宛名</label><br>
 									<input type="text" class="form-control"
 										id="exampleInputAddresses" aria-describedby="addresses"
 										name="addresses" value="" placeholder="伊藤 直也">
 								</div>
 								<p id="errorMessageAddressee" style="color:red;"></p>
-								<div class="form-group mb-3">
+								<div class="form-group">
 									<label for="exampleInputPostCode">郵便番号</label><br>
 									<input type="text" class="form-control" id="exampleInputPostCode"
 										aria-describedby="postCode" maxlength="7" maxlength="7" name="postcode" value=""
 										placeholder="6500001">
 								</div>
 								<p id="errorMessagePostalCode" style="color:red;"></p>
-								<div class="form-group mb-3">
+								<div class="form-group">
 									<label for="exampleInputAddress">住所</label><br>
 									<input type="text" class="form-control" id="exampleInputAddress"
 										aria-describedby="address" name="address" value="" placeholder="兵庫県神戸市中央区加納町４丁目２−１">
