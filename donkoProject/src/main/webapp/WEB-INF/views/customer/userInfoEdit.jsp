@@ -20,7 +20,7 @@
 			CustomerUser users = (CustomerUser) request.getAttribute("users");
 			%>
 			<div class="row" style="height:100vh;">
-				<div class="col-lg-5 border m-auto p-5" style="display: flex; justify-content: center;">
+				<div class="col-lg-5 border m-auto p-5" style="display: flex; justify-content: center; border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 					<form action="userInfoEdit" method="post"
 					class="needs-validation w-100" novalidate>
 						<div class="cancelButton"
@@ -36,7 +36,7 @@
 						</div>
 						<br>
 						<div>
-						<div class="form-group d-flex flex-wrap">
+						<div class="form-group d-flex flex-wrap mb-3">
 							<label for="exampleInputUserId">ユーザーID</label>
 							<input type="text" class="form-control" id="exampleInputUserId"
 								aria-describedby="userId" name="user_login_id"
@@ -49,7 +49,7 @@
 							<%= userLoginId %>
 							<% } %>
 						</div>
-						<div class="form-group d-flex flex-wrap">
+						<div class="form-group d-flex flex-wrap mb-3">
 							<label for="exampleInputUserName">ユーザー名</label>
 							<input type="text" class="form-control" id="exampleInputUserName"
 								aria-describedby="userName" name="user_name"
@@ -62,7 +62,7 @@
 							<%= userName %>
 							<% } %>
 						</div>
-						<div class="form-group d-flex flex-wrap">
+						<div class="form-group d-flex flex-wrap mb-3">
 							<label for="exampleInputGender">性別</label>
 							<select class="form-control" name="gender" id="exampleInputGender">
 								<%
