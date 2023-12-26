@@ -19,12 +19,12 @@ public class LogoutServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Boolean logoutStatus = User.logout(request);
+		String link = User.logout(request);
 		
-		if(logoutStatus == null || logoutStatus == false) {
+		if(link == null) {
 			ErrorHandling.transitionToErrorPage(request, response, "ログアウトに失敗しました", "myPage", "マイページに");
 		} else {
-			response.sendRedirect("home");
+			response.sendRedirect(link);
 		}
 	}
 }

@@ -39,36 +39,54 @@
 									￥ <%= String.format("%,d", totalPrice) %>
 								</h4>
 							</div>
-							<form action="purchaseConfirm" method="post" class="ms-auto">
-								<input type="hidden" value="<%= totalPrice %>" name="totalPrice">
-								<input type="hidden" value="<%= sa.getAddress() %>" name="address">
-								<input type="hidden" value="<%= sa.getPostalCode() %>" name="postalCode">
-								<input type="hidden" value="<%= sa.getAddressee() %>" name="addressee">
-								<button type=submit class="btn px-5 py-2" style="background-color: #9933ff; color: white;">
-									注文確定
-								</button>
-							</form>
+							<%
+							if (sa != null){
+							%>
+								<form action="purchaseConfirm" method="post" class="ms-auto">
+									<input type="hidden" value="<%= totalPrice %>" name="totalPrice">
+									<input type="hidden" value="<%= sa.getAddress() %>" name="address">
+									<input type="hidden" value="<%= sa.getPostalCode() %>" name="postalCode">
+									<input type="hidden" value="<%= sa.getAddressee() %>" name="addressee">
+									<button type=submit class="btn px-5 py-2" style="background-color: #9933ff; color: white;">
+										注文確定
+									</button>
+								</form>
+							<%	
+							}
+							%>
 						</div>
 						<p class="mt-5">
 							1. 配送先
 						</p>
 						<hr>
 						<div class="p-3">
-							<p class="mb-0">
-								〒 
-								<%= new StringBuilder(sa.getPostalCode()).insert(3, "-") %>
-							</p>
-							<p>
-								<%= sa.getAddress() %>
-							</p>
-							<p>
-								<%= sa.getAddressee() %>
-							</p>
-							<div class="d-flex justify-content-end">
+							<%
+							if(sa != null){
+							%>
+								<p class="mb-0">
+									〒 
+									<%= new StringBuilder(sa.getPostalCode()).insert(3, "-") %>
+								</p>
+								<p>
+									<%= sa.getAddress() %>
+								</p>
+								<p>
+									<%= sa.getAddressee() %>
+								</p>
+								<div class="d-flex justify-content-end">
+									<a href="shippingAddressIndex" style="color: #385a37">
+										メインの配送先を変更
+									</a>
+								</div>
+							<%
+							} else {
+							%>
 								<a href="shippingAddressIndex" style="color: #385a37">
-									メインの配送先を変更
+									住所を設定してください
 								</a>
-							</div>
+							<%
+							} 
+							%>
 						</div>
 						<p>
 							2. 商品情報
