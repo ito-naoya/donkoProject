@@ -96,7 +96,7 @@
 						</div>
 						<div class="cancelButton mt-5 mb-3"
 							style="display: flex; justify-content: center;">
-							<button type="submit" class="btn w-100"
+							<button type="submit" class="btn p-2 w-50"
 								style="border: 1px solid gray; background: #E5CCFF;">更新</button>
 						</div>
 					</form>

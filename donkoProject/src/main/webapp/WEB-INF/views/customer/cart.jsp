@@ -139,7 +139,7 @@
 						<%
 						if(cartBeanList.size() > 0) {
 						%>
-							<div class="border p-4 align-items-center" style="width: auto; height:auto;">
+							<div class="border p-4 align-items-center" style="width: auto; height:auto; border-radius:5px;">
 								<% 
 								Integer totalPrice = (Integer)request.getAttribute("totalPrice");
 								%>
@@ -150,7 +150,7 @@
 									</h4>
 								</div>
 								<form action="purchaseConfirm" method="get" class="d-flex justify-content-end mb-3">
-									<button type=submit class="btn btn-sm px-5 py-2 w-100" style="background-color: #E5CCFF; width: auto;">
+									<button type=submit class="btn btn-sm px-5 py-2 w-100" style="border: 1px solid gray; background-color: #E5CCFF; width: auto;">
 										レジに進む
 									</button>
 								</form>

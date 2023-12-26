@@ -100,12 +100,12 @@
 								%>
 								<a href="userInfoEdit?=<%=userId%>"
 									style="color: #000000; vertical-align: middle; text-decoration: none; width: 50%; margin-right: 30px;">
-									<button class="btn w-100"
-										style="border: 1px solid gray; background: #E5CCFF; padding: 10px;">編集</button>
+									<button class="btn p-2 w-100"
+										style="border: 1px solid gray; background: #E5CCFF;">編集</button>
 								</a>
 								<form action="deleteUser" method="post" style="width: 50%;">
-									<button type="submit" class="btn text-nowrap w-100"
-										style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000; padding: 10px;">退会</button>
+									<button type="submit" class="btn p-2 text-nowrap w-100"
+										style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000;">退会</button>
 								</form>
 							</div>
 						</div>
