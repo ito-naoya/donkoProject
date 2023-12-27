@@ -33,7 +33,7 @@ public class SampleUserSigninServlet extends HttpServlet {
 		cu.setUserLoginId(userLoginId);
 		cu.setPassword(userLoginPass);
 		
-		CustomerUser customerUser = User.login(cu);
+		CustomerUser customerUser = User.sampleLogin(cu);
 		
 		if(customerUser == null) {
 			request.setAttribute("errorMessage", "IDまたはパスワードが異なります");
