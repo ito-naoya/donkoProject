@@ -24,7 +24,7 @@ class TestSelectItemDetailFromItems {
 		ItemBean ib = new ItemBean();
 		ib.setItemId(0);
 		ItemBean result = SelectItemDetailFromItems.selectItemDetailFromItems(ib);
-		assertEquals(null, result);
+		assertNull(result);
 	}
 	
 }

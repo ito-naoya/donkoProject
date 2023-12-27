@@ -22,7 +22,7 @@ class TestInsertPurchaseToPurchases {
 		assertTrue(result);
 	}
 	
-	//失敗テスト
+	//失敗テスト(SQL書き換え必要)
 	@Test
 	void testException() {
 		PurchaseBean pb = new PurchaseBean();
