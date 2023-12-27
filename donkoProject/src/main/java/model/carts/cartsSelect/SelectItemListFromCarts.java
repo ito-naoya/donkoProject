@@ -90,5 +90,5 @@ public class SelectItemListFromCarts {
 		}
 		//カート情報を保持したcartBeanListを返す
 		return cartBeanList;
-	};
+	}
 }
