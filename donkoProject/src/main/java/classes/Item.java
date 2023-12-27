@@ -108,27 +108,13 @@ public class Item {
 		DeleteItemFromItems.deleteItemFromItems(itemStatus);
 	};
 
-	//商品画像をドキュメント内に登録する
-	public static boolean registerNewImage(Part part, String fileName, ServletContext context) {
-	    if (part != null && !fileName.isEmpty()) {
-	        try {
-	            // フルパスを指定
-	            String filePath = "/Users/nakahara.erika/git/donkoProject/donkoProject/src/main/webapp/images/" + fileName + ".jpg";
-	            // ファイルを保存
-	            part.write(filePath);
-	            return true;
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	            return false;
-	        }
-	    }
-	    return false;
-	}
-
 	//写真を新規登録
-	public static boolean registerNewImage(Part part,String fileName, String oldFileName, ServletContext context){
-		if(part.getSize() == 0 || fileName.isEmpty()) {
-			return false;
+	public static boolean registerNewImage(Part part,String fileName, ServletContext context){
+		final long MAX_SIZE = 2 * 1024 * 1024; // 2MB
+	    final String TYPE = "image/jpg";
+
+	    if (part.getSize() == 0 || fileName.isEmpty() || part.getSize() > MAX_SIZE || !part.getContentType().equals(TYPE)) {
+	        return false;
 		} else {
 				try {
 					// サーブレットコンテキストで相対パスの場所を取得して、絶対パスに変換。最後に/をつける。
@@ -147,16 +133,21 @@ public class Item {
 
 	//写真を編集、変更
 	public static boolean renameNewImage(Part part, String fileName, String oldFileName, ServletContext context) {
+		final long MAX_SIZE = 2 * 1024 * 1024; // 2MB
+	    final String TYPE = "image/jpeg";
 
 		// サーブレットコンテキストで相対パスの場所を取得して、絶対パスに変換。最後に/をつける。
         String imagesDirectory = context.getRealPath("/images") + File.separator;
 	    if (part.getSize() != 0) {// 写真がある場合
-	        // 古いファイルを削除（名前が異なる場合）
-	        if (!fileName.equals(oldFileName)) {
-	            File oldFile = new File(imagesDirectory + oldFileName + ".jpg");
-	            if (oldFile.exists()) {
-	                oldFile.delete();
-	            }
+	    	if(part.getSize() > MAX_SIZE || !part.getContentType().equals(TYPE)) {
+	    		return false;
+	    	}
+		        // 古いファイルを削除（名前が異なる場合）
+		        if (!fileName.equals(oldFileName)) {
+		            File oldFile = new File(imagesDirectory + oldFileName + ".jpg");
+		            if (oldFile.exists()) {
+		                oldFile.delete();
+		            }
 	        }
 	        // 新しいファイルを保存
 	        String newFilePath = imagesDirectory + fileName + ".jpg";
@@ -179,26 +170,26 @@ public class Item {
 	}
 
 	//商品登録画面から取得した値のnull値及び文字数をチェックして、ItemBeanにセット
-	public static ItemBean checkRegistItemDetail(ItemBean newItem,String price, String stock) {
+	public static ItemBean checkRegistItemDetail(ItemBean newItem, String price, String stock) {
+		String cleanedPrice = price.replaceAll(",", "");
+		int processedPrice = -1;
+	    int processedStock = -1;
 
-		//金額
-		String processedPrice = price.replaceAll(",", "");
-	    if(processedPrice.isEmpty() || !processedPrice.matches("\\d+")) {
-	        return null;
+	    // 金額の処理
+	    if (!cleanedPrice.isEmpty() && cleanedPrice.matches("\\d+")) {
+	        processedPrice = Integer.parseInt(cleanedPrice);
 	    }
-		//在庫
-		if(stock.isEmpty() || !stock.matches("\\d+")) {
-			return null;
-		}
 
-		//ItemBeanに値をセット
-		newItem.setItemPrice(Integer.valueOf(processedPrice));
-		newItem.setItemStock(Integer.valueOf(stock));
+	    // 在庫の処理
+	    if (!stock.isEmpty() && stock.matches("\\d+")) {
+	        processedStock = Integer.parseInt(stock);
+	    }
 
-		return newItem;
+	    // ItemBeanに値をセット
+	    newItem.setItemPrice(processedPrice);
+	    newItem.setItemStock(processedStock);
 
+	    return newItem;
 	}
-
-
 
 }

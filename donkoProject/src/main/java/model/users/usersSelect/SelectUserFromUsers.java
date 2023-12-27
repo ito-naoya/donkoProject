@@ -49,7 +49,9 @@ public class SelectUserFromUsers {
 					cu = new CustomerUser();
 					cu.setUserId(rs.getInt("user_id"));
 				}
-					
+				
+				//ユーザー情報がない場合
+				if(cu == null) throw new SQLException();
 				
 			}catch(SQLException e) {
 				if(!conn.isClosed()) {

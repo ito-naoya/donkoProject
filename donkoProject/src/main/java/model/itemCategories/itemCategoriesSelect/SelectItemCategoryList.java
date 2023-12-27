@@ -21,7 +21,7 @@ public class SelectItemCategoryList {
 				sb.append("SELECT DISTINCT "			);
 				sb.append(	"item_category_name " 		);
 				sb.append("FROM "						);
-				sb.append(	"item_categories "			);
+				sb.append(	"item_categories; "			);
 
 				final String SQL = sb.toString();
 

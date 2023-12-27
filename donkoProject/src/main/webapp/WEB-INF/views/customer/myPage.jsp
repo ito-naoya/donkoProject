@@ -69,7 +69,8 @@
 									<tr>
 										<td>性別</td>
 										<%
-										if (users.getGender() == null) {
+										String gender = users.getGender();
+										if (gender == null || gender.equals("") || gender.equals("選択してください")) {
 										%>
 										<td>未設定</td>
 										<%
@@ -100,12 +101,12 @@
 								%>
 								<a href="userInfoEdit?=<%=userId%>"
 									style="color: #000000; vertical-align: middle; text-decoration: none; width: 50%; margin-right: 30px;">
-									<button class="btn w-100"
-										style="border: 1px solid gray; background: #E5CCFF; padding: 10px;">編集</button>
+									<button class="btn p-2 w-100"
+										style="border: 1px solid gray; background: #E5CCFF;">編集</button>
 								</a>
 								<form action="deleteUser" method="post" style="width: 50%;">
-									<button type="submit" class="btn text-nowrap w-100"
-										style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000; padding: 10px;">退会</button>
+									<button type="submit" class="btn p-2 text-nowrap w-100"
+										style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000;">退会</button>
 								</form>
 							</div>
 						</div>
@@ -144,21 +145,21 @@
 							</div>
 							<!-- フォームを入れる -->
 							<form action="createShippingAddress" method="post">
-								<div class="form-group mb-3">
+								<div class="form-group">
 									<label for="exampleInputAddresses">宛名</label><br>
 									<input type="text" class="form-control"
 										id="exampleInputAddresses" aria-describedby="addresses"
 										name="addresses" value="" placeholder="伊藤 直也">
 								</div>
 								<p id="errorMessageAddressee" style="color:red;"></p>
-								<div class="form-group mb-3">
+								<div class="form-group">
 									<label for="exampleInputPostCode">郵便番号</label><br>
 									<input type="text" class="form-control" id="exampleInputPostCode"
 										aria-describedby="postCode" maxlength="7" maxlength="7" name="postcode" value=""
 										placeholder="6500001">
 								</div>
 								<p id="errorMessagePostalCode" style="color:red;"></p>
-								<div class="form-group mb-3">
+								<div class="form-group">
 									<label for="exampleInputAddress">住所</label><br>
 									<input type="text" class="form-control" id="exampleInputAddress"
 										aria-describedby="address" name="address" value="" placeholder="兵庫県神戸市中央区加納町４丁目２−１">
@@ -181,19 +182,25 @@
 				style="width: 32%; color: #385A37; text-decoration: none;">
 				配送先一覧 </a>
 		</div>
+		<%
+		ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
+		%>
 		<div class="logout d-flex justify-content-between mx-5">
 			<h4 style="margin-bottom: 0;">
 				<strong>購入履歴</strong>
 			</h4>
+			<%
+			if (purchaseList != null && purchaseList.size() > 0) {
+			%>
 			<button class="btn btn-sm" id="hideShippedButton" name="status_sort"
 				value="hidden"
 				style="border: 1px solid gray; background-color: #E5CCFF; border-radius: 40px;">発送済みを非表示</button>
+			<% 
+			} 
+			%>
 		</div>
 		<div style="overflow-x: scroll; height: 30vh;"
 			class="border mx-5 my-3">
-			<%
-			ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
-			%>
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
 			%>

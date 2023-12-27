@@ -1,19 +1,14 @@
 package controller.admin;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import bean.ItemBean;
-import bean.ItemCategoryBean;
-import bean.OptionCategoryBean;
 import classes.BeanValidation;
 import classes.ErrorHandling;
 import classes.Item;
-import classes.ItemCategory;
+import classes.ItemManagementHelper;
 import classes.Option;
-import classes.OptionCategory;
 import interfaces.group.GroupA;
 import interfaces.group.GroupB;
 import interfaces.group.GroupC;
@@ -54,23 +49,20 @@ public class EditItemInfo2Servlet extends HttpServlet {
 		String stock = request.getParameter("itemStock");
 		String olditemFile = request.getParameter("itemImgFileName");
 		Part imgPart = request.getPart("img");
+		String redirectPath = "/WEB-INF/views/admin/editItemInfo2.jsp";
 
 		//入力した取得情報について、null値及び文字数制限の超過が無いかどうか確認し、itemBeanに登録
 		updateItem = Item.checkRegistItemDetail(updateItem, price, stock);
 		if(updateItem == null) {
 			//取得情報の不備があれば、再度入力画面に戻る
-			response.sendRedirect("editItem1");
+			response.sendRedirect("editItemInfo1");
 			return;
 		}
 
 		//入力文字チェック。入力内容に不備があった場合、再度カテゴリーリストを作成して、元の画面にリダイレクト
 		if(BeanValidation.validate(request, "item", updateItem, GroupA.class)) {
-			//カテゴリー一覧を取得
-			getCategoryList(request, response);
-			String view = "/WEB-INF/views/admin/editItem1.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-			return;
-		}
+  			ItemManagementHelper.errorRedirect(request,response,updateItem,redirectPath);
+  		}
 
 		//セレクトボックスの個数を取得
 		int selectBoxCount = Integer.parseInt(request.getParameter("selectBoxCount"));
@@ -78,20 +70,19 @@ public class EditItemInfo2Servlet extends HttpServlet {
 		//順番にitembanに格納<色：緑 など>
 		updateItem.setItemFirstOptionName(request.getParameter("optionCategoryName_1"));
 		String itemFirstOptionIncrementId = request.getParameter("optionValue_1");
-		String[] secondIds = null;
+		String[] secondIds = new String[1]; // 配列の初期化
 		//取得したオプション情報について、null値チェック。IremBeansに値を追加。セレクトボックスが2つなら、2個目の値も格納<衣類サイズ：S　など>
 		//商品の持つ他の情報について、null値及び文字数制限の超過が無いかどうか確認し、itemBeanに登録
 	    if (selectBoxCount == 1) {
 	    	updateItem = Option.checkRegistItemOptionDetail(itemId, updateItem, itemFirstOptionIncrementId, null);
 	    } else {
 	    	updateItem.setItemSecondOptionName(request.getParameter("optionCategoryName_2"));
-	    	String secondOptionId = request.getParameter("optionValue_2");
-			String[] itemSecondOptionIncrementIds = {secondOptionId};
-	        updateItem = Option.checkRegistItemOptionDetail(itemId, updateItem, itemFirstOptionIncrementId, itemSecondOptionIncrementIds);
+	    	secondIds[0] = request.getParameter("optionValue_2");
+	        updateItem = Option.checkRegistItemOptionDetail(itemId, updateItem, itemFirstOptionIncrementId, secondIds);
 	    }
 	    if (updateItem == null) {
 	    	//不正な値を入力していた場合はリダイレクト
-	        edit2Foward(request, response, updateItem);
+	    	ItemManagementHelper.errorRedirect(request,response,updateItem,redirectPath);
 	    }
 
 		//写真名を設定
@@ -103,23 +94,35 @@ public class EditItemInfo2Servlet extends HttpServlet {
 		}
 
 		//バリデーションチェック
-	    if (selectBoxCount == 1) {
-	    	checkBalidation(request, response, updateItem, GroupB.class);
-	    } else {
-	    	checkBalidation(request, response, updateItem, GroupC.class);
-	    }
-
+        if (selectBoxCount == 1) {
+        	if(BeanValidation.validate(request, "item", updateItem, GroupB.class)) {
+        		ItemManagementHelper.errorRedirect(request,response,updateItem,redirectPath);
+        	}
+        } else {
+        	if(BeanValidation.validate(request, "item", updateItem, GroupC.class)) {
+        		ItemManagementHelper.errorRedirect(request,response,updateItem,redirectPath);
+        	}
+        }
 
 	    String message = null;
-		//商品名とオプションについて、既存のアイテムと重複がないか確認する
-	    if(!fileName.equals(olditemFile)){
+	    //重複商品を確認するために、商品詳細を取得
+  		ItemBean editItem = Item.getItemAllDetail(updateItem);
+  		if(editItem == null) {
+  			//取得情報の不備があれば、エラー画面に遷移
+  			ErrorHandling.transitionToErrorPage(request,response,"商品詳細の取得に失敗しました","adminTopPage","管理者ページに");
+  			return;
+  		}
+  		int oldId = editItem.getItemSecondOptionIncrementId();
+		//変更後の商品名とオプションについて、既存のアイテムと重複がないか確認する
+	    if(!fileName.equals(olditemFile) || oldId != updateItem.getItemSecondOptionIncrementId()){
 		    ArrayList<Integer> existId = Item.checkItemAlreadyExist(updateItem,secondIds);
 		    if(existId == null) {
 		    	ErrorHandling.transitionToErrorPage(request,response,"商品情報の取得に失敗しました","adminTopPage","管理者ページに");
+		    	return;
 		    } else if (!existId.isEmpty()) { //商品が重複していた場合
 		    	message = "商品が重複しています。重複商品ID：" + existId.get(0);
-		    	deleteItemRedirect(response, updateItem, message);
-			    return;
+		    	ItemManagementHelper.deleteItemRedirect(response, updateItem, message);
+		    	return;
 		    }
 	    }
 
@@ -140,56 +143,6 @@ public class EditItemInfo2Servlet extends HttpServlet {
         }
 
     	message ="商品を編集しました";
-	    deleteItemRedirect(response, updateItem, message);
-	    return;
-	}
-
-	private void deleteItemRedirect(HttpServletResponse response, ItemBean updateItem, String message)
-			throws UnsupportedEncodingException, IOException {
-		String encodedItemCategoryName = URLEncoder.encode(updateItem.getItemCategoryName(), "UTF-8");
-		String encodedMessage = URLEncoder.encode(message, "UTF-8");
-		String redirectURL = "deleteItemIndex?itemCategoryName=" + encodedItemCategoryName + "&itemDelFlg=" + "0" + "&message=" + encodedMessage;
-		response.sendRedirect(redirectURL);
-	}
-
-	private void edit2Foward(HttpServletRequest request, HttpServletResponse response, ItemBean newItem)
-			throws ServletException, IOException {
-		// オプション情報の不備があれば、再度入力画面に戻る
-		ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(newItem);
-		request.setAttribute("itemCategoryListAll", itemCategoryListAll);
-		request.setAttribute("newItem", newItem);
-		String view = "/WEB-INF/views/admin/editItem2.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
-	}
-
-	//カテゴリ抽出メソッド
-	private void getCategoryList(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
-		if(categoryList == null) {
-			//取得情報の不備があれば、エラー画面に遷移
-			ErrorHandling.transitionToErrorPage(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
-			return;
-		}
-		request.setAttribute("categoryList", categoryList);
-	}
-
-	private void checkBalidation(HttpServletRequest request, HttpServletResponse response, ItemBean updateItem, Class<?> groupClass)
-			throws ServletException, IOException {
-		//入力文字チェック。入力内容に不備があった場合、オプションリストを作成して、元の画面にリダイレクト
-		if(BeanValidation.validate(request, "item", updateItem, groupClass)) {
-			//オプション一覧を取得
-			ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(updateItem);
-			if(itemCategoryListAll == null) {
-				//取得情報の不備があれば、エラー画面に遷移
-				ErrorHandling.transitionToErrorPage(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
-				return;
-			}
-			request.setAttribute("updateItem", updateItem);
-			request.setAttribute("itemCategoryListAll", itemCategoryListAll);
-			String view = "/WEB-INF/views/admin/editItem2.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-			return;
-		}
+    	ItemManagementHelper.deleteItemRedirect(response, updateItem, message);
 	}
 }
