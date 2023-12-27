@@ -1,7 +1,6 @@
 package controller.admin;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import bean.ItemBean;
@@ -9,6 +8,7 @@ import bean.ItemCategoryBean;
 import classes.ErrorHandling;
 import classes.Item;
 import classes.ItemCategory;
+import classes.ItemManagementHelper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -78,21 +78,25 @@ public class DeleteItemIndexServlet extends HttpServlet {
 	//ソートを実行
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		ItemBean newItem = new ItemBean();
 		//カテゴリーを取得
-		String itemCategoryName = request.getParameter("itemCategoryName");
+		newItem.setItemCategoryName(request.getParameter("itemCategoryName"));
 		//選択済みの商品ステータスを全て取得、配列に格納
 		String[] itemStatus = request.getParameterValues("itemStatus");
 
 		//選択済みの商品のステータスを切り替えるサーブレット
-		if(itemStatus != null && itemStatus.length > 0) {
-			Item.deleteItem(itemStatus);
+		//返却値によって切り替え0→成功、1→ボタン押して、2→失敗ページへ
+		switch(Item.deleteItem(itemStatus)) {
+			case 0:
+				ItemManagementHelper.deleteItemRedirect(response, newItem, "販売ステータスを切り替えました");
+				break;
+			case 1:
+				ItemManagementHelper.deleteItemRedirect(response, newItem, "商品を選択してください");
+				break;
+			case 2:
+				ErrorHandling.transitionToErrorPage(request,response,"ステータスの切り替えに失敗しました","adminTopPage","管理者ページに");
+				break;
 		}
-
-		//商品一覧ページに戻る（とりあえずリダイレクト）
-		String encodedItemCategoryName = URLEncoder.encode(itemCategoryName, "UTF-8");
-        String redirectURL = "deleteItemIndex?itemCategoryName=" + encodedItemCategoryName + "&itemDelFlg=" + "2";
-        response.sendRedirect(redirectURL);
 	}
 
 }

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import bean.ItemBean;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.Part;
-import model.items.itemsDelete.DeleteItemFromItems;
 import model.items.itemsInsert.InsertNewItemToItems;
 import model.items.itemsSelect.SelectItemAllDetailFromItems;
 import model.items.itemsSelect.SelectItemAlreadyExistFromItems;
@@ -21,6 +20,7 @@ import model.items.itemsSelect.SelectItemListWithoutDuplicate;
 import model.items.itemsSelect.SelectItemNameListFromItemsByCategory;
 import model.items.itemsSelect.SelectItemOptionListFromItems;
 import model.items.itemsSelect.SelectRandomItemListFromItems;
+import model.items.itemsUpdate.UpdateItemDeleteFromItems;
 import model.items.itemsUpdate.UpdateItemInfoInItems;
 
 public class Item {
@@ -104,8 +104,14 @@ public class Item {
 	};
 
 	//商品を削除する（論理削除）
-	public static void deleteItem(String[] itemStatus){
-		DeleteItemFromItems.deleteItemFromItems(itemStatus);
+	public static int deleteItem(String[] itemStatus){
+		if (itemStatus == null || itemStatus.length == 0) {
+			return 1;//なんか入れて
+		}
+		if(!UpdateItemDeleteFromItems.deleteItemFromItems(itemStatus)) {
+			return 2;//不正なSQL
+		}
+		return 0;//成功
 	};
 
 	//写真を新規登録

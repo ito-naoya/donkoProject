@@ -1,4 +1,4 @@
-package model.items.itemsDelete;
+package model.items.itemsUpdate;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -8,10 +8,10 @@ import java.util.Arrays;
 import dao.DatabaseConnection;
 import dao.GeneralDao;
 
-public class DeleteItemFromItems {
+public class UpdateItemDeleteFromItems {
 
 	//商品を削除する（論理削除）
-	public static void deleteItemFromItems(String[]  itemStatus){
+	public static Boolean deleteItemFromItems(String[] itemStatus){
 
 		StringBuilder sb = new StringBuilder();
 			//削除フラグ（item_delete_flg)の0と1を切り替えるSQL
@@ -39,7 +39,11 @@ public class DeleteItemFromItems {
 			try (Connection conn = DatabaseConnection.getConnection();) {
 				try {
 					//チェックが入っているitem_idの削除フラグを全て切り替える
-					GeneralDao.executeUpdate(conn, UPDATE_ITEM_DELETE_FLG_SQL, param);
+					int updatedRows = GeneralDao.executeUpdate(conn, UPDATE_ITEM_DELETE_FLG_SQL, param);
+
+					//更新件数が0件の場合
+					if(updatedRows == 0) throw new SQLException();
+
 					//sqlをコミット
 					conn.commit();
 				} catch (SQLException e) {
@@ -48,19 +52,24 @@ public class DeleteItemFromItems {
 						conn.rollback();
 					}
 					e.printStackTrace();
+					return false;
 				}
 			} catch (SQLException | ClassNotFoundException e) {
 				e.printStackTrace();
+				return false;
 			}
-
+			return true;
 	};
 		// SQL文の?を検索キーワードの数だけ用意する
 		private static String questionNum(String[] itemStatus) {
-			String str = "?";
+		    if (itemStatus.length == 0) {
+		        // 何も返さない
+		        return "";
+		    }
+		    String str = "?";
 		    for (int index = 1; index < itemStatus.length; index++) {
 		        str += ",?";
 		    }
-		    //?,?・・とつづく文字列を返す
 		    return str;
 		}
 }

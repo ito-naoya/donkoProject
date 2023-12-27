@@ -134,6 +134,6 @@ public class RegistItemServlet2 extends HttpServlet {
 
 	    // 完了後、商品一覧ページに遷移
         ItemManagementHelper.deleteItemRedirect(response, newItem, message);
-
+        return;
 	}
 }
