@@ -30,7 +30,7 @@ public class SelectMainShippingAddress {
 		sb.append("AND ");
 		sb.append(		"main_shipping_address = 1");
 		//sqlを文字列化
-		final String SELECT_MAINADDRESS_SQL = sb.toString();
+		final String SELECT_MAIN_ADDRESS_SQL = sb.toString();
 		
 		//ログインしているユーザーのIDをリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
@@ -41,7 +41,7 @@ public class SelectMainShippingAddress {
 		
 		//データベース接続
 		try(Connection conn = DatabaseConnection.getConnection();){
-			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_MAINADDRESS_SQL, params)) {
+			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_MAIN_ADDRESS_SQL, params)) {
 				
 				while(rs.next()) {
 					//配送先情報を保持するshippingAddressBeanをnew
@@ -51,6 +51,7 @@ public class SelectMainShippingAddress {
 					sa.setAddress(rs.getString("address"));
 					sa.setAddressee(rs.getString("addressee"));
 				}
+				if(sa == null) throw new SQLException();
 				
 			}catch(SQLException e) {
 				if(!conn.isClosed()) {

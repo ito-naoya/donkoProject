@@ -21,12 +21,12 @@ class TestSelectItemListFromCarts {
 		assertTrue(result instanceof ArrayList<CartBean>);
 	}
 	
-	//失敗テスト
+	//失敗テスト(SQL書き換え必要)
 	@Test
 	void testException() {
 		CustomerUser cu = new CustomerUser();
 		ArrayList<CartBean> result = SelectItemListFromCarts.selectItemListFromCarts(cu);
-		assertEquals(null, result);
+		assertNull(result);
 	}
 	
 

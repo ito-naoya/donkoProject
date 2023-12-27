@@ -52,7 +52,10 @@ public class UpdateUserInfoByAdmin {
 		try (Connection conn = DatabaseConnection.getConnection()) {
 			try {
 				//ユーザー情報の更新
-				GeneralDao.executeUpdate(conn, UPDATE_USER_INFO_SQL, params);
+				int updatedRows = GeneralDao.executeUpdate(conn, UPDATE_USER_INFO_SQL, params);
+				
+				if(updatedRows == 0) throw new SQLException();
+				
 				//sqlをコミット
 				conn.commit();
 				isCommit = true;
