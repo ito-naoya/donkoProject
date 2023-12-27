@@ -38,7 +38,11 @@ public class DeleteItemFromCarts {
 		try (Connection conn = DatabaseConnection.getConnection();) {
 			try {
 				//カートから対象の商品を削除
-				GeneralDao.executeUpdate(conn, DELETE_ITEM_ALL_SQL, params);
+				int updatedRows = GeneralDao.executeUpdate(conn, DELETE_ITEM_ALL_SQL, params);
+				
+				//更新件数が0件の場合
+				if(updatedRows == 0) throw new SQLException();
+				
 				//sqlをコミット
 				conn.commit();
 				isCommit = true;

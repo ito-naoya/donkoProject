@@ -21,9 +21,9 @@ class TestUpdateItemQuantityInCarts {
 	}
 	
 	
-	//更新件数が０件の場合
+	//失敗テスト
 	@Test
-	void testUpdatedRowsIsZero() {
+	void testException() {
 		CartBean cb = new CartBean();
 		cb.setUserId(0);
 		cb.setItemId(0);
