@@ -63,6 +63,7 @@
 							<% if (postalCode != null) { %>
 							<%= postalCode %>
 							<% } %>
+							<p id="errorMessagePostalCode" style="color:red;"></p>
 						</div>
 						<div class="form-group d-flex flex-wrap">
 							<label for="exampleInputAddress">住所</label>
@@ -79,7 +80,7 @@
 						</div>
 						<div class="cancelButton mt-5"
 							style="display: flex; justify-content: center;">
-							<button type="submit" class="btn w-50 p-2"
+							<button type="submit" class="btn w-50 p-2" id="editButton"
 								style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF;">更新</button
 						</div>
 					</div>
@@ -87,6 +88,6 @@
 			</div>
 		</div>
 	</main>
-	<script src="./js/nullValidationScript.js"></script>
+	<script src="./js/editShippingAddress.js"></script>
 </body>
 </html>
