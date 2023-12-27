@@ -53,8 +53,8 @@
 
 								<div class="mb-3">
 								    <label for="itemName" class="form-label">商品名</label>
-								    <label for="itemName" class="form-label"  style="font-size: small; color: grey;">20文字以内</label>
-								    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" value="<%= item.getItemName() %>" required>
+								    <label for="itemName" class="form-label"  style="font-size: small; color: grey;">30文字以内</label>
+								    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" required value="<%= item.getItemName() %>" >
 								    <% String itemName = (String)request.getAttribute("itemName");
 									 if (itemName != null) {
 							 	 	%>
@@ -67,7 +67,7 @@
 							 	<div class="mb-3">
 								    <label for="itemDescription" class="form-label">商品説明</label>
 								    <label for="itemDescription" class="form-label" style="font-size: small; color: grey;">100文字以内</label>
-								    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" required maxlength="100"><%= item.getItemDescription().trim() %></textarea>
+								    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" required  maxlength="100"><%= item.getItemDescription().trim() %></textarea>
 								    <% String itemDescription = (String)request.getAttribute("itemDescription");
 									 if (itemDescription != null) {
 							 	 	%>
@@ -80,7 +80,8 @@
 							 	<div class="col-4 mb-3">
 								    <label for="price" class="form-label">金額</label>
 								    <label for="price" class="form-label"  style="font-size: small; color: grey;">¥1~入力可※半角数字以外は入力不可</label>
-								    <input type="text" class="form-control" id="price" name="price" maxlength="11"  value="<%= NumberFormat.getNumberInstance().format(item.getItemPrice()) %>" required style="text-align: right">
+								    <% boolean isPriceSelected = item.getItemPrice() >= 0; %>
+								    <input type="text" class="form-control" id="price" name="price" maxlength="11" required  value="<%= isPriceSelected ? NumberFormat.getNumberInstance().format(item.getItemPrice()) : "" %>" style="text-align: right">
 								    <%
 									String itemPrice = (String) request.getAttribute("itemPrice");
 									if (itemPrice != null && !itemPrice.isEmpty()) {
@@ -94,7 +95,8 @@
 							 	<div class="col-2 mb-3">
 								    <label for="stock" class="form-label">在庫</label>
 								    <label for="stock" class="form-label"  style="font-size: small; color: grey;">0~9で設定可</label>
-								    <input type="number" class="form-control" id="stock" name="stock" min="0" max="9" value="<%= item.getItemStock() %>" required style="text-align: center">
+								    <% boolean isStockSelected = item.getItemStock() >= 0; %>
+								    <input type="number" class="form-control" id="stock" name="stock" min="0" max="9" required value="<%= isStockSelected ? item.getItemStock() : "" %>" style="text-align: center">
 								    <% String itemStock = (String)request.getAttribute("itemStock");
 									 if (itemStock != null) {
 							 	 	%>

@@ -4,12 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.ItemBean;
-import bean.ItemCategoryBean;
 import bean.OptionCategoryBean;
 import classes.BeanValidation;
 import classes.ErrorHandling;
 import classes.Item;
-import classes.ItemCategory;
+import classes.ItemManagementHelper;
 import classes.OptionCategory;
 import interfaces.group.GroupA;
 import jakarta.servlet.ServletException;
@@ -32,13 +31,13 @@ public class RegistItemServlet1 extends HttpServlet {
 		//ログイン画面実装後にセットします
 
 		//カテゴリー一覧を取得
-		getCategoryList(request, response);
-		
+		ItemManagementHelper.getCategoryList(request, response);
+
 		ItemBean newItem = new ItemBean();
 		request.setAttribute("item", newItem);
 
 		request.setAttribute("existId", null);
-		
+
 		//商品登録画面1に転送
 		String view = "/WEB-INF/views/admin/registItem1.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
@@ -63,16 +62,16 @@ public class RegistItemServlet1 extends HttpServlet {
 			response.sendRedirect("registItem1");
 			return;
 		}
-		
+
 		//入力文字チェック。入力内容に不備があった場合、再度カテゴリーリストを作成して、元の画面にリダイレクト
 		if(BeanValidation.validate(request, "item", newItem, GroupA.class)) {
 			//カテゴリー一覧を取得
-			getCategoryList(request, response);
+			ItemManagementHelper.getCategoryList(request, response);
 			String view = "/WEB-INF/views/admin/registItem1.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 			return;
 		}
-		
+
 		//取得した商品情報をセット
 		request.setAttribute("newItem", newItem);
 
@@ -88,17 +87,4 @@ public class RegistItemServlet1 extends HttpServlet {
 		String view = "/WEB-INF/views/admin/registItem2.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}
-	
-	//カテゴリ抽出メソッド
-	private void getCategoryList(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
-		if(categoryList == null) {
-			//取得情報の不備があれば、エラー画面に遷移
-			ErrorHandling.transitionToErrorPage(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
-			return;
-		}
-		request.setAttribute("categoryList", categoryList);
-	}
-
 }

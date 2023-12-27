@@ -1,17 +1,15 @@
 package controller.admin;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import bean.ItemBean;
-import bean.OptionCategoryBean;
 import classes.BeanValidation;
 import classes.ErrorHandling;
 import classes.Item;
+import classes.ItemManagementHelper;
 import classes.Option;
-import classes.OptionCategory;
 import interfaces.group.GroupA;
 import interfaces.group.GroupB;
 import interfaces.group.GroupC;
@@ -50,6 +48,7 @@ public class RegistItemServlet2 extends HttpServlet {
 		newItem.setItemDescription(request.getParameter("itemDescription"));
 		String price = request.getParameter("itemPrice");
 		String stock = request.getParameter("itemStock");
+		String redirectPath = "/WEB-INF/views/admin/registItem2.jsp";
 
 	    // 画像情報を取得
 	    Part imgPart = request.getPart("img");
@@ -61,7 +60,9 @@ public class RegistItemServlet2 extends HttpServlet {
   			response.sendRedirect("registItem1");
   			return;
   		}
-  		checkBalidation(request, response, newItem, GroupA.class);
+  		if(BeanValidation.validate(request, "item", newItem, GroupA.class)) {
+  			ItemManagementHelper.errorRedirect(request,response,newItem,redirectPath);
+  		}
 
 	    // セレクトボックスの個数を取得
 	    int selectBoxCount = Integer.parseInt(request.getParameter("selectBoxCount"));
@@ -80,7 +81,7 @@ public class RegistItemServlet2 extends HttpServlet {
         }
 	    if (newItem == null) {
 	    	//不正な値を入力していた場合はリダイレクト
-	        regist2Foward(request, response, newItem);
+	    	ItemManagementHelper.errorRedirect(request,response,newItem,redirectPath);
 	    }
 
         // 写真がセットされている事を確認して、写真名を設定(商品名＋オプションID)
@@ -92,21 +93,27 @@ public class RegistItemServlet2 extends HttpServlet {
 
         //バリデーションチェック
         if (selectBoxCount == 1) {
-        	checkBalidation(request, response, newItem, GroupB.class);
+        	if(BeanValidation.validate(request, "item", newItem, GroupB.class)) {
+        		ItemManagementHelper.errorRedirect(request,response,newItem,redirectPath);
+        	}
         } else {
-        	checkBalidation(request, response, newItem, GroupC.class);
+        	if(BeanValidation.validate(request, "item", newItem, GroupC.class)) {
+        		ItemManagementHelper.errorRedirect(request,response,newItem,redirectPath);
+        	}
         }
 
         String message = null;
         //商品名とオプションについて、既存のアイテムと重複がないか確認する
         ArrayList<Integer> existId = Item.checkItemAlreadyExist(newItem,itemSecondOptionIncrementIds);
         if(existId == null) {
-        	regist2Foward(request, response, newItem);
+        	ItemManagementHelper.errorRedirect(request,response,newItem,redirectPath);
         } else if (!existId.isEmpty()) { //商品が重複していた場合
         	String idsStr = existId.stream()
                     .map(String::valueOf)
                     .collect(Collectors.joining(", "));
         	message = "商品が重複しています。重複商品ID：" + idsStr;
+        	ItemManagementHelper.deleteItemRedirect(response, newItem, message);
+        	return;
 
         } else { //重複がなければ登録
 	        if (Item.registerNewItem(newItem, selectBoxCount, itemSecondOptionIncrementIds)) {
@@ -126,38 +133,7 @@ public class RegistItemServlet2 extends HttpServlet {
         }
 
 	    // 完了後、商品一覧ページに遷移
-        String encodedItemCategoryName = URLEncoder.encode(newItem.getItemCategoryName(), "UTF-8");
-        String encodedMessage = URLEncoder.encode(message, "UTF-8");
-        String redirectURL = "deleteItemIndex?itemCategoryName=" + encodedItemCategoryName + "&itemDelFlg=" + "0" + "&message=" + encodedMessage;
-        response.sendRedirect(redirectURL);
-	}
+        ItemManagementHelper.deleteItemRedirect(response, newItem, message);
 
-	private void regist2Foward(HttpServletRequest request, HttpServletResponse response, ItemBean newItem)
-			throws ServletException, IOException {
-		// オプション情報の不備があれば、再度入力画面に戻る
-		ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(newItem);
-		request.setAttribute("itemCategoryListAll", itemCategoryListAll);
-		request.setAttribute("newItem", newItem);
-		String view = "/WEB-INF/views/admin/registItem2.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
-	}
-
-	private void checkBalidation(HttpServletRequest request, HttpServletResponse response, ItemBean newItem, Class<?> groupClass)
-			throws ServletException, IOException {
-		//入力文字チェック。入力内容に不備があった場合、オプションリストを作成して、元の画面にリダイレクト
-		if(BeanValidation.validate(request, "item", newItem, groupClass)) {
-			//オプション一覧を取得
-			ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(newItem);
-			if(itemCategoryListAll == null) {
-				//取得情報の不備があれば、エラー画面に遷移
-				ErrorHandling.transitionToErrorPage(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
-				return;
-			}
-			request.setAttribute("newItem", newItem);
-			request.setAttribute("itemCategoryListAll", itemCategoryListAll);
-			String view = "/WEB-INF/views/admin/registItem2.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
-			return;
-		}
 	}
 }

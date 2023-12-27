@@ -25,8 +25,8 @@ public class ItemBean {
 	@Length(groups = {GroupA.class}, min=1 , max= 100, message="{min}文字以上{max}文字以下で入力してください。" )
 	private String itemDescription;
 
-	@Min(groups = {GroupA.class}, value = 1, message = "¥1~10,000,000,000で入力してください。")
-    @Max(groups = {GroupA.class}, value = 1000000000, message = "¥1~10,000,000,000で入力してください。")
+	@Min(groups = {GroupA.class}, value = 1, message = "¥1~1,000,000,000で入力してください。")
+    @Max(groups = {GroupA.class}, value = 1000000000, message = "¥1~1,000,000,000で入力してください。")
 	private int itemPrice;
 
 	@Min(groups = {GroupA.class}, value = 0, message = "0~9で入力してください。")

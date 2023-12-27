@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.ItemBean;
-import bean.ItemCategoryBean;
 import bean.OptionCategoryBean;
 import classes.BeanValidation;
 import classes.ErrorHandling;
 import classes.Item;
-import classes.ItemCategory;
 import classes.Option;
 import classes.OptionCategory;
 import interfaces.group.GroupA;
@@ -72,15 +70,13 @@ public class EditItemInfo1Servlet extends HttpServlet {
 		updateItem = Item.checkRegistItemDetail(updateItem, price, stock);
 		if(updateItem == null) {
 			//取得情報の不備があれば、再度入力画面に戻る
-			response.sendRedirect("editItem1");
+			response.sendRedirect("editItemInfo1");
 			return;
 		}
 
-		//入力文字チェック。入力内容に不備があった場合、再度カテゴリーリストを作成して、元の画面にリダイレクト
+		//入力文字チェック。入力内容に不備があった場合、元の画面にリダイレクト
 		if(BeanValidation.validate(request, "item", updateItem, GroupA.class)) {
-			//カテゴリー一覧を取得
-			getCategoryList(request, response);
-			String view = "/WEB-INF/views/admin/registItem1.jsp";
+			String view = "/WEB-INF/views/admin/editItemInfo1.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 			return;
 		}
@@ -105,7 +101,8 @@ public class EditItemInfo1Servlet extends HttpServlet {
         }
 	    if (updateItem == null) {
 	    	//不正な値を入力していた場合はリダイレクト
-	        edit2Foward(request, response, updateItem);
+	    	response.sendRedirect("editItem1");
+			return;
 	    }
 
 		//取得した商品情報をセット
@@ -116,28 +113,6 @@ public class EditItemInfo1Servlet extends HttpServlet {
 		String view = "/WEB-INF/views/admin/editItemInfo2.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
-	}
-
-	private void edit2Foward(HttpServletRequest request, HttpServletResponse response, ItemBean newItem)
-			throws ServletException, IOException {
-		// オプション情報の不備があれば、再度入力画面に戻る
-		ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = OptionCategory.getOptionCategoryListAllByCategory(newItem);
-		request.setAttribute("itemCategoryListAll", itemCategoryListAll);
-		request.setAttribute("newItem", newItem);
-		String view = "/WEB-INF/views/admin/registItem2.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
-	}
-
-	//カテゴリ抽出メソッド
-	private void getCategoryList(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
-		if(categoryList == null) {
-			//取得情報の不備があれば、エラー画面に遷移
-			ErrorHandling.transitionToErrorPage(request,response,"カテゴリ一覧の取得に失敗しました","adminTopPage","管理者ページに");
-			return;
-		}
-		request.setAttribute("categoryList", categoryList);
 	}
 }
 
