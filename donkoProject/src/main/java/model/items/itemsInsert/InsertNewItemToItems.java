@@ -60,16 +60,15 @@ public class InsertNewItemToItems {
             params3.add(itemBean.getItemSecondOptionName());
             params3.add(itemBean.getItemSecondOptionIncrementId());
         }
+        int totalUpdatedRows = 0;
 
         try (Connection conn = DatabaseConnection.getConnection()) {
             try {
-                if (itemSecondOptionIncrementIds == null) {
+                if (selectBoxCount == 1) {
                     // optionが1つしかない商品の場合
                     GeneralDao.executeUpdate(conn, INSERT_NEWITEM_ITEM_SQL, params1);
                     GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, params2);
-                    if (selectBoxCount == 2) {
-                        GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, params3);
-                    }
+                    totalUpdatedRows ++;
                 } else {
                     // チェックボックスの場合
                     for (String optionId : itemSecondOptionIncrementIds) {
@@ -86,7 +85,11 @@ public class InsertNewItemToItems {
                         paramsSize.add(optionId);
                         GeneralDao.executeUpdate(conn, INSERT_NEWITEM_OPTION_SQL, paramsSize);
                     }
+                    totalUpdatedRows ++;
                 }
+
+              //更新件数が0件の場合
+				if(totalUpdatedRows == 0) throw new SQLException();
                 conn.commit(); // コミット
             } catch (SQLException e) {
                 conn.rollback(); // ロールバック
