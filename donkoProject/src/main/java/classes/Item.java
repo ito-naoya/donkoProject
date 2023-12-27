@@ -111,7 +111,7 @@ public class Item {
 	//写真を新規登録
 	public static boolean registerNewImage(Part part,String fileName, ServletContext context){
 		final long MAX_SIZE = 2 * 1024 * 1024; // 2MB
-	    final String TYPE = "image/jpeg";
+	    final String TYPE = "image/jpg";
 
 	    if (part.getSize() == 0 || fileName.isEmpty() || part.getSize() > MAX_SIZE || !part.getContentType().equals(TYPE)) {
 	        return false;
