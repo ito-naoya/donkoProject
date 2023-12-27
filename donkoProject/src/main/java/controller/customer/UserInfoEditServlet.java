@@ -71,10 +71,17 @@ public class UserInfoEditServlet extends HttpServlet {
 		customerUser.setUserId((int)session.getAttribute("user_id"));
 		customerUser.setUserLoginId(request.getParameter("user_login_id"));
 		customerUser.setUserName(request.getParameter("user_name"));
-		customerUser.setGender(request.getParameter("gender"));
-		String birthdayString = request.getParameter("birthday");
-		if (birthdayString != "") {
-			customerUser.setBirthday(Date.valueOf(birthdayString));
+		
+		String gender = request.getParameter("gender");
+		if(gender.equals("") || gender.equals("選択してください")) {
+			customerUser.setGender(null);
+		} else {
+			customerUser.setGender(gender);
+		}
+		
+		String birthday = request.getParameter("birthday");
+		if (birthday != "") {
+			customerUser.setBirthday(Date.valueOf(birthday));
 		}
 		
 		//入力チェック
