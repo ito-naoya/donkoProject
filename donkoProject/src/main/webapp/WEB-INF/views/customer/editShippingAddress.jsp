@@ -38,39 +38,39 @@
 							</div>
 						</div>
 						<br>
-						<div class="form-group d-flex flex-wrap mb-3">
+						<div class="form-group d-flex flex-wrap">
 							<label for="exampleInputAddresses">宛名</label>
 							<input type="text" class="form-control" id="exampleInputAddresses"
 								aria-describedby="addresses" name="addressee"
 								value="<%=shippingAddressEdit.getAddressee() %>">
 						</div>
-						<div class="d-flex flex-wrap"
+						<div class="d-flex flex-wrap mb-3"
 							style="display: flex; justify-content: start; color: #FF0000;">
 							<% String addressee = (String) request.getAttribute("addressee"); %>
 							<% if (addressee != null) { %>
 							<%= addressee %>
 							<% } %>
 						</div>
-						<div class="form-group d-flex flex-wrap mb-3">
+						<div class="form-group d-flex flex-wrap">
 							<label for="exampleInputPostalCode">郵便番号</label>
 							<input type="text" class="form-control" id="exampleInputPostalCode"
 								aria-describedby="postalcode" maxlength="8" name="postalcode"
 								value="<%=shippingAddressEdit.getPostalCode() %>">
 						</div>
-						<div class="d-flex flex-wrap"
+						<div class="d-flex flex-wrap mb-3"
 							style="display: flex; justify-content: start; color: #FF0000;">
 							<% String postalCode = (String) request.getAttribute("postalCode"); %>
 							<% if (postalCode != null) { %>
 							<%= postalCode %>
 							<% } %>
 						</div>
-						<div class="form-group d-flex flex-wrap mb-3">
+						<div class="form-group d-flex flex-wrap">
 							<label for="exampleInputAddress">住所</label>
 							<input type="text" class="form-control" id="exampleInputAddress"
 								aria-describedby="address" name="address"
 								value="<%=shippingAddressEdit.getAddress() %>">
 						</div>
-						<div class="d-flex flex-wrap"
+						<div class="d-flex flex-wrap mb-3"
 							style="display: flex; justify-content: start; color: #FF0000;">
 							<% String address = (String) request.getAttribute("address"); %>
 							<% if (address != null) { %>
