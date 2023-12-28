@@ -33,6 +33,9 @@ public class SelectItemNameListFromItemsByCategory {
 		try (Connection conn = DatabaseConnection.getConnection()){
 		    try(ResultSet rs = GeneralDao.executeQuery(conn, sql, params)) {
 
+		    	// ResultSetが空の場合、SQLExceptionを投げる
+	            if (!rs.isBeforeFirst()) throw new SQLException();
+
 		   		//ItemBeanに挿入
 		   		while(rs.next()) {
 		   			ItemBean item = new ItemBean();

@@ -37,7 +37,9 @@ public class InsertNewUserToUsers {
 
 				try (Connection connection = DatabaseConnection.getConnection()) {
 					try {
-						GeneralDao.executeUpdate(connection, INSERT_NEWUSER_SQL, param);
+						int updatedRows= GeneralDao.executeUpdate(connection, INSERT_NEWUSER_SQL, param);
+						//更新件数が0件の場合
+						if(updatedRows == 0) throw new SQLException();
 						connection.commit();
 					} catch (Exception e) {
 						if(!connection.isClosed()) {

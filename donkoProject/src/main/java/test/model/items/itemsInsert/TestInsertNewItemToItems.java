@@ -31,13 +31,13 @@ class TestInsertNewItemToItems {
 	@Test
 	void testException1() {
 		ItemBean item = new ItemBean();
-		String[] itemSecondOptionIncrementIds = {""};
-		item.setItemCategoryName("");
-		item.setItemName("");
-		item.setItemDescription("");
+		String[] itemSecondOptionIncrementIds = {null};
+		item.setItemCategoryName(null);
+		item.setItemName(null);
+		item.setItemDescription(null);
 		item.setItemPrice(-1);
 		item.setItemStock(-1);
-		item.setImageFileName("");
+		item.setImageFileName(null);
 		item.setItemFirstOptionName("色");
 		item.setItemFirstOptionIncrementId(1);
 		Boolean result = InsertNewItemToItems.insertNewItemToItems(item,1,itemSecondOptionIncrementIds);
@@ -54,9 +54,9 @@ class TestInsertNewItemToItems {
 		item.setItemPrice(0);
 		item.setItemStock(0);
 		item.setImageFileName("hoge");
-		item.setItemFirstOptionName("");
+		item.setItemFirstOptionName(null);
 		item.setItemFirstOptionIncrementId(0);
-		item.setItemSecondOptionName("");
+		item.setItemSecondOptionName(null);
 		item.setItemSecondOptionIncrementId(0);
 		Boolean result = InsertNewItemToItems.insertNewItemToItems(item,2,itemSecondOptionIncrementIds);
 		assertFalse(result);
