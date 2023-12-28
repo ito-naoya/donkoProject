@@ -59,20 +59,20 @@ public class UpdateItemInfoInItems {
             params3.add(itemBean.getItemSecondOptionName());
             params3.add(itemBean.getItemId());
         }
-
+        int totalUpdatedRows = 0;
         try (Connection conn = DatabaseConnection.getConnection()) {
             try {
             	// itemsテーブルを更新
-                GeneralDao.executeUpdate(conn, sql1, params1);
-                GeneralDao.executeUpdate(conn, sql2, params2);
-
+            	totalUpdatedRows += GeneralDao.executeUpdate(conn, sql1, params1);
+            	totalUpdatedRows += GeneralDao.executeUpdate(conn, sql2, params2);
 
                 // optionが2つある場合の重複チェックと更新
                 if (selectBoxCount == 2) {
-                    GeneralDao.executeUpdate(conn, sql2, params3);
+                	totalUpdatedRows += GeneralDao.executeUpdate(conn, sql2, params3);
                 }
 
-
+              //更新件数が0件の場合
+				if(totalUpdatedRows < 2) throw new SQLException();
             	conn.commit();  //コミットする
             } catch (SQLException e) {
 		    	if(!conn.isClosed()) {

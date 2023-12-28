@@ -38,6 +38,8 @@ public class SelectOptionCategoryListByCategory {
 		try (Connection conn = DatabaseConnection.getConnection()){
 			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_OPTION_CATEFORY_BYCATEGORY_SQL, params)) {
 
+				if (!rs.isBeforeFirst())throw new SQLException();
+
 					//OptionCategoryBeanに挿入
 					while(rs.next()) {
 						OptionCategoryBean optionCategory = new OptionCategoryBean();
