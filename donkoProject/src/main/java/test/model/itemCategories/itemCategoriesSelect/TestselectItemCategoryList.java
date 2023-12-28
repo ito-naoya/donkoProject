@@ -1,4 +1,4 @@
-package test.model.items.itemsSelect;
+package test.model.itemCategories.itemCategoriesSelect;
 
 import static org.junit.jupiter.api.Assertions.*;
 
