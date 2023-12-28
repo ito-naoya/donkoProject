@@ -58,6 +58,9 @@ public class SelectItemAndOptionListAll {
 		try(Connection conn = DatabaseConnection.getConnection();){
 			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEM_AND_OPTION_ALL_SQL, params)){
 
+				// ResultSetが空の場合、SQLExceptionを投げる
+	            if (!rs.isBeforeFirst()) throw new SQLException();
+
 				ItemBean currentIb = null;
 	            int lastItemId = -1; // item_idがint型であるため、初期値として無効な値を設定
 

@@ -39,6 +39,8 @@ public class SelectItemAllDetailFromItems {
 		try(Connection conn = DatabaseConnection.getConnection();){
 			try(ResultSet rs = GeneralDao.executeQuery(conn, SELECT_ITEM_ALLDETAIL, params)){
 
+				if (!rs.isBeforeFirst()) throw new SQLException();
+
 				if(rs.next()){
 					ib.setItemId(rs.getInt("item_id"));
 		            ib.setItemCategoryName(rs.getString("item_category_name"));
