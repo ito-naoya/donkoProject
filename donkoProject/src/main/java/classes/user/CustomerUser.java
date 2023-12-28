@@ -19,7 +19,7 @@ public class CustomerUser extends User {
 	@Length(groups = {GroupA.class, GroupB.class, GroupC.class}, min=5 , max= 10, message="{min}文字以上{max}文字以下で入力してください。" )
 	private String userLoginId;
 	//パスワード
-	@Length(groups = {GroupA.class, GroupC.class}, min=8, max=16, message="{min}文字以上{max}文字以内で入力してください。" )
+	@Length(groups = {GroupC.class}, min=8, max=16, message="{min}文字以上{max}文字以内で入力してください。" )
 	@Pattern(regexp = "(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]*", groups = {GroupA.class, GroupC.class}, message = "パスワードは文字と数字を含む必要があります。")
 	private String password;
 	//ユーザー名
