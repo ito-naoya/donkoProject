@@ -32,6 +32,10 @@ public class DeleteItemIndexServlet extends HttpServlet {
 		Integer sortParam = Integer.parseInt(request.getParameter("itemDelFlg"));
 		//メッセージを取得
 		String message = request.getParameter("message");
+		//並び順を取得
+		String sortOrder = request.getParameter("order");
+		// キーワードを取得
+	    String keyword = request.getParameter("keyword");
 
 		//カテゴリー一覧を取得
 		ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
@@ -45,21 +49,13 @@ public class DeleteItemIndexServlet extends HttpServlet {
 		ItemCategoryBean allItem = new ItemCategoryBean();
 		allItem.setItemCategoryName("全ての商品");
 		categoryList.add(allItem);
-		//ソートで指定されたカテゴリをセット
+
 		request.setAttribute("categoryName", itemCategoryName);
-		//カテゴリ一覧をセット
 		request.setAttribute("categoryList", categoryList);
 		request.setAttribute("message", message);
 
 		//以下、ソートSQL
-		ArrayList<ItemBean> itemList = null;
-		if(!itemCategoryName.isEmpty() && sortParam == 2) { //sortParamが2なら、全商品を抽出
-			itemList = Item.getItemAndOptionListAll(itemCategoryName);
-
-		} else if(!itemCategoryName.isEmpty() && sortParam < 2 ) { //sortParamが2未満なら、削除フラグを確認して抽出
-			itemList = Item.getItemAndOptionListByDelFlg(sortParam, itemCategoryName);
-		}
-
+		ArrayList<ItemBean> itemList = Item.getItemAndOptionListByDelFlg(sortParam, itemCategoryName, sortOrder, keyword);
 		if(itemList == null) {
 			//取得情報の不備があれば、エラー画面に遷移
 			ErrorHandling.transitionToErrorPage(request,response,"商品一覧の取得に失敗しました","adminTopPage","管理者ページに");
@@ -67,8 +63,9 @@ public class DeleteItemIndexServlet extends HttpServlet {
 		}
 
 		request.setAttribute("itemList", itemList);
-		//指定された表示方法をセット
 		request.setAttribute("itemDelFlg", sortParam);
+		request.setAttribute("order", sortOrder);
+		request.setAttribute("keyword", keyword);
 
 		String view = "/WEB-INF/views/admin/deleteItemIndex.jsp";
 		request.getRequestDispatcher(view).forward(request, response);

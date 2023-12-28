@@ -21,20 +21,10 @@ public class TestItem {
 
     //getItemAndOptionListAllのテスト
     @Nested
-    class GetItemAndOptionListAllTests {
-        @Test
-        void returnsAllItemsWhenCategoryIsAll() {// "全ての商品"を指定した場合、空値に変換されて結果が出力
-            ArrayList<ItemBean> result = Item.getItemAndOptionListAll("全ての商品");
-            assertNotNull(result);
-        }
-    }
-
-    //getItemAndOptionListAllのテスト
-    @Nested
     class getItemAndOptionListByDelFlg {
         @Test
         void returnsAllItemsWhenCategoryIsAll() {// "全ての商品"を指定した場合、空値に変換されて結果が出力
-            ArrayList<ItemBean> result = Item.getItemAndOptionListByDelFlg(0,"全ての商品");
+            ArrayList<ItemBean> result = Item.getItemAndOptionListByDelFlg(0,"全ての商品","asc", "");
             assertNotNull(result);
         }
     }

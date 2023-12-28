@@ -8,4 +8,14 @@ table.st-tbl1 th {
     background: white;
     position: sticky;
     top: 0px;
+    z-index: 1;
+}
+
+#itemTable tbody tr:hover {
+    background-color: #e5ccff;
+}
+
+input[type="checkbox"]{
+  transform: scale(2);
+  cursor: pointer;
 }

@@ -10,7 +10,6 @@ import jakarta.servlet.http.Part;
 import model.items.itemsInsert.InsertNewItemToItems;
 import model.items.itemsSelect.SelectItemAllDetailFromItems;
 import model.items.itemsSelect.SelectItemAlreadyExistFromItems;
-import model.items.itemsSelect.SelectItemAndOptionListAll;
 import model.items.itemsSelect.SelectItemAndOptionListByDelFlg;
 import model.items.itemsSelect.SelectItemDetailFromItems;
 import model.items.itemsSelect.SelectItemImageListFromItems;
@@ -50,22 +49,13 @@ public class Item {
 			return SelectRandomItemListFromItems.selectItemListFromItems();
 		};
 
-	//商品の一覧を取得する(カテゴリ指定も可能)
-	public static ArrayList<ItemBean> getItemAndOptionListAll(String itemCategoryName){
-		//全ての商品を抽出する場合は、値をセットしない
-		if (itemCategoryName.equals("全ての商品")) {
-			itemCategoryName = "";
-		}
-		return SelectItemAndOptionListAll.selectItemAndOptionListAll(itemCategoryName);
-	};
-
 	//商品の一覧を取り扱い指定込みで取得する(カテゴリ指定も可能)
-	public static ArrayList<ItemBean> getItemAndOptionListByDelFlg(int itemDeleteFlg, String itemCategoryName){
+	public static ArrayList<ItemBean> getItemAndOptionListByDelFlg(int itemDeleteFlg, String itemCategoryName, String sortOrder, String keyword){
 		//全ての商品を抽出する場合は、値をセットしない
 		if(itemCategoryName.equals("全ての商品")) {
 			itemCategoryName = "";
 		}
-		return SelectItemAndOptionListByDelFlg.selectItemAndOptionListByDelFlg(itemDeleteFlg, itemCategoryName);
+		return SelectItemAndOptionListByDelFlg.selectItemAndOptionListByDelFlg(itemDeleteFlg, itemCategoryName, sortOrder, keyword);
 	};
 
 	//商品の詳細を取得する
