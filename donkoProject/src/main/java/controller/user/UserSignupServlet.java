@@ -40,7 +40,7 @@ public class UserSignupServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//値をセット（バリデーションでうまいことする）
+		//値をセット
 		CustomerUser user = new CustomerUser();
 		user.setUserLoginId(request.getParameter("userLoginId"));
 		user.setUserName(request.getParameter("userLoginName"));
