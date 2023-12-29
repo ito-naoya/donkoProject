@@ -27,3 +27,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+function deleteUser() {
+//
+const modal = document.querySelector('.js-modal');
+const modalButton = document.querySelector('.deleteUserButton');
+const modalClose = document.querySelector('.deleteUserCloseButton'); // xボタンのjs-close-buttonを取得し変数に格納
+
+// 
+modalButton.addEventListener('click', () => {
+  modal.classList.add('is-open');
+});
+
+// 
+modalClose.addEventListener('click', () => { 
+  // xボタンをクリックしたときのイベントを登録
+  modal.classList.remove('is-open'); 
+});
+};

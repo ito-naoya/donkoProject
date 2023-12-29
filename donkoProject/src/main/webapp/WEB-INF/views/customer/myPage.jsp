@@ -104,8 +104,36 @@
 									<button class="btn p-2 w-100"
 										style="border: 1px solid gray; background: #E5CCFF;">編集</button>
 								</a>
+								<div style="width: 50%;">
+									<button type="submit"
+										class="deleteUserButton btn p-2 text-nowrap w-100"
+										onclick="deleteUser()"
+										style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000;">退会</button>
+								</div>
+								<!-- 								<form action="deleteUser" method="post" style="width: 50%;">
+									<button type="submit" class="deleteUserButton btn p-2 text-nowrap w-100" onclick="deleteUser()"
+										style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000;">退会</button>
+								</form> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 退会処理のボタン -->
+			<div class="layer js-modal">
+				<div class="modal">
+					<div class="modal_inner">
+						<!-- ×ボタン追記 -->
+						<div class="modal_button-wrap">
+							<button class="close-button js-close-button">
+								<span></span> <span></span>
+							</button>
+						</div>
+						<div class="modal_contents">
+							<div class="modal_content">
 								<form action="deleteUser" method="post" style="width: 50%;">
-									<button type="submit" class="btn p-2 text-nowrap w-100"
+									<button type="submit"
+										class="deleteUser btn p-2 text-nowrap w-100"
 										style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000;">退会</button>
 								</form>
 							</div>
