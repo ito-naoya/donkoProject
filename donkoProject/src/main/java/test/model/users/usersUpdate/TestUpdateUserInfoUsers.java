@@ -33,7 +33,7 @@ class TestUpdateUserInfoUsers {
 	/*
 	 * int型なのでどう実装しようか検討中で一旦保留
 	 * */
-	
+	@Test
 	void testException() {
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserLoginId(null);
