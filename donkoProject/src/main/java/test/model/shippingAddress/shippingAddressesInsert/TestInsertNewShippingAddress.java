@@ -21,21 +21,21 @@ class TestInsertNewShippingAddress {
 		shippingAddressBean.setAddress("香川県高松市xxx町1-2-3");
 		shippingAddressBean.setMainShippingAddress(0);
 		shippingAddressBean.setAddressee("高松魚");
-		boolean insertStatus  = InsertNewShippingAddress.insertNewShippingAddress(shippingAddressBean);
+		Boolean insertStatus  = InsertNewShippingAddress.insertNewShippingAddress(shippingAddressBean);
 		assertTrue(insertStatus);
 	}
 	
-	// 成功
+	// 失敗
 		@Test
 		void testException() {
 			ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
-			shippingAddressBean.setUserId(4);
-			shippingAddressBean.setPostalCode("1234567");
-			shippingAddressBean.setAddress("香川県高松市xxx町1-2-3");
-			shippingAddressBean.setMainShippingAddress(0);
-			shippingAddressBean.setAddressee("高松魚");
-			boolean insertStatus  = InsertNewShippingAddress.insertNewShippingAddress(shippingAddressBean);
-			assertTrue(insertStatus);
+			shippingAddressBean.setUserId(-1);
+			shippingAddressBean.setPostalCode(null);
+			shippingAddressBean.setAddress(null);
+			shippingAddressBean.setMainShippingAddress(-1);
+			shippingAddressBean.setAddressee(null);
+			Boolean insertStatus  = InsertNewShippingAddress.insertNewShippingAddress(shippingAddressBean);
+			assertFalse(insertStatus);
 		}
 
 }
