@@ -13,7 +13,7 @@ import model.users.usersUpdate.UpdateUserInfoInUsers;
 class TestUpdateUserInfoUsers {
 	
 	/*
-	 * ユーザーのユーザー情報を更新する TEST
+	 * ユーザー情報を更新する TEST
 	 * */
 	
 	// 成功ケース
