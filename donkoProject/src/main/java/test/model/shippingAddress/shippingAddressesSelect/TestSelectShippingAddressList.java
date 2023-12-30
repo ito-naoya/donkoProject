@@ -22,9 +22,9 @@ class TestSelectShippingAddressList {
 	@Test
 	void testException() {
 		ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
-		shippingAddressBean.setUserId(-1);
+		shippingAddressBean.setUserId(0);
 		ShippingAddressBean result = SelectShippingAddressDetail.selectShippingAddressDetail(shippingAddressBean);
-		assertNull(result instanceof ShippingAddressBean);
+		assertNull(result);
 	}
 
 }
