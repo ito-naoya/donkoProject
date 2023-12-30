@@ -21,9 +21,9 @@ public class SelectOrderItemList {
 		sb.append(	  "p.user_id, "                                          );
 		sb.append(	  "u.user_name, "                                        );
 		sb.append(	  "p.total_amount, "                                     );
-		sb.append(	  "sa.postal_code, "                                     );
-		sb.append(	  "sa.address, "                                         );
-		sb.append(	  "sa.addressee, "                                       );
+		sb.append(	  "p.postal_code, "                                     );
+		sb.append(	  "p.address, "                                         );
+		sb.append(	  "p.addressee, "                                       );
 		sb.append(	  "s.shipping_status "                                   );
 		sb.append("FROM "                                                    );
 		sb.append(	  "purchases p "                                         );
@@ -31,10 +31,6 @@ public class SelectOrderItemList {
 		sb.append(    "users u "                                             );
 		sb.append("ON "                                                      );
 		sb.append(    "p.user_id = u.user_id "                               );
-		sb.append("INNER JOIN "                                              );
-		sb.append(    "shipping_addresses sa "                               );
-		sb.append("ON "                                                      );
-		sb.append(    "p.shipping_address_id = sa.shipping_address_id "      );
 		sb.append("INNER JOIN "                                              );
 		sb.append(    "shippings s "                                         );
 		sb.append("ON "                                                      );
