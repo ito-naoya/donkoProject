@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
@@ -34,7 +35,7 @@
 				</div>
 			</label> <input type="checkbox" id="pop-up">
 			<div class="overlay">
-				<div class="window">
+				<div class="window" id="userInfoWindow">
 					<label class="close m-3" for="pop-up"> <svg
 							xmlns="http://www.w3.org/2000/svg" width="22" height="22"
 							fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
@@ -86,7 +87,8 @@
 									<tr>
 										<td>誕生日</td>
 									<%
-                    if (users.getBirthday() == null) {
+									Date birthday = users.getBirthday();
+                    if (birthday == null) {
                     %>
                     <td>未設定</td>
                     <% } else { %>
@@ -105,36 +107,36 @@
 										style="border: 1px solid gray; background: #E5CCFF;">編集</button>
 								</a>
 								<div style="width: 50%;">
-									<button type="submit"
-										class="deleteUserButton btn p-2 text-nowrap w-100"
-										onclick="deleteUser()"
+									<button class="deleteUserButton btn p-2 text-nowrap w-100"
+										data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="deleteUserButton"
 										style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000;">退会</button>
 								</div>
-								<!-- 								<form action="deleteUser" method="post" style="width: 50%;">
-									<button type="submit" class="deleteUserButton btn p-2 text-nowrap w-100" onclick="deleteUser()"
-										style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000;">退会</button>
-								</form> -->
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- 退会処理のボタン -->
-			<div class="layer js-modal">
-				<div class="modal">
-					<div class="modal_inner">
-						<!-- ×ボタン追記 -->
-						<div class="modal_button-wrap">
-							<button class="close-button js-close-button">
-								<span></span> <span></span>
-							</button>
-						</div>
-						<div class="modal_contents">
-							<div class="modal_content">
-								<form action="deleteUser" method="post" style="width: 50%;">
-									<button type="submit"
-										class="deleteUser btn p-2 text-nowrap w-100"
-										style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000;">退会</button>
+				<!-- 退会確認ボタン -->
+				<div class="modal fade" id="staticBackdrop"
+					data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+					aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered w-100">
+						<div class="modal-content" id="modalWindow" style="width:100%;">
+							<div class="modal-header">
+								<h1 class="modal-title fs-5" id="staticBackdropLabel">
+									<strong>退会</strong>
+								</h1>
+								<a href="myPage">
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</a>
+							</div>
+							<div class="modal-body">
+								<strong>アカウントのデータが全て消えます。</strong><br>それでも退会してよろしいでしょうか？
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-secondary" data-bs-dismiss="modal" id="cancelButton">キャンセル</button>
+								<form action="deleteUser" method="post">
+									<button type="submit" class="btn btn-danger">退会</button>
 								</form>
 							</div>
 						</div>

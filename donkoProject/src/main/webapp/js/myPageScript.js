@@ -28,20 +28,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-function deleteUser() {
-//
-const modal = document.querySelector('.js-modal');
-const modalButton = document.querySelector('.deleteUserButton');
-const modalClose = document.querySelector('.deleteUserCloseButton'); // xボタンのjs-close-buttonを取得し変数に格納
+// 退会確認画面のモーダルを表示
+document.getElementById("deleteUserButton").addEventListener("click", function() {
+  // ユーザ情報のモーダルを非表示にする
+  document.getElementById("userInfoWindow").style.display = "none";
+  // 確認画面のモーダルを表示する
+  document.getElementById("staticBackdrop").style.display = "";
 
-// 
-modalButton.addEventListener('click', () => {
-  modal.classList.add('is-open');
 });
 
-// 
-modalClose.addEventListener('click', () => { 
-  // xボタンをクリックしたときのイベントを登録
-  modal.classList.remove('is-open'); 
+// ユーザ情報の確認画面のモーダルを表示
+document.getElementById("cancelButton").addEventListener("click", function() {
+  // 確認画面のモーダルを非表示にする
+  document.getElementById("staticBackdrop").style.display = "none";
+    // ユーザ情報のモーダルを表示する
+  document.getElementById("userInfoWindow").style.display = "";
 });
-};
