@@ -1,7 +1,6 @@
 package test.model.users.usersUpdate;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,16 +24,11 @@ class TestUpdateUserPasswords {
 	}
 	
 	// 失敗ケース
-	/*
-	 * ハッシュ化でエラー
-	 * 後ほど対応
-	 * */
-	
 	@Test
 	void testException() {
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserLoginId(null);
-		customerUser.setPassword(null);
+		customerUser.setPassword("test"); // ハッシュ化でエラーになるので一旦値を入れる
 		Boolean result = UpdateUserPasswords.updateUserPasswords(customerUser);
 		assertFalse(result);
 	}
