@@ -38,10 +38,6 @@ document.getElementById('createButton').addEventListener('click', function(event
     // Nullまたは空白の場合
     errorMessagePostalCode.textContent ='郵便番号を入力してください。';
     event.preventDefault();
-  } else if (postcodeValue.length != 7 || isNaN(postcodeValue)) {
-    // 入力した文字が7桁超えの場合
-    errorMessagePostalCode.textContent ='半角数字の7桁で入力してください。';
-    event.preventDefault();
   } else {
     // 成功した場合
     errorMessagePostalCode.textContent ='';

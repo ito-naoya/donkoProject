@@ -183,9 +183,9 @@
 								</div>
 								<p id="errorMessageAddressee" style="color:red;"></p>
 								<div class="form-group">
-									<label for="exampleInputPostCode">郵便番号</label><br>
-									<input type="text" class="form-control" id="exampleInputPostCode"
-										aria-describedby="postCode" maxlength="7" maxlength="7" name="postcode" value=""
+									<label for="exampleInputPostalCode">郵便番号</label><br>
+									<input type="text" class="form-control" id="exampleInputPostalCode"
+										aria-describedby="postalCode" maxlength="7" maxlength="7" name="postalcode" value=""
 										placeholder="6500001">
 								</div>
 								<p id="errorMessagePostalCode" style="color:red;"></p>
