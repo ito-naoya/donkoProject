@@ -77,15 +77,40 @@
 							int main_address = shippingAddressBean.getMainShippingAddress();
 							if (main_address != 1) {
 							%>
-							<button type="submit" class="btn"
-								style="border: 1px solid #FF0000; background: #FFFFFF;">
-								<a href="deleteShippingAddress?shipping_address_id=<%= shippingAddressBean.getShippingAddressId() %>"
-									style="color: #FF0000; vertical-align: middle; text-decoration: none;">
-									削除
-								</a>
-							</button>
-							<% 
-							} 
+							<button type="submit" class="btn" data-bs-toggle="modal"
+								data-bs-target="#staticBackdrop"
+								style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000;">削除</button>
+							<!-- Modal -->
+							<div class="modal fade" id="staticBackdrop"
+								data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+								aria-labelledby="staticBackdropLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h1 class="modal-title fs-5" id="staticBackdropLabel">
+												<strong>配送先削除</strong>
+											</h1>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<strong><%=shippingAddressBean.getAddressee()%></strong>
+											さんの<br> 配送先を削除してもよろしいでしょうか？
+										</div>
+										<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">キャンセル</button>
+													                     <a
+                        href="deleteShippingAddress?shipping_address_id=<%=shippingAddressBean.getShippingAddressId()%>"
+                        style="color: #FF0000; vertical-align: middle; text-decoration: none;">
+												<button type="submit" class="btn btn-danger">削除</button>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<%
+							}
 							%>
 						</div>
 					</div>
