@@ -69,12 +69,12 @@
 						    <input type="hidden" name="itemPrice" value="<%= newItem.getItemPrice() %>">
 						    <input type="hidden" name="itemStock" value="<%= newItem.getItemStock() %>">
 						    <br>
-						    
+
 						    <div class="mb-3">
-						        <label for="registFormFile" class="form-label">商品写真を登録(2MBまで)</label>
+						        <label for="registFormFile" class="form-label">商品写真を登録(jpgのみ・2MBまで)</label>
 						        <input type="file" class="form-control" id="registFormFile" name="img" accept=".jpg" required onchange="previewImage(event);" />
 						    </div>
-						    
+
 						    <br>
 						    <div class="upload card mb-3 mx-2" style="width: 300px; height: 300px; display: inline-block;">
 								<span id="default-text" style="position: absolute; width: 100%; height: 100%;">ここに画像が表示されます</span>
@@ -88,7 +88,7 @@
 										<%= imageFileName %>
 								  </div>
 							<% } %>
-							
+
 							<br>
 						    <br>
 						    <!-- オプション登録 -->
