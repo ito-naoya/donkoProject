@@ -1,6 +1,6 @@
 package test.model.users.usersSelect;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -24,17 +24,12 @@ class TestUserDetailFromUsers {
 	}
 	
 	// 失敗ケース
-	/*
-	 * int型なのでどう実装しようか検討中で一旦保留
-	 * */
-	@SuppressWarnings("null")
 	@Test
 	void testException() {
 		CustomerUser customerUser  = new CustomerUser();
-		Integer testCase = null;
-		customerUser.setUserId(testCase);
+		customerUser.setUserId(0);
 		CustomerUser result = SelectUserDetailFromUsers.selectUserDetailFromUsers(customerUser);
-		assertFalse(result instanceof CustomerUser);
+		assertNull(result);
 	}
 
 }
