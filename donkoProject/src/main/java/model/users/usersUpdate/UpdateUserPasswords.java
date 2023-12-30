@@ -46,9 +46,9 @@ public class UpdateUserPasswords {
 			} catch (Exception e) {
 				if(!connection.isClosed()) {
 					connection.rollback();
+					e.printStackTrace();
+					return false;
 				}
-				e.printStackTrace();
-				return false;
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
