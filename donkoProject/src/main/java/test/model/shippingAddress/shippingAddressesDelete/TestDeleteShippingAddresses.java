@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import bean.ShippingAddressBean;
 import model.shippingAddresses.shippingAddressesDelete.DeleteIteShippingAddresses;
 
-class TestDeleteIteShippingAddresses {
+class TestDeleteShippingAddresses {
 
 	/*
 	 * 配送先削除 TEST
@@ -17,9 +17,9 @@ class TestDeleteIteShippingAddresses {
 	@Test
 	void testSuccess() {
 		ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
-		shippingAddressBean.setUserId(13);
-		shippingAddressBean.setShippingAddressId(24);
-		Boolean status  = DeleteIteShippingAddresses.deleteUpdateShippingAddress(shippingAddressBean);
+		shippingAddressBean.setUserId(4);
+		shippingAddressBean.setShippingAddressId(8);
+		Boolean status = DeleteIteShippingAddresses.deleteUpdateShippingAddress(shippingAddressBean);
 		assertTrue(status);
 	}
 	
@@ -27,6 +27,8 @@ class TestDeleteIteShippingAddresses {
 	@Test
 	void testException() {
 		ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
+		shippingAddressBean.setUserId(0);
+		shippingAddressBean.setShippingAddressId(0);
 		Boolean status  = DeleteIteShippingAddresses.deleteUpdateShippingAddress(shippingAddressBean);
 		assertFalse(status);
 	}
