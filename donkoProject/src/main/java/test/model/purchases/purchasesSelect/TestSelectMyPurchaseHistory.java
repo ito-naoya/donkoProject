@@ -28,14 +28,9 @@ class TestSelectMyPurchaseHistory {
 	@Test
 	void testException() {
 		CustomerUser customerUser = new CustomerUser();
+		customerUser.setUserId(0);
 		ArrayList<PurchaseBean> result = SelectMyPurchaseHistory.selectMyPurchaseHistory(customerUser);
-		boolean status;
-		if(result.size() > 1) {
-			status = true;
-		} else {
-			status = false;
-		}
-		assertTrue(status);
+		assertNull(result);
 	}
 
 }
