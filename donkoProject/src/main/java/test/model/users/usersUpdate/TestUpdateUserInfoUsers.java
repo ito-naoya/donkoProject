@@ -1,6 +1,6 @@
 package test.model.users.usersUpdate;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Date;
@@ -42,7 +42,7 @@ class TestUpdateUserInfoUsers {
 		customerUser.setGender(null);
 		customerUser.setUserId(0);
 		Boolean result = UpdateUserInfoInUsers.updateUserInfoInUsers(customerUser);
-		assertFalse(result);
+		assertNull(result);
 	}
 
 }
