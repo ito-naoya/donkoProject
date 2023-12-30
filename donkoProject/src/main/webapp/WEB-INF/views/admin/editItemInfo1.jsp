@@ -55,6 +55,7 @@
 								    <label for="itemName" class="form-label">商品名</label>
 								    <label for="itemName" class="form-label"  style="font-size: small; color: grey;">30文字以内</label>
 								    <input type="text" class="form-control" id="itemName" name="itemName" maxlength="30" required value="<%= item.getItemName() %>" >
+								    <div id="itemNameCount" style="text-align: right; font-size: small; color: grey;">0/30</div>
 								    <% String itemName = (String)request.getAttribute("itemName");
 									 if (itemName != null) {
 							 	 	%>
@@ -68,6 +69,7 @@
 								    <label for="itemDescription" class="form-label">商品説明</label>
 								    <label for="itemDescription" class="form-label" style="font-size: small; color: grey;">100文字以内</label>
 								    <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3" required  maxlength="100"><%= item.getItemDescription().trim() %></textarea>
+								    <div id="itemDescriptionCount" style="text-align: right; font-size: small; color: grey;">0/100</div>
 								    <% String itemDescription = (String)request.getAttribute("itemDescription");
 									 if (itemDescription != null) {
 							 	 	%>
