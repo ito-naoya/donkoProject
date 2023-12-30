@@ -50,9 +50,9 @@ public class SelectMainShippingAddressSort {
 			}catch(SQLException e) {
 				if(!connection.isClosed()) {
 					connection.rollback();
+					e.printStackTrace();
+					return null;
 				}
-				e.printStackTrace();
-				return null;
 			}
 		}catch(SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
