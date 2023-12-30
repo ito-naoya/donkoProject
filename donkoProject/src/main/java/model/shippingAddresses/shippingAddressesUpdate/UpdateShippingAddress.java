@@ -15,7 +15,7 @@ public class UpdateShippingAddress {
 		
 		// SQLコマンド生成
 		StringBuilder sb = new StringBuilder();
-		sb.append("UPDATE " );
+		sb.append("UPDATE "											);
 		sb.append(	"shipping_addresses "							);
 		sb.append(	"SET "											);
 		sb.append(		"postal_code = ?, "							);
@@ -42,11 +42,10 @@ public class UpdateShippingAddress {
 			} catch (Exception e) {
 				if(!connection.isClosed()) {
 					connection.rollback();
+					e.printStackTrace();
+					return false;
 				}
-				e.printStackTrace();
-				return false;
 			}
-			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			return false;

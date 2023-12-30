@@ -17,7 +17,7 @@ class TestUpdateShippingAddress {
 		shippingAddressBean.setAddressee("香川県坂出市yyy町9-8-7");
 		shippingAddressBean.setAddress("何処 徹子");
 		shippingAddressBean.setUserId(4);
-		shippingAddressBean.setShippingAddressId(26);
+		shippingAddressBean.setShippingAddressId(8);
 		Boolean result = UpdateShippingAddress.updateShippingAddress(shippingAddressBean);
 		assertTrue(result);
 	}
@@ -26,6 +26,11 @@ class TestUpdateShippingAddress {
 	@Test
 	void testException() {
 		ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
+		shippingAddressBean.setPostalCode(null);
+		shippingAddressBean.setAddressee(null);
+		shippingAddressBean.setAddress(null);
+		shippingAddressBean.setUserId(0);
+		shippingAddressBean.setShippingAddressId(0);
 		Boolean result = UpdateShippingAddress.updateShippingAddress(shippingAddressBean);
 		assertFalse(result);
 	}
