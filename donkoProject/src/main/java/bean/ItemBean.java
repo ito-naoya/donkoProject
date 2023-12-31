@@ -39,7 +39,7 @@ public class ItemBean {
 	@NotNull(groups = {GroupB.class,GroupC.class}, message = "写真を登録してください")
 	private String imageFileName;
 
-	@Length(groups = {GroupC.class}, min=1 , max= 20, message="正しい値を選択してください" )
+	@Length(groups = {GroupB.class}, min=1 , max= 20, message="正しい値を選択してください" )
 	private String itemFirstOptionName;
 	@Length(groups = {GroupB.class,GroupC.class}, min=1 , max= 20, message="正しい値を選択してください" )
 	private String itemSecondOptionName;
@@ -51,8 +51,8 @@ public class ItemBean {
     @Max(groups = {GroupB.class,GroupC.class}, value = 1000000000, message = "正しい値を選択してください")
 	private int itemFirstOptionIncrementId;
 
-	@Min(groups = {GroupB.class,GroupC.class}, value = 1, message = "オプションを選択してください")
-    @Max(groups = {GroupB.class,GroupC.class}, value = 1000000000, message = "正しい値を選択してください")
+	@Min(groups = {GroupC.class}, value = 1, message = "オプションを選択してください")
+    @Max(groups = {GroupC.class}, value = 1000000000, message = "正しい値を選択してください")
     private int itemSecondOptionIncrementId;
 
 	public ItemBean(){};

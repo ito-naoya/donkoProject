@@ -123,9 +123,12 @@
 					<div class="col-11 mt-4">
 						<!-- ここから削除切り替えフォーム  -->
 						<form action="deleteItemIndex" method="post">
-							<h2>削除商品一覧</h1>
-							<h6>商品をダブルクリックで編集できます</h6>
-								<div class="overflow-auto" style="height: calc(85vh - 200px);">
+							<div style="display: flex; align-items: end;">
+							    <h2>削除商品一覧　</h2>
+							    <h6>　商品をダブルクリックで編集できます</h6>
+							</div>
+
+								<div class="overflow-auto" style="height: calc(80vh - 200px);">
 								<table class="table table-borderless  st-tbl1" id="itemTable">
 									<thead>
 									    <tr>
@@ -147,7 +150,7 @@
 											   	 if(itemList != null && itemList.size() > 0){
 											        for(ItemBean item : itemList){
 											%>
-									            <tr style="cursor: pointer;" ondblclick="location.href='editItemInfo1?itemId=<%= item.getItemId() %>'">
+									          	 <tr style="cursor: pointer;" onclick="changeColor(this)" ondblclick="location.href='editItemInfo1?itemId=<%= item.getItemId() %>'">
 									                <td style="vertical-align: middle;"><!-- ID -->
 									                    <p><%= item.getItemId() %></p>
 									                </td>
@@ -191,7 +194,7 @@
 															<p style="color: #00FF00;">販売中</p>
 														<% } %>
 									                </td>
-									                <td><!-- チェックボックス -->
+									                <td style="vertical-align: middle;"><!-- チェックボックス -->
 									                	<input type="checkbox" name="itemStatus" id="item_<%= item.getItemId() %>" value="<%= item.getItemId() %>">
 													</td>
 									            </tr>
@@ -219,6 +222,7 @@
 
 	</div>
 </main>
+
 <script src="./js/deleteItemScript.js"></script>
 </body>
 </html>

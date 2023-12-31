@@ -51,7 +51,7 @@ public class SelectItemAlreadyExistFromItems {
 		            itemToOptionsMap.computeIfAbsent(currentItemId, k -> new ArrayList<>()).add(currentOptionId);
 		        }
 
-		        if(itemSecondOptionIncrementIds == null) {
+		        if(itemSecondOptionIncrementIds == null || itemSecondOptionIncrementIds[0] == null) {
 		        	// optionが1つの時
 	                for (Map.Entry<Integer, ArrayList<Integer>> entry : itemToOptionsMap.entrySet()) {
 	                    ArrayList<Integer> options = entry.getValue();

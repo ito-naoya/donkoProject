@@ -97,10 +97,12 @@ public class EditItemInfo2Servlet extends HttpServlet {
         if (selectBoxCount == 1) {
         	if(BeanValidation.validate(request, "item", updateItem, GroupB.class)) {
         		ItemManagementHelper.errorRedirect(request,response,updateItem,redirectPath);
+        		return;
         	}
         } else {
         	if(BeanValidation.validate(request, "item", updateItem, GroupC.class)) {
         		ItemManagementHelper.errorRedirect(request,response,updateItem,redirectPath);
+        		return;
         	}
         }
 

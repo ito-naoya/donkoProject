@@ -5,15 +5,19 @@ table.st-tbl1 {
 }
 
 table.st-tbl1 th {
-    background: white;
     position: sticky;
     top: 0px;
     z-index: 1;
 }
 
-#itemTable tbody tr:hover {
-    background-color: #e5ccff;
+#itemTable tr:not(.selected-row):hover td {
+    background-color: lightgray;
 }
+
+.selected-row td {
+    background-color: lightgray;
+}
+
 
 input[type="checkbox"]{
   transform: scale(2);
