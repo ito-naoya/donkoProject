@@ -39,7 +39,7 @@ public class OptionServlet extends HttpServlet {
 		itemBean.setItemCategoryName(categoryName);
 		
 		if (checkedOptionList.length > 0) {
-			request.setAttribute("message", "検索キーワード : " + searchKeyword(checkedOptionList, categoryName));
+			request.setAttribute("message", "検索キーワード : 　" + searchKeyword(checkedOptionList, categoryName));
 		}
 		
 		// オプション選択の項目を取得
@@ -69,9 +69,9 @@ public class OptionServlet extends HttpServlet {
 	
 	// 検索したキーワードを文字連結して表示
 	private static String searchKeyword(String[] checkedOptionList, String categoryName) {
-		String searchKeyword = "[ " + categoryName + " ], [ " + checkedOptionList[0] + " ]";
+		String searchKeyword = categoryName + " , " + checkedOptionList[0];
 	    for (int i = 1; i < checkedOptionList.length; i++) {
-	    	searchKeyword += ", " + "[ " + checkedOptionList[i] + " ]";
+	    	searchKeyword += " , " + checkedOptionList[i];
 	    }
 	    return searchKeyword;
 	}

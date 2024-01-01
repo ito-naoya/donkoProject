@@ -4,6 +4,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<style>
+		.link:hover{opacity: 0.7;}
+		.link2:hover{opacity: 0.8;}
+		</style>
 		<title>
 			donko
 		</title>
@@ -12,7 +16,7 @@
 		<%@include file="../component/header.jsp"%>
 		<%@include file="../component/headerTopSpace.jsp"%>
 		<main>
-			<div class="mx-auto mt-5 w-50 d-flex flex-column align-items-start justify-content-center border border-2" style="height:auto; padding: 100px">
+			<div class="mx-auto mt-5 w-50 d-flex flex-column align-items-start justify-content-center border border-2" style="height:auto; padding: 100px; box-shadow:10px 10px 10px lightgray;">
 				<h3 style="color:#63A162;">
 					<strong>
 						<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
@@ -23,13 +27,19 @@
 					</strong>
 				</h3>
 				<small>ご購入ありがとうございます。<br>商品の発送までしばらくお待ちください。</small>
-				<a  href="myPage" style="color: #385a37">
-					<p class="mt-5" >
+				<a  href="myPage" style="color: #385a37; text-decoration:none;">
+					<p class="mt-5 link" >
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+						  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+						</svg>
 						購入履歴を確認する
 					</p>
 				</a>
-				<a  href="home" style="color: #385a37">
-					<p class="mt-2" >
+				<a  href="home" style="color: #385a37; text-decoration:none;">
+					<p class="mt-2 link" >
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+						  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+						</svg>
 						ホームへ戻る
 					</p>
 				</a>

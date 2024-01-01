@@ -111,19 +111,19 @@
 						<% 
 						if (item.getItemStock() == 0) {
 						%>
-							<p class="mt-4 p-3" style=" width: 100px; color: red; border: 1px red solid;">
+							<p class="mb-0 px-3 py-2" style=" width: 100px; color: red; border: 1px red solid; border-radius:5px;">
 								入荷待ち
 							</p>
 						<% 
 						} else if (item.getItemStock() <= 3) {
 						%>
-							<p class="p-3 mt-4 text-center" style=" width: 100px; color: red; border: 1px red solid;">
+							<p class="mb-0 px-3 py-2 text-center" style=" width: 100px; color: red; border: 1px red solid; border-radius:5px;">
 								残り<%=item.getItemStock()%>点
 							</p>
 						<%		
 						} else {
 						%>
-							<p class="border p-3 mt-4 text-center" style=" width: 100px;">
+							<p class="border mb-0 px-3 py-2 text-center" style=" width: 100px; border-radius:5px;">
 								残り<%=item.getItemStock()%>点
 							</p>
 						<%
@@ -137,8 +137,8 @@
 									<small class="mx-4">数量</small>
 									<input type="number" name="quantity" min="1" step="1" max="<%=item.getItemStock()%>" class="form-control mx-4" style="width:80px;" value="1">
 								</div>
-								<button type=submit class="btn btn-sm px-5 py-3" style="background-color: #9933ff; color: white;">
-									カートに入れる
+								<button type=submit class="btn mt-auto" style="background-color: #9933ff; color: white;">
+									カートに追加
 								</button>
 							</form>
 						<%
