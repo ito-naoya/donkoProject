@@ -54,7 +54,7 @@ public class RegistItemServlet1 extends HttpServlet {
 		newItem.setItemDescription(request.getParameter("itemDescription"));
 		String price = request.getParameter("price");
 		String stock = request.getParameter("stock");
-
+		
 		//int型のフィールドの取得情報について、null値及び文字数制限の超過が無いかどうか確認し、itemBeanに登録
 		newItem = Item.checkRegistItemDetail(newItem, price, stock);
 		if(newItem == null) {
@@ -70,7 +70,7 @@ public class RegistItemServlet1 extends HttpServlet {
 			String view = "/WEB-INF/views/admin/registItem1.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 			return;
-		}
+  		}
 
 		//取得した商品情報をセット
 		request.setAttribute("newItem", newItem);

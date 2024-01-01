@@ -44,7 +44,7 @@
 								aria-describedby="addresses" name="addressee"
 								value="<%=shippingAddressEdit.getAddressee() %>">
 						</div>
-						<div class="d-flex flex-wrap mb-3"
+						<div class="d-flex flex-wrap mb-4"
 							style="display: flex; justify-content: start; color: #FF0000;">
 							<% String addressee = (String) request.getAttribute("addressee"); %>
 							<% if (addressee != null) { %>
@@ -57,13 +57,12 @@
 								aria-describedby="postalcode" maxlength="8" name="postalcode"
 								value="<%=shippingAddressEdit.getPostalCode() %>">
 						</div>
-						<div class="d-flex flex-wrap mb-3"
+						<div class="d-flex flex-wrap mb-4"
 							style="display: flex; justify-content: start; color: #FF0000;">
 							<% String postalCode = (String) request.getAttribute("postalCode"); %>
 							<% if (postalCode != null) { %>
 							<%= postalCode %>
 							<% } %>
-							<p id="errorMessagePostalCode" style="color:red;"></p>
 						</div>
 						<div class="form-group d-flex flex-wrap">
 							<label for="exampleInputAddress">住所</label>
@@ -71,7 +70,7 @@
 								aria-describedby="address" name="address"
 								value="<%=shippingAddressEdit.getAddress() %>">
 						</div>
-						<div class="d-flex flex-wrap mb-3"
+						<div class="d-flex flex-wrap mb-4"
 							style="display: flex; justify-content: start; color: #FF0000;">
 							<% String address = (String) request.getAttribute("address"); %>
 							<% if (address != null) { %>

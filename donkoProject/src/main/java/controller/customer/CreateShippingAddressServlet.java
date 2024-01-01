@@ -1,6 +1,9 @@
 package controller.customer;
 
 import java.io.IOException;
+import java.text.Normalizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import bean.ShippingAddressBean;
 import classes.ErrorHandling;
@@ -77,7 +80,7 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		// ShippingAddressBeanに値をセット
 		shippingAddressBean.setUserId((int)userId);
 		shippingAddressBean.setAddressee(request.getParameter("addresses"));
-		shippingAddressBean.setPostalCode(request.getParameter("postcode"));
+		shippingAddressBean.setPostalCode(regexPostalCodeCheck(request.getParameter("postalcode"))); // 正規表現で郵便番号を確認して変換
 		shippingAddressBean.setAddress(request.getParameter("address"));
 		shippingAddressBean.setMainShippingAddress(status);
 		
@@ -91,6 +94,27 @@ public class CreateShippingAddressServlet extends HttpServlet {
 		} else {
 			// エラー画面を返す
 			ErrorHandling.transitionToErrorPage(request, response, "配送先登録処理に失敗しました", "myPage", "マイページに");
+		}
+	}
+	
+	// 全角数字を半角数字に変換するメソッド
+	private String regexPostalCodeCheck(String postalCode) {
+		// 正規表現のパターン
+		String regex = "^[0-9]{7}+$";
+		// 正規表現のパターンをセット
+		Pattern pattern = Pattern.compile(regex);
+		// 郵便番号の値が正規表現のパターンと一致するかセット
+		Matcher matcher = pattern.matcher(postalCode);
+		// 郵便番号の値と正規表現のパターンと照らし合わせた結果
+		boolean regexPostalCode = matcher.matches();
+		// 正規表現で照らし合わせた結果
+		if(regexPostalCode) {
+			// 半角数字7桁であればBeanに値をセット
+			return postalCode;
+		} else {
+			// 半角数字7桁に置換してからBeanにセット
+			String postalCodeSub = Normalizer.normalize(postalCode, Normalizer.Form.NFKC).replaceAll("[^\\p{ASCII}]", "");
+			return postalCodeSub;
 		}
 	}
 }

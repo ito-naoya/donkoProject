@@ -1,5 +1,7 @@
 package bean;
 
+import javax.validation.constraints.Digits;
+
 import org.hibernate.validator.constraints.Length;
 
 import interfaces.group.GroupB;
@@ -9,6 +11,7 @@ public class ShippingAddressBean {
 	private int shippingAddressId;
 	private int userId;
 	@Length(groups = {GroupB.class}, min=7 , max=7, message="{max}文字で入力してください。" )
+	@Digits(integer = 7, fraction = 0, message = "半角数字で入力してください。")
 	private String postalCode;
 	@Length(groups = {GroupB.class}, min=1 , max=25, message="{min}文字以上{max}文字以下で入力してください。" )
 	private String addressee;

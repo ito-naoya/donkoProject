@@ -26,8 +26,7 @@
 						<strong>パスワード変更</strong>
 					</h2>
 					<div>
-						<a href="home"
-							style="text-decoration: none; text-align: center;"><button
+						<a href="home" style="text-decoration: none; text-align: center;"><button
 								type="button" class="btn-close border" aria-label="Close"></button>️</a>
 					</div>
 				</div>
@@ -35,7 +34,7 @@
 					<label for="exampleInputUserId">ユーザーID</label><br>
 				</div>
 				<div class="form-group"
-					style="display: flex; justify-content: center; margin-bottom: 30px;">
+					style="display: flex; justify-content: center;">
 					<input type="text" class="form-control" id="exampleInputUserId"
 						aria-describedby="userId" name="user_login_id" value="">
 				</div>
@@ -56,24 +55,23 @@
 					<label for="exampleInputPassword">パスワード</label><br>
 				</div>
 				<div class="form-group"
-					style="display: flex; justify-content: center; margin-bottom: 30px;">
+					style="display: flex; justify-content: center;">
 					<input type="text" class="form-control" id="exampleInputPassword"
-						aria-describedby="password" name="password"
-						value="">
+						aria-describedby="password" name="password" value="">
 				</div>
-        <div class="d-flex flex-wrap"
-          style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
-          <%
-          String password = (String) request.getAttribute("password");
-          %>
-          <%
-          if (password != null) {
-          %>
-          <%=password%>
-          <%
-          }
-          %>
-        </div>
+				<div class="d-flex flex-wrap"
+					style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
+					<%
+					String password = (String) request.getAttribute("password");
+					%>
+					<%
+					if (password != null) {
+					%>
+					<%=password%>
+					<%
+					}
+					%>
+				</div>
 				<div class="cancelButton"
 					style="display: flex; justify-content: center; margin-bottom: 20px;">
 					<button type="submit" class="btn btn-lg w-100"
@@ -82,6 +80,6 @@
 		</form>
 		</div>
 	</main>
-	 <script src="./js/editUserInfoScript.js"></script>
+	<script src="./js/editUserInfoScript.js"></script>
 </body>
 </html>

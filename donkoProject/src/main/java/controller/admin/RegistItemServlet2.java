@@ -52,7 +52,6 @@ public class RegistItemServlet2 extends HttpServlet {
 
 	    // 画像情報を取得
 	    Part imgPart = request.getPart("img");
-
 	    //int型のフィールドの取得情報について、null値及び数値以外の値がないかどうか確認し、itemBeanに登録
   		newItem = Item.checkRegistItemDetail(newItem, price, stock);
   		if(newItem == null) {
@@ -62,6 +61,7 @@ public class RegistItemServlet2 extends HttpServlet {
   		}
   		if(BeanValidation.validate(request, "item", newItem, GroupA.class)) {
   			ItemManagementHelper.errorRedirect(request,response,newItem,redirectPath);
+  			return;
   		}
 
 	    // セレクトボックスの個数を取得
@@ -95,10 +95,12 @@ public class RegistItemServlet2 extends HttpServlet {
         if (selectBoxCount == 1) {
         	if(BeanValidation.validate(request, "item", newItem, GroupB.class)) {
         		ItemManagementHelper.errorRedirect(request,response,newItem,redirectPath);
+        		return;
         	}
         } else {
         	if(BeanValidation.validate(request, "item", newItem, GroupC.class)) {
         		ItemManagementHelper.errorRedirect(request,response,newItem,redirectPath);
+        		return;
         	}
         }
 

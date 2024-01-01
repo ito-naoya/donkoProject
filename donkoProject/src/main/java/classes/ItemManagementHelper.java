@@ -39,14 +39,13 @@ public class ItemManagementHelper {
 	            return;
 	    }
 
+	    //商品編集、登録画面から商品一覧に遷移
 	    public static void deleteItemRedirect(HttpServletResponse response, ItemBean updateItem, String message)
 				throws UnsupportedEncodingException, IOException {
 			String encodedItemCategoryName = URLEncoder.encode(updateItem.getItemCategoryName(), "UTF-8");
 			String encodedMessage = URLEncoder.encode(message, "UTF-8");
-			String redirectURL = "deleteItemIndex?itemCategoryName=" + encodedItemCategoryName + "&itemDelFlg=" + "0" + "&message=" + encodedMessage;
+			String redirectURL = "deleteItemIndex?itemCategoryName=" + encodedItemCategoryName + "&itemDelFlg=" + "0" + "&message=" + encodedMessage + "&order=desc";
 			response.sendRedirect(redirectURL);
 			return;
 		}
-
-
 }

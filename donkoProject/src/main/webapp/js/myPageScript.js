@@ -27,3 +27,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+// 退会確認画面のモーダルを表示
+document.getElementById("deleteUserButton").addEventListener("click", function() {
+  // ユーザ情報のモーダルを非表示にする
+  document.getElementById("userInfoWindow").style.display = "none";
+  // 確認画面のモーダルを表示する
+  document.getElementById("staticBackdrop").style.display = "";
+
+});
+
+// ユーザ情報の確認画面のモーダルを表示
+document.getElementById("cancelButton").addEventListener("click", function() {
+  // 確認画面のモーダルを非表示にする
+  document.getElementById("staticBackdrop").style.display = "none";
+    // ユーザ情報のモーダルを表示する
+  document.getElementById("userInfoWindow").style.display = "";
+});
