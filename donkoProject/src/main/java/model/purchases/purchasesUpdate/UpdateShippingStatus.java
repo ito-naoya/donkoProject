@@ -26,9 +26,15 @@ public class UpdateShippingStatus {
 			add(purchaseBean.getShippingId());
 			add(purchaseBean.getPurchaseId());
 		}};
+		
+		int totalUpdatedRows = 0;
+		
 		try (Connection conn = DatabaseConnection.getConnection()) {
 			try {
-				GeneralDao.executeUpdate(conn, UPDATE_SHIPPING_SQL, paramList);
+				totalUpdatedRows += GeneralDao.executeUpdate(conn, UPDATE_SHIPPING_SQL, paramList);
+				
+				if(totalUpdatedRows < 1) throw new SQLException();
+				
 				conn.commit();
 			} catch (SQLException e) {
 				if (conn != null && !conn.isClosed()&& !conn.getAutoCommit()) {

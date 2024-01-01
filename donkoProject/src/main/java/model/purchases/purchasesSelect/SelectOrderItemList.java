@@ -21,9 +21,9 @@ public class SelectOrderItemList {
 		sb.append(	  "p.user_id, "                                          );
 		sb.append(	  "u.user_name, "                                        );
 		sb.append(	  "p.total_amount, "                                     );
-		sb.append(	  "p.postal_code, "                                     );
-		sb.append(	  "p.address, "                                         );
-		sb.append(	  "p.addressee, "                                       );
+		sb.append(	  "p.postal_code, "                                      );
+		sb.append(	  "p.address, "                                          );
+		sb.append(	  "p.addressee, "                                        );
 		sb.append(	  "s.shipping_status "                                   );
 		sb.append("FROM "                                                    );
 		sb.append(	  "purchases p "                                         );
