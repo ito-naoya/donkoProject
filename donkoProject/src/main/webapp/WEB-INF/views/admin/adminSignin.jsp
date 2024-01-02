@@ -13,48 +13,56 @@
 </head>
 <body>
   <main>
-		<div class="container　ml-5 mr-5">
-			<div class="row justify-content-center">
-				<div class="col-5 m-5 p-5" style="border: 1px solid #333333;">
-
-			          <h2>
-			            <strong>管理者ログイン</strong>
-			          </h2>
-			          <br>
-			            <%
+		<div class="container mx-0">
+			<div class="row" style="height:100vh; width:100vw;">
+			
+				<div class="col-lg-5 border m-auto p-5" style="display: flex; justify-content: center; border-radius:10px; box-shadow:10px 10px 10px lightgray;">
+					<!-- ここからフォーム -->
+					<form action="adminSignin" method="post" class="w-100">
+						<h5>
+							<img src="./images/donkoLogo2.png" style="height:50px;">
+							<strong>管理者ログイン</strong>
+						</h5>
+						<br>
+						<%
 						String errorMessage = (String) request.getAttribute("errorMessage");
 						if(errorMessage != null && !errorMessage.isEmpty()) {
 						%>
-						    <div class="alert alert-danger alert-message" role="alert">
-						        <%= errorMessage %>
-						    </div>
+							<div class="alert alert-danger alert-message" role="alert">
+								<%= errorMessage %>
+							</div>
 						<%
 						}
 						%>
+						<div class="mb-3">
+							<label for="adminLoginId" class="form-label">ユーザーID</label>
+							<div>
+								<input type="text" class="form-control" id="adminLoginId"
+									name="adminLoginId" required>
+							</div>
+						</div>
 
-						<!-- ここからフォーム -->
-					    <form action="adminSignin" method="post">
-				            <div class="row mb-5 mt-3">
-				              <label for="adminLoginId" class="form-label">ユーザーID</label>
-				              <div class="col-12">
-				                <input type="text" class="form-control" id="adminLoginId" name="adminLoginId" required>
-				              </div>
-				            </div>
-
-				            <div class="row mb-3">
-				              <label for="adminLoginPass" class="form-label">パスワード</label>
-				              <div class="col-12">
-				                <input type="text" class="form-control" id="adminLoginPass" name="adminLoginPass" required>
-				              </div>
-				            </div>
-
-				            <div class="row">
-				              <div class="col-12 mt-5 d-flex justify-content-center">
-				                <input type="submit" value="ログイン" class="btn border" style="background-color:#9933FF; color: white; padding: 12px 80px;">
-				              </div>
-				            </div>
-				        </form>
+						<div class="mb-5">
+							<label for="adminLoginPass" class="form-label">パスワード</label>
+							<div>
+								<input type="text" class="form-control" id="adminLoginPass"
+									name="adminLoginPass" required>
+							</div>
+						</div>
+						
+						<div class="mt-5">
+							<div class="d-flex justify-content-center">
+								<input type="submit" value="ログイン" class="btn border w-50"
+									style="background-color: #9933FF; color: white; margin:20px 0;">
+							</div>
+						</div>
+					</form>
 				</div>
+				
+				<div class="col-lg-6 d-flex justify-content-center px-5" style="height:100%; background-image: url('./images/広告3.jpeg'); background-size: cover; background-position: center;">
+					<a href="home" class="border p-3" style="margin:auto; color:white; border-radius:5px; text-decoration:none;">ユーザー側ホーム画面に移動</a>
+				</div>
+				
 			</div>
     	</div>
   </main>

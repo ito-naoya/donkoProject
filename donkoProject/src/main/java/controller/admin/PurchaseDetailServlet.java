@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/purchaseDetail")
 public class PurchaseDetailServlet extends HttpServlet {
@@ -23,6 +24,15 @@ public class PurchaseDetailServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession as = request.getSession();
+		String adminSession = (String)as.getAttribute("admin");
+		
+		// アドミンのセッションがnullの場合は管理者ログイン画面に遷移
+		if (adminSession == null) {
+			response.sendRedirect("adminSignin");
+			return;
+		}
+		
 		// purchaseIdがリクエストパラメータに存在しない場合はアドミンのホーム画面に遷移
 		if (request.getParameter("purchaseId") == null) {
 			response.sendRedirect("adminTopPage");
