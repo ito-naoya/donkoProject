@@ -272,7 +272,7 @@
 						<%
 						} else {
 						%>
-							<td align="middle" style="color: #63A162;"><strong><%=purchaseBean.getShippingStatus()%></strong></td>
+							<td align="middle" style="color: #63A162;"><%=purchaseBean.getShippingStatus()%></td>
 						<%
 						}
 						%>

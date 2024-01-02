@@ -16,20 +16,25 @@ public class SelectPurchaseInfo {
 	public static PurchaseBean selectPurchaseInfo(PurchaseBean purchaseBean){
   		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT "                                                  );
-		sb.append(   "p.purchase_id, "                                      );
+		sb.append(    "p.purchase_id, "                                      );
 		sb.append(    "u.user_name, "                                        );
 		sb.append(    "p.purchase_date, "                                    );
 		sb.append(    "p.total_amount, "                                     );
 		sb.append(    "p.shipping_id, "                                      );
 		sb.append(    "p.postal_code, "                                      );
 		sb.append(    "p.address, "                                          );
-		sb.append(    "p.addressee "                                         );
+		sb.append(    "p.addressee, "                                        );
+		sb.append(    "s.shipping_status "                                   );
 		sb.append("FROM "                                                    );
 		sb.append(    "purchases p "                                         );
 		sb.append("INNER JOIN "                                              );
 		sb.append(    "users u "                                             );
 		sb.append("ON "                                                      );
 		sb.append(    "p.user_id = u.user_id "                               );
+		sb.append("INNER JOIN "                                              );
+		sb.append(    "shippings s "                                         );
+		sb.append("ON "                                                      );
+		sb.append(    "p.shipping_id = s.shipping_id "                       );
 		sb.append("WHERE "                                                   );
 		sb.append(    "p.purchase_id = ?"                                    );
 		
@@ -53,6 +58,7 @@ public class SelectPurchaseInfo {
 					String postalCode = result.getString("postal_code");
 					String address = result.getString("address");
 					String addressee = result.getString("addressee");
+					String shippingStatus = result.getString("shipping_status");
 					purchaseInfo.setPurchaseId(purchaseId);
 					purchaseInfo.setUserName(userName);
 					purchaseInfo.setPurchaseDate(purchaseDate);
@@ -61,6 +67,7 @@ public class SelectPurchaseInfo {
 					purchaseInfo.setPostalCode(postalCode);
 					purchaseInfo.setAddress(address);
 					purchaseInfo.setAddressee(addressee);
+					purchaseInfo.setShippingStatus(shippingStatus);
 				}
 				
 			} catch (Exception e) {

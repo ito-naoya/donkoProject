@@ -81,9 +81,9 @@
 				<div>
 				<h5 class="mb-3"><strong>私たちについて</strong></h5>
 				<small>
-					山形県で誕生したECサイト「donko」へようこそ！<br>
-					私たちは地元の魅力を全国に発信し、暖かい心でつながるコミュニティを築いています。<br>
-					donkoは、山形の豊かな自然と伝統を感じながら、新しい価値観を提案し続けるプラットフォームです。
+					山形県で誕生したECサイト<img src="./images/donkoLogo2.png" class="mb-1" style="height:30px;">へようこそ！<br>
+					私たちは地元の魅力を全国に発信し、暖かい心でつながるコミュニティを築いています。<br><br>
+					<img src="./images/donkoLogo2.png" class="mb-1" style="height:30px;">は、山形の豊かな自然と伝統を感じながら、新しい価値観を提案し続けるプラットフォームです。
 				</small>
 				</div>
 			</div>
