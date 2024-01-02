@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/adminTopPage")
 public class AdminTopPageServlet extends HttpServlet {
@@ -21,6 +22,15 @@ public class AdminTopPageServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession as = request.getSession();
+		String adminSession = (String)as.getAttribute("admin");
+		
+		// アドミンのセッションがnullの場合は管理者ログイン画面に遷移
+		if (adminSession == null) {
+			response.sendRedirect("adminSignin");
+			return;
+		}
+		
 		// 未発送の購入情報を一覧表示
 		ArrayList<PurchaseBean> unshippingedItemList = Purchase.getUnshippingedItemListByDesc();
 
