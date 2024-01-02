@@ -16,6 +16,10 @@
 			rel="stylesheet"
 			integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 			crossorigin="anonymous">
+		<style>
+		.link:hover{opacity: 0.7;}
+		.link2:hover{opacity: 0.8;}
+		</style>
 	</head>
 	<body>
 		<main>
@@ -81,9 +85,11 @@
 							<%
 							} else {
 							%>
-								<a href="shippingAddressIndex" style="color: #385a37">
-									住所を設定してください
-								</a>
+								<div class="mb-3">
+									<a href="shippingAddressIndex" class="link" style="color: #385a37; text-decoration: none;">
+										<small class="px-3 py-2" style="border:0.5px #385a37 solid; border-radius:40px;">配送先を選択</small>
+									</a>
+								</div>
 							<%
 							} 
 							%>

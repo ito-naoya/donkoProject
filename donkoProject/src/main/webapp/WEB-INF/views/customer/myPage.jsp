@@ -252,18 +252,20 @@
 					<tr onclick="location.href='orderDetail?purchase_id=<%=purchaseBean.getPurchaseId()%>'"
 						style="cursor: pointer;">
 						<!-- 注文番号 -->
-						<td align="middle""><%=purchaseBean.getPurchaseId()%></td>
+						<td align="middle">#<%=purchaseBean.getPurchaseId()%></td>
 						<!-- 単価 -->
 						<td align="middle" style="white-space: nowrap;">¥ <%=String.format("%,d", purchaseBean.getTotalAmount())%></td>
 						<!-- 購入日 -->
-						<td align="middle" style="white-space: nowrap;"><%=new SimpleDateFormat("yyyy/MM/dd hh:mm").format(purchaseBean.getPurchaseDate())%></td>
+						<td align="middle" style="white-space: nowrap;"><%=new SimpleDateFormat("yyyy / MM / dd　hh:mm").format(purchaseBean.getPurchaseDate())%></td>
 						<!-- 配送先 -->
-						<td align="middle" style="white-space: nowrap;">〒 
+						<td align="middle" style="white-space: nowrap;">
 						<% String postalCode = (String) purchaseBean.getPostalCode();%>
 						<% String head = postalCode.substring(0, 3);
 						  String end = postalCode.substring(3);
-						%> <%= head %>-<%= end %>
-							<%=purchaseBean.getAddress()%> <%=purchaseBean.getAddressee()%></td>
+						%>
+						〒 <%= head %>-<%= end %>　
+						<%=purchaseBean.getAddress()%>　
+						<%=purchaseBean.getAddressee()%></td>
 						<!-- 配送ステータス -->
 						<%
 						if ((purchaseBean.getShippingStatus()).equals("処理中")) {
