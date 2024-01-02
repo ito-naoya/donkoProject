@@ -13,15 +13,16 @@
 </head>
 <body>
   <main>
-		<div class="container">
-			<div class="row" style="height:100vh;">
+		<div class="container mx-0">
+			<div class="row" style="height:100vh; width:100vw;">
+			
 				<div class="col-lg-5 border m-auto p-5" style="display: flex; justify-content: center; border-radius:10px; box-shadow:10px 10px 10px lightgray;">
-
 					<!-- ここからフォーム -->
 					<form action="adminSignin" method="post" class="w-100">
-						<h4>
+						<h5>
+							<img src="./images/donkoLogo2.png" style="height:50px;">
 							<strong>管理者ログイン</strong>
-						</h4>
+						</h5>
 						<br>
 						<%
 						String errorMessage = (String) request.getAttribute("errorMessage");
@@ -56,8 +57,12 @@
 							</div>
 						</div>
 					</form>
-					
 				</div>
+				
+				<div class="col-lg-6 d-flex justify-content-center px-5" style="height:100%; background-image: url('./images/広告3.jpeg'); background-size: cover; background-position: center;">
+					<a href="home" class="border p-3" style="margin:auto; color:white; border-radius:5px; text-decoration:none;">ユーザー側ホーム画面に移動</a>
+				</div>
+				
 			</div>
     	</div>
   </main>
