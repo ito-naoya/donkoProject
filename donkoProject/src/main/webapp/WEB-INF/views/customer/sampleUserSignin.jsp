@@ -76,7 +76,9 @@
 					<div class="row">
 						<div class="col-12 mt-3 d-flex justify-content-center">
 							<div style="width:50%;">
-							<small class="mb-3">パスワードをお忘れですか？</small><br>
+							<div class="d-flex justify-content-center">
+							<small>パスワードをお忘れですか？</small><br>
+							</div>
 							<a href="updateUserPassword">
 							<input type="submit" value="パスワード変更" class="btn border w-100"
 								style="background-color: #9933FF; color: white;">
