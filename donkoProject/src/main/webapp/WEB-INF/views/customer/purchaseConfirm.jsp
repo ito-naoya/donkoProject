@@ -16,6 +16,10 @@
 			rel="stylesheet"
 			integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 			crossorigin="anonymous">
+		<style>
+		.link:hover{opacity: 0.7;}
+		.link2:hover{opacity: 0.8;}
+		</style>
 	</head>
 	<body>
 		<main>
@@ -74,16 +78,18 @@
 									<%= sa.getAddressee() %>
 								</p>
 								<div class="d-flex justify-content-end">
-									<a href="shippingAddressIndex" style="color: #385a37">
-										メインの配送先を変更
+									<a href="shippingAddressIndex" style="color: #385a37; text-decoration: none;">
+										<small class="px-3 py-2" style="border:1px #385a37 solid; border-radius:40px;">メインの配送先を変更</small>
 									</a>
 								</div>
 							<%
 							} else {
 							%>
-								<a href="shippingAddressIndex" style="color: #385a37">
-									住所を設定してください
-								</a>
+								<div class="mb-3">
+									<a href="shippingAddressIndex" class="link" style="color: #385a37; text-decoration: none;">
+										<small class="px-3 py-2" style="border:0.5px #385a37 solid; border-radius:40px;">配送先を選択</small>
+									</a>
+								</div>
 							<%
 							} 
 							%>
@@ -104,8 +110,9 @@
 										<a href="itemDetail?itemId=<%= cb.getItemId() %>&source=purchaseConfirm" class="me-3"
 										style="text-decoration: none; display: inline-block;">
 											<div style="height: 100px; width: 100px;">
-												<img class="object-fit-cover w-100 h-100 itemImage"
-													src="./images/<%= cb.getImageFileName() %>.jpg">
+												<img class="object-fit-cover w-100 h-100 itemImage border"
+													src="./images/<%= cb.getImageFileName() %>.jpg"
+													style="border-radius:5px;">
 											</div>
 										</a>
 									</td>

@@ -35,7 +35,10 @@
 			<div class="row d-flex justify-content-center">
 				<div class="col-lg-3 mb-4">
 					<div class="m-auto" style="width: 100%;">
-						<img class="object-fit-cover" style=" width: 100%; aspect-ratio: 1 / 1;" id="mainImage" src="./images/<%=item.getImageFileName()%>.jpg">
+						<img class="object-fit-cover border" 
+							 style=" width: 100%; aspect-ratio: 1 / 1; border-radius:5px;" 
+							 id="mainImage" 
+							 src="./images/<%=item.getImageFileName()%>.jpg">
 					</div>
 				</div>
 				<div class="col-lg-7">
@@ -65,7 +68,9 @@
 							%>
 							<a href="itemDetail?itemId=<%=itemBean.getItemId()%>" class="me-3" style="text-decoration: none;">
 								<div style="height: 120px; width: 120px;">
-									<img class="object-fit-cover w-100 h-100 subImage" src="./images/<%=itemBean.getImageFileName()%>.jpg">
+									<img class="object-fit-cover w-100 h-100 subImage border" 
+										 src="./images/<%=itemBean.getImageFileName()%>.jpg"
+										 style="border-radius:5px;">
 								</div>
 							</a>
 							<%

@@ -26,7 +26,7 @@
 						<strong>パスワード変更</strong>
 					</h2>
 					<div>
-						<a href="home" style="text-decoration: none; text-align: center;"><button
+						<a href="userSignin" style="text-decoration: none; text-align: center;"><button
 								type="button" class="btn-close border" aria-label="Close"></button>️</a>
 					</div>
 				</div>

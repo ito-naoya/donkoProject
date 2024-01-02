@@ -11,14 +11,11 @@
 <link href="./css/style.css" rel="stylesheet">
 <title>donko</title>
 <style>
-.border::-webkit-scrollbar {
-	display: none;
-}
-
-.th {
-	position: sticky;
-	top: 0;
-}
+.border::-webkit-scrollbar {display: none;}
+.th {position: sticky; top: 0;}
+td {vertical-align: middle;}
+.link:hover{opacity: 0.7;}
+.link2:hover{opacity: 0.8;}
 </style>
 </head>
 <body>
@@ -102,14 +99,17 @@
 								int userId = (int) request.getAttribute("user_id");
 								%>
 								<a href="userInfoEdit?=<%=userId%>"
+									class="link"
 									style="color: #000000; vertical-align: middle; text-decoration: none; width: 50%; margin-right: 30px;">
 									<button class="btn p-2 w-100"
 										style="border: 1px solid gray; background: #E5CCFF;">編集</button>
 								</a>
-								<div style="width: 50%;">
+								<div style="width: 50%;" class="link">
 									<button class="deleteUserButton btn p-2 text-nowrap w-100"
-										data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="deleteUserButton"
-										style="border: 1px solid #FF0000; background: #FFFFFF; color: #FF0000;">退会</button>
+										data-bs-toggle="modal" 
+										data-bs-target="#staticBackdrop" 
+										id="deleteUserButton"
+										style="border: 1px solid #FF0000; color: #FF0000;">退会</button>
 								</div>
 							</div>
 						</div>
@@ -122,21 +122,25 @@
 					<div class="modal-dialog modal-dialog-centered w-100">
 						<div class="modal-content" id="modalWindow" style="width:100%;">
 							<div class="modal-header">
-								<h1 class="modal-title fs-5" id="staticBackdropLabel">
-									<strong>退会</strong>
-								</h1>
-								<a href="myPage">
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</a>
+								<p class="modal-title fs-5" id="staticBackdropLabel">
+									退会手続き
+								</p>
+								<button class="btn ms-auto p-0" data-bs-dismiss="modal" id="cancelButton">
+									<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+									  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+									  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+									</svg>
+								</button>
 							</div>
 							<div class="modal-body">
-								<strong>アカウントのデータが全て消えます。</strong><br>それでも退会してよろしいでしょうか？
+								退会処理を行うとアカウントのデータが
+								<strong>全て</strong>消えます。<br>
+								本当に退会してよろしいですか？<br><br>
+								<small>退会後は現在のアカウントでログインできません。</small>
 							</div>
 							<div class="modal-footer">
-								<button class="btn btn-secondary" data-bs-dismiss="modal" id="cancelButton">キャンセル</button>
 								<form action="deleteUser" method="post">
-									<button type="submit" class="btn btn-danger">退会</button>
+									<button type="submit" class="btn link" style="color:white; background-color:#FF0000;">退会</button>
 								</form>
 							</div>
 						</div>
@@ -197,7 +201,7 @@
 								<p id="errorMessageAddress" style="color:red;"></p>
 								<div class="cancelButton mt-5 d-flex justify-content-center">
 									<button type="submit" class="btn" id="createButton"
-										style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; padding: 10px; width:50%;">
+										style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; width:50%;">
 										登録
 									</button>
 								</div>
@@ -229,8 +233,8 @@
 			} 
 			%>
 		</div>
-		<div style="overflow-x: scroll; height: 30vh;"
-			class="border mx-5 my-3">
+		<div style="overflow-x: scroll; height: 30vh; border-radius: 5px;"
+			class="border mx-5 my-3 px-3">
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
 			%>
@@ -252,18 +256,20 @@
 					<tr onclick="location.href='orderDetail?purchase_id=<%=purchaseBean.getPurchaseId()%>'"
 						style="cursor: pointer;">
 						<!-- 注文番号 -->
-						<td align="middle""><%=purchaseBean.getPurchaseId()%></td>
+						<td align="middle">#<%=purchaseBean.getPurchaseId()%></td>
 						<!-- 単価 -->
 						<td align="middle" style="white-space: nowrap;">¥ <%=String.format("%,d", purchaseBean.getTotalAmount())%></td>
 						<!-- 購入日 -->
-						<td align="middle" style="white-space: nowrap;"><%=new SimpleDateFormat("yyyy/MM/dd hh:mm").format(purchaseBean.getPurchaseDate())%></td>
+						<td align="middle" style="white-space: nowrap;"><%=new SimpleDateFormat("yyyy / MM / dd　hh:mm").format(purchaseBean.getPurchaseDate())%></td>
 						<!-- 配送先 -->
-						<td align="middle" style="white-space: nowrap;">〒 
+						<td align="middle" style="white-space: nowrap;">
 						<% String postalCode = (String) purchaseBean.getPostalCode();%>
 						<% String head = postalCode.substring(0, 3);
 						  String end = postalCode.substring(3);
-						%> <%= head %>-<%= end %>
-							<%=purchaseBean.getAddress()%> <%=purchaseBean.getAddressee()%></td>
+						%>
+						〒 <%= head %>-<%= end %><br>
+						<%=purchaseBean.getAddress()%><br>
+						<%=purchaseBean.getAddressee()%></td>
 						<!-- 配送ステータス -->
 						<%
 						if ((purchaseBean.getShippingStatus()).equals("処理中")) {
@@ -272,7 +278,7 @@
 						<%
 						} else {
 						%>
-							<td align="middle" style="color: #63A162;"><strong><%=purchaseBean.getShippingStatus()%></strong></td>
+							<td align="middle" style="color: #63A162;"><%=purchaseBean.getShippingStatus()%></td>
 						<%
 						}
 						%>
