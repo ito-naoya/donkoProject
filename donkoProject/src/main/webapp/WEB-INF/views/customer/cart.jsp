@@ -49,16 +49,6 @@
 						%>
 						<hr>
 						<table class="table table-borderless">
-							<!-- <thead class="text-center">
-								<tr>
-									<th></th>
-									<th>商品名</th>
-									<th>単価</th>
-									<th>数量</th>
-									<th>小計</th>
-									<th></th>
-								</tr>
-							</thead> -->
 							<tbody>
 								<%
 								for(CartBean cb : cartBeanList) {
@@ -68,8 +58,9 @@
 										<a href="itemDetail?itemId=<%= cb.getItemId() %>&source=cart"
 										style="text-decoration: none; display: inline-block;">
 											<div style="height: 100px; width: 100px;">
-												<img class="object-fit-cover w-100 h-100 itemImage"
-													src="./images/<%= cb.getImageFileName() %>.jpg">
+												<img class="object-fit-cover w-100 h-100 itemImage border"
+													src="./images/<%= cb.getImageFileName() %>.jpg"
+													style="border-radius:5px;">
 											</div>
 										</a>
 									</td>

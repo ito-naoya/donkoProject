@@ -201,7 +201,7 @@ td {vertical-align: middle;}
 								<p id="errorMessageAddress" style="color:red;"></p>
 								<div class="cancelButton mt-5 d-flex justify-content-center">
 									<button type="submit" class="btn" id="createButton"
-										style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; padding: 10px; width:50%;">
+										style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; width:50%;">
 										登録
 									</button>
 								</div>
@@ -233,7 +233,7 @@ td {vertical-align: middle;}
 			} 
 			%>
 		</div>
-		<div style="overflow-x: scroll; height: 30vh;"
+		<div style="overflow-x: scroll; height: 30vh; border-radius: 5px;"
 			class="border mx-5 my-3 px-3">
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
