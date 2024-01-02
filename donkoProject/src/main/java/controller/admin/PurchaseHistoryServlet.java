@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/purchaseHistory")
 public class PurchaseHistoryServlet extends HttpServlet {
@@ -21,6 +22,15 @@ public class PurchaseHistoryServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession as = request.getSession();
+		String adminSession = (String)as.getAttribute("admin");
+		
+		// アドミンのセッションがnullの場合は管理者ログイン画面に遷移
+		if (adminSession == null) {
+			response.sendRedirect("adminSignin");
+			return;
+		}
+		
 		// 全ての受注情報を取得
 		ArrayList<PurchaseBean> orderItemList = Purchase.getOrderItemList();
 		
