@@ -9,6 +9,7 @@ import classes.ErrorHandling;
 import classes.Purchase;
 import classes.PurchaseDetail;
 import classes.user.CustomerUser;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -36,6 +37,11 @@ public class OrderDetailServlet extends HttpServlet {
 			response.sendRedirect("home");
 			return;
 		} else {
+			// ヘッダー表示用
+			String disp = "/header";
+			RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+			dispatch.include(request, response);
+			
 			// ユーザーIDを取得してセット
 			customerUser.setUserId((int)session.getAttribute("user_id"));
 		}
