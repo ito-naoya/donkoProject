@@ -78,8 +78,8 @@
 									<%= sa.getAddressee() %>
 								</p>
 								<div class="d-flex justify-content-end">
-									<a href="shippingAddressIndex" style="color: #385a37">
-										メインの配送先を変更
+									<a href="shippingAddressIndex" style="color: #385a37; text-decoration: none;">
+										<small class="px-3 py-2" style="border:1px #385a37 solid; border-radius:40px;">メインの配送先を変更</small>
 									</a>
 								</div>
 							<%
@@ -110,8 +110,9 @@
 										<a href="itemDetail?itemId=<%= cb.getItemId() %>&source=purchaseConfirm" class="me-3"
 										style="text-decoration: none; display: inline-block;">
 											<div style="height: 100px; width: 100px;">
-												<img class="object-fit-cover w-100 h-100 itemImage"
-													src="./images/<%= cb.getImageFileName() %>.jpg">
+												<img class="object-fit-cover w-100 h-100 itemImage border"
+													src="./images/<%= cb.getImageFileName() %>.jpg"
+													style="border-radius:5px;">
 											</div>
 										</a>
 									</td>
