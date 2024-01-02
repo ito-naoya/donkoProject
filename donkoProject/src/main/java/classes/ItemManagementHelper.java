@@ -48,4 +48,19 @@ public class ItemManagementHelper {
 			response.sendRedirect(redirectURL);
 			return;
 		}
+
+	    //オプション一覧ページに遷移
+	    public static void optionMessage(HttpServletResponse response, String rowMessage) throws UnsupportedEncodingException, IOException {
+			String message = URLEncoder.encode(rowMessage, "UTF-8");
+			String redirectURL = "optionIndex?message=" + message;
+			response.sendRedirect(redirectURL);
+		}
+
+	    //オプション情報を保持した状態でオプション一覧ページに遷移
+		public static void optionDetailMessage(HttpServletResponse response, OptionCategoryBean option, String rowMessage) throws UnsupportedEncodingException, IOException {
+			String message = URLEncoder.encode(rowMessage, "UTF-8");
+			String optionCategoryName = URLEncoder.encode(option.getOptionCategoryName(), "UTF-8");
+			String redirectURL = "optionDetail?message=" + message + "&optionCategoryName=" + optionCategoryName;
+			response.sendRedirect(redirectURL);
+		}
 }
