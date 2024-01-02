@@ -57,7 +57,7 @@
 				<div class="form-group"
 					style="display: flex; justify-content: center;">
 					<input type="text" class="form-control" id="exampleInputPassword"
-						aria-describedby="password" name="password" value="">
+						aria-describedby="password" maxlength="16" name="password" value="">
 				</div>
 				<div class="d-flex flex-wrap"
 					style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
