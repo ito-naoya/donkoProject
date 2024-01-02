@@ -43,7 +43,11 @@
 		  <tbody>
 		  <tr><td>購入日　：　</td><th><%=new SimpleDateFormat("yyyy/MM/dd hh:mm").format(purchaseInfo.getPurchaseDate())%></th></tr>
 		  <tr><td>宛先　：　</td><th><%= purchaseInfo.getAddressee() %></th></tr>
-		  <tr><td>配送先　：　</td><th>〒<%= purchaseInfo.getPostalCode() %> <%= purchaseInfo.getAddress() %></th></tr>
+		  <tr><td>配送先　：　</td><th>〒 
+		  <% String postalCode = (String) purchaseInfo.getPostalCode();%> 
+		  <% String head = postalCode.substring(0, 3);
+		     String end = postalCode.substring(3);%>
+		  <%=head%>-<%=end%> <%=purchaseInfo.getAddress()%></th></tr>
 		  </tbody>
 		  </table>
 		<hr>

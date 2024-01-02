@@ -1,8 +1,15 @@
 package bean;
 
+import org.hibernate.validator.constraints.Length;
+
+import interfaces.group.GroupA;
+import interfaces.group.GroupB;
+
 public class OptionCategoryBean {
 
+	@Length(groups = {GroupA.class}, min=1 , max= 20, message="{min}文字以上{max}文字以下で入力してください。" )
 	private String optionCategoryName;
+	@Length(groups = {GroupB.class}, min=1 , max= 20, message="{min}文字以上{max}文字以下で入力してください。" )
 	private String optionCategoryValue;
 	private int optionCategoryId;
 
