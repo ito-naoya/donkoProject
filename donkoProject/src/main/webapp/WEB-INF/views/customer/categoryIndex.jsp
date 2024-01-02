@@ -9,7 +9,8 @@
 <style type="text/css">
 	a,label{ cursor:pointer; }
 	label:hover { color : #E5CCFF; }
-	}
+	.link:hover{ opacity: 0.7; }
+	.link2:hover{ opacity: 0.8; }
 </style>
 </head>
 <body>
@@ -75,7 +76,8 @@
 					for (ItemBean item : itemList) { 
 					%>
 					<div class="px-2" style="width:20%;">
-						<a href="itemDetail?itemId=<%= item.getItemId() %>&source=category&categoryName=<%= (String)request.getAttribute("categoryName") %>" style="color: #385a37; display: block; text-decoration:none;">
+						<a href="itemDetail?itemId=<%= item.getItemId() %>&source=category&categoryName=<%= (String)request.getAttribute("categoryName") %>" 
+						   class="link" style="color: #385a37; display: block; text-decoration:none;">
 							<span class="card">
 							<img src="./images/<%= item.getImageFileName() %>.jpg"
 								class="card-img-top" alt="<%= item.getImageFileName() %>"
@@ -83,7 +85,7 @@
 							</span>
 						</a>
 						<div class="mb-3">
-							<a href="itemDetail?itemId=<%= item.getItemId() %>" style="color: #385a37;">
+							<a href="itemDetail?itemId=<%= item.getItemId() %>" class="link" style="color: #385a37; text-decoration:none;">
 								<%= item.getItemName() %>
 							</a>
 						</div>
