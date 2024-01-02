@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+table.st-tbl1 {
+    position: relative;
+}
+
+table.st-tbl1 th {
+    position: sticky;
+    top: 0px;
+}
+
+#itemTable tr:hover td:nth-child(1), #itemTable tr:hover td:nth-child(2) {
+    background-color: lightgray;
+}
+
+
+.selected-row td {
+    background-color: lightgray;
+}
+
+.row > .col-6 {
+    border-right: 1px solid #ddd; /* 右側に線を追加 */
+}
+
+.custom-button {
+    border: 4px solid gray;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-text {
+    margin-left: 10px;
+    font-size: 1rem;
+}

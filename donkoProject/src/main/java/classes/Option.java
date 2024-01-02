@@ -1,13 +1,32 @@
 package classes;
 
 import bean.ItemBean;
-import model.options.optionsInsert.InsertItemOption;
+import bean.OptionCategoryBean;
+import model.options.optionsDelete.DeleteItemOptionName;
+import model.options.optionsDelete.DeleteItemOptionValue;
+import model.options.optionsInsert.InsertItemOptionName;
+import model.options.optionsInsert.InsertItemOptionValue;
 
 public class Option {
 
 	//商品のオプションを登録する
-	public static void registerItemOption(ItemBean itemBean) {
-		InsertItemOption.insertItemOption(itemBean);
+	public static Integer registerItemOptionName(OptionCategoryBean optionCategoryBean) {
+		return InsertItemOptionName.insertItemOptionName(optionCategoryBean);
+	}
+
+	//商品のオプション詳細を登録する
+	public static Integer registerItemOptionValue(OptionCategoryBean optionCategoryBean) {
+		return InsertItemOptionValue.insertItemOptionValue(optionCategoryBean);
+	}
+
+	//商品のオプションを削除する
+	public static Integer deleteItemOptionName(OptionCategoryBean optionCategoryBean) {
+		return DeleteItemOptionName.deleteItemOptionName(optionCategoryBean);
+	}
+
+	//商品のオプション詳細を削除する
+	public static Integer deleteItemOptionValue(OptionCategoryBean optionCategoryBean) {
+		return DeleteItemOptionValue.deleteItemOptionValue(optionCategoryBean);
 	}
 
 	//商品登録画面から取得したオプション項目のnull値及び文字数をチェックして、ItemBeanにセット
@@ -42,4 +61,6 @@ public class Option {
 
 	    return itemBean;
 	}
+
+
 }
