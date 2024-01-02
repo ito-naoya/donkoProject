@@ -26,6 +26,6 @@ class TestUpdateMainShippingAddress {
 		shippingAddressBean.setUserId(0);
 		shippingAddressBean.setShippingAddressId(0);
 		Boolean result = UpdateMainShippingAddress.updateMainShippingAddress(shippingAddressBean);
-		assertFalse(result);
+		assertNull(result);
 	}
 }
