@@ -61,12 +61,18 @@
 					%>
 					<div class="d-flex justify-content-start mb-3">
 						<%
+						String source = (String)request.getAttribute("source");
+						%>
+						<%
+						String categoryName = (String)request.getAttribute("categoryName");
+						%>
+						<%
 						if (itemImageList.size() > 1) {
 						%>
 							<%
 							for (ItemBean itemBean : itemImageList) {
 							%>
-							<a href="itemDetail?itemId=<%=itemBean.getItemId()%>" class="me-3" style="text-decoration: none;">
+							<a href="itemDetail?itemId=<%=itemBean.getItemId()%>&source=<%= source %><%= categoryName != null ? "&categoryName=" + categoryName : "" %>" class="me-3" style="text-decoration: none;">
 								<div style="height: 120px; width: 120px;">
 									<img class="object-fit-cover w-100 h-100 subImage border" 
 										 src="./images/<%=itemBean.getImageFileName()%>.jpg"
@@ -91,7 +97,7 @@
 							<%
 							for(ItemBean ib : itemOptionList) {
 							%>
-								<a href="itemDetail?itemId=<%= ib.getItemId() %>" class="d-inline-block" style="margin-right: 9px; text-decoration: none; margin-bottom: 16px; color: black;">
+								<a href="itemDetail?itemId=<%= ib.getItemId() %>&source=<%= source %><%= categoryName != null ? "&categoryName=" + categoryName : "" %>" class="d-inline-block" style="margin-right: 9px; text-decoration: none; margin-bottom: 16px; color: black;">
 									<div class="border px-3 py-2 text-center size" style=" width: auto; hegiht: 50px">
 										<%= ib.getItemFirstOptionValue() %>
 									</div>
