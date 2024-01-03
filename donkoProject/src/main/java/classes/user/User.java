@@ -6,7 +6,6 @@ import hash.HashGenerator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import model.users.usersInsert.InsertNewUserToUsers;
-import model.users.usersSelect.SampleSelectUserFromUsers;
 import model.users.usersSelect.SelectUserDetailFromUsers;
 import model.users.usersSelect.SelectUserDuplicate;
 import model.users.usersSelect.SelectUserFromUsers;
@@ -88,11 +87,6 @@ public class User {
 			return "adminSignin";
 		}
 		return null;
-	};
-
-	//ログインする
-	public static CustomerUser sampleLogin(CustomerUser customerUser) {
-		return SampleSelectUserFromUsers.selectUserFromUsers(customerUser);
 	};
 	
 	//ログインする
