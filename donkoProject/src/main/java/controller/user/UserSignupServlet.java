@@ -39,47 +39,53 @@ public class UserSignupServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		HttpSession session = request.getSession();
 		//値をセット
-		CustomerUser user = new CustomerUser();
-		user.setUserLoginId(request.getParameter("userLoginId"));
-		user.setUserName(request.getParameter("userLoginName"));
-		user.setPassword(request.getParameter("userLoginPass"));
+		CustomerUser users = new CustomerUser();
+		users.setUserLoginId(request.getParameter("userLoginId"));
+		users.setUserName(request.getParameter("userLoginName"));
+		users.setPassword(request.getParameter("userLoginPass"));
 
 		//入力文字チェック。入力内容に不備があった場合、元の画面にリダイレクト
-		if(BeanValidation.validate(request, "users", user, GroupC.class)) {
+		if(BeanValidation.validate(request, "users", users, GroupC.class)) {
 			String view = "/WEB-INF/views/user/userSignup.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 			return;
 		}
 
 		//ユーザ-ログインIDの重複がないか確認
-		Integer checkResult = User.checkUserDuplicate(user);
+		Integer checkResult = User.checkUserDuplicate(users);
 		if (checkResult == null) {
 		    // checkResult が null の場合の処理
 		    ErrorHandling.transitionToErrorPage(request, response, "新規登録に失敗しました","home","トップページに");
 		    return;
 		} else if (checkResult > 0) {
 		    // checkResult が 0 より大きい場合の処理
+			String admin = (String) session.getAttribute("admin");
+			if (admin != null) {
+				request.setAttribute("admin",admin);
+			}
+			request.setAttribute("users", users);
 		    request.setAttribute("errorMessage", "このIDは既に使用されています");
 		    String view = "/WEB-INF/views/user/userSignup.jsp";
 		    request.getRequestDispatcher(view).forward(request, response);
+		    return;
 		}
 
 		//問題なければ新規登録メソッド発動
-		if(!User.registerNewUser(user)) {
+		if(!User.registerNewUser(users)) {
 			//失敗した場合
 			ErrorHandling.transitionToErrorPage(request,response,"新規登録に失敗しました","home","トップページに");
 			return;
 		}
 
 		//遷移先を決定
-		//セッションを確認。
-		HttpSession session = request.getSession();
+		//セッションを確認
 		String admin = (String) session.getAttribute("admin");
 		if (admin != null) {
 			//セッションがある=Admin側。管理者画面にリダイレクト
 			response.sendRedirect("adminTopPage");
+			return;
 		}
 		//セッションがない＝User側。ログイン画面にリダイレクト
 		response.sendRedirect("home");
