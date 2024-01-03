@@ -50,7 +50,7 @@
     			if (user_id == null) {
     			%>
     			<li class="ms-auto me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
-    				<a href="userSignup" class="link2 btn btn-sm px-4" style="color:white; background-color:#9933FF; border-radius:40px; border:1px #333 solid;">
+    				<a href="userSignup" class="link2 btn btn-sm px-4" style="color:white; background-color:#9933FF; border-radius:40px;">
     					新規登録
     				</a>
     			</li>
@@ -83,7 +83,7 @@
     	</div>
 	    <nav style="height:40px; background-color:#D5E8D4; display:flex; align-items:center;">
 	    	<ul class="d-flex mb-0 p-0 w-100">
-	    		<li class="mx-3" style="list-style:none; display: flex; align-items: center;">
+	    		<li class="me-3" style="list-style:none; display: flex; align-items: center;">
 	    			<button class="link btn" style="border: none; outline: none; background: transparent;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
    						<strong>
    						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
