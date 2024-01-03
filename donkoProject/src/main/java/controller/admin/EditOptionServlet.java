@@ -36,7 +36,7 @@ public class EditOptionServlet extends HttpServlet {
 		} else if (deleteOptionResult == 0) {
 		    ItemManagementHelper.optionDetailMessage(response, option, "商品登録中ののオプションは削除できません");
 		} else if (deleteOptionResult > 0) {
-			ItemManagementHelper.optionMessage(response, "オプションを削除しました");;
+			ItemManagementHelper.optionDetailMessage(response, null, "オプションを削除しました");;
 		}
 		return;
 
@@ -50,7 +50,7 @@ public class EditOptionServlet extends HttpServlet {
 
 		//入力文字チェック。入力内容に不備があった場合、元の画面にリダイレクト
 		if(BeanValidation.validate(request, "option", option, GroupA.class)) {
-			ItemManagementHelper.optionMessage(response,"1文字以上20文字以下で入力してください");
+			ItemManagementHelper.optionDetailMessage(response, option, "1文字以上20文字以下で入力してください");
 			return;
 		}
 		//SQL実行
@@ -59,7 +59,7 @@ public class EditOptionServlet extends HttpServlet {
 		if (registOptionResult == null) {
 		    ErrorHandling.transitionToErrorPage(request, response, "オプションの更新に失敗しました", "adminTopPage", "管理者ページに");
 		} else if (registOptionResult == 0) {
-		    ItemManagementHelper.optionMessage(response, "同じ名前のオプションは登録できません");
+		    ItemManagementHelper.optionDetailMessage(response, option, "同じ名前のオプションは登録できません");
 		} else if (registOptionResult > 0) {
 		    ItemManagementHelper.optionDetailMessage(response, option, "オプションを追加しました");
 		}

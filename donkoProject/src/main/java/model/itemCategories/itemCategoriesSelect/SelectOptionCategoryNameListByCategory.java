@@ -38,9 +38,6 @@ public class SelectOptionCategoryNameListByCategory {
 		try (Connection conn = DatabaseConnection.getConnection()){
 			try(ResultSet rs = GeneralDao.executeQuery(conn, SQL, params)) {
 
-				// ResultSetが空の場合、SQLExceptionを投げる
-	            if (!rs.isBeforeFirst()) throw new SQLException();
-
 			//ItemCategoryBeanに挿入
 			while(rs.next()) {
 				ItemCategoryBean itemCategory = new ItemCategoryBean();
