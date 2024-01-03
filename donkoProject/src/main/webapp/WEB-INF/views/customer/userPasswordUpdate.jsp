@@ -19,6 +19,7 @@
 			<div class="row" style="height:100vh;">
 				<form action="updateUserPassword" 
 					  method="post"
+					  id="updateUserPassword"
 					  style="display: flex; justify-content: center;">
 					<% CustomerUser customerUser = (CustomerUser) request.getAttribute("users"); %>
 					<div class="col-lg-5 m-auto p-5 border" style="border-radius:10px;">
@@ -33,7 +34,7 @@
 								</a>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group my-3">
 							<label for="exampleInputUserId">ユーザーID</label>
 							<input type="text" class="form-control" id="exampleInputUserId"
 								aria-describedby="userId" name="user_login_id">
@@ -52,8 +53,23 @@
 							%>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword">パスワード</label>
-							<input type="text" class="form-control" id="exampleInputPassword"
+							<label for="exampleInputPassword">パスワード
+								<p id="passShowToggleIcon" class="d-inline-block"
+									style="cursor: pointer; margin: 0;">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+										fill="currentColor" class="bi bi-eye-slash-fill"
+										viewBox="0 0 16 16">
+										<path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
+										<path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
+									</svg>
+								</p>
+							</label><br>
+							<label for="exampleInputPassword" class="form-label"
+								style="font-size: small; color: grey;"> 半角英数字8文字以上16文字以内
+							</label><br>
+							<label for="exampleInputPassword" class="form-label"
+								style="font-size: small; color: grey;"> 数字を1つ以上含む </label>
+								<input type="password" class="form-control" id="exampleInputPassword"
 								aria-describedby="password" maxlength="16" name="password" value="">
 						</div>
 						<div class="d-flex flex-wrap"
@@ -72,12 +88,13 @@
 						<div class="cancelButton mt-5"
 							 style="display: flex; justify-content: center;">
 							<button type="submit" class="btn w-100"
-								style="border: 1px solid #000000; background: #E5CCFF;">更新</button
+								style="border: 1px solid #000000; background: #E5CCFF;">更新</button>
 						</div>
 				</form>
 			</div>
 		</div>
 	</main>
+	<script src="./js/updatePassword.js"></script>
 	<script src="./js/editUserInfoScript.js"></script>
 </body>
 </html>
