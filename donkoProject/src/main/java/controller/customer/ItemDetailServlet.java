@@ -75,12 +75,13 @@ public class ItemDetailServlet extends HttpServlet {
 		//カテゴリ別商品一覧ページからの遷移
 		if(source != null && categoryName != null) {
 			request.setAttribute("url", source + "?categoryName=" + categoryName);
-		//トップページの商品一覧からの遷移
+			request.setAttribute("source", source);
+			request.setAttribute("categoryName", categoryName);
+			
+		//その他からの遷移
 		}else if(source != null && categoryName == null) {
 			request.setAttribute("url", source);
-		//商品詳細画面で種類違い選択時の遷移
-		}else {
-			request.setAttribute("url", "itemDetail?itemId=" + itemId);
+			request.setAttribute("source", source);
 		}
 		
 		request.setAttribute("item", item);
