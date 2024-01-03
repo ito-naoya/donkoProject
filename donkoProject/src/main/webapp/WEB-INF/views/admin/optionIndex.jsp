@@ -69,7 +69,7 @@
 								int counter = 1;
 								for (OptionCategoryBean option : optionList) {
 								%>
-								    <tr style="cursor: pointer;" onclick="location.href='optionDetail?optionCategoryName=<%= option.getOptionCategoryName() %>'">
+								    <tr style="cursor: pointer;" onclick="location.href='optionIndex?optionCategoryName=<%= option.getOptionCategoryName() %>'">
 								        <td><!-- ID -->
 								            <p><%= counter  %></p>
 								        </td>
@@ -97,7 +97,7 @@
 					<div class="col-5">
 					<%
 					ArrayList<OptionCategoryBean> optionValueList = (ArrayList<OptionCategoryBean>)request.getAttribute("optionValueList");
-					if(optionValueList == null){
+					if(optionCategoryName == null){
 					%>
 						<div class="" style="display:block;">オプションをクリックすると詳細が表示されます</div>
 					<%}else if(optionValueList.size() == 0){ %>
@@ -119,7 +119,7 @@
 							      	#
 							      </th>
 							      <th scope="col">
-							      	オプション詳細
+							      	オプション詳細：<%= optionCategoryName %>
 							      </th>
 							      <th scope="col">
 							      	削除

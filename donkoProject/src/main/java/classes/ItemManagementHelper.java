@@ -49,18 +49,56 @@ public class ItemManagementHelper {
 			return;
 		}
 
-	    //オプション一覧ページに遷移
-	    public static void optionMessage(HttpServletResponse response, String rowMessage) throws UnsupportedEncodingException, IOException {
-			String message = URLEncoder.encode(rowMessage, "UTF-8");
-			String redirectURL = "optionIndex?message=" + message;
-			response.sendRedirect(redirectURL);
-		}
-
 	    //オプション情報を保持した状態でオプション一覧ページに遷移
 		public static void optionDetailMessage(HttpServletResponse response, OptionCategoryBean option, String rowMessage) throws UnsupportedEncodingException, IOException {
 			String message = URLEncoder.encode(rowMessage, "UTF-8");
-			String optionCategoryName = URLEncoder.encode(option.getOptionCategoryName(), "UTF-8");
-			String redirectURL = "optionDetail?message=" + message + "&optionCategoryName=" + optionCategoryName;
+			String redirectURL;
+			if(option != null) {
+				String optionCategoryName = URLEncoder.encode(option.getOptionCategoryName(), "UTF-8");
+				redirectURL = "optionIndex?message=" + message + "&optionCategoryName=" + optionCategoryName;
+			}else {
+				redirectURL = "optionIndex?message=" + message;
+			}
 			response.sendRedirect(redirectURL);
+		}
+
+		//カテゴリ情報を保持した状態でカテゴリ一覧ページに遷移
+		public static void categoryDetailMessage(HttpServletResponse response, ItemCategoryBean category, String rowMessage) throws UnsupportedEncodingException, IOException {
+			String message = URLEncoder.encode(rowMessage, "UTF-8");
+			String redirectURL;
+			if(category != null) {
+				String itemCategoryName = URLEncoder.encode(category.getItemCategoryName(), "UTF-8");
+				redirectURL = "categoryIndex?message=" + message + "&categoryCategoryName=" + itemCategoryName;
+			}else {
+				redirectURL = "categoryIndex?message=" + message;
+			}
+			response.sendRedirect(redirectURL);
+		}
+
+		//カテゴリ情報のリダイレクト
+		public static void categoryDetailRedirect(HttpServletRequest request, HttpServletResponse response, ItemBean category)throws ServletException, IOException {
+			//カテゴリに紐づくオプションを取得
+			ArrayList<ItemCategoryBean> optionList = ItemCategory.getItemOptionCategoryNameListByCategory(category);
+			if(optionList == null) {
+				ErrorHandling.transitionToErrorPage(request,response,"オプションの取得に失敗しました","adminTopPage","管理者ページに");
+				return;
+			}
+			//全てのカテゴリ一覧を取得
+			ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
+			if(categoryList == null) {
+				ErrorHandling.transitionToErrorPage(request,response,"カテゴリの取得に失敗しました","adminTopPage","管理者ページに");
+				return;
+			}
+			//全てのオプション一覧を取得
+			ArrayList<OptionCategoryBean> allOptionList = OptionCategory.getOptionCategoryList();
+			if(allOptionList == null) {
+				ErrorHandling.transitionToErrorPage(request,response,"オプションの取得に失敗しました","adminTopPage","管理者ページに");
+				return;
+			}
+
+			request.setAttribute("optionList", optionList);
+			request.setAttribute("allOptionList", allOptionList);
+			request.setAttribute("categoryList", categoryList);
+			request.setAttribute("itemCategoryName1", category.getItemCategoryName());
 		}
 }

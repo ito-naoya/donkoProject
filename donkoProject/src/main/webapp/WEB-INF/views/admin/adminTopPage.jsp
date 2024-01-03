@@ -94,6 +94,7 @@
 			<a href="deleteItemIndex?itemCategoryName=全ての商品&itemDelFlg=1&order=asc" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">削除商品一覧</a>
 			<a href="deleteUserInfoIndex" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">削除ユーザ情報一覧</a>
 			<a href="optionIndex" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">オプションを編集</a>
+			<a href="categoryIndex" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">カテゴリを編集</a>
 			<a href="registItem1" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">商品登録</a>
 			<a href="userSignup" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">ユーザ新規登録</a>
 		</div>

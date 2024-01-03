@@ -51,7 +51,7 @@ public class EditOptionDetailServlet extends HttpServlet {
 
 		//入力文字チェック。入力内容に不備があった場合、元の画面にリダイレクト
 		if(BeanValidation.validate(request, "option", option, GroupB.class)) {
-			ItemManagementHelper.optionMessage(response,"1文字以上20文字以下で入力してください");
+			ItemManagementHelper.optionDetailMessage(response, option, "1文字以上20文字以下で入力してください");
 			return;
 		}
 		//SQL実行
