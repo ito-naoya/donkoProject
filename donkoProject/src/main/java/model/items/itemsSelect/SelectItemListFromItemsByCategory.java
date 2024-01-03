@@ -12,6 +12,12 @@ import dao.GeneralDao;
 public class SelectItemListFromItemsByCategory {
 	// カテゴリー名を指定して一覧を取得
 	public static ArrayList<ItemBean> selectItemListFromItemsByCategory(ItemBean itemBean){
+		
+		// カテゴリーがnullだった場合はnullを返す
+		if (itemBean.getItemCategoryName() == null) {
+            return null;
+        }
+		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT "                           );
 		sb.append(    "items.item_id, "               );
