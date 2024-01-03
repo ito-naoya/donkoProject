@@ -70,7 +70,7 @@
 							%>
 						</div>
 						<div class="cancelButton mt-5"
-							style="display: flex; justify-content: center;">
+							 style="display: flex; justify-content: center;">
 							<button type="submit" class="btn w-100"
 								style="border: 1px solid #000000; background: #E5CCFF;">更新</button
 						</div>
