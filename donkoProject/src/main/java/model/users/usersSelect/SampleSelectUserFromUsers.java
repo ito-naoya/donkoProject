@@ -25,6 +25,8 @@ public class SampleSelectUserFromUsers {
 		sb.append(	"user_login_id = ? ");
 		sb.append("AND ");
 		sb.append(	"password = ? ");
+		sb.append("AND ");
+		sb.append(	"user_delete_flg = 0 ");
 		final String SELECT_USER_SQL = sb.toString();
 
 		// パスワードのハッシュ化
