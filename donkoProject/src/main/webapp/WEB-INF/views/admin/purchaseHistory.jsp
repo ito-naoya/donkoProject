@@ -7,30 +7,21 @@
 <meta charset="UTF-8">
 <title>donko</title>
 <style>
-.th{
- 	position: sticky;
-    top: 0;
-}
-.td{
-	vertical-align: middle;
-}
+.th{position: sticky; top: 0;}
+.td{vertical-align: middle;}
+.arrow:hover{opacity: 0.7;}
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
+	<%@include file= "../component/adminheader.jsp" %>
+	<%@include file= "../component/adminheaderTopSpace.jsp" %>
 	<main>
 		<div class="container">
 			<div class="row px-5">
-				<a href="adminTopPage" class="mt-5 mb-3" style="display: inline-block">
-					<div class="border text-center" style="width: 50px;">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-		  					<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-						</svg>
-					</div>
-				</a>
-				<h4 class="my-3 th">
-					<strong>受注一覧</strong>
-				</h4>
+				<h5 class="mt-5 mb-3">
+					<strong>受注履歴一覧</strong>
+				</h5>
 				<% 
 				ArrayList<PurchaseBean> orderItemList = (ArrayList<PurchaseBean>) request.getAttribute("orderItemList");
 				String message = (String) request.getAttribute("message");
@@ -44,8 +35,8 @@
 				<% 
 				} else { 
 				%>
-					<div style=" overflow-x: scroll; overflow:scroll; height:500px;" class="border px-5">
-						<table class="table table-borderless text-center my-5">
+					<div style=" overflow-x: scroll; overflow:scroll; height:70vh; border-radius:5px;" class="border px-5">
+						<table class="table table-borderless table-hover text-center my-5">
 							<thead>
 								<tr>
 									<th class="th">ID</th>
@@ -67,8 +58,9 @@
 								    SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM / dd　HH:mm");
 								    String formattedTime = sdf.format(ts); 
 								    %>
-									<tr>
-										<td class="td"><a href='purchaseDetail?purchaseId=<%= orderItem.getPurchaseId() %>&source=purchaseHistory'><%= orderItem.getPurchaseId() %></a></td>
+									<tr onclick="location.href='purchaseDetail?purchaseId=<%= orderItem.getPurchaseId() %>&source=purchaseHistory'"
+										style="cursor: pointer;">
+										<td class="td">#<%= orderItem.getPurchaseId() %></td>
 										<td class="td"><%= formattedTime %></td>
 										<td class="td"><%= orderItem.getUserId() %></td>
 										<td class="td"><%= orderItem.getUserName() %></td>
@@ -80,7 +72,17 @@
 												<%= orderItem.getAddressee() %>
 											</small>
 										</td>
-										<td class="td"><%= orderItem.getShippingStatus() %></td>
+										<%
+										if ((orderItem.getShippingStatus()).equals("処理中")) {
+										%>
+											<td class="td" style="color: #CCC;"><%= orderItem.getShippingStatus() %></td>
+										<%
+										} else {
+										%>
+											<td class="td" style="color: #63A162;"><%= orderItem.getShippingStatus() %></td>
+										<%
+										}
+										%>
 									</tr>
 								<%
 								}

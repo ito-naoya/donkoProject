@@ -51,7 +51,7 @@
 							<tbody>
 								<tr>
 									<td style="width: 120px;">購入ID　：　</td>
-									<th><%= purchaseInfo.getPurchaseId() %></th>
+									<th>#<%= purchaseInfo.getPurchaseId() %></th>
 								</tr>
 								<tr>
 									<td style="width: 120px;">購入者　：　</td>
