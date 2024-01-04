@@ -13,7 +13,7 @@ public class InsertItemOptionName {
     // 商品のオプションを登録する
     public static Integer insertItemOptionName(OptionCategoryBean optionCategoryBean) {
         StringBuilder sb = new StringBuilder();
-        sb.append("INSERT INTO old ");
+        sb.append("INSERT INTO option_category_names ");
         sb.append("(option_category_name) ");
         sb.append("VALUES ");
         sb.append("(?);");
