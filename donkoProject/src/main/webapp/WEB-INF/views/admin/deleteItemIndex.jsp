@@ -119,7 +119,7 @@
 									    </small>
 									</div>
 		
-										<div class="overflow-auto border px-4" style="height: 70vh; border-radius:5px;">
+										<div class="overflow-auto border px-4" style="height: 68vh; border-radius:5px;">
 										<table class="table table-borderless st-tbl1 my-4 text-center" id="itemTable">
 											<thead>
 											    <tr>
