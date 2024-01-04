@@ -200,7 +200,8 @@ td {vertical-align: middle;}
 								</div>
 								<p id="errorMessageAddress" style="color:red;"></p>
 								<div class="cancelButton mt-5 d-flex justify-content-center">
-									<button type="submit" class="btn" id="createButton"
+									<button 
+										type="submit" class="btn" id="createButton"
 										style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; width:50%;">
 										登録
 									</button>
