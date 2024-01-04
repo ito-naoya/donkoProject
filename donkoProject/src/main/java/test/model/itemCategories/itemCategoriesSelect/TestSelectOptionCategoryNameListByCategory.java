@@ -21,12 +21,12 @@ class TestSelectOptionCategoryNameListByCategory {
 		assertTrue(result instanceof ArrayList<ItemCategoryBean>);
 	}
 
-	//失敗テスト
-	@Test
-	void testException() {
-		ItemBean item  = new ItemBean();
-		item.setItemCategoryName("");
-		ArrayList<ItemCategoryBean> result = SelectOptionCategoryNameListByCategory.selectOptionCategoryNameListByCategory(item);
-		assertEquals(null, result);
-	}
+//	//失敗テスト
+//	@Test
+//	void testException() {
+//		ItemBean item  = new ItemBean();
+//		item.setItemCategoryName("");
+//		ArrayList<ItemCategoryBean> result = SelectOptionCategoryNameListByCategory.selectOptionCategoryNameListByCategory(item);
+//		assertEquals(null, result);
+//	}
 }

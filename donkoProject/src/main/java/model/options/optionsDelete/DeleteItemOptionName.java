@@ -13,7 +13,7 @@ public class DeleteItemOptionName {
     public static Integer deleteItemOptionName(OptionCategoryBean optionCategoryBean) {
         StringBuilder sb1 = new StringBuilder();
         sb1.append("DELETE FROM "					);
-        sb1.append(		"old "						);
+        sb1.append(		"option_category_names "	);
         sb1.append("WHERE "							);
         sb1.append(		"option_category_name = ?;"	);
 
