@@ -23,7 +23,7 @@
 					</svg>
 				</a>
 				<h4 class="my-3 th">
-					<strong>受注一覧</strong>
+					<strong>受注履歴一覧</strong>
 				</h4>
 				<% 
 				ArrayList<PurchaseBean> orderItemList = (ArrayList<PurchaseBean>) request.getAttribute("orderItemList");
@@ -75,7 +75,17 @@
 												<%= orderItem.getAddressee() %>
 											</small>
 										</td>
-										<td class="td"><%= orderItem.getShippingStatus() %></td>
+										<%
+										if ((orderItem.getShippingStatus()).equals("処理中")) {
+										%>
+											<td class="td" style="color: #CCC;"><%= orderItem.getShippingStatus() %></td>
+										<%
+										} else {
+										%>
+											<td class="td" style="color: #63A162;"><%= orderItem.getShippingStatus() %></td>
+										<%
+										}
+										%>
 									</tr>
 								<%
 								}

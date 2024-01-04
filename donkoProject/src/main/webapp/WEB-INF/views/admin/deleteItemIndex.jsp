@@ -133,16 +133,16 @@
 									<table class="table table-borderless st-tbl1 my-4 text-center" id="itemTable">
 										<thead>
 										    <tr>
-										      <th scope="col">ID</th>
-										      <th scope="col">画像</th>
-										      <th scope="col">商品名</th>
-										      <th scope="col">カテゴリー</th>
-										      <th scope="col">オプション1</th>
-										      <th scope="col">オプション2</th>
-										      <th scope="col">金額</th>
-										      <th scope="col">在庫数</th>
-										      <th scope="col">ステータス</th>
-										      <th scope="col"></th>
+										      <th scope="col" class="text-nowrap"><small>ID</small></th>
+										      <th scope="col" class="text-nowrap"><small>画像</small></th>
+										      <th scope="col" class="text-nowrap"><small>商品名</small></th>
+										      <th scope="col" class="text-nowrap"><small>カテゴリー</small></th>
+										      <th scope="col" class="text-nowrap"><small>オプション1</small></th>
+										      <th scope="col" class="text-nowrap"><small>オプション2</small></th>
+										      <th scope="col" class="text-nowrap"><small>金額</small></th>
+										      <th scope="col" class="text-nowrap"><small>在庫数</small></th>
+										      <th scope="col" class="text-nowrap"><small>ステータス</small></th>
+										      <th scope="col" class="text-nowrap"></th>
 										    </tr>
 										</thead>
 										<tbody>
@@ -152,8 +152,8 @@
 												        for(ItemBean item : itemList){
 												%>
 										          	 <tr style="cursor: pointer;" onclick="changeColor(this)" ondblclick="location.href='editItemInfo1?itemId=<%= item.getItemId() %>'">
-										                <td style="vertical-align: middle;"><!-- ID -->
-										                    <%= item.getItemId() %>
+										                <td class="p-3" style="vertical-align: middle;"><!-- ID -->
+										                    <small><%= item.getItemId() %></small>
 										                </td>
 										                <td class="td" style="width: 60px; vertical-align: middle;">
 															<span class="card" style="width: 60px; height: 60px;">
@@ -163,39 +163,39 @@
 															</span>
 														</td>
 										                <td style="vertical-align: middle;"><!-- 商品名 -->
-										                    <%= item.getItemName() %>
+										                    <small><%= item.getItemName() %></small>
 										                </td>
 										                <td style="vertical-align: middle;"><!-- カテゴリー -->
-										                    <%= item.getItemCategoryName() %>
+										                    <small><%= item.getItemCategoryName() %></small>
 										                </td>
 										                <td style="vertical-align: middle;"><!-- オプション1 -->
-										                    <%= item.getItemFirstOptionValue() %>
+										                    <small><%= item.getItemFirstOptionValue() %></small>
 										                </td>
 										                <td style="vertical-align: middle;"><!-- オプション2 -->
 										                    <% if(item.getItemSecondOptionValue() != null && !item.getItemSecondOptionValue().isEmpty()){ %>
-										                        <%= item.getItemSecondOptionValue() %>
+										                        <small><%= item.getItemSecondOptionValue() %></small>
 										                    <% } else { %>
 										                        -
 										                    <% } %>
 										                </td>
-										                <td style="vertical-align: middle;"><!-- 金額 -->
+										                <td style="vertical-align: middle;" class="text-nowrap"><!-- 金額 -->
 										                    <%
 															    NumberFormat formatter = NumberFormat.getInstance();
 															    String formattedPrice = formatter.format(item.getItemPrice());
 															%>
-															￥ <%= formattedPrice %>
+															<small>￥ <%= formattedPrice %></small>
 										                </td>
 										                <td style="vertical-align: middle;"><!-- 在庫 -->
-										                    <%= item.getItemStock() %>
+										                    <small><%= item.getItemStock() %></small>
 										                </td>
 										                <td style="vertical-align: middle;"><!-- ステータス -->
 										                    <% if(item.isDeleted()){ %>
-															    <p class="mb-0" style="color: #CCC;">停止中</p>
+															    <small class="mb-0" style="color: #CCC;">停止中</small>
 															<% } else { %>
-																<p class="mb-0" style="color: #00FF00;">販売中</p>
+																<small class="mb-0" style="color: #00FF00;">販売中</small>
 															<% } %>
 										                </td>
-										                <td style="vertical-align: middle;"><!-- チェックボックス -->
+										                <td class="p-3" style="vertical-align: middle;"><!-- チェックボックス -->
 										                	<input type="checkbox" name="itemStatus" id="item_<%= item.getItemId() %>" value="<%= item.getItemId() %>">
 														</td>
 										            </tr>

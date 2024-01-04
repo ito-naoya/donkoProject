@@ -41,7 +41,7 @@
 			</div>
 		<% } else { %>
 			<div style="margin-bottom:40px; border: 1px solid #000; overflow-x: scroll; overflow:scroll; height:400px;" class="border mx-5 px-3">
-				<table class="table table-borderless text-center my-5">
+				<table class="table table-borderless table-hover text-center my-5">
 					<thead>
 						<tr>
 							<th class="th">注文ID</th>
@@ -63,8 +63,9 @@
 						    SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM / dd　HH:mm");
 						    String formattedTime = sdf.format(ts);
 							%>
-							<tr>
-								<td class="td"><a href='purchaseDetail?purchaseId=<%= unshippingedItem.getPurchaseId() %>&source=adminTopPage'><%= unshippingedItem.getPurchaseId() %></a></td>
+							<tr onclick="location.href='purchaseDetail?purchaseId=<%= unshippingedItem.getPurchaseId() %>&source=adminTopPage'"
+								style="cursor: pointer;">
+								<td class="td">#<%= unshippingedItem.getPurchaseId() %></td>
 								<td class="td"><%= formattedTime %></td>
 								<td class="td"><%= unshippingedItem.getUserId() %></td>
 								<td class="td"><%= unshippingedItem.getUserName() %></td>
@@ -90,13 +91,13 @@
 		}
 		%>
 		<div class="row d-flex justify-content-center">
-			<a href="purchaseHistory" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">受注一覧</a>
-			<a href="deleteItemIndex?itemCategoryName=全ての商品&itemDelFlg=1&order=asc" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">削除商品一覧</a>
-			<a href="deleteUserInfoIndex" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">削除ユーザ情報一覧</a>
-			<a href="optionIndex" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">オプションを編集</a>
-			<a href="categoryIndex" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">カテゴリを編集</a>
-			<a href="registItem1" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">商品登録</a>
-			<a href="userSignup" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white;">ユーザ新規登録</a>
+			<a href="purchaseHistory" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white; border-radius:5px;">受注履歴一覧</a>
+			<a href="deleteItemIndex?itemCategoryName=全ての商品&itemDelFlg=1&order=asc" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white; border-radius:5px;">削除商品一覧</a>
+			<a href="deleteUserInfoIndex" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white; border-radius:5px;">削除ユーザ情報一覧</a>
+			<a href="optionIndex" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white; border-radius:5px;">オプションを編集</a>
+			<a href="categoryIndex" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white; border-radius:5px;">カテゴリを編集</a>
+			<a href="registItem1" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white; border-radius:5px;">商品登録</a>
+			<a href="userSignup" class="d-inline-block border mx-2 mb-4 p-3 text-center" style="width: 30%; background-color:#385A37; color: white; border-radius:5px;">ユーザ新規登録</a>
 		</div>
 	</main>
 </body>
