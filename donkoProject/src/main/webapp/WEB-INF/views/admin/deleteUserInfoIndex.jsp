@@ -28,7 +28,7 @@
 					%>
 					<div class="d-flex justify-content-between align-items-center mt-5 mb-3">
 						<div style="display: flex; align-items: end;">
-						    <h5 class="mb-0 me-3"><strong>削除商品一覧</strong></h5>
+						    <h5 class="mb-0 me-3"><strong>削除ユーザー一覧</strong></h5>
 						    <small class="mx-3" style="vertical-align: middle;">
 						  		ダブルクリックで商品を編集
 						    </small>
@@ -79,7 +79,7 @@
 								<%
 								for(CustomerUser user : userList){
 								%>
-									<tr style="cursor: pointer;" onclick="location.href='editUserInfo?userId=<%= user.getUserId() %>'" >
+									<tr style="cursor: pointer;" ondblclick="location.href='editUserInfo?userId=<%= user.getUserId() %>'" >
 										<!-- ID -->
 										<td class="p-4"><%= user.getUserId()  %></td>
 										<!-- ログインID -->
