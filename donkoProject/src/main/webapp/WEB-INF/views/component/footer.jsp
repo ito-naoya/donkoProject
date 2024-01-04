@@ -18,7 +18,7 @@
 	<footer style="position: absolute; bottom: 0; width:100%;">
 		<span id="back">
 		    <a href="#top"  style="text-decoration:none;">
-		      <div class="d-flex justify-content-center border mt-5" 
+		      <div class="d-flex justify-content-center border" 
 		           style="width:100%; height:50px; line-height:50px; background-color:#D5E8D4;">
 					<small class="mb-0 text-dark ">ページのトップへ戻る
 						<svg

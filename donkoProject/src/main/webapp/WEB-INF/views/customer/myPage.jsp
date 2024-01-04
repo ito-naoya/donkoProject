@@ -24,7 +24,7 @@ td {vertical-align: middle;}
 	<main class="container">
 		<!--  メニューボタンの表示 -->
 		<div class="d-flex justify-content-between m-5 mb-2">
-			<label class="open mx-1" for="pop-up" style="width: 32%;">
+			<label class="open mx-1 link" for="pop-up" style="width: 32%;">
 				<div
 					class="d-inline-block border mb-4 p-3 w-100 text-center text-nowrap"
 					style="color: #385A37; text-decoration: none; border-radius:5px;">
@@ -152,7 +152,7 @@ td {vertical-align: middle;}
 				</div>
 			</div>
 			<!-- 配送先の登録ボタン -->
-			<label class="open mx-1" for="pop-up2" style="width: 32%;">
+			<label class="open mx-1 link" for="pop-up2" style="width: 32%;">
 				<div
 					class="d-inline-block border mb-4 p-3 w-100 text-center text-nowrap"
 					style="color: #385A37; text-decoration: none; border-radius:5px;">
@@ -217,7 +217,7 @@ td {vertical-align: middle;}
 			</div>
 			<!-- 配送先一覧のボタン -->
 			<a href="shippingAddressIndex"
-				class="d-inline-block border mb-4 p-3 text-center"
+				class="d-inline-block border mb-4 p-3 text-center link"
 				style="width: 32%; color: #385A37; text-decoration: none; border-radius:5px;">
 				配送先一覧 </a>
 		</div>
@@ -238,7 +238,7 @@ td {vertical-align: middle;}
 			} 
 			%>
 		</div>
-		<div style="overflow-x: scroll; height: 30vh; border-radius: 5px;"
+		<div style="overflow-x: scroll; height: 52vh; border-radius: 5px;"
 			class="border mx-5 my-3 px-3">
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
@@ -304,7 +304,7 @@ td {vertical-align: middle;}
 			%>
 		</div>
 		<div class="logout d-flex justify-content-end my-4">
-			<a href="logout" class="btn px-4"
+			<a href="logout" class="btn px-4 link2"
 				style="color: white; background-color: #385A37; border-radius: 40px; margin-right: 45px;">ログアウト</a>
 		</div>
 	</main>
