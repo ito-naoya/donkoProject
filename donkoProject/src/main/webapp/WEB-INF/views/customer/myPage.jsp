@@ -83,14 +83,18 @@ td {vertical-align: middle;}
 									</tr>
 									<tr>
 										<td>誕生日</td>
-									<%
-									Date birthday = users.getBirthday();
-                    if (birthday == null) {
-                    %>
-                    <td>未設定</td>
-                    <% } else { %>
+										<%
+										Date birthday = users.getBirthday();
+											if (birthday == null) {
+										%>
+										<td>未設定</td>
+										<%
+										} else {
+										%>
 										<td><%=new SimpleDateFormat("yyyy/MM/dd").format(users.getBirthday())%></td>
-										<% } %>
+										<%
+										}
+										%>
 									</tr>
 								</tbody>
 							</table>
@@ -127,7 +131,7 @@ td {vertical-align: middle;}
 								</p>
 								<button class="btn ms-auto p-0" data-bs-dismiss="modal" id="cancelButton">
 									<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
-									  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+									<path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
 									  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
 									</svg>
 								</button>
@@ -183,20 +187,20 @@ td {vertical-align: middle;}
 									<label for="exampleInputAddresses">宛名</label><br>
 									<input type="text" class="form-control"
 										id="exampleInputAddresses" aria-describedby="addresses"
-										name="addresses" value="" placeholder="伊藤 直也">
+										name="addresses" value="" placeholder="伊藤 直也" autocomplete="name">
 								</div>
 								<p id="errorMessageAddressee" style="color:red;"></p>
 								<div class="form-group">
 									<label for="exampleInputPostalCode">郵便番号</label><br>
 									<input type="text" class="form-control" id="exampleInputPostalCode"
 										aria-describedby="postalCode" maxlength="7" maxlength="7" name="postalcode" value=""
-										placeholder="6500001">
+										placeholder="6500001" autocomplete="postal-code">
 								</div>
 								<p id="errorMessagePostalCode" style="color:red;"></p>
 								<div class="form-group">
 									<label for="exampleInputAddress">住所</label><br>
 									<input type="text" class="form-control" id="exampleInputAddress"
-										aria-describedby="address" name="address" value="" placeholder="兵庫県神戸市中央区加納町４丁目２−１">
+										aria-describedby="address" name="address" value="" placeholder="兵庫県神戸市中央区加納町４丁目２−１" autocomplete="address-line1">
 								</div>
 								<p id="errorMessageAddress" style="color:red;"></p>
 								<div class="cancelButton mt-5 d-flex justify-content-center">
@@ -266,7 +270,7 @@ td {vertical-align: middle;}
 						<td align="middle" style="white-space: nowrap;">
 						<% String postalCode = (String) purchaseBean.getPostalCode();%>
 						<% String head = postalCode.substring(0, 3);
-						  String end = postalCode.substring(3);
+						String end = postalCode.substring(3);
 						%>
 						〒 <%= head %>-<%= end %><br>
 						<%=purchaseBean.getAddress()%><br>

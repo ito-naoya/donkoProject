@@ -29,8 +29,7 @@ public class MyPageServlet extends HttpServlet {
 		
 		// セッションの確認
 		HttpSession session = request.getSession(false);
-		Object userId = session.getAttribute("user_id");
-		if(userId == null) {
+		if(session == null) {
 			// セッションがなければホーム画面に遷移
 			response.sendRedirect("userSignin");
 			return;
