@@ -18,15 +18,14 @@ public class SampleSelectUserFromUsers {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT ");
-		sb.append(	"user_id ");
+		sb.append(	"user_id, ");
+		sb.append(	"user_delete_flg ");
 		sb.append("FROM ");
 		sb.append(	"users ");
 		sb.append("WHERE ");
 		sb.append(	"user_login_id = ? ");
 		sb.append("AND ");
 		sb.append(	"password = ? ");
-		sb.append("AND ");
-		sb.append(	"user_delete_flg = 0 ");
 		final String SELECT_USER_SQL = sb.toString();
 
 		// パスワードのハッシュ化
@@ -50,6 +49,7 @@ public class SampleSelectUserFromUsers {
 				while(rs.next()) {
 					cu = new CustomerUser();
 					cu.setUserId(rs.getInt("user_id"));
+					cu.setDeleted(rs.getBoolean("user_delete_flg"));
 				}
 				
 				//ユーザー情報がない場合
