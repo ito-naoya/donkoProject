@@ -144,10 +144,20 @@
 						if (item.getItemStock() > 0) { 
 						%>
 							<form action="itemDetail?itemId=<%= item.getItemId() %>" method="post" class="d-flex align-items-center">
-								<div>
-									<small class="mx-4">数量</small>
-									<input type="number" name="quantity" min="1" step="1" max="<%=item.getItemStock()%>" class="form-control mx-4" style="width:80px;" value="1">
-								</div>
+									<div class="d-flex align-items-center mx-3">
+										<span class="me-2">数量:</span>
+										<span id="quantityDecrementBtn" style="cursor: pointer;">
+											<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
+											  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+											</svg>
+										</span>
+										<input type="number" id="quantity" name="quantity" min="1" step="1" max="<%=item.getItemStock()%>" class="form-control mx-2" style="width:80px;" value="1" required>
+										<span id="quantityIncrementBtn" style="cursor: pointer;">
+											<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+											  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+											</svg>
+										</span>
+									</div>
 								<button type=submit class="btn mt-auto" style="background-color: #9933ff; color: white;">
 									カートに追加
 								</button>

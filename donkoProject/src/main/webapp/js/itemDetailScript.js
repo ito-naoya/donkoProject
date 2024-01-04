@@ -33,3 +33,25 @@ sizes.forEach(size => {
 	
 })
 
+
+const quantityIncrementBtn = document.querySelector("#quantityIncrementBtn");
+const quantityDecrementBtn = document.querySelector("#quantityDecrementBtn");
+const quantity = document.querySelector("#quantity");
+const maxQuantity = quantity.getAttribute("max");
+const minQuantity = quantity.getAttribute("min");
+
+quantityIncrementBtn.addEventListener("click", () => {
+	
+	if(quantity.value < maxQuantity){
+		quantity.value++;
+	}
+	
+	
+})
+quantityDecrementBtn.addEventListener("click", () => {
+	
+	if(quantity.value > minQuantity){
+		quantity.value--;
+	}
+	
+})
