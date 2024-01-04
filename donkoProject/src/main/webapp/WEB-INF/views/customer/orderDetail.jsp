@@ -69,7 +69,7 @@
 						<tr class="border" style="border-radius:10px important!;">
 						  <!-- 画像 -->
 							<td class="p-4" style="width:148px;"><img class="object-fit-cover subImage"
-								style="height: 100px; width: 100px;"
+								style="border-radius:5px; height: 100px; width: 100px;"
 								src="./images/<%= purchaseDetailBean.getImageFileName()%>.jpg">
 							</td>
 							<!-- 商品タイトル -->
