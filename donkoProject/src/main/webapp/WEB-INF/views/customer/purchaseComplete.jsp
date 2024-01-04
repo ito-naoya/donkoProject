@@ -13,8 +13,6 @@
 		</title>
 	</head>
 	<body>
-		<%@include file="../component/header.jsp"%>
-		<%@include file="../component/headerTopSpace.jsp"%>
 		<main>
 			<div class="mx-auto mt-5 w-50 d-flex flex-column align-items-start justify-content-center border border-2" style="height:auto; padding: 100px; box-shadow:10px 10px 10px lightgray;">
 				<h3 style="color:#63A162;">
@@ -45,6 +43,5 @@
 				</a>
 			</div>
 		</main>
-		<%@include file="../component/footer.jsp"%>
 	</body>
 </html>
