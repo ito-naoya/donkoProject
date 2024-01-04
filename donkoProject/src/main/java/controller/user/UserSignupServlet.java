@@ -88,7 +88,7 @@ public class UserSignupServlet extends HttpServlet {
 			return;
 		}
 		//セッションがない＝User側。ログイン画面にリダイレクト
-		response.sendRedirect("home");
+		response.sendRedirect("userSignin");
 	}
 
 }
