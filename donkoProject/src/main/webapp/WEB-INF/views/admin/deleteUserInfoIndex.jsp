@@ -27,9 +27,12 @@
 					ArrayList<CustomerUser> userList = (ArrayList<CustomerUser>)request.getAttribute("userList");
 					%>
 					<div class="d-flex justify-content-between align-items-center mt-5 mb-3">
-						<h5>
-							<strong>削除ユーザー一覧</strong>
-						</h5>
+						<div style="display: flex; align-items: end;">
+						    <h5 class="mb-0 me-3"><strong>削除商品一覧</strong></h5>
+						    <small class="mx-3" style="vertical-align: middle;">
+						  		ダブルクリックで商品を編集
+						    </small>
+						</div>
 						<%
 						String toIndicate = (String)request.getAttribute("toIndicate");
 						%>
@@ -55,7 +58,7 @@
 					</div>
 					
 					<div style=" overflow-x: scroll; overflow:scroll; height:70vh; border-radius:5px;" class="border px-4">
-						<table class="table table-borderless st-tbl1 my-4 text-center" id="userTable">
+						<table class="table table-borderless st-tbl1 my-5 text-center" id="userTable">
 							<thead>
 							    <tr>
 							      <th scope="col">
@@ -77,22 +80,14 @@
 								for(CustomerUser user : userList){
 								%>
 									<tr style="cursor: pointer;" onclick="location.href='editUserInfo?userId=<%= user.getUserId() %>'" >
-										<td><!-- ID -->
-											<p>
-												<%= user.getUserId()  %>
-											</p>
-										</td>
-										<td><!-- ログインID -->
-											<p>
-												<%= user.getUserLoginId() %>
-											</p>
-										</td>
-										<td><!-- ユーザー名 -->
-											<p>
-												<%= user.getUserName() %>
-											</p>
-										</td>
-										<td><!-- ステータス -->
+										<!-- ID -->
+										<td class="p-4"><%= user.getUserId()  %></td>
+										<!-- ログインID -->
+										<td class="p-4"><%= user.getUserLoginId() %></td>
+										<!-- ユーザー名 -->
+										<td class="p-4"><%= user.getUserName() %></td>
+										<!-- ステータス -->
+										<td class="p-4">
 											<% if(user.isDeleted()){ %>
 												<p style="color: #CCC">無効</p>
 											<% } else { %>
