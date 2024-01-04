@@ -35,8 +35,10 @@ public class SampleUserSigninServlet extends HttpServlet {
 		
 		CustomerUser customerUser = User.sampleLogin(cu);
 		
-		if(customerUser == null) {
-			request.setAttribute("errorMessage", "IDまたはパスワードが異なります");
+		if(customerUser == null) request.setAttribute("errorMessage", "IDまたはパスワードが異なります");
+		if(customerUser != null && customerUser.isDeleted())request.setAttribute("errorMessage", "無効なユーザーです");
+		
+		if(customerUser == null || customerUser.isDeleted()) {
 			String view = "/WEB-INF/views/customer/sampleUserSignin.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 			return;
