@@ -62,6 +62,15 @@
 					<div class="card me-2 mb-2" style="width: calc(50% - 8px);">
 						<div class="card-body">
 							<%= numbers %>
+							<% int mainStatus = shippingAddressBean.getMainShippingAddress();
+									if (mainStatus == 1) {
+							%>
+							<div class="d-flex justify-content-end">
+								<small class="me-3 mb-0 px-3 py-1" style="color: #63A162; border: 0.5px #63A162 solid; border-radius:40px;">
+								配送先設定中
+								</small>
+							</div>
+							<% } %>
 							<h5 class="card-title"><%= shippingAddressBean.getAddressee() %></h5>
 							<h6 class="card-subtitle mb-2 text-body-secondary">
 							〒 <%= head %>-<%= end %><br>
