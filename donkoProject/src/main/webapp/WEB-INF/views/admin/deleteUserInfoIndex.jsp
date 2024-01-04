@@ -17,45 +17,45 @@
 		<link rel="stylesheet" href="./css/deleteUserInfoIndex.css">
 	</head>
 	<body>
+		<%@include file= "../component/adminheader.jsp" %>
+		<%@include file= "../component/adminheaderTopSpace.jsp" %>
 		<main>
 			<div class="container">
-				<%
-				ArrayList<CustomerUser> userList = (ArrayList<CustomerUser>)request.getAttribute("userList");
-				%>
-				<div class="d-flex justify-content-evenly align-items-center mt-5 mb-3">
-					<a href="adminTopPage" style="display: inline-block;">
-						<div class="border text-center" style="width: 50px;">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-  								<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-							</svg>
-						</div>
-					</a>
+				<div class="row px-5">
+				
 					<%
-					String toIndicate = (String)request.getAttribute("toIndicate");
+					ArrayList<CustomerUser> userList = (ArrayList<CustomerUser>)request.getAttribute("userList");
 					%>
-					<form action="deleteUserInfoIndex" method="POST">
+					<div class="d-flex justify-content-between align-items-center mt-5 mb-3">
+						<h5>
+							<strong>削除ユーザー一覧</strong>
+						</h5>
 						<%
-						if(toIndicate.equals("deletedUser")) {
+						String toIndicate = (String)request.getAttribute("toIndicate");
 						%>
-							<input type="hidden" name="showSelect" value="notDeletedUser">
-							<button type="submit" class="btn border p-2 ms-3" style="background-color: #e5ccff;">
-								全てのユーザーを表示
-							</button>
-						<%
-						} else if(toIndicate.equals("notDeletedUser")) {
-						%>
-							<input type="hidden" name="showSelect" value="deletedUser">
-							<button type="submit" class="btn border p-2 ms-3" style="background-color: #e5ccff;">
-								無効のユーザーを表示
-							</button>
-						<%
-						}
-						%>
-					</form>
-				</div>
-				<div class="row">
-					<div class="col">
-						<table class="table table-borderless st-tbl1" id="userTable" style="padding: 10px">
+						<form action="deleteUserInfoIndex" method="POST">
+							<%
+							if(toIndicate.equals("deletedUser")) {
+							%>
+								<input type="hidden" name="showSelect" value="notDeletedUser">
+								<button type="submit" class="btn btn-sm px-4 border" style="background-color: #e5ccff; border-radius:40px;">
+									全てのユーザーを表示
+								</button>
+							<%
+							} else if(toIndicate.equals("notDeletedUser")) {
+							%>
+								<input type="hidden" name="showSelect" value="deletedUser">
+								<button type="submit" class="btn btn-sm px-4 border" style="background-color: #e5ccff; border-radius:40px;">
+									無効のユーザーを表示
+								</button>
+							<%
+							}
+							%>
+						</form>
+					</div>
+					
+					<div style=" overflow-x: scroll; overflow:scroll; height:70vh; border-radius:5px;" class="border px-4">
+						<table class="table table-borderless st-tbl1 my-4 text-center" id="userTable">
 							<thead>
 							    <tr>
 							      <th scope="col">
@@ -106,6 +106,7 @@
 							</tbody>
 						</table>
 					</div>
+						
 				</div>
 			</div>
 		</main>
