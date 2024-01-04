@@ -27,7 +27,7 @@ td {vertical-align: middle;}
 			<label class="open mx-1" for="pop-up" style="width: 32%;">
 				<div
 					class="d-inline-block border mb-4 p-3 w-100 text-center text-nowrap"
-					style="color: #385A37; text-decoration: none;">
+					style="color: #385A37; text-decoration: none; border-radius:5px;">
 					<p class="mb-0">ユーザー情報を確認</p>
 				</div>
 			</label> <input type="checkbox" id="pop-up">
@@ -155,7 +155,7 @@ td {vertical-align: middle;}
 			<label class="open mx-1" for="pop-up2" style="width: 32%;">
 				<div
 					class="d-inline-block border mb-4 p-3 w-100 text-center text-nowrap"
-					style="color: #385A37; text-decoration: none;">
+					style="color: #385A37; text-decoration: none; border-radius:5px;">
 					<p class="mb-0">配送先の登録</p>
 				</div>
 			</label> 
@@ -218,7 +218,7 @@ td {vertical-align: middle;}
 			<!-- 配送先一覧のボタン -->
 			<a href="shippingAddressIndex"
 				class="d-inline-block border mb-4 p-3 text-center"
-				style="width: 32%; color: #385A37; text-decoration: none;">
+				style="width: 32%; color: #385A37; text-decoration: none; border-radius:5px;">
 				配送先一覧 </a>
 		</div>
 		<%

@@ -78,10 +78,10 @@
 					<div class="px-2" style="width:20%;">
 						<a href="itemDetail?itemId=<%= item.getItemId() %>&source=category&categoryName=<%= (String)request.getAttribute("categoryName") %>" 
 						   class="link" style="color: #385a37; display: block; text-decoration:none;">
-							<span class="card">
+							<span>
 							<img src="./images/<%= item.getImageFileName() %>.jpg"
-								class="card-img-top" alt="<%= item.getImageFileName() %>"
-								style="object-fit: cover;  width: 100%; aspect-ratio: 1 / 1; display: block;">
+								class="card-img-top border" alt="<%= item.getImageFileName() %>"
+								style="object-fit: cover;  width: 100%; aspect-ratio: 1 / 1; display: block; border-radius:5px;">
 							</span>
 						</a>
 						<div class="mb-3">
