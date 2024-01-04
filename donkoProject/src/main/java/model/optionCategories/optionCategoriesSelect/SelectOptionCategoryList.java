@@ -20,7 +20,7 @@ public class SelectOptionCategoryList {
 		sb.append("SELECT "							);
 		sb.append(	"option_category_name "	);
 		sb.append("FROM "							);
-		sb.append(	"old "			);
+		sb.append(	"option_category_names;"			);
 
 		final String SELECT_OPTION_CATEFORY_SQL = sb.toString();
 
