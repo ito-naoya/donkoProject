@@ -67,7 +67,7 @@
 									if (mainStatus == 1) {
 							%>
 								<small class="mb-0 px-3 py-1" style="color: #63A162; border: 0.5px #63A162 solid; border-radius:40px;">
-								配送先設定中
+								メイン配送先
 								</small>
 							<% } %>
 							</div>
