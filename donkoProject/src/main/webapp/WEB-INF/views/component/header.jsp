@@ -7,8 +7,10 @@
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <style>
-.link:hover{opacity: 0.7;}
-.link2:hover{opacity: 0.8;}
+.link:hover {opacity: 0.7;}
+.link2:hover {opacity: 0.8;}
+.link::after {display: none !important;}
+.dropdown-toggle:action {background-color: #63A162 !important;}
 </style>
 <title>donko</title>
 </head>
@@ -119,12 +121,26 @@
 						</div>
 					</div>
 	    		</li>
-	    		<li class="ms-auto me-3" style="list-style:none; display: flex; align-items: center;">
-	    			<small class="link ms-1">お知らせ</small>
-	    		</li>
-	    		<li class="link mx-3" style="list-style:none; display: flex; align-items: center;">
-	    			<small>利用ガイド</small>
-	    		</li>
+	    		<li class="ms-auto me-1" style="list-style:none; display: flex; align-items: center;">
+	    			<div class="dropdown">
+						<button class="btn dropdown-toggle link" type="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="border: none !important;">
+							<small>お問い合わせ</small>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#"><small>利用ガイド</small></a></li>
+							<li><a class="dropdown-item" href="#"><small>よくある質問</small></a></li>
+							<% 
+			    			if (user_id != null) {
+			    			%>
+							<li><a class="dropdown-item" href="deleteAccount"><small>アカウントの解約について</small></a></li>
+							<% 
+							} 
+							%>
+						</ul>
+					</div>
+				</li>
 	    	</ul>
 	    </nav>
     </header>
