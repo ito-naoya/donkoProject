@@ -44,12 +44,6 @@
 					</div>
 					<div class="form-group　d-flex flex-wrap　justify-content-center" style="margin-bottom: 30px;">
 						<input type="text" class="form-control" id="exampleInputUserId" name="user_login_id" value="<%=user.getUserLoginId()%>">
-						<% String userLoginId = (String)request.getAttribute("userLoginId"); %>
-						<% if (userLoginId != null) {%>
-						<p style="color: red; margin: 0;">
-							<%= userLoginId %>
-						</p>
-						<%} %>
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputUserName">
@@ -63,12 +57,6 @@
 					<div class="form-group d-flex flex-wrap justify-content-start" style="margin-bottom: 30px;">
 						<input disabled type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName"  value="<%=user.getUserName()%>">
 						<input type="hidden" name="user_name" value="<%=user.getUserName()%>">
-						<% String userName = (String)request.getAttribute("userName"); %>
-						<% if (userName != null) {%>
-						<p style="color: red; margin: 0;">
-							<%= userName %>
-						</p>
-						<%} %>
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputGender">
@@ -110,12 +98,6 @@
 					<div class="form-group d-flex flex-wrap justify-content-start" style="margin-bottom: 30px;">
 						<input disabled type="date" class="form-control" id="exampleInputbirthday" value="<%=user.getBirthday()%>">
 						<input type="hidden" value="<%=user.getBirthday()%>" name="birthday">
-						<% String birthday = (String)request.getAttribute("birthday"); %>
-						<% if (birthday != null) {%>
-						<p style="color: red; margin: 0;">
-							<%= birthday %>
-						</p>
-						<%} %>
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputbirthday">
