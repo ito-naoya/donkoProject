@@ -21,7 +21,7 @@
 			CustomerUser user = (CustomerUser) request.getAttribute("user");
 			%>
 			<form action="editUserInfo" method="post" style="display: flex; justify-content: center; margin: 30px;">
-				<input type="hidden" name="userId" value="<%= user.getUserId() %>">
+				<input disabled type="hidden" name="userId" value="<%= user.getUserId() %>">
 				<div class="col-lg-5 m-5" style="border: 1px solid #333333; padding: 65px;">
 					<div class="cancelButton" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
 						<h2>
@@ -38,7 +38,7 @@
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputUserId">
-							ユーザーID
+							ログインID
 						</label>
 						<br>
 					</div>
@@ -54,11 +54,14 @@
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputUserName">
 							ユーザー名
+							<span style="color: red;">
+								（編集不可）
+							</span>
 						</label>
 						<br>
 					</div>
 					<div class="form-group d-flex flex-wrap justify-content-start" style="margin-bottom: 30px;">
-						<input type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName" name="user_name" value="<%=user.getUserName()%>">
+						<input disabled type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName" name="user_name" value="<%=user.getUserName()%>">
 						
 						<% String userName = (String)request.getAttribute("userName"); %>
 						<% if (userName != null) {%>
@@ -70,11 +73,14 @@
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputGender">
 							性別
+							<span style="color: red;">
+								（編集不可）
+							</span>
 						</label>
 						<br>
 					</div>
 					<div class="form-group d-flex flex-wrap justify-content-center" style="margin-bottom: 30px;">
-						<select class="form-control" name="gender" id="exampleInputGender">
+						<select disabled class="form-control" name="gender" id="exampleInputGender">
 							<%
 							String selected = user.getGender();
 							String men = (selected != null && selected.equals("男性") ? "selected" : "");
@@ -95,11 +101,14 @@
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputbirthday">
 							誕生日
+							<span style="color: red;">
+								（編集不可）
+							</span>
 						</label>
 						<br>
 					</div>
 					<div class="form-group d-flex flex-wrap justify-content-start" style="margin-bottom: 30px;">
-						<input type="date" class="form-control" id="exampleInputbirthday" name="birthday" value="<%=user.getBirthday()%>">
+						<input disabled type="date" class="form-control" id="exampleInputbirthday" name="birthday" value="<%=user.getBirthday()%>">
 						<% String birthday = (String)request.getAttribute("birthday"); %>
 						<% if (birthday != null) {%>
 						<p style="color: red; margin: 0;">
