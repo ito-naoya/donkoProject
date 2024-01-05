@@ -122,24 +122,25 @@
 						<% 
 						if (item.getItemStock() == 0) {
 						%>
-							<p class="mb-0 px-3 py-2" style=" width: 100px; color: red; border: 1px red solid; border-radius:5px;">
+							<p class="mb-0 px-3 py-2" style=" width: 120px; color: red; border: 1px red solid; border-radius:5px;">
 								入荷待ち
 							</p>
 						<% 
 						} else if (item.getItemStock() <= 3) {
 						%>
-							<p class="mb-0 px-3 py-2 text-center" style=" width: 100px; color: red; border: 1px red solid; border-radius:5px;">
+							<p class="mb-0 px-3 py-2 text-center" style=" width: 120px; color: red; border: 1px red solid; border-radius:5px;">
 								残り<%=item.getItemStock()%>点
 							</p>
 						<%		
 						} else {
 						%>
-							<p class="border mb-0 px-3 py-2 text-center" style=" width: 100px; border-radius:5px;">
+							<p class="border mb-0 px-3 py-2 text-center" style=" width: 120px; border-radius:5px;">
 								残り<%=item.getItemStock()%>点
 							</p>
 						<%
 						} 
 						%>
+						
 						<%
 						if (item.getItemStock() > 0) { 
 						%>
@@ -151,7 +152,7 @@
 											  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
 											</svg>
 										</span>
-										<input type="number" id="quantity" name="quantity" min="1" step="1" max="<%=item.getItemStock()%>" class="form-control mx-2" style="width:50px;" value="1" required>
+										<input type="number" id="quantity" name="quantity" max="<%= item.getItemStock() %>" min="1" step="1" class="form-control mx-2" style="width:80px;" value="1" required>
 										<span id="quantityIncrementBtn" style="cursor: pointer;">
 											<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
 											  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>

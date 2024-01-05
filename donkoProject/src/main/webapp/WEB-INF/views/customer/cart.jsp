@@ -53,73 +53,66 @@
 								<%
 								for(CartBean cb : cartBeanList) {
 								%>
-								<tr>
-									<td class="text-center" >
-										<a href="itemDetail?itemId=<%= cb.getItemId() %>&source=cart"
-										style="text-decoration: none; display: inline-block;">
-											<div style="height: 100px; width: 100px;">
-												<img class="object-fit-cover w-100 h-100 itemImage border"
-													src="./images/<%= cb.getImageFileName() %>.jpg"
-													style="border-radius:5px;">
-											</div>
-										</a>
-									</td>
-									<td style="vertical-align: middle;">
-										<%= cb.getItemName() %>
-										(
-										<%= cb.getItemOptionDetail() %>
-											)
-										<br>
-										¥ 
-										<%= String.format("%,d", cb.getItemPrice()) %>
-									</td>
-									<td style="vertical-align: middle; width:30%;">
-										<form action="cart" method="POST" class="d-flex">
-											<p class="mb-0 w-100">
+									<tr>
+										<td class="text-center" >
+											<a href="itemDetail?itemId=<%= cb.getItemId() %>&source=cart"
+											style="text-decoration: none; display: inline-block;">
+												<div style="height: 100px; width: 100px;">
+													<img class="object-fit-cover w-100 h-100 itemImage border"
+														src="./images/<%= cb.getImageFileName() %>.jpg"
+														style="border-radius:5px;">
+												</div>
+											</a>
+										</td>
+										<td style="vertical-align: middle;">
+											<%= cb.getItemName() %>
+											(
+											<%= cb.getItemOptionDetail() %>
+												)
+											<br>
+											¥ 
+											<%= String.format("%,d", cb.getItemPrice()) %>
+										</td>
+										<td style="vertical-align: middle; width:35%;">
+											<form action="cart" method="POST" class="d-flex quantityForm">											
 												<input type="hidden" value="<%= cb.getItemId() %>" name="itemId">
-												<small class="me-auto">数量:</small>
-												<select name="quantity" style="display: inline-block" class="form-control" onchange="submit(this.form)">
-													<%
-													for(int i = 1; i <= cb.getItemStock(); i ++) {
-													%>
-														<%
-														if (i == cb.getQuantity()) {
-														%>
-															<option value="<%= i %>" selected>
-																<%= i %>
-															</option>
-														<%
-														}else {
-														%>
-															<option value="<%= i %>">
-																<%= i %>
-															</option>
-														<%
-														} 
-														%>
-													<%
-													}
-													%>
-												</select>
-											</p>
-		             					</form>
-									</td>
-									<td style="vertical-align: middle;">
-										<small>小計</small><br>
-										<strong>￥ <%= String.format("%,d", (cb.getItemPrice())*(cb.getQuantity())) %></strong>
-									</td>
-									<td class="text-center" style="vertical-align: middle; width:10%;">
-										<form action="deleteCart" method="GET">
-											<input type="hidden" value="<%= cb.getItemId() %>" name="itemId">
-											<button type="submit" class="btn" style="color:red; border: 1px red solid; border-radius:40px;">
-												<svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-												  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-												  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-												</svg>
-											</button>
-										</form>
-									</td>
-								<tr>
+												<div class="d-flex align-items-center mx-3">
+													<span class="me-2">
+														数量:
+													</span>
+													<span class="quantityDecrementBtn" style="cursor: pointer;">
+														<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
+														  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+														</svg>
+													</span>
+													<input type="number" name="quantity" max="<%= cb.getItemStock() %>" min="1" step="1" class="mx-2 quantity" style="width:80px;" value="<%= cb.getQuantity() %>" required>
+													<span class="quantityIncrementBtn" style="cursor: pointer;">
+														<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+														  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+														</svg>
+													</span>
+													<!-- <button type="submit" class="quantityUpdateBtn ms-2 btn p-1" style="padding: 0; font-size: 13px; background-color: #E5CCFF; visibility: hidden">
+														更新
+													</button> -->
+												</div>
+			             					</form>
+										</td>
+										<td style="vertical-align: middle;">
+											<small>小計</small><br>
+											<strong>￥ <%= String.format("%,d", (cb.getItemPrice())*(cb.getQuantity())) %></strong>
+										</td>
+										<td class="text-center" style="vertical-align: middle; width:10%;">
+											<form action="deleteCart" method="GET">
+												<input type="hidden" value="<%= cb.getItemId() %>" name="itemId">
+												<button type="submit" class="btn" style="color:red; border: 1px red solid; border-radius:40px;">
+													<svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+													  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+													  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+													</svg>
+												</button>
+											</form>
+										</td>
+									<tr>
 								<%
 								} 
 								%>
