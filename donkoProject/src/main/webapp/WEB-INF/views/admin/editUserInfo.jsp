@@ -21,7 +21,7 @@
 			CustomerUser user = (CustomerUser) request.getAttribute("user");
 			%>
 			<form action="editUserInfo" method="post" style="display: flex; justify-content: center; margin: 30px;">
-				<input disabled type="hidden" name="userId" value="<%= user.getUserId() %>">
+				<input type="hidden" name="userId" value="<%= user.getUserId() %>">
 				<div class="col-lg-5 m-5" style="border: 1px solid #333333; padding: 65px;">
 					<div class="cancelButton" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
 						<h2>
@@ -61,8 +61,8 @@
 						<br>
 					</div>
 					<div class="form-group d-flex flex-wrap justify-content-start" style="margin-bottom: 30px;">
-						<input disabled type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName" name="user_name" value="<%=user.getUserName()%>">
-						
+						<input disabled type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName"  value="<%=user.getUserName()%>">
+						<input type="hidden" name="user_name" value="<%=user.getUserName()%>">
 						<% String userName = (String)request.getAttribute("userName"); %>
 						<% if (userName != null) {%>
 						<p style="color: red; margin: 0;">
@@ -80,7 +80,8 @@
 						<br>
 					</div>
 					<div class="form-group d-flex flex-wrap justify-content-center" style="margin-bottom: 30px;">
-						<select disabled class="form-control" name="gender" id="exampleInputGender">
+						<input type="hidden" name="gender" value="<%= user.getGender() %>">
+						<select disabled class="form-control" id="exampleInputGender">
 							<%
 							String selected = user.getGender();
 							String men = (selected != null && selected.equals("男性") ? "selected" : "");
@@ -96,7 +97,6 @@
 								女性
 							</option>
 						</select>
-						<div class="invalid-feedback">性別を選択してください</div>
 					</div>
 					<div style="margin-bottom: 10px;">
 						<label for="exampleInputbirthday">
@@ -108,7 +108,8 @@
 						<br>
 					</div>
 					<div class="form-group d-flex flex-wrap justify-content-start" style="margin-bottom: 30px;">
-						<input disabled type="date" class="form-control" id="exampleInputbirthday" name="birthday" value="<%=user.getBirthday()%>">
+						<input disabled type="date" class="form-control" id="exampleInputbirthday" value="<%=user.getBirthday()%>">
+						<input type="hidden" value="<%=user.getBirthday()%>" name="birthday">
 						<% String birthday = (String)request.getAttribute("birthday"); %>
 						<% if (birthday != null) {%>
 						<p style="color: red; margin: 0;">
@@ -135,7 +136,6 @@
 								有効
 							</option>
 						</select>
-						<div class="invalid-feedback">誕生日を選択してください</div>
 					</div>
 					<div class="d-flex justify-content-center" style="margin-bottom: 20px;">
 						<button type="submit" class="btn btn-lg w-100" style="border: 1px solid #000000; background: #E5CCFF; padding: 10px;">
