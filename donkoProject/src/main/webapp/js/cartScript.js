@@ -63,17 +63,15 @@ quantityIncrementBtns.forEach(incrementBtn => {
 	});
 });
 
-/*
+
 const quantityInputArray = document.querySelectorAll(".quantity");
 
 quantityInputArray.forEach(quantityInput => {
 	
 	quantityInput.addEventListener("focus", () => {
-		quantityInput.nextElementSibling.nextElementSibling.style.visibility = "";
-	})
-	
-	quantityInput.addEventListener("blur", () => {
-		quantityInput.nextElementSibling.nextElementSibling.style.visibility = "hidden";
+		const incrementBtn = quantityInput.nextElementSibling
+		const updateBtn = incrementBtn.nextElementSibling;
+		updateBtn.style.display = "";
 	})
 	
 })
@@ -82,12 +80,12 @@ const quantityUpdateBtnArray = document.querySelectorAll(".quantityUpdateBtn");
 
 quantityUpdateBtnArray.forEach(btn => {
 	btn.addEventListener("submit", ()=>{
-		const eClosest = btn.closest(".quantityForm");
-		eClosest.submit();
-		
+		btn.style.display = "none";
 	})
 })
-*/
+
+
+
 
 
 
