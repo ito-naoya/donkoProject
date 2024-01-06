@@ -40,10 +40,10 @@
 		    			</li>
 	    			</div>
     			</a>
-    			<% 
-    			} 
+    			<%
+    			}
     			%>
-    			<% 
+    			<%
     			if (user_id == null) {
     			%>
     			<li class="ms-auto me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
@@ -56,7 +56,7 @@
     					<small>ログイン</small>
     				</a>
     			</li>
-    			<% 
+    			<%
     			} else {
     			%>
     			<li class="ms-auto me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
@@ -73,7 +73,7 @@
 						  <span class="badge ms-1" style="background-color:#333;"><%= cartItemNum %></span>
     				</a>
     			</li>
-    			<% 
+    			<%
     			}
     			%>
     		</ul>

@@ -42,15 +42,23 @@ const minQuantity = quantity.getAttribute("min");
 
 quantityIncrementBtn.addEventListener("click", () => {
 	
-	if(quantity.value < maxQuantity){
+	if (parseInt(quantity.value , 10) < parseInt(minQuantity, 10)) {
+		quantity.value = 1;
+	}else if(parseInt(quantity.value, 10) < parseInt(maxQuantity, 10)){
 		quantity.value++;
+	}else if(parseInt(quantity.value, 10) > parseInt(maxQuantity, 10)){
+		quantity.value = maxQuantity;
 	}
 	
-	
 })
+
 quantityDecrementBtn.addEventListener("click", () => {
-	
-	if(quantity.value > minQuantity){
+
+	if (parseInt(quantity.value , 10) > parseInt(maxQuantity, 10)) {
+		quantity.value = maxQuantity;
+	}else if(parseInt(quantity.value, 10) < parseInt(minQuantity, 10)){
+		quantity.value = 1;
+	}else if(parseInt(quantity.value, 10) > parseInt(minQuantity, 10)){
 		quantity.value--;
 	}
 	
