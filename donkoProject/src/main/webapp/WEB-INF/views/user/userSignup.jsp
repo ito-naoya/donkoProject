@@ -13,14 +13,6 @@
 	rel="stylesheet"
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
-<style>
-.link:hover {
-	opacity: 0.7;
-}
-
-.link2:hover {
-	opacity: 0.8;
-}
 </style>
 <title>donko</title>
 </head>
@@ -160,8 +152,8 @@
 
 						<div class="row">
 							<div class="col-12 mt-5 d-flex justify-content-center">
-								<input type="submit" value="登録する" class="btn border"
-									style="background-color: #9933FF; color: white; width: 50%;">
+								<input type="submit" value="登録する" class="button-purple py-1"
+									style="border-radius:5px; width: 50%;">
 							</div>
 						</div>
 					</form>

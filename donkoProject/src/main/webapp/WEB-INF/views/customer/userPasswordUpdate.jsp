@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="./css/button.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -87,8 +88,8 @@
 						</div>
 						<div class="cancelButton"
 							 style="display: flex; justify-content: center; margin:60px 0 0;">
-							<button type="submit" class="btn w-50"
-								style="border: 1px solid #000000; background: #E5CCFF;">更新</button>
+							<button type="submit" class="button-light-purple py-1 w-50"
+								style="border-radius:5px;">更新</button>
 						</div>
 				</form>
 			</div>
