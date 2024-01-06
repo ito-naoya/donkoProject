@@ -165,41 +165,12 @@ td {vertical-align: middle;}
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
-			<div class="overlay">
-				<div class="window">
-					<label class="close m-3" for="pop-up2"> 
-						<svg
-							xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-							fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
-						  <path
-								d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-						  <path
-								d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-						</svg>
-					</label>
-					<div class="row d-flex justify-content-centert"
-						style="height: 100%;">
-						<div class="my-auto p-5">
-							<div class="cancelButton"
-								style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-								<h5>
-									<strong>配送先の登録</strong>
-								</h5>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-			</div>
 			<!-- 配送先一覧のボタン -->
 			<a href="shippingAddressIndex"
 				class="d-inline-block border mb-4 p-3 text-center link"
 				style="width: 32%; color: #385A37; text-decoration: none; border-radius:5px;">
-				配送先一覧 </a>
+				配送先一覧 
+			</a>
 		</div>
 		<%
 		ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
@@ -211,9 +182,10 @@ td {vertical-align: middle;}
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
 			%>
-			<button class="btn btn-sm" id="hideShippedButton" name="status_sort"
-				value="hidden"
-				style="border: 1px solid gray; background-color: #E5CCFF; border-radius: 40px;">発送済みを非表示</button>
+			<button class="button-light-purple px-3 py-1" id="hideShippedButton" name="status_sort"
+				value="hidden" style="border-radius: 40px;">
+				<small>発送済みを非表示</small>
+			</button>
 			<% 
 			} 
 			%>

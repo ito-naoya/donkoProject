@@ -65,7 +65,7 @@
 						} 
 						%>
 						<input type="hidden" name="categoryName" value="<%= (String)request.getAttribute("categoryName") %>">
-						<button type="submit" class="btn text-nowrap ms-3" style="border:1px gray solid; background-color: #E5CCFF;" onclick="return testCheck()">こだわり検索</button>
+						<button type="submit" class="button-light-purple text-nowrap ms-3 px-2" style="border-radius:5px;" onclick="return testCheck()">こだわり検索</button>
 					</div>
 				</div>
 			</form>

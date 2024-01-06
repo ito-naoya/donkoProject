@@ -1,0 +1,33 @@
+@charset "UTF-8";
+.link:hover {opacity: 0.7;}
+.link2:hover {opacity: 0.8;}
+.button-purple {
+    color: white;
+    background-color: #9933FF;
+    border-radius: 40px;
+    text-decoration: none; /* To remove underlines from links */
+}
+.button-purple:hover {
+    color: #9933FF;
+    background-color: white;
+    border: 1px solid #9933FF;
+}
+.button-light-purple {
+    background-color: #E5CCFF;
+    border: 1px solid gray;
+    text-decoration: none; /* To remove underlines from links */
+}
+.button-light-purple:hover {
+    color: #E5CCFF;
+    background-color: white;
+    border: 1px solid #E5CCFF;
+}
+.button-red {
+    border: 1px solid #FF0000; 
+    background: #FFFFFF; 
+    color: #FF0000;
+}
+.button-red:hover {
+    background: #FF0000; 
+    color: #FFF;
+}
