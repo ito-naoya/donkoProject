@@ -35,7 +35,7 @@
 									    String keyword = (String) request.getAttribute("keyword");
 									%>
 									<!-- カテゴリでソート -->
-									<label for="category-select" class="form-label"><small>カテゴリー選択：</small></label>
+									<label for="category-select" class="form-label"><small>カテゴリ選択：</small></label>
 									<select class="form-select" id="category-select" name="itemCategoryName">
 									    <%
 									        if(categoryList != null && itemDelFlg != null && !categoryName.isEmpty()){
@@ -92,7 +92,7 @@
 								</div>
 						</form>
 					</div>
-					
+
 					<div class="col-9">
 						<!-- 各種メッセージ -->
 						<%
@@ -118,7 +118,7 @@
 									  		ダブルクリックで商品を編集
 									    </small>
 									</div>
-		
+
 										<div class="overflow-auto border px-4" style="height: 68vh; border-radius:5px;">
 										<table class="table table-borderless st-tbl1 my-4 text-center" id="itemTable">
 											<thead>
@@ -126,7 +126,7 @@
 											      <th scope="col" class="text-nowrap"><small>ID</small></th>
 											      <th scope="col" class="text-nowrap"><small>画像</small></th>
 											      <th scope="col" class="text-nowrap"><small>商品名</small></th>
-											      <th scope="col" class="text-nowrap"><small>カテゴリー</small></th>
+											      <th scope="col" class="text-nowrap"><small>カテゴリ</small></th>
 											      <th scope="col" class="text-nowrap"><small>オプション1</small></th>
 											      <th scope="col" class="text-nowrap"><small>オプション2</small></th>
 											      <th scope="col" class="text-nowrap"><small>金額</small></th>
@@ -197,7 +197,7 @@
 										</table>
 										</div>
 										<br>
-		
+
 									<input type=hidden name="itemCategoryName" value="<%= categoryName %>">
 										<div class="row">
 										    <div class="d-flex flex-wrap justify-content-end text-center">

@@ -49,7 +49,7 @@
 					    <small>編集</small>
 					  </button>
 					  <ul class="dropdown-menu">
-					    <li><a class="dropdown-item" href="categoryIndex"><small>カテゴリー</small></a></li>
+					    <li><a class="dropdown-item" href="categoryIndex"><small>カテゴリ</small></a></li>
 					    <li><a class="dropdown-item" href="optionIndex"><small>オプション</small></a></li>
 					  </ul>
 					</div>
