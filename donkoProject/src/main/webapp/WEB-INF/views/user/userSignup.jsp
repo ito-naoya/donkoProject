@@ -29,7 +29,7 @@
 		CustomerUser users = (CustomerUser) request.getAttribute("users");
 		%>
 		<div class="container　ml-5 mr-5">
-			<div class="row justify-content-center" style="height: 100vh;">
+			<div class="row justify-content-center">
 				<%
 					String admin = (String) request.getAttribute("admin");
 					if (admin == null){
@@ -43,7 +43,7 @@
 				<%
 					}
 				%>
-				<div class="col-5 m-auto p-5 border" style="border-radius: 10px;">
+				<div class="col-lg-4 m-auto p-5 border" style="border-radius: 10px;">
 					<div class="cancelButton"
 						style="display: flex; justify-content: space-between;">
 						<h4 class="mt-3">
@@ -168,7 +168,7 @@
 			</div>
 			<%if (admin == null){ %>
 				<div class="row justify-content-center my-3">
-					<div class="col-5">
+					<div class="col-lg-4">
 						<!-- ユーザー側のみログイン画面にいくボタン表示 -->
 						<div class="cancelButton">
 							<a href="userSignin" class="link"

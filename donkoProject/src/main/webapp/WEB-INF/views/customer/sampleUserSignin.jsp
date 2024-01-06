@@ -25,7 +25,7 @@
 						<img src="./images/donkoLogo2.png" style="height: 80px;">
 					</a>
 				</span>
-				<div class="col-5 p-5 border" style="border-radius:10px;">
+				<div class="col-lg-4 p-5 border" style="border-radius:10px;">
 					<h4 class="mt-3"><strong>ログイン</strong></h4>
 					<br>
 					<%
@@ -89,7 +89,7 @@
 				</div>
 			</div>
 			<div class="row justify-content-center my-3">
-				<div class="col-5">
+				<div class="col-lg-4">
 					<a href="userSignup" class="link" style="color:#385A37; text-decoration:none;">新規登録はこちら</a>
 				</div>
 			</div>
