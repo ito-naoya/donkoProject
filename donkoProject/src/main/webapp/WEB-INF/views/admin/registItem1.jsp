@@ -38,7 +38,7 @@
 						<form action="registItem1" id="registItem1" method="post" class="needs-validation">
 							<div class="mb-3">
 							    <select class="form-select category-select" name="itemCategoryName">
-							        <option selected hidden disabled value="">カテゴリーを選択</option>
+							        <option selected hidden disabled value="">カテゴリを選択</option>
 							        <%
 							            for (ItemCategoryBean category : categoryList){
 							                // item.getItemCategoryName()がnullの場合も考慮
@@ -49,7 +49,7 @@
 							            }
 							        %>
 							    </select>
-							    <div class="invalid-feedback">カテゴリーを選択してください</div>
+							    <div class="invalid-feedback">カテゴリを選択してください</div>
 							    <%
 							        String itemCategoryName = (String)request.getAttribute("itemCategoryName");
 							        if (itemCategoryName != null) {
