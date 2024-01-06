@@ -80,13 +80,13 @@
 														  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
 														</svg>
 													</span>
-													<input type="number" name="quantity" max="<%= cb.getItemStock() %>" min="1" step="1" class="mx-2 quantity form-control text-center" style="width:auto;" value="<%= cb.getQuantity() %>" required>
+													<input type="number" name="quantity" max="<%= cb.getItemStock() %>" min="1" step="1" class="mx-2 quantity form-control text-center" style="width:60px;" value="<%= cb.getQuantity() %>" required>
 													<span class="quantityIncrementBtn" style="cursor: pointer;">
 														<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
 														  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
 														</svg>
 													</span>
-													<button type="submit" class="quantityUpdateBtn ms-2 btn p-1" style="padding: 0; font-size: 13px; background-color: #E5CCFF; display: none;">
+													<button type="submit" class="quantityUpdateBtn ms-2 btn p-1 text-nowrap" style="padding: 0; font-size: 13px; background-color: #E5CCFF; display: none;">
 														更新
 													</button>
 												</div>
