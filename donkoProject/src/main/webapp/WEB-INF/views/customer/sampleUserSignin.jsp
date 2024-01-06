@@ -41,6 +41,10 @@
 
 					<!-- ここからフォーム -->
 					<form action="userSignin" method="post">
+						<%
+						String originSource = (String)request.getAttribute("originSource");
+						%>
+						<input type="hidden" name="originSource" value="<%= originSource %>">
 						<div class="row mb-3 mt-3">
 							<label for="adminLoginId" class="form-label">ユーザーID</label>
 							<div class="col-12">
