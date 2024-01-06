@@ -5,13 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="./css/button.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-<style>
-.link:hover {opacity: 0.7;}
-.link2:hover {opacity: 0.8;}
-.link::after {display: none !important;}
-.dropdown-toggle:action {background-color: #63A162 !important;}
-</style>
 <title>donko</title>
 </head>
 <body>
@@ -52,7 +47,7 @@
     			if (user_id == null) {
     			%>
     			<li class="ms-auto me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
-    				<a href="userSignup" class="link2 btn btn-sm px-4" style="color:white; background-color:#9933FF; border-radius:40px;">
+    				<a href="userSignup" class="px-4 py-1 button-purple" style="border-radius:40px;">
     					新規登録
     				</a>
     			</li>
@@ -112,7 +107,7 @@
 								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a
 									href="category?categoryName=靴" style="text-decoration:none; color:white;">靴</a></li>
 								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a
-									href="category?categoryName=携帯" style=" text-decoration:none; color:white;">携帯</a></li>
+									href="category?categoryName=携帯" style="text-decoration:none; color:white;">携帯</a></li>
 								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a
 									href="category?categoryName=本" style="text-decoration:none; color:white;">本</a></li>
 								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a

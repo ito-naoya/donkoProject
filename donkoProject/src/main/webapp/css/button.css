@@ -1,0 +1,48 @@
+@charset "UTF-8";
+.link:hover {opacity: 0.7;}
+.link2:hover {opacity: 0.8;}
+.button-purple {
+    color: white;
+    background-color: #9933FF;
+    text-decoration: none; /* To remove underlines from links */
+    border: 1px solid #9933FF;
+}
+.button-purple:hover {
+    color: #9933FF;
+    background-color: white;
+    border: 1px solid #9933FF;
+}
+.button-light-purple {
+    background-color: #E5CCFF;
+    border: 1px solid gray;
+    text-decoration: none; /* To remove underlines from links */
+}
+.button-light-purple:hover {
+    color: #E5CCFF;
+    background-color: white;
+    font-weight: bold;
+    border: 1px solid #E5CCFF;
+}
+.anchor {
+	color:inherit;
+}
+.button-red {
+    border: 1px solid red; 
+    background: #FFFFFF; 
+    color: red;
+    text-decoration: none; /* To remove underlines from links */
+}
+.button-red:hover {
+    background: #FF0000; 
+    color: #FFF;
+}
+.button-green {
+    border: 0.1px solid #385a37; 
+    background: #FFFFFF; 
+    color: #385a37;
+    text-decoration: none; /* To remove underlines from links */
+}
+.button-green:hover {
+    background: #385a37; 
+    color: #FFF;
+}

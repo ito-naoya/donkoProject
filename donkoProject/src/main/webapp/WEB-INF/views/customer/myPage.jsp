@@ -14,8 +14,6 @@
 .border::-webkit-scrollbar {display: none;}
 .th {position: sticky; top: 0;}
 td {vertical-align: middle;}
-.link:hover{opacity: 0.7;}
-.link2:hover{opacity: 0.8;}
 </style>
 </head>
 <body>
@@ -27,10 +25,10 @@ td {vertical-align: middle;}
 			
 			<!-- ユーザー情報の確認 -->
 			<!-- モーダルボタン -->
-			<div style="width: 32%;" class="link">
-				<button type="button" class="btn mb-4 p-3 text-nowrap text-center w-100 border" 
+			<div style="width: 32%;">
+				<button type="button" class="button-green mb-4 px-3 py-2 text-nowrap text-center w-100" 
 						data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-						style="color: #385A37; text-decoration: none; border-radius:5px;">
+						style="text-decoration: none; border-radius:5px;">
 				 		ユーザー情報の確認
 				</button>
 			</div>
@@ -112,10 +110,10 @@ td {vertical-align: middle;}
 			
 			<!-- 配送先の登録 -->
 			<!-- モーダルボタン -->
-			<div style="width: 32%;" class="link">
-				<button type="button" class="btn mb-4 p-3 text-nowrap text-center w-100 border" 
+			<div style="width: 32%;">
+				<button type="button" class="button-green mb-4 px-3 py-2 text-nowrap text-center w-100" 
 						data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
-						style="color: #385A37; text-decoration: none; border-radius:5px;">
+						style="text-decoration: none; border-radius:5px;">
 				 		配送先の登録
 				</button>
 			</div>
@@ -156,8 +154,8 @@ td {vertical-align: middle;}
 							</div>
 							<div class="modal-footer d-flex flex-column p-4">
 								<button 
-									type="submit" class="btn" id="createButton"
-									style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; width:50%;">
+									type="submit" class="button-purple py-2" id="createButton"
+									style="width:50%; border-radius:5px;">
 									登録
 								</button>
 							</div>
@@ -165,41 +163,12 @@ td {vertical-align: middle;}
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
-			<div class="overlay">
-				<div class="window">
-					<label class="close m-3" for="pop-up2"> 
-						<svg
-							xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-							fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
-						  <path
-								d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-						  <path
-								d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-						</svg>
-					</label>
-					<div class="row d-flex justify-content-centert"
-						style="height: 100%;">
-						<div class="my-auto p-5">
-							<div class="cancelButton"
-								style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-								<h5>
-									<strong>配送先の登録</strong>
-								</h5>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-			</div>
 			<!-- 配送先一覧のボタン -->
 			<a href="shippingAddressIndex"
-				class="d-inline-block border mb-4 p-3 text-center link"
-				style="width: 32%; color: #385A37; text-decoration: none; border-radius:5px;">
-				配送先一覧 </a>
+				class="button-green d-inline-block mb-4 px-3 py-2 text-center"
+				style="width: 32%; text-decoration: none; border-radius:5px;">
+				配送先一覧 
+			</a>
 		</div>
 		<%
 		ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
@@ -211,14 +180,15 @@ td {vertical-align: middle;}
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
 			%>
-			<button class="btn btn-sm" id="hideShippedButton" name="status_sort"
-				value="hidden"
-				style="border: 1px solid gray; background-color: #E5CCFF; border-radius: 40px;">発送済みを非表示</button>
+			<button class="button-light-purple px-3 py-1" id="hideShippedButton" name="status_sort"
+				value="hidden" style="border-radius: 40px;">
+				<small>発送済みを非表示</small>
+			</button>
 			<% 
 			} 
 			%>
 		</div>
-		<div style="overflow-x: scroll; height: 57vh; border-radius: 5px;"
+		<div style="overflow-x: scroll; height: 59vh; border-radius: 5px;"
 			class="border mx-5 mt-3 mb-5 px-3">
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {

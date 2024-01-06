@@ -50,11 +50,11 @@
 							</div>
 						</div>
 						<!-- モーダルボタン -->
-						<div class="mx-auto" style="width: 50%;" class="link">
-							<button type="button" class="btn text-nowrap w-100" 
+						<div class="mx-auto" style="" class="link">
+							<button type="button" class="text-nowrap px-3 py-1 w-100 link" 
 									data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-									style="border: 1px solid #FF0000; color: #FF0000; border-radius:40px;">
-							 		アカウントの解約
+									style="border:0.5px #385A37 solid; background-color:white; color:#385A37; border-radius:5px;">
+							 		<small>アカウントを解約する</small>
 							</button>
 						</div>
 						<!-- モーダルウィンドウ -->
@@ -82,7 +82,9 @@
 									</div>
 									<div class="modal-footer">
 										<form action="deleteUser" method="post">
-											<button type="submit" class="btn link" style="border: 1px solid #FF0000; color: #FF0000; border-radius:40px;">解約する</button>
+											<button type="submit" class="btn link" style="color: #385A37;">
+											<small>解約する</small>
+										</button>
 										</form>
 									</div>
 								</div>
