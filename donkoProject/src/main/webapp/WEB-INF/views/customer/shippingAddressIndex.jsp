@@ -113,13 +113,13 @@
 							〒 <%= head %>-<%= end %><br>
 							<%= shippingAddressBean.getAddress() %>
 							</h6>
-							<a 
-							   href='editShippingAddress?shipping_address_id=<%= shippingAddressBean.getShippingAddressId() %>'
-							   style="text-decoration:none;">
 								<button type="submit" class="button-light-purple px-2 py-1" style="border-radius:5px;">
-									編集
+									<a class="anchor"
+									   href='editShippingAddress?shipping_address_id=<%= shippingAddressBean.getShippingAddressId() %>'
+									   style="text-decoration:none;">
+										編集
+									</a>
 								</button>
-							</a>
 							<%
 							int main_address = shippingAddressBean.getMainShippingAddress();
 							if (main_address != 1) {

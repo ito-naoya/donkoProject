@@ -4,8 +4,8 @@
 .button-purple {
     color: white;
     background-color: #9933FF;
-    border-radius: 40px;
     text-decoration: none; /* To remove underlines from links */
+    border: 1px solid #9933FF;
 }
 .button-purple:hover {
     color: #9933FF;
@@ -20,14 +20,29 @@
 .button-light-purple:hover {
     color: #E5CCFF;
     background-color: white;
+    font-weight: bold;
     border: 1px solid #E5CCFF;
 }
+.anchor {
+	color:inherit;
+}
 .button-red {
-    border: 1px solid #FF0000; 
+    border: 1px solid red; 
     background: #FFFFFF; 
-    color: #FF0000;
+    color: red;
+    text-decoration: none; /* To remove underlines from links */
 }
 .button-red:hover {
     background: #FF0000; 
+    color: #FFF;
+}
+.button-green {
+    border: 0.1px solid #385a37; 
+    background: #FFFFFF; 
+    color: #385a37;
+    text-decoration: none; /* To remove underlines from links */
+}
+.button-green:hover {
+    background: #385a37; 
     color: #FFF;
 }

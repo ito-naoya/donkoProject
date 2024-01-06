@@ -14,8 +14,6 @@
 .border::-webkit-scrollbar {display: none;}
 .th {position: sticky; top: 0;}
 td {vertical-align: middle;}
-.link:hover{opacity: 0.7;}
-.link2:hover{opacity: 0.8;}
 </style>
 </head>
 <body>
@@ -27,10 +25,10 @@ td {vertical-align: middle;}
 			
 			<!-- ユーザー情報の確認 -->
 			<!-- モーダルボタン -->
-			<div style="width: 32%;" class="link">
-				<button type="button" class="btn mb-4 p-3 text-nowrap text-center w-100 border" 
+			<div style="width: 32%;">
+				<button type="button" class="button-green mb-4 px-3 py-2 text-nowrap text-center w-100" 
 						data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-						style="color: #385A37; text-decoration: none; border-radius:5px;">
+						style="text-decoration: none; border-radius:5px;">
 				 		ユーザー情報の確認
 				</button>
 			</div>
@@ -112,10 +110,10 @@ td {vertical-align: middle;}
 			
 			<!-- 配送先の登録 -->
 			<!-- モーダルボタン -->
-			<div style="width: 32%;" class="link">
-				<button type="button" class="btn mb-4 p-3 text-nowrap text-center w-100 border" 
+			<div style="width: 32%;">
+				<button type="button" class="button-green mb-4 px-3 py-2 text-nowrap text-center w-100" 
 						data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
-						style="color: #385A37; text-decoration: none; border-radius:5px;">
+						style="text-decoration: none; border-radius:5px;">
 				 		配送先の登録
 				</button>
 			</div>
@@ -156,8 +154,8 @@ td {vertical-align: middle;}
 							</div>
 							<div class="modal-footer d-flex flex-column p-4">
 								<button 
-									type="submit" class="btn" id="createButton"
-									style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; width:50%;">
+									type="submit" class="button-purple py-2" id="createButton"
+									style="width:50%; border-radius:5px;">
 									登録
 								</button>
 							</div>
@@ -167,8 +165,8 @@ td {vertical-align: middle;}
 			</div>
 			<!-- 配送先一覧のボタン -->
 			<a href="shippingAddressIndex"
-				class="d-inline-block border mb-4 p-3 text-center link"
-				style="width: 32%; color: #385A37; text-decoration: none; border-radius:5px;">
+				class="button-green d-inline-block mb-4 px-3 py-2 text-center"
+				style="width: 32%; text-decoration: none; border-radius:5px;">
 				配送先一覧 
 			</a>
 		</div>
@@ -190,7 +188,7 @@ td {vertical-align: middle;}
 			} 
 			%>
 		</div>
-		<div style="overflow-x: scroll; height: 57vh; border-radius: 5px;"
+		<div style="overflow-x: scroll; height: 59vh; border-radius: 5px;"
 			class="border mx-5 mt-3 mb-5 px-3">
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
