@@ -24,95 +24,91 @@ td {vertical-align: middle;}
 	<main class="container">
 		<!--  メニューボタンの表示 -->
 		<div class="d-flex justify-content-between m-5 mb-2">
-			<label class="open mx-1 link" for="pop-up" style="width: 32%;">
-				<div
-					class="d-inline-block border mb-4 p-3 w-100 text-center text-nowrap"
-					style="color: #385A37; text-decoration: none; border-radius:5px;">
-					<p class="mb-0">ユーザー情報を確認</p>
-				</div>
-			</label> <input type="checkbox" id="pop-up">
-			<div class="overlay">
-				<div class="window" id="userInfoWindow">
-					<label class="close m-3" for="pop-up"> <svg
-							xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-							fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
-						  <path
-								d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-						  <path
-								d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-						</svg>
-					</label>
-					<%
-					CustomerUser users = (CustomerUser) request.getAttribute("users");
-					%>
-					<div class="row d-flex justify-content-centert"
-						style="height: 100%;">
-						<div class="my-auto p-5">
-							<div class="cancelButton"
-								style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-								<h5>
-									<strong>ユーザー情報</strong>
-								</h5>
-							</div>
-							<table class="table table-borderless">
-								<tbody>
-									<tr>
-										<td>ユーザーID</td>
-										<td><%=users.getUserLoginId()%></td>
-									</tr>
-									<tr>
-										<td>ユーザー名</td>
-										<td><%=users.getUserName()%></td>
-									</tr>
-									<tr>
-										<td>性別</td>
-										<%
-										String gender = users.getGender();
-										if (gender == null) {
-										%>
-										<td>未設定</td>
-										<%
-										} else {
-										%>
-										<td><%=users.getGender()%></td>
-										<%
-										}
-										%>
-									</tr>
-									<tr>
-									</tr>
-									<tr>
-										<td>誕生日</td>
-										<%
-										Date birthday = users.getBirthday();
-											if (birthday == null) {
-										%>
-										<td>未設定</td>
-										<%
-										} else {
-										%>
-										<td><%=new SimpleDateFormat("yyyy/MM/dd").format(users.getBirthday())%></td>
-										<%
-										}
-										%>
-									</tr>
-								</tbody>
-							</table>
-							<div class="d-flex mt-5">
+			
+			<!-- モーダルボタン -->
+			<div style="width: 32%;" class="link">
+				<button type="button" class="btn mb-4 p-3 text-nowrap text-center w-100 border" 
+						data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+						style="color: #385A37; text-decoration: none; border-radius:5px;">
+				 		ユーザー情報の確認
+				</button>
+			</div>
+			<!-- モーダルウィンドウ -->
+			<div class="modal fade" id="staticBackdrop"
+				data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered w-100">
+					<div class="modal-content" id="modalWindow" style="width:100%;">
+						<div class="modal-header">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" style="color:#385A37;">
+								<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+								<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+							</svg>
+							<small class="ms-2">ユーザー情報</small>
+							<button type="button" class="btn-close"
+								data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body p-5 d-flex flex-wrap">
+							<div>
 								<%
+								CustomerUser users = (CustomerUser) request.getAttribute("users");
+								String gender = users.getGender();
+								Date birthday = users.getBirthday();
 								int userId = (int) request.getAttribute("user_id");
 								%>
-								<a href="userInfoEdit?=<%=userId%>"
-									class="link"
-									style="color: #000000; vertical-align: middle; text-decoration: none; width: 50%; margin-right: 30px;">
-									<button class="btn p-2 w-100"
-										style="border: 1px solid gray; background: #E5CCFF;">編集</button>
+								<div class="mb-3">
+									<small>ログインID：</small><br>
+									<%=users.getUserLoginId()%>
+								</div>
+								<div class="mb-3">
+									<small>名前：</small><br>
+									<%=users.getUserName()%>
+								</div>
+								<div class="mb-3">
+									<small>性別：</small><br>
+									<%
+									if (gender == null) {
+									%>
+										未設定<br>
+									<%
+									} else {
+									%>
+										<%=users.getGender()%><br>
+									<%
+									}
+									%>
+								</div>
+								<div>
+									<small>性別：</small><br>
+									<%
+									if (birthday == null) {
+									%>
+										未設定<br>
+									<%
+									} else {
+									%>
+										<%=new SimpleDateFormat("yyyy/MM/dd").format(users.getBirthday())%><br>
+									<%
+									}
+									%>
+								</div>
+							</div>
+							<div class="ms-auto">
+								<a href="userInfoEdit?=<%= userId %>" class="ms-auto mb-3 link" style="color:#385A37;">
+									<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+										<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+										<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+									</svg>
 								</a>
 							</div>
+						</div>
+						<div class="modal-footer d-flex flex-column p-4">
+							<a href="logout" class="ms-auto link" style="color:#385A37; text-decoration:none;"><small>ログアウト</small></a>
 						</div>
 					</div>
 				</div>
 			</div>
+			
 			<!-- 配送先の登録ボタン -->
 			<label class="open mx-1 link" for="pop-up2" style="width: 32%;">
 				<div
@@ -200,8 +196,8 @@ td {vertical-align: middle;}
 			} 
 			%>
 		</div>
-		<div style="overflow-x: scroll; height: 52vh; border-radius: 5px;"
-			class="border mx-5 my-3 px-3">
+		<div style="overflow-x: scroll; height: 57vh; border-radius: 5px;"
+			class="border mx-5 mt-3 mb-5 px-3">
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
 			%>
@@ -264,10 +260,6 @@ td {vertical-align: middle;}
 			<%
 			}
 			%>
-		</div>
-		<div class="logout d-flex justify-content-end my-4">
-			<a href="logout" class="btn px-4 link2"
-				style="color: white; background-color: #385A37; border-radius: 40px; margin-right: 45px;">ログアウト</a>
 		</div>
 	</main>
 	<%@include file="../component/footer.jsp"%>
