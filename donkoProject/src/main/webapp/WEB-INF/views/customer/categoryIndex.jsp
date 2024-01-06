@@ -47,7 +47,7 @@
 							<% 
 							for (OptionCategoryBean optionCategoryValue : optionCategoryValueList) { 
 							%>
-							<small class="mx-3" style="display: flex; align-items: center;">
+							<small class="mx-3 text-nowrap" style="display: flex; align-items: center;">
 								<input type="checkbox" name="option"
 								id="<%= optionCategoryValue.getOptionCategoryValue() %>"
 								onclick="chebg('<%= optionCategoryValue.getOptionCategoryValue() %>')" 
