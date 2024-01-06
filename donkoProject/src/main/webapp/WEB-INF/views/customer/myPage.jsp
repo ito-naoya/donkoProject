@@ -25,6 +25,7 @@ td {vertical-align: middle;}
 		<!--  メニューボタンの表示 -->
 		<div class="d-flex justify-content-between m-5 mb-2">
 			
+			<!-- ユーザー情報の確認 -->
 			<!-- モーダルボタン -->
 			<div style="width: 32%;" class="link">
 				<button type="button" class="btn mb-4 p-3 text-nowrap text-center w-100 border" 
@@ -109,15 +110,65 @@ td {vertical-align: middle;}
 				</div>
 			</div>
 			
-			<!-- 配送先の登録ボタン -->
-			<label class="open mx-1 link" for="pop-up2" style="width: 32%;">
-				<div
-					class="d-inline-block border mb-4 p-3 w-100 text-center text-nowrap"
-					style="color: #385A37; text-decoration: none; border-radius:5px;">
-					<p class="mb-0">配送先の登録</p>
+			<!-- 配送先の登録 -->
+			<!-- モーダルボタン -->
+			<div style="width: 32%;" class="link">
+				<button type="button" class="btn mb-4 p-3 text-nowrap text-center w-100 border" 
+						data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
+						style="color: #385A37; text-decoration: none; border-radius:5px;">
+				 		配送先の登録
+				</button>
+			</div>
+			<!-- モーダルウィンドウ -->
+			<div class="modal fade" id="staticBackdrop2"
+				data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered w-100">
+					<div class="modal-content" id="modalWindow" style="width:100%;">
+						<div class="modal-header">
+							<small class="ms-2">配送先の登録</small>
+							<button type="button" class="btn-close"
+								data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<!-- フォームを入れる -->
+						<form action="createShippingAddress" method="post">
+							<div class="modal-body p-5 d-flex flex-wrap">
+								<div class="form-group w-100 mb-3">
+									<label for="exampleInputAddresses"><small>宛名：</small></label><br>
+									<input type="text" class="form-control"
+										id="exampleInputAddresses" aria-describedby="addresses"
+										name="addresses" value="" placeholder="伊藤 直也" autocomplete="name">
+									<span id="errorMessageAddressee" style="color:red;"></span>
+								</div>
+								<div class="form-group w-100 mb-3">
+									<label for="exampleInputPostalCode"><small>郵便番号：</small></label><br>
+									<input type="text" class="form-control" id="exampleInputPostalCode"
+										aria-describedby="postalCode" maxlength="7" maxlength="7" name="postalcode" value=""
+										placeholder="6500001" autocomplete="postal-code">
+									<span id="errorMessagePostalCode" style="color:red;"></span>
+								</div>
+								<div class="form-group w-100">
+									<label for="exampleInputAddress"><small>住所：</small></label><br>
+									<input type="text" class="form-control" id="exampleInputAddress"
+										aria-describedby="address" name="address" value="" placeholder="兵庫県神戸市中央区加納町４丁目２−１" autocomplete="address-line1">
+									<span id="errorMessageAddress" style="color:red;"></span>
+								</div>
+							</div>
+							<div class="modal-footer d-flex flex-column p-4">
+								<button 
+									type="submit" class="btn" id="createButton"
+									style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; width:50%;">
+									登録
+								</button>
+							</div>
+						</form>
+					</div>
 				</div>
-			</label> 
-			<input type="checkbox" id="pop-up2">
+			</div>
+			
+			
+			
+			
 			<div class="overlay">
 				<div class="window">
 					<label class="close m-3" for="pop-up2"> 
@@ -139,36 +190,7 @@ td {vertical-align: middle;}
 									<strong>配送先の登録</strong>
 								</h5>
 							</div>
-							<!-- フォームを入れる -->
-							<form action="createShippingAddress" method="post">
-								<div class="form-group">
-									<label for="exampleInputAddresses">宛名</label><br>
-									<input type="text" class="form-control"
-										id="exampleInputAddresses" aria-describedby="addresses"
-										name="addresses" value="" placeholder="伊藤 直也" autocomplete="name">
-								</div>
-								<p id="errorMessageAddressee" style="color:red;"></p>
-								<div class="form-group">
-									<label for="exampleInputPostalCode">郵便番号</label><br>
-									<input type="text" class="form-control" id="exampleInputPostalCode"
-										aria-describedby="postalCode" maxlength="7" maxlength="7" name="postalcode" value=""
-										placeholder="6500001" autocomplete="postal-code">
-								</div>
-								<p id="errorMessagePostalCode" style="color:red;"></p>
-								<div class="form-group">
-									<label for="exampleInputAddress">住所</label><br>
-									<input type="text" class="form-control" id="exampleInputAddress"
-										aria-describedby="address" name="address" value="" placeholder="兵庫県神戸市中央区加納町４丁目２−１" autocomplete="address-line1">
-								</div>
-								<p id="errorMessageAddress" style="color:red;"></p>
-								<div class="cancelButton mt-5 d-flex justify-content-center">
-									<button 
-										type="submit" class="btn" id="createButton"
-										style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF; width:50%;">
-										登録
-									</button>
-								</div>
-							</form>
+							
 						</div>
 					</div>
 				</div>
