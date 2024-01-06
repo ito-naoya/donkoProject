@@ -23,17 +23,17 @@ quantityDecrementBtns.forEach(decrementBtn => {
 		const maxQuantity = enext.getAttribute("max");
 		const minQuantity = enext.getAttribute("min");
 
-		const eClosest = decrementBtn.closest(".quantityForm");
+		const quantityInput = decrementBtn.nextElementSibling;
+		const incrementBtn = quantityInput.nextElementSibling;
+		const updateBtn = incrementBtn.nextElementSibling;
+		updateBtn.style.visibility = "";
 
 		if (parseInt(enext.value, 10) > parseInt(maxQuantity, 10)) {
 			enext.value = maxQuantity;
-			eClosest.submit();
 		}else if(parseInt(enext.value, 10) < parseInt(minQuantity, 10)){
 			enext.value = 1;
-			eClosest.submit();
 		}else if(parseInt(enext.value, 10) > parseInt(minQuantity, 10)){
 			enext.value--;
-			eClosest.submit();
 		}
 		
 	});
@@ -47,18 +47,15 @@ quantityIncrementBtns.forEach(incrementBtn => {
 		const maxQuantity = eprev.getAttribute("max");
 		const minQuantity = eprev.getAttribute("min");	
 		
-		const eClosest = incrementBtn.closest(".quantityForm");
-		console.log(eClosest);
+		const updateBtn = incrementBtn.nextElementSibling;
+		updateBtn.style.visibility = "";
 
 		if (parseInt(eprev.value, 10) < parseInt(minQuantity, 10)) {
 			eprev.value = 1;
-			eClosest.submit();
 		}else if(parseInt(eprev.value, 10) < parseInt(maxQuantity, 10)){
 			eprev.value++;
-			eClosest.submit();
 		}else if(parseInt(eprev.value, 10) > parseInt(maxQuantity, 10)){
 			eprev.value = maxQuantity;
-			eClosest.submit();
 		}
 	});
 });
@@ -71,7 +68,7 @@ quantityInputArray.forEach(quantityInput => {
 	quantityInput.addEventListener("focus", () => {
 		const incrementBtn = quantityInput.nextElementSibling
 		const updateBtn = incrementBtn.nextElementSibling;
-		updateBtn.style.display = "";
+		updateBtn.style.visibility = "";
 	})
 	
 })
@@ -80,7 +77,7 @@ const quantityUpdateBtnArray = document.querySelectorAll(".quantityUpdateBtn");
 
 quantityUpdateBtnArray.forEach(btn => {
 	btn.addEventListener("submit", ()=>{
-		btn.style.display = "none";
+		btn.style.visibility = "hidden";
 	})
 })
 
