@@ -36,33 +36,33 @@
 						</div>
 						<br>
 						<div>
-						<div class="form-group d-flex flex-wrap mb-3">
+						<div class="form-group d-flex flex-wrap">
 							<label for="exampleInputUserId">ユーザーID</label>
 							<input type="text" class="form-control" id="exampleInputUserId"
 								aria-describedby="userId" name="user_login_id"
 								value="<%=users.getUserLoginId()%>">
 						</div>
-						<div class="d-flex flex-wrap"
+						<div class="d-flex flex-wrap mb-3"
 							style="display: flex; justify-content: start; color: #FF0000;">
 							<% String userLoginId = (String)request.getAttribute("userLoginId"); %>
 							<% if (userLoginId != null) { %>
 							<%= userLoginId %>
 							<% } %>
 						</div>
-						<div class="form-group d-flex flex-wrap mb-3">
+						<div class="form-group d-flex flex-wrap">
 							<label for="exampleInputUserName">ユーザー名</label>
 							<input type="text" class="form-control" id="exampleInputUserName"
 								aria-describedby="userName" name="user_name"
 								value="<%=users.getUserName()%>">
 						</div>
-						<div class="d-flex flex-wrap"
+						<div class="d-flex flex-wrap mb-3"
 							style="display: flex; justify-content: start; color: #FF0000;">
 							<% String userName = (String)request.getAttribute("userName"); %>
 							<% if (userName != null) { %>
 							<%= userName %>
 							<% } %>
 						</div>
-						<div class="form-group d-flex flex-wrap mb-3">
+						<div class="form-group d-flex flex-wrap">
 							<label for="exampleInputGender">性別</label>
 							<select class="form-control" name="gender" id="exampleInputGender">
 								<%
@@ -75,7 +75,7 @@
 								<option value="女性" <%=woman%>>女性</option>
 							</select>
 						</div>
-						<div class="d-flex flex-wrap"
+						<div class="d-flex flex-wrap mb-3"
 							style="display: flex; justify-content: start; color: #FF0000;">
 							<% String gender = (String)request.getAttribute("gender"); %>
 							<% if (gender != null) { %>
@@ -87,14 +87,31 @@
 							<input type="date" class="form-control" id="exampleInputbirthday"
 								name="birthday" value="<%=users.getBirthday()%>">
 						</div>
-						<div class="d-flex flex-wrap"
+						<div class="d-flex flex-wrap mb-3"
 							style="display: flex; justify-content: start; color: #FF0000;">
 							<% String birthday = (String)request.getAttribute("birthday"); %>
 							<% if (birthday != null) { %>
 							<%= birthday %>
 							<% } %>
 						</div>
-						<div class="cancelButton mt-5 mb-3"
+						<!-- TODO: パスワードも一緒に更新したい -->
+<!-- 							<div class="form-group">
+								<label for="exampleInputPassword">パスワード
+									<p id="passShowToggleIcon" class="d-inline-block"
+										style="cursor: pointer; margin: 0;">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+											fill="currentColor" class="bi bi-eye-slash-fill"
+											viewBox="0 0 16 16">
+                    <path
+												d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
+                    <path
+												d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
+                  </svg>
+									</p>
+								</label><br> <input type="password" class="form-control"
+									id="exampleInputPassword" name="password" value=" ">
+							</div> -->
+							<div class="cancelButton mt-5 mb-3"
 							style="display: flex; justify-content: center;">
 							<button type="submit" class="btn p-2 w-50"
 								style="border: 1px solid gray; background: #E5CCFF;">更新</button>

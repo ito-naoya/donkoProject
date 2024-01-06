@@ -47,7 +47,7 @@
 							<% 
 							for (OptionCategoryBean optionCategoryValue : optionCategoryValueList) { 
 							%>
-							<small class="mx-3" style="display: flex; align-items: center;">
+							<small class="mx-3 text-nowrap" style="display: flex; align-items: center;">
 								<input type="checkbox" name="option"
 								id="<%= optionCategoryValue.getOptionCategoryValue() %>"
 								onclick="chebg('<%= optionCategoryValue.getOptionCategoryValue() %>')" 
@@ -65,7 +65,7 @@
 						} 
 						%>
 						<input type="hidden" name="categoryName" value="<%= (String)request.getAttribute("categoryName") %>">
-						<button type="submit" class="btn text-nowrap ms-3" style="border:1px gray solid; background-color: #E5CCFF;" onclick="return testCheck()">こだわり検索</button>
+						<button type="submit" class="button-light-purple text-nowrap ms-3 px-2" style="border-radius:5px;" onclick="return testCheck()">こだわり検索</button>
 					</div>
 				</div>
 			</form>

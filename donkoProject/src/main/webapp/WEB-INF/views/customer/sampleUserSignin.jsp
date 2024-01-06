@@ -4,15 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="./css/button.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
-<style>
-.link:hover{opacity: 0.7;}
-.link2:hover{opacity: 0.8;}
-</style>
 <title>donko</title>
 </head>
 <body>
@@ -25,7 +22,7 @@
 						<img src="./images/donkoLogo2.png" style="height: 80px;">
 					</a>
 				</span>
-				<div class="col-5 p-5 border" style="border-radius:10px;">
+				<div class="col-lg-4 p-5 border" style="border-radius:10px;">
 					<h4 class="mt-3"><strong>ログイン</strong></h4>
 					<br>
 					<%
@@ -41,6 +38,10 @@
 
 					<!-- ここからフォーム -->
 					<form action="userSignin" method="post">
+						<%
+						String originSource = (String)request.getAttribute("originSource");
+						%>
+						<input type="hidden" name="originSource" value="<%= originSource %>">
 						<div class="row mb-3 mt-3">
 							<label for="adminLoginId" class="form-label">ユーザーID</label>
 							<div class="col-12">
@@ -67,8 +68,8 @@
 
 						<div class="row">
 							<div class="col-12 my-4 d-flex justify-content-center">
-								<input type="submit" value="ログイン" class="btn border"
-									style="background-color: #9933FF; color: white; width:50%;">
+								<input type="submit" value="ログイン" class="button-purple py-1"
+									style="width:50%; border-radius:5px;">
 							</div>
 						</div>
 					</form>
@@ -80,16 +81,17 @@
 							<small>パスワードをお忘れですか？</small><br>
 							</div>
 							<a href="updateUserPassword">
-							<input type="submit" value="パスワード変更" class="btn border w-100"
-								style="background-color: #9933FF; color: white;">
-								</a>
+								<input type="submit" value="パスワード変更" 
+									   class="button-purple py-1 w-100"
+									   style="border-radius:5px;">
+							</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row justify-content-center my-3">
-				<div class="col-5">
+				<div class="col-lg-4">
 					<a href="userSignup" class="link" style="color:#385A37; text-decoration:none;">新規登録はこちら</a>
 				</div>
 			</div>

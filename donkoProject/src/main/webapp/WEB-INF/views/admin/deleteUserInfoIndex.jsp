@@ -30,7 +30,7 @@
 						<div style="display: flex; align-items: end;">
 						    <h5 class="mb-0 me-3"><strong>削除ユーザー一覧</strong></h5>
 						    <small class="mx-3" style="vertical-align: middle;">
-						  		ダブルクリックで商品を編集
+						  		ダブルクリックでユーザー情報を編集
 						    </small>
 						</div>
 						<%

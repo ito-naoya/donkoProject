@@ -5,11 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="./css/button.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-<style>
-.link:hover{opacity: 0.7;}
-.link2:hover{opacity: 0.8;}
-</style>
 <title>donko</title>
 </head>
 <body>
@@ -43,14 +40,14 @@
 		    			</li>
 	    			</div>
     			</a>
-    			<% 
-    			} 
+    			<%
+    			}
     			%>
-    			<% 
+    			<%
     			if (user_id == null) {
     			%>
     			<li class="ms-auto me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
-    				<a href="userSignup" class="link2 btn btn-sm px-4" style="color:white; background-color:#9933FF; border-radius:40px;">
+    				<a href="userSignup" class="px-4 py-1 button-purple" style="border-radius:40px;">
     					新規登録
     				</a>
     			</li>
@@ -59,7 +56,7 @@
     					<small>ログイン</small>
     				</a>
     			</li>
-    			<% 
+    			<%
     			} else {
     			%>
     			<li class="ms-auto me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
@@ -76,7 +73,7 @@
 						  <span class="badge ms-1" style="background-color:#333;"><%= cartItemNum %></span>
     				</a>
     			</li>
-    			<% 
+    			<%
     			}
     			%>
     		</ul>
@@ -89,7 +86,7 @@
    						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
 						  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
 						</svg>
-   						<small>カテゴリーで探す</small>
+   						<small>カテゴリで探す</small>
    						</strong>
    					</button>
    					<div class="offcanvas offcanvas-start" data-bs-scroll="true"
@@ -98,7 +95,7 @@
 					style="background-color:#63A162; opacity: 0.96;">
 						<div class="offcanvas-header" style="border-bottom:1px white solid;">
 							<h5 class="offcanvas-title ms-3 mt-3 text-light" id="offcanvasScrollingLabel">
-								<strong>カテゴリー一覧</strong>
+								<strong>カテゴリ一覧</strong>
 							</h5>
 							<button type="button" class="btn-close me-2"
 								data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -110,7 +107,7 @@
 								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a
 									href="category?categoryName=靴" style="text-decoration:none; color:white;">靴</a></li>
 								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a
-									href="category?categoryName=携帯" style=" text-decoration:none; color:white;">携帯</a></li>
+									href="category?categoryName=携帯" style="text-decoration:none; color:white;">携帯</a></li>
 								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a
 									href="category?categoryName=本" style="text-decoration:none; color:white;">本</a></li>
 								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a
@@ -119,12 +116,26 @@
 						</div>
 					</div>
 	    		</li>
-	    		<li class="ms-auto me-3" style="list-style:none; display: flex; align-items: center;">
-	    			<small class="link ms-1">お知らせ</small>
-	    		</li>
-	    		<li class="link mx-3" style="list-style:none; display: flex; align-items: center;">
-	    			<small>利用ガイド</small>
-	    		</li>
+	    		<li class="ms-auto me-1" style="list-style:none; display: flex; align-items: center;">
+	    			<div class="dropdown">
+						<button class="btn dropdown-toggle link" type="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="border: none !important;">
+							<small>お問い合わせ</small>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#"><small>利用ガイド</small></a></li>
+							<li><a class="dropdown-item" href="#"><small>よくある質問</small></a></li>
+							<% 
+			    			if (user_id != null) {
+			    			%>
+							<li><a class="dropdown-item" href="deleteAccount"><small>アカウントの解約について</small></a></li>
+							<% 
+							} 
+							%>
+						</ul>
+					</div>
+				</li>
 	    	</ul>
 	    </nav>
     </header>

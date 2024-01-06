@@ -82,6 +82,8 @@ public class ItemDetailServlet extends HttpServlet {
 		}else if(source != null && categoryName == null) {
 			request.setAttribute("url", source);
 			request.setAttribute("source", source);
+		}else if(source == null && categoryName == null) {
+			request.setAttribute("url", "home");
 		}
 		
 		request.setAttribute("item", item);
@@ -99,19 +101,18 @@ public class ItemDetailServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession(false);
 		Object loginedUserId = session.getAttribute("user_id");
+		String itemId = request.getParameter("itemId");
+		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
 		
 		if(loginedUserId == null) {
-			response.sendRedirect("userSignin");
+			response.sendRedirect("userSignin?" + "originSource=" + "itemDetail?itemId=" + itemId);
 			return;
 		}
 		
 		String disp = "/header";
 		RequestDispatcher dispatch = request.getRequestDispatcher(disp);
 		dispatch.include(request, response);
-		
-		String itemId = request.getParameter("itemId");
-		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
-		
+	
 		//商品IDとユーザーIDを保持するcartBeanをnewする
 		CartBean cb = new CartBean();
 		//商品IDをcartBeanにセットする
