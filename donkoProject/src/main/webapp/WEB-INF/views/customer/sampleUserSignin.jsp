@@ -68,8 +68,8 @@
 
 						<div class="row">
 							<div class="col-12 my-4 d-flex justify-content-center">
-								<input type="submit" value="ログイン" class="btn border"
-									style="background-color: #9933FF; color: white; width:50%;">
+								<input type="submit" value="ログイン" class="button-purple py-1"
+									style="width:50%; border-radius:5px;">
 							</div>
 						</div>
 					</form>
@@ -81,9 +81,10 @@
 							<small>パスワードをお忘れですか？</small><br>
 							</div>
 							<a href="updateUserPassword">
-							<input type="submit" value="パスワード変更" class="btn border w-100"
-								style="background-color: #9933FF; color: white;">
-								</a>
+								<input type="submit" value="パスワード変更" 
+									   class="button-purple py-1 w-100"
+									   style="border-radius:5px;">
+							</a>
 							</div>
 						</div>
 					</div>
