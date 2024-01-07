@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="./css/button.css">
 <link
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
   rel="stylesheet"
@@ -52,8 +53,8 @@
 						
 						<div class="mt-5">
 							<div class="d-flex justify-content-center">
-								<input type="submit" value="ログイン" class="btn border w-50"
-									style="background-color: #9933FF; color: white; margin:20px 0;">
+								<input type="submit" value="ログイン" class="button-purple py-1 w-50"
+									style="border-radius:5px; margin:20px 0;">
 							</div>
 						</div>
 					</form>

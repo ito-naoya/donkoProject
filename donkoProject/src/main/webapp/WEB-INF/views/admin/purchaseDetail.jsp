@@ -6,12 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>donko</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="./css/button.css">
 <style type="text/css">
 .td{
 	vertical-align: middle;
 }
 </style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
 	<main>
@@ -94,11 +96,45 @@
 						if (shippingId == 1) { 
 						%>
 						<div class="d-flex justify-content-center mb-5">
-							<form action="shipping" method="post" onsubmit="return check()">
-								<input type="hidden" name="purchaseId" value="<%= purchaseInfo.getPurchaseId() %>">
-								<input type="hidden" name="shippingId" value="2">
-								<input type="submit" value="発送する" class="btn border" style="margin-top: 70px; background-color:#9933FF; color: white; padding: 12px 80px;">
-							</form>
+							<!-- モーダルボタン -->
+							<button type="button" class="button-light-purple px-5 py-2 text-nowrap text-center" 
+									data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+									style="border-radius:5px; margin-top: 70px;">
+								発送する
+							</button>
+							<!-- モーダルウィンドウ -->
+							<div class="modal fade" id="staticBackdrop"
+								data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+								aria-labelledby="staticBackdropLabel" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered w-100">
+									<div class="modal-content" id="modalWindow" style="width:100%;">
+										<div class="modal-header">
+											<small class="ms-2">発送手続き</small>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body p-5 d-flex flex-wrap">
+											<p>#<%= purchaseInfo.getPurchaseId() %> の受注商品を発送しますか？</p>
+											<small>
+												発送ステータスは元に戻すことはできません。<br>
+												ステータスの変更は商品を発送した後変更してください。
+											</small>
+										</div>
+										<!-- 発送するボタン -->
+										<div class="modal-footer">
+											<form action="shipping" method="post">
+												<input type="hidden" name="purchaseId" value="<%= purchaseInfo.getPurchaseId() %>">
+												<input type="hidden" name="shippingId" value="2">
+												<button type="submit" class="button-purple px-3 py-2"
+													style="border-radius: 5px;">
+													発送する
+												</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							
 						</div>
 						<% 
 						} 
