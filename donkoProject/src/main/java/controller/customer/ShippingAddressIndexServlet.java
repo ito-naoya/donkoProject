@@ -39,6 +39,9 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 			dispatch.include(request, response);
 		}
 		
+		String source = request.getParameter("source");
+		request.setAttribute("url", source != null ? source : "myPage");
+		
 		// ユーザIDをセット
 		CustomerUser customerUser = new CustomerUser();
 		customerUser.setUserId((int) userId);
@@ -53,6 +56,7 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 			ErrorHandling.transitionToErrorPage(request,response,"配送先一覧画面へのアクセスに失敗しました","myPage","マイページ画面に");
 			return;
 		} 
+		
 		
 			// データ取得に成功した場合に値をセットする
 			request.setAttribute("mainShippingAddressList", mainShippingAddressList);
