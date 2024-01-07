@@ -94,22 +94,22 @@
 						<div class="row mb-3">
 							<div class="col-lg-6 me-auto">
 								<div class="m-3">
-									<small class="border p-1" style="border-radius:5px; background-color:#D5E8D4;">合計金額</small>
+									<small class="border p-1" style="border-radius:5px; background-color:cornflowerblue; color:white;">合計金額</small>
 									<h4 class="my-2"><strong>￥ <%= nf.format(purchaseInfo.getTotalAmount()) %></strong></h4>
 								</div>
 								<div class="m-3">
-									<small class="border p-1" style="border-radius:5px; background-color:#D5E8D4;">受注情報</small>
+									<small class="border p-1" style="border-radius:5px; background-color:cornflowerblue; color:white;">受注情報</small>
 									<p class="my-2">#<%= purchaseInfo.getPurchaseId() %></p>
 									<p class="my-2"><%= formattedTime %></p>
 								</div>
 								<div class="m-3">
-									<small class="border p-1" style="border-radius:5px; background-color:#D5E8D4;">購入者</small>
+									<small class="border p-1" style="border-radius:5px; background-color:cornflowerblue; color:white;">購入者</small>
 									<p class="my-2"><%= purchaseInfo.getUserName() %></p>
 								</div>
 							</div>
 							<div class="col-lg-5" style="border-radius:5px;">
 								<div class="my-3 border p-3" style="border-radius:5px;">
-									<small class="border p-1" style="border-radius:5px; background-color:#D5E8D4;">配送先</small><br>
+									<small class="border p-1" style="border-radius:5px; background-color:cornflowerblue; color:white;">配送先</small><br>
 									<p class="my-2">〒 <%= purchaseInfo.getPostalCode() %></p>
 									<p class="mb-2"><%= purchaseInfo.getAddress() %></p>
 									<p class="mb-0"><%= purchaseInfo.getAddressee() %></p>
