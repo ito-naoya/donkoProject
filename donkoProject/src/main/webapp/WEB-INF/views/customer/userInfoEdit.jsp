@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="./css/button.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -20,14 +21,14 @@
 			CustomerUser users = (CustomerUser) request.getAttribute("users");
 			%>
 			<div class="row" style="height:100vh;">
-				<div class="col-lg-5 border m-auto p-5" style="display: flex; justify-content: center; border-radius:10px; box-shadow:10px 10px 10px lightgray;">
+				<div class="col-lg-4 border m-auto p-5" style="display: flex; justify-content: center; border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 					<form action="userInfoEdit" method="post"
 					class="needs-validation w-100" novalidate>
 						<div class="cancelButton"
 							style="display: flex; justify-content: space-between;">
-							<h4>
+							<h5>
 								<strong>ユーザ情報編集</strong>
-							</h4>
+							</h5>
 							<div>
 								<a href="myPage"
 									style="text-decoration: none; text-align: center;"><button
@@ -37,7 +38,7 @@
 						<br>
 						<div>
 						<div class="form-group d-flex flex-wrap">
-							<label for="exampleInputUserId">ユーザーID</label>
+							<label for="exampleInputUserId"><small>ログインID：</small></label>
 							<input type="text" class="form-control" id="exampleInputUserId"
 								aria-describedby="userId" name="user_login_id"
 								value="<%=users.getUserLoginId()%>">
@@ -50,7 +51,7 @@
 							<% } %>
 						</div>
 						<div class="form-group d-flex flex-wrap">
-							<label for="exampleInputUserName">ユーザー名</label>
+							<label for="exampleInputUserName"><small>ユーザー名：</small></label>
 							<input type="text" class="form-control" id="exampleInputUserName"
 								aria-describedby="userName" name="user_name"
 								value="<%=users.getUserName()%>">
@@ -63,7 +64,7 @@
 							<% } %>
 						</div>
 						<div class="form-group d-flex flex-wrap">
-							<label for="exampleInputGender">性別</label>
+							<label for="exampleInputGender"><small>性別：</small></label>
 							<select class="form-control" name="gender" id="exampleInputGender">
 								<%
 								String selected = users.getGender();
@@ -83,7 +84,7 @@
 							<% } %>
 						</div>
 						<div class="form-group d-flex flex-wrap">
-							<label for="exampleInputbirthday">誕生日</label><br>
+							<label for="exampleInputbirthday"><small>誕生日：</small></label><br>
 							<input type="date" class="form-control" id="exampleInputbirthday"
 								name="birthday" value="<%=users.getBirthday()%>">
 						</div>
@@ -113,8 +114,8 @@
 							</div> -->
 							<div class="cancelButton mt-5 mb-3"
 							style="display: flex; justify-content: center;">
-							<button type="submit" class="btn p-2 w-50"
-								style="border: 1px solid gray; background: #E5CCFF;">更新</button>
+							<button type="submit" class="button-light-purple px-3 py-1 w-50"
+								style="border-radius:5px;">更新</button>
 						</div>
 					</form>
 				</div>

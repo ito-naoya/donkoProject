@@ -146,8 +146,8 @@
 												data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body p-5">
-											<strong><%=shippingAddressBean.getAddressee()%></strong>
-											さんの配送先を削除しますか？
+											この配送先を削除しますか？<br><br>
+											<small>一度削除した配送先は復元できません。</small>
 										</div>
 										<div class="modal-footer">
 											<a href="deleteShippingAddress?shipping_address_id=<%=shippingAddressBean.getShippingAddressId()%>"

@@ -173,10 +173,10 @@ td {vertical-align: middle;}
 		<%
 		ArrayList<PurchaseBean> purchaseList = (ArrayList<PurchaseBean>) request.getAttribute("purchaseList");
 		%>
-		<div class="logout d-flex justify-content-between mx-5">
-			<h4 style="margin-bottom: 0;">
+		<div class="logout d-flex justify-content-between align-items-center mx-5">
+			<h5 style="margin-bottom: 0;">
 				<strong>購入履歴</strong>
-			</h4>
+			</h5>
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
 			%>
