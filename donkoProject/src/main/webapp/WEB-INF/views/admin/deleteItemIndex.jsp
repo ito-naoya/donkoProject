@@ -86,7 +86,7 @@
 								    <input type="text" class="form-control" id="keyword-search" name="keyword" placeholder=<%= keyword == null ? "キーワードを入力" : keyword %>>
 								</div>
 								<div class="m-1 d-flex align-items-center">
-									<button type="submit" class="btn mt-5 p-2 w-100" style="background-color: #9933ff; color:white;">
+									<button type="submit" class="button-purple w-100 mt-5 py-2" style="border-radius:5px;">
 										絞り込む
 									</button>
 								</div>
@@ -227,7 +227,7 @@
 										<div class="row">
 										    <div class="d-flex flex-wrap justify-content-end text-center">
 										    	<small class="mb-0 me-3">ステータス<br>切り替え</small>
-										        <button type="submit" class="btn px-3" onclick="return confirmStatusChange();" style="background-color: #E5CCFF; color: black; border-radius: 2rem;">
+										        <button type="submit" class="button-light-purple px-3 py-1" onclick="return confirmStatusChange();" style="border-radius: 40px;">
 												    実行
 												</button>
 										    </div>
