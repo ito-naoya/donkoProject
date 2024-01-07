@@ -35,7 +35,7 @@
 				<% 
 				} else { 
 				%>
-					<div style=" overflow-x: scroll; overflow:scroll; height:70vh; border-radius:5px;" class="border px-5">
+					<div style=" overflow-x: scroll; overflow:scroll; height:74vh; border-radius:5px;" class="border px-5">
 						<table class="table table-borderless table-hover text-center my-5">
 							<thead>
 								<tr>

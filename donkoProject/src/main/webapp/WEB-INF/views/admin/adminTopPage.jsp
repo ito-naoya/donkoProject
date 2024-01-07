@@ -36,12 +36,12 @@
 				</h5>
 				<% if (unshippingedItemList == null || unshippingedItemList.size() == 0) { %>
 					<div class="border p-5 d-flex justify-content-center align-items-center" 
-						 style="margin-bottom:40px; overflow-x: scroll; overflow:scroll; height:70vh;">
+						 style="margin-bottom:40px; overflow-x: scroll; overflow:scroll; height:74vh;">
 						<p class="mb-0" style="color: lightgray;"><%= message %></p>
 					</div>
 				<% } else { %>
 					<div  class="border px-3" 
-						  style="margin-bottom:40px; border: 1px solid #000; overflow-x: scroll; overflow:scroll; height:70vh; border-radius:5px;">
+						  style="margin-bottom:40px; border: 1px solid #000; overflow-x: scroll; overflow:scroll; height:74vh; border-radius:5px;">
 						<table class="table table-borderless table-hover text-center my-5">
 							<thead>
 								<tr>

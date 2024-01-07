@@ -9,11 +9,6 @@
 		<title>
 			donko
 		</title>
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-			integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-			crossorigin="anonymous">
 		<link rel="stylesheet" href="./css/deleteUserInfoIndex.css">
 	</head>
 	<body>
@@ -41,14 +36,14 @@
 							if(toIndicate.equals("deletedUser")) {
 							%>
 								<input type="hidden" name="showSelect" value="notDeletedUser">
-								<button type="submit" class="btn btn-sm px-4 border" style="background-color: #e5ccff; border-radius:40px;">
+								<button type="submit" class="button-light-purple px-3 py-1" style="border-radius:40px;">
 									全てのユーザーを表示
 								</button>
 							<%
 							} else if(toIndicate.equals("notDeletedUser")) {
 							%>
 								<input type="hidden" name="showSelect" value="deletedUser">
-								<button type="submit" class="btn btn-sm px-4 border" style="background-color: #e5ccff; border-radius:40px;">
+								<button type="submit" class="button-light-purple px-3 py-1" style="border-radius:40px;">
 									無効のユーザーを表示
 								</button>
 							<%
@@ -57,7 +52,7 @@
 						</form>
 					</div>
 					
-					<div style=" overflow-x: scroll; overflow:scroll; height:70vh; border-radius:5px;" class="border px-4">
+					<div style=" overflow-x: scroll; overflow:scroll; height:72vh; border-radius:5px;" class="border px-4">
 						<table class="table table-borderless st-tbl1 my-5 text-center" id="userTable">
 							<thead>
 							    <tr>

@@ -154,7 +154,7 @@ td {vertical-align: middle;}
 							</div>
 							<div class="modal-footer d-flex flex-column p-4">
 								<button 
-									type="submit" class="button-purple py-2" id="createButton"
+									type="submit" class="button-purple px-2 py-1" id="createButton"
 									style="width:50%; border-radius:5px;">
 									登録
 								</button>

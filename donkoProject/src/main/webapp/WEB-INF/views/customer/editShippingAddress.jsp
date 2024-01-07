@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="./css/button.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -27,9 +28,9 @@
 					<div class="col-lg-5 m-auto p-5 border" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 						<div class="cancelButton"
 							style="display: flex; justify-content: space-between;">
-							<h4>
+							<h5>
 								<strong>配送先編集</strong>
-							</h4>
+							</h5>
 							<div>
 								<a href="shippingAddressIndex"
 									style="text-decoration: none; text-align: center;"><button
@@ -39,7 +40,7 @@
 						</div>
 						<br>
 						<div class="form-group d-flex flex-wrap">
-							<label for="exampleInputAddresses">宛名</label>
+							<label for="exampleInputAddresses"><small>宛名：</small></label>
 							<input type="text" class="form-control" id="exampleInputAddresses"
 								aria-describedby="addresses" name="addressee"
 								value="<%=shippingAddressEdit.getAddressee() %>">
@@ -52,7 +53,7 @@
 							<% } %>
 						</div>
 						<div class="form-group d-flex flex-wrap">
-							<label for="exampleInputPostalCode">郵便番号</label>
+							<label for="exampleInputPostalCode"><small>郵便番号：</small></label>
 							<input type="text" class="form-control" id="exampleInputPostalCode"
 								aria-describedby="postalcode" maxlength="8" name="postalcode"
 								value="<%=shippingAddressEdit.getPostalCode() %>">
@@ -65,7 +66,7 @@
 							<% } %>
 						</div>
 						<div class="form-group d-flex flex-wrap">
-							<label for="exampleInputAddress">住所</label>
+							<label for="exampleInputAddress"><small>住所：</small></label>
 							<input type="text" class="form-control" id="exampleInputAddress"
 								aria-describedby="address" name="address"
 								value="<%=shippingAddressEdit.getAddress() %>">
@@ -79,8 +80,8 @@
 						</div>
 						<div class="cancelButton mt-5"
 							style="display: flex; justify-content: center;">
-							<button type="submit" class="btn w-50 p-2" id="editButton"
-								style="border: 1px solid #000000; background: #9933FF; color: #FFFFFF;">更新</button
+							<button type="submit" class="button-purple mt-3 w-50 px-2 py-1" id="editButton"
+								style="border-radius:5px;">更新</button
 						</div>
 					</div>
 				</form>

@@ -21,7 +21,7 @@
 			CustomerUser users = (CustomerUser) request.getAttribute("users");
 			%>
 			<div class="row" style="height:100vh;">
-				<div class="col-lg-4 border m-auto p-5" style="display: flex; justify-content: center; border-radius:10px; box-shadow:10px 10px 10px lightgray;">
+				<div class="col-lg-5 border m-auto p-5" style="display: flex; justify-content: center; border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 					<form action="userInfoEdit" method="post"
 					class="needs-validation w-100" novalidate>
 						<div class="cancelButton"
@@ -114,7 +114,7 @@
 							</div> -->
 							<div class="cancelButton mt-5 mb-3"
 							style="display: flex; justify-content: center;">
-							<button type="submit" class="button-light-purple px-3 py-1 w-50"
+							<button type="submit" class="button-light-purple mt-3 px-3 py-1 w-50"
 								style="border-radius:5px;">更新</button>
 						</div>
 					</form>
