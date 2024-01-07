@@ -23,16 +23,11 @@
 					<% 
 					String source = (String)request.getParameter("source");
 					%>
-					<a href="<%= source %>" class="my-3" style="display: inline-block">
-						<div class="border text-center" style="width: 50px;">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-			  					<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-							</svg>
-						</div>
+					<a href="<%= source %>" class="arrow my-3" style="display: inline-block; color:#385A37;">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+						  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+						</svg>
 					</a>
-					<h4 class="mb-4 p-3 border-bottom">
-						<strong>受注詳細</strong>
-					</h4>
 					<%
 					PurchaseBean purchaseInfo = (PurchaseBean) request.getAttribute("purchaseInfo");
 					ArrayList<PurchaseDetailBean> purchaseDetailList = (ArrayList<PurchaseDetailBean>) request.getAttribute("purchaseDetailList");
@@ -42,64 +37,18 @@
 				    String formattedTime = sdf.format(ts);
 				    int shippingId = purchaseInfo.getShippingId();
 					%>
-					<% 
-					if(purchaseInfo != null) { 
-					%>
-						<div class="m-3">
-							<small>合計金額</small>
-							<h4><strong>￥ <%= nf.format(purchaseInfo.getTotalAmount()) %></strong></h4>
-						</div>
-						<table class="table table-borderless ms-2">
-							<tbody>
-								<tr>
-									<td style="width: 120px;">購入ID　：　</td>
-									<th>#<%= purchaseInfo.getPurchaseId() %></th>
-								</tr>
-								<tr>
-									<td style="width: 120px;">購入者　：　</td>
-									<th><%= purchaseInfo.getUserName() %></th>
-								</tr>
-								<tr>
-									<td style="width: 120px;">購入日　：　</td>
-									<th><%= formattedTime %></th>
-								</tr>
-							</tbody>
-						</table>
-						<div class="border-top" style="height: 50px;"></div>
-						<table class="table table-borderless text-center">
-							<tbody>
-								<%
-								for (PurchaseDetailBean purchaseDetail : purchaseDetailList) {
-								%>
-								<tr>
-									<td class="td" style="width: 10%;"><%= purchaseDetail.getPurchaseDetailId() %></td>
-									<td class="td" style="width: 100px;">
-										<span class="card" style="width: 100px; height: 100px;">
-											<img src="./images/<%= purchaseDetail.getImageFileName() %>.jpg"
-												 class="card-img-top" alt="<%= purchaseDetail.getImageFileName() %>"
-												 style="object-fit: cover; height: 100%; display: block;">
-										</span>
-									</td>
-									<td class="td"><%= purchaseDetail.getItemName() %> ( <%= purchaseDetail.getOptionCategoryValue() %> )</td>
-									<td class="td">￥ <%= nf.format(purchaseDetail.getPurchaseAmount()) %></td>
-									<td class="td"><%= purchaseDetail.getQuantity() %> 個</td>
-								</tr>
-								<%
-								}
-								%>
-							</tbody>
-						</table>
-						<% 
-						
-						%>
+					<div class="d-flex flex-wrap align-items-center mb-3 p-3 border-bottom">
+						<h4 class="mb-0">
+							<strong>受注詳細</strong>
+						</h4>
 						<% 
 						if (shippingId == 1) { 
 						%>
-						<div class="d-flex justify-content-center mb-5">
+						<div class="ms-auto">
 							<!-- モーダルボタン -->
-							<button type="button" class="button-light-purple px-5 py-2 text-nowrap text-center" 
+							<button type="button" class="button-light-purple px-4 py-1 text-nowrap text-center" 
 									data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-									style="border-radius:5px; margin-top: 70px;">
+									style="border-radius:5px;">
 								発送する
 							</button>
 							<!-- モーダルウィンドウ -->
@@ -134,11 +83,62 @@
 									</div>
 								</div>
 							</div>
-							
 						</div>
 						<% 
 						} 
 						%>
+					</div>
+					<% 
+					if(purchaseInfo != null) { 
+					%>
+						<div class="row mb-3">
+							<div class="col-lg-6 me-auto">
+								<div class="m-3">
+									<small class="border p-1" style="border-radius:5px; background-color:#D5E8D4;">合計金額</small>
+									<h4 class="my-2"><strong>￥ <%= nf.format(purchaseInfo.getTotalAmount()) %></strong></h4>
+								</div>
+								<div class="m-3">
+									<small class="border p-1" style="border-radius:5px; background-color:#D5E8D4;">受注情報</small>
+									<p class="my-2">#<%= purchaseInfo.getPurchaseId() %></p>
+									<p class="my-2"><%= formattedTime %></p>
+								</div>
+								<div class="m-3">
+									<small class="border p-1" style="border-radius:5px; background-color:#D5E8D4;">購入者</small>
+									<p class="my-2"><%= purchaseInfo.getUserName() %></p>
+								</div>
+							</div>
+							<div class="col-lg-5" style="border-radius:5px;">
+								<div class="my-3 border p-3" style="border-radius:5px;">
+									<small class="border p-1" style="border-radius:5px; background-color:#D5E8D4;">配送先</small><br>
+									<p class="my-2">〒 <%= purchaseInfo.getPostalCode() %></p>
+									<p class="mb-2"><%= purchaseInfo.getAddress() %></p>
+									<p class="mb-0"><%= purchaseInfo.getAddressee() %></p>
+								</div>
+							</div>
+						</div>
+						<div class="border-top" style="height: 30px;"></div>
+						<table class="table table-borderless text-center">
+							<tbody>
+								<%
+								for (PurchaseDetailBean purchaseDetail : purchaseDetailList) {
+								%>
+								<tr>
+									<td class="td" style="width: 120px;">
+										<span style="width: 100px; height: 100px;">
+											<img src="./images/<%= purchaseDetail.getImageFileName() %>.jpg"
+												 class="object-fit-cover border" alt="<%= purchaseDetail.getImageFileName() %>"
+												 style="width: 100%; aspect-ratio: 1 / 1; border-radius:0px;">
+										</span>
+									</td>
+									<td class="td"><%= purchaseDetail.getItemName() %> ( <%= purchaseDetail.getOptionCategoryValue() %> )</td>
+									<td class="td text-nowrap">￥ <%= nf.format(purchaseDetail.getPurchaseAmount()) %></td>
+									<td class="td text-nowrap"><%= purchaseDetail.getQuantity() %> 個</td>
+								</tr>
+								<%
+								}
+								%>
+							</tbody>
+						</table>
 					<%
 					} 
 					%>

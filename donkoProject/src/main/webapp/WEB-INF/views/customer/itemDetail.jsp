@@ -36,7 +36,7 @@
 				<div class="col-lg-3 mb-4">
 					<div class="m-auto" style="width: 100%;">
 						<img class="object-fit-cover border" 
-							 style=" width: 100%; aspect-ratio: 1 / 1; border-radius:0px;" 
+							 style="width: 100%; aspect-ratio: 1 / 1; border-radius:0px;" 
 							 id="mainImage" 
 							 src="./images/<%=item.getImageFileName()%>.jpg">
 					</div>
