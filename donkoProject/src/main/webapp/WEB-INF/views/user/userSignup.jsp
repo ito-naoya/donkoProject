@@ -22,8 +22,35 @@
 		CustomerUser users = (CustomerUser) request.getAttribute("users");
 		%>
 		<div class="container　ml-5 mr-5">
-			<div class="row" style="height:100vh;">
-				<div class="m-auto">
+			<div class="row justify-content-center">
+				<%
+					String admin = (String) request.getAttribute("admin");
+					if (admin == null){
+				%>
+				<!-- ここにdonko画像を表示 -->
+				<span class="d-block d-flex justify-content-center my-3"> 
+					<a href="home" class="link" style="text-decoration: none;"> 
+						<img src="./images/donkoLogo2.png" style="height: 80px;">
+					</a>
+				</span>
+				<%
+					}
+				%>
+				<div class="col-lg-4 m-auto p-5 border" style="border-radius: 10px;">
+					<div class="cancelButton"
+						style="display: flex; justify-content: space-between;">
+						<h4 class="mt-3">
+							<strong>ユーザー新規登録</strong>
+						</h4>
+						<!-- アドミン側のみ表示 -->
+						<%if (admin != null){ %>
+						<div>
+							<a href="adminTopPage"
+								style="text-decoration: none; text-align: center;"><button
+									type="button" class="btn-close border" aria-label="Close"></button>️</a>
+						</div>
+						<%} %>
+					</div>
 					<%
 						String admin = (String) request.getAttribute("admin");
 						if (admin == null){

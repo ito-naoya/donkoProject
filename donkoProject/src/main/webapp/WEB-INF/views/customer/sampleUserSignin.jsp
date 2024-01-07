@@ -15,24 +15,44 @@
 <body>
 	<main>
 		<div class="container　ml-5 mr-5">
-			<div class="row" style="height:100vh;">
-				<div class="m-auto">
-					<!-- ここにdonko画像を表示 -->
-					<span class="d-block d-flex justify-content-center my-3">
-						<a href="home" class="link" style="text-decoration: none;"> 
-							<img src="./images/donkoLogo2.png" style="height: 80px;">
-						</a>
-					</span>
-					<div class="d-flex justify-content-center">
-						<div class="col-lg-4 p-5 border" style="border-radius:10px;">
-							<h4 class="mt-3"><strong>ログイン</strong></h4>
-							<br>
-							<%
-							String errorMessage = (String) request.getAttribute("errorMessage");
-							if(errorMessage != null && !errorMessage.isEmpty()) {
-							%>
-							<div class="alert alert-danger alert-message" role="alert">
-								<%= errorMessage %>
+			<div class="row justify-content-center">
+				<!-- ここにdonko画像を表示 -->
+				<span class="d-block d-flex justify-content-center my-3">
+					<a href="home" class="link" style="text-decoration: none;"> 
+						<img src="./images/donkoLogo2.png" style="height: 80px;">
+					</a>
+				</span>
+				<div class="col-lg-4 p-5 border" style="border-radius:10px;">
+					<h4 class="mt-3"><strong>ログイン</strong></h4>
+					<br>
+					<%
+					String errorMessage = (String) request.getAttribute("errorMessage");
+					if(errorMessage != null && !errorMessage.isEmpty()) {
+					%>
+					<div class="alert alert-danger alert-message" role="alert">
+						<%= errorMessage %>
+					</div>
+					<%
+					}
+					%>
+
+					<!-- ここからフォーム -->
+					<form action="userSignin" method="post">
+						<%
+						String originSource = (String)request.getAttribute("originSource");
+						%>
+						<%
+						if(originSource != null){
+						%>						
+						<input type="hidden" name="originSource" value="<%= originSource %>">
+						<%
+						}
+						%>
+						<div class="row mb-3 mt-3">
+							<label for="adminLoginId" class="form-label">ユーザーID</label>
+							<div class="col-12">
+								<input type="text" class="form-control" id="userLoginId"
+									name="userLoginId" required>
 							</div>
 							<%
 							}
