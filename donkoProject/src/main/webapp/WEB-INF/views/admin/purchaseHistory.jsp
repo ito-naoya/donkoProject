@@ -75,11 +75,11 @@
 										<%
 										if ((orderItem.getShippingStatus()).equals("処理中")) {
 										%>
-											<td class="td" style="color: #CCC;"><%= orderItem.getShippingStatus() %></td>
+											<td class="td" style="color: royalblue;"><%= orderItem.getShippingStatus() %></td>
 										<%
 										} else {
 										%>
-											<td class="td" style="color: #63A162;"><%= orderItem.getShippingStatus() %></td>
+											<td class="td" style="color: #CCC;"><%= orderItem.getShippingStatus() %></td>
 										<%
 										}
 										%>

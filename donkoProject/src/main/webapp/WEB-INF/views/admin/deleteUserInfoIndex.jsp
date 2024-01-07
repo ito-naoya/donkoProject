@@ -91,7 +91,7 @@
 											<% if(user.isDeleted()){ %>
 												<p style="color: #CCC">無効</p>
 											<% } else { %>
-												<p style="color: #00FF00">有効</p>
+												<p style="color: royalblue">有効</p>
 											<% } %>
 										</td>
 									</tr>

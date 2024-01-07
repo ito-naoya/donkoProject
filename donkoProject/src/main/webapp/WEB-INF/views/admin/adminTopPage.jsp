@@ -37,7 +37,7 @@
 				<% if (unshippingedItemList == null || unshippingedItemList.size() == 0) { %>
 					<div class="border p-5 d-flex justify-content-center align-items-center" 
 						 style="margin-bottom:40px; overflow-x: scroll; overflow:scroll; height:70vh;">
-						<p class="mb-0" style="color: #385A37;"><%= message %></p>
+						<p class="mb-0" style="color: lightgray;"><%= message %></p>
 					</div>
 				<% } else { %>
 					<div  class="border px-3" 
