@@ -28,10 +28,10 @@
 					if (admin == null){
 				%>
 				<!-- ここにdonko画像を表示 -->
-				<span class="d-block d-flex justify-content-center my-3"> <a
-					href="home" class="link" style="text-decoration: none;"> <img
-						src="./images/donkoLogo2.png" style="height: 80px;">
-				</a>
+				<span class="d-block d-flex justify-content-center my-3"> 
+					<a href="home" class="link" style="text-decoration: none;"> 
+						<img src="./images/donkoLogo2.png" style="height: 80px;">
+					</a>
 				</span>
 				<%
 					}

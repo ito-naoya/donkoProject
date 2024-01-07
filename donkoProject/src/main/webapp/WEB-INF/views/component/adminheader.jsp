@@ -8,11 +8,11 @@
 .link:hover{opacity: 0.7;}
 .link2:hover{opacity: 0.8;}
 </style>
-<title>Insert title here</title>
+<title>donko</title>
 </head>
 <body>
 	<header class="fixed-top" style="background-color:white;">
-    	<div style="height:54px; background-color:#385A37; position:relative; top: 0; left: 0; z-index:2; display:flex; align-items:center;">
+    	<div style="height:54px; background-color:navy; position:relative; top: 0; left: 0; z-index:2; display:flex; align-items:center;">
     		<ul class="d-flex mb-0 p-0 w-100">
     			<li class="mx-3" style="list-style:none; display: flex; align-items: center;">
 	    			<a href="adminTopPage" class="link" style="text-decoration:none;">
