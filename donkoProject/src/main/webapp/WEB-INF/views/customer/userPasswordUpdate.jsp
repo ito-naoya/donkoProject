@@ -27,7 +27,7 @@
 						<div class="cancelButton"
 							 style="display: flex; justify-content: space-between; margin-bottom: 20px;">
 							<div>
-								<h4><strong>パスワードの更新</strong></h4>
+								<h5><strong>パスワードの更新</strong></h5>
 							</div>
 							<div>
 								<a href="userSignin" style="text-decoration: none; text-align: center;">
@@ -36,7 +36,9 @@
 							</div>
 						</div>
 						<div class="form-group my-3">
-							<label for="exampleInputUserId">ユーザーID</label>
+							<label for="exampleInputUserId">
+								<small>ユーザーID：</small>
+							</label>
 							<input type="text" class="form-control" id="exampleInputUserId"
 								aria-describedby="userId" name="user_login_id">
 						</div>
@@ -54,24 +56,34 @@
 							%>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword">パスワード
-								<p id="passShowToggleIcon" class="d-inline-block"
-									style="cursor: pointer; margin: 0;">
+							<label for="exampleInputPassword" class="d-flex justify-content-between mb-0">
+								<small>パスワード：</small>
+								<button type="button" class="btn link p-0 mb-1" 
+									data-bs-container="body" data-bs-toggle="popover" 
+									data-bs-placement="top" 
+									data-bs-content="半角英数字 8 文字以上 16 文字以内&lt;br&gt;数字を1つ以上含む" data-bs-html="true"
+									style="border: none;">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle me-2" viewBox="0 0 16 16">
+											<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+											<path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+										</svg>
+								</button> 
+							</label>
+							<div class="input-group">
+								<input type="password" class="form-control" id="exampleInputPassword"
+								aria-describedby="password" maxlength="16" name="password" value="">
+								<span id="passShowToggleIcon" class="d-inline-block p-2  d-inline-flex align-items-center border"
+									style="cursor: pointer; margin: 0; height:100%; border-radius: 0 5px 5px 0; background-color:#D5E8D4;">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
 										fill="currentColor" class="bi bi-eye-slash-fill"
 										viewBox="0 0 16 16">
-										<path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
-										<path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
-									</svg>
-								</p>
-							</label><br>
-							<label for="exampleInputPassword" class="form-label"
-								style="font-size: small; color: grey;"> 半角英数字8文字以上16文字以内
-							</label><br>
-							<label for="exampleInputPassword" class="form-label"
-								style="font-size: small; color: grey;"> 数字を1つ以上含む </label>
-								<input type="password" class="form-control" id="exampleInputPassword"
-								aria-describedby="password" maxlength="16" name="password" value="">
+           								<path
+											d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
+           								<path
+											d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
+        							</svg>
+								</span>
+							</div>
 						</div>
 						<div class="d-flex flex-wrap"
 							style="display: flex; justify-content: start; color: #FF0000;">
@@ -97,5 +109,14 @@
 	</main>
 	<script src="./js/updatePassword.js"></script>
 	<script src="./js/editUserInfoScript.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+	<script>
+	  // ポップオーバーを初期化
+	  var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+	  var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+	    return new bootstrap.Popover(popoverTriggerEl)
+	  });
+	</script>
 </body>
 </html>
