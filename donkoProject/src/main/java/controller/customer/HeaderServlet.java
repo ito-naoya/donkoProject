@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.CartBean;
+import bean.ItemCategoryBean;
 import bean.ShippingAddressBean;
 import classes.Cart;
+import classes.ItemCategory;
 import classes.ShippingAddress;
 import classes.user.CustomerUser;
 import jakarta.servlet.ServletException;
@@ -44,12 +46,16 @@ public class HeaderServlet extends HttpServlet {
 				int cartItemNum = cartBeanList.stream()
 						.map(cb -> cb.getQuantity())
 						.mapToInt(i -> i)
-						.sum();			
+						.sum();
+				
 				// 値をセット
 				request.setAttribute("mainShippingAddress", mainShippingAddress);
 				request.setAttribute("cartItemNum", cartItemNum);
 			}
 		}
+		// カテゴリ名を取得
+		ArrayList<ItemCategoryBean> categoryNameList = ItemCategory.getItemCategoryList();
+		request.setAttribute("categoryNameList", categoryNameList);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
