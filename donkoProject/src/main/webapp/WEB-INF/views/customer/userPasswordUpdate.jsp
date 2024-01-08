@@ -23,7 +23,7 @@
 					  id="updateUserPassword"
 					  style="display: flex; justify-content: center;">
 					<% CustomerUser customerUser = (CustomerUser) request.getAttribute("users"); %>
-					<div class="col-lg-5 m-auto p-5 border" style="border-radius:10px;">
+					<div class="col-lg-5 m-auto p-5 border" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 						<div class="cancelButton"
 							 style="display: flex; justify-content: space-between; margin-bottom: 20px;">
 							<div>

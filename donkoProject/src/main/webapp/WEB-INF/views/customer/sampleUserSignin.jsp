@@ -18,13 +18,15 @@
 			<div class="row" style="height:100vh;">
 				<div class="m-auto">
 					<!-- ここにdonko画像を表示 -->
-					<span class="d-block d-flex justify-content-center my-3"> <a
-						href="home" class="link" style="text-decoration: none;"> <img
+					<span class="d-block d-flex justify-content-center my-3"> 
+					<a
+						href="home" class="link" style="text-decoration: none;"> 
+						<img
 							src="./images/donkoLogo2.png" style="height: 80px;">
 					</a>
 					</span>
 					<div class="d-flex justify-content-center">
-						<div class="col-lg-5 p-5 border" style="border-radius: 10px;">
+						<div class="col-lg-5 p-5 border" style="border-radius: 10px; box-shadow:10px 10px 10px lightgray;">
 							<h5 class="mt-3">
 								<strong>ログイン</strong>
 							</h5>
@@ -104,7 +106,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row justify-content-center my-3">
+					<div class="row justify-content-center my-4">
 						<div class="col-lg-5">
 							<a href="userSignup" class="link"
 								style="color: #385A37; text-decoration: none;">新規登録はこちら</a>

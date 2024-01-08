@@ -22,7 +22,7 @@
 	<main>
 		<div class="container" style="">
 			<div class="row" style="height:100vh;">
-				<div class="border m-auto p-5" style="border-radius:5px; box-shadow:10px 10px 10px lightgray;">
+				<div class="border m-auto p-5" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 					<div class="row d-flex justify-content-center mb-3">
 						
 						<div class="col-lg-12" style="display: flex; align-items: center;">

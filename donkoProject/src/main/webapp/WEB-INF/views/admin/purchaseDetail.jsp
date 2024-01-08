@@ -19,7 +19,7 @@
 	<main>
 		<div class="container">
 			<div class="row" style="height:100vh;">
-				<div class="col-lg-8 m-auto p-5 border" style="border-radius:5px;">
+				<div class="col-lg-8 m-auto p-5 border" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 					<% 
 					String source = (String)request.getParameter("source");
 					PurchaseBean purchaseInfo = (PurchaseBean) request.getAttribute("purchaseInfo");

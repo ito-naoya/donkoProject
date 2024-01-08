@@ -17,7 +17,7 @@
 <main>
 	<div class="container">
 		<div class="row d-flex justify-content-center" style="height:100vh;">
-			<div class="col-lg-10 m-auto border p-5" style="border-radius:5px; box-shadow:10px 10px 10px lightgray;">
+			<div class="col-lg-10 m-auto border p-5" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 				<div class="row d-flex justify-content-center">
 					<div class="d-flex flex-wrap px-4 mb-4">
 						<!-- 戻るボタン -->
