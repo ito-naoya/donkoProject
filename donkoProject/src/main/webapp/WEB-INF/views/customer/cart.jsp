@@ -86,7 +86,7 @@
 														  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
 														</svg>
 													</span>
-													<button type="submit" class="quantityUpdateBtn ms-2 btn p-1" style="padding: 0; font-size: 13px; background-color: #E5CCFF; visibility: hidden;">
+													<button type="submit" class="button-light-purple ms-3 p-1" style="font-size: 13px; visibility: hidden; border-radius:5px;">
 														更新
 													</button>
 												</div>

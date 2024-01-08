@@ -36,21 +36,21 @@
 				</h5>
 				<% if (unshippingedItemList == null || unshippingedItemList.size() == 0) { %>
 					<div class="border p-5 d-flex justify-content-center align-items-center" 
-						 style="margin-bottom:40px; overflow-x: scroll; overflow:scroll; height:74vh;">
+						 style="margin-bottom:40px; overflow-x: scroll; overflow:scroll; height:74vh; border-radius:5px;">
 						<p class="mb-0" style="color: lightgray;"><%= message %></p>
 					</div>
 				<% } else { %>
-					<div  class="border px-3" 
+					<div  class="border" 
 						  style="margin-bottom:40px; border: 1px solid #000; overflow-x: scroll; overflow:scroll; height:74vh; border-radius:5px;">
-						<table class="table table-borderless table-hover text-center my-5">
+						<table class="table table-borderless table-hover text-center">
 							<thead>
 								<tr>
-									<th class="th">注文ID</th>
-									<th class="th" style="width:20%;">購入日</th>
-									<th class="th" style="width:10%;">購入者ID</th>
-									<th class="th">購入者</th>
-									<th class="th" style="width:15%;">合計金額</th>
-									<th class="th">配送先</th>
+									<th class="th py-4 ps-4">ID</th>
+									<th class="th py-4" style="width:20%;">購入日</th>
+									<th class="th py-4" style="width:10%;">購入者ID</th>
+									<th class="th py-4">購入者</th>
+									<th class="th py-4" style="width:15%;">合計金額</th>
+									<th class="th py-4 pe-4">配送先</th>
 								<tr>
 							</thead>
 							<tbody>
@@ -66,12 +66,12 @@
 									%>
 									<tr onclick="location.href='purchaseDetail?purchaseId=<%= unshippingedItem.getPurchaseId() %>&source=adminTopPage'"
 										style="cursor: pointer;">
-										<td class="td">#<%= unshippingedItem.getPurchaseId() %></td>
+										<td class="td ps-4">#<%= unshippingedItem.getPurchaseId() %></td>
 										<td class="td"><%= formattedTime %></td>
 										<td class="td"><%= unshippingedItem.getUserId() %></td>
 										<td class="td"><%= unshippingedItem.getUserName() %></td>
 										<td class="td">￥ <%= nf.format(unshippingedItem.getTotalAmount()) %></td>
-										<td class="td">
+										<td class="td pe-4">
 											<small>
 											〒 <%= unshippingedItem.getPostalCode() %><br>
 											<%= unshippingedItem.getAddress() %><br>
