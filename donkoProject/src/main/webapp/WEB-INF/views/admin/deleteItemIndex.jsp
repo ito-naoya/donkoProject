@@ -59,7 +59,7 @@
 										    </div>
 										    <div class="form-check">
 										        <input class="form-check-input" type="radio" name="itemDelFlg" id="delFlgActive" value="0" <%= itemDelFlg == 0 ? "checked" : "" %>>
-										        <label class="form-check-label" for="delFlgActive">掲載中</label>
+										        <label class="form-check-label" for="delFlgActive">販売中</label>
 										    </div>
 										    <div class="form-check">
 										        <input class="form-check-input" type="radio" name="itemDelFlg" id="delFlgInactive" value="1" <%= itemDelFlg == 1 ? "checked" : "" %>>
