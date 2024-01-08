@@ -36,14 +36,14 @@
 							if(toIndicate.equals("deletedUser")) {
 							%>
 								<input type="hidden" name="showSelect" value="notDeletedUser">
-								<button type="submit" class="button-light-purple px-3 py-1" style="border-radius:40px;">
+								<button type="submit" class="button-light-purple px-3" style="border-radius:40px;">
 									<small>全てのユーザーを表示</small>
 								</button>
 							<%
 							} else if(toIndicate.equals("notDeletedUser")) {
 							%>
 								<input type="hidden" name="showSelect" value="deletedUser">
-								<button type="submit" class="button-light-purple px-3 py-1" style="border-radius:40px;">
+								<button type="submit" class="button-light-purple px-3" style="border-radius:40px;">
 									<small>無効のユーザーを表示</small>
 								</button>
 							<%
@@ -52,22 +52,14 @@
 						</form>
 					</div>
 					
-					<div style=" overflow-x: scroll; overflow:scroll; height:72vh; border-radius:5px;" class="border px-4">
-						<table class="table table-borderless st-tbl1 my-5 text-center" id="userTable">
+					<div style=" overflow-x: scroll; overflow:scroll; height:72vh; border-radius:5px;" class="border">
+						<table class="table table-borderless st-tbl1 text-center" id="userTable">
 							<thead>
 							    <tr>
-							      <th scope="col">
-							      	ID
-							      </th>
-							      <th scope="col">
-							      	ログインID
-							      </th>
-							      <th scope="col">
-							      	ユーザー名
-							      </th>
-							      <th scope="col">
-							      	ステータス
-							      </th>
+							      <th scope="col" class="py-4 ps-4"><small>ID</small></th>
+							      <th scope="col" class="py-4"><small>ログインID</small></th>
+							      <th scope="col" class="py-4"><small>ユーザー名</small></th>
+							      <th scope="col" class="py-4 pe-4"><small>ステータス</small></th>
 							    </tr>
 							</thead>
 							<tbody>
@@ -76,17 +68,17 @@
 								%>
 									<tr style="cursor: pointer;" ondblclick="location.href='editUserInfo?userId=<%= user.getUserId() %>'" >
 										<!-- ID -->
-										<td class="p-4"><%= user.getUserId()  %></td>
+										<td class="ps-4 py-4"><%= user.getUserId()  %></td>
 										<!-- ログインID -->
 										<td class="p-4"><%= user.getUserLoginId() %></td>
 										<!-- ユーザー名 -->
 										<td class="p-4"><%= user.getUserName() %></td>
 										<!-- ステータス -->
-										<td class="p-4">
+										<td class="pe-4 py-4">
 											<% if(user.isDeleted()){ %>
-												<p style="color: #CCC">無効</p>
+												<p class="mb-0" style="color: #CCC">無効</p>
 											<% } else { %>
-												<p style="color: royalblue">有効</p>
+												<p class="mb-0" style="color: royalblue">有効</p>
 											<% } %>
 										</td>
 									</tr>

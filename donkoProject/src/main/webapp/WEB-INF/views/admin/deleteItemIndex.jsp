@@ -117,105 +117,126 @@
 									    <small class="mx-3" style="vertical-align: middle;">
 									  		ダブルクリックで商品を編集
 									    </small>
+								   		<%
+								   		if(keyword != null && !keyword.equals("")){
+										%>
+											<div class="col-lg-3 border mt-2 ms-auto px-3 py-2 w-auto" style="display: inline-flex; align-items: center; border-radius:5%; box-shadow:5px 5px 5px lightgray;">
+												<p class="mb-0" style="display: flex; align-items: center;">キーワード検索：　<%= keyword %></p>
+											</div>
+										<% 
+										}	
+								   		%>
 									</div>
 
-									<div class="overflow-auto border px-4" style="height: 68vh; border-radius:5px;">
+									<div class="overflow-auto border" style="height: 68vh; border-radius:5px;">
 										<%
 									    ArrayList<ItemBean> itemList = (ArrayList<ItemBean>) request.getAttribute("itemList");
 									   	if(itemList != null && itemList.size() > 0){
-									   		if(keyword != null){
-										%>
-										<div class="col-lg-3 border mt-2 ps-3" style="display: inline-flex; align-items: center; border-radius:5%; box-shadow:5px 5px 5px lightgray;">
-											<p class="mb-0" style="display: flex; align-items: center;"> キーワード検索： <%= keyword %></p>
-										</div>
-										<% } %>
-										<table class="table table-borderless st-tbl1 my-4 text-center" id="itemTable">
-											<thead>
-											    <tr>
-											      <th scope="col" class="text-nowrap"><small>ID</small></th>
-											      <th scope="col" class="text-nowrap"><small>画像</small></th>
-											      <th scope="col" class="text-nowrap"><small>商品名</small></th>
-											      <th scope="col" class="text-nowrap"><small>カテゴリ</small></th>
-											      <th scope="col" class="text-nowrap"><small>オプション1</small></th>
-											      <th scope="col" class="text-nowrap"><small>オプション2</small></th>
-											      <th scope="col" class="text-nowrap"><small>金額</small></th>
-											      <th scope="col" class="text-nowrap"><small>在庫数</small></th>
-											      <th scope="col" class="text-nowrap"><small>ステータス</small></th>
-											      <th scope="col" class="text-nowrap"></th>
-											    </tr>
-											</thead>
-											<tbody>
-											<%
-											for(ItemBean item : itemList){
-											%>
-												<tr style="cursor: pointer;" onclick="changeColor(this)"
-													ondblclick="location.href='editItemInfo1?itemId=<%=item.getItemId()%>'">
-													<td class="p-3" style="vertical-align: middle;">
-														<!-- ID --> <small><%=item.getItemId()%></small>
-													</td>
-													<td class="td" style="width: 60px; vertical-align: middle;">
-														<span class="card" style="width: 60px; height: 60px;">
-															<img src="./images/<%=item.getImageFileName()%>.jpg"
-															class="card-img-top" alt="<%=item.getImageFileName()%>"
-															style="object-fit: cover; height: 100%; display: block;">
-													</span>
-													</td>
-													<td style="vertical-align: middle;">
-														<!-- 商品名 --> <small><%=item.getItemName()%></small>
-													</td>
-													<td style="vertical-align: middle;">
-														<!-- カテゴリー --> <small><%=item.getItemCategoryName()%></small>
-													</td>
-													<td style="vertical-align: middle;">
-														<!-- オプション1 --> <small><%=item.getItemFirstOptionValue()%></small>
-													</td>
-													<td style="vertical-align: middle;">
-														<!-- オプション2 -->
-														<%
-														if (item.getItemSecondOptionValue() != null && !item.getItemSecondOptionValue().isEmpty()) {
-														%>
-															<small><%=item.getItemSecondOptionValue()%></small>
-														<%
-														} else {
-														%>
-															 -
-														<%
-														}
-														%>
-													</td>
-													<td style="vertical-align: middle;" class="text-nowrap">
-														<!-- 金額 -->
-														<%
-	 													NumberFormat formatter = NumberFormat.getInstance();
-	 													String formattedPrice = formatter.format(item.getItemPrice());
-	 													%>
-	 													<small>￥ <%=formattedPrice%></small>
-													</td>
-													<td style="vertical-align: middle;">
-														<!-- 在庫 -->
-														<small><%=item.getItemStock()%></small>
-													</td>
-													<td style="vertical-align: middle;">
-														<!-- ステータス -->
-														<%
-														 if (item.isDeleted()) {
-														 %> <small class="mb-0" style="color: #CCC;">停止中</small> <%
-														 } else {
-														 %> <small class="mb-0" style="color: royalblue;">販売中</small> <%
-														 }
-														 %>
-													</td>
-													<td class="p-3" style="vertical-align: middle;">
-														<!-- チェックボックス --> <input type="checkbox" name="itemStatus"
-														id="item_<%=item.getItemId()%>"
-														value="<%=item.getItemId()%>">
-													</td>
-												</tr>
-											<%
-											}
-											%>
-											</tbody>
-										</table>
+									   	%>	
+									   		<div id="top"></div>
+											<table class="table table-borderless st-tbl1 text-center" id="itemTable">
+												<thead>
+												    <tr>
+												      <th scope="col" class="text-nowrap py-4 ps-4"><small>ID</small></th>
+												      <th scope="col" class="text-nowrap py-4"><small>画像</small></th>
+												      <th scope="col" class="text-nowrap py-4"><small>商品名</small></th>
+												      <th scope="col" class="text-nowrap py-4"><small>カテゴリ</small></th>
+												      <th scope="col" class="text-nowrap py-4"><small>オプション1</small></th>
+												      <th scope="col" class="text-nowrap py-4"><small>オプション2</small></th>
+												      <th scope="col" class="text-nowrap py-4"><small>金額</small></th>
+												      <th scope="col" class="text-nowrap py-4"><small>在庫数</small></th>
+												      <th scope="col" class="text-nowrap py-4"><small>ステータス</small></th>
+												      <th scope="col" class="text-nowrap py-4 pe-4"></th>
+												    </tr>
+												</thead>
+												<tbody>
+												<%
+												for(ItemBean item : itemList){
+												%>
+													<tr style="cursor: pointer;" onclick="changeColor(this)"
+														ondblclick="location.href='editItemInfo1?itemId=<%=item.getItemId()%>'">
+														<td class="ps-4" style="vertical-align: middle;">
+															<!-- ID --> <small><%=item.getItemId()%></small>
+														</td>
+														<td class="td" style="width: 60px; vertical-align: middle;">
+															<span class="card" style="width: 60px; height: 60px;">
+																<img src="./images/<%=item.getImageFileName()%>.jpg"
+																class="card-img-top" alt="<%=item.getImageFileName()%>"
+																style="object-fit: cover; height: 100%; display: block;">
+														</span>
+														</td>
+														<td style="vertical-align: middle;">
+															<!-- 商品名 --> <small><%=item.getItemName()%></small>
+														</td>
+														<td style="vertical-align: middle;">
+															<!-- カテゴリー --> <small><%=item.getItemCategoryName()%></small>
+														</td>
+														<td style="vertical-align: middle;">
+															<!-- オプション1 --> <small><%=item.getItemFirstOptionValue()%></small>
+														</td>
+														<td style="vertical-align: middle;">
+															<!-- オプション2 -->
+															<%
+															if (item.getItemSecondOptionValue() != null && !item.getItemSecondOptionValue().isEmpty()) {
+															%>
+																<small><%=item.getItemSecondOptionValue()%></small>
+															<%
+															} else {
+															%>
+																 -
+															<%
+															}
+															%>
+														</td>
+														<td style="vertical-align: middle;" class="text-nowrap">
+															<!-- 金額 -->
+															<%
+		 													NumberFormat formatter = NumberFormat.getInstance();
+		 													String formattedPrice = formatter.format(item.getItemPrice());
+		 													%>
+		 													<small>￥ <%=formattedPrice%></small>
+														</td>
+														<td style="vertical-align: middle;">
+															<!-- 在庫 -->
+															<small><%=item.getItemStock()%></small>
+														</td>
+														<td style="vertical-align: middle;">
+															<!-- ステータス -->
+															<%
+															 if (item.isDeleted()) {
+															 %> <small class="mb-0" style="color: #CCC;">停止中</small> <%
+															 } else {
+															 %> <small class="mb-0" style="color: royalblue;">販売中</small> <%
+															 }
+															 %>
+														</td>
+														<td class="pe-4" style="vertical-align: middle;">
+															<!-- チェックボックス --> <input type="checkbox" name="itemStatus"
+															id="item_<%=item.getItemId()%>"
+															value="<%=item.getItemId()%>">
+														</td>
+													</tr>
+												<%
+												}
+												%>
+												</tbody>
+											</table>
+											<span id="back">
+											    <a href="#top"  style="text-decoration:none;">
+											      <div class="d-flex justify-content-center border mb-3 mx-auto" 
+											           style="width:95%; height:50px; line-height:50px; background-color:lightsteelblue; border-radius:5px;">
+														<small class="mb-0 text-dark">一覧のトップへ戻る
+															<svg
+																xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+																fill="currentColor" class="bi bi-arrow-up-circle"
+																viewBox="0 0 16 16">
+									 							 <path fill-rule="evenodd"
+																	d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+															</svg>
+														</small>
+													</div>
+											    </a>
+											</span>
 										<%
 										} else {
 										%>
