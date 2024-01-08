@@ -18,21 +18,15 @@ public class UpdateUserInfoByAdmin {
 		sb.append("UPDATE "						);
 		sb.append(	"users "					);
 		sb.append("SET "						);
-		//パラメータをここで使う(1/5)
+		//パラメータをここで使う(1/2)
 		sb.append(	"user_login_id = ?, "		);
-		//パラメータをここで使う(2/5)
-		sb.append(	"user_name = ?, "			);
-		//パラメータをここで使う(3/5)
-		sb.append(	"birthday = ?, "			);
 		if (customerUser.isDeleted()) {
-		 sb.append("user_delete_flg = 1, ") ;
+		 sb.append("user_delete_flg = 1 ") ;
 		}else {
-		 sb.append("user_delete_flg = 0, ");
+		 sb.append("user_delete_flg = 0 ");
 		}
-		//パラメータをここで使う(4/5)
-		sb.append(	"gender = ? "				);
 		sb.append("WHERE "						);
-		//パラメータをここで使う(5/5)
+		//パラメータをここで使う(2/2)
 		sb.append(	"user_id = ? ;"				);
 		//sqlを文字列化
 		final String UPDATE_USER_INFO_SQL = sb.toString();
@@ -40,9 +34,6 @@ public class UpdateUserInfoByAdmin {
 		//更新する値をすべてリストに追加
 		ArrayList<Object> params = new ArrayList<Object>();
 		params.add(customerUser.getUserLoginId());
-		params.add(customerUser.getUserName());
-		params.add(customerUser.getBirthday());
-		params.add(customerUser.getGender());
 		params.add(customerUser.getUserId());
 		
 		//コミットフラグをfalseで初期化

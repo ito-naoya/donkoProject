@@ -45,6 +45,18 @@
 										<small>ログインID：</small>
 									</label>
 									<input type="text" class="form-control" id="exampleInputUserId" name="user_login_id" value="<%=user.getUserLoginId()%>">
+									<% 
+									String userLoginId = (String)request.getAttribute("userLoginId"); 
+									%>
+									<% 
+									if (userLoginId != null) {
+									%>
+										<p style="color: red; margin: 0;">
+											<%= userLoginId %>
+										</p>
+									<%
+									} 
+									%>
 								</div>
 								<div class="form-group d-flex flex-wrap justify-content-start mb-3">
 									<label for="exampleInputUserName">
