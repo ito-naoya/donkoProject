@@ -170,61 +170,86 @@
 					>
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="modalLabel">カテゴリを追加</h5>
+							<small class="modal-title" id="modalLabel">カテゴリを追加</small>
 							<button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
 						<!-- フォーム内容 -->
 						<form action="editCategory" method="post">
 							<div class="modal-body">
-								<label for="categoryName" class="form-label"
-									style="font-size: small; color: grey;">20文字以内</label> <input
-									type="text" class="form-control mb-3" id="newCategoryName"
-									name="newCategoryName" maxlength="20"
-									value="<%= modalCategoryName != null ? modalCategoryName : "" %>">
-								<%
-					        	String itemCategoryName = (String) request.getAttribute("itemCategoryName");
-								if (itemCategoryName != null) {
-							 	 %>
-									<div class="d-flex flex-wrap"
-										style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
-										<%= itemCategoryName %>
-									</div>
-								<% 
-								} 
-								%>
+								<!-- <label for="categoryName" class="form-label"
+									style="font-size: small; color: grey;">20文字以内</label>  -->
+								<label for="categoryName">
+									<small>カテゴリ：</small>
+								</label> 
+								<div class="mb-3">
+									<input
+										type="text" class="form-control" id="newCategoryName"
+										name="newCategoryName" maxlength="20"
+										value="<%= modalCategoryName != null ? modalCategoryName : "" %>">
+									<%
+						        	String itemCategoryName = (String) request.getAttribute("itemCategoryName");
+									if (itemCategoryName != null) {
+								 	 %>
+										<div class="d-flex flex-wrap"
+											style="display: flex; justify-content: start; color: #FF0000;">
+											<%= itemCategoryName %>
+										</div>
+									<% 
+									} 
+									%>
+								</div>
 
 								<!-- セレクトボックス1 -->
-								<label for="optionSelect1" class="form-label">オプション1</label> <select
-									class="form-control mb-3" id="optionSelect1"
-									name="optionSelect1">
-									<option selected hidden disabled value="">必ず選択してください</option>
-									<% for (OptionCategoryBean option : allOptionList) { %>
-									<option value="<%= option.getOptionCategoryName() %>"><%= option.getOptionCategoryName() %></option>
+								<label for="optionSelect1">
+									<small>オプション1</small><small style="color:red;">（必須）</small><small>：</small>
+								</label> 
+								<div class="mb-3">
+									<select
+										class="form-control" id="optionSelect1"
+										name="optionSelect1">
+										<option selected hidden disabled value="">選択する</option>
+										<% for (OptionCategoryBean option : allOptionList) { %>
+										<option value="<%= option.getOptionCategoryName() %>"><%= option.getOptionCategoryName() %></option>
+										<% } %>
+									</select>
+									<%
+							        String optionCategoryName = (String)request.getAttribute("optionCategoryName");
+							        if (optionCategoryName != null) {
+								    %>
+										<div class="d-flex flex-wrap"
+											 style="display: flex; justify-content: start; color: #FF0000;">
+											<%= optionCategoryName %>
+										</div>
 									<% } %>
-								</select>
-								<%
-						        String optionCategoryName = (String)request.getAttribute("optionCategoryName");
-						        if (optionCategoryName != null) {
-							    %>
-									<div class="d-flex flex-wrap"
-										 style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
-										<%= optionCategoryName %>
-									</div>
-								<% } %>
+								</div>
 								
 								<!-- セレクトボックス2 -->
-								<label for="optionSelect2" class="form-label">オプション2（任意）</label>
+								<label for="optionSelect2">
+									<small>オプション2（任意）：</small>
+								</label>
 								<select class="form-control mb-3" id="optionSelect2"
 									name="optionSelect2">
-									<option value="">選択しない</option>
+									<option value="">未設定</option>
 									<% for (OptionCategoryBean option : allOptionList) { %>
 										<option value="<%= option.getOptionCategoryName() %>"><%= option.getOptionCategoryName() %></option>
 									<% } %>
 								</select>
-								<label>該当するオプションがない場合</label>
-								<a href="optionIndex"
-								   style="color: #385A37; text-decoration: none;">オプションを新規登録する</a>
+								<div class="mt-5 mb-3 d-flex justify-content-center">
+									<label>
+										<small class="me-4">該当するオプションがない場合</small>
+									</label>
+									<a href="optionIndex"
+								  	   style="color: #385A37; text-decoration: none;">
+										<small>
+											<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-caret-right-square mb-1" viewBox="0 0 16 16">
+												<path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+												<path d="M5.795 12.456A.5.5 0 0 1 5.5 12V4a.5.5 0 0 1 .832-.374l4.5 4a.5.5 0 0 1 0 .748l-4.5 4a.5.5 0 0 1-.537.082z"/>
+											</svg>
+											オプションを新規登録する
+										</small>
+									</a>
+							   </div>
 							</div>
 							<div class="modal-footer">
 								<button type="submit" class="btn btn-success">追加</button>
