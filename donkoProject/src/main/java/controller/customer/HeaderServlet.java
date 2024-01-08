@@ -57,8 +57,4 @@ public class HeaderServlet extends HttpServlet {
 		ArrayList<ItemCategoryBean> categoryNameList = ItemCategory.getItemCategoryList();
 		request.setAttribute("categoryNameList", categoryNameList);
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
 }

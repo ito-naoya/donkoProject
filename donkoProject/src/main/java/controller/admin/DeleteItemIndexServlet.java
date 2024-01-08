@@ -9,6 +9,7 @@ import classes.ErrorHandling;
 import classes.Item;
 import classes.ItemCategory;
 import classes.ItemManagementHelper;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,7 +26,12 @@ public class DeleteItemIndexServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+		
 		//カテゴリーを取得
 		String itemCategoryName = request.getParameter("itemCategoryName");
 		//表示方法を取得

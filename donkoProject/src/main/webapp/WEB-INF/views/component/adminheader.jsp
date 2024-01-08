@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="bean.PurchaseBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +15,9 @@
 <title>donko</title>
 </head>
 <body>
+	<% 
+	ArrayList<PurchaseBean> unshippingnum = (ArrayList<PurchaseBean>)request.getAttribute("unshippingnum");
+	%>
 	<header class="fixed-top" style="background-color:white;">
     	<div style="height:54px; background-color:navy; position:relative; top: 0; left: 0; z-index:2; display:flex; align-items:center;">
     		<ul class="d-flex mb-0 p-0 w-100">
@@ -27,7 +32,16 @@
 					    <small>一覧</small>
 					  </button>
 					  <ul class="dropdown-menu">
-					  	<li><a class="dropdown-item" href="adminTopPage"><small>未発送商品</small></a></li>
+					  	<li><a class="dropdown-item" href="adminTopPage"><small>未発送商品</small>
+					  			<% 
+					  			if (unshippingnum.size() > 0) { 
+					  			%>
+					  				<span class="badge ms-2" style="background-color:red; border-radius:40px;"><%= unshippingnum.size() %></span>
+					  			<% 
+					  			}
+					  			%>
+					  		</a>
+					  	</li>
 					    <li><a class="dropdown-item" href="purchaseHistory"><small>受注履歴</small></a></li>
 					    <li><a class="dropdown-item" href="deleteItemIndex?itemCategoryName=全ての商品&itemDelFlg=1&order=asc"><small>削除商品</small></a></li>
 					    <li><a class="dropdown-item" href="deleteUserInfoIndex"><small>削除ユーザー</small></a></li>
