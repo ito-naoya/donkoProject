@@ -23,12 +23,12 @@ public class CustomerUser extends User {
 	@Pattern(regexp = "(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]*", groups = {GroupA.class, GroupC.class}, message = "パスワードは文字と数字を含む必要があります。")
 	private String password;
 	//ユーザー名
-	@Length(groups = {GroupA.class, GroupB.class, GroupC.class}, min=1, max= 25, message="{min}文字以上{max}文字以内で入力してください。")
+	@Length(groups = {GroupA.class, GroupC.class}, min=1, max= 25, message="{min}文字以上{max}文字以内で入力してください。")
 	private String userName;
 	//性別
 	private String gender;
 	//生年月日
-	@Past(groups = {GroupA.class, GroupB.class}, message= "無効な値が入力されています。")
+	@Past(groups = {GroupA.class}, message= "無効な値が入力されています。")
 	private Date birthday;
 	//削除フラグ
 	private boolean isDeleted;
