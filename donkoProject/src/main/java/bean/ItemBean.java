@@ -30,7 +30,7 @@ public class ItemBean {
 	private int itemPrice;
 
 	@Min(groups = {GroupA.class}, value = 0, message = "0~9で入力してください。")
-    @Max(groups = {GroupA.class}, value = 9, message = "0~9で入力してください。")
+    @Max(groups = {GroupA.class}, value = 100, message = "0~100で入力してください。")
     private int itemStock;
 
 	private boolean isDeleted;

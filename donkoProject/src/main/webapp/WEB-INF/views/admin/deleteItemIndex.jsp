@@ -83,7 +83,7 @@
 							    <div class="mx-1 mb-4">
 								    <!-- キーワード検索の入力ボックス -->
 								    <label for="keyword-search" class="form-label">キーワード検索：</label>
-								    <input type="text" class="form-control" id="keyword-search" name="keyword" placeholder=<%= keyword == null ? "キーワードを入力" : keyword %>>
+								    <input type="text" class="form-control" id="keyword-search" name="keyword" placeholder=<%= keyword == null ? "キーワードを入力" : "" %>>
 								</div>
 								<div class="m-1 d-flex align-items-center">
 									<button type="submit" class="button-purple w-100 mt-5 py-2" style="border-radius:5px;">
@@ -123,7 +123,12 @@
 										<%
 									    ArrayList<ItemBean> itemList = (ArrayList<ItemBean>) request.getAttribute("itemList");
 									   	if(itemList != null && itemList.size() > 0){
+									   		if(keyword != null){
 										%>
+										<div class="col-lg-3 border mt-2 ps-3" style="display: inline-flex; align-items: center; border-radius:5%; box-shadow:5px 5px 5px lightgray;">
+											<p class="mb-0" style="display: flex; align-items: center;"> キーワード検索： <%= keyword %></p>
+										</div>
+										<% } %>
 										<table class="table table-borderless st-tbl1 my-4 text-center" id="itemTable">
 											<thead>
 											    <tr>
@@ -140,7 +145,7 @@
 											    </tr>
 											</thead>
 											<tbody>
-											<% 
+											<%
 											for(ItemBean item : itemList){
 											%>
 												<tr style="cursor: pointer;" onclick="changeColor(this)"
@@ -165,33 +170,33 @@
 														<!-- オプション1 --> <small><%=item.getItemFirstOptionValue()%></small>
 													</td>
 													<td style="vertical-align: middle;">
-														<!-- オプション2 --> 
+														<!-- オプション2 -->
 														<%
 														if (item.getItemSecondOptionValue() != null && !item.getItemSecondOptionValue().isEmpty()) {
-														%> 
-															<small><%=item.getItemSecondOptionValue()%></small> 
+														%>
+															<small><%=item.getItemSecondOptionValue()%></small>
 														<%
 														} else {
 														%>
-															 - 
+															 -
 														<%
 														}
 														%>
 													</td>
 													<td style="vertical-align: middle;" class="text-nowrap">
-														<!-- 金額 --> 
+														<!-- 金額 -->
 														<%
 	 													NumberFormat formatter = NumberFormat.getInstance();
 	 													String formattedPrice = formatter.format(item.getItemPrice());
-	 													%> 
+	 													%>
 	 													<small>￥ <%=formattedPrice%></small>
 													</td>
 													<td style="vertical-align: middle;">
-														<!-- 在庫 --> 
+														<!-- 在庫 -->
 														<small><%=item.getItemStock()%></small>
 													</td>
 													<td style="vertical-align: middle;">
-														<!-- ステータス --> 
+														<!-- ステータス -->
 														<%
 														 if (item.isDeleted()) {
 														 %> <small class="mb-0" style="color: #CCC;">停止中</small> <%
@@ -206,7 +211,7 @@
 														value="<%=item.getItemId()%>">
 													</td>
 												</tr>
-											<% 
+											<%
 											}
 											%>
 											</tbody>
@@ -217,7 +222,7 @@
 											<div class="d-flex justify-content-center align-items-center" style="height:100%;">
 												<p class="mb-0" style="color: lightgray;">該当する商品がありません</p>
 											</div>
-										<% 
+										<%
 										}
 										%>
 									</div>

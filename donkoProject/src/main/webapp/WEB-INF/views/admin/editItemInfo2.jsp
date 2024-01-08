@@ -13,8 +13,15 @@
 <main class="m-5">
 		<div class="container　ml-5 mr-5">
 			<div class="row  justify-content-center">
+			<%
+			ItemBean item = (ItemBean) request.getAttribute("item");
+			int OptionName_1 = (Integer) item.getItemFirstOptionIncrementId();
+			int OptionName_2 = (Integer) item.getItemSecondOptionIncrementId();
+
+			if(item != null) {
+			%>
 				<div class="col-6">
-					<a href="editItem1" class="mb-3" style="display: inline-block">
+					<a href="editItemInfo1?itemId=<%=item.getItemId()%>" class="mb-3" style="display: inline-block">
 						<div class="border text-center" style="width: 50px;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
 			  					<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
@@ -25,13 +32,7 @@
 					<h2>商品情報登録</h2>
 					<br>
 					<!-- 　枠の中でnewItemを展開 -->
-						<%
-						ItemBean item = (ItemBean) request.getAttribute("item");
-						int OptionName_1 = (Integer) item.getItemFirstOptionIncrementId();
-						int OptionName_2 = (Integer) item.getItemSecondOptionIncrementId();
 
-						if(item != null) {
-						%>
 								    <div class="col p-5" style="border:1px solid black" >
 								    	<table class="table table-borderless ">
 											  <tbody>
