@@ -16,11 +16,11 @@
 <%
 	ItemBean item = (ItemBean) request.getAttribute("item");
 %>
-<main class="m-5">
-		<div class="container　ml-5 mr-5">
-			<div class="row justify-content-center">
-				<div class="col-lg-5 border p-5" style="border-radius:5px;">
-					<a href="adminTopPage" class="arrow my-3 link" style="display: inline-block; color:navy;">
+<main>
+		<div class="container">
+			<div class="row justify-content-center" style="height:100vh;">
+				<div class="col-lg-5 m-auto border p-5" style="border-radius:5px; box-shadow:10px 10px 10px lightgray;">
+					<a href="adminTopPage" class="arrow mb-3 link" style="display: inline-block; color:navy;">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
 						  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
 						</svg>
@@ -35,8 +35,9 @@
 						<!-- ここから入力フォーム  -->
 						<form action="registItem1" id="registItem1" method="post">
 							<div class="mb-3">
+								<small>カテゴリ： <span class="badge bg-danger mb-1">必須</span></small>
 							    <select class="form-select category-select" name="itemCategoryName">
-							        <option selected hidden disabled value="">カテゴリを選択</option>
+							        <option selected hidden disabled value="">選択する</option>
 							        <%
 							            for (ItemCategoryBean category : categoryList){
 							                // item.getItemCategoryName()がnullの場合も考慮
@@ -60,7 +61,7 @@
 
 							<div class="">
 							    <label for="itemName" class="form-label d-flex justify-content-between align-items-center mb-0">
-							    	<small>商品名：</small>
+							    	<small>商品名： <span class="badge bg-danger">必須</span></small>
 							    	<button type="button" class="btn link p-0 mb-1" 
 										data-bs-container="body" data-bs-toggle="popover" 
 										data-bs-placement="top" 
@@ -85,7 +86,7 @@
 
 						 	<div class="">
 							    <label for="itemDescription" class="form-label d-flex justify-content-between align-items-center mb-0">
-							    	<small>商品説明：</small>
+							    	<small>商品説明： <span class="badge bg-danger">必須</span></small>
 							    	<button type="button" class="btn link p-0 mb-1" 
 										data-bs-container="body" data-bs-toggle="popover" 
 										data-bs-placement="top" 
@@ -110,7 +111,7 @@
 
 						 	<div class="col-4 mb-3">
 							    <label for="price" class="form-label d-flex justify-content-between align-items-center mb-0">
-							    	<small>金額：</small>
+							    	<small>金額： <span class="badge bg-danger">必須</span></small>
 							    	<button type="button" class="btn link p-0 mb-1" 
 										data-bs-container="body" data-bs-toggle="popover" 
 										data-bs-placement="top" 
@@ -134,9 +135,9 @@
 								  <% } %>
 						 	</div>
 
-						 	<div class="col-2 mb-3">
+						 	<div class="col-3 mb-3">
 							    <label for="stock" class="form-label d-flex justify-content-between align-items-center mb-0">
-							    	<small>在庫</small>
+							    	<small>在庫： <span class="badge bg-danger">必須</span></small>
 							    	<button type="button" class="btn link p-0 mb-1" 
 										data-bs-container="body" data-bs-toggle="popover" 
 										data-bs-placement="top" 
