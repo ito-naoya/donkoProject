@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import bean.PurchaseBean;
 import classes.ErrorHandling;
 import classes.Purchase;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,6 +23,11 @@ public class AdminTopPageServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+		
 		HttpSession as = request.getSession();
 		String adminSession = (String)as.getAttribute("admin");
 		

@@ -18,13 +18,13 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
+	<%
+	ArrayList<PurchaseBean> unshippingedItemList = (ArrayList<PurchaseBean>) request.getAttribute("unshippingedItemList");
+	String message = (String) request.getAttribute("message");
+	%>
 	<%@include file= "../component/adminheader.jsp" %>
 	<%@include file= "../component/adminheaderTopSpace.jsp" %>
 	<main>
-		<%
-		ArrayList<PurchaseBean> unshippingedItemList = (ArrayList<PurchaseBean>) request.getAttribute("unshippingedItemList");
-		String message = (String) request.getAttribute("message");
-		%>
 		<div class="container">
 			<div class="row px-5">
 				<h5 class="mt-5 mb-3">

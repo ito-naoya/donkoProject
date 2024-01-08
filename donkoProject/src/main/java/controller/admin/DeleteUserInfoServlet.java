@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import classes.ErrorHandling;
 import classes.user.AdminUser;
 import classes.user.CustomerUser;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,7 +24,12 @@ public class DeleteUserInfoServlet extends HttpServlet {
 	//削除済みユーザー一覧を取得する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+		
 		//削除済みのユーザー一覧を取得
 		ArrayList<CustomerUser> userList = AdminUser.getDeletedUserList();
 		

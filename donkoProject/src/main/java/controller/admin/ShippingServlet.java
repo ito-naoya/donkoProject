@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import bean.PurchaseBean;
 import classes.ErrorHandling;
 import classes.Purchase;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,6 +22,7 @@ public class ShippingServlet extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		    
 		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
 		int shippingId = Integer.parseInt(request.getParameter("shippingId"));
 		
@@ -54,10 +56,16 @@ public class ShippingServlet extends HttpServlet {
 		if (unshippingedItemList == null){
 	        ErrorHandling.transitionToErrorPage(request, response, "データの取得に失敗しました","adminTopPage","管理者ページに");
 			return;
-		} 
+		}
+		
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
 		
 		if (unshippingedItemList.size() > 0) {
 			request.setAttribute("unshippingedItemList", unshippingedItemList);
+			
 		} else {
 			request.setAttribute("message", "現在未発送の商品はありません");
 		}
