@@ -14,6 +14,19 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class ItemManagementHelper {
 
+	// 全角数字を半角数字に変換するメソッド
+		public static String priceCheck(String price) {
+			StringBuilder sb = new StringBuilder();
+		    for (char c : price.toCharArray()) {
+		        if (c >= '０' && c <= '９') {
+		            sb.append((char) (c - '０' + '0'));
+		        } else {
+		            sb.append(c);
+		        }
+		    }
+		    return sb.toString();
+		}
+
 	    public static void getCategoryList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	        // カテゴリリスト取得の共通処理
 	    	ArrayList<ItemCategoryBean> categoryList = ItemCategory.getItemCategoryList();
