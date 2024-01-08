@@ -16,6 +16,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/registItem1")
 public class RegistItemServlet1 extends HttpServlet {
@@ -27,8 +28,12 @@ public class RegistItemServlet1 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//TODO:セッション管理
-		//ログイン画面実装後にセットします
+		HttpSession session = request.getSession();
+		String admin = (String) session.getAttribute("admin");
+		if (admin == null) {
+			response.sendRedirect("adminSignin");
+			return;
+		}
 
 		//カテゴリー一覧を取得
 		ItemManagementHelper.getCategoryList(request, response);
@@ -54,7 +59,7 @@ public class RegistItemServlet1 extends HttpServlet {
 		newItem.setItemDescription(request.getParameter("itemDescription"));
 		String price = request.getParameter("price");
 		String stock = request.getParameter("stock");
-		
+
 		//int型のフィールドの取得情報について、null値及び文字数制限の超過が無いかどうか確認し、itemBeanに登録
 		newItem = Item.checkRegistItemDetail(newItem, price, stock);
 		if(newItem == null) {

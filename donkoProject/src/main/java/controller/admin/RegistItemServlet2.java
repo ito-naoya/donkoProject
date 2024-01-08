@@ -20,6 +20,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
 @MultipartConfig
@@ -39,6 +40,12 @@ public class RegistItemServlet2 extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String admin = (String) session.getAttribute("admin");
+		if (admin == null) {
+			response.sendRedirect("adminSignin");
+			return;
+		}
 
 		ItemBean newItem = new ItemBean();
 		//TODO:セッション管理

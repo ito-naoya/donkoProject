@@ -17,6 +17,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/editItemInfo1")
 public class EditItemInfo1Servlet extends HttpServlet {
@@ -28,6 +29,12 @@ public class EditItemInfo1Servlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String admin = (String) session.getAttribute("admin");
+		if (admin == null) {
+			response.sendRedirect("adminSignin");
+			return;
+		}
 
 		//商品idを取得して、商品詳細を取得
 		Integer itemId = Integer.parseInt(request.getParameter("itemId"));
