@@ -147,7 +147,7 @@
 									</button> 
 							    </label>
 							    <% boolean isStockSelected = item.getItemStock() >= 0; %>
-							    <input type="number" class="form-control" id="stock" name="stock" style="text-align: center" min="0" max="9" value="<%= isStockSelected ? item.getItemStock() : "" %>">
+							    <input type="number" class="form-control" id="stock" name="stock" style="text-align: center" min="0" max="100" value="<%= isStockSelected ? item.getItemStock() : "" %>">
 							    <% String itemStock = (String)request.getAttribute("itemStock");
 									 if (itemStock != null) {
 							 	 %>

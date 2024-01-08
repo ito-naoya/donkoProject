@@ -75,7 +75,7 @@
 									<%= sa.getAddressee() %>
 								</p>
 								<div class="d-flex justify-content-end">
-									<a href="shippingAddressIndex" style="text-decoration: none;">
+									<a href="shippingAddressIndex?source=purchaseConfirm" style="text-decoration: none;">
 										<small class="button-green px-3 py-2" style="border-radius:40px;">メインの配送先を変更</small>
 									</a>
 								</div>
