@@ -26,7 +26,7 @@
 					<div class="m-auto">
 						<form action="editUserInfo" method="post" style="display: flex; justify-content: center;">
 							<input type="hidden" name="userId" value="<%= user.getUserId() %>">
-							<div class="col-lg-5 border p-5" style="border-radius:5px;">
+							<div class="col-lg-5 border p-5" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 								<div class="cancelButton" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
 									<h5>
 										<strong>
