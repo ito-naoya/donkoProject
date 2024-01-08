@@ -18,17 +18,10 @@
 <body>
 	<main>
 		<div class="container">
-			<div class="row" style="padding: 30px 0">
-				<div class="col-lg-8 mx-auto">
+			<div class="row" style="height:100vh;">
+				<div class="col-lg-8 m-auto p-5 border" style="border-radius:5px;">
 					<% 
 					String source = (String)request.getParameter("source");
-					%>
-					<a href="<%= source %>" class="arrow my-3 link" style="display: inline-block; color:navy;">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-						  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-						</svg>
-					</a>
-					<%
 					PurchaseBean purchaseInfo = (PurchaseBean) request.getAttribute("purchaseInfo");
 					ArrayList<PurchaseDetailBean> purchaseDetailList = (ArrayList<PurchaseDetailBean>) request.getAttribute("purchaseDetailList");
 					NumberFormat nf = NumberFormat.getNumberInstance();
@@ -38,9 +31,14 @@
 				    int shippingId = purchaseInfo.getShippingId();
 					%>
 					<div class="d-flex flex-wrap align-items-center mb-3 p-3 border-bottom">
-						<h4 class="mb-0">
+						<a href="<%= source %>" class="arrow link" style="display: inline-block; color:navy;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+							  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+							</svg>
+						</a>
+						<h5 class="mb-0 ms-3">
 							<strong>受注詳細</strong>
-						</h4>
+						</h5>
 						<% 
 						if (shippingId == 1) { 
 						%>
