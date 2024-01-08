@@ -79,6 +79,8 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 		// インスタンス生成
 		ShippingAddressBean shippingAddressBean = new ShippingAddressBean();
 		
+		String source = request.getParameter("source");
+		
 		// 値をセット
 		shippingAddressBean.setAddressee(request.getParameter("addressee"));
 		shippingAddressBean.setPostalCode(request.getParameter("postalcode"));
@@ -107,7 +109,7 @@ public class ShippingAddressIndexServlet extends HttpServlet {
 		} 
 		
 			// 配送先一覧画面
-			response.sendRedirect("shippingAddressIndex");
+			response.sendRedirect("shippingAddressIndex?source=" + source);
 	
 	}
 }

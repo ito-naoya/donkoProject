@@ -62,6 +62,7 @@
 							</select>
 							<button type="submit" class="px-2 text-nowrap button-light-purple"
 								style="margin-left: 15px; border-radius:5px;">更新</button>
+								<input type="hidden" value="<%= url %>" name="source">
 						</form>
 					</div>
 				</div>
