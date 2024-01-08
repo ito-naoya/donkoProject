@@ -54,7 +54,7 @@
 							<thead>
 							    <tr>
 							      <th scope="col">
-							      	#
+							      	ID
 							      </th>
 							      <th scope="col">
 							      	オプション

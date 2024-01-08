@@ -36,7 +36,7 @@
 				</h5>
 				<% if (unshippingedItemList == null || unshippingedItemList.size() == 0) { %>
 					<div class="border p-5 d-flex justify-content-center align-items-center" 
-						 style="margin-bottom:40px; overflow-x: scroll; overflow:scroll; height:74vh;">
+						 style="margin-bottom:40px; overflow-x: scroll; overflow:scroll; height:74vh; border-radius:5px;">
 						<p class="mb-0" style="color: lightgray;"><%= message %></p>
 					</div>
 				<% } else { %>
@@ -45,7 +45,7 @@
 						<table class="table table-borderless table-hover text-center my-5">
 							<thead>
 								<tr>
-									<th class="th">注文ID</th>
+									<th class="th">ID</th>
 									<th class="th" style="width:20%;">購入日</th>
 									<th class="th" style="width:10%;">購入者ID</th>
 									<th class="th">購入者</th>
