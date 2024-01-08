@@ -174,6 +174,7 @@ public class Item {
 
 	    // 金額の処理
 	    if (!cleanedPrice.isEmpty() && cleanedPrice.matches("\\d+")) {
+	    	cleanedPrice = ItemManagementHelper.priceCheck(cleanedPrice);
 	        processedPrice = Integer.parseInt(cleanedPrice);
 	    }
 

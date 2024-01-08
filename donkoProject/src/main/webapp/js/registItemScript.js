@@ -60,12 +60,12 @@ function validateFile(file) {
     }
 }
 
-
-//金額について、正規表現でカンマ区切りの半角のみ受け付ける
 const priceInput = document.getElementById('price');
 if (priceInput) {
     priceInput.addEventListener('input', function (event) {
         let value = event.target.value;
+        // 全角数字を半角に変換
+        value = zenkakuToHankaku(value);
         // 最初の0を削除
         value = value.replace(/^0+/, '');
         // 全ての非数字を削除
@@ -73,5 +73,12 @@ if (priceInput) {
         // 3桁ごとにカンマ区切りにする
         value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         event.target.value = value;
+    });
+}
+
+// 全角数字を半角に変換する関数
+function zenkakuToHankaku(str) {
+    return str.replace(/[０-９]/g, function(s) {
+        return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
     });
 }
