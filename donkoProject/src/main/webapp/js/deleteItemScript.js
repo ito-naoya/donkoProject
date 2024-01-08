@@ -1,8 +1,3 @@
-
-function confirmStatusChange() {
-    return confirm('ステータスを切り替えます。よろしいですか？');
-}
-
 // チェックボックスのクリックイベントを取得して処理する関数
 function checkboxClicked(event) {
 	event.stopPropagation();
