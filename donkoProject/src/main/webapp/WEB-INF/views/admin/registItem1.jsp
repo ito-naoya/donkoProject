@@ -19,13 +19,15 @@
 <main class="m-5">
 		<div class="container　ml-5 mr-5">
 			<div class="row justify-content-center">
-				<div class="col-lg-5">
+				<div class="col-lg-5 border p-5" style="border-radius:5px;">
 					<a href="adminTopPage" class="arrow my-3 link" style="display: inline-block; color:navy;">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
 						  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
 						</svg>
 					</a>
-					<h5 class="mb-4">商品登録</h5>
+					<h5 class="mb-4">
+						<strong>商品登録</strong>
+					</h5>
 					<%
 						ArrayList<ItemCategoryBean> categoryList = (ArrayList<ItemCategoryBean>) request.getAttribute("categoryList");
 						if(categoryList != null && categoryList.size() > 0 ){
@@ -157,7 +159,7 @@
 								  <% } %>
 						 	</div>
 						 	<div class="d-flex justify-content-center mt-5">
-								<button type=submit class="button-light-purple px-2 py-2" style="border-radius: 0.5rem;">オプションの追加をする</button>
+								<button type=submit class="button-light-purple px-3 py-1" style="border-radius: 5px;">オプションの追加をする</button>
 							</div>
 						</form>
 						<%

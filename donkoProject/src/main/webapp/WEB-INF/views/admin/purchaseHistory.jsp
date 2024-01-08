@@ -29,23 +29,23 @@
 				<% 
 				if (orderItemList == null || orderItemList.size() == 0) {
 				%>
-					<div class="mx-5 p-5 d-flex justify-content-center align-items-center" style="overflow-x: scroll; overflow:scroll; height:400px;">
+					<div class="d-flex justify-content-center align-items-center" style="overflow-x: scroll; overflow:scroll; height:74vh;">
 						<p class="mb-0" style="color: #385A37;"><%= message %></p>
 					</div>
 				<% 
 				} else { 
 				%>
-					<div style=" overflow-x: scroll; overflow:scroll; height:74vh; border-radius:5px;" class="border px-5">
-						<table class="table table-borderless table-hover text-center my-5">
+					<div class="border" style=" overflow-x: scroll; overflow:scroll; height:74vh; border-radius:5px;">
+						<table class="table table-borderless table-hover text-center">
 							<thead>
 								<tr>
-									<th class="th">ID</th>
-									<th class="th">購入日</th>
-									<th class="th">購入者ID</th>
-									<th class="th">購入者名</th>
-									<th class="th">合計金額</th>
-									<th class="th">配送先</th>
-									<th class="th">配送ステータス</th>
+									<th class="th py-4 ps-4">ID</th>
+									<th class="th py-4">購入日</th>
+									<th class="th py-4">購入者ID</th>
+									<th class="th py-4">購入者名</th>
+									<th class="th py-4">合計金額</th>
+									<th class="th py-4">配送先</th>
+									<th class="th py-4 pe-4">配送ステータス</th>
 								<tr>
 							</thead>
 							<tbody>
@@ -60,12 +60,12 @@
 								    %>
 									<tr onclick="location.href='purchaseDetail?purchaseId=<%= orderItem.getPurchaseId() %>&source=purchaseHistory'"
 										style="cursor: pointer;">
-										<td class="td">#<%= orderItem.getPurchaseId() %></td>
+										<td class="td ps-4">#<%= orderItem.getPurchaseId() %></td>
 										<td class="td"><%= formattedTime %></td>
 										<td class="td"><%= orderItem.getUserId() %></td>
 										<td class="td"><%= orderItem.getUserName() %></td>
 										<td class="td">￥ <%= nf.format(orderItem.getTotalAmount()) %></td>
-										<td class="td">
+										<td class="td pe-4">
 											<small>
 												〒 <%= orderItem.getPostalCode() %><br>
 												<%= orderItem.getAddress() %><br>
@@ -75,11 +75,11 @@
 										<%
 										if ((orderItem.getShippingStatus()).equals("処理中")) {
 										%>
-											<td class="td" style="color: royalblue;"><%= orderItem.getShippingStatus() %></td>
+											<td class="td pe-4" style="color: royalblue;"><%= orderItem.getShippingStatus() %></td>
 										<%
 										} else {
 										%>
-											<td class="td" style="color: #CCC;"><%= orderItem.getShippingStatus() %></td>
+											<td class="td pe-4" style="color: #CCC;"><%= orderItem.getShippingStatus() %></td>
 										<%
 										}
 										%>

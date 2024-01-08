@@ -20,127 +20,130 @@
 	</head>
 	<body>
 	<main>
-		<div class="container">
-			<div class="row d-flex justify-content-center mt-5 mb-3">
-				
-				<div class="col-lg-10" style="display: flex; align-items: center;">
-					<!-- 戻るボタン -->
-					<a href="adminTopPage" class="arrow my-3 link" style="display: inline-block; color:navy;">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-						  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-						</svg>
-					</a>
+		<div class="container" style="">
+			<div class="row" style="height:100vh;">
+				<div class="border m-auto p-5" style="border-radius:5px; box-shadow:10px 10px 10px lightgray;">
+					<div class="row d-flex justify-content-center mb-3">
+						
+						<div class="col-lg-12" style="display: flex; align-items: center;">
+							<!-- 戻るボタン -->
+							<a href="adminTopPage" class="arrow my-3 link" style="display: inline-block; color:navy;">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+								  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+								</svg>
+							</a>
+							
+							<h5 class="mb-0 mx-3"><strong>カテゴリ編集</strong></h5>
+						    <small class="mx-3" style="vertical-align: middle;">
+						  		登録中の商品に紐づくカテゴリは削除できません
+						    </small>
+						
+							<!-- カテゴリ追加 -->
+							<!-- モーダルボタン -->
+							<div class="ms-auto">
+								<button type="button" class="button-light-purple px-3 py-1 mx-2 my-4" data-bs-toggle="modal"
+									data-bs-target="#modalOptionAdd"
+									style="border-radius: 2rem;">
+									カテゴリを追加
+								</button>
+							</div>
+						</div>
+					</div>
 					
-					<h5 class="mb-0 mx-3"><strong>カテゴリ編集</strong></h5>
-				    <small class="mx-3" style="vertical-align: middle;">
-				  		登録中の商品に紐づくカテゴリは削除できません
-				    </small>
-				
-					<!-- カテゴリ追加 -->
-					<!-- モーダルボタン -->
-					<div class="ms-auto">
-						<button type="button" class="button-light-purple px-3 py-1 mx-2 my-4" data-bs-toggle="modal"
-							data-bs-target="#modalOptionAdd"
-							style="border-radius: 2rem;">
-							カテゴリを追加
-						</button>
-					</div>
-				</div>
-			</div>
-			
-			<!-- メッセージ表示 -->
-			<%
-			String message = (String)request.getAttribute("message");
-			if (message != null){
-			%>
-				<div class="alert alert-warning" role="alert">
-					<%= message %>
-				</div>
-			<% } %>
-			
-			<!-- 一覧表示 -->
-			<div class="row d-flex justify-content-center">
-				<div class="col-lg-6">
+					<!-- メッセージ表示 -->
 					<%
-					String itemCategoryName1 = (String) request.getAttribute("itemCategoryName1");
-					ArrayList<ItemCategoryBean> categoryList = (ArrayList<ItemCategoryBean>)request.getAttribute("categoryList");
-					if(categoryList != null || categoryList.size() > 0){
+					String message = (String)request.getAttribute("message");
+					if (message != null){
 					%>
-					<div class="overflow-auto" style="height: calc(80vh - 200px);">
-						<table class="table table-borderless st-tbl1" id="itemTable"
-							style="padding: 10px">
-							<thead>
-								<tr>
-									<th scope="col" class="px-3" style="width:16%;"><small>ID</small></th>
-									<th scope="col"><small>カテゴリ名</small></th>
-									<th scope="col" class="text-center" style="width: 30%;"><small></small></th>
-								</tr>
-							</thead>
-							<tbody>
-								<%
-								int counter = 1;
-								for (ItemCategoryBean category : categoryList) {
-								%>
-								<tr style="cursor: pointer;"
-									onclick="location.href='categoryIndex?itemCategoryName=<%= category.getItemCategoryName() %>'">
-									<!-- ID -->
-									<td class="p-3" style="vertical-align:middle;"><%= counter %></td>
-									<!-- カテゴリ名 -->
-									<td style="vertical-align:middle;"><%= category.getItemCategoryName() %></td>
-									<!-- 削除ボタン -->
-									<td class="text-center">
-										<button type="button" class="btn btn-outline-danger"
-											onclick="event.stopPropagation(); location.href='editCategory?itemCategoryName=<%= category.getItemCategoryName() %>'">
-											削除</button>
-									</td>
-								</tr>
-								<%
-								counter++;
-								}
-								%>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<% } %>
-				<div class="col-lg-4" style="height: 100%;">
-					<%
-						ArrayList<ItemCategoryBean> optionList = (ArrayList<ItemCategoryBean>)request.getAttribute("optionList");
-						if(itemCategoryName1 == null){
-						%>
-					<div class="m-auto p-5 border w-100" style="display: block; border-radius:5px;">
-						<small style="color:lightgray;">カテゴリをクリックすると登録済みのオプションを確認できます</small>
-					</div>
-					<%}else{ %>
-					<div class="overflow-auto p-5 mt-3 border w-100" style="height: auto; border-radius:5px;">
-						<table class="table table-borderless">
-							<thead>
-								<small class="border p-1"
-									style="border-radius: 5px; background-color: cornflowerblue; color: white;">カテゴリ名：<%= itemCategoryName1 %></small>
-								<tr>
-									<th scope="col" class="px-3"><small>ID</small></th>
-									<th scope="col"><small>オプション名</small></th>
-								</tr>
-							</thead>
-							<tbody>
-								<%
-										int counter2 = 1;
-											for(ItemCategoryBean option : optionList){
+						<div class="alert alert-warning" role="alert">
+							<%= message %>
+						</div>
+					<% } %>
+					
+					<!-- 一覧表示 -->
+					<div class="row d-flex justify-content-center">
+						<div class="col-lg-8">
+							<%
+							String itemCategoryName1 = (String) request.getAttribute("itemCategoryName1");
+							ArrayList<ItemCategoryBean> categoryList = (ArrayList<ItemCategoryBean>)request.getAttribute("categoryList");
+							if(categoryList != null || categoryList.size() > 0){
+							%>
+							<div class="border" style="height:55vh; overflow-x: scroll; overflow:scroll; border-radius:5px;">
+								<table class="table table-borderless st-tbl1" id="itemTable">
+									<thead style="background-color: cornflowerblue;">
+										<tr>
+											<th scope="col" class="px-4 py-3" style="width:16%;"><small>ID</small></th>
+											<th scope="col" class="py-3"><small>カテゴリ名</small></th>
+											<th scope="col" class="text-center" style="width: 15%;"><small></small></th>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+										int counter = 1;
+										for (ItemCategoryBean category : categoryList) {
 										%>
-								<tr>
-									<td class="p-3"><%= counter2  %></td>
-									<td class="p-3"><%= option.getOptionCategoryName() %></td>
-								</tr>
-								<%
-										counter2++;
+										<tr style="cursor: pointer;"
+											onclick="location.href='categoryIndex?itemCategoryName=<%= category.getItemCategoryName() %>'">
+											<!-- ID -->
+											<td class="p-4" style="vertical-align:middle;"><%= counter %></td>
+											<!-- カテゴリ名 -->
+											<td style="vertical-align:middle;"><%= category.getItemCategoryName() %></td>
+											<!-- 削除ボタン -->
+											<td class="text-center" style="vertical-align:middle;">
+												<button type="button" class="btn btn-outline-danger"
+													onclick="event.stopPropagation(); location.href='editCategory?itemCategoryName=<%= category.getItemCategoryName() %>'">
+													削除</button>
+											</td>
+										</tr>
+										<%
+										counter++;
 										}
 										%>
-							</tbody>
-						</table>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<% } %>
+						<div class="col-lg-4 border" style="height:55vh; overflow-x: scroll; overflow:scroll; border-radius:5px;">
+							<%
+								ArrayList<ItemCategoryBean> optionList = (ArrayList<ItemCategoryBean>)request.getAttribute("optionList");
+								if(itemCategoryName1 == null){
+								%>
+							<div class="m-auto py-3 px-2 w-100 d-inline-block d-inline-flex align-items-center" style="border-radius:5px; height:100%;">
+								<small style="color:lightgray;">カテゴリをクリックすると登録済みのオプションを確認できます</small>
+							</div>
+							<%}else{ %>
+							<div class="overflow-auto py-4 px-2 w-100" style="height: 100%; border-radius:5px;">
+								<table class="table table-borderless">
+									<thead>
+										<small class="border p-1"
+											style="border-radius: 5px; background-color: cornflowerblue; color: white;">カテゴリ名：<%= itemCategoryName1 %></small>
+										<tr>
+											<th scope="col" class="px-3"><small>ID</small></th>
+											<th scope="col"><small>オプション名</small></th>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+												int counter2 = 1;
+													for(ItemCategoryBean option : optionList){
+												%>
+										<tr>
+											<td class="p-3"><%= counter2  %></td>
+											<td class="p-3"><%= option.getOptionCategoryName() %></td>
+										</tr>
+										<%
+												counter2++;
+												}
+												%>
+									</tbody>
+								</table>
+							</div>
+							<% 
+								} 
+								%>
+						</div>
 					</div>
-					<% 
-						} 
-						%>
 				</div>
 			</div>
 		</div>
