@@ -221,6 +221,9 @@
 												%>
 												</tbody>
 											</table>
+											<% 
+											if(itemList.size() > 7) {
+											%>
 											<span id="back">
 											    <a href="#top"  style="text-decoration:none;">
 											      <div class="d-flex justify-content-center border mb-3 mx-auto" 
@@ -237,6 +240,9 @@
 													</div>
 											    </a>
 											</span>
+											<% 
+											}
+											%>
 										<%
 										} else {
 										%>
