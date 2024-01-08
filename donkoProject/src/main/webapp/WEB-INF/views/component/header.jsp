@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="bean.ShippingAddressBean"%>
+<%@ page import="java.util.*"%>
+<%@ page import="bean.ItemCategoryBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +16,7 @@
 	Object user_id = session.getAttribute("user_id");
 	ShippingAddressBean mainShippingAddress = (ShippingAddressBean)request.getAttribute("mainShippingAddress");
 	Object cartItemNum = request.getAttribute("cartItemNum");
+	ArrayList<ItemCategoryBean> categoryNameList = (ArrayList<ItemCategoryBean>)request.getAttribute("categoryNameList");
     %>
 	<div id="top"></div>
 	<header class="fixed-top" style="background-color:white;">
@@ -102,16 +105,15 @@
 						</div>
 						<div class="offcanvas-body">
 							<ul class="mb-0 p-0 mx-auto">
+								<% 
+								for (ItemCategoryBean categoryName : categoryNameList) {
+								%>
 								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a
-									href="category?categoryName=衣類" style=" text-decoration:none; color:white;">衣類</a></li>
-								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a
-									href="category?categoryName=靴" style="text-decoration:none; color:white;">靴</a></li>
-								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a
-									href="category?categoryName=携帯" style="text-decoration:none; color:white;">携帯</a></li>
-								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a
-									href="category?categoryName=本" style="text-decoration:none; color:white;">本</a></li>
-								<li class="link2 m-3" style="list-style: none; z-index: 3;"><a
-									href="category?categoryName=食品" style="text-decoration:none; color:white;">食品</a></li>
+									href="category?categoryName=<%= categoryName.getItemCategoryName() %>" style=" text-decoration:none; color:white;"><%= categoryName.getItemCategoryName() %></a>
+								</li>
+								<%
+								}
+								%>
 							</ul>
 						</div>
 					</div>

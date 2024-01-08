@@ -9,6 +9,7 @@
 .link:hover{opacity: 0.7;}
 .link2:hover{opacity: 0.8;}
 </style>
+<link rel="stylesheet" href="./css/home.css">
 <title>donko</title>
 </head>
 <body>
@@ -42,7 +43,7 @@
 				<span class="visually-hidden">Next</span>
 			</button>
 		</div>
-		<div class="row text-center" style="margin: 100px 0;">
+		<div class="row text-center item" style="margin: 100px 0;">
 			<h5 class="mb-4"><strong>DONKOのおすすめ商品</strong></h5>
 			<div class="d-flex flex-wrap justify-content-center">
 				<% 
@@ -71,7 +72,7 @@
 				%>
 			</div>
 		</div>
-		<div class="row d-flex justify-content-center" style="margin:100px 65px 60px;">
+		<div class="row d-flex justify-content-center item2" style="margin:100px 65px 60px;">
 			<div class="col-lg-4 p-0">
 				<img src="./images/donkohonsya.png"
 					class="card-img-top"

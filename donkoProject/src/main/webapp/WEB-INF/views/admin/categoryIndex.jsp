@@ -20,11 +20,10 @@
 	</head>
 	<body>
 	<main>
-		<div class="container" style="">
+		<div class="container">
 			<div class="row" style="height:100vh;">
 				<div class="border m-auto p-5" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 					<div class="row d-flex justify-content-center mb-3">
-						
 						<div class="col-lg-12" style="display: flex; align-items: center;">
 							<!-- 戻るボタン -->
 							<a href="adminTopPage" class="arrow my-3 link" style="display: inline-block; color:navy;">
@@ -41,7 +40,7 @@
 							<!-- カテゴリ追加 -->
 							<!-- モーダルボタン -->
 							<div class="ms-auto">
-								<button type="button" class="button-light-purple px-3 py-1 mx-2 my-4" data-bs-toggle="modal"
+								<button type="button" class="button-purple px-3 py-1 mx-2 my-4" data-bs-toggle="modal"
 									data-bs-target="#modalOptionAdd"
 									style="border-radius: 2rem;">
 									カテゴリを追加
@@ -74,7 +73,7 @@
 										<tr>
 											<th scope="col" class="px-4 py-3" style="width:16%;"><small>ID</small></th>
 											<th scope="col" class="py-3"><small>カテゴリ名</small></th>
-											<th scope="col" class="text-center" style="width: 15%;"><small></small></th>
+											<th scope="col" class="py-3 text-center" style="width: 15%;"><small></small></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -117,10 +116,12 @@
 								<table class="table table-borderless">
 									<thead>
 										<small class="border p-1"
-											style="border-radius: 5px; background-color: cornflowerblue; color: white;">カテゴリ名：<%= itemCategoryName1 %></small>
+											style="border-radius: 5px; background-color: cornflowerblue; color: white;">
+											カテゴリ名：<%= itemCategoryName1 %>
+										</small>
 										<tr>
-											<th scope="col" class="px-3"><small>ID</small></th>
-											<th scope="col"><small>オプション名</small></th>
+											<th scope="col" class="p-3"><small>ID</small></th>
+											<th scope="col" class="p-3"><small>オプション名</small></th>
 										</tr>
 									</thead>
 									<tbody>
