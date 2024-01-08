@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/deleteUserInfoIndex")
 public class DeleteUserInfoServlet extends HttpServlet {
@@ -24,7 +25,13 @@ public class DeleteUserInfoServlet extends HttpServlet {
 	//削除済みユーザー一覧を取得する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
+		String admin = (String) session.getAttribute("admin");
+		if (admin == null) {
+			response.sendRedirect("adminSignin");
+			return;
+		}
+
 		// ヘッダーに表示する値を取得
 		String disp = "/adminheader";
 	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
