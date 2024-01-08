@@ -83,7 +83,7 @@
 							} else {
 							%>
 								<div class="mb-3">
-									<a href="shippingAddressIndex" style="text-decoration: none;">
+									<a href="myPage" style="text-decoration: none;">
 										<small class="button-green px-3 py-2" style="border-radius:40px;">配送先を選択</small>
 									</a>
 								</div>

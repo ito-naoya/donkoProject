@@ -39,7 +39,10 @@
 					</div>
 					<div class="d-flex flex-wrap align-items-center">
 						<div class="mx-5">
-							<small class="mt-0 mb-3" style="display: inline-block;"><strong>配送先</strong></small><br>
+							<small class="mt-0 mb-3 border p-1" 
+							style="display: inline-block; border-radius:5px; background-color:#D5E8D4;">
+								配送先
+							</small><br>
 							<%=purchaseInfo.getAddressee()%><br>
 							<%
 							String postalCode = (String) purchaseInfo.getPostalCode();
@@ -52,7 +55,10 @@
 							<%=purchaseInfo.getAddress()%>
 						</div>
 						<div class="mx-4" style="height:100%;">
-							<small class="mt-0 mb-3" style="display: inline-block;"><strong>ご請求金額</strong></small><br>
+							<small class="mt-0 mb-3 border p-1" 
+							style="display: inline-block; border-radius:5px; background-color:#D5E8D4;">
+								ご請求金額
+							</small><br>
 							<h4 class="mb-0">¥ <%=String.format("%,d", purchaseInfo.getTotalAmount())%></h4>
 						</div>
 					</div>

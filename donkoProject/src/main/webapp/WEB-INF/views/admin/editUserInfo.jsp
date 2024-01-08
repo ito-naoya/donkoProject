@@ -6,6 +6,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="./css/button.css">
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -15,117 +16,108 @@
 			donko
 		</title>
 	</head>
-	<body class="container">
+	<body>
 		<main>
-			<%
-			CustomerUser user = (CustomerUser) request.getAttribute("user");
-			%>
-			<form action="editUserInfo" method="post" style="display: flex; justify-content: center; margin: 30px;">
-				<input type="hidden" name="userId" value="<%= user.getUserId() %>">
-				<div class="col-lg-5 m-5" style="border: 1px solid #333333; padding: 65px;">
-					<div class="cancelButton" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-						<h2>
-							<strong>
-								ユーザ情報編集
-							</strong>
-						</h2>
-						<div>
-							<a href="deleteUserInfoIndex" style="text-decoration: none; text-align: center;">
-								<button type="button" class="btn-close border" aria-label="Close">
-								</button>
-							️</a>
-						</div>
-					</div>
-					<div style="margin-bottom: 10px;">
-						<label for="exampleInputUserId">
-							ログインID
-						</label>
-						<br>
-					</div>
-					<div class="form-group　d-flex flex-wrap　justify-content-center" style="margin-bottom: 30px;">
-						<input type="text" class="form-control" id="exampleInputUserId" name="user_login_id" value="<%=user.getUserLoginId()%>">
-					</div>
-					<div style="margin-bottom: 10px;">
-						<label for="exampleInputUserName">
-							ユーザー名
-							<span style="color: red;">
-								（編集不可）
-							</span>
-						</label>
-						<br>
-					</div>
-					<div class="form-group d-flex flex-wrap justify-content-start" style="margin-bottom: 30px;">
-						<input disabled type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName"  value="<%=user.getUserName()%>">
-						<input type="hidden" name="user_name" value="<%=user.getUserName()%>">
-					</div>
-					<div style="margin-bottom: 10px;">
-						<label for="exampleInputGender">
-							性別
-							<span style="color: red;">
-								（編集不可）
-							</span>
-						</label>
-						<br>
-					</div>
-					<div class="form-group d-flex flex-wrap justify-content-center" style="margin-bottom: 30px;">
-						<input type="hidden" name="gender" value="<%= user.getGender() %>">
-						<select disabled class="form-control" id="exampleInputGender">
-							<%
-							String selected = user.getGender();
-							String men = (selected != null && selected.equals("男性") ? "selected" : "");
-							String woman = (selected != null && selected.equals("女性") ? "selected" : "");
-							%>
-							<option hidden>
-								選択してください
-							</option>
-							<option value="男性" <%=men%>>
-								男性
-							</option>
-							<option value="女性" <%=woman%>>
-								女性
-							</option>
-						</select>
-					</div>
-					<div style="margin-bottom: 10px;">
-						<label for="exampleInputbirthday">
-							誕生日
-							<span style="color: red;">
-								（編集不可）
-							</span>
-						</label>
-						<br>
-					</div>
-					<div class="form-group d-flex flex-wrap justify-content-start" style="margin-bottom: 30px;">
-						<input disabled type="date" class="form-control" id="exampleInputbirthday" value="<%=user.getBirthday()%>">
-						<input type="hidden" value="<%=user.getBirthday()%>" name="birthday">
-					</div>
-					<div style="margin-bottom: 10px;">
-						<label for="exampleInputbirthday">
-							ステータス
-						</label>
-						<br>
-					</div>
-					<div class="form-group d-flex flex-wrap justify-content-center" style="margin-bottom: 70px;">
-						<select class="form-control" name="status" required>
-						<%
-						String isDeleted = user.isDeleted() ? "selected" : ""; 
-						String isNotDeleted = user.isDeleted() ? "" : "selected";
-						%>
-							<option value="delete" <%= isDeleted %>>
-								無効
-							</option>
-							<option value="notDelete" <%= isNotDeleted %>>
-								有効
-							</option>
-						</select>
-					</div>
-					<div class="d-flex justify-content-center" style="margin-bottom: 20px;">
-						<button type="submit" class="btn btn-lg w-100" style="border: 1px solid #000000; background: #E5CCFF; padding: 10px;">
-							更新
-						</button
+			<div class="container">
+				<div class="row" style="height:100vh;">
+					<%
+					CustomerUser user = (CustomerUser) request.getAttribute("user");
+					%>
+					<div class="m-auto">
+						<form action="editUserInfo" method="post" style="display: flex; justify-content: center;">
+							<input type="hidden" name="userId" value="<%= user.getUserId() %>">
+							<div class="col-lg-5 border p-5" style="border-radius:5px;">
+								<div class="cancelButton" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+									<h5>
+										<strong>
+											ユーザ情報編集
+										</strong>
+									</h5>
+									<div>
+										<a href="deleteUserInfoIndex" style="text-decoration: none; text-align: center;">
+											<button type="button" class="btn-close border" aria-label="Close">
+											</button>
+										️</a>
+									</div>
+								</div>
+								<div class="form-group　d-flex flex-wrap　justify-content-center mb-3"
+									<label for="exampleInputUserId">
+										<small>ログインID：</small>
+									</label>
+									<input type="text" class="form-control" id="exampleInputUserId" name="user_login_id" value="<%=user.getUserLoginId()%>">
+								</div>
+								<div class="form-group d-flex flex-wrap justify-content-start mb-3">
+									<label for="exampleInputUserName">
+										<small>ユーザー名：</small>
+										<small style="color: red;">
+											（編集不可）
+										</small>
+									</label>
+									<input disabled type="text" class="form-control" id="exampleInputUserName" aria-describedby="userName"  value="<%=user.getUserName()%>">
+									<input type="hidden" name="user_name" value="<%=user.getUserName()%>">
+								</div>
+								<div class="form-group d-flex flex-wrap justify-content-start mb-3">
+									<label for="exampleInputGender">
+										<small>性別：</small>
+										<small style="color: red;">
+											（編集不可）
+										</small>
+									</label>
+									<input type="hidden" name="gender" value="<%= user.getGender() %>">
+									<select disabled class="form-control" id="exampleInputGender">
+										<%
+										String selected = user.getGender();
+										String men = (selected != null && selected.equals("男性") ? "selected" : "");
+										String woman = (selected != null && selected.equals("女性") ? "selected" : "");
+										%>
+										<option hidden>
+											選択してください
+										</option>
+										<option value="男性" <%=men%>>
+											男性
+										</option>
+										<option value="女性" <%=woman%>>
+											女性
+										</option>
+									</select>
+								</div>
+								<div class="form-group d-flex flex-wrap justify-content-start mb-3">
+									<label for="exampleInputbirthday">
+										<small>誕生日：</small>
+										<small style="color: red;">
+											（編集不可）
+										</small>
+									</label>
+									<input disabled type="date" class="form-control" id="exampleInputbirthday" value="<%=user.getBirthday()%>">
+									<input type="hidden" value="<%=user.getBirthday()%>" name="birthday">
+								</div>
+								<div class="form-group d-flex flex-wrap justify-content-start">
+									<label for="exampleInputbirthday">
+										<small>ステータス：</small>
+									</label>
+									<select class="form-control" name="status" required>
+									<%
+									String isDeleted = user.isDeleted() ? "selected" : ""; 
+									String isNotDeleted = user.isDeleted() ? "" : "selected";
+									%>
+										<option value="delete" <%= isDeleted %>>
+											無効
+										</option>
+										<option value="notDelete" <%= isNotDeleted %>>
+											有効
+										</option>
+									</select>
+								</div>
+								<div class="d-flex justify-content-center">
+									<button type="submit" class="button-purple px-2 py-1 w-50" style="border-radius:5px; margin-top:70px;">
+										更新
+									</button
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
-			</form>
+			</div>
 		</main>
 	</body>
 </html>

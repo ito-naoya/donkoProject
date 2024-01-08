@@ -8,6 +8,7 @@ import bean.ItemBean;
 import bean.OptionCategoryBean;
 import classes.Item;
 import classes.OptionCategory;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,6 +24,11 @@ public class OptionServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// ヘッダーの値を取得
+		String disp = "/header";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+		
 		String[] checkedOptionList = request.getParameterValues("option");
 		String categoryName = request.getParameter("categoryName");
 		// URLの形式を日本語対応させるための処理

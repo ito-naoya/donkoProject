@@ -36,7 +36,7 @@
 						}
 						%>
 						<div class="mb-3">
-							<label for="adminLoginId" class="form-label">ユーザーID</label>
+							<label for="adminLoginId" class="form-label"><small>ユーザーID：</small></label>
 							<div>
 								<input type="text" class="form-control" id="adminLoginId"
 									name="adminLoginId" required>
@@ -44,7 +44,7 @@
 						</div>
 
 						<div class="mb-5">
-							<label for="adminLoginPass" class="form-label">パスワード</label>
+							<label for="adminLoginPass" class="form-label"><small>パスワード：</small></label>
 							<div>
 								<input type="text" class="form-control" id="adminLoginPass"
 									name="adminLoginPass" required>
