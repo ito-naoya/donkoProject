@@ -37,14 +37,14 @@
 							%>
 								<input type="hidden" name="showSelect" value="notDeletedUser">
 								<button type="submit" class="button-light-purple px-3 py-1" style="border-radius:40px;">
-									全てのユーザーを表示
+									<small>全てのユーザーを表示</small>
 								</button>
 							<%
 							} else if(toIndicate.equals("notDeletedUser")) {
 							%>
 								<input type="hidden" name="showSelect" value="deletedUser">
 								<button type="submit" class="button-light-purple px-3 py-1" style="border-radius:40px;">
-									無効のユーザーを表示
+									<small>無効のユーザーを表示</small>
 								</button>
 							<%
 							}
