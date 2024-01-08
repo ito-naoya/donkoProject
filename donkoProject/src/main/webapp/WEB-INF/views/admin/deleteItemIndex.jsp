@@ -232,10 +232,37 @@
 										<div class="row">
 										    <div class="d-flex flex-wrap justify-content-end text-center">
 										    	<small class="mb-0 me-3">ステータス<br>切り替え</small>
-										        <button type="submit" class="button-light-purple px-3 py-1" onclick="return confirmStatusChange();" style="border-radius: 40px;">
+										        <button type="button" class="button-light-purple px-3 py-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="border-radius: 40px;">
 												    実行
 												</button>
 										    </div>
+										</div>
+										<!-- モーダルウィンドウ -->
+										<div class="modal fade" id="staticBackdrop"
+											data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+											aria-labelledby="staticBackdropLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered w-100">
+												<div class="modal-content" id="modalWindow" style="width:100%;">
+													<div class="modal-header">
+														<small class="ms-2">ステータス切り替え</small>
+														<button type="button" class="btn-close"
+															data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body p-5 d-flex flex-wrap">
+														<small>
+															商品のステータスを切り替えます。<br>
+															本当によろしいですか。
+														</small>
+													</div>
+													<!-- 発送するボタン -->
+													<div class="modal-footer">
+															<button type="submit" class="button-purple px-3 py-2"
+																style="border-radius: 5px;">
+																OK
+															</button>
+													</div>
+												</div>
+											</div>
 										</div>
 								</form>
 							</div>
