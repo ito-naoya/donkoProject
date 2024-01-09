@@ -92,7 +92,7 @@
 											</svg>
 									</button>
 						        </label>
-						        <input type="file" class="form-control" id="registFormFile" name="img" accept=".jpg" required onchange="previewImage(event);" />
+						        <input type="file" class="form-control" id="registFormFile" name="img" accept=".jpg" onchange="previewImage(event);" />
 						    </div>
 
 							    <br>
