@@ -88,7 +88,7 @@
 						    </div>
 						    <div class="upload card my-3" style="width: 200px; height: 200px; display: inline-block;">
 								<span id="default-text" style="position: absolute; top:10px; width: 100%; height: 100%; color:lightgray;">
-									<small class="m-3">ここに画像が表示</small>
+									<small class="m-3">ここに画像を表示</small>
 								</span>
 							    <img id="image-preview" style="width: 100%; height: 100%; object-fit: cover; display: none;"/>
 							</div>
