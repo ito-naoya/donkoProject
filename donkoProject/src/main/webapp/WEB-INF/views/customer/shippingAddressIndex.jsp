@@ -71,7 +71,11 @@
 			} 
 			%>
 			<div class="col-lg-8 mt-5 px-4" style="margin-bottom:80px;">
+			<div class="d-flex justify-content-between">
 				<h5><strong>配送先一覧</strong></h5>
+				<small class="mx-3" style="vertical-align: middle;">
+					ダブルクリックで配送先を編集 </small>
+				</div>
 				<div class="d-flex flex-wrap">
 					<a href="myPage" class="me-2 mb-2" style="text-decoration:none; width: calc(50% - 8px);">
 						<div class="card" style="width:100%; height:100%; border: 1px dashed lightgray !important;">
@@ -100,7 +104,8 @@
 					String head = postalCode.substring(0, 3);
 					String end = postalCode.substring(3);
 					%>
-					<div class="card me-2 mb-2" style="width: calc(50% - 8px);">
+					<div class="card me-2 mb-2" style="width: calc(50% - 8px); cursor: pointer;" ondblclick="location.href='editShippingAddress?shipping_address_id=<%= shippingAddressBean.getShippingAddressId() %>'">
+<%-- 					<div class="card me-2 mb-2" style="width: calc(50% - 8px);"> --%>
 						<div class="card-body">
 						<div class="card-head d-flex justify-content-between">
 							<%= numbers %>
@@ -117,13 +122,13 @@
 							〒 <%= head %>-<%= end %><br>
 							<%= shippingAddressBean.getAddress() %>
 							</h6>
-								<button type="submit" class="button-light-purple px-2 py-1" style="border-radius:5px;">
+<%-- 								<button type="submit" class="button-light-purple px-2 py-1" style="border-radius:5px;">
 									<a class="anchor"
 									   href='editShippingAddress?shipping_address_id=<%= shippingAddressBean.getShippingAddressId() %>'
 									   style="text-decoration:none;">
 										編集
 									</a>
-								</button>
+								</button> --%>
 							<%
 							int main_address = shippingAddressBean.getMainShippingAddress();
 							if (main_address != 1) {
