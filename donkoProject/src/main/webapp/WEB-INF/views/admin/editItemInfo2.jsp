@@ -70,17 +70,15 @@
 							    <input type="hidden" name="itemPrice" value="<%= item.getItemPrice() %>">
 							    <input type="hidden" name="itemStock" value="<%= item.getItemStock() %>">
 							    <input type="hidden" name="itemImgFileName" value="<%= item.getImageFileName() %>">
-							    <br>
 
-								<label for="default-text" class="form-label">現在登録済みの写真</label>
-							    <br>
-							    <div class="upload card my-3" style="width: 200px; height: 200px; display: inline-block;">
+								<label for="default-text"><small>現在登録済みの写真</small></label><br>
+							    <div class="upload card mt-2 mb-3" style="width: 200px; height: 200px; display: inline-block;">
 								    <img src="./images/<%= item.getImageFileName() %>.jpg" id="default-text" style="width: 100%; height: 100%; object-fit: cover;">
 								    <img id="image-preview" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
 								</div>
 								<div>
-						        <label for="registFormFile" class="d-flex justify-content-between">
-								    <small>商品写真を変更<small>
+						        <label for="registFormFile" class="d-flex justify-content-between align-items-center mb-0">
+								    <small>商品写真： <span class="badge bg-danger">必須</span><small>
 							        <button type="button" class="btn link p-0"
 										data-bs-container="body" data-bs-toggle="popover"
 										data-bs-placement="top"
@@ -93,11 +91,10 @@
 									</button>
 						        </label>
 						        <input type="file" class="form-control" id="registFormFile" name="img" accept=".jpg" onchange="previewImage(event);" />
-						    </div>
 
 							    <br>
 							    <div>
-								    <label for="options"><small>オプションを登録： </small></label>
+								    <label for="options" style="font-size:16px;"><small>オプションを登録： <span class="badge bg-danger">必須</span></small></label>
 								    <%
 								    ArrayList<ArrayList<OptionCategoryBean>> itemCategoryListAll = (ArrayList<ArrayList<OptionCategoryBean>>) request.getAttribute("itemCategoryListAll");
 								    if(itemCategoryListAll != null && itemCategoryListAll.size() > 0 ){
@@ -109,7 +106,6 @@
 									            // 最初のカテゴリ（例：色）のセレクトボックスを生成
 									    %>
 									    		<input type="hidden" name="optionCategoryName_1" value="<%= optionCategoryName %>">
-									    		<div class="mb-3">
 									            <label for="optionSelect_<%= counter %>" class="form-label mb-3"></label>
 									            <!-- 一つ目のオプションは必ずセレクトボックス（画像名と一意に紐づけるため） -->
 									            <select class="form-select mb-3" id="optionSelect_1" name="optionValue_1">
@@ -155,10 +151,9 @@
 								    %>
 								    <input type="hidden" name="selectBoxCount" value="<%= itemCategoryListAll.size() %>">
 						        </div>
-							    <br>
-							    <br>
+						        
 							    <div class="d-flex justify-content-center mt-5">
-						    	<button type=submit class="button-purple px-3 py-1 w-50" style="border-radius: 5px;">登録</button>
+						    	<button type=submit class="button-purple px-3 py-1" style="border-radius: 5px; width:40%; font-size:16px;">更新</button>
 						    </div>
 							</form>
 						<% } %>

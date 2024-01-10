@@ -24,12 +24,10 @@
 							String defaultItemCategoryName = item.getItemCategoryName();
 							String errorMessage = (String) request.getAttribute("errorMessage");
 					%>
-					<a href="deleteItemIndex?itemCategoryName=<%= defaultItemCategoryName %>&itemDelFlg=2" class="mb-3" style="display: inline-block">
-						<div class="border text-center" style="width: 50px;">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-			  					<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-							</svg>
-						</div>
+					<a href="deleteItemIndex?itemCategoryName=<%= defaultItemCategoryName %>&itemDelFlg=2" class="arrow mb-3 link" style="display: inline-block; color:navy;">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+						  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+						</svg>
 					</a>
 					<h5 class="mb-4">
 						<strong>商品編集</strong>
@@ -147,7 +145,7 @@
 							 	<input type="hidden" name="secondOptionId" value="<%= item.getItemSecondOptionIncrementId() %>">
 
 								<div class="d-flex justify-content-center mt-5">
-									<button type=submit class="button-light-purple px-3 py-1" style="border-radius: 5px;">オプションの追加をする</button>
+									<button type=submit class="button-light-purple px-3 py-1 w-50" style="border-radius: 5px;">次へ</button>
 								</div>
 							</form>
 						<% } %>
