@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.CartBean;
+import bean.ItemCategoryBean;
 import classes.Cart;
 import classes.ErrorHandling;
+import classes.ItemCategory;
 import classes.user.CustomerUser;
 import classes.user.User;
 import jakarta.servlet.RequestDispatcher;
@@ -70,10 +72,14 @@ public class CartServlet extends HttpServlet {
 				.map(cb -> cb.getItemPrice() * cb.getQuantity())
 				.mapToInt( i -> i )
 				.sum();
-	
+		
+		// カテゴリ名を取得
+		ArrayList<ItemCategoryBean> categoryNameList = ItemCategory.getItemCategoryList();
+
 		request.setAttribute("userName", cu.getUserName());
 		request.setAttribute("totalPrice", totalPrice);
 		request.setAttribute("cartBeanList", cartBeanList);
+		request.setAttribute("categoryNameList", categoryNameList);
 
 		//カートページを表示する
 		String view = "/WEB-INF/views/customer/cart.jsp";
