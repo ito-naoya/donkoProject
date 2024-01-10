@@ -8,7 +8,7 @@ import classes.ErrorHandling;
 import classes.user.AdminUser;
 import classes.user.CustomerUser;
 import classes.user.User;
-import interfaces.group.GroupB;
+import interfaces.group.GroupD;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -77,7 +77,7 @@ public class EditUserInfoServlet extends HttpServlet {
 		if(!birthday.equals("")) customerUser.setBirthday(Date.valueOf(request.getParameter("birthday")));
 		
 		//入力チェック
-		Boolean isIncomplete = BeanValidation.validate(request, "user", customerUser, GroupB.class);
+		Boolean isIncomplete = BeanValidation.validate(request, "user", customerUser, GroupD.class);
         
 		//入力内容に不備があった場合
 	      if(isIncomplete) {
