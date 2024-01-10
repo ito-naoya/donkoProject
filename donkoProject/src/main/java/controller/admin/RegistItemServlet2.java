@@ -13,6 +13,7 @@ import classes.Option;
 import interfaces.group.GroupA;
 import interfaces.group.GroupB;
 import interfaces.group.GroupC;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -40,9 +41,18 @@ public class RegistItemServlet2 extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String admin = (String) session.getAttribute("admin");
-		if (admin == null) {
+		
+		
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+
+		HttpSession as = request.getSession();
+		String adminSession = (String)as.getAttribute("admin");
+
+		// アドミンのセッションがnullの場合は管理者ログイン画面に遷移
+		if (adminSession == null) {
 			response.sendRedirect("adminSignin");
 			return;
 		}

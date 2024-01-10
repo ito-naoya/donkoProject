@@ -7,6 +7,7 @@ import classes.ErrorHandling;
 import classes.user.CustomerUser;
 import classes.user.User;
 import interfaces.group.GroupC;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -29,7 +30,15 @@ public class UserSignupServlet extends HttpServlet {
 		String admin = (String) session.getAttribute("admin");
 		if (admin != null) {
 			request.setAttribute("admin",admin);
+			String disp = "/adminheader";
+		    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		    dispatch.include(request, response);
+		} else {
+			String disp = "/header";
+		    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		    dispatch.include(request, response);
 		}
+
 		CustomerUser users = new CustomerUser();
 		request.setAttribute("users", users);
 		//ログイン時の初期メッセージ
@@ -39,7 +48,21 @@ public class UserSignupServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		// セッションを確認
+		// セッションの有無でjsp側の表示ボタンが変わる
+ 		HttpSession session = request.getSession();
+		String admin = (String) session.getAttribute("admin");
+		if (admin != null) {
+			request.setAttribute("admin",admin);
+			String disp = "/adminheader";
+		    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		    dispatch.include(request, response);
+		} else {
+			String disp = "/header";
+		    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+		    dispatch.include(request, response);
+		}
+
 		//値をセット
 		CustomerUser users = new CustomerUser();
 		users.setUserLoginId(request.getParameter("userLoginId"));
@@ -61,7 +84,6 @@ public class UserSignupServlet extends HttpServlet {
 		    return;
 		} else if (checkResult > 0) {
 		    // checkResult が 0 より大きい場合の処理
-			String admin = (String) session.getAttribute("admin");
 			if (admin != null) {
 				request.setAttribute("admin",admin);
 			}
@@ -81,7 +103,6 @@ public class UserSignupServlet extends HttpServlet {
 
 		//遷移先を決定
 		//セッションを確認
-		String admin = (String) session.getAttribute("admin");
 		if (admin != null) {
 			//セッションがある=Admin側。管理者画面にリダイレクト
 			response.sendRedirect("adminTopPage");

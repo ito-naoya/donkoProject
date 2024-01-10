@@ -11,6 +11,8 @@
 <title>donko</title>
 </head>
 <body>
+<%@include file= "../component/adminheader.jsp" %>
+<%@include file= "../component/adminheaderTopSpace.jsp" %>
 <main>
 	<div class="container">
 		<div class="row d-flex justify-content-center" style="height:100vh;">
@@ -151,7 +153,7 @@
 								    %>
 								    <input type="hidden" name="selectBoxCount" value="<%= itemCategoryListAll.size() %>">
 						        </div>
-						        
+
 							    <div class="d-flex justify-content-center mt-5">
 						    	<button type=submit class="button-purple px-3 py-1" style="border-radius: 5px; width:40%; font-size:16px;">更新</button>
 						    </div>
@@ -164,7 +166,6 @@
 <script src="./js/registItemScript.js"></script>
 <script src="./js/nullValidationScript.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script>
   // ポップオーバーを初期化
   var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))

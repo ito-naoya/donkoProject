@@ -11,6 +11,7 @@ import classes.Item;
 import classes.ItemManagementHelper;
 import classes.OptionCategory;
 import interfaces.group.GroupA;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,13 +29,19 @@ public class RegistItemServlet1 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String admin = (String) session.getAttribute("admin");
-		if (admin == null) {
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+
+		HttpSession as = request.getSession();
+		String adminSession = (String)as.getAttribute("admin");
+
+		// アドミンのセッションがnullの場合は管理者ログイン画面に遷移
+		if (adminSession == null) {
 			response.sendRedirect("adminSignin");
 			return;
 		}
-
 		//カテゴリー一覧を取得
 		ItemManagementHelper.getCategoryList(request, response);
 
@@ -50,6 +57,19 @@ public class RegistItemServlet1 extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+
+		HttpSession as = request.getSession();
+		String adminSession = (String)as.getAttribute("admin");
+
+		// アドミンのセッションがnullの場合は管理者ログイン画面に遷移
+		if (adminSession == null) {
+			response.sendRedirect("adminSignin");
+			return;
+		}
 
 		ItemBean newItem = new ItemBean();
 		//TODO:セッション管理
