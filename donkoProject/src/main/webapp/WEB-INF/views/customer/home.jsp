@@ -43,7 +43,7 @@
 				<span class="visually-hidden">Next</span>
 			</button>
 		</div>
-		<div class="row text-center item" style="margin: 100px 0;">
+		<div class="row text-center item" style="margin: 100px 0px;">
 			<h5 class="mb-4"><strong>DONKOのおすすめ商品</strong></h5>
 			<div class="d-flex flex-wrap justify-content-center">
 				<% 
