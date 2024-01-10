@@ -57,6 +57,10 @@ public class DeleteUserInfoServlet extends HttpServlet {
 	//ユーザー一覧を取得（削除済み or 全て）
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
 
 		String showSelect = request.getParameter("showSelect");
 
