@@ -17,7 +17,7 @@ document.getElementById('createButton').addEventListener('click', function(event
     let errorMessagePostalCode = document.getElementById('errorMessagePostalCode');
     let errorMessageAddress = document.getElementById('errorMessageAddress');
     
-        // 宛名のNullチェック
+    // 宛名のNullチェック
     if (!addresseeValue || addresseeValue.trim() === '') {
         errorMessageAddressee.textContent = '宛名を入力してください。';
         event.preventDefault();
@@ -32,7 +32,10 @@ document.getElementById('createButton').addEventListener('click', function(event
     if (!postcodeValue || postcodeValue.trim() === '') {
         errorMessagePostalCode.textContent = '郵便番号を入力してください。';
         event.preventDefault();
-    } else {
+    } else if (postcodeValue.length < 7 || postcodeValue.length > 7) {
+        errorMessagePostalCode.textContent = '7文字で入力してください。';
+        event.preventDefault();
+    }else {
         errorMessagePostalCode.textContent = '';
     }
     
