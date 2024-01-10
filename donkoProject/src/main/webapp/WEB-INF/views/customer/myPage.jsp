@@ -201,7 +201,7 @@ td {vertical-align: middle;}
 						<th class="th"><strong>購入日</strong></th>
 						<th class="th"><strong>配送先</strong></th>
 						<th class="th"><strong style="white-space: nowrap;">配送ステータス</strong></th>
-					<tr>
+					</tr>
 				</thead>
 				<tbody>
 					<!-- PurchaseBeanから順次値を取得して表示 -->
