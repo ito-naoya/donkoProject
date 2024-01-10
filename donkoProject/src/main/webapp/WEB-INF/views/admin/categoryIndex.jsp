@@ -7,9 +7,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>
-			donko
-		</title>
+<title>donko</title>
 		<link rel="stylesheet" href="./css/button.css">
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -19,24 +17,20 @@
 		<link rel="stylesheet"  href="./css/optionIndex.css">
 	</head>
 	<body>
+	<%@include file= "../component/adminheader.jsp" %>
+	<%@include file= "../component/adminheaderTopSpace.jsp" %>
 	<main>
 		<div class="container">
 			<div class="row" style="height:100vh;">
 				<div class="border m-auto p-5" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 					<div class="row d-flex justify-content-center mb-3">
 						<div class="col-lg-12" style="display: flex; align-items: center;">
-							<!-- 戻るボタン -->
-							<a href="adminTopPage" class="arrow my-3 link" style="display: inline-block; color:navy;">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-								  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-								</svg>
-							</a>
-							
+
 							<h5 class="mb-0 mx-3"><strong>カテゴリ編集</strong></h5>
 						    <small class="mx-3" style="vertical-align: middle;">
 						  		登録中の商品に紐づくカテゴリは削除できません
 						    </small>
-						
+
 							<!-- カテゴリ追加 -->
 							<!-- モーダルボタン -->
 							<div class="ms-auto">
@@ -48,7 +42,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<!-- メッセージ表示 -->
 					<%
 					String message = (String)request.getAttribute("message");
@@ -58,7 +52,7 @@
 							<%= message %>
 						</div>
 					<% } %>
-					
+
 					<!-- 一覧表示 -->
 					<div class="row d-flex justify-content-center">
 						<div class="col-lg-8">
@@ -140,15 +134,15 @@
 									</tbody>
 								</table>
 							</div>
-							<% 
-								} 
+							<%
+								}
 								%>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- モーダルウィンドウ -->
 		<%
 	    String showModalString = (String) request.getAttribute("showModal");
@@ -182,7 +176,7 @@
 									style="font-size: small; color: grey;">20文字以内</label>  -->
 								<label for="categoryName">
 									<small>カテゴリ：</small>
-								</label> 
+								</label>
 								<div class="mb-3">
 									<input
 										type="text" class="form-control" id="newCategoryName"
@@ -196,15 +190,15 @@
 											style="display: flex; justify-content: start; color: #FF0000;">
 											<%= itemCategoryName %>
 										</div>
-									<% 
-									} 
+									<%
+									}
 									%>
 								</div>
 
 								<!-- セレクトボックス1 -->
 								<label for="optionSelect1">
 									<small>オプション1</small><small style="color:red;">（必須）</small><small>：</small>
-								</label> 
+								</label>
 								<div class="mb-3">
 									<select
 										class="form-control" id="optionSelect1"
@@ -224,7 +218,7 @@
 										</div>
 									<% } %>
 								</div>
-								
+
 								<!-- セレクトボックス2 -->
 								<label for="optionSelect2">
 									<small>オプション2（任意）：</small>
@@ -260,12 +254,11 @@
 					</div>
 				</div>
 			</div>
-		<% 
-		} 
+		<%
+		}
 		%>
 		<!-- モーダルウィンドウここまで -->
 	</main>
 	<script src="./js/optionScript.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 	</body>
 </html>

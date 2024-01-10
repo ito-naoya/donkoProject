@@ -9,6 +9,7 @@ import classes.ErrorHandling;
 import classes.ItemCategory;
 import classes.ItemManagementHelper;
 import interfaces.group.GroupA;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,9 +27,16 @@ public class EditCategoryServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String admin = (String) session.getAttribute("admin");
-		if (admin == null) {
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+
+		HttpSession as = request.getSession();
+		String adminSession = (String)as.getAttribute("admin");
+
+		// アドミンのセッションがnullの場合は管理者ログイン画面に遷移
+		if (adminSession == null) {
 			response.sendRedirect("adminSignin");
 			return;
 		}

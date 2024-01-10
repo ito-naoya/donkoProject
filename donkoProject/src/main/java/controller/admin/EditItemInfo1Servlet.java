@@ -29,9 +29,16 @@ public class EditItemInfo1Servlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String admin = (String) session.getAttribute("admin");
-		if (admin == null) {
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+
+		HttpSession as = request.getSession();
+		String adminSession = (String)as.getAttribute("admin");
+
+		// アドミンのセッションがnullの場合は管理者ログイン画面に遷移
+		if (adminSession == null) {
 			response.sendRedirect("adminSignin");
 			return;
 		}
@@ -59,6 +66,20 @@ public class EditItemInfo1Servlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+
+		HttpSession as = request.getSession();
+		String adminSession = (String)as.getAttribute("admin");
+
+		// アドミンのセッションがnullの場合は管理者ログイン画面に遷移
+		if (adminSession == null) {
+			response.sendRedirect("adminSignin");
+			return;
+		}
 
 		//TODO:セッション管理
 		//カテゴリー、商品名、商品説明、金額、在庫数を取得

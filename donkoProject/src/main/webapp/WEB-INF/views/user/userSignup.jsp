@@ -17,6 +17,16 @@
 <title>donko</title>
 </head>
 <body>
+<%
+String admin = (String) request.getAttribute("admin");
+if (admin != null){
+%>
+	<%@include file= "../component/adminheader.jsp" %>
+	<%@include file= "../component/adminheaderTopSpace.jsp" %>
+<% } else {%>
+	<%@include file= "../component/header.jsp" %>
+	<%@include file= "../component/headerTopSpace.jsp" %>
+<% } %>
 	<main>
 		<%
 		CustomerUser users = (CustomerUser) request.getAttribute("users");
@@ -25,13 +35,12 @@
 			<div class="row" style="height:100vh;">
 				<div class="m-auto">
 					<%
-					String admin = (String) request.getAttribute("admin");
 					if (admin == null){
 				    %>
 					<!-- ここにdonko画像を表示 -->
-					<span class="d-block d-flex justify-content-center my-3"> 
+					<span class="d-block d-flex justify-content-center my-3">
 					<a
-						href="home" class="link" style="text-decoration: none;"> 
+						href="home" class="link" style="text-decoration: none;">
 						<img
 							src="./images/donkoLogo2.png" style="height: 80px;">
 					</a>
@@ -42,7 +51,7 @@
 					<div class="col-lg-5 m-auto p-5 border" style="border-radius: 10px; box-shadow:10px 10px 10px lightgray;">
 						<!-- アドミン側のみ表示 -->
 						<%
-						if (admin != null){ 
+						if (admin != null){
 						%>
 							<a href="adminTopPage" class="arrow mb-3 link" style="display: inline-block; color:navy;">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
@@ -50,7 +59,7 @@
 								</svg>
 							</a>
 						<%
-						} 
+						}
 						%>
 						<div class="cancelButton"
 							 style="display: flex; justify-content: space-between;">
@@ -75,16 +84,16 @@
 							<div class="row my-3">
 								<label for="userLoginId" class="form-label d-flex justify-content-between mb-0">
 									<small>ログインID：</small>
-									<button type="button" class="btn link p-0 mb-1" 
-										data-bs-container="body" data-bs-toggle="popover" 
-										data-bs-placement="top" 
+									<button type="button" class="btn link p-0 mb-1"
+										data-bs-container="body" data-bs-toggle="popover"
+										data-bs-placement="top"
 										data-bs-content="5 文字以上 10 文字以内" data-bs-html="true"
 										style="border: none;">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle me-2" viewBox="0 0 16 16">
 												<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
 												<path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
 											</svg>
-									</button> 
+									</button>
 								</label>
 								<div class="col-12">
 									<input type="text" class="form-control" id="userLoginId"
@@ -101,20 +110,20 @@
 								</div>
 								<% } %>
 							</div>
-	
+
 							<div class="row mb-4">
 								<label for="userLoginUser" class="form-label d-flex justify-content-between mb-0">
 								<small>ユーザー名：</small>
-								<button type="button" class="btn link p-0 mb-1" 
-									data-bs-container="body" data-bs-toggle="popover" 
-									data-bs-placement="top" 
+								<button type="button" class="btn link p-0 mb-1"
+									data-bs-container="body" data-bs-toggle="popover"
+									data-bs-placement="top"
 									data-bs-content="1 文字以上 25 文字以内" data-bs-html="true"
 									style="border: none;">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle me-2" viewBox="0 0 16 16">
 											<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
 											<path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
 										</svg>
-									</button> 
+									</button>
 								</label>
 								<div class="col-12">
 									<input type="text" class="form-control" id="userLoginName"
@@ -131,13 +140,13 @@
 								</div>
 								<% } %>
 							</div>
-	
+
 							<div class="row mb-3">
 								<label for="userLoginPass" class="form-label d-flex justify-content-between mb-0">
 									<small>パスワード：</small>
-									<button type="button" class="btn link p-0 mb-1" 
-									data-bs-container="body" data-bs-toggle="popover" 
-									data-bs-placement="top" 
+									<button type="button" class="btn link p-0 mb-1"
+									data-bs-container="body" data-bs-toggle="popover"
+									data-bs-placement="top"
 									data-bs-content="半角英数字 8 文字以上 16 文字以内&lt;br&gt;数字を1つ以上含む" data-bs-html="true"
 									style="border: none;">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle me-2" viewBox="0 0 16 16">
@@ -172,7 +181,7 @@
 								</div>
 								<% } %>
 							</div>
-	
+
 							<div class="row">
 								<div class="col-12 mt-5 d-flex justify-content-center">
 									<input type="submit" value="登録する" class="button-purple py-1"

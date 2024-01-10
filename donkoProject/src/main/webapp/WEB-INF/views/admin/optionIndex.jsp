@@ -19,46 +19,41 @@
 		<link rel="stylesheet"  href="./css/optionIndex.css">
 	</head>
 	<body>
+	<%@include file= "../component/adminheader.jsp" %>
+	<%@include file= "../component/adminheaderTopSpace.jsp" %>
 		<main>
 			<div class="container">
 				<div class="row" style="height:100vh;">
 					<div class="border m-auto p-5" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 						<div class="row d-flex justify-content-center mb-3">
 							<div class="col-lg-12" style="display: flex; align-items: center;">
-								<!-- 戻るボタン -->
-								<a href="adminTopPage" class="arrow my-3 link" style="display: inline-block; color:navy;">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-									  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-									</svg>
-								</a>
-								
 								<h5 class="mb-0 mx-3"><strong>オプション編集</strong></h5>
 							    <small class="mx-3" style="vertical-align: middle;">
 							  		登録中の商品に紐づくオプションは削除できません
 							    </small>
-							    
+
 							    <!-- カテゴリ追加 -->
 								<!-- モーダルボタン -->
 								<div class="ms-auto">
-									<button type="button" class="button-purple px-3 py-1 mx-2 my-4" 
-										data-bs-toggle="modal" data-bs-target="#modalOptionAdd" 
+									<button type="button" class="button-purple px-3 py-1 mx-2 my-4"
+										data-bs-toggle="modal" data-bs-target="#modalOptionAdd"
 										style="border-radius: 2rem;">
 										オプションを追加
 									</button>
 								</div>
 							</div>
 						</div>
-						
+
 						<!-- メッセージ -->
 						<%
 						String message = (String)request.getAttribute("message");
 						if (message != null){
 						%>
 							<div class="alert alert-warning" role="alert"> <%= message %></div>
-						<% 
-						} 
+						<%
+						}
 						%>
-					
+
 						<div class="row">
 							<div class="col-lg-8">
 							<%
@@ -101,8 +96,8 @@
 								</table>
 								</div>
 							</div>
-							<% 
-							} 
+							<%
+							}
 							%>
 							<div class="col-lg-4 border" style="height:55vh; overflow-x: scroll; overflow:scroll; border-radius:5px;">
 								<%
@@ -112,8 +107,8 @@
 									<div class="m-auto py-3 px-2 w-100 d-inline-block d-inline-flex align-items-center justify-content-center" style="border-radius:5px; height:100%;">
 										<small style="color:lightgray;">オプションをクリックすると詳細が表示されます</small>
 									</div>
-								<% 
-								} else if(optionValueList.size() == 0) { 
+								<%
+								} else if(optionValueList.size() == 0) {
 								%>
 									<div class="m-auto py-3 px-2 w-100 d-inline-block d-inline-flex align-items-center justify-content-center" style="border-radius:5px; height:100%;">
 										<div>
@@ -128,7 +123,7 @@
 										</div>
 									</div>
 								<%
-								} else { 
+								} else {
 								%>
 									<div class="overflow-auto py-4 px-2 w-100" style="height: 55vh;">
 										<div class="d-flex flex-wrap">
@@ -176,8 +171,8 @@
 											</tbody>
 										</table>
 									</div>
-								<% 
-								} 
+								<%
+								}
 								%>
 							</div>
 						</div>
@@ -245,6 +240,5 @@
 			</div>
 		</main>
 		<script src="./js/optionScript.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 	</body>
 </html>

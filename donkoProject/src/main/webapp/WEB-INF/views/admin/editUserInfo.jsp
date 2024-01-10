@@ -17,6 +17,8 @@
 		</title>
 	</head>
 	<body>
+	<%@include file= "../component/adminheader.jsp" %>
+	<%@include file= "../component/adminheaderTopSpace.jsp" %>
 		<main>
 			<div class="container">
 				<div class="row" style="height:100vh;">
@@ -45,17 +47,17 @@
 										<small>ログインID：</small>
 									</label>
 									<input type="text" class="form-control" id="exampleInputUserId" name="user_login_id" value="<%=user.getUserLoginId()%>">
-									<% 
-									String userLoginId = (String)request.getAttribute("userLoginId"); 
+									<%
+									String userLoginId = (String)request.getAttribute("userLoginId");
 									%>
-									<% 
+									<%
 									if (userLoginId != null) {
 									%>
 										<p style="color: red; margin: 0;">
 											<%= userLoginId %>
 										</p>
 									<%
-									} 
+									}
 									%>
 								</div>
 								<div class="form-group d-flex flex-wrap justify-content-start mb-3">
@@ -109,7 +111,7 @@
 									</label>
 									<select class="form-control" name="status" required>
 									<%
-									String isDeleted = user.isDeleted() ? "selected" : ""; 
+									String isDeleted = user.isDeleted() ? "selected" : "";
 									String isNotDeleted = user.isDeleted() ? "" : "selected";
 									%>
 										<option value="delete" <%= isDeleted %>>

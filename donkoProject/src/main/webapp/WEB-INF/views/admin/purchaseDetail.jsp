@@ -16,11 +16,13 @@
 </style>
 </head>
 <body>
+	<%@include file= "../component/adminheader.jsp" %>
+	<%@include file= "../component/adminheaderTopSpace.jsp" %>
 	<main>
 		<div class="container">
 			<div class="row" style="height:100vh;">
 				<div class="col-lg-8 m-auto p-5 border" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
-					<% 
+					<%
 					String source = (String)request.getParameter("source");
 					PurchaseBean purchaseInfo = (PurchaseBean) request.getAttribute("purchaseInfo");
 					ArrayList<PurchaseDetailBean> purchaseDetailList = (ArrayList<PurchaseDetailBean>) request.getAttribute("purchaseDetailList");
@@ -39,12 +41,12 @@
 						<h5 class="mb-0 ms-3">
 							<strong>受注詳細</strong>
 						</h5>
-						<% 
-						if (shippingId == 1) { 
+						<%
+						if (shippingId == 1) {
 						%>
 						<div class="ms-auto">
 							<!-- モーダルボタン -->
-							<button type="button" class="button-light-purple px-4 py-1 text-nowrap text-center" 
+							<button type="button" class="button-light-purple px-4 py-1 text-nowrap text-center"
 									data-bs-toggle="modal" data-bs-target="#staticBackdrop"
 									style="border-radius:5px;">
 								発送する
@@ -82,12 +84,12 @@
 								</div>
 							</div>
 						</div>
-						<% 
-						} 
+						<%
+						}
 						%>
 					</div>
-					<% 
-					if(purchaseInfo != null) { 
+					<%
+					if(purchaseInfo != null) {
 					%>
 						<div class="row mb-3">
 							<div class="col-lg-6 me-auto">
@@ -138,7 +140,7 @@
 							</tbody>
 						</table>
 					<%
-					} 
+					}
 					%>
 				</div>
 			</div>

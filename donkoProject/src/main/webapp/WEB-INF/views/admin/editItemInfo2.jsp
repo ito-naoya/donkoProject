@@ -11,6 +11,8 @@
 <title>donko</title>
 </head>
 <body>
+<%@include file= "../component/adminheader.jsp" %>
+<%@include file= "../component/adminheaderTopSpace.jsp" %>
 <main>
 	<div class="container">
 		<div class="row d-flex justify-content-center" style="height:100vh;">
@@ -25,7 +27,7 @@
 				<div class="row d-flex justify-content-center">
 					<div class="d-flex flex-wrap px-4 mb-4">
 						<!-- 戻るボタン -->
-						<a href="registItem1" class="arrow mb-3 link" style="display: inline-block; color:navy;">
+						<a href="editItemInfo1?itemId=<%=item.getItemId()%>" class="arrow mb-3 link" style="display: inline-block; color:navy;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
 							  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
 							</svg>
@@ -151,7 +153,7 @@
 								    %>
 								    <input type="hidden" name="selectBoxCount" value="<%= itemCategoryListAll.size() %>">
 						        </div>
-						        
+
 							    <div class="d-flex justify-content-center mt-5">
 						    	<button type=submit class="button-purple px-3 py-1" style="border-radius: 5px; width:40%; font-size:16px;">更新</button>
 						    </div>
@@ -164,7 +166,6 @@
 <script src="./js/registItemScript.js"></script>
 <script src="./js/nullValidationScript.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script>
   // ポップオーバーを初期化
   var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
