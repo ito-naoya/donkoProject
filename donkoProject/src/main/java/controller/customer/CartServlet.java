@@ -100,7 +100,6 @@ public class CartServlet extends HttpServlet {
 			return;
 		}
 		
-		
 		String disp = "/header";
 	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
 	    dispatch.include(request, response);
