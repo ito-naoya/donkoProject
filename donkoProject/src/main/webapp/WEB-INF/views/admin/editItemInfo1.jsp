@@ -145,7 +145,7 @@
 							 	<input type="hidden" name="secondOptionId" value="<%= item.getItemSecondOptionIncrementId() %>">
 
 								<div class="d-flex justify-content-center mt-5">
-									<button type=submit class="button-light-purple px-3 py-1" style="border-radius: 5px;">オプションの追加をする</button>
+									<button type=submit class="button-light-purple px-3 py-1 w-50" style="border-radius: 5px;">次へ</button>
 								</div>
 							</form>
 						<% } %>

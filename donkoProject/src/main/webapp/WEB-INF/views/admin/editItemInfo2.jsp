@@ -153,7 +153,7 @@
 						        </div>
 						        
 							    <div class="d-flex justify-content-center mt-5">
-						    	<button type=submit class="button-purple px-3 py-1" style="border-radius: 5px; width:40%; font-size:16px;">登録</button>
+						    	<button type=submit class="button-purple px-3 py-1" style="border-radius: 5px; width:40%; font-size:16px;">更新</button>
 						    </div>
 							</form>
 						<% } %>
