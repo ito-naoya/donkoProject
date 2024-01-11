@@ -75,11 +75,11 @@
 								<%
 								if(itemBean.getItemId() == item.getItemId()) {
 								%>
-										<a href="itemDetail?itemId=<%=itemBean.getItemId()%>&source=<%= source %><%= categoryName != null ? "&categoryName=" + categoryName : "" %>" class="me-3" style="text-decoration: none;">
-											<div style="height: 120px; width: 120px;">
+										<a href="itemDetail?itemId=<%=itemBean.getItemId()%>&source=<%= source %><%= categoryName != null ? "&categoryName=" + categoryName : "" %>" class="me-3" style="text-decoration: none; border:3px solid #9933FF; border-radius: 5px;">
+											<div style="height: 120px; width: 120px;  padding: 0px;">
 												<img class="object-fit-cover w-100 h-100 subImage border" 
 													 src="./images/<%=itemBean.getImageFileName()%>.jpg"
-													 style="border-radius:5px; opacity: 0.5;">
+													 style="border-radius:5px; ">
 											</div>
 										</a>
 								<%
