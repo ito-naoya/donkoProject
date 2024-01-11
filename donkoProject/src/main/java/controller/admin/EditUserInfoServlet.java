@@ -109,7 +109,7 @@ public class EditUserInfoServlet extends HttpServlet {
 		}
 
 		// ユーザー一覧に遷移
-		response.sendRedirect("deleteUserInfoIndex");
+		response.sendRedirect("deleteUserInfoIndex?status=" + status);
 
 	}
 

@@ -36,9 +36,18 @@ public class DeleteUserInfoServlet extends HttpServlet {
 		String disp = "/adminheader";
 	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
 	    dispatch.include(request, response);
-		
-		//削除済みのユーザー一覧を取得
-		ArrayList<CustomerUser> userList = AdminUser.getDeletedUserList();
+	    
+	    String status = request.getParameter("status");
+	    
+	    ArrayList<CustomerUser> userList = null;
+		if(status == null) {
+			userList = AdminUser.getDeletedUserList();
+		}else if(status != null) {
+			//全てのユーザー一覧を取得
+			if(status.equals("notDelete")) userList = AdminUser.getUserList();
+			//削除済みのユーザー一覧を取得
+			if(status.equals("delete")) userList = AdminUser.getDeletedUserList();
+		}
 		
 		//データベースから取得できなかった時
 		if(userList == null) {
