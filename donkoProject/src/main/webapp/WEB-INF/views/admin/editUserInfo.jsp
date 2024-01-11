@@ -27,18 +27,14 @@
 						<form action="editUserInfo" method="post" style="display: flex; justify-content: center;">
 							<input type="hidden" name="userId" value="<%= user.getUserId() %>">
 							<div class="col-lg-5 border p-5" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
-								<div class="cancelButton" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-									<h5>
-										<strong>
-											ユーザ情報編集
-										</strong>
-									</h5>
-									<div>
-										<a href="deleteUserInfoIndex" style="text-decoration: none; text-align: center;">
-											<button type="button" class="btn-close border" aria-label="Close">
-											</button>
-										️</a>
-									</div>
+								<div class="d-flex flex-wrap mb-4">
+									<!-- 戻るボタン -->
+									<a href="deleteUserInfoIndex" class="arrow mb-3 link" style="display: inline-block; color:navy;">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+										  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+										</svg>
+									</a>
+									<h5 class="mb-0 mx-3"><strong>ユーザ情報編集</strong></h5>
 								</div>
 								<div class="form-group　d-flex flex-wrap　justify-content-center mb-3"
 									<label for="exampleInputUserId">

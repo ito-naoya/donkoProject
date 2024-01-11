@@ -20,8 +20,8 @@
 <%@include file= "../component/adminheaderTopSpace.jsp" %>
 <main>
 		<div class="container">
-			<div class="row justify-content-center" style="height:100vh;">
-				<div class="col-lg-5 m-auto border p-5" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
+			<div class="row justify-content-center" style="height:calc(100vh - 54px);">
+				<div class="col-lg-5 col-md-9 m-auto border p-5" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 					<h5 class="mb-4">
 						<strong>商品登録</strong>
 					</h5>
@@ -167,6 +167,7 @@
 			</div>
 		</div>
 </main>
+<%@include file= "../component/adminfooter.jsp" %>
 <script src="./js/registItemScript.js"></script>
 <script src="./js/nullValidationScript.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

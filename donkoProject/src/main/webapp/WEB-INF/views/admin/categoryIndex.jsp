@@ -21,12 +21,12 @@
 	<%@include file= "../component/adminheaderTopSpace.jsp" %>
 	<main>
 		<div class="container">
-			<div class="row" style="height:100vh;">
+			<div class="row" style="height:calc(100vh - 54px);">
 				<div class="border m-auto p-5" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 					<div class="row d-flex justify-content-center mb-3">
 						<div class="col-lg-12" style="display: flex; align-items: center;">
 
-							<h5 class="mb-0 mx-3"><strong>カテゴリ編集</strong></h5>
+							<h5 class="mb-0 mx-3"><strong>カテゴリ一覧</strong></h5>
 						    <small class="mx-3" style="vertical-align: middle;">
 						  		登録中の商品に紐づくカテゴリは削除できません
 						    </small>
@@ -259,6 +259,7 @@
 		%>
 		<!-- モーダルウィンドウここまで -->
 	</main>
+	<%@include file= "../component/adminfooter.jsp" %>
 	<script src="./js/optionScript.js"></script>
 	</body>
 </html>

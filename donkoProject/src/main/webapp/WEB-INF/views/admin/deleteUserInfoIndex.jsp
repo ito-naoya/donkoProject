@@ -52,7 +52,7 @@
 						</form>
 					</div>
 					
-					<div style=" overflow-x: scroll; overflow:scroll; height:72vh; border-radius:5px;" class="border">
+					<div style=" overflow-x: scroll; overflow:scroll; height:67vh; border-radius:5px;" class="border">
 						<table class="table table-borderless st-tbl1 text-center" id="userTable">
 							<thead>
 							    <tr>
@@ -88,9 +88,9 @@
 							</tbody>
 						</table>
 					</div>
-						
 				</div>
 			</div>
 		</main>
+		<%@include file= "../component/adminfooter.jsp" %>
 	</body>
 </html>
