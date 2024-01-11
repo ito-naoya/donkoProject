@@ -29,13 +29,13 @@
 				<% 
 				if (orderItemList == null || orderItemList.size() == 0) {
 				%>
-					<div class="d-flex justify-content-center align-items-center" style="overflow-x: scroll; overflow:scroll; height:74vh;">
+					<div class="d-flex justify-content-center align-items-center" style="overflow-x: scroll; overflow:scroll; height:67vh;">
 						<p class="mb-0" style="color: #385A37;"><%= message %></p>
 					</div>
 				<% 
 				} else { 
 				%>
-					<div class="border" style=" overflow-x: scroll; overflow:scroll; height:74vh; border-radius:5px;">
+					<div class="border" style=" overflow-x: scroll; overflow:scroll; height:67vh; border-radius:5px;">
 						<table class="table table-borderless table-hover text-center">
 							<thead>
 								<tr>
@@ -96,5 +96,6 @@
 			</div>
 		</div>
 	</main>
+	<%@include file= "../component/adminfooter.jsp" %>
 </body>
 </html>

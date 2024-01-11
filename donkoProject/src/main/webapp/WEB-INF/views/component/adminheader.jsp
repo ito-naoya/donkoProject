@@ -45,6 +45,8 @@
 					    <li><a class="dropdown-item" href="purchaseHistory"><small>受注履歴</small></a></li>
 					    <li><a class="dropdown-item" href="deleteItemIndex?itemCategoryName=全ての商品&itemDelFlg=1&order=asc"><small>削除商品</small></a></li>
 					    <li><a class="dropdown-item" href="deleteUserInfoIndex"><small>削除ユーザー</small></a></li>
+					    <li><a class="dropdown-item" href="categoryIndex"><small>カテゴリ</small></a></li>
+					    <li><a class="dropdown-item" href="optionIndex"><small>オプション</small></a></li>
 					  </ul>
 					</div>
     			</li>
@@ -56,17 +58,6 @@
 					  <ul class="dropdown-menu">
 					    <li><a class="dropdown-item" href="registItem1"><small>商品</small></a></li>
 					    <li><a class="dropdown-item" href="userSignup"><small>ユーザー</small></a></li>
-					  </ul>
-					</div>
-    			</li>
-    			<li class="mx-2" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
-    				<div class="dropdown">
-					  <button class="btn dropdown-toggle text-light link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-					    <small>編集</small>
-					  </button>
-					  <ul class="dropdown-menu">
-					    <li><a class="dropdown-item" href="categoryIndex"><small>カテゴリ</small></a></li>
-					    <li><a class="dropdown-item" href="optionIndex"><small>オプション</small></a></li>
 					  </ul>
 					</div>
     			</li>

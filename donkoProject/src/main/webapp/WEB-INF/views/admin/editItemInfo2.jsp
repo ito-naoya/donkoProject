@@ -11,8 +11,6 @@
 <title>donko</title>
 </head>
 <body>
-<%@include file= "../component/adminheader.jsp" %>
-<%@include file= "../component/adminheaderTopSpace.jsp" %>
 <main>
 	<div class="container">
 		<div class="row d-flex justify-content-center" style="height:100vh;">
