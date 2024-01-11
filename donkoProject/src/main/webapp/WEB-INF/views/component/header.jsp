@@ -64,7 +64,7 @@
     			%>
     			<li class="ms-auto me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
     				<a href="myPage" class="link" style="color:white; text-decoration:none;">
-    					<small>購入履歴</small>
+    					<small>マイページ</small>
     				</a>
     			</li>
 				<li class="ms-2 me-3" style="list-style:none; color:white; display: flex; align-items: center; vertical-align: middle;">
