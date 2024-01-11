@@ -97,7 +97,7 @@
 										</small>
 									</label>
 									<input disabled type="date" class="form-control" id="exampleInputbirthday" value="<%=user.getBirthday()%>">
-									<input type="hidden" value="<%=user.getBirthday()%>" name="birthday">
+									<input type="hidden" value="<%=user.getBirthday() == null ? "" : user.getBirthday()  %>" name="birthday">
 								</div>
 								<div class="form-group d-flex flex-wrap justify-content-start">
 									<label for="exampleInputbirthday">
