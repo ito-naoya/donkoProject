@@ -45,6 +45,7 @@ public class UserSigninServlet extends HttpServlet {
 		if(customerUser != null && customerUser.isDeleted())request.setAttribute("errorMessage", "無効なユーザーです");
 		
 		if(customerUser == null || customerUser.isDeleted()) {
+			request.setAttribute("originSource", originSource);
 			String view = "/WEB-INF/views/customer/sampleUserSignin.jsp";
 			request.getRequestDispatcher(view).forward(request, response);
 			return;
