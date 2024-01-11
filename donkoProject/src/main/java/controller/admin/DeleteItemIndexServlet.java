@@ -88,6 +88,19 @@ public class DeleteItemIndexServlet extends HttpServlet {
 	//ソートを実行
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		String admin = (String) session.getAttribute("admin");
+		if (admin == null) {
+			response.sendRedirect("adminSignin");
+			return;
+		}
+
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+	    
 		ItemBean newItem = new ItemBean();
 		//カテゴリーを取得
 		newItem.setItemCategoryName(request.getParameter("itemCategoryName"));

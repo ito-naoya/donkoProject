@@ -60,6 +60,18 @@ public class EditCategoryServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String admin = (String) session.getAttribute("admin");
+		if (admin == null) {
+			response.sendRedirect("adminSignin");
+			return;
+		}
+
+		// ヘッダーに表示する値を取得
+		String disp = "/adminheader";
+	    RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+	    dispatch.include(request, response);
+
 		//選択されたカテゴリに対するカテゴリ詳細を表示
 		ItemBean category = new ItemBean();
 		//カテゴリを受け取る
