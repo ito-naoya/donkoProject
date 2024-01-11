@@ -135,20 +135,20 @@ td {vertical-align: middle;}
 									<label for="exampleInputAddresses"><small>宛名：</small></label><br>
 									<input type="text" class="form-control"
 										id="exampleInputAddresses" aria-describedby="addresses"
-										name="addresses" value="" placeholder="伊藤 直也" autocomplete="name">
+										name="addresses" value="" autocomplete="name">
 									<span id="errorMessageAddressee" style="color:red;"></span>
 								</div>
 								<div class="form-group w-100 mb-3">
 									<label for="exampleInputPostalCode"><small>郵便番号：</small></label><br>
 									<input type="text" class="form-control" id="exampleInputPostalCode"
 										aria-describedby="postalCode" maxlength="7" maxlength="7" name="postalcode" value=""
-										placeholder="6500001" autocomplete="postal-code">
+										autocomplete="postal-code">
 									<span id="errorMessagePostalCode" style="color:red;"></span>
 								</div>
 								<div class="form-group w-100">
 									<label for="exampleInputAddress"><small>住所：</small></label><br>
 									<input type="text" class="form-control" id="exampleInputAddress"
-										aria-describedby="address" name="address" value="" placeholder="兵庫県神戸市中央区加納町４丁目２−１" autocomplete="address-line1">
+										aria-describedby="address" name="address" value="" autocomplete="address-line1">
 									<span id="errorMessageAddress" style="color:red;"></span>
 								</div>
 							</div>
