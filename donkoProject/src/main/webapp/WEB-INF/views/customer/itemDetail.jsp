@@ -72,13 +72,29 @@
 							<%
 							for (ItemBean itemBean : itemImageList) {
 							%>
-							<a href="itemDetail?itemId=<%=itemBean.getItemId()%>&source=<%= source %><%= categoryName != null ? "&categoryName=" + categoryName : "" %>" class="me-3" style="text-decoration: none;">
-								<div style="height: 120px; width: 120px;">
-									<img class="object-fit-cover w-100 h-100 subImage border" 
-										 src="./images/<%=itemBean.getImageFileName()%>.jpg"
-										 style="border-radius:5px;">
-								</div>
-							</a>
+								<%
+								if(itemBean.getItemId() == item.getItemId()) {
+								%>
+										<a href="itemDetail?itemId=<%=itemBean.getItemId()%>&source=<%= source %><%= categoryName != null ? "&categoryName=" + categoryName : "" %>" class="me-3" style="text-decoration: none;">
+											<div style="height: 120px; width: 120px;">
+												<img class="object-fit-cover w-100 h-100 subImage border" 
+													 src="./images/<%=itemBean.getImageFileName()%>.jpg"
+													 style="border-radius:5px; opacity: 0.5;">
+											</div>
+										</a>
+								<%
+								}else{
+								%>
+										<a href="itemDetail?itemId=<%=itemBean.getItemId()%>&source=<%= source %><%= categoryName != null ? "&categoryName=" + categoryName : "" %>" class="me-3" style="text-decoration: none;">
+											<div style="height: 120px; width: 120px;">
+												<img class="object-fit-cover w-100 h-100 subImage border" 
+													 src="./images/<%=itemBean.getImageFileName()%>.jpg"
+													 style="border-radius:5px;">
+											</div>
+										</a>
+								<%
+								}
+								%>
 							<%
 							}
 							%>
