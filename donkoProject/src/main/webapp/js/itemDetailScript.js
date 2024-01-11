@@ -63,3 +63,16 @@ quantityDecrementBtn.addEventListener("click", () => {
 	}
 	
 })
+
+
+const itemOptionName = document.querySelector("#itemOptionName");
+const options = document.querySelectorAll(".option");
+
+
+options.forEach(option => {
+	
+	if(itemOptionName.innerText.includes(option.innerText)){
+		option.style.backgroundColor = "#e5ccff";
+	};
+});
+

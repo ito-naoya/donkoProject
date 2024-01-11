@@ -47,7 +47,7 @@
 							<%=item.getItemName()%>
 							(
 						
-								<span><%= item.getItemFirstOptionValue() %></span>
+								<span id="itemOptionName"><%= item.getItemFirstOptionValue() %></span>
 							)
 						</strong>
 					</h4>
@@ -98,7 +98,7 @@
 							for(ItemBean ib : itemOptionList) {
 							%>
 								<a href="itemDetail?itemId=<%= ib.getItemId() %>&source=<%= source %><%= categoryName != null ? "&categoryName=" + categoryName : "" %>" class="d-inline-block" style="margin-right: 9px; text-decoration: none; margin-bottom: 16px; color: black;">
-									<div class="border px-3 py-2 text-center size" style=" width: auto; hegiht: 50px">
+									<div class="border px-3 py-2 text-center size option" style=" width: auto; hegiht: 50px">
 										<%= ib.getItemFirstOptionValue() %>
 									</div>
 								</a>
