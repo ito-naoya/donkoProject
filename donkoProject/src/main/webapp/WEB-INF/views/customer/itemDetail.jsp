@@ -85,7 +85,7 @@
 								<%
 								}else{
 								%>
-										<a href="itemDetail?itemId=<%=itemBean.getItemId()%>&source=<%= source %><%= categoryName != null ? "&categoryName=" + categoryName : "" %>" class="me-3" style="text-decoration: none;">
+										<a href="itemDetail?itemId=<%=itemBean.getItemId()%>&source=<%= source %><%= categoryName != null ? "&categoryName=" + categoryName : "" %>" class="me-3" style="text-decoration: none; border:3px solid lightgray; border-radius: 5px;">
 											<div style="height: 120px; width: 120px;">
 												<img class="object-fit-cover w-100 h-100 subImage border" 
 													 src="./images/<%=itemBean.getImageFileName()%>.jpg"
