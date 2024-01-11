@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <style>
 .arrow:hover{opacity: 0.7;}
+.card:hover {background-color: #00000013;}
 </style>
 <title>donko</title>
 </head>
@@ -43,22 +44,27 @@
 						<form action="shippingAddressIndex" method="post" class="d-flex w-100">
 							<select class="form-control d-flex"
 								name="update_shipping_address"
-								id="main_address_select">
+								id="main_address_select"
+								style="cursor: pointer;">
 								<%
-				                for (ShippingAddressBean updateMainShippingAddress : mainShippingAddressList) {
-				                %>
-				                <%String postalCode = (String)updateMainShippingAddress.getPostalCode();%>
-				                <% String head = postalCode.substring(0, 3);
-				                   String end = postalCode.substring(3);
-				                     %>
-				                <option
-				                  value="<%=updateMainShippingAddress.getShippingAddressId()%>">
-				                  〒 <%= head %>-<%= end %>
-				                  <%=updateMainShippingAddress.getAddress()%>
-				                  <%=updateMainShippingAddress.getAddressee()%></option>
-				                <%
-				                }
-				                %>
+								for (ShippingAddressBean updateMainShippingAddress : mainShippingAddressList) {
+								%>
+								<%
+								String postalCode = (String) updateMainShippingAddress.getPostalCode();
+								%>
+								<%
+								String head = postalCode.substring(0, 3);
+								String end = postalCode.substring(3);
+								%>
+								<option
+									value="<%=updateMainShippingAddress.getShippingAddressId()%>">
+									〒
+									<%=head%>-<%=end%>
+									<%=updateMainShippingAddress.getAddress()%>
+									<%=updateMainShippingAddress.getAddressee()%></option>
+								<%
+								}
+								%>
 							</select>
 							<button type="submit" class="px-2 text-nowrap button-light-purple"
 								style="margin-left: 15px; border-radius:5px;">更新</button>
@@ -105,14 +111,13 @@
 					String end = postalCode.substring(3);
 					%>
 					<div class="card me-2 mb-2" style="width: calc(50% - 8px); cursor: pointer;" ondblclick="location.href='editShippingAddress?shipping_address_id=<%= shippingAddressBean.getShippingAddressId() %>'">
-<%-- 					<div class="card me-2 mb-2" style="width: calc(50% - 8px);"> --%>
 						<div class="card-body">
 						<div class="card-head d-flex justify-content-between">
 							<%= numbers %>
 							<% int mainStatus = shippingAddressBean.getMainShippingAddress();
 									if (mainStatus == 1) {
 							%>
-								<small class="mb-0 px-3 py-1" style="color: #63A162; border: 0.5px #63A162 solid; border-radius:40px;">
+								<small class="mb-0 px-3 py-1" style="color: #63A162; background-color:white; border: 0.5px #63A162 solid; border-radius:40px;">
 								メイン配送先
 								</small>
 							<% } %>
@@ -122,21 +127,22 @@
 							〒 <%= head %>-<%= end %><br>
 							<%= shippingAddressBean.getAddress() %>
 							</h6>
-<%-- 								<button type="submit" class="button-light-purple px-2 py-1" style="border-radius:5px;">
-									<a class="anchor"
-									   href='editShippingAddress?shipping_address_id=<%= shippingAddressBean.getShippingAddressId() %>'
-									   style="text-decoration:none;">
-										編集
-									</a>
-								</button> --%>
 							<%
 							int main_address = shippingAddressBean.getMainShippingAddress();
 							if (main_address != 1) {
 							%>
-							<button type="submit" class="button-red px-2 py-1" data-bs-toggle="modal"
-								data-bs-target="#staticBackdrop" style="border-radius:5px;">
-								削除
-							</button>
+							<div class="d-flex justify-content-end">
+								<button type="submit" class="btn p-0" data-bs-toggle="modal"
+									data-bs-target="#staticBackdrop" style="color: red;">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+										fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+  <path
+											d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+  <path fill-rule="evenodd"
+											d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+</svg>
+								</button>
+							</div>
 							<!-- 配送先削除確認ボタン -->
 							<div class="modal fade" id="staticBackdrop"
 								data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
