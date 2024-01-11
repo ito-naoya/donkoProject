@@ -180,21 +180,23 @@ td {vertical-align: middle;}
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
 			%>
+			<div style="cursor: pointer;">
 			<button class="button-light-purple px-3 py-1" id="hideShippedButton" name="status_sort"
 				value="hidden" style="border-radius: 40px;">
 				<small>発送済みを非表示</small>
 			</button>
+			</div>
 			<% 
 			} 
 			%>
 		</div>
 		<div style="overflow-x: scroll; height: 59vh; border-radius: 5px;"
-			class="border mx-5 mt-3 mb-5 px-3">
+			id="border" class="border mx-5 mt-3 mb-5 px-3">
 			<%
 			if (purchaseList != null && purchaseList.size() > 0) {
 			%>
 			<table class="table purchaseDetailTable table-hover table-borderless my-4">
-				<thead align="center">
+				<thead align="center" id="thead">
 					<tr>
 						<th class="th"><strong style="white-space: nowrap;">注文ID</strong></th>
 						<th class="th"><strong style="white-space: nowrap;">合計金額</strong></th>
