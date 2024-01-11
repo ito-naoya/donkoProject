@@ -31,18 +31,18 @@
 						<%
 						String toIndicate = (String)request.getAttribute("toIndicate");
 						%>
-						<form action="deleteUserInfoIndex" method="POST">
+						<form action="deleteUserInfoIndex" method="GET">
 							<%
-							if(toIndicate.equals("deletedUser")) {
+							if(toIndicate.equals("delete")) {
 							%>
-								<input type="hidden" name="showSelect" value="notDeletedUser">
+								<input type="hidden" name="status" value="notDelete">
 								<button type="submit" class="button-light-purple px-3" style="border-radius:40px;">
 									<small>全てのユーザーを表示</small>
 								</button>
 							<%
-							} else if(toIndicate.equals("notDeletedUser")) {
+							} else if(toIndicate.equals("notDelete")) {
 							%>
-								<input type="hidden" name="showSelect" value="deletedUser">
+								<input type="hidden" name="status" value="delete">
 								<button type="submit" class="button-light-purple px-3" style="border-radius:40px;">
 									<small>無効のユーザーを表示</small>
 								</button>
