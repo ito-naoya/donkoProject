@@ -2,6 +2,7 @@ package controller.customer;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import bean.CartBean;
 import bean.ItemBean;
@@ -63,7 +64,8 @@ public class ItemDetailServlet extends HttpServlet {
 		
 		
 		//商品の登録されているオプションを全て取得する(衣類：S、M、L)
-		ArrayList<ItemBean> itemOptionList = Item.getItemOptionList(ib);
+		ArrayList<ItemBean> itemOptionList = Item.getItemOptionList(ib);	
+		if(item.getItemCategoryName().equals("衣類")) Collections.reverse(itemOptionList);
 		
 		//データベースから取得できなかった時
 		if(itemOptionList == null) {
