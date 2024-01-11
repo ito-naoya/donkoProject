@@ -19,7 +19,7 @@
 	<%@include file= "../component/adminheaderTopSpace.jsp" %>
 	<main>
 		<div class="container">
-			<div class="row" style="height:100vh;">
+			<div class="row" style="height:calc(100vh - 54px);">
 				<div class="col-lg-8 m-auto p-5 border" style="border-radius:10px; box-shadow:10px 10px 10px lightgray;">
 					<%
 					String source = (String)request.getParameter("source");
@@ -145,6 +145,7 @@
 			</div>
 		</div>
 	</main>
+	<%@include file= "../component/adminfooter.jsp" %>
 	<script src="./js/purchaseDetailScript.js"></script>
 </body>
 </html>
