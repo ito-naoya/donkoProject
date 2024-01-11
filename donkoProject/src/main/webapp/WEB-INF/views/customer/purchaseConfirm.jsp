@@ -19,17 +19,16 @@
 			crossorigin="anonymous">
 	</head>
 	<body>
+		<%@include file="../component/confirmheader.jsp"%>
+		<%@include file="../component/confirmheaderTopSpace.jsp"%>
 		<main>
 			<div class="container">
-				<div class="row">
+				<div class="row my-5">
 					<div class="col-lg-8 mx-auto" style="margin-bottom: 40px;">
-					<a href="cart" class="link mt-5 mb-4" style="text-decoration: none; display: inline-block">
-						<img src="./images/donkoLogo2.png" style="height:70px;">
-					</a>
-					<br>
 						<%
 						ShippingAddressBean sa = (ShippingAddressBean)request.getAttribute("shippingAddress");
 						%>
+						<h5><strong>購入の確認</strong></h5>
 						<div class="d-flex border p-4 align-items-center" style="width: auto; height: auto; border-radius:5px;">
 							<% 
 							Integer totalPrice = (Integer)request.getAttribute("totalPrice");
@@ -135,6 +134,7 @@
 				</div>
 			</div>
 		</main>
+		<%@include file="../component/confirmfooter.jsp"%>
 		<script src="./js/cartScript.js"></script>
 	</body>
 </html>
