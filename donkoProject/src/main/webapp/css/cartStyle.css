@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.itemImageHover{
+	opacity: 0.5;
+	transition-duration: 0.3s;
+}
+
+input[type="number"]::-webkit-outer-spin-button, 
+input[type="number"]::-webkit-inner-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+} 
+
+.bi-dash-circle-fill{
+	color: #385A37;
+}
+
+.bi-dash-circle-fill:hover{
+	color: #63A162;
+}
+
+.bi-plus-circle-fill{
+	color: #385A37;
+}
+
+.bi-plus-circle-fill:hover{
+	color: #63A162;
+}

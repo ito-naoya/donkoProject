@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+#userTable tr:hover td {
+ 	background-color: lightgray;
+}
+
+p{
+	margin: 0;
+}
