@@ -48,7 +48,7 @@
 							<button type="button" class="button-light-purple px-4 py-1 text-nowrap text-center"
 									data-bs-toggle="modal" data-bs-target="#staticBackdrop"
 									style="border-radius:5px;">
-								発送する
+								発送済みにする
 							</button>
 							<!-- モーダルウィンドウ -->
 							<div class="modal fade" id="staticBackdrop"
@@ -75,7 +75,7 @@
 												<input type="hidden" name="shippingId" value="2">
 												<button type="submit" class="button-purple px-3 py-2"
 													style="border-radius: 5px;">
-													発送する
+													発送済みにする
 												</button>
 											</form>
 										</div>
