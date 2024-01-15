@@ -90,7 +90,7 @@ td {
 									%>
 								</div>
 								<div>
-									<small>性別：</small><br>
+									<small>生年月日：</small><br>
 									<%
 									if (birthday == null) {
 									%>
